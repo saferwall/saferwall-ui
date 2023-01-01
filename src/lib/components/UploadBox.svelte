@@ -2,7 +2,7 @@
 	import ButtonBrowse from './ButtonBrowse.svelte';
 </script>
 
-<section class="upload__ bg-white rounded-xl shadow p-12 flex flex-col justify-between">
+<section class="upload__ bg-white rounded-xl shadow p-8 md:p-12 flex flex-col justify-between">
 	<h1 class="text-xl font-medium">Welcome to Saferwall</h1>
 
 	<div class="flex h-80 flex-col items-center justify-center">
@@ -12,7 +12,7 @@
 	</div>
 
 	<div class="m-auto text-center max-w-screen-md">
-		<p class="px-8">
+		<p class="text-sm md:text-base md:px-8">
 			By using Saferwall you consent to our
 			<a class="link" target="_blank" rel="noreferrer" href="https://about.saferwall.com/tos"
 				>Terms of Service</a
