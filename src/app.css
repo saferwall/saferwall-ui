@@ -4,5 +4,21 @@
 
 html,
 body {
-	font-family: 'Manrope';
+	@apply font-primary;
+	@apply min-h-screen h-full;
+}
+
+#app {
+	@apply flex flex-col min-h-full;
+}
+
+a[href*=''],
+input,
+textarea,
+button {
+	@apply focus:outline focus:outline-primary;
+}
+
+.container {
+	@apply px-6 md:px-0;
 }
