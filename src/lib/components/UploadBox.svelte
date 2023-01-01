@@ -13,9 +13,14 @@
 
 	<div class="m-auto text-center max-w-screen-md">
 		<p class="px-8">
-			By using Saferwall you consent to our <a class="link" href="/">Terms of Service</a> and
-			<a class="link" href="/">Privacy Policy</a> and allow us to share your submission with the security
-			community. Learn more
+			By using Saferwall you consent to our
+			<a class="link" target="_blank" rel="noreferrer" href="https://about.saferwall.com/tos"
+				>Terms of Service</a
+			>
+			and
+			<a class="link" target="_blank" rel="noreferrer" href="https://about.saferwall.com/privacy"
+				>Privacy Policy</a
+			> and allow us to share your submission with the security community. Learn more
 		</p>
 	</div>
 </section>
