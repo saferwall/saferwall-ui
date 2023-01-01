@@ -1,15 +1,15 @@
 <script lang="ts">
 	export let image: string | undefined;
-	export let name: string | undefined;
+	export let username: string | undefined;
 </script>
 
-<div class="avatar">
+<a class="avatar" href="/user/{username}">
 	{#if image}
-		<img class="avatar__image" src={image} alt="Avatar of {name}" />
+		<img class="avatar__image" src={image} alt="Avatar of {username}" />
 	{:else}
-		<span class="avatar__text">{name?.slice(0, 3)}</span>
+		<span class="avatar__text">{username?.slice(0, 3)}</span>
 	{/if}
-</div>
+</a>
 
 <style lang="scss">
 	.avatar {

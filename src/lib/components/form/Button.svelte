@@ -1,9 +1,11 @@
 <script lang="ts">
+	let cclass = '';
 	export let size: string = 'base';
 	export let theme: string = 'base';
+	export { cclass as class };
 </script>
 
-<button class="button button--{theme} button--size--{size}">
+<button class="button button--{theme} button--size--{size} {cclass}">
 	<slot />
 </button>
 

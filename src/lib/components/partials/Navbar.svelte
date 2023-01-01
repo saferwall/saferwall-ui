@@ -23,7 +23,7 @@
 			</li>
 		</ul>
 		<div class="auth__ space-x-2">
-			<Button>Login</Button>
+			<Button class="!hidden md:!inline-flex">Login</Button>
 			<Button theme="primary">Sign up</Button>
 		</div>
 	</div>
