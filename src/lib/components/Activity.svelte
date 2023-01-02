@@ -24,7 +24,7 @@
 		class="activity flex flex-col lg:flex-row space-y-4 lg:space-y-0 justify-between items-center bg-white shadow-sm rounded-xl md:px-8 py-8 w-full"
 	>
 		<div class="flex flex-col flex-1 items-center md:flex-row space-y-4 md:space-y-0">
-			<div class="author__ md:px-8 flex flex-col items-center space-y-2 md:pr-10">
+			<div class="activity__author flex flex-col items-center space-y-2">
 				<Avatar
 					image="https://robohash.org/{activity.author.username}?set=set1&bgset=bg1&size=200x200"
 					username={activity.author.username}
@@ -84,9 +84,7 @@
 				</ul>
 			</div>
 		</div>
-		<div
-			class="activity__tags flex flex-row lg:flex-col items-center md:items-start lg:space-y-1 lg:px-8 lg:pl-10"
-		>
+		<div class="activity__tags flex flex-row lg:flex-col items-center md:items-start lg:space-y-1">
 			<p class="activity__tags__title hidden lg:block">TAGS</p>
 			<ul class="activity__tags__list">
 				{#if tags.length > 0}
@@ -109,7 +107,14 @@
 			@apply text-grayx-400;
 		}
 
+		&__author,
+		&__tags {
+			@apply md:px-8 2xl:px-10 lg:w-48 2xl:w-60;
+		}
+
 		&__info {
+			@apply 2xl:py-4;
+
 			&__author,
 			&__type {
 				@apply font-semibold;
@@ -132,7 +137,7 @@
 			}
 
 			&__list {
-				@apply flex flex-wrap justify-center lg:justify-start lg:w-48;
+				@apply flex flex-wrap justify-center lg:justify-start;
 
 				li {
 					@apply m-1 py-1.5 px-3 rounded;
