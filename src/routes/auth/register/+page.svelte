@@ -12,7 +12,11 @@
 	</div>
 	<label class="flex items-center space-x-2 text-sm">
 		<input type="checkbox" />
-		<p>I agree to the <a href="/pages/terms-of-service">Terms of Service</a></p>
+		<p>
+			I agree to the <a href="/pages/terms-of-service" target="_blank" class="link"
+				>Terms of Service</a
+			>
+		</p>
 	</label>
 	<Button theme="primary" size="large">Create account</Button>
 </form>
