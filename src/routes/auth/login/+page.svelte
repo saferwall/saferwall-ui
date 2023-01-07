@@ -20,7 +20,7 @@
 <form
 	method="POST"
 	on:submit={handleFormSubmit}
-	class="flex flex-col space-y-6 px-10 lg:px-16 py-14"
+	class="flex flex-col space-y-6 px-10 lg:px-16 pt-14"
 >
 	<h1 class="text-3xl font-bold">Sign in</h1>
 	<div class="space-y-4">
