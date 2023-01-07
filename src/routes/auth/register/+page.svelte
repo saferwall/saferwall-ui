@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
-	import AuthMailSent from '$lib/components/AuthMailSent.svelte';
+	import AuthActionDone from '$lib/components/AuthActionDone.svelte';
 
 	let loading = false;
 	let finished = false;
@@ -21,7 +21,7 @@
 </svelte:head>
 
 {#if finished}
-	<AuthMailSent
+	<AuthActionDone
 		title="Confirm your registration !"
 		description="We’ve sent a link to the email you specified"
 	/>

@@ -57,4 +57,9 @@
         <path fill="#fff"
             d="M61.87 55.55a.75.75 0 0 1-.53-.22l-5.19-5.2a.75.75 0 0 1 0-1.06l1.53-1.53a.75.75 0 0 1 1.07 0l3.12 3.13 8.38-8.38a.75.75 0 0 1 1.07 0l1.53 1.53a.75.75 0 0 1 0 1.07L62.4 55.33a.74.74 0 0 1-.54.22Z" />
     </symbol>
+    <symbol id="illustration-done" fill="none" viewBox="0 0 89 89">
+        <path stroke="#0D9677" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m60.5 33.5-21.31 20-9.69-9.1" />
+        <rect width="86" height="86" x="1.5" y="1.5" stroke="#0D9677" stroke-width="2" rx="43" />
+    </symbol>
 </svg>
