@@ -19,7 +19,7 @@
 			<div class="w-full flex-center rounded cursor-pointer text-primary space-x-2 font-medium">
 				<div class="flex-center space-x-1">
 					<span>Show more activities</span>
-					<svg class="ui_icon w-4 h-2"><use href="/images/icons.svg#icon-arrow-down" /></svg>
+					<svg class="w-4 h-2"><use href="/images/images.svg#icon-arrow-down" /></svg>
 				</div>
 			</div>
 		</div>

@@ -9,10 +9,10 @@
 
 <p
 	on:mouseup={toggleSelection}
-	class="hash__ w-full flex items-center bg-grayx-100 rounded px-4 space-x-2"
+	class="w-full flex items-center bg-grayx-100 rounded px-4 space-x-2"
 >
-	<svg class="ui_icon w-4 h-4 text-grayx-500">
-		<use href="/images/icons.svg#icon-link" />
+	<svg class="w-4 h-4 text-grayx-500">
+		<use href="/images/images.svg#icon-link" />
 	</svg>
 	<input
 		bind:this={ref}

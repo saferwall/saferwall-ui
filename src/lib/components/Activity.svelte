@@ -66,7 +66,7 @@
 							)}"
 						>
 							<svg class="ui_icon w-4 h-4"
-								><use href="/images/icons.svg#icon-{getLabelIcon(activity.file?.class)}" /></svg
+								><use href="/images/images.svg#icon-{getLabelIcon(activity.file?.class)}" /></svg
 							>
 							<span>{getLabelClass(activity.file?.class)}</span>
 						</div>
