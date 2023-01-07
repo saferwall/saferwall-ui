@@ -1,13 +1,18 @@
 <script lang="ts">
-	let cclass = '';
 	export let size: string = 'base';
 	export let theme: string = 'base';
-	export { cclass as class };
+	export let href: string | undefined = undefined;
 </script>
 
-<button class="button button--{theme} button--size--{size} {cclass}">
-	<slot />
-</button>
+{#if href}
+	<a {href} class="button button--{theme} button--size--{size}">
+		<slot />
+	</a>
+{:else}
+	<button class="button button--{theme} button--size--{size}">
+		<slot />
+	</button>
+{/if}
 
 <style lang="scss">
 	.button {
