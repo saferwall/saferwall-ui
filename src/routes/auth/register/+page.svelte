@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
-	import AuthMailSent from '$lib/sections/AuthMailSent.svelte';
+	import AuthMailSent from '$lib/components/AuthMailSent.svelte';
 
 	let loading = false;
 	let finished = false;
