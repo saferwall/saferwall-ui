@@ -12,21 +12,23 @@ body {
 	@apply flex flex-col min-h-full;
 }
 
-a[href*=''],
 input,
 textarea,
 button {
 	@apply focus:outline focus:outline-primary;
 }
 
-a.link[href] {
-	@apply text-blue-500;
+a.link:not([href='']) {
+	@apply text-primary;
 }
 
 .container {
 	@apply px-6 md:px-0;
 }
 
+.flex-center {
+	@apply flex items-center justify-center;
+}
 /**
  * Scrollbar
  **/
