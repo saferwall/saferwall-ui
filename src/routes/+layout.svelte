@@ -6,7 +6,7 @@
 </script>
 
 <Navbar />
-<main class="flex-1 h-full bg-grayx">
+<main class="flex-1 flex flex-col h-full bg-grayx">
 	<slot />
 </main>
 <Footer />
