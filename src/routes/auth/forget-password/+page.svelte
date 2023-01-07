@@ -36,7 +36,7 @@
 			We have just sent a confirmation link of your account to the email address.
 		</p>
 		<div class="space-y-4">
-			<Input name="email" label="Email" disabled={loading} />
+			<Input name="email" required label="Email" disabled={loading} />
 		</div>
 		<Button {loading} type="submit" theme="primary" size="large">Login</Button>
 	</form>

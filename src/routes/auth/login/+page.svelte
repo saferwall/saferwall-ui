@@ -24,8 +24,8 @@
 >
 	<h1 class="text-3xl font-bold">Sign in</h1>
 	<div class="space-y-4">
-		<Input label="Username or email" name="username" disabled={loading} />
-		<Input label="Password" type="password" name="password" disabled={loading} />
+		<Input label="Username or email" required name="username" disabled={loading} />
+		<Input label="Password" required type="password" name="password" disabled={loading} />
 	</div>
 	<a href="/auth/forget-password" class="self-end border-l-pink-50">Forget password?</a>
 

@@ -36,7 +36,7 @@
 			Enter your account email address and we’ll send you a link to confirm your email.
 		</p>
 		<div class="space-y-4">
-			<Input label="Email" name="email" disabled={loading} />
+			<Input label="Email" name="email" required disabled={loading} />
 		</div>
 		<Button {loading} type="submit" theme="primary" size="large">Send confirmation</Button>
 	</form>
