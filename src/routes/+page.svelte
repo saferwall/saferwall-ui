@@ -8,6 +8,6 @@
 </svelte:head>
 
 <div class="container mx-auto py-10 space-y-20">
-	<!-- <UploadBox /> -->
+	<UploadBox />
 	<LatestActivities />
 </div>
