@@ -23,8 +23,10 @@
 			</li>
 		</ul>
 		<div class="auth__ space-x-2">
-			<Button class="!hidden md:!inline-flex">Login</Button>
-			<Button theme="primary">Sign up</Button>
+			<div class="!hidden md:!inline-flex">
+				<Button href="/auth/login">Login</Button>
+			</div>
+			<Button href="/auth/register" theme="primary">Sign up</Button>
 		</div>
 	</div>
 </nav>
@@ -38,8 +40,12 @@
 		&__menu {
 			@apply hidden xl:flex;
 
-			&__link:hover {
-				@apply text-grayx-600;
+			a {
+				@apply text-grayx-900;
+			}
+
+			&__link {
+				@apply hover:text-grayx-600;
 			}
 		}
 	}
