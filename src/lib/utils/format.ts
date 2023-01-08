@@ -108,3 +108,7 @@ export function timeToDateISO(timestamp: number): string {
 
     return date.toISOString();
 }
+
+export function getFileTypeIcon(type: string | undefined): string {
+    return `tmp`;
+}

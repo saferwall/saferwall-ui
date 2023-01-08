@@ -6,7 +6,7 @@
 </script>
 
 <div class="px-14 py-16 flex flex-col items-center space-y-6">
-	<svg class="ui_icon {imageSize}"><use href="/images/images.svg#{image}" /></svg>
+	<svg class={imageSize}><use href="/images/images.svg#{image}" /></svg>
 	<div class="flex flex-col items-center space-y-3">
 		<h1 class="text-2xl font-bold">{title}</h1>
 		<p class="text-grayx-700">{@html description}</p>

@@ -21,7 +21,7 @@
 	{/if}
 	<input {required} {type} {disabled} {name} {placeholder} class="input__field {cclass}" />
 	{#if isPassword}
-		<svg class="ui_icon" class:visible={passwordVisible} on:mouseup={togglePassword}
+		<svg class="icon" class:visible={passwordVisible} on:mouseup={togglePassword}
 			><use href="/images/images.svg#icon-eye" /></svg
 		>
 	{/if}
@@ -56,7 +56,7 @@
 			}
 		}
 
-		.ui_icon {
+		.icon {
 			@apply w-6 h-6;
 			@apply text-grayx-400 hover:cursor-pointer hover:text-grayx-900;
 			@apply absolute right-3 -translate-y-1/2 top-1/2;

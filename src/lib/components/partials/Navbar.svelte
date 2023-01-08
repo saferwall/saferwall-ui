@@ -4,7 +4,9 @@
 	import InputSearch from '../InputSearch.svelte';
 </script>
 
-<nav class="navbar w-full px-8 py-5 flex justify-between shadow-lg">
+<nav
+	class="navbar w-full px-8 py-5 flex justify-between border-b border-gray-400 border-opacity-20"
+>
 	<div class="flex space-x-5">
 		<Logo />
 		<div class="navbar__search w-80">
@@ -24,7 +26,7 @@
 		</ul>
 		<div class="auth__ space-x-2">
 			<div class="!hidden md:!inline-flex">
-				<Button href="/auth/login">Login</Button>
+				<Button href="/auth/login" m>Login</Button>
 			</div>
 			<Button href="/auth/register" theme="primary">Sign up</Button>
 		</div>
@@ -47,6 +49,10 @@
 			&__link {
 				@apply hover:text-grayx-600;
 			}
+		}
+
+		:global(.button) {
+			@apply min-w-[100px];
 		}
 	}
 </style>

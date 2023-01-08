@@ -1,3 +1,8 @@
+export interface FileMenu {
+    name: string;
+    path: string;
+}
+
 export interface Author {
     member_since: number;
     username: string;

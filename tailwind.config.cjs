@@ -10,6 +10,9 @@ module.exports = {
         DEFAULT: "6px"
       },
       colors: {
+        redx: {
+          DEFAULT: '#E63755'
+        },
         primary: {
           DEFAULT: '#0D9677'
         },
