@@ -9,6 +9,20 @@
 		@apply space-y-4;
 	}
 
+	&__table {
+		@apply table table-auto;
+		thead {
+			@apply text-left text-grayx-500 uppercase;
+		}
+		tbody {
+			@apply divide-y;
+		}
+		th,
+		td {
+			@apply py-4;
+		}
+	}
+
 	&__item {
 		@apply px-3 lg:px-6 bg-grayx-50;
 
