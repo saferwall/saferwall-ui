@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Loading from './Loading.svelte';
 
+	let cclass: string = '';
 	export let size: string = 'base';
 	export let theme: string = 'base';
 	export let loading: boolean = false;
@@ -8,15 +9,21 @@
 	export let target: string | undefined = undefined;
 	export let href: string | undefined = undefined;
 	export let type: 'button' | 'submit' | 'reset' | undefined = 'button';
+	export { cclass as class };
 </script>
 
 {#if href}
-	<a {href} {target} class="button button--{theme} button--size--{size}">
+	<a on:mouseup {href} {target} class="button button--{theme} button--size--{size} {cclass}">
 		{#if icon}<svg class="icon"><use href="/images/images.svg#icon-{icon}" /></svg>{/if}
 		<Loading {loading}><slot /></Loading>
 	</a>
 {:else}
-	<button {type} disabled={loading} class="button button--{theme} button--size--{size}">
+	<button
+		on:mouseup
+		{type}
+		disabled={loading}
+		class="button button--{theme} button--size--{size} {cclass}"
+	>
 		{#if icon}<svg class="icon"><use href="/images/images.svg#icon-{icon}" /></svg>{/if}
 		<Loading {loading}><slot /></Loading>
 	</button>

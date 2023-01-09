@@ -4,7 +4,7 @@
 	import { convertBytes } from '$lib/utils/format';
 	import BaseCard from '../BaseCard.svelte';
 
-	const ingoreProps: string[] = ['Tags', 'Packer', 'Trid'];
+	const ingoreProps: string[] = ['Tags', 'Packer', 'TrID'];
 	const formatterProps: any = {
 		Size: convertBytes
 	};

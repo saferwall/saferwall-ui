@@ -59,7 +59,7 @@
 		<h2 class="summary__card__title">First submission</h2>
 		<p class="summary__card__desc"><time datetime="2023-01-01 12:00">{getFirstSubmission}</time></p>
 	</article>
-	{#if fileType}
+	{#if false}
 		<article class="summary__card short flex-grow lg:flex-grow-0">
 			<h2 class="sr-only">File type</h2>
 			<p>
