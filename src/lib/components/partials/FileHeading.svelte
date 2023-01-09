@@ -34,7 +34,7 @@
 </section>
 
 <style lang="scss">
-	:global(.button) {
-		@apply shadow-sm border-none space-x-0;
+	:global(.fheading .button) {
+		@apply shadow-base border-none space-x-0;
 	}
 </style>

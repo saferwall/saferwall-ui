@@ -9,9 +9,15 @@ module.exports = {
       borderRadius: {
         DEFAULT: "6px"
       },
+      boxShadow: {
+        'base': '0px 2px 9px rgb(0 0 0 / 0.05)'
+      },
       colors: {
         redx: {
           DEFAULT: '#E63755'
+        },
+        greenx: {
+          DEFAULT: '#56AC30'
         },
         primary: {
           DEFAULT: '#0D9677'

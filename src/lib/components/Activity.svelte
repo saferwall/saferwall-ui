@@ -21,7 +21,7 @@
 
 <article>
 	<div
-		class="activity flex flex-col lg:flex-row space-y-4 lg:space-y-0 justify-between items-center bg-white shadow-sm rounded-xl md:px-8 py-8 w-full"
+		class="activity flex flex-col lg:flex-row space-y-4 lg:space-y-0 justify-between items-center bg-white shadow-base rounded-xl md:px-8 py-8 w-full"
 	>
 		<div class="flex flex-col flex-1 items-center md:flex-row space-y-4 md:space-y-0">
 			<div class="activity__author flex flex-col items-center space-y-2">
