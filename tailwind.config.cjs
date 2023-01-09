@@ -9,9 +9,27 @@ module.exports = {
       borderRadius: {
         DEFAULT: "6px"
       },
+      boxShadow: {
+        'base': '0px 2px 9px rgb(0 0 0 / 0.05)'
+      },
+      backdropBlur: {
+        xs: '1px',
+      },
       colors: {
+        redx: {
+          DEFAULT: '#E63755'
+        },
+        greenx: {
+          DEFAULT: '#56AC30'
+        },
         primary: {
           DEFAULT: '#0D9677'
+        },
+        orangex: {
+          DEFAULT: '#F08039'
+        },
+        purplex: {
+          DEFAULT: '#6C5ED1'
         },
         grayx: {
           DEFAULT: '#F6F6F6',
@@ -29,5 +47,7 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
