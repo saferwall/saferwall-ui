@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import FileSummaryCard from '$lib/components/FileSummaryCard.svelte';
+	import BasePropsCard from '$lib/components/summary/BasePropsCard.svelte';
+	import FileSummaryCard from '$lib/components/summary/FileSummaryCard.svelte';
 
 	export let data: PageData;
 
@@ -13,8 +14,13 @@
 		lastScanned: summary.last_scanned,
 		firstSubmission: summary.first_seen
 	};
+
+	$: properties = summary.properties;
+
+	console.log(data);
 </script>
 
-<section class="container mx-auto py-2">
+<section class="container mx-auto py-2 space-y-6">
 	<FileSummaryCard {...summaryCard} />
+	<BasePropsCard {properties} />
 </section>

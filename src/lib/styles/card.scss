@@ -1,0 +1,24 @@
+.card {
+	&__title {
+		@apply text-2xl font-normal;
+	}
+
+	&__list {
+		@apply space-y-4;
+	}
+
+	&__item {
+		@apply px-3 lg:px-6 bg-grayx-50;
+
+		&:nth-child(2n) {
+			@apply bg-white;
+		}
+
+		&__title {
+			@apply p-4 min-w-[80px] text-left rounded-l;
+		}
+		&__content {
+			@apply p-4 break-all rounded-r text-grayx-800;
+		}
+	}
+}

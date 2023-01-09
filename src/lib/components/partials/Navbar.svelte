@@ -1,7 +1,7 @@
 <script>
 	import Button from '../form/Button.svelte';
 	import Logo from './Logo.svelte';
-	import InputSearch from '../InputSearch.svelte';
+	import InputSearch from '../form/InputSearch.svelte';
 </script>
 
 <nav

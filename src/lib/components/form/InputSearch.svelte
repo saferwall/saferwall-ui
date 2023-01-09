@@ -1,5 +1,5 @@
 <script>
-	import Input from './form/Input.svelte';
+	import Input from './Input.svelte';
 </script>
 
 <div class="flex relative w-full">

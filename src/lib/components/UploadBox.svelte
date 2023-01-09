@@ -1,5 +1,5 @@
 <script>
-	import ButtonBrowse from './ButtonBrowse.svelte';
+	import ButtonBrowse from './form/ButtonBrowse.svelte';
 </script>
 
 <section class="upload__ bg-white rounded-xl shadow p-8 md:p-12 flex flex-col justify-between">

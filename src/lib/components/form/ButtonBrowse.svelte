@@ -1,5 +1,5 @@
 <script>
-	import Button from './form/Button.svelte';
+	import Button from './Button.svelte';
 </script>
 
 <Button theme="primary" size="large">

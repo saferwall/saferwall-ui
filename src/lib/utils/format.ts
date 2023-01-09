@@ -1,4 +1,4 @@
-import type { ActivityType, pe, Tag } from "$lib/types";
+import type { ActivityType } from "$lib/types";
 
 const labels: { [key: string]: string } = {
     benign: 'safe',
@@ -34,7 +34,7 @@ export function getLabelClass(classification?: string): string {
 }
 
 /**
- * Parse label class to icon
+ * Returns the icon for a given classification label.
  * @param classification label
  * @returns icon
  */
@@ -43,37 +43,9 @@ export function getLabelIcon(classification?: string): string {
 }
 
 /**
- * Parse mixed tags to basic tag name & category
- * @param fileTags mix of tags with value type string|array
- * @returns list of simple tag name & category
- */
-export function parseTags(fileTags: any): Tag[] {
-    return Object.keys(fileTags).reduce((tags: Tag[], category: string) => {
-        let items: string | string[] | undefined = fileTags[category];
-
-        if (!items) {
-            return tags;
-        }
-
-        if (!Array.isArray(items)) {
-            items = [items];
-        }
-
-        items.forEach((name) => {
-            tags.push({
-                name: name,
-                category: category.toLowerCase()
-            });
-        });
-
-        return tags;
-    }, [])
-}
-
-/**
- *  
- * @param timestamp
- * @returns time ago format
+ * Returns a string representing the time elapsed since the given timestamp.
+ * @param timestamp The timestamp to calculate the elapsed time from. Can be a number or a Date object.
+ * @returns A string in the format "X time ago", where X is the elapsed time and time is a unit of time (e.g. "2 weeks ago").
  */
 export function timeSince(timestamp: number | Date) {
     const date = (timestamp instanceof Date) ? timestamp : new Date(timestamp);
@@ -98,9 +70,28 @@ export function timeSince(timestamp: number | Date) {
 }
 
 /**
- * 
- * @param timestamp
- * @returns ISO date format
+ * Converts bytes to kilobytes, megabytes, or gigabytes, depending on the size of the input value.
+ * @param bytes The number of bytes to convert.
+ * @returns The size in the appropriate unit (kilobytes, megabytes, or gigabytes). The result is rounded to two decimal places.
+ */
+export const convertBytes = (bytes: number): string => {
+    if (bytes < 1024) {
+        return bytes + 'B';
+    }
+    if (bytes < 1048576) {
+        return (bytes / 1024).toFixed(2) + 'KB';
+    }
+    if (bytes < 1073741824) {
+        return (bytes / 1048576).toFixed(2) + 'MB';
+    }
+
+    return (bytes / 1073741824).toFixed(2) + 'GB';
+}
+
+/**
+ * Converts a timestamp to an ISO string.
+ * @param timestamp The timestamp to convert.
+ * @returns The ISO string representation of the timestamp.
  */
 export function timeToDateISO(timestamp: number): string {
     const date = new Date();

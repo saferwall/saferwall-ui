@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './lib/styles/card.scss';
+@import './lib/styles/tags.scss';
+@import './lib/styles/scrollbar.scss';
+
 html,
 body {
 	@apply font-primary;
 	@apply min-h-screen h-full;
-}
-
-#app {
-	@apply flex flex-col min-h-full;
 }
 
 input,
@@ -18,8 +18,8 @@ button {
 	@apply focus:outline focus:outline-primary;
 }
 
-a.link:not([href='']) {
-	@apply text-primary;
+#app {
+	@apply flex flex-col min-h-full;
 }
 
 .container {
@@ -30,25 +30,6 @@ a.link:not([href='']) {
 	@apply flex items-center justify-center;
 }
 
-/**
- * Scrollbar
- **/
-/* width */
-::-webkit-scrollbar {
-	@apply w-1 h-1;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-	@apply bg-white;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-	@apply bg-primary bg-opacity-60;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	@apply bg-primary;
+a.link:not([href='']) {
+	@apply text-primary;
 }

@@ -16,6 +16,7 @@ export interface Exif {
     Subsystem: string;
     SubsystemVersion: string;
     UninitializedDataSize: string;
+    [key: string]: any;
 }
 
 export interface Multiav {
@@ -28,6 +29,7 @@ export interface Tags {
     packer: string[];
     pe: string[];
     windefender: string;
+    [key: string]: any;
 }
 
 export interface Properties {
@@ -42,6 +44,7 @@ export interface Properties {
     Size: number;
     Tags: Tags;
     TrID: string[];
+    [key: string]: any;
 }
 
 export interface Submission {

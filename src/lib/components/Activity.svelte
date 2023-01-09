@@ -1,18 +1,18 @@
 <script lang="ts">
 	import type { Activity, Tag } from '$lib/types';
+	import { parseTags } from '$lib/utils/data';
 	import { getMemberSince } from '$lib/utils/date';
 	import {
 		getActivityTitle,
 		getLabelClass,
 		getLabelIcon,
-		parseTags,
 		timeSince,
 		timeToDateISO
 	} from '$lib/utils/format';
 
 	import Avatar from './Avatar.svelte';
 	import Button from './form/Button.svelte';
-	import InputHash from './InputHash.svelte';
+	import InputHash from './form/InputHash.svelte';
 
 	export let activity: Activity;
 
@@ -84,12 +84,12 @@
 				</ul>
 			</div>
 		</div>
-		<div class="activity__tags flex flex-row lg:flex-col items-center md:items-start lg:space-y-1">
-			<p class="activity__tags__title hidden lg:block">TAGS</p>
-			<ul class="activity__tags__list">
+		<div class="tags flex flex-row lg:flex-col items-center md:items-start lg:space-y-1">
+			<p class="tags__title hidden lg:block">TAGS</p>
+			<ul class="tags__list">
 				{#if tags.length > 0}
 					{#each tags as tag}
-						<li class="activity__tag activity__tag--{tag.category}">
+						<li class="tags__tag tags__tag--{tag.category}">
 							<a href="/tags/{tag.category}-{tag.name}">{tag.name}</a>
 						</li>
 					{/each}
@@ -108,8 +108,12 @@
 		}
 
 		&__author,
-		&__tags {
+		.tags {
 			@apply md:px-8 2xl:px-10 lg:w-48 2xl:w-60;
+
+			&__title {
+				@apply font-semibold text-grayx-400;
+			}
 		}
 
 		&__info {
@@ -118,30 +122,6 @@
 			&__author,
 			&__type {
 				@apply font-semibold;
-			}
-		}
-		&__tag {
-			@apply bg-grayx-100;
-
-			&--eset {
-				@apply bg-red-200 text-red-900;
-			}
-			&--pe,
-			&--packer {
-				@apply bg-blue-200 text-blue-900;
-			}
-		}
-		&__tags {
-			&__title {
-				@apply font-semibold text-grayx-400;
-			}
-
-			&__list {
-				@apply flex flex-wrap justify-center lg:justify-start;
-
-				li {
-					@apply m-1 py-1.5 px-3 rounded;
-				}
 			}
 		}
 
