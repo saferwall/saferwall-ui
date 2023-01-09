@@ -42,11 +42,3 @@
 		{/if}
 	</div>
 </BaseCard>
-
-<style lang="scss">
-	.card__list {
-		.hide {
-			@apply hidden;
-		}
-	}
-</style>

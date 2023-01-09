@@ -1,6 +1,10 @@
 .card {
 	@apply space-y-6;
 
+	.hide {
+		@apply hidden;
+	}
+
 	&__title {
 		@apply text-2xl font-normal;
 	}

@@ -23,8 +23,8 @@
 				<th>Country</th>
 			</thead>
 			<tbody>
-				{#each submissions as submission}
-					<tr>
+				{#each submissions as submission, i}
+					<tr class:hide={!expanded && i > maxRecords}>
 						<td><time>{timestampToFormattedDate(submission.timestamp * 1000)}</time></td>
 						<td>{submission.filename}</td>
 						<td class="capitalize">{submission.src}</td>
@@ -38,11 +38,3 @@
 		{/if}
 	</div>
 </BaseCard>
-
-<style lang="scss">
-	.card__list {
-		.hide {
-			@apply hidden;
-		}
-	}
-</style>
