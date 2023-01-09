@@ -7,6 +7,7 @@
 	import ExifFileMetadataCard from '$lib/components/summary/ExifFileMetadataCard.svelte';
 	import IndicatorsCard from '$lib/components/summary/IndicatorsCard.svelte';
 	import SubmissionsCard from '$lib/components/summary/SubmissionsCard.svelte';
+	import VirtualScreensCard from '$lib/components/summary/VirtualScreensCard.svelte';
 
 	export let data: PageData;
 
@@ -31,4 +32,5 @@
 	<ExifFileMetadataCard {exif} />
 	<SubmissionsCard {submissions} />
 	<IndicatorsCard {indicators} />
+	<VirtualScreensCard />
 </section>
