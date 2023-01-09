@@ -12,6 +12,9 @@ module.exports = {
       boxShadow: {
         'base': '0px 2px 9px rgb(0 0 0 / 0.05)'
       },
+      backdropBlur: {
+        xs: '1px',
+      },
       colors: {
         redx: {
           DEFAULT: '#E63755'
@@ -21,6 +24,12 @@ module.exports = {
         },
         primary: {
           DEFAULT: '#0D9677'
+        },
+        orangex: {
+          DEFAULT: '#F08039'
+        },
+        purplex: {
+          DEFAULT: '#6C5ED1'
         },
         grayx: {
           DEFAULT: '#F6F6F6',

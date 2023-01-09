@@ -144,10 +144,10 @@
 			@apply flex items-center space-x-1;
 
 			&--benign {
-				@apply text-green-500;
+				@apply text-greenx;
 			}
 			&--unknown {
-				@apply text-orange-500;
+				@apply text-orangex;
 			}
 			&--malicious {
 				@apply text-red-500;

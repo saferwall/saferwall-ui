@@ -13,11 +13,11 @@
 			? 'text-greenx'
 			: score.value / (score.count || 1) > 0.5
 			? 'text-redx'
-			: 'text-orange-500';
+			: 'text-orangex';
 	$: signatureColor = signature?.includes('not')
 		? 'text-redx'
 		: signature?.includes('invalid')
-		? 'text-orange-500'
+		? 'text-orangex'
 		: 'text-greenx';
 
 	$: getLastScanned = timeSince(lastScanned * 1000);
@@ -32,7 +32,7 @@
 		<div class="flex items-center space-x-6">
 			<div class="rounded-full font-bold text-lg bg-gray-200  p-1.5">
 				<div class="flex flex-center flex-col w-24 h-24 rounded-full bg-white">
-					<span class="text-2xl {scoreColor}">{score.value}</span>
+					<span class="text-3xl {scoreColor}">{score.value}</span>
 					<span class="text-grayx-300">/ {score.count}</span>
 				</div>
 			</div>
