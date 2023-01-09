@@ -54,6 +54,13 @@ export interface Submission {
     timestamp: number;
 }
 
+export interface Indicator {
+    description: string;
+    severity: string;
+    category: string;
+    module: string;
+}
+
 export default interface APISummary {
     class: string;
     comments_count: number;

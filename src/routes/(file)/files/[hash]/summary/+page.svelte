@@ -1,8 +1,11 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { indicators } from '$lib/data/demo';
+
 	import BasePropsCard from '$lib/components/summary/BasicPropsCard.svelte';
 	import FileSummaryCard from '$lib/components/summary/FileSummaryCard.svelte';
 	import ExifFileMetadataCard from '$lib/components/summary/ExifFileMetadataCard.svelte';
+	import IndicatorsCard from '$lib/components/summary/IndicatorsCard.svelte';
 	import SubmissionsCard from '$lib/components/summary/SubmissionsCard.svelte';
 
 	export let data: PageData;
@@ -27,4 +30,5 @@
 	<BasePropsCard {properties} />
 	<ExifFileMetadataCard {exif} />
 	<SubmissionsCard {submissions} />
+	<IndicatorsCard {indicators} />
 </section>
