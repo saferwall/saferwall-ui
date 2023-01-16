@@ -17,7 +17,8 @@
 			</div>
 			<div class="grow space-y-4 max-w-full truncate">
 				<div class="space-y-4">
-					<h1 class="text-xl font-semibold text-gray-800">{username}</h1>
+					<h1 class="text-2xl font-semibold text-gray-800">{username}</h1>
+					<a href="/user/{username}">@{username}</a>
 					{#if github}
 						<a
 							href={github}
