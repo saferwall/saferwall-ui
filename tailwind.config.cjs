@@ -23,7 +23,17 @@ module.exports = {
           DEFAULT: '#56AC30'
         },
         primary: {
-          DEFAULT: '#0D9677'
+          DEFAULT: '#0D9677',
+          '50': '#edfcf6',
+          '100': '#d3f8e8',
+          '200': '#abefd6',
+          '300': '#74e1bf',
+          '400': '#3ccba3',
+          '500': '#19b08b',
+          '600': '#0d9677',
+          '700': '#0a725d',
+          '800': '#0b5a4b',
+          '900': '#0a4a3e',
         },
         orangex: {
           DEFAULT: '#F08039'
