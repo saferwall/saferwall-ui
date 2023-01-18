@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { Submission } from '$lib/types/summary';
 	import { timestampToFormattedDate } from '$lib/utils/date';
-	import BaseCard from '../BaseCard.svelte';
-	import ButtonShowAll from '../form/ButtonShowAll.svelte';
+	import BaseCard from '../../cards/BaseCard.svelte';
+	import ButtonShowAll from '../../form/ButtonShowAll.svelte';
 
 	const maxRecords = 10;
 

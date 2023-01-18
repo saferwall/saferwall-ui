@@ -1,3 +1,5 @@
+import { browser } from '$app/environment';
+import { env } from '$env/dynamic/public';
 import { fileMenu } from '$lib/data/menus';
 import type { FileMenu } from '$lib/types';
 import type { LayoutLoad } from './$types';
@@ -9,11 +11,13 @@ export const load = (async ({ params, url }): Promise<{
 }> => {
     const { hash } = params;
 
-    const fileReq = await fetch(`https://api.saferwall.com/v1/files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav`,
-        {
-            cache: "force-cache"
-        }
-    );
+    const initReq: { cache?: RequestCache | undefined } = {};
+    if (browser) {
+        initReq.cache = "force-cache";
+    }
+
+    const fileReq = await fetch(`${env.PUBLIC_API_URL}/files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav`, initReq);
+
     const file = await fileReq.json();
 
     const paths = url.pathname.toString().split('/');

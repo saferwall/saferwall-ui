@@ -1,10 +1,10 @@
 import { browser } from '$app/environment';
 import { env } from '$env/dynamic/public';
-import type APISummary from '$lib/types/summary';
+import type { APIAntivirus } from '$lib/types/antivirus';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ params }): Promise<{
-    summary: APISummary
+    antivirus: APIAntivirus
 }> => {
     const { hash } = params;
 
@@ -13,12 +13,12 @@ export const load = (async ({ params }): Promise<{
         initReq.cache = "force-cache";
     }
 
-    const fileReq = await fetch(`${env.PUBLIC_API_URL}/files/${hash}/summary`, initReq);
+    const fileReq = await fetch(`${env.PUBLIC_API_URL}/files/${hash}?fields=multiav,first_seen,last_scanned`, initReq);
 
-    const summary = await fileReq.json();
+    const antivirus = await fileReq.json();
 
     return {
-        summary,
+        antivirus,
     };
 
 }) satisfies PageLoad;
