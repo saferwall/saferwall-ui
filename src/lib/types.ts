@@ -1,3 +1,5 @@
+import type { APIFile } from "./types/files";
+
 export interface FileMenu {
     name: string;
     path: string;
@@ -8,26 +10,9 @@ export interface Author {
     username: string;
 }
 
-export interface FileMultiav {
-    count: number;
-    value: number;
-}
-
-export interface FileTags {
-    [key: string]: any;
-}
-
-export interface File {
-    filename: string;
-    hash: string;
-    multiav: FileMultiav;
-    tags?: FileTags;
-    class?: string;
-}
-
 export interface Activity {
     id: string;
-    file?: File;
+    file?: APIFile;
     author: Author;
     date: number;
     type: ActivityType;
