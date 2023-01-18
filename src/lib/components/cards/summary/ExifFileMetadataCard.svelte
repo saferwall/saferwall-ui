@@ -1,9 +1,8 @@
 <script lang="ts">
+	import ButtonShowAll from '$lib/components/form/ButtonShowAll.svelte';
 	import type { Exif } from '$lib/types/summary';
-	import { parseTags } from '$lib/utils/data';
 	import { convertBytes } from '$lib/utils/format';
 	import BaseCard from '../BaseCard.svelte';
-	import ButtonShowAll from '../form/ButtonShowAll.svelte';
 
 	const maxRecords = 10;
 	const formatterProps: any = {

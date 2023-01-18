@@ -49,6 +49,9 @@
 		}
 
 		&--size {
+			&--small {
+				@apply py-2;
+			}
 			&--large {
 				@apply py-3 px-5;
 			}

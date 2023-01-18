@@ -20,3 +20,11 @@
 ::-webkit-scrollbar-thumb:hover {
 	@apply bg-primary;
 }
+
+.no-scroll-style {
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
+}
+.no-scroll-style::-webkit-scrollbar {
+	display: none; /* Safari and Chrome */
+}

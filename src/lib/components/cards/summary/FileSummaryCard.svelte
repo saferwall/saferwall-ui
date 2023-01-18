@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { FileMultiav } from '$lib/types';
+	import type { FileMultiav } from '$lib/types/files';
 	import { getFileTypeIcon, timeSince } from '$lib/utils/format';
+	import BaseCard from '../BaseCard.svelte';
 
 	export let score: FileMultiav;
 	export let lastScanned: number;
@@ -24,7 +25,9 @@
 	$: getFirstSubmission = timeSince(firstSubmission * 1000);
 </script>
 
-<div
+<BaseCard
+	flex={false}
+	padding={false}
 	class="summary flex lg:justify-between flex-wrap lg:flex-nowrap lg:items-center bg-white rounded w-full shadow-base lg:p-4"
 >
 	<article class="summary__card flex-grow">
@@ -70,7 +73,7 @@
 			</p>
 		</article>
 	{/if}
-</div>
+</BaseCard>
 
 <style lang="scss">
 	.summary {

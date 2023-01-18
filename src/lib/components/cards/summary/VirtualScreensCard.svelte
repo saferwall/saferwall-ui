@@ -1,6 +1,6 @@
 <script lang="ts">
-	import BaseCard from '../BaseCard.svelte';
-	import ComingSoon from '../partials/ComingSoon.svelte';
+	import BaseCard from '../../cards/BaseCard.svelte';
+	import ComingSoon from '../../partials/ComingSoon.svelte';
 </script>
 
 <BaseCard>
@@ -16,8 +16,7 @@
 <style lang="scss">
 	.virtual {
 		&__preview {
-			background-image: url('/images/demo-virutal-screne.webp');
-			@apply w-full h-64 bg-gray-100 border border-gray-200 rounded bg-cover max-w-[400px] mx-auto;
+			@apply w-full h-64 bg-gray-400 border border-gray-200 rounded bg-cover max-w-[400px] mx-auto;
 		}
 	}
 </style>

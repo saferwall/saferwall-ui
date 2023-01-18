@@ -9,6 +9,7 @@
 		timeSince,
 		timeToDateISO
 	} from '$lib/utils/format';
+	import ActivityMeta from './ActivityMeta.svelte';
 
 	import Avatar from './Avatar.svelte';
 	import Button from './form/Button.svelte';
@@ -55,33 +56,9 @@
 					</time>
 				</p>
 				<InputHash hash={activity.file?.hash} />
-				<ul
-					class="activity__meta flex flex-wrap md:flex-nowrap items-center md:justify-center space-y-1 md:space-y-0"
-				>
-					<li class="activity__meta__item">
-						<span>CLASSIFICATION</span>
-						<div
-							class="capitalize activity__label activity__label--{getLabelClass(
-								activity.file?.class
-							)}"
-						>
-							<svg class="w-4 h-4"
-								><use href="/images/images.svg#icon-{getLabelIcon(activity.file?.class)}" /></svg
-							>
-							<span>{getLabelClass(activity.file?.class)}</span>
-						</div>
-					</li>
-					<li class="activity__meta__item">
-						<span>ANTIVIRUS</span>
-						<span>{activity.file?.multiav.value}/{activity.file?.multiav.count}</span>
-					</li>
-					<li class="activity__meta__item flex-1">
-						<span>FILE NAME</span>
-						<span class="w-full">
-							<input class="w-full" type="text" value={activity.file?.filename} />
-						</span>
-					</li>
-				</ul>
+				{#if activity.file}
+					<ActivityMeta file={activity.file} />
+				{/if}
 			</div>
 		</div>
 		<div class="tags flex flex-row lg:flex-col items-center md:items-start lg:space-y-1">
@@ -122,35 +99,6 @@
 			&__author,
 			&__type {
 				@apply font-semibold;
-			}
-		}
-
-		&__meta {
-			@apply w-full;
-
-			&__item {
-				@apply flex flex-col mr-4;
-
-				& span:first-child {
-					@apply font-semibold text-grayx-400;
-				}
-				& span:last-child {
-					@apply font-semibold text-sm;
-				}
-			}
-		}
-
-		&__label {
-			@apply flex items-center space-x-1;
-
-			&--benign {
-				@apply text-greenx;
-			}
-			&--unknown {
-				@apply text-orangex;
-			}
-			&--malicious {
-				@apply text-red-500;
 			}
 		}
 	}

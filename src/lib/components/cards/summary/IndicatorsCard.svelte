@@ -1,7 +1,7 @@
 <script lang="ts">
-	import BaseCard from '../BaseCard.svelte';
-	import ButtonShowAll from '../form/ButtonShowAll.svelte';
-	import CommingSoon from '../partials/ComingSoon.svelte';
+	import BaseCard from '../../cards/BaseCard.svelte';
+	import ButtonShowAll from '../../form/ButtonShowAll.svelte';
+	import CommingSoon from '../../partials/ComingSoon.svelte';
 
 	const maxRecords = 10;
 

@@ -1,3 +1,9 @@
-<section class="container mx-auto py-4 pt-14">
-	<h1 class="text-3xl font-medium">My profile</h1>
+<script lang="ts">
+	export let title: string = '';
+</script>
+
+<section class="container mx-auto py-4">
+	{#if title}
+		<h1 class="text-3xl font-medium">{title}</h1>
+	{/if}
 </section>

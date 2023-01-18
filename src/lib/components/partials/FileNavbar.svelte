@@ -10,7 +10,7 @@
 
 <section
 	data-sveltekit-preload-data="tap"
-	class="fnavbar z-10 w-full sticky top-0 bg-white overflow-x-auto"
+	class="fnavbar z-10 w-full sticky top-0 bg-white overflow-x-auto no-scroll-style"
 >
 	<div class="w-full container mx-auto flex">
 		<ul class="fnavbar__menu flex w-full space-x-3">
