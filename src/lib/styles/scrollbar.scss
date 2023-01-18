@@ -1,0 +1,30 @@
+/**
+ * Scrollbar
+ **/
+/* width */
+::-webkit-scrollbar {
+	@apply w-1 h-1;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	@apply bg-white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	@apply bg-primary bg-opacity-60;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	@apply bg-primary;
+}
+
+.no-scroll-style {
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+	scrollbar-width: none; /* Firefox */
+}
+.no-scroll-style::-webkit-scrollbar {
+	display: none; /* Safari and Chrome */
+}

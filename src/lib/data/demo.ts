@@ -1,4 +1,5 @@
 import type { Activity } from "$lib/types";
+import type { Indicator } from "$lib/types/summary";
 
 export const activities: Activity[] = [
     {
@@ -671,5 +672,37 @@ export const activities: Activity[] = [
     }
 ];
 
+export const indicators: Indicator[] = [
+    {
+        description: 'Malware detection of a yara signature: Win32/WannaCry',
+        severity: 'malicious',
+        category: 'Sandbox Detection',
+        module: 'Behavior'
+    },
+    {
+        description: 'Communicates over HTTP with a low reputation domain',
+        severity: 'informational',
+        category: 'C2',
+        module: 'Behavior'
+    },
+    {
+        description: 'Deletes itself after process termination',
+        severity: 'suspicious',
+        category: 'Stealth',
+        module: 'Behavior'
+    },
+    {
+        description: 'Write a file to the startup folder',
+        severity: 'suspicious',
+        category: 'Persistence',
+        module: 'Behavior'
+    },
+    {
+        description: 'Check for the existence of Virtual Machines',
+        severity: 'suspicious',
+        category: 'Signature',
+        module: 'Yara'
+    },
+]
 
-export default { activities };
+export default { activities, indicators };

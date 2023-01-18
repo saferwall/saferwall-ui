@@ -1,0 +1,59 @@
+.card {
+	.hide {
+		@apply hidden;
+	}
+
+	&__title {
+		@apply text-2xl font-normal;
+	}
+
+	&__list {
+		@apply space-y-4;
+	}
+
+	&__table {
+		@apply table table-auto;
+		thead {
+			@apply text-left text-grayx-500 uppercase;
+		}
+		tbody {
+			@apply divide-y;
+		}
+		th,
+		td {
+			@apply py-4;
+		}
+	}
+
+	&__item {
+		@apply px-3 lg:px-6 bg-grayx-50;
+
+		&:nth-child(2n) {
+			@apply bg-white;
+		}
+
+		&:hover,
+		&:nth-child(2n):hover {
+			@apply bg-black bg-opacity-10;
+		}
+
+		&__title {
+			@apply min-w-[80px] text-left rounded-l;
+		}
+		&__content {
+			@apply break-all rounded-r text-grayx-800;
+		}
+
+		&__title,
+		&__content {
+			@apply py-2 px-4;
+		}
+	}
+	&--padding {
+		@apply p-6 lg:p-10;
+	}
+
+	&--flex {
+		@apply flex flex-col space-y-6;
+	}
+}

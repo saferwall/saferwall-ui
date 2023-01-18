@@ -1,69 +1,78 @@
 <script lang="ts">
-	import type { Activity } from '$lib/types';
-	import { label_class, member_since } from '$lib/utils/date';
+	import type { Activity, Tag } from '$lib/types';
+	import { parseTags } from '$lib/utils/data';
+	import { getMemberSince } from '$lib/utils/date';
+	import {
+		getActivityTitle,
+		getLabelClass,
+		getLabelIcon,
+		timeSince,
+		timeToDateISO
+	} from '$lib/utils/format';
+	import ActivityMeta from './ActivityMeta.svelte';
 
 	import Avatar from './Avatar.svelte';
 	import Button from './form/Button.svelte';
+	import InputHash from './form/InputHash.svelte';
 
 	export let activity: Activity;
+
+	$: tags = parseTags(activity.file?.tags || {});
 </script>
 
 <article>
 	<div
-		class="activity bg-white shadow-sm rounded-xl p-8 inline-flex justify-between items-center w-full"
+		class="activity flex flex-col lg:flex-row space-y-4 lg:space-y-0 justify-between items-center bg-white shadow-base rounded-xl md:px-8 py-8 w-full"
 	>
-		<div class="authorf_ px-8 flex flex-col items-center space-y-2 lg:pr-10">
-			<Avatar image="https://i.pravatar.cc/300" name={activity.author.username} />
-			<div class="name__ text-center">
-				<a href="/profile" class="font-bold">{activity.author.username}</a>
-				<p class="text-grayx-500">Member since {member_since(activity.author.member_since)}</p>
-			</div>
-			<div class="action__">
-				<Button>Follow</Button>
-			</div>
-		</div>
-		<div
-			class="activity__info flex-1 border-r border-l h-full flex flex-col items-start px-8 space-y-4"
-		>
-			<p class="activity__title">
-				<a class="activity__info__author" href="/">{activity.author.username}</a>
-				<span class="activity__info__type">submitted a file</span>
-				<time class="activity__time" datetime="2018-07-07">4 days ago</time>
-			</p>
-			<p class="hash__ w-full bg-grayx-100 rounded">
-				<input
-					class="w-full px-4 py-2 bg-transparent"
-					type="text"
-					readonly
-					value={activity.file?.hash}
+		<div class="flex flex-col flex-1 items-center md:flex-row space-y-4 md:space-y-0">
+			<div class="activity__author flex flex-col items-center space-y-2">
+				<Avatar
+					image="https://robohash.org/{activity.author.username}?set=set1&bgset=bg1&size=200x200"
+					username={activity.author.username}
 				/>
-			</p>
-			<ul class="activity__meta flex items-center justify-center space-x-10">
-				<li class="activity__meta__item">
-					<span>CLASSIFICATION</span>
-					<span class="capitalize">{label_class(activity.file?.class)}</span>
-				</li>
-				<li class="activity__meta__item">
-					<span>ANTIVIRUS</span>
-					<span>{activity.file?.multiav.value}/{activity.file?.multiav.count}</span>
-				</li>
-				<li class="activity__meta__item">
-					<span>FILE NAME</span>
-					<span class="w-full">
-						<input type="text" value={activity.file?.filename} />
+				<div class="name__ text-center">
+					<a href="/user/{activity.author.username}" class="font-bold">{activity.author.username}</a
+					>
+					<p class="text-grayx-500">Member since {getMemberSince(activity.author.member_since)}</p>
+				</div>
+				<div class="action__">
+					<Button>Follow</Button>
+				</div>
+			</div>
+			<div
+				class="activity__info flex-1 md:border-l lg:border-r h-full flex flex-col items-start px-6 md:px-8 space-y-6"
+			>
+				<p class="activity__title space-x-1 flex flex-col md:flex-row">
+					<span class="flex space-x-1">
+						<a class="activity__info__author" href="/user/{activity.author.username}">
+							{activity.author.username}
+						</a>
+						<a class="activity__info__type" href="/files/{activity.file?.hash}"
+							>{getActivityTitle(activity.type)}</a
+						>
 					</span>
-				</li>
-			</ul>
+					<time class="activity__time" datetime={timeToDateISO(activity.date * 1000)}>
+						{timeSince(activity.date * 1000)}
+					</time>
+				</p>
+				<InputHash hash={activity.file?.hash} />
+				{#if activity.file}
+					<ActivityMeta file={activity.file} />
+				{/if}
+			</div>
 		</div>
-		<div class="activity__tags px-8  lg:pl-10">
-			<p class="activity__tags__title">TAGS</p>
-			<ul class="activity__tags__list">
-				<li>nsis</li>
-				<li>zhrw</li>
-				<li>nsis</li>
-				<li>xyz</li>
-				<li>zhrw</li>
-				<li>xyz</li>
+		<div class="tags flex flex-row lg:flex-col items-center md:items-start lg:space-y-1">
+			<p class="tags__title hidden lg:block">TAGS</p>
+			<ul class="tags__list">
+				{#if tags.length > 0}
+					{#each tags as tag}
+						<li class="tags__tag tags__tag--{tag.category}">
+							<a href="/tags/{tag.category}-{tag.name}">{tag.name}</a>
+						</li>
+					{/each}
+				{:else}
+					<p class="text-grayx-800 font-medium">No tags.</p>
+				{/if}
 			</ul>
 		</div>
 	</div>
@@ -75,35 +84,21 @@
 			@apply text-grayx-400;
 		}
 
-		&__info {
-			&__author,
-			&__type {
-				@apply font-medium;
-			}
-		}
-		&__tags {
+		&__author,
+		.tags {
+			@apply md:px-8 2xl:px-10 lg:w-48 2xl:w-60;
+
 			&__title {
 				@apply font-semibold text-grayx-400;
 			}
-
-			&__list {
-				@apply flex flex-wrap lg:w-56;
-
-				li {
-					@apply m-1 py-1.5 px-3 bg-grayx-100 rounded;
-				}
-			}
 		}
 
-		&__meta {
-			&__item {
-				@apply flex flex-col;
-				& span:first-child {
-					@apply font-semibold text-grayx-400;
-				}
-				& span:last-child {
-					@apply font-semibold;
-				}
+		&__info {
+			@apply 2xl:py-4;
+
+			&__author,
+			&__type {
+				@apply font-semibold;
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 <script>
-	import Input from './form/Input.svelte';
+	import Input from './Input.svelte';
 </script>
 
 <div class="flex relative w-full">
@@ -8,7 +8,7 @@
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"
-		class="w-4 h-4 absolute right-4 top-4"
+		class="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2"
 		viewBox="0 0 18 18"
 	>
 		<path

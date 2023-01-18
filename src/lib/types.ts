@@ -1,31 +1,28 @@
+import type { APIFile } from "./types/files";
+
+export interface FileMenu {
+    name: string;
+    path: string;
+}
+
 export interface Author {
     member_since: number;
     username: string;
 }
 
-export interface Multiav {
-    count: number;
-    value: number;
-}
-
-export interface Tags {
-    [key: string]: any;
-}
-
-export interface File {
-    filename: string;
-    hash: string;
-    multiav: Multiav;
-    tags?: Tags;
-    class?: string;
-}
-
 export interface Activity {
     id: string;
-    file?: File;
+    file?: APIFile;
     author: Author;
     date: number;
-    type: string;
+    type: ActivityType;
     follow: boolean;
     target?: string;
 }
+
+export interface Tag {
+    category: string;
+    name: string;
+}
+
+export type ActivityType = 'comment' | 'like' | 'submit';
