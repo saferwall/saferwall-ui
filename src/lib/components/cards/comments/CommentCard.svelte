@@ -4,8 +4,8 @@
 	import { Viewer } from 'bytemd';
 
 	import Avatar from '$lib/components/Avatar.svelte';
-	import Button from '$lib/components/form/Button.svelte';
 	import BaseCard from '../BaseCard.svelte';
+	import Button from '$lib/components/form/Button.svelte';
 	import DateTime from '$lib/components/DateTime.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 
