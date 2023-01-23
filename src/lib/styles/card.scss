@@ -51,6 +51,10 @@
 	}
 
 	&--flex {
-		@apply flex flex-col space-y-6;
+		@apply flex flex-col;
+	}
+
+	&--spacing {
+		@apply space-y-6;
 	}
 }

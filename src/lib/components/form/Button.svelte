@@ -49,6 +49,9 @@
 		}
 
 		&--size {
+			&--xsmall {
+				@apply text-sm py-2;
+			}
 			&--small {
 				@apply py-2;
 			}

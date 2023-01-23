@@ -2,6 +2,7 @@
 	let cclass = '';
 	export let flex: boolean = true;
 	export let padding: boolean = true;
+	export let spacing: boolean = true;
 
 	export { cclass as class };
 </script>
@@ -10,6 +11,7 @@
 	class="card relative overflow-hidden bg-white rounded-xl shadow-base  {cclass}"
 	class:card--flex={flex}
 	class:card--padding={padding}
+	class:card--spacing={spacing}
 >
 	<slot />
 </article>

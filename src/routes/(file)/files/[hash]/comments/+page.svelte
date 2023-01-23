@@ -1,3 +1,15 @@
-<div class="flex flex-1 flex-col w-full h-full items-center justify-center">
-	<h1>Comments | Coming soon</h1>
-</div>
+<script lang="ts">
+	import CommentCard from '$lib/components/cards/comments/CommentCard.svelte';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+	$: comments = data.pagination.items;
+</script>
+
+<section class="container mx-auto">
+	<div class="flex flex-col space-y-12">
+		{#each comments as comment}
+			<CommentCard {...comment} />
+		{/each}
+	</div>
+</section>
