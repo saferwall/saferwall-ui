@@ -9,7 +9,7 @@
 	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/file/${hash}/${activeMenu.path}`;
 </script>
 
-<section class="fheading container mx-auto py-6 overflow-x-auto">
+<section class="fheading container mx-auto py-6 overflow-x-auto mb-6">
 	<div class="flex items-end justify-between space-x-12">
 		<h1 class="text-2xl font-semibold">
 			{activeMenu.name}

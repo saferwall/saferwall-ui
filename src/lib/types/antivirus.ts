@@ -1,9 +1,10 @@
+export interface ScanResult {
+    infected: boolean;
+    output: string;
+    update: number;
+}
 export interface Scan {
-    [key: string]: {
-        infected: boolean;
-        output: string;
-        update: number;
-    }
+    [key: string]: ScanResult;
 }
 
 export interface Multiav {

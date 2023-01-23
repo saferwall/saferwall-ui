@@ -8,7 +8,7 @@
 	}
 
 	&__list {
-		@apply space-y-4;
+		@apply md:space-y-4;
 	}
 
 	&__table {
@@ -26,15 +26,11 @@
 	}
 
 	&__item {
-		@apply px-3 lg:px-6 bg-grayx-50;
+		@apply flex flex-col md:flex-row md:table-row;
+		@apply py-1 md:px-3 lg:px-6 bg-grayx-50;
 
 		&:nth-child(2n) {
 			@apply bg-white;
-		}
-
-		&:hover,
-		&:nth-child(2n):hover {
-			@apply bg-black bg-opacity-10;
 		}
 
 		&__title {
@@ -46,9 +42,10 @@
 
 		&__title,
 		&__content {
-			@apply py-2 px-4;
+			@apply py-1 md:py-2 px-4;
 		}
 	}
+
 	&--padding {
 		@apply p-6 lg:p-10;
 	}

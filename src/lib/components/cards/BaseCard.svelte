@@ -6,10 +6,10 @@
 	export { cclass as class };
 </script>
 
-<div
+<article
 	class="card relative overflow-hidden bg-white rounded-xl shadow-base  {cclass}"
 	class:card--flex={flex}
 	class:card--padding={padding}
 >
 	<slot />
-</div>
+</article>
