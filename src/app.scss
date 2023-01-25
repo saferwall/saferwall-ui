@@ -33,3 +33,7 @@ button {
 a.link:not([href='']) {
 	@apply text-primary;
 }
+
+:global(.markdown-body) {
+	@apply prose;
+}

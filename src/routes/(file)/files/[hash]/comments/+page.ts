@@ -17,6 +17,7 @@ export const load = (async ({ params }): Promise<{
     const fileReq = await fetch(`${env.PUBLIC_API_URL}/files/${hash}/comments`, initReq);
 
     const pagination = await fileReq.json();
+    pagination.items = pagination.items ?? [];
 
     return {
         pagination

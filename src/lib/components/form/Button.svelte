@@ -39,9 +39,15 @@
 		&--base {
 			@apply text-primary bg-white;
 		}
+		&--gray {
+			@apply text-grayx-500 bg-white;
+		}
 		&--base:hover,
 		&--primary {
 			@apply bg-primary text-white border-primary;
+		}
+		&--gray:hover {
+			@apply text-primary;
 		}
 
 		&--primary:hover {
