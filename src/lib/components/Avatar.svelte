@@ -40,7 +40,7 @@
 <style lang="scss">
 	.avatar {
 		@apply rounded-full bg-white overflow-hidden;
-		@apply border-2 border-grayx flex-shrink-0;
+		@apply border border-grayx flex-shrink-0;
 
 		&:has(&__text) {
 			@apply flex items-center justify-center flex-shrink-0 text-2xl font-bold text-grayx-900;

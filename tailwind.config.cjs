@@ -22,6 +22,9 @@ module.exports = {
         greenx: {
           DEFAULT: '#56AC30'
         },
+        bluex: {
+          DEFAULT: '#2573F0'
+        },
         primary: {
           DEFAULT: '#0D9677',
           '50': '#edfcf6',

@@ -1,0 +1,6 @@
+name = "saferwall"
+compatibility_date = "2023-01-26"
+
+kv_namespaces = [
+    { binding = "HOT_ACTIVITIES", id = "724ef4df56724aa9be1fd1eb0cdf5904" }
+]

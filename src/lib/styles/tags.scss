@@ -1,21 +1,19 @@
-.tags {
-	&__list {
-		@apply flex flex-wrap justify-center lg:justify-start;
+.tags__list {
+	@apply flex flex-wrap justify-center lg:justify-start;
 
-		li {
-			@apply m-1 py-1.5 px-3 rounded;
-		}
+	li {
+		@apply m-1 py-1.5 px-3 rounded;
 	}
+}
 
-	&__tag {
-		@apply bg-grayx-100;
+.tags__tag {
+	@apply bg-grayx-100;
 
-		&--eset {
-			@apply bg-red-200 text-red-900;
-		}
-		&--pe,
-		&--packer {
-			@apply bg-blue-200 text-blue-900;
-		}
+	&--eset {
+		@apply bg-red-200 text-red-900;
+	}
+	&--pe,
+	&--packer {
+		@apply bg-blue-200 text-blue-900;
 	}
 }
