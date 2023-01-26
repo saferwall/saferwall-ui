@@ -2,13 +2,7 @@
 	import type { Activity, Tag } from '$lib/types';
 	import { parseTags } from '$lib/utils/data';
 	import { getMemberSince } from '$lib/utils/date';
-	import {
-		getActivityTitle,
-		getLabelClass,
-		getLabelIcon,
-		timeSince,
-		timeToDateISO
-	} from '$lib/utils/format';
+	import { getActivityTitle, timeSince, timeToDateISO } from '$lib/utils/format';
 	import ActivityMeta from './ActivityMeta.svelte';
 
 	import Avatar from './Avatar.svelte';
@@ -26,16 +20,13 @@
 	>
 		<div class="flex flex-col flex-1 items-center md:flex-row space-y-4 md:space-y-0">
 			<div class="activity__author flex flex-col items-center space-y-2">
-				<Avatar
-					image="https://robohash.org/{activity.author.username}?set=set1&bgset=bg1&size=200x200"
-					username={activity.author.username}
-				/>
-				<div class="name__ text-center">
+				<Avatar username={activity.author.username} />
+				<div class="text-center">
 					<a href="/user/{activity.author.username}" class="font-bold">{activity.author.username}</a
 					>
 					<p class="text-grayx-500">Member since {getMemberSince(activity.author.member_since)}</p>
 				</div>
-				<div class="action__">
+				<div>
 					<Button>Follow</Button>
 				</div>
 			</div>

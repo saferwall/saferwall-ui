@@ -6,12 +6,18 @@
 	export let size: string = 'base';
 	export let image: string | undefined = undefined;
 	export let username: string | undefined = undefined;
-	export let hasAvatar: boolean = false;
+	export let hasAvatar: boolean = true;
 
 	$: avatarImage =
 		image ||
-		(hasAvatar ? env.PUBLIC_AVATAR_API_URL.replace('{username}', username!) : undefined) ||
+		(hasAvatar
+			? env.PUBLIC_AVATAR_API_URL.replace('{username}', `${username}`.toLowerCase())
+			: undefined) ||
 		DEFAULT_AVATAR;
+
+	const setDefaultAvatar = (event: any) => {
+		event.target.src = DEFAULT_AVATAR;
+	};
 </script>
 
 <a class="avatar avatar--{size}" href="/user/{username}">
@@ -20,7 +26,7 @@
 			class="avatar__image"
 			src={avatarImage}
 			alt="Avatar of {username}"
-			on:error={(event) => (event.target.src = DEFAULT_AVATAR)}
+			on:error={(event) => setDefaultAvatar(event)}
 		/>
 	{:else if username}
 		<span class="avatar__text">{username?.slice(0, 3)}</span>
