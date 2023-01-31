@@ -42,14 +42,17 @@
 		&--gray {
 			@apply text-grayx-500 bg-white;
 		}
+		&--base.active,
 		&--base:hover,
 		&--primary {
 			@apply bg-primary text-white border-primary;
 		}
+		&--gray.active,
 		&--gray:hover {
 			@apply text-primary;
 		}
 
+		&--primary.active,
 		&--primary:hover {
 			@apply bg-opacity-90 border-opacity-90;
 		}

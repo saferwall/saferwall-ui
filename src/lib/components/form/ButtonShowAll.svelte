@@ -15,7 +15,7 @@
 	.button {
 		@apply relative cursor-pointer;
 		@apply w-full pt-3 select-none flex items-center justify-center space-x-2;
-		@apply text-center font-semibold text-primary text-xl;
+		@apply text-center font-semibold text-primary;
 
 		&:not(:has(.expanded)):before {
 			@apply content-[''];

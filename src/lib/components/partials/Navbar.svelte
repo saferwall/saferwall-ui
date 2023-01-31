@@ -26,7 +26,7 @@
 		</ul>
 		<div class="auth__ space-x-2">
 			<div class="!hidden md:!inline-flex">
-				<Button href="/auth/login" m>Login</Button>
+				<Button href="/auth/login">Login</Button>
 			</div>
 			<Button href="/auth/register" theme="primary">Sign up</Button>
 		</div>

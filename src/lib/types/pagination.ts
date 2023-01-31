@@ -3,5 +3,5 @@ export interface APIPagination<T> {
     per_page: number;
     page_count: number;
     total_count: number;
-    items: T[];
+    items: T[] | Record<string, T> | T;
 }
