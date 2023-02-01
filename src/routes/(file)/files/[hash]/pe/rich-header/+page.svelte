@@ -9,7 +9,7 @@
 </script>
 
 <article>
-	<h1 class="title">rich Header</h1>
+	<h1 class="title">Rich Header</h1>
 	<table class="w-full">
 		<thead>
 			{#each columns as column}
