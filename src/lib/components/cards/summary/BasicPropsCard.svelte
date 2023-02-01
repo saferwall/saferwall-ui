@@ -9,7 +9,8 @@
 		Size: convertBytes
 	};
 
-	export let properties: Properties;
+	export let properties: Properties = {};
+
 	$: trid = properties?.TrID;
 	$: packer = properties?.Packer;
 	$: tags = parseTags(properties?.Tags || {});
@@ -35,7 +36,7 @@
 			{/if}
 		{/each}
 
-		{#if packer.length > 0}
+		{#if packer?.length > 0}
 			<tr class="card__item">
 				<th class="card__item__title">Packer</th>
 				<td class="card__item__content">
@@ -49,7 +50,7 @@
 				</td>
 			</tr>
 		{/if}
-		{#if trid.length > 0}
+		{#if trid?.length > 0}
 			<tr class="card__item">
 				<th class="card__item__title"><span>TrID</span></th>
 				<td class="card__item__content">
@@ -63,7 +64,7 @@
 				</td>
 			</tr>
 		{/if}
-		{#if tags.length > 0}
+		{#if tags?.length > 0}
 			<tr class="card__item">
 				<th class="card__item__title">Tags</th>
 				<td class="card__item__content">

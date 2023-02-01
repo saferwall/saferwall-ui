@@ -5,8 +5,7 @@
 	import ButtonShowAll from '../../form/ButtonShowAll.svelte';
 
 	const maxRecords = 10;
-
-	export let submissions: Submission[];
+	export let submissions: Submission[] = [];
 
 	$: expanded = false;
 	$: activeExpanding = submissions.length > maxRecords;

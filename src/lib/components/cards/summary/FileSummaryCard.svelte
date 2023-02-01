@@ -3,7 +3,10 @@
 	import { getFileTypeIcon, timeSince } from '$lib/utils/format';
 	import BaseCard from '../BaseCard.svelte';
 
-	export let score: FileMultiav;
+	export let score: FileMultiav = {
+		count: 0,
+		value: 0
+	};
 	export let lastScanned: number;
 	export let firstSubmission: number;
 	export let signature: string | undefined = undefined;

@@ -8,8 +8,9 @@
 	const { hash, file } = data;
 	const { submissions } = file;
 
+	$: fileMenu = data.fileMenu;
 	$: activeMenu = data.activeMenu;
-	$: fileName = submissions[submissions.length - 1].filename;
+	$: fileName = (submissions && submissions[submissions.length - 1].filename) || '';
 </script>
 
 <svelte:head>
@@ -17,7 +18,7 @@
 	<meta name="description" content="{fileName} file scan - hash {hash}" />
 </svelte:head>
 
-<FileNavbar {hash} {activeMenu} />
+<FileNavbar {hash} {activeMenu} {fileMenu} />
 <main class="flex-1 flex flex-col h-full bg-grayx">
 	<FileHeading {activeMenu} {hash} />
 	<div class="pt-4 pb-10">

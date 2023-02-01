@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { fileMenu } from '$lib/data/menus';
+	import type { FileMenu } from '$lib/types';
 
 	export let hash = '';
+	export let fileMenu: FileMenu[] = [];
 	export let activeMenu: { name: string; path: string };
 
 	$: isActivePath = (path: string): boolean => path === activeMenu.path;

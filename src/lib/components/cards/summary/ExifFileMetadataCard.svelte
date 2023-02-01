@@ -10,11 +10,11 @@
 		InitializedDataSize: convertBytes
 	};
 
-	export let exif: Exif;
+	export let exif: Exif = {};
 
 	$: expanded = false;
 	$: items = Object.entries(exif);
-	$: activeExpanding = Object.keys(exif).length > maxRecords;
+	$: activeExpanding = Object.keys(exif)?.length > maxRecords;
 </script>
 
 <BaseCard>
