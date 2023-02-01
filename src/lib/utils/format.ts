@@ -5,7 +5,8 @@ import {
 	magicMap,
 	prodIdsMap,
 	relocationTypesMap,
-	subSystemsMap
+	subSystemsMap,
+	sectionFlagMap
 } from '$lib/data/translates';
 import type { ActivityType } from '$lib/types';
 
@@ -170,12 +171,23 @@ export function valueToHex(value: any): string {
 	return `0x${stringToHex(value)}`;
 }
 
-export function getFileCharacteristics(characteristics: number): string[] {
+export function getFileCharacteristics(value: number): string[] {
 	const values = [];
 	for (const key in fileHeaderCharacteristicsMap) {
 		const kkey: any = key;
-		if (kkey & characteristics) {
+		if (kkey & value) {
 			values.push(fileHeaderCharacteristicsMap[key]);
+		}
+	}
+	return values;
+}
+
+export function getSectionFlags(value: number): string[] {
+	const values = [];
+	for (const key in sectionFlagMap) {
+		const kkey: any = key;
+		if (kkey & value) {
+			values.push(sectionFlagMap[key]);
 		}
 	}
 	return values;
@@ -204,13 +216,18 @@ export function prodIdToVsVersion(prod: number): string {
 export const translateGroupValue = (value: any, name: string, sub?: string): any => {
 	if (name === 'FileHeader') {
 		if (sub === 'Characteristics') {
-			return getFileCharacteristics(value).join('\n') || value;
+			return getFileCharacteristics(value).join(',\n') || value;
 		}
 		if (sub === 'Machine') {
 			return getMachineName(value);
 		}
 		if (sub === 'Signature') {
 			return asciiReversed(hexToASCII(stringToHex(value)));
+		}
+	}
+	if (name === 'Sections') {
+		if (sub === 'Characteristics') {
+			return getSectionFlags(value).join(',\n') || value;
 		}
 	}
 
@@ -222,7 +239,7 @@ export const translateGroupValue = (value: any, name: string, sub?: string): any
 		date.setSeconds(value);
 		return date.toISOString();
 	}
-	if (sub?.includes('SizeOf')) {
+	if (sub?.includes('SizeOf') || sub?.includes('Size')) {
 		return convertBytes(value);
 	}
 	if (sub?.includes('Subsystem')) {
