@@ -3,6 +3,7 @@ import {
 	fileHeaderCharacteristicsMap,
 	machinesMap,
 	magicMap,
+	prodIdsMap,
 	subSystemsMap
 } from '$lib/data/translates';
 import type { ActivityType } from '$lib/types';
@@ -222,6 +223,13 @@ export const translateGroupValue = (value: any, name: string, sub?: string): any
 	}
 	if (sub?.includes('Subsystem')) {
 		return subSystemsMap[value] || '?';
+	}
+
+	if (sub === 'ProdID') {
+		return prodIdsMap[value] || value;
+	}
+	if (sub === 'MSinternalName') {
+		return prodIdToVsVersion(value);
 	}
 
 	return value;
