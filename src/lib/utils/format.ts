@@ -4,6 +4,7 @@ import {
 	machinesMap,
 	magicMap,
 	prodIdsMap,
+	relocationTypesMap,
 	subSystemsMap
 } from '$lib/data/translates';
 import type { ActivityType } from '$lib/types';
@@ -233,6 +234,14 @@ export const translateGroupValue = (value: any, name: string, sub?: string): any
 	}
 	if (sub === 'MSinternalName') {
 		return prodIdToVsVersion(value);
+	}
+	if (name === 'Relocations') {
+		if (sub === 'Type') {
+			return relocationTypesMap[value] || value;
+		}
+		if (sub === 'VirtualAddress') {
+			return valueToHex(value);
+		}
 	}
 
 	return value;

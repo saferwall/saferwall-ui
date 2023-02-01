@@ -164,7 +164,7 @@ export const magicMap: Record<number, string> = {
     0x107: "ROM",
 }
 
-export const relocTypesMap: Record<number, string> = {
+export const relocationTypesMap: Record<number, string> = {
     0x0: "Absolute",
     0x1: "High",
     0x2: "Low",
