@@ -163,6 +163,9 @@ export function stringToHex(value: any) {
 }
 
 export function valueToHex(value: any): string {
+	if (typeof value !== 'number' || isNaN(value)) {
+		return value;
+	}
 	return `0x${stringToHex(value)}`;
 }
 
