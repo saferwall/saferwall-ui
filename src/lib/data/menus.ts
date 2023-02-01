@@ -2,7 +2,9 @@ import type { FileMenu } from "$lib/types";
 
 export const fileMenu: FileMenu[] = [
     { name: 'Summary', path: 'summary' },
-    { name: 'PE', path: 'pe' },
+    {
+        name: 'PE', fullName: 'PE (Portable Executable)', path: 'pe'
+    },
     { name: 'Strings', path: 'strings' },
     { name: 'Antivirus', path: 'antivirus' },
     { name: 'Dynamic Overview', path: 'dynamic-overview' },

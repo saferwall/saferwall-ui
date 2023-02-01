@@ -2,6 +2,7 @@ import type { APIFile } from "./types/files";
 
 export interface FileMenu {
     name: string;
+    fullName?: string;
     path: string;
 }
 

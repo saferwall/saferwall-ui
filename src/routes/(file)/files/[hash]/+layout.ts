@@ -7,7 +7,8 @@ import type { LayoutLoad } from './$types';
 export const load = (async ({ params, url }): Promise<{
     file: any,
     activeMenu: FileMenu,
-    hash: string
+    hash: string,
+    paths: string[]
 }> => {
     const { hash } = params;
 
@@ -20,13 +21,14 @@ export const load = (async ({ params, url }): Promise<{
 
     const file = await fileReq.json();
 
-    const paths = url.pathname.toString().split('/');
-    const activePath = paths[paths.length - 1];
-    const activeMenu = fileMenu.find(menu => menu.path === activePath)!;
+    const paths = url.pathname.toString().split(`/files/`)[1].split('/');
+    const activePath = paths[1];
+    const activeMenu = fileMenu.find(menu => menu.path === activePath)! || {};
 
     return {
         hash,
         file,
+        paths,
         activeMenu,
     };
 
