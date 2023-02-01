@@ -26,7 +26,7 @@
 	$: submissions = summary.submissions;
 </script>
 
-<section class="container mx-auto pt-2 pb-12 space-y-6">
+<section class="container mx-auto space-y-6">
 	<FileSummaryCard {...summaryCard} />
 	<BasePropsCard {properties} />
 	<ExifFileMetadataCard {exif} />

@@ -25,9 +25,9 @@
 			<Button size="xsmall">Follow</Button>
 		</div>
 	</div>
-	<div class="prose">
+	<section class="prose my-2">
 		<Viewer value={comment} />
-	</div>
+	</section>
 	<div class="flex items-center text-grayx-500 space-x-2">
 		<Icon name="calendar" size="w-4 h-4" />
 		<DateTime {date} />

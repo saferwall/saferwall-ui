@@ -19,12 +19,10 @@
 	}
 </script>
 
-<section class="file__comments container mx-auto">
-	<div class="flex flex-col space-y-12">
-		{#each comments as comment}
-			<CommentCard {...comment} />
-		{/each}
-	</div>
+<section class="file__comments container mx-auto space-y-4">
+	{#each comments as comment}
+		<CommentCard {...comment} />
+	{/each}
 	{#if comments.length === 0}
 		<div class="flex-center py-12">
 			<p class="text-grayx-500">No comments available</p>

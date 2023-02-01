@@ -27,7 +27,7 @@
 	];
 </script>
 
-<section class="container mx-auto pb-12">
+<section class="container mx-auto pb-10">
 	<TabsCard {heading}>
 		{#if itemsCount > 0}
 			<slot />

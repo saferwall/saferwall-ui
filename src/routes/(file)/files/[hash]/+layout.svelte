@@ -20,7 +20,7 @@
 <FileNavbar {hash} {activeMenu} />
 <main class="flex-1 flex flex-col h-full bg-grayx">
 	<FileHeading {activeMenu} {hash} />
-	<div class="py-12">
+	<div class="pt-4 pb-10">
 		<slot />
 	</div>
 </main>

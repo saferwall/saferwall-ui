@@ -12,8 +12,8 @@
 <section class="fheading container mx-auto pt-6 pb-2 overflow-x-auto mb-2 no-scroll-style">
 	<div class="flex items-end justify-between space-x-12">
 		<h1 class="text-3xl font-semibold flex-shrink-0">
+			<span class="sr-only">File {hash}</span>
 			{activeMenu.fullName || activeMenu.name}
-			<span class="sr-only">{hash}</span>
 		</h1>
 
 		<div class="space-x-2 flex flex-shrink-0">

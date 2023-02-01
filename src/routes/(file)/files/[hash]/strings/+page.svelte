@@ -58,7 +58,7 @@
 	<BaseCard class="overflow-x-auto">
 		<table class="table">
 			<thead>
-				<th>
+				<th class="w-1/4">
 					<div class="flex items-center space-x-3 justify-between">
 						<span>Encoding</span>
 						<label class="flex-center">
