@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { weightCalc } from '$lib/utils/data';
 	import {
 		getDataDirectoryLabel,
 		splitCamelCase,
