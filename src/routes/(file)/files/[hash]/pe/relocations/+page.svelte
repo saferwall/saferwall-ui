@@ -7,6 +7,8 @@
 	const maxRecords = 20;
 	export let data: PageData;
 
+	// TODO: split into components
+
 	$: groups = data.relocations;
 
 	let entries: Record<number, boolean> = {};

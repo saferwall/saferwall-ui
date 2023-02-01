@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData } from '../$types';
+	import type { PageData } from './$types';
 	import type { APIUser } from '$lib/types/users';
 
 	import Footer from '$lib/components/partials/Footer.svelte';

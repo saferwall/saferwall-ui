@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { Activity } from '$lib/types';
 	import ActivityItem from '$lib/components/Activity.svelte';
-	import data from '$lib/data/demo';
 
-	export const activities: Activity[] = data.activities.slice(-3);
+	export let activities: Activity[];
 </script>
 
 <section class="latest__ space-y-4">

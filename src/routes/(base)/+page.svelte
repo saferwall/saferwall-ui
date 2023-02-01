@@ -1,6 +1,12 @@
-<script>
+<script lang="ts">
 	import UploadBox from '$lib/components/UploadBox.svelte';
 	import LatestActivities from '$lib/sections/LatestActivities.svelte';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+
+	// TODO: infinite scroll <> loading activities
+	$: activities = data.pagination.items;
 </script>
 
 <svelte:head>
@@ -9,5 +15,5 @@
 
 <div class="container mx-auto py-10 space-y-20">
 	<UploadBox />
-	<LatestActivities />
+	<LatestActivities {activities} />
 </div>
