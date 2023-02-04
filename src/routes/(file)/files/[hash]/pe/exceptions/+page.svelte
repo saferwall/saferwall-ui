@@ -1,0 +1,143 @@
+<script lang="ts">
+	import ButtonShowAll from '$lib/components/form/ButtonShowAll.svelte';
+	import Icon from '$lib/components/Icon.svelte';
+	import { splitCamelCase, translateGroupValue, valueToHex } from '$lib/utils/format';
+	import type { PageData } from './$types';
+
+	const maxRecords = 20;
+	let records = maxRecords;
+	export let data: PageData;
+	// TODO: split into components
+
+	$: exceptions = data.exceptions?.map((exception) => {
+		return {
+			base: exception.RuntimeFunction,
+			unwind: Object.entries(exception.UnwinInfo)
+				.filter(([key]) => !['FunctionEntry', 'UnwindCodes'].includes(key))
+				.map(([key, value]) => {
+					return {
+						key: splitCamelCase(key),
+						value: translateGroupValue(value, 'Exceptions', key)
+					};
+				}),
+			codes: exception.UnwinInfo.UnwindCodes || []
+		};
+	});
+
+	let entries: Record<number, boolean> = {};
+
+	$: isEntryOpen = (index: number) => {
+		return entries[index] == true;
+	};
+</script>
+
+<article>
+	<h1 class="title">Exceptions</h1>
+	<table class="exceptions">
+		<thead>
+			<th colspan="2">Begin Address</th>
+			<th>End Address</th>
+			<th>Unwind Info Address</th>
+		</thead>
+		<tbody>
+			{#each exceptions.slice(0, records) as item, index}
+				<tr
+					class="box"
+					on:mouseup={() => (entries[index] = !isEntryOpen(index))}
+					class:expanded={isEntryOpen(index)}
+				>
+					<td class="px-0 !pr-0">
+						<Icon
+							size="w-4 h-4"
+							name="arrow-down"
+							class={'transition-all ' + (isEntryOpen(index) === true ? '' : '-rotate-90')}
+						/>
+					</td>
+					<td>{valueToHex(item.base.BeginAddress)}</td>
+					<td>{valueToHex(item.base.EndAddress)}</td>
+					<td>{valueToHex(item.base.UnwindInfoAddress)}</td>
+				</tr>
+				<tr class="box__body" class:hidden={!isEntryOpen(index)}>
+					<td colspan="8">
+						<div class="p-4 relative">
+							<h2
+								class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
+							>
+								Unwind Info
+							</h2>
+							<table class="w-full">
+								<tbody>
+									{#each item.unwind as entry}
+										<tr>
+											<td class="lg:w-1/4 font-semibold">{entry.key}</td>
+											<td>{entry.value}</td>
+										</tr>
+									{/each}
+									{#if item.codes && item.codes.length > 0}
+										<tr>
+											<td colspan="2">
+												<div class="flex flex-col w-full">
+													<h4 class="font-bold">Unwind codes</h4>
+													<div class="pl-5 pt-4">
+														<ul class="border-l border-gray-100 pl-5 py-2">
+															{#each item.codes as code}
+																<li class="text-sm">
+																	<span class="font-semibold">{valueToHex(code.CodeOffset)} :</span>
+																	<span>{[code.Operand, code.Operand].join(', ')}</span>
+																</li>
+															{/each}
+														</ul>
+													</div>
+												</div>
+											</td>
+										</tr>
+									{/if}
+								</tbody>
+							</table>
+						</div>
+					</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
+
+	<!-- <ButtonShowAll bind:expanded on:mouseup={() => (expanded = !expanded)} /> -->
+</article>
+
+<style lang="scss">
+	table.exceptions {
+		@apply pr-4 border-separate border-spacing-y-2 w-full;
+
+		thead th {
+			@apply font-bold;
+		}
+
+		tbody {
+			tr {
+				@apply relative z-0;
+
+				&.box__body:after {
+					@apply content-[''] absolute -top-2 rounded-t-none left-0 border rounded w-full h-full border-grayx-200 border-t-0;
+				}
+
+				&.box:after {
+					@apply content-[''] absolute top-0 left-0 border rounded w-full h-full border-grayx-200;
+				}
+
+				&.expanded:nth-child(2n + 1):after {
+					@apply rounded-b-none border-b-0;
+				}
+
+				&.box td {
+					@apply p-4 rounded;
+				}
+
+				&.box__body {
+					td {
+						@apply px-4 py-1.5;
+					}
+				}
+			}
+		}
+	}
+</style>

@@ -268,5 +268,13 @@ export const translateGroupValue = (value: any, name: string, sub?: string): any
 		return value;
 	}
 
+	if (name == 'Exceptions') {
+		if (sub === 'Characteristics') {
+			return getFileCharacteristics(value).join(',\n') || value;
+		}
+
+		return valueToHex(value);
+	}
+
 	return value;
 };
