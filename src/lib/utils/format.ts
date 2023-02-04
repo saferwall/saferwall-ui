@@ -235,9 +235,8 @@ export const translateGroupValue = (value: any, name: string, sub?: string): any
 		return magicMap[value] || `?`;
 	}
 	if (sub === 'TimeDateStamp') {
-		const date = new Date();
-		date.setSeconds(value);
-		return date.toISOString();
+		const date = new Date(value * 1000);
+		return date.toISOString().split('T').join(' ');
 	}
 	if (sub?.includes('SizeOf') || sub?.includes('Size')) {
 		return convertBytes(value);
@@ -259,6 +258,14 @@ export const translateGroupValue = (value: any, name: string, sub?: string): any
 		if (sub === 'VirtualAddress') {
 			return valueToHex(value);
 		}
+	}
+
+	if (name == 'Export') {
+		if (sub === 'Characteristics') {
+			return getFileCharacteristics(value).join(',\n') || value;
+		}
+
+		return value;
 	}
 
 	return value;
