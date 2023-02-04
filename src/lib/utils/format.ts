@@ -6,7 +6,9 @@ import {
 	prodIdsMap,
 	relocationTypesMap,
 	subSystemsMap,
-	sectionFlagMap
+	sectionFlagMap,
+	unwFlagsMap,
+	unwOpcodesMap
 } from '$lib/data/translates';
 import type { ActivityType } from '$lib/types';
 
@@ -171,26 +173,30 @@ export function valueToHex(value: any): string {
 	return `0x${stringToHex(value)}`;
 }
 
-export function getFileCharacteristics(value: number): string[] {
+function getValuesByAndOperator(list: Record<number, string>, value: number): string[] {
 	const values = [];
-	for (const key in fileHeaderCharacteristicsMap) {
+	for (const key in list) {
 		const kkey: any = key;
 		if (kkey & value) {
-			values.push(fileHeaderCharacteristicsMap[key]);
+			values.push(list[key]);
 		}
 	}
 	return values;
 }
+export function getFileCharacteristics(value: number): string[] {
+	return getValuesByAndOperator(fileHeaderCharacteristicsMap, value);
+}
 
 export function getSectionFlags(value: number): string[] {
-	const values = [];
-	for (const key in sectionFlagMap) {
-		const kkey: any = key;
-		if (kkey & value) {
-			values.push(sectionFlagMap[key]);
-		}
-	}
-	return values;
+	return getValuesByAndOperator(sectionFlagMap, value);
+}
+
+export function getUnwFlags(value: number): string[] {
+	return getValuesByAndOperator(unwFlagsMap, value);
+}
+
+export function getUnwOpcodes(value: number): string {
+	return unwOpcodesMap[value];
 }
 
 export function getMachineName(machine: number): string {
@@ -260,7 +266,7 @@ export const translateGroupValue = (value: any, name: string, sub?: string): any
 		}
 	}
 
-	if (name == 'Export') {
+	if (name === 'Export') {
 		if (sub === 'Characteristics') {
 			return getFileCharacteristics(value).join(',\n') || value;
 		}
@@ -268,9 +274,14 @@ export const translateGroupValue = (value: any, name: string, sub?: string): any
 		return value;
 	}
 
-	if (name == 'Exceptions') {
-		if (sub === 'Characteristics') {
-			return getFileCharacteristics(value).join(',\n') || value;
+	if (name === 'Exceptions') {
+		if (sub === 'Flags') {
+			const flags = getUnwFlags(value).join(',\n');
+			return `${valueToHex(value)} ( ${flags || 'No Flags'} )`;
+		}
+
+		if (sub === 'UnwindOp') {
+			return getUnwOpcodes(value) || value;
 		}
 
 		return valueToHex(value);

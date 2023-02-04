@@ -21,7 +21,14 @@
 						value: translateGroupValue(value, 'Exceptions', key)
 					};
 				}),
-			codes: exception.UnwinInfo.UnwindCodes || []
+			codes: (exception.UnwinInfo.UnwindCodes || []).map((code: any) => {
+				return {
+					...code,
+					value: [translateGroupValue(code.UnwindOp, 'Exceptions', 'UnwindOp'), code.Operand].join(
+						' , '
+					)
+				};
+			})
 		};
 	});
 
@@ -93,7 +100,7 @@
 															{#each item.codes as code}
 																<li class="text-sm">
 																	<span class="font-semibold">{valueToHex(code.CodeOffset)} :</span>
-																	<span>{[code.Operand, code.Operand].join(', ')}</span>
+																	<span>{code.value}</span>
 																</li>
 															{/each}
 														</ul>

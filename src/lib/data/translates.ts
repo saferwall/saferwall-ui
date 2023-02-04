@@ -450,3 +450,25 @@ export const prodIdsMap: Record<number, string> = {
     0x010d: "Utc1900_POGO_O_C",
     0x010e: "Utc1900_POGO_O_CPP"
 }
+
+export const unwOpcodesMap: Record<number, string> = {
+    0: 'UWOP_PUSH_NONVOL',
+    1: 'UWOP_ALLOC_LARE',
+    2: 'UWOP_ALLOC_SMALL',
+    3: 'UWOP_SET_FPREG',
+    4: 'UWOP_SAVE_NONVOL',
+    5: 'UWOP_SAVE_NONVOL_FAR',
+    6: 'UWOP_EPILOG',
+    7: 'UWOP_SPARE_CODE',
+    8: 'UWOP_SAVE_XMM128',
+    9: 'UWOP_SAVE_XMM128_FAR',
+    10: 'UWOP_PUSH_MACHFRAME',
+    11: 'UWOP_SET_FPREG_LARGE',
+}
+
+export const unwFlagsMap: Record<number, string> = {
+    0x0: 'No Handler',
+    0x1: 'Exception',
+    0x2: 'Termination',
+    0x4: 'Chain',
+}
