@@ -97,7 +97,7 @@
 
 <style lang="scss">
 	table.groups {
-		@apply p-4 border-separate border-spacing-2 w-full;
+		@apply pr-4 border-separate border-spacing-y-2 w-full;
 
 		thead th {
 			@apply font-bold;

@@ -43,7 +43,7 @@
 							name="arrow-down"
 						/></td
 					>
-					<td class="!px-1">{index}</td>
+					<td>{index}</td>
 					<td>{translateGroupValue(group.Data.VirtualAddress, 'Relocations', 'VirtualAddress')}</td>
 					<td>{translateGroupValue(group.Data.SizeOfBlock, 'Relocations', 'SizeOfBlock')}</td>
 					<td>{group.Entries.length}</td>
@@ -86,7 +86,7 @@
 
 <style lang="scss">
 	table.groups {
-		@apply p-4 border-separate border-spacing-2 w-full;
+		@apply pr-4 border-separate border-spacing-y-2 w-full;
 
 		thead th {
 			@apply font-bold;
