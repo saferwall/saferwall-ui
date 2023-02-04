@@ -8,7 +8,10 @@ import {
 	subSystemsMap,
 	sectionFlagMap,
 	unwFlagsMap,
-	unwOpcodesMap
+	unwOpcodesMap,
+	signaturesAlgoMap,
+	publicAlgoMap,
+	certificateTypesMap
 } from '$lib/data/translates';
 import type { ActivityType } from '$lib/types';
 
@@ -199,6 +202,18 @@ export function getUnwOpcodes(value: number): string {
 	return unwOpcodesMap[value];
 }
 
+export function getSignatureAlgo(value: number): string {
+	return signaturesAlgoMap[value];
+}
+
+export function getPublicAlgo(value: number): string {
+	return publicAlgoMap[value];
+}
+
+export function getCertificateType(value: number): string {
+	return certificateTypesMap[value];
+}
+
 export function getMachineName(machine: number): string {
 	return machinesMap[machine] || 'Unknown';
 }
@@ -285,6 +300,18 @@ export const translateGroupValue = (value: any, name: string, sub?: string): any
 		}
 
 		return valueToHex(value);
+	}
+
+	if (name === 'Certificate') {
+		if (sub === 'Signature Algorithm') {
+			return getSignatureAlgo(value);
+		}
+		if (sub === 'PublicKey Algorithm') {
+			return getPublicAlgo(value);
+		}
+		if (sub === 'CertificateType') {
+			return getCertificateType(value);
+		}
 	}
 
 	return value;

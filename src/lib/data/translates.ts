@@ -472,3 +472,38 @@ export const unwFlagsMap: Record<number, string> = {
     0x2: 'Termination',
     0x4: 'Chain',
 }
+
+export const signaturesAlgoMap: Record<number, string> = {
+    0: 'Unknown Algorithm',
+    1: 'MD2-RSA',
+    2: 'MD5-RSA',
+    3: 'SHA1-RSA',
+    4: 'SHA256-RSA',
+    5: 'SHA384-RSA',
+    6: 'SHA512-RSA',
+    7: 'DSA-SHA1',
+    8: 'DSA-SHA256',
+    9: 'ECDSA-SHA1',
+    10: 'ECDSA-SHA256',
+    11: 'ECDSA-SHA384',
+    12: 'ECDSA-SHA512',
+    13: 'SHA256-RSAPSS',
+    14: 'SHA384-RSAPSS',
+    15: 'SHA512-RSAPSS',
+    16: 'Ed25519',
+}
+
+export const publicAlgoMap: Record<number, string> = {
+    0: 'Unknown Algorithm',
+    1: 'RSA',
+    2: 'DSA',
+    3: 'ECDSA',
+    4: 'Ed25519',
+}
+
+export const certificateTypesMap: Record<number, string> = {
+    1: 'X509',
+    2: 'PKCS Signed Data',
+    3: 'Reserved',
+    4: 'TS Stack Signed',
+}

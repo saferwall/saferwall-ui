@@ -152,4 +152,27 @@
             d="m16.65 16.18-3.89-3.88a6.82 6.82 0 1 0-.68.67l3.89 3.89a.48.48 0 0 0 .52.1.48.48 0 0 0 .15-.78ZM1.75 7.83a5.86 5.86 0 1 1 11.72 0 5.86 5.86 0 0 1-11.72 0Z"
         />
     </symbol>
+
+
+    <symbol id="icon-cerificate-valid" fill="none" viewBox="0 0 20 20">
+        <g stroke="#56AC30" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            clip-path="url(#a)">
+            <path d="M10 18.33a8.33 8.33 0 1 0 0-16.66 8.33 8.33 0 0 0 0 16.66Z" />
+            <path d="M13.89 7.78 9.3 12.22 7.22 10.2" />
+        </g>
+        <defs>
+            <clipPath id="a">
+                <path fill="#fff" d="M0 0h20v20H0z" />
+            </clipPath>
+        </defs>
+    </symbol>
+    <symbol id="icon-cerificate-invalid" fill="none" viewBox="0 0 21 20">
+        <path stroke="#E63755" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M10.5 18.33a8.33 8.33 0 1 0 0-16.66 8.33 8.33 0 0 0 0 16.66ZM13 7.5l-5 5m0-5 5 5" />
+    </symbol>
+    <symbol id="icon-cerificate-signed" fill="none" viewBox="0 0 20 20">
+        <path stroke="#F08039" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M10 18a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-12.33v4.96m0 2.7h0" />
+    </symbol>
+
 </svg>
