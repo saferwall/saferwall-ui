@@ -34,7 +34,7 @@
 				<li><a class:active={item.path === activeMenu} href={item.path}>{item.title}</a></li>
 			{/each}
 		</ul>
-		<div class="w-full h-full overflow-x-auto md:pl-8 py-4">
+		<div class="w-full h-full overflow-x-auto py-4">
 			<slot />
 		</div>
 	</BaseCard>

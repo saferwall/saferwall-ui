@@ -18,7 +18,7 @@ export const load = (async ({ params, url }): Promise<{
         initReq.cache = "force-cache";
     }
 
-    const fileReq = await fetch(`${env.PUBLIC_API_URL}/files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,fileformat`, initReq);
+    const fileReq = await fetch(`${env.PUBLIC_API_URL}/files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format`, initReq);
 
     const file = await fileReq.json();
 
@@ -30,7 +30,7 @@ export const load = (async ({ params, url }): Promise<{
     const menus = [...fileMenu].filter(menu => {
         if (
             `${menu.name}`.toLowerCase() === 'pe' &&
-            `${file.fileformat}`.toLowerCase() !== 'pe'
+            `${file.file_format}`.toLowerCase() !== 'pe'
         ) {
             return false;
         }
