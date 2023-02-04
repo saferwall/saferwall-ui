@@ -1,10 +1,11 @@
 <script lang="ts">
+	export let mode: 'all' | 'more' = 'all';
 	export let expanded: boolean = false;
 </script>
 
 <div class="button" on:mouseup>
 	<span>
-		Show {#if expanded}less{:else}all{/if}
+		Show {#if expanded}less{:else}{mode}{/if}
 	</span>
 	<svg class="icon" class:expanded>
 		<use href="/images/images.svg#icon-arrow-down" />

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import BaseCard from '../../cards/BaseCard.svelte';
-	import ButtonShowAll from '../../form/ButtonShowAll.svelte';
+	import ButtonShowMore from '../../form/ButtonShowMore.svelte';
 	import CommingSoon from '../../partials/ComingSoon.svelte';
 
 	const maxRecords = 10;
@@ -38,7 +38,7 @@
 		</table>
 		<CommingSoon />
 		{#if activeExpanding}
-			<ButtonShowAll on:mouseup={() => (expanded = !expanded)} {expanded} />
+			<ButtonShowMore on:mouseup={() => (expanded = !expanded)} {expanded} />
 		{/if}
 	</div>
 </BaseCard>

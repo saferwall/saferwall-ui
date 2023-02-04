@@ -57,7 +57,7 @@
 		</table>
 	</div>
 
-	<!-- <ButtonShowAll bind:expanded on:mouseup={() => (expanded = !expanded)} /> -->
+	<!-- <ButtonShowMore bind:expanded on:mouseup={() => (expanded = !expanded)} /> -->
 </article>
 
 <style lang="scss">

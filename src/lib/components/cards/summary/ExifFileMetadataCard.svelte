@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ButtonShowAll from '$lib/components/form/ButtonShowAll.svelte';
+	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
 	import type { Exif } from '$lib/types/summary';
 	import { convertBytes } from '$lib/utils/format';
 	import BaseCard from '../BaseCard.svelte';
@@ -37,7 +37,7 @@
 			{/each}
 		</table>
 		{#if activeExpanding}
-			<ButtonShowAll on:mouseup={() => (expanded = !expanded)} {expanded} />
+			<ButtonShowMore on:mouseup={() => (expanded = !expanded)} {expanded} />
 		{/if}
 	</div>
 </BaseCard>

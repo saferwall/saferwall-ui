@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ButtonShowAll from '$lib/components/form/ButtonShowAll.svelte';
+	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import { translateGroupValue, valueToHex } from '$lib/utils/format';
 	import type { PageData } from './$types';
@@ -80,8 +80,6 @@
 			{/each}
 		</tbody>
 	</table>
-
-	<!-- <ButtonShowAll bind:expanded on:mouseup={() => (expanded = !expanded)} /> -->
 </article>
 
 <style lang="scss">

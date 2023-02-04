@@ -1,11 +1,12 @@
 <script lang="ts">
-	import ButtonShowAll from '$lib/components/form/ButtonShowAll.svelte';
+	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import { splitCamelCase, translateGroupValue, valueToHex } from '$lib/utils/format';
 	import type { PageData } from './$types';
 
-	const maxRecords = 20;
-	let records = maxRecords;
+	const recordsPerPage = 200;
+	let records = recordsPerPage;
+
 	export let data: PageData;
 	// TODO: split into components
 
@@ -26,8 +27,17 @@
 
 	let entries: Record<number, boolean> = {};
 
+	$: expanded = exceptions.length <= records;
 	$: isEntryOpen = (index: number) => {
 		return entries[index] == true;
+	};
+
+	$: paginationTrigger = () => {
+		if (exceptions.length <= records) {
+			records = recordsPerPage;
+		} else {
+			records += recordsPerPage;
+		}
 	};
 </script>
 
@@ -101,7 +111,7 @@
 		</tbody>
 	</table>
 
-	<!-- <ButtonShowAll bind:expanded on:mouseup={() => (expanded = !expanded)} /> -->
+	<ButtonShowMore mode="more" bind:expanded on:mouseup={() => paginationTrigger()} />
 </article>
 
 <style lang="scss">

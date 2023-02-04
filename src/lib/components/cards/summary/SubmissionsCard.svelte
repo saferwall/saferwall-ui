@@ -2,7 +2,7 @@
 	import type { Submission } from '$lib/types/summary';
 	import { timestampToFormattedDate } from '$lib/utils/date';
 	import BaseCard from '../../cards/BaseCard.svelte';
-	import ButtonShowAll from '../../form/ButtonShowAll.svelte';
+	import ButtonShowMore from '../../form/ButtonShowMore.svelte';
 
 	const maxRecords = 10;
 	export let submissions: Submission[] = [];
@@ -33,7 +33,7 @@
 			</tbody>
 		</table>
 		{#if activeExpanding}
-			<ButtonShowAll on:mouseup={() => (expanded = !expanded)} {expanded} />
+			<ButtonShowMore on:mouseup={() => (expanded = !expanded)} {expanded} />
 		{/if}
 	</div>
 </BaseCard>
