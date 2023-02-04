@@ -9,7 +9,7 @@
 
 	export let data: PageData;
 
-	const user: APIUser = data.user;
+	$: user = data.user;
 </script>
 
 <Navbar />
