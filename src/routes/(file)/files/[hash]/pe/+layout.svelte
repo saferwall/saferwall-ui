@@ -12,7 +12,7 @@
 		{ path: 'rich-header', title: 'Rich Header' },
 		{ path: 'sections', title: 'Sections' },
 		{ path: 'export', title: 'Export' },
-		{ path: 'import', title: 'Import' },
+		{ path: 'imports', title: 'Imports' },
 		{ path: 'resources', title: 'Resources' },
 		{ path: 'exceptions', title: 'Exceptions' },
 		{ path: 'certificate', title: 'Certificate' },

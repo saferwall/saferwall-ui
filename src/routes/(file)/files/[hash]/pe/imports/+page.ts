@@ -3,7 +3,7 @@ import { env } from '$env/dynamic/public';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ params, parent }): Promise<{
-    import: any[]
+    imports: any[]
 }> => {
     const { hash } = params;
 
@@ -16,7 +16,7 @@ export const load = (async ({ params, parent }): Promise<{
     const { pe } = await fileReq.json();
 
     return {
-        import: pe.import
+        imports: pe.import
     };
 
 }) satisfies PageLoad;

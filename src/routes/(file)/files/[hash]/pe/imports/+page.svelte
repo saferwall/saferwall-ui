@@ -9,7 +9,7 @@
 
 	// TODO: split into components
 
-	$: groups = data.import;
+	$: groups = data.imports;
 
 	let entries: Record<number, boolean> = {};
 
@@ -19,7 +19,7 @@
 </script>
 
 <article>
-	<h1 class="title">Import</h1>
+	<h1 class="title">Imports</h1>
 	<table class="groups">
 		<thead>
 			<th class="w-2">#</th>
@@ -45,12 +45,13 @@
 							class={'transition-all ' + (isEntryOpen(index) === true ? '' : '-rotate-90')}
 						/>
 					</td>
-					<td>{translateGroupValue(group.Name, 'import', 'Name')}</td>
+					<td>{translateGroupValue(group.Name, 'Imports', 'Name')}</td>
 					<td>{valueToHex(group.Descriptor.Name)}</td>
 					<td>{valueToHex(group.Offset)}</td>
 					<td>{valueToHex(group.Descriptor.FirstThunk)}</td>
-					<td>{translateGroupValue(group.Descriptor.TimeDateStamp, 'import', 'TimeDateStamp')}</td>
-					<td>{translateGroupValue(group.Descriptor.ForwarderChain, 'import', 'ForwarderChain')}</td
+					<td>{translateGroupValue(group.Descriptor.TimeDateStamp, 'Imports', 'TimeDateStamp')}</td>
+					<td
+						>{translateGroupValue(group.Descriptor.ForwarderChain, 'Imports', 'ForwarderChain')}</td
 					>
 					<td>{group.Functions.length}</td>
 				</tr>
@@ -62,7 +63,7 @@
 							>
 								Functions
 							</h2>
-							<table class="table-fixed items w-full">
+							<table class="items w-full">
 								<thead>
 									<th>Name</th>
 									<th>Thunk RVA</th>
@@ -71,7 +72,7 @@
 									<th>Original Thunk Value</th>
 									<th>Hint</th>
 								</thead>
-								<tbody class="table-cval">
+								<tbody>
 									{#each group.Functions as entry}
 										<tr>
 											<td>{entry.Name}</td>
