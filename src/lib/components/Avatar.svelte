@@ -6,13 +6,10 @@
 	export let size: string = 'base';
 	export let image: string | undefined = undefined;
 	export let username: string | undefined = undefined;
-	export let hasAvatar: boolean = true;
 
 	$: avatarImage =
 		image ||
-		(hasAvatar
-			? env.PUBLIC_AVATAR_API_URL.replace('{username}', `${username}`.toLowerCase())
-			: undefined) ||
+		env.PUBLIC_AVATAR_API_URL.replace('{username}', `${username}`.toLowerCase()) ||
 		DEFAULT_AVATAR;
 
 	const setDefaultAvatar = (event: any) => {

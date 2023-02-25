@@ -1,5 +1,6 @@
 import { browser } from "$app/environment";
 import { env } from "$env/dynamic/public";
+import { APIClient } from "$lib/api";
 import type { APIUser } from "$lib/types/users";
 import type { LayoutLoad } from "./$types";
 
@@ -7,19 +8,11 @@ export const load = (async ({ params }): Promise<{
     username: string,
     user: APIUser
 }> => {
-    const { username } = params;
-
-    const initReq: { cache?: RequestCache | undefined } = {};
-    if (browser) {
-        initReq.cache = "force-cache";
-    }
-
-    const fileReq = await fetch(`${env.PUBLIC_API_URL}/users/${username}`, initReq);
-
-    const user = await fileReq.json();
+    const username = params.username!;
+    const user = await APIClient.getUser(username);
 
     return {
-        username: username!,
+        username: username,
         user: user
     };
 

@@ -14,8 +14,7 @@
 		sanitize: true
 	};
 	$: username = data.user.username;
-	$: hasAvatar = data.user.has_avatar;
-	$: items = data.pagination.items || [];
+	$: items = Array.isArray(data.pagination.items) ? (data.pagination.items as any) : [];
 </script>
 
 <ul class="divide-y">
@@ -25,7 +24,7 @@
 				<div class="flex flex-col space-y-2">
 					<div class="flex flex-col md:flex-row space-y-4 md:space-y-0 justify-between">
 						<div class="flex items-center space-x-4">
-							<Avatar {hasAvatar} {username} size="small" />
+							<Avatar {username} size="small" />
 							<DateTime class="text-gray-500 text-sm" date={item.date} />
 						</div>
 						<div class="w-full md:w-max">

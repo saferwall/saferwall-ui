@@ -27,3 +27,5 @@ export interface Tag {
 }
 
 export type ActivityType = 'comment' | 'like' | 'submit';
+
+export type ProfileSection = 'likes' | 'comments' | 'submissions' | 'followers' | 'following';

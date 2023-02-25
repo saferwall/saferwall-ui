@@ -1,30 +1,29 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
 	import BaseCard from '$lib/components/cards/BaseCard.svelte';
 
 	export let data: PageData;
 
 	$: activeMenu = data.activePEMenu;
 	$: menus = [
-		{ path: 'dos-header', title: 'DOS Header' },
-		{ path: 'nt-header', title: 'NT Header' },
-		{ path: 'rich-header', title: 'Rich Header' },
-		{ path: 'sections', title: 'Sections' },
-		{ path: 'export', title: 'Export' },
-		{ path: 'imports', title: 'Imports' },
-		{ path: 'resources', title: 'Resources' },
-		{ path: 'exceptions', title: 'Exceptions' },
-		{ path: 'certificate', title: 'Certificate' },
-		{ path: 'relocations', title: 'Relocations' },
-		{ path: 'debugs', title: 'Debugs' },
-		{ path: 'tLS', title: 'TLS' },
-		{ path: 'load-config', title: 'Load config' },
-		{ path: 'bound-imports', title: 'Bound imports' },
-		{ path: 'iat', title: 'IAT' },
-		{ path: 'delay-imports', title: 'Delay imports' },
-		{ path: 'clr', title: 'CLR' }
-	];
+		{ field: 'dos_header', path: 'dos-header', title: 'DOS Header' },
+		{ field: 'nt_header', path: 'nt-header', title: 'NT Header' },
+		{ field: 'rich_header', path: 'rich-header', title: 'Rich Header' },
+		{ field: 'sections', path: 'sections', title: 'Sections' },
+		{ field: 'export', path: 'export', title: 'Export' },
+		{ field: 'import', path: 'imports', title: 'Imports' },
+		{ field: 'resources', path: 'resources', title: 'Resources' },
+		{ field: 'exceptions', path: 'exceptions', title: 'Exceptions' },
+		{ field: 'security', path: 'certificate', title: 'Certificate' },
+		{ field: 'reloc', path: 'relocations', title: 'Relocations' },
+		{ field: 'debug', path: 'debugs', title: 'Debugs' },
+		{ field: 'tls', path: 'tls', title: 'TLS' },
+		{ field: 'load_config', path: 'load-config', title: 'Load config' },
+		{ field: 'bound_imports', path: 'bound-imports', title: 'Bound imports' },
+		{ field: 'iat', path: 'iat', title: 'IAT' },
+		{ field: 'delay_import', path: 'delay-imports', title: 'Delay import' },
+		{ field: 'clr', path: 'clr', title: 'CLR' }
+	].filter(({ field }) => data.file.pe?.meta.includes(field));
 </script>
 
 <div class="files__layout container mx-auto w-full h-full items-center justify-center">

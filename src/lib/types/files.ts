@@ -14,4 +14,6 @@ export interface APIFile {
     multiav: FileMultiav;
     tags?: FileTags;
     class?: string;
+    file_format?: string;
+    pe?: any;
 }

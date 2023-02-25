@@ -7,7 +7,7 @@
 
 	export let data: PageData;
 
-	$: items = data.pagination.items || [];
+	$: items = Array.isArray(data.pagination.items) ? (data.pagination.items as any) : [];
 </script>
 
 <div class="grid md:grid-cols-2 md:gap-x-14 lg:gap-x-20 py-10">
@@ -19,7 +19,7 @@
 				class="flex flex-col md:flex-row w-full md:space-x-4 items-center space-y-4 md:space-y-0"
 			>
 				<div class="flex px-3 md:px-0 w-full space-x-4 items-center">
-					<Avatar hasAvatar={true} username={item.username} size="base" />
+					<Avatar username={item.username} size="base" />
 					<div class="flex flex-col w-full">
 						<h2 class="font-medium text-lg">@{item.username}</h2>
 						<DateTime class="text-gray-400 text-sm" date={item.member_since} />

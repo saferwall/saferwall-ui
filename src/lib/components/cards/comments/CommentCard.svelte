@@ -16,7 +16,7 @@
 
 <BaseCard spacing={false}>
 	<div class="flex space-x-6 items-center">
-		<Avatar size="medium" username={author.username} hasAvatar={true} />
+		<Avatar size="medium" username={author.username} />
 		<div class="text-sm">
 			<a href="/user/{author.username}" class="font-bold">{author.username}</a>
 			<p class="text-grayx-500">Member since {getMemberSince(author.member_since)}</p>

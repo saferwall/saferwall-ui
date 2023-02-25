@@ -48,35 +48,37 @@
 					<td>{translateGroupValue(group.Data.SizeOfBlock, 'Relocations', 'SizeOfBlock')}</td>
 					<td>{group.Entries.length}</td>
 				</tr>
-				<tr class="box__body" class:hidden={!isEntryOpen(index)}>
-					<td colspan="5">
-						<div class="px-4 relative pt-0">
-							<h2
-								class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
-							>
-								Entries
-							</h2>
-							<table class="items">
-								<thead>
-									<th>Offset</th>
-									<th>Data</th>
-									<th>Type</th>
-									<th>Type Value</th>
-								</thead>
-								<tbody class="table-cval">
-									{#each group.Entries as entry}
-										<tr>
-											<td>{entry.Offset}</td>
-											<td>{valueToHex(entry.Data)}</td>
-											<td>{valueToHex(entry.Type)}</td>
-											<td>{translateGroupValue(entry.Type, 'Relocations', 'Type')}</td>
-										</tr>
-									{/each}
-								</tbody>
-							</table>
-						</div>
-					</td>
-				</tr>
+				{#if isEntryOpen(index)}
+					<tr class="box__body" class:hidden={!isEntryOpen(index)}>
+						<td colspan="5">
+							<div class="px-4 relative pt-0">
+								<h2
+									class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
+								>
+									Entries
+								</h2>
+								<table class="items">
+									<thead>
+										<th>Offset</th>
+										<th>Data</th>
+										<th>Type</th>
+										<th>Type Value</th>
+									</thead>
+									<tbody class="table-cval">
+										{#each group.Entries as entry}
+											<tr>
+												<td>{entry.Offset}</td>
+												<td>{valueToHex(entry.Data)}</td>
+												<td>{valueToHex(entry.Type)}</td>
+												<td>{translateGroupValue(entry.Type, 'Relocations', 'Type')}</td>
+											</tr>
+										{/each}
+									</tbody>
+								</table>
+							</div>
+						</td>
+					</tr>
+				{/if}
 			{/each}
 		</tbody>
 	</table>

@@ -1,32 +1,29 @@
 <script lang="ts">
-	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
-	import Icon from '$lib/components/Icon.svelte';
-	import { translateGroupValue, valueToHex } from '$lib/utils/format';
 	import type { PageData } from './$types';
 
-	const maxRecords = 20;
+	import Icon from '$lib/components/Icon.svelte';
+	import { translateGroupValue, valueToHex } from '$lib/utils/format';
+
 	export let data: PageData;
-
-	// TODO: split into components
-
 	$: groups = data.items;
 
 	let entries: Record<number, boolean> = {};
-
 	$: isEntryOpen = (index: number) => {
 		return entries[index] == true;
 	};
 </script>
 
 <article>
-	<h1 class="title">Bound imports</h1>
+	<h1 class="title">Delay imports</h1>
 	<table class="groups">
 		<thead>
-			<th>Name</th>
-			<th>Module Forwarder Refs</th>
+			<th colspan="2">Name</th>
+			<th>Module Handle</th>
+			<th>IAT</th>
+			<th>INT</th>
+			<th>Bound IAT</th>
+			<th>Unload IAT</th>
 			<th>Time Date Stamp</th>
-			<th>Offset Module Name</th>
-			<th>Number Of Module Forwarder Refs</th>
 		</thead>
 		<tbody>
 			{#each groups as group, index}
@@ -42,12 +39,21 @@
 							class={'transition-all ' + (isEntryOpen(index) === true ? '' : '-rotate-90')}
 						/>
 					</td>
-					<td>{translateGroupValue(group.Name, 'Imports', 'Name')}</td>
-					<td>{translateGroupValue(group.Struct.TimeDateStamp, '', 'TimeDateStamp')}</td>
-					<td>{valueToHex(group.Struct.OffsetModuleName)}</td>
-					<td>{group.Struct.NumberOfModuleForwarderRefs}</td>
+					<td>{translateGroupValue(group.Name, 'DelayImports', 'Name')}</td>
+					<td>{valueToHex(group.Descriptor.ModuleHandleRVA)}</td>
+					<td>{valueToHex(group.Descriptor.ImportAddressTableRVA)}</td>
+					<td>{valueToHex(group.Descriptor.ImportNameTableRVA)}</td>
+					<td>{valueToHex(group.Descriptor.BoundImportAddressTableRVA)}</td>
+					<td>{valueToHex(group.Descriptor.UnloadInformationTableRVA)}</td>
+					<td
+						>{translateGroupValue(
+							group.Descriptor.TimeDateStamp,
+							'DelayImports',
+							'TimeDateStamp'
+						)}</td
+					>
 				</tr>
-				{#if isEntryOpen(index)}
+				{#if group.Functions && isEntryOpen(index)}
 					<tr class="box__body" class:hidden={!isEntryOpen(index)}>
 						<td colspan="8">
 							<div class="px-4 relative pt-0">
@@ -59,21 +65,23 @@
 								<table class="items w-full">
 									<thead>
 										<th>Name</th>
-										<th>Time Date Stamp</th>
-										<th>Offset Module Name</th>
-										<th>Reserved</th>
+										<th>Thunk RVA</th>
+										<th>Thunk Value</th>
+										<th>Original Thunk TVA</th>
+										<th>Original Thunk Value</th>
+										<th>Hint</th>
 									</thead>
 									<tbody>
-										{#if group.ForwardedRefs}
-											{#each group.ForwardedRefs as entry}
-												<tr>
-													<td>{entry.Name}</td>
-													<td>{valueToHex(entry.Struct.OffsetModuleName)}</td>
-													<td>{valueToHex(entry.Struct.TimeDateStamp)}</td>
-													<td>{valueToHex(entry.Struct.Reserved)}</td>
-												</tr>
-											{/each}
-										{/if}
+										{#each group.Functions as entry}
+											<tr>
+												<td>{entry.Name}</td>
+												<td>{valueToHex(entry.ThunkRVA)}</td>
+												<td>{valueToHex(entry.ThunkValue)}</td>
+												<td>{valueToHex(entry.OriginalThunkRVA)}</td>
+												<td>{valueToHex(entry.OriginalThunkValue)}</td>
+												<td>{valueToHex(entry.Hint)}</td>
+											</tr>
+										{/each}
 									</tbody>
 								</table>
 							</div>

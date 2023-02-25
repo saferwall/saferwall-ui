@@ -24,8 +24,6 @@ export const fallBackPlatformToMiniFlareInDev = async (_platform: App.Platform) 
 		`
     });
 
-    // await mf.dispatchFetch('https://host.tld');
-
     const env: any = await mf.getBindings();
 
     const platform: App.Platform = { env };

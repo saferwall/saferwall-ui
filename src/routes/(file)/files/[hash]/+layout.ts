@@ -1,7 +1,7 @@
-import { browser } from '$app/environment';
-import { env } from '$env/dynamic/public';
+import { APIClient } from '$lib/api';
 import { fileMenu } from '$lib/data/menus';
 import type { FileMenu } from '$lib/types';
+import type { APIFile } from '$lib/types/files';
 import type { LayoutLoad } from './$types';
 
 export const load = (async ({ params, url }): Promise<{
@@ -13,14 +13,7 @@ export const load = (async ({ params, url }): Promise<{
 }> => {
     const { hash } = params;
 
-    const initReq: { cache?: RequestCache | undefined } = {};
-    if (browser) {
-        initReq.cache = "force-cache";
-    }
-
-    const fileReq = await fetch(`${env.PUBLIC_API_URL}/files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format`, initReq);
-
-    const file = await fileReq.json();
+    const file = await APIClient.request<APIFile>(`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta`);
 
     const paths = url.pathname.toString().split(`/files/`)[1].split('/');
 

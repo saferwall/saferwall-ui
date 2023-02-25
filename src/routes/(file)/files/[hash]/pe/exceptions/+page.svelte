@@ -74,46 +74,50 @@
 					<td>{valueToHex(item.base.EndAddress)}</td>
 					<td>{valueToHex(item.base.UnwindInfoAddress)}</td>
 				</tr>
-				<tr class="box__body" class:hidden={!isEntryOpen(index)}>
-					<td colspan="8">
-						<div class="p-4 relative">
-							<h2
-								class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
-							>
-								Unwind Info
-							</h2>
-							<table class="w-full">
-								<tbody>
-									{#each item.unwind as entry}
-										<tr>
-											<td class="lg:w-1/4 font-semibold">{entry.key}</td>
-											<td>{entry.value}</td>
-										</tr>
-									{/each}
-									{#if item.codes && item.codes.length > 0}
-										<tr>
-											<td colspan="2">
-												<div class="flex flex-col w-full">
-													<h4 class="font-bold">Unwind codes</h4>
-													<div class="pl-5 pt-4">
-														<ul class="border-l border-gray-100 pl-5 py-2">
-															{#each item.codes as code}
-																<li class="text-sm">
-																	<span class="font-semibold">{valueToHex(code.CodeOffset)} :</span>
-																	<span>{code.value}</span>
-																</li>
-															{/each}
-														</ul>
+				{#if isEntryOpen(index)}
+					<tr class="box__body" class:hidden={!isEntryOpen(index)}>
+						<td colspan="8">
+							<div class="p-4 relative">
+								<h2
+									class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
+								>
+									Unwind Info
+								</h2>
+								<table class="w-full">
+									<tbody>
+										{#each item.unwind as entry}
+											<tr>
+												<td class="lg:w-1/4 font-semibold">{entry.key}</td>
+												<td>{entry.value}</td>
+											</tr>
+										{/each}
+										{#if item.codes && item.codes.length > 0}
+											<tr>
+												<td colspan="2">
+													<div class="flex flex-col w-full">
+														<h4 class="font-bold">Unwind codes</h4>
+														<div class="pl-5 pt-4">
+															<ul class="border-l border-gray-100 pl-5 py-2">
+																{#each item.codes as code}
+																	<li class="text-sm">
+																		<span class="font-semibold"
+																			>{valueToHex(code.CodeOffset)} :</span
+																		>
+																		<span>{code.value}</span>
+																	</li>
+																{/each}
+															</ul>
+														</div>
 													</div>
-												</div>
-											</td>
-										</tr>
-									{/if}
-								</tbody>
-							</table>
-						</div>
-					</td>
-				</tr>
+												</td>
+											</tr>
+										{/if}
+									</tbody>
+								</table>
+							</div>
+						</td>
+					</tr>
+				{/if}
 			{/each}
 		</tbody>
 	</table>

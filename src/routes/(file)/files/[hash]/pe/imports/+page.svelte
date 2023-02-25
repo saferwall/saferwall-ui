@@ -55,39 +55,41 @@
 					>
 					<td>{group.Functions.length}</td>
 				</tr>
-				<tr class="box__body" class:hidden={!isEntryOpen(index)}>
-					<td colspan="8">
-						<div class="px-4 relative pt-0">
-							<h2
-								class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
-							>
-								Functions
-							</h2>
-							<table class="items w-full">
-								<thead>
-									<th>Name</th>
-									<th>Thunk RVA</th>
-									<th>Thunk Value</th>
-									<th>Original Thunk RVA</th>
-									<th>Original Thunk Value</th>
-									<th>Hint</th>
-								</thead>
-								<tbody>
-									{#each group.Functions as entry}
-										<tr>
-											<td>{entry.Name}</td>
-											<td>{valueToHex(entry.ThunkRVA)}</td>
-											<td>{valueToHex(entry.ThunkValue)}</td>
-											<td>{valueToHex(entry.OriginalThunkRVA)}</td>
-											<td>{valueToHex(entry.OriginalThunkValue)}</td>
-											<td>{valueToHex(entry.Hint)}</td>
-										</tr>
-									{/each}
-								</tbody>
-							</table>
-						</div>
-					</td>
-				</tr>
+				{#if isEntryOpen(index)}
+					<tr class="box__body" class:hidden={!isEntryOpen(index)}>
+						<td colspan="8">
+							<div class="px-4 relative pt-0">
+								<h2
+									class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
+								>
+									Functions
+								</h2>
+								<table class="items w-full">
+									<thead>
+										<th>Name</th>
+										<th>Thunk RVA</th>
+										<th>Thunk Value</th>
+										<th>Original Thunk RVA</th>
+										<th>Original Thunk Value</th>
+										<th>Hint</th>
+									</thead>
+									<tbody>
+										{#each group.Functions as entry}
+											<tr>
+												<td>{entry.Name}</td>
+												<td>{valueToHex(entry.ThunkRVA)}</td>
+												<td>{valueToHex(entry.ThunkValue)}</td>
+												<td>{valueToHex(entry.OriginalThunkRVA)}</td>
+												<td>{valueToHex(entry.OriginalThunkValue)}</td>
+												<td>{valueToHex(entry.Hint)}</td>
+											</tr>
+										{/each}
+									</tbody>
+								</table>
+							</div>
+						</td>
+					</tr>
+				{/if}
 			{/each}
 		</tbody>
 	</table>

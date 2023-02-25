@@ -6,10 +6,7 @@
 	export let bio: string = '';
 	export let url: string = '';
 	export let username: string;
-	export let has_avatar: boolean = false;
 	export let selfProfile: boolean = false;
-
-	$: hasAvatar = has_avatar;
 </script>
 
 <div class="container mx-auto">
@@ -18,7 +15,7 @@
 	>
 		<div class="inline-flex relative w-full items-start md:space-x-12 pt-12">
 			<div class="inline-flex absolute md:static -top-14 -right-0">
-				<Avatar {hasAvatar} {username} size="large" />
+				<Avatar {username} size="large" />
 			</div>
 			<div class="grow space-y-4 w-full">
 				<div class="space-y-4 flex flex-col">

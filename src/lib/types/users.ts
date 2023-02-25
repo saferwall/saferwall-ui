@@ -11,7 +11,6 @@ export interface APIUser {
     member_since: number;
     last_seen: number;
     admin: boolean;
-    has_avatar: boolean;
     following: string[];
     following_count: number;
     followers: string[];
