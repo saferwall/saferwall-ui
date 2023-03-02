@@ -12,24 +12,37 @@ export const load = (async ({ params, url }): Promise<{
     paths: string[]
 }> => {
     const { hash } = params;
-
-    const file = await APIClient.request<APIFile>(`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta`);
-
     const paths = url.pathname.toString().split(`/files/`)[1].split('/');
-
     const activePath = paths[1];
     const activeMenu = fileMenu.find(menu => menu.path === activePath)! || {};
 
-    const menus = [...fileMenu].filter(menu => {
-        if (
-            `${menu.name}`.toLowerCase() === 'pe' &&
-            `${file.file_format}`.toLowerCase() !== 'pe'
-        ) {
-            return false;
-        }
+    let file: any, menus: FileMenu[];
+    try {
+        file = await APIClient.request<APIFile>(`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta`);
 
-        return true;
-    });
+        menus = [...fileMenu].filter(menu => {
+            if (
+                `${menu.name}`.toLowerCase() === 'pe' &&
+                `${file.file_format}`.toLowerCase() !== 'pe'
+            ) {
+                return false;
+            }
+
+            return true;
+        });
+
+    } catch (error) {
+        file = {};
+        menus = [...fileMenu].filter(menu => {
+            if (
+                `${menu.name}`.toLowerCase() === 'pe'
+            ) {
+                return false;
+            }
+
+            return true;
+        })
+    }
 
 
     return {
@@ -39,5 +52,4 @@ export const load = (async ({ params, url }): Promise<{
         activeMenu,
         fileMenu: menus
     };
-
 }) satisfies LayoutLoad;

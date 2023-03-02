@@ -19,7 +19,7 @@
 		{ field: 'debug', path: 'debugs', title: 'Debugs' },
 		{ field: 'tls', path: 'tls', title: 'TLS' },
 		{ field: 'load_config', path: 'load-config', title: 'Load config' },
-		{ field: 'bound_imports', path: 'bound-imports', title: 'Bound imports' },
+		{ field: 'bound_import', path: 'bound-imports', title: 'Bound imports' },
 		{ field: 'iat', path: 'iat', title: 'IAT' },
 		{ field: 'delay_import', path: 'delay-imports', title: 'Delay import' },
 		{ field: 'clr', path: 'clr', title: 'CLR' }

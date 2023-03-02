@@ -138,11 +138,11 @@
 				@apply relative z-0;
 
 				&.box__body:after {
-					@apply content-[''] absolute -top-2 rounded-t-none left-0 border rounded w-full h-full border-grayx-200 border-t-0;
+					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-grayx-200 border-t-0;
 				}
 
 				&.box:after {
-					@apply content-[''] absolute top-0 left-0 border rounded w-full h-full border-grayx-200;
+					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-grayx-200;
 				}
 
 				&.expanded:nth-child(2n + 1):after {
