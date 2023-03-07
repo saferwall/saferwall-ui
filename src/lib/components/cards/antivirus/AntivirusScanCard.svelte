@@ -8,6 +8,8 @@
 
 	export let title = 'Scan Results';
 	export let sortBy: 'first' | 'last';
+	let cclass: string = '';
+	export { cclass as class };
 
 	$: sortedResults = Object.values(result).sort(
 		(resultA, resultB) => resultA.update - resultB.update
@@ -16,7 +18,7 @@
 	$: dateScan = sortBy === 'last' ? sortedResults[0] : sortedResults[sortedResults.length - 1];
 </script>
 
-<BaseCard class="w-full">
+<BaseCard class="w-full {cclass}">
 	<div class="space-y-2">
 		<h2>{title}</h2>
 		<p class="text-grayx-500">
