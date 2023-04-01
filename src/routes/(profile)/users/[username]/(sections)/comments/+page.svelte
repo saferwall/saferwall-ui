@@ -24,11 +24,11 @@
 				<div class="flex flex-col space-y-2">
 					<div class="flex flex-col md:flex-row space-y-4 md:space-y-0 justify-between">
 						<div class="flex items-center space-x-4">
-							<Avatar {username} size="small" />
+							<Avatar {username} size="sm" />
 							<DateTime class="text-gray-500 text-sm" date={item.date} />
 						</div>
 						<div class="w-full md:w-max">
-							<Button class="w-full md:w-max md:border-none" size="small">
+							<Button class="w-full md:w-max md:border-none" size="sm">
 								<svg class="w-4 h-4 mr-2">
 									<use href="/images/images.svg#icon-like" />
 								</svg>

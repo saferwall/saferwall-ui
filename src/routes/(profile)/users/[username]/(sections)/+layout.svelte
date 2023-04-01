@@ -11,7 +11,7 @@
 	$: itemsCount = data.pagination.items?.length || 0;
 
 	const generatePath = (path: string) => {
-		const sectionPath = `/user/${user.username}/${path}`;
+		const sectionPath = `/users/${user.username}/${path}`;
 		return {
 			url: sectionPath,
 			active: sectionPath == currentPath

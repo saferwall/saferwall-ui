@@ -25,14 +25,14 @@
 						<DateTime class="text-gray-400 text-sm" date={item.member_since} />
 					</div>
 				</div>
-				<Button class="w-full md:w-max z-30" size="small">
+				<Button class="w-full md:w-max z-30" size="sm">
 					<svg class="w-4 h-4 mr-2">
 						<use href="/images/images.svg#icon-like" />
 					</svg>
 					<span>{item.follow ? 'Unfollow' : 'Follow'}</span>
 				</Button>
 			</div>
-			<a class="absolute opacity-0 z-20 inset-0" href="/user/{item.username}">
+			<a class="absolute opacity-0 z-20 inset-0" href="/users/{item.username}">
 				{item.username}
 			</a>
 		</article>
