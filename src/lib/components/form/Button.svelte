@@ -58,13 +58,16 @@
 		}
 
 		&--size {
-			&--xsmall {
-				@apply text-sm py-2;
+			&--xss {
+				@apply text-xs py-2;
 			}
-			&--small {
-				@apply py-2;
+			&--xs {
+				@apply text-xs py-2;
 			}
-			&--large {
+			&--sm {
+				@apply py-2 text-sm;
+			}
+			&--lg {
 				@apply py-3 px-5;
 			}
 		}

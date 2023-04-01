@@ -29,7 +29,7 @@
 	</div>
 	<a href="/auth/forget-password" class="self-end border-l-pink-50">Forget password?</a>
 
-	<Button theme="primary" type="submit" {loading} size="large">Login</Button>
+	<Button theme="primary" type="submit" {loading} size="lg">Login</Button>
 
 	<p class="text-center text-sm">
 		Didn't confirm registration? <a href="/auth/confirm" class="link">Send confirmation</a>

@@ -17,16 +17,16 @@
 		</h1>
 
 		<div class="space-x-2 flex flex-shrink-0">
-			<Button href={downloadLink} size="large" icon="download">
+			<Button href={downloadLink} size="lg" icon="download">
 				<span class="hidden md:block pl-2">Download file</span></Button
 			>
-			<Button size="large" icon="rescan">
+			<Button size="lg" icon="rescan">
 				<span class="hidden md:block pl-2">Rescan file</span>
 			</Button>
-			<Button size="large" icon="like">
+			<Button size="lg" icon="like">
 				<span class="hidden md:block pl-2">Like</span>
 			</Button>
-			<Button href={shareTwitterLink} target="_blank" size="large" icon="twitter">
+			<Button href={shareTwitterLink} target="_blank" size="lg" icon="twitter">
 				<span class="hidden md:block pl-2">Share</span></Button
 			>
 		</div>

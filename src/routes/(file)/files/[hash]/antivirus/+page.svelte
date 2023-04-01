@@ -12,8 +12,20 @@
 </script>
 
 <div class="container mx-auto pb-20">
-	<div class="flex space-y-12 md:space-y-0 md:flex-row md:space-x-10">
-		<AntivirusScanCard sortBy="first" title="First Scan" result={firstScan} />
-		<AntivirusScanCard sortBy="last" title="Last scan" result={lastScan} />
+	<div
+		class="flex md:space-y-0 md:flex-row md:space-x-10  max-md:bg-white max-md:rounded-xl max-md:shadow-base max-md:p-6"
+	>
+		<AntivirusScanCard
+			sortBy="first"
+			title="First Scan"
+			result={firstScan}
+			class="max-md:rounded-none max-md:shadow-none max-md:p-0"
+		/>
+		<AntivirusScanCard
+			sortBy="last"
+			title="Last scan"
+			result={lastScan}
+			class="max-md:rounded-none max-md:shadow-none max-md:p-0"
+		/>
 	</div>
 </div>

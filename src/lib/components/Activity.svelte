@@ -22,7 +22,8 @@
 			<div class="activity__author flex flex-col items-center space-y-2">
 				<Avatar username={activity.author.username} />
 				<div class="text-center">
-					<a href="/user/{activity.author.username}" class="font-bold">{activity.author.username}</a
+					<a href="/users/{activity.author.username}" class="font-bold"
+						>{activity.author.username}</a
 					>
 					<p class="text-grayx-500">Member since {getMemberSince(activity.author.member_since)}</p>
 				</div>
@@ -35,7 +36,7 @@
 			>
 				<p class="activity__title space-x-1 flex flex-col md:flex-row">
 					<span class="flex space-x-1">
-						<a class="activity__info__author" href="/user/{activity.author.username}">
+						<a class="activity__info__author" href="/users/{activity.author.username}">
 							{activity.author.username}
 						</a>
 						<a class="activity__info__type" href="/files/{activity.file?.hash}"

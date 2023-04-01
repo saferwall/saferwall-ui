@@ -316,3 +316,56 @@ export const translateGroupValue = (value: any, name: string, sub?: string): any
 
 	return value;
 };
+
+enum ResourceType {
+	RTCursor = 1,
+	RTBitmap,
+	RTIcon,
+	RTMenu,
+	RTDialog,
+	RTString,
+	RTFontDir,
+	RTFont,
+	RTAccelerator,
+	RTRCdata,
+	RTMessageTable,
+	RTGroupCursor = RTCursor + 11,
+	RTGroupIcon = RTIcon + 11,
+	RTVersion = 16,
+	RTDlgInclude = 17,
+	RTPlugPlay = 19,
+	RTVxD = 20,
+	RTAniCursor = 21,
+	RTAniIcon = 22,
+	RTHtml = 23,
+	RTManifest = 24,
+}
+
+// Stringify the resource type.
+export const getResourceTypeName = (type: ResourceType): string => {
+	const rsrcTypeMap: { [key in ResourceType]: string } = {
+		[ResourceType.RTCursor]: "Cursor",
+		[ResourceType.RTBitmap]: "Bitmap",
+		[ResourceType.RTIcon]: "Icon",
+		[ResourceType.RTMenu]: "Menu",
+		[ResourceType.RTDialog]: "Dialog box",
+		[ResourceType.RTString]: "String",
+		[ResourceType.RTFontDir]: "Font directory",
+		[ResourceType.RTFont]: "Font",
+		[ResourceType.RTAccelerator]: "Accelerator",
+		[ResourceType.RTRCdata]: "RC Data",
+		[ResourceType.RTMessageTable]: "Message Table",
+		[ResourceType.RTGroupCursor]: "Group Cursor",
+		[ResourceType.RTGroupIcon]: "Group Icon",
+		[ResourceType.RTVersion]: "Version",
+		[ResourceType.RTDlgInclude]: "Dialog Include",
+		[ResourceType.RTPlugPlay]: "Plug & Play",
+		[ResourceType.RTVxD]: "VxD",
+		[ResourceType.RTAniCursor]: "Animated Cursor",
+		[ResourceType.RTAniIcon]: "Animated Icon",
+		[ResourceType.RTHtml]: "HTML",
+		[ResourceType.RTManifest]: "Manifest",
+	};
+
+	return rsrcTypeMap[type] ?? "?";
+}

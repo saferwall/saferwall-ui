@@ -6,6 +6,13 @@ export interface FileMenu {
     path: string;
 }
 
+export interface PEMenu {
+    path: string;
+    title: string;
+    field: string;
+}
+
+
 export interface Author {
     member_since: number;
     username: string;

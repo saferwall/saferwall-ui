@@ -12,8 +12,12 @@ export class APIClient {
         url: `${env.PUBLIC_API_URL}`
     }
 
-    private static get cacheMode(): RequestCache {
-        return browser ? "force-cache" : "default";
+    private static cacheRequest(init: RequestInit): RequestInit {
+        if (browser) {
+            init.cache = "force-cache";
+        }
+
+        return init;
     }
 
     public static async request<T>(
@@ -22,12 +26,12 @@ export class APIClient {
     ): Promise<T> {
         const url = `${this.apiConfig.url}/${endpoint}`;
         const init: RequestInit = {
-            cache: this.cacheMode,
             headers: {
                 "Content-Type": "application/json"
             },
             ...args,
         };
+        this.cacheRequest(init);
         const response = await fetch(url, init);
         return response.json();
     }

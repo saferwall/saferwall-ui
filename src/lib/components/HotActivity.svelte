@@ -15,7 +15,7 @@
 
 <BaseCard>
 	<div class="flex items-center space-x-2">
-		<Avatar size="medium" image="/images/logo-v.webp" />
+		<Avatar size="md" image="/images/logo-v.webp" />
 		<div class="flex flex-col">
 			<span>Saferwall</span>
 			<DateTime class="text-sm text-grayx-600" {date} />

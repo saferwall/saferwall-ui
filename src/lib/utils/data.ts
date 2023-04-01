@@ -36,13 +36,19 @@ export function parseTags(fileTags: any): Tag[] {
     }, [])
 }
 
-
+/**
+ * Returns a randomly selected, friendly error message
+ * @returns {string} A randomly selected error quote.
+ */
 export const randomErrorQuote = (): string => {
-    return [
-        "Oops! It looks like we've hit a glitch in the system. Don't worry, our team is on it. If you're still experiencing errors, please don't hesitate to contact us.",
-        "Something's not quite right...but don't worry, we're on the case! If you're still having issues, please get in touch with our team.",
-        "Uh oh, it looks like we've encountered a bit of a snag. Our team is hard at work fixing it as we speak. If you're still experiencing errors, please reach out to us.",
-        "Looks like we've run into a bit of a hiccup. Hang tight while we work on getting things back to normal. If you're still encountering issues, please contact our team.",
-        "Whoops, it looks like something's gone awry. Don't worry, we're on it and everything will be up and running again soon. If you're still experiencing errors, please don't hesitate to reach out to us."
-    ][Math.floor(Math.random() * 5)];
+    const quotes = [
+        "Oops! It looks like we've hit a glitch in the system. Our team is working to resolve it. Please contact us if the issue persists.",
+        "Something seems to have gone wrong. We are investigating and will get back to you soon. Please let us know if you continue to experience problems.",
+        "We apologize for the inconvenience. Our team is addressing the issue and will have it resolved shortly. If you need further assistance, please reach out to us.",
+        "We're sorry for the trouble. We're working to fix the problem as soon as possible. If you're still having trouble, please don't hesitate to contact us.",
+        "Whoops! It looks like something has gone wrong. We're on it and will have everything back to normal soon. Please reach out to us if you still need help."
+    ];
+    const index = Math.floor(Math.random() * quotes.length);
+    return quotes[index];
 }
+

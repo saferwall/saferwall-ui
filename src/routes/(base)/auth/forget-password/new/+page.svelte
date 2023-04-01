@@ -27,7 +27,7 @@
 		title="Congratulation !"
 		description="Your password has been successfully reset."
 	>
-		<Button href="/auth/login" theme="primary" size="large">Login</Button>
+		<Button href="/auth/login" theme="primary" size="lg">Login</Button>
 	</AuthActionDone>
 {:else}
 	<form
@@ -40,6 +40,6 @@
 		<div class="space-y-4">
 			<Input name="password" type="password" required label="New password" disabled={loading} />
 		</div>
-		<Button {loading} type="submit" theme="primary" size="large">Change password</Button>
+		<Button {loading} type="submit" theme="primary" size="lg">Change password</Button>
 	</form>
 {/if}

@@ -16,13 +16,13 @@
 
 <BaseCard spacing={false}>
 	<div class="flex space-x-6 items-center">
-		<Avatar size="medium" username={author.username} />
+		<Avatar size="md" username={author.username} />
 		<div class="text-sm">
-			<a href="/user/{author.username}" class="font-bold">{author.username}</a>
+			<a href="/users/{author.username}" class="font-bold">{author.username}</a>
 			<p class="text-grayx-500">Member since {getMemberSince(author.member_since)}</p>
 		</div>
 		<div>
-			<Button size="xsmall">Follow</Button>
+			<Button size="xss">Follow</Button>
 		</div>
 	</div>
 	<section class="prose my-2">

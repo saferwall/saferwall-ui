@@ -1,29 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import BaseCard from '$lib/components/cards/BaseCard.svelte';
+	import { peMenu } from '$lib/data/menus';
 
 	export let data: PageData;
 
 	$: activeMenu = data.activePEMenu;
-	$: menus = [
-		{ field: 'dos_header', path: 'dos-header', title: 'DOS Header' },
-		{ field: 'nt_header', path: 'nt-header', title: 'NT Header' },
-		{ field: 'rich_header', path: 'rich-header', title: 'Rich Header' },
-		{ field: 'sections', path: 'sections', title: 'Sections' },
-		{ field: 'export', path: 'export', title: 'Export' },
-		{ field: 'import', path: 'imports', title: 'Imports' },
-		{ field: 'resources', path: 'resources', title: 'Resources' },
-		{ field: 'exceptions', path: 'exceptions', title: 'Exceptions' },
-		{ field: 'security', path: 'certificate', title: 'Certificate' },
-		{ field: 'reloc', path: 'relocations', title: 'Relocations' },
-		{ field: 'debug', path: 'debugs', title: 'Debugs' },
-		{ field: 'tls', path: 'tls', title: 'TLS' },
-		{ field: 'load_config', path: 'load-config', title: 'Load config' },
-		{ field: 'bound_import', path: 'bound-imports', title: 'Bound imports' },
-		{ field: 'iat', path: 'iat', title: 'IAT' },
-		{ field: 'delay_import', path: 'delay-imports', title: 'Delay import' },
-		{ field: 'clr', path: 'clr', title: 'CLR' }
-	].filter(({ field }) => data.file.pe?.meta.includes(field));
+	$: menus = [...peMenu].filter(({ field }) => data.file.pe?.meta.includes(field));
 </script>
 
 <div class="files__layout container mx-auto w-full h-full items-center justify-center">
@@ -71,7 +54,7 @@
 	}
 
 	.files__layout :global(table thead th) {
-		@apply py-6 font-medium;
+		@apply py-4 font-medium;
 	}
 	.files__layout :global(table tr td) {
 		@apply py-2 text-gray-800;

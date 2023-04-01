@@ -47,7 +47,7 @@
 						<tr>
 							<td class="lg:w-1/3 font-semibold">{item.name}</td>
 							<td class="lg:w-1/3">{item.value}</td>
-							<td class="lg:w-1/3">{item?.comment}</td>
+							<td class="lg:w-1/3 whitespace-pre-wrap">{item?.comment}</td>
 						</tr>
 					{/each}
 				</tbody>

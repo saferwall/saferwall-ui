@@ -38,6 +38,6 @@
 		<div class="space-y-4">
 			<Input label="Email" name="email" required disabled={loading} />
 		</div>
-		<Button {loading} type="submit" theme="primary" size="large">Send confirmation</Button>
+		<Button {loading} type="submit" theme="primary" size="lg">Send confirmation</Button>
 	</form>
 {/if}

@@ -17,7 +17,7 @@
 	};
 </script>
 
-<a class="avatar avatar--{size}" href="/user/{username}">
+<a class="avatar avatar--{size}" href="/users/{username}">
 	{#if avatarImage}
 		<img
 			class="avatar__image"
@@ -47,11 +47,11 @@
 			@apply w-full h-full object-cover;
 		}
 
-		&--small {
+		&--sm {
 			@apply w-12 h-12;
 		}
 
-		&--medium {
+		&--md {
 			@apply w-14 h-14;
 		}
 
@@ -59,7 +59,7 @@
 			@apply w-20 h-20;
 		}
 
-		&--large {
+		&--lg {
 			@apply w-32 h-32;
 		}
 	}

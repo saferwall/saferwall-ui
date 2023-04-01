@@ -13,5 +13,5 @@
 	title="Congratulation !"
 	description="Your registration has been confirmed. "
 >
-	<Button href="/auth/login" theme="primary" size="large">Login</Button>
+	<Button href="/auth/login" theme="primary" size="lg">Login</Button>
 </AuthActionDone>

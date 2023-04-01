@@ -15,12 +15,12 @@
 	>
 		<div class="inline-flex relative w-full items-start md:space-x-12 pt-12">
 			<div class="inline-flex absolute md:static -top-14 -right-0">
-				<Avatar {username} size="large" />
+				<Avatar {username} size="lg" />
 			</div>
 			<div class="grow space-y-4 w-full">
 				<div class="space-y-4 flex flex-col">
 					<h1 class="text-2xl font-semibold text-gray-800">{username}</h1>
-					<a href="/user/{username}">@{username}</a>
+					<a href="/users/{username}">@{username}</a>
 					{#if url}
 						<a
 							href={url}
@@ -47,9 +47,9 @@
 		</div>
 		<div class="actions__ flex flex-col pt-4 w-full md:w-max h-full flex-shrink-0 my-auto">
 			{#if selfProfile}
-				<Button theme="primary" size="large">Edit my profile</Button>
+				<Button theme="primary" size="lg">Edit my profile</Button>
 			{:else}
-				<Button theme="primary" size="large">Follow</Button>
+				<Button theme="primary" size="lg">Follow</Button>
 			{/if}
 		</div>
 	</section>

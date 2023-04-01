@@ -45,7 +45,7 @@
 				>
 			</p>
 		</label>
-		<Button type="submit" {loading} theme="primary" size="large">Create account</Button>
+		<Button type="submit" {loading} theme="primary" size="lg">Create account</Button>
 	</form>
 	<div class="border-t border-grayx-100 p-6">
 		<p class="text-center text-sm">
