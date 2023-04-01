@@ -46,7 +46,7 @@ module.exports = {
         },
         grayx: {
           DEFAULT: '#F6F6F6',
-          '50': '#f6f6f6',
+          '50': '#F8F8F8',
           '100': '#f0f0f0',
           '200': '#e4e4e4',
           '300': '#d1d1d1',
