@@ -1,4 +1,5 @@
 import { APIClient } from '$lib/api';
+import type { APIFile } from '$lib/types/files';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ params, parent }): Promise<{
