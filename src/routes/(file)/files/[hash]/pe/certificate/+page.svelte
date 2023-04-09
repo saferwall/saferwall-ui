@@ -1,9 +1,9 @@
 <script lang="ts">
+	import TableKeyValue from '$lib/components/TableKeyValue.svelte';
 	import ValidityBox from '$lib/components/ValidityBox.svelte';
-	import { splitCamelCase, translateGroupValue, valueToHex } from '$lib/utils/format';
+	import { translateGroupValue, valueToHex } from '$lib/utils/format';
 	import type { PageData } from './$types';
 
-	const maxRecords = 20;
 	export let data: PageData;
 
 	$: certificate = data.certificate;
@@ -58,16 +58,7 @@
 
 	<article>
 		<h1 class="title">Signer Certificate</h1>
-		<table class="w-full">
-			<tbody>
-				{#each signer as [title, value]}
-					<tr>
-						<td>{title}</td>
-						<td>{value}</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+		<TableKeyValue items={signer} />
 	</article>
 </section>
 
