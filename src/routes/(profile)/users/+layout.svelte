@@ -7,11 +7,10 @@
 	import ProfileCard from '$lib/components/cards/profile/ProfileCard.svelte';
 
 	export let data: PageData;
-
 	$: user = data.user;
 </script>
 
-<Navbar />
+<Navbar {user} />
 <main class="flex-1 flex flex-col py-4 h-full bg-grayx space-y-6">
 	<ProfileHeading />
 	<ProfileCard {...user} />

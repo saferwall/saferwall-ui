@@ -1,5 +1,11 @@
 import type { APIFile } from "./types/files";
 
+export interface Error {
+    details: unknown;
+    message: string;
+    status: number;
+}
+
 export interface FileMenu {
     name: string;
     fullName?: string;
@@ -36,3 +42,41 @@ export interface Tag {
 export type ActivityType = 'comment' | 'like' | 'submit';
 
 export type ProfileSection = 'likes' | 'comments' | 'submissions' | 'followers' | 'following';
+
+export interface LoginData {
+    username: string;
+    password: string;
+}
+export interface RegisterData {
+    email: string;
+    username: string;
+    password: string;
+}
+
+export interface Session {
+    token: string;
+    username?: string;
+}
+
+export interface User {
+    admin: boolean;
+    type: string;
+    email: string;
+    username: string;
+    confirmed: boolean;
+    location: string;
+    name: string;
+    url: string;
+    bio: string;
+    has_avatar: boolean;
+    likes_count: number;
+    comments_count: number;
+    following_count: number;
+    followers_count: number;
+    submissions_count: number;
+    likes: string[];
+    following: string[];
+    followers: string[];
+    last_seen: number;
+    member_since: number;
+}

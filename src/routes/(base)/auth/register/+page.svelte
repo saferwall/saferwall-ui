@@ -1,18 +1,37 @@
 <script lang="ts">
-	import Button from '$lib/components/form/Button.svelte';
+	import { enhance } from '$app/forms';
 	import Input from '$lib/components/form/Input.svelte';
+	import Button from '$lib/components/form/Button.svelte';
+	import Alert from '$lib/components/Alert.svelte';
 	import AuthActionDone from '$lib/components/AuthActionDone.svelte';
 
-	let loading = false;
 	let finished = false;
-	const handleFormSubmit = (event: Event) => {
-		event.preventDefault();
+	let loading = false;
+	let error: string = '';
+	let errors: Record<string, boolean> = {};
 
+	const handleFormSubmit = (_event: any) => {
+		error = '';
+		errors = {};
 		loading = true;
-		setTimeout(() => {
+
+		return async ({ result, update }: any) => {
+			const { data, type } = result;
 			loading = false;
+
+			if (type === 'failure') {
+				errors = data;
+
+				if (data.error) {
+					error = data.error.message;
+				}
+
+				return;
+			}
+
 			finished = true;
-		}, 2000);
+			update();
+		};
 	};
 </script>
 
@@ -28,14 +47,33 @@
 {:else}
 	<form
 		method="POST"
-		on:submit={handleFormSubmit}
+		action="/auth/register"
+		use:enhance={handleFormSubmit}
 		class="flex flex-col space-y-6 px-10 lg:px-16 pt-14"
 	>
 		<h1 class="text-3xl font-bold">Sign up</h1>
+
+		{#if error}
+			<Alert type="error" on:close={() => (error = '')}>{error}</Alert>
+		{/if}
 		<div class="space-y-4">
-			<Input label="Username" required name="username" disabled={loading} />
-			<Input label="Email" required type="email" name="email" disabled={loading} />
-			<Input label="Password" required type="password" name="password" disabled={loading} />
+			<Input required error={errors.email} label="Username" name="username" disabled={loading} />
+			<Input
+				required
+				error={errors.username}
+				label="Email"
+				type="email"
+				name="email"
+				disabled={loading}
+			/>
+			<Input
+				required
+				error={errors.password}
+				label="Password"
+				type="password"
+				name="password"
+				disabled={loading}
+			/>
 		</div>
 		<label class="flex items-center space-x-2 text-sm">
 			<input type="checkbox" required disabled={loading} name="agree" />
