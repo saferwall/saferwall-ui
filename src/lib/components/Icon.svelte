@@ -7,6 +7,6 @@
 	export { cclass as class };
 </script>
 
-<svg class="{size} {cclass}">
+<svg class="icon {size} {cclass}">
 	<use href="/images/images.svg#icon-{name}" />
 </svg>

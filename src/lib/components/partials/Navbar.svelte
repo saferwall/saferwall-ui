@@ -1,7 +1,13 @@
-<script>
-	import Button from '../form/Button.svelte';
+<script lang="ts">
+	import { page } from '$app/stores';
+	import type { User } from '$lib/types';
+
 	import Logo from './Logo.svelte';
+	import UserMenu from './UserMenu.svelte';
+	import Button from '../form/Button.svelte';
 	import InputSearch from '../form/InputSearch.svelte';
+
+	export let user: User;
 </script>
 
 <nav
@@ -24,12 +30,16 @@
 				<a class="menu__link" href="/hot-activities">Hot activities</a>
 			</li>
 		</ul>
-		<div class="auth__ space-x-2">
-			<div class="!hidden md:!inline-flex">
-				<Button href="/auth/login">Login</Button>
+		{#if !$page.data.user}
+			<div class="auth__ space-x-2">
+				<div class="!hidden md:!inline-flex">
+					<Button href="/auth/login">Login</Button>
+				</div>
+				<Button href="/auth/register" theme="primary">Sign up</Button>
 			</div>
-			<Button href="/auth/register" theme="primary">Sign up</Button>
-		</div>
+		{:else}
+			<UserMenu {user} />
+		{/if}
 	</div>
 </nav>
 
