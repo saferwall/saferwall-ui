@@ -47,6 +47,10 @@
 			@apply w-full h-full object-cover;
 		}
 
+		&--xs {
+			@apply w-10 h-10;
+		}
+
 		&--sm {
 			@apply w-12 h-12;
 		}
