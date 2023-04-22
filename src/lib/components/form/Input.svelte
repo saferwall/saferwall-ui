@@ -3,6 +3,7 @@
 	export let type = 'text';
 	export let name = '';
 	export let label = '';
+	export let error = false;
 	export let placeholder = ' ';
 	export let required = false;
 	export let disabled = false;
@@ -15,7 +16,7 @@
 	$: passwordVisible = type !== 'password';
 </script>
 
-<label class="input peer-focus" class:labeled={label}>
+<label class="input peer-focus" class:labeled={label} class:error>
 	{#if label}
 		<span class="input__label">{label}</span>
 	{/if}
@@ -35,6 +36,15 @@
 			@apply w-full;
 			@apply px-4 pt-3 pb-3.5;
 			@apply border rounded;
+		}
+
+		&.error {
+			.input__field {
+				@apply border-red-400;
+			}
+			.input__label {
+				@apply text-red-400;
+			}
 		}
 
 		&.labeled {
