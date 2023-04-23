@@ -4,14 +4,14 @@
 	import TabsCard from '$lib/components/cards/TabsCard.svelte';
 
 	export let data: PageData;
-	$: user = data.user;
+	$: profile = data.profile;
 	$: section = data.section;
 	$: username = data.username;
 	$: currentPath = data.currentPath;
 	$: itemsCount = data.pagination.items?.length || 0;
 
 	const generatePath = (path: string) => {
-		const sectionPath = `/users/${user.username}/${path}`;
+		const sectionPath = `/users/${username}/${path}`;
 		return {
 			url: sectionPath,
 			active: sectionPath == currentPath
@@ -19,11 +19,31 @@
 	};
 
 	$: heading = [
-		{ title: 'Likes', count: user.likes_count, ...generatePath('likes') },
-		{ title: 'Submissions', count: user.submissions_count, ...generatePath('submissions') },
-		{ title: 'Followers', count: user.followers_count, ...generatePath('followers') },
-		{ title: 'Following', count: user.following_count, ...generatePath('following') },
-		{ title: 'Comments', count: user.comments_count, ...generatePath('comments') }
+		{
+			title: 'Likes',
+			count: profile.likes_count,
+			...generatePath('likes')
+		},
+		{
+			title: 'Submissions',
+			count: profile.submissions_count,
+			...generatePath('submissions')
+		},
+		{
+			title: 'Followers',
+			count: profile.followers_count,
+			...generatePath('followers')
+		},
+		{
+			title: 'Following',
+			count: profile.following_count,
+			...generatePath('following')
+		},
+		{
+			title: 'Comments',
+			count: profile.comments_count,
+			...generatePath('comments')
+		}
 	];
 </script>
 

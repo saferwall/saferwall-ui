@@ -6,14 +6,14 @@ import type { LayoutLoad } from "./$types";
 
 export const load = (async ({ params }): Promise<{
     username: string,
-    user: APIUser
+    profile: APIUser
 }> => {
     const username = params.username!;
     const user = await APIClient.getUser(username);
 
     return {
         username: username,
-        user: user
+        profile: user
     };
 
 }) satisfies LayoutLoad;

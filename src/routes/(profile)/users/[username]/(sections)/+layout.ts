@@ -6,9 +6,9 @@ import type { LayoutLoad } from "./$types";
 
 export const load = (async ({ params, parent, url }): Promise<{
     username: string,
-    user: APIUser,
+    profile: APIUser,
     currentPath: string,
-    pagination: APIPagination<APIItem>,
+    pagination: APIPagination<APIItem> | unknown,
     section: ProfileSection
 }> => {
     const data = await parent();
@@ -20,10 +20,10 @@ export const load = (async ({ params, parent, url }): Promise<{
     const pagination = await APIClient.request(`users/${username}/${section}`);
 
     return {
+        ...data,
         section,
         currentPath,
         pagination,
-        ...data
     };
 
 }) satisfies LayoutLoad;
