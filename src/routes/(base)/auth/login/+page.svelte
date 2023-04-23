@@ -40,7 +40,6 @@
 
 <form
 	method="POST"
-	action="/auth/login"
 	use:enhance={handleFormSubmit}
 	class="flex flex-col space-y-6 px-10 lg:px-16 pt-14"
 >
