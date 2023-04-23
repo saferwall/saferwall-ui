@@ -52,8 +52,10 @@
 		{#if itemsCount > 0}
 			<slot />
 		{:else}
-			<div class="inline-block px-6 md:px-10 py-20 text-center">
-				{username} has no {section} at the moment
+			<div class="px-6 md:px-10 py-20 text-center">
+				<p>
+					{username} has no {section} at the moment
+				</p>
 			</div>
 		{/if}
 	</TabsCard>
