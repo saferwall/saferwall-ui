@@ -1,18 +1,37 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+	import Alert from '$lib/components/Alert.svelte';
 	import AuthActionDone from '$lib/components/AuthActionDone.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 
-	let loading = false;
 	let finished = false;
-	const handleFormSubmit = (event: Event) => {
-		event.preventDefault();
+	let loading = false;
+	let error: string = '';
+	let errors: Record<string, boolean> = {};
 
+	const handleFormSubmit = (_event: any) => {
+		error = '';
+		errors = {};
 		loading = true;
-		setTimeout(() => {
+
+		return async ({ result, update }: any) => {
+			const { data, type } = result;
 			loading = false;
+
+			if (type === 'failure') {
+				errors = data;
+
+				if (data.error) {
+					error = data.error.message;
+				}
+
+				return;
+			}
+
 			finished = true;
-		}, 2000);
+			update();
+		};
 	};
 </script>
 
@@ -32,13 +51,23 @@
 {:else}
 	<form
 		method="POST"
-		on:submit={handleFormSubmit}
+		use:enhance={handleFormSubmit}
 		class="flex flex-col space-y-6 px-10 lg:px-16 py-14"
 	>
 		<h1 class="text-3xl font-bold">New password</h1>
+		{#if error}
+			<Alert type="error" on:close={() => (error = '')}>{error}</Alert>
+		{/if}
 		<p class="text-grayx-700">Enter your new password</p>
 		<div class="space-y-4">
-			<Input name="password" type="password" required label="New password" disabled={loading} />
+			<Input
+				required
+				error={errors.password}
+				label="New Password"
+				type="password"
+				name="password"
+				disabled={loading}
+			/>
 		</div>
 		<Button {loading} type="submit" theme="primary" size="lg">Change password</Button>
 	</form>

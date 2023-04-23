@@ -2,17 +2,36 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import AuthActionDone from '$lib/components/AuthActionDone.svelte';
+	import Alert from '$lib/components/Alert.svelte';
+	import { enhance } from '$app/forms';
 
-	let loading = false;
 	let finished = false;
-	const handleFormSubmit = (event: Event) => {
-		event.preventDefault();
+	let loading = false;
+	let error: string = '';
+	let errors: Record<string, boolean> = {};
 
+	const handleFormSubmit = (_event: any) => {
+		error = '';
+		errors = {};
 		loading = true;
-		setTimeout(() => {
+
+		return async ({ result, update }: any) => {
+			const { data, type } = result;
 			loading = false;
+
+			if (type === 'failure') {
+				errors = data;
+
+				if (data.error) {
+					error = data.error.message;
+				}
+
+				return;
+			}
+
 			finished = true;
-		}, 2000);
+			update();
+		};
 	};
 </script>
 
@@ -28,15 +47,25 @@
 {:else}
 	<form
 		method="POST"
-		on:submit={handleFormSubmit}
+		use:enhance={handleFormSubmit}
 		class="flex flex-col space-y-6 px-10 lg:px-16 py-14"
 	>
 		<h1 class="text-3xl font-bold">Forgot password</h1>
+		{#if error}
+			<Alert type="error" on:close={() => (error = '')}>{error}</Alert>
+		{/if}
 		<p class="text-grayx-700">
 			We have just sent a confirmation link of your account to the email address.
 		</p>
 		<div class="space-y-4">
-			<Input name="email" required label="Email" disabled={loading} />
+			<Input
+				required
+				error={errors.email}
+				label="Email"
+				type="email"
+				name="email"
+				disabled={loading}
+			/>
 		</div>
 		<Button {loading} type="submit" theme="primary" size="lg">Login</Button>
 	</form>
