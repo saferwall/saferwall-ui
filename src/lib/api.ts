@@ -2,8 +2,7 @@ import { env } from "$env/dynamic/public";
 import { browser } from "$app/environment";
 
 import type { APIFile } from "./types/files";
-import type { APIUser } from "./types/users";
-import type { LoginData, RegisterData, Session, User } from "./types";
+import type { ChangePasswordData, LoginData, RegisterData, Session, User } from "./types";
 
 export type APIConfig = {
     url: string;
@@ -60,8 +59,34 @@ export class APIClient {
             body: JSON.stringify(data)
         });
     }
+
     static async signUp(data: RegisterData): Promise<Session> {
         return this.request<Session>('users/', false, {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+    }
+
+    static async sendConfirmation(email: string): Promise<Session> {
+        return this.request<Session>('auth/resend-confirmation', false, {
+            method: 'POST',
+            body: JSON.stringify({
+                email
+            })
+        });
+    }
+
+    static async resetPassword(email: string): Promise<Session> {
+        return this.request<Session>('auth/reset-password', false, {
+            method: 'POST',
+            body: JSON.stringify({
+                email
+            })
+        });
+    }
+
+    static async changePassword(data: ChangePasswordData): Promise<Session> {
+        return this.request<Session>('auth/password', false, {
             method: 'POST',
             body: JSON.stringify(data)
         });

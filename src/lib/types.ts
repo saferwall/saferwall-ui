@@ -58,6 +58,12 @@ export interface Session {
     username?: string;
 }
 
+export interface ChangePasswordData {
+    guid: string;
+    token: string;
+    password: string;
+}
+
 export interface User {
     admin: boolean;
     type: string;
