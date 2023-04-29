@@ -46,7 +46,12 @@
 		&--base:hover,
 		&--primary {
 			@apply bg-primary text-white border-primary;
+
+			&.light {
+				@apply bg-primary-200 text-primary bg-opacity-30 border-transparent;
+			}
 		}
+
 		&--gray.active,
 		&--gray:hover {
 			@apply text-primary;
