@@ -7,6 +7,7 @@
 
 	import Avatar from './Avatar.svelte';
 	import Button from './form/Button.svelte';
+	import ButtonFollow from './form/ButtonFollow.svelte';
 	import InputHash from './form/InputHash.svelte';
 
 	export let activity: Activity;
@@ -29,9 +30,7 @@
 					<p class="text-grayx-500">Member since {getMemberSince(activity.author.member_since)}</p>
 				</div>
 				<div>
-					<Button href={loggedIn ? undefined : '/auth/login'}>
-						{activity.follow ? 'UnFollow' : 'Follow'}
-					</Button>
+					<ButtonFollow {loggedIn} followed={activity.follow} />
 				</div>
 			</div>
 			<div

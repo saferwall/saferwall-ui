@@ -4,6 +4,7 @@
 	import Avatar from '$lib/components/Avatar.svelte';
 	import DateTime from '$lib/components/DateTime.svelte';
 	import Button from '$lib/components/form/Button.svelte';
+	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
 
 	export let item: APIItemFollow;
 	export let loggedIn: boolean = false;
@@ -20,14 +21,7 @@
 				<DateTime class="text-gray-400 text-sm" date={item.member_since} />
 			</div>
 		</div>
-		<Button
-			class="w-full md:w-max z-30"
-			href={loggedIn ? undefined : '/auth/login'}
-			size="sm"
-			theme={item.follow ? 'primary light' : undefined}
-		>
-			<span>{item.follow ? 'Unfollow' : 'Follow'}</span>
-		</Button>
+		<ButtonFollow {loggedIn} followed={item.follow} />
 	</div>
 	<a class="absolute opacity-0 z-10 inset-0" href="/users/{item.username}">
 		{item.username}
