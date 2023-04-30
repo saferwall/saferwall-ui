@@ -1,5 +1,4 @@
 import { fail } from '@sveltejs/kit';
-import { SESSION_KEY } from '$lib/config';
 import type { PageServerLoad, Actions } from './$types';
 import { APIClient } from '$lib/api';
 
@@ -31,7 +30,7 @@ export const actions = {
 
 
         try {
-            await APIClient.signUp({
+            await new APIClient().signUp({
                 email,
                 username,
                 password

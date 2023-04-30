@@ -2,18 +2,25 @@ import { env } from "$env/dynamic/public";
 import { browser } from "$app/environment";
 
 import type { APIFile } from "./types/files";
-import type { ChangePasswordData, LoginData, RegisterData, Session, User } from "./types";
+import type { Activity, ChangePasswordData, LoginData, RegisterData, Session, User } from "./types";
 
 export type APIConfig = {
     url: string;
 }
 
 export class APIClient {
-    private static apiConfig: APIConfig = {
+    private authorization: string | undefined;
+    private apiConfig: APIConfig = {
         url: `${env.PUBLIC_API_URL}`
     }
 
-    private static cacheRequest(init: RequestInit): RequestInit {
+    constructor(session?: Session) {
+        if (session && session.token) {
+            this.authorization = `Bearer ${session.token}`;
+        }
+    }
+
+    private cacheRequest(init: RequestInit): RequestInit {
         if (browser) {
             init.cache = "force-cache";
         }
@@ -21,7 +28,18 @@ export class APIClient {
         return init;
     }
 
-    public static async request<T>(
+    private setAuthHeaders(init: RequestInit): RequestInit {
+        if (this.authorization) {
+            init.headers = {
+                ...init.headers,
+                'Authorization': this.authorization
+            }
+        }
+
+        return init;
+    }
+
+    public async request<T>(
         endpoint: string,
         cache: boolean = false,
         args: any = {}
@@ -33,11 +51,14 @@ export class APIClient {
             },
             ...args,
         };
+
         if (cache) {
             this.cacheRequest(init);
         }
-        const response = await fetch(url, init);
 
+        this.setAuthHeaders(init);
+
+        const response = await fetch(url, init);
         if (!response.ok) {
             throw response;
         }
@@ -45,29 +66,33 @@ export class APIClient {
         return response.json();
     }
 
-    static async getFile(id: string): Promise<APIFile> {
+    public async getActivities(): Promise<Activity[]> {
+        return this.request<Activity[]>(`users/activities?per_page=10`);
+    }
+
+    public async getFile(id: string): Promise<APIFile> {
         return this.request<APIFile>(`files/${id}`, true);
     }
 
-    static async getUser(username: string): Promise<User> {
+    public async getUser(username: string): Promise<User> {
         return this.request<User>(`users/${username}`, true);
     }
 
-    static async singIn(data: LoginData): Promise<Session> {
+    public async singIn(data: LoginData): Promise<Session> {
         return this.request<Session>('auth/login', false, {
             method: 'POST',
             body: JSON.stringify(data)
         });
     }
 
-    static async signUp(data: RegisterData): Promise<Session> {
+    public async signUp(data: RegisterData): Promise<Session> {
         return this.request<Session>('users/', false, {
             method: 'POST',
             body: JSON.stringify(data)
         });
     }
 
-    static async sendConfirmation(email: string): Promise<Session> {
+    public async sendConfirmation(email: string): Promise<Session> {
         return this.request<Session>('auth/resend-confirmation', false, {
             method: 'POST',
             body: JSON.stringify({
@@ -76,7 +101,7 @@ export class APIClient {
         });
     }
 
-    static async resetPassword(email: string): Promise<Session> {
+    public async resetPassword(email: string): Promise<Session> {
         return this.request<Session>('auth/reset-password', false, {
             method: 'POST',
             body: JSON.stringify({
@@ -85,14 +110,14 @@ export class APIClient {
         });
     }
 
-    static async changePassword(data: ChangePasswordData): Promise<Session> {
+    public async changePassword(data: ChangePasswordData): Promise<Session> {
         return this.request<Session>('auth/password', false, {
             method: 'POST',
             body: JSON.stringify(data)
         });
     }
 
-    static async logOut(): Promise<any> {
+    public async logOut(): Promise<any> {
         return this.request('auth/logout', false, {
             method: 'DELETE'
         });

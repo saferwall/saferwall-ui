@@ -23,7 +23,7 @@ export const actions = {
         }
 
         try {
-            const { token } = await APIClient.resetPassword(email);
+            const { token } = await new APIClient().resetPassword(email);
             return { success: true };
         } catch (error: any) {
             return fail(400, { error: await error.json() });

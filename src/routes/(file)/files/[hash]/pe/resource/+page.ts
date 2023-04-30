@@ -7,7 +7,7 @@ export const load = (async ({ params }): Promise<{
 }> => {
     const { hash } = params;
 
-    const { pe } = await APIClient.request<APIFile>(`files/${hash}?fields=pe.resource`);
+    const { pe } = await new APIClient().request<APIFile>(`files/${hash}?fields=pe.resource`);
 
     return {
         resource: pe.resource

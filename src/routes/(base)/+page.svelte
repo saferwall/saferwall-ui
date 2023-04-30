@@ -7,6 +7,7 @@
 
 	// TODO: infinite scroll <> loading activities
 	$: activities = data.pagination.items;
+	$: loggedIn = data.user !== undefined;
 </script>
 
 <svelte:head>
@@ -14,6 +15,6 @@
 </svelte:head>
 
 <div class="container mx-auto py-10 space-y-20">
-	<UploadBox />
-	<LatestActivities {activities} />
+	<UploadBox {loggedIn} />
+	<LatestActivities {loggedIn} {activities} />
 </div>

@@ -6,7 +6,7 @@ export const load = (async ({ params, parent }): Promise<{
 }> => {
     const { hash } = params;
 
-    const { pe } = await APIClient.request<APIFile>(`files/${hash}?fields=pe.rich_header`);
+    const { pe } = await new APIClient().request<APIFile>(`files/${hash}?fields=pe.rich_header`);
 
     return {
         richHeader: pe.rich_header

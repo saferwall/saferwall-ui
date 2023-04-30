@@ -3,6 +3,7 @@
 	import ActivityItem from '$lib/components/Activity.svelte';
 
 	export let activities: Activity[];
+	export let loggedIn: boolean = false;
 </script>
 
 <section class="latest__ space-y-4">
@@ -12,7 +13,7 @@
 	{:else}
 		<div class="activities__ space-y-8 pt-6">
 			{#each activities as activity}
-				<ActivityItem {activity} />
+				<ActivityItem {loggedIn} {activity} />
 			{/each}
 
 			<div class="w-full flex-center rounded cursor-pointer text-primary space-x-2 font-medium">

@@ -8,7 +8,7 @@ export const load = (async ({ params }): Promise<{
 }> => {
     const { hash } = params;
 
-    const pagination = await APIClient.request<APIFile>(`files/${hash}/comments`);
+    const pagination = await new APIClient().request<APIFile>(`files/${hash}/comments`);
     pagination.items = pagination.items ?? [];
 
     return {

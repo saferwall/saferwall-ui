@@ -10,6 +10,7 @@
 	import InputHash from './form/InputHash.svelte';
 
 	export let activity: Activity;
+	export let loggedIn: boolean = false;
 
 	$: tags = parseTags(activity.file?.tags || {});
 </script>
@@ -28,7 +29,9 @@
 					<p class="text-grayx-500">Member since {getMemberSince(activity.author.member_since)}</p>
 				</div>
 				<div>
-					<Button>Follow</Button>
+					<Button href={loggedIn ? undefined : '/auth/login'}>
+						{activity.follow ? 'UnFollow' : 'Follow'}
+					</Button>
 				</div>
 			</div>
 			<div

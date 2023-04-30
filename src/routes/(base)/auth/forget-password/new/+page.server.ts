@@ -35,7 +35,7 @@ export const actions = {
         }
 
         try {
-            await APIClient.changePassword({
+            await new APIClient().changePassword({
                 password,
                 token,
                 guid

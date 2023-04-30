@@ -7,7 +7,7 @@ export const load = (async ({ params }): Promise<{
 }> => {
     const { hash } = params;
 
-    const antivirus = await APIClient.request<APIFile>(`files/${hash}?fields=multiav,first_seen,last_scanned`);
+    const antivirus = await new APIClient().request<APIFile>(`files/${hash}?fields=multiav,first_seen,last_scanned`);
 
     return {
         antivirus,

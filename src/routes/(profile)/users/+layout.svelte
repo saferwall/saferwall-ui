@@ -10,12 +10,14 @@
 
 	$: user = data.user;
 	$: profile = data.profile;
+	$: loggedIn = data.user !== undefined;
+	$: selfProfile = data.user?.username === data.username;
 </script>
 
 <Navbar {user} />
 <main class="flex-1 flex flex-col py-4 h-full bg-grayx space-y-6">
 	<ProfileHeading />
-	<ProfileCard {...profile} />
+	<ProfileCard {loggedIn} {...profile} {selfProfile} />
 	<slot />
 </main>
 <Footer />

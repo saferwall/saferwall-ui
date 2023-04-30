@@ -7,7 +7,7 @@ export const load = (async ({ params, parent }): Promise<{
 }> => {
     const { hash } = params;
 
-    const { pe } = await APIClient.request<APIFile>(`files/${hash}?fields=pe.security`);
+    const { pe } = await new APIClient().request<APIFile>(`files/${hash}?fields=pe.security`);
 
     return {
         certificate: pe.security

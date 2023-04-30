@@ -34,7 +34,7 @@ export const actions = {
         }
 
         try {
-            const { token } = await APIClient.singIn({
+            const { token } = await new APIClient().singIn({
                 username,
                 password
             });

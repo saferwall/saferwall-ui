@@ -4,13 +4,15 @@ import type { FileMenu } from '$lib/types';
 import type { APIFile } from '$lib/types/files';
 import type { LayoutLoad } from './$types';
 
-export const load = (async ({ params, url }): Promise<{
+export const load = (async ({ parent, params, url }): Promise<{
     file: any,
     activeMenu: FileMenu,
     fileMenu: FileMenu[],
     hash: string,
     paths: string[]
 }> => {
+    const { session } = await parent();
+
     const { hash } = params;
     const paths = url.pathname.toString().split(`/files/`)[1].split('/');
     const activePath = paths[1];
@@ -18,7 +20,7 @@ export const load = (async ({ params, url }): Promise<{
 
     let file: any, menus: FileMenu[];
     try {
-        file = await APIClient.request<APIFile>(`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta`);
+        file = await new APIClient().request<APIFile>(`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta`);
 
         menus = [...fileMenu].filter(menu => {
             if (

@@ -1,5 +1,7 @@
-<script>
+<script lang="ts">
 	import ButtonBrowse from './form/ButtonBrowse.svelte';
+
+	export let loggedIn: boolean = false;
 </script>
 
 <section class="upload__ bg-white rounded-xl shadow p-8 md:p-12 flex flex-col justify-between">
@@ -7,7 +9,7 @@
 
 	<div class="flex h-80 flex-col items-center justify-center">
 		<div class="m-auto w-max h-max">
-			<ButtonBrowse />
+			<ButtonBrowse href={loggedIn ? undefined : '/auth/login'} />
 		</div>
 	</div>
 

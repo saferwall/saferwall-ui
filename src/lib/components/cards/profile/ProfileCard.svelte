@@ -6,6 +6,7 @@
 	export let bio: string = '';
 	export let url: string = '';
 	export let username: string;
+	export let loggedIn: boolean = false;
 	export let selfProfile: boolean = false;
 </script>
 
@@ -18,14 +19,14 @@
 				<Avatar {username} size="lg" />
 			</div>
 			<div class="grow space-y-4 w-full">
-				<div class="space-y-4 flex flex-col">
+				<div class="flex flex-col">
 					<h1 class="text-2xl font-semibold text-gray-800">{username}</h1>
 					<a href="/users/{username}">@{username}</a>
 					{#if url}
 						<a
 							href={url}
 							target="_blank"
-							class="inline-flex items-center font-medium text-primary-600 bg-primary-600 bg-opacity-10 rounded px-4 space-x-2 max-w-full w-max"
+							class="inline-flex items-center font-medium text-primary-600 bg-primary-600 bg-opacity-10 rounded px-4 space-x-2 max-w-full w-max mt-4"
 							rel="noreferrer"
 						>
 							<svg class="w-4 h-4">
@@ -49,7 +50,9 @@
 			{#if selfProfile}
 				<Button theme="primary" size="lg">Edit my profile</Button>
 			{:else}
-				<Button theme="primary" size="lg">Follow</Button>
+				<Button href={loggedIn ? undefined : '/auth/login'} theme="primary" size="lg">
+					Follow
+				</Button>
 			{/if}
 		</div>
 	</section>

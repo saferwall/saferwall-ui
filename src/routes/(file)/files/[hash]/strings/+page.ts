@@ -20,7 +20,7 @@ export const load = (async ({ params, url }): Promise<{
         urlParams.append('per_page', per_page.toString());
     }
 
-    const pagination = await APIClient.request<APIFile>(`files/${hash}/strings?${urlParams.toString()}`);
+    const pagination = await new APIClient().request<APIFile>(`files/${hash}/strings?${urlParams.toString()}`);
     pagination.items = pagination.items ?? [];
 
     return {
