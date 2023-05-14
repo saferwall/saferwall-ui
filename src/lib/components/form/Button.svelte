@@ -24,8 +24,15 @@
 		disabled={loading}
 		class="button button--{theme} button--size--{size} {cclass}"
 	>
-		{#if icon}<svg class="icon"><use href="/images/images.svg#icon-{icon}" /></svg>{/if}
-		<Loading {loading}><slot /></Loading>
+		{#if icon}
+			<svg class="icon"><use href="/images/images.svg#icon-{icon}" /></svg>
+		{/if}
+		<Loading {loading}>
+			<slot />
+		</Loading>
+		{#if loading}
+			<slot name="loading" />
+		{/if}
 	</button>
 {/if}
 
@@ -33,7 +40,7 @@
 	.button {
 		@apply py-2.5 px-4;
 		@apply font-semibold;
-		@apply inline-flex justify-center items-center space-x-3;
+		@apply inline-flex justify-center items-center space-x-4;
 		@apply border rounded;
 
 		&--base {

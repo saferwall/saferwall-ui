@@ -10,6 +10,7 @@
 	href={loggedIn ? undefined : '/auth/login'}
 	size="sm"
 	theme={followed ? 'primary light' : undefined}
+	{...$$props}
 >
 	<span>{followed ? 'Unfollow' : 'Follow'}</span>
 </Button>
