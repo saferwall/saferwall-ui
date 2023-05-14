@@ -9,7 +9,7 @@
 
 	$: avatarImage =
 		image ||
-		env.PUBLIC_AVATAR_API_URL.replace('{username}', `${username}`.toLowerCase()) ||
+		(username && env.PUBLIC_AVATAR_API_URL.replace('{username}', `${username}`.toLowerCase())) ||
 		DEFAULT_AVATAR;
 
 	const setDefaultAvatar = (event: any) => {
@@ -37,7 +37,7 @@
 <style lang="scss">
 	.avatar {
 		@apply rounded-full bg-white overflow-hidden;
-		@apply border border-grayx flex-shrink-0;
+		@apply border border-grayx flex-shrink-0 inline-block;
 
 		&:has(&__text) {
 			@apply flex items-center justify-center flex-shrink-0 text-2xl font-bold text-grayx-900;
