@@ -20,7 +20,7 @@
 	<li class="meta__item grow">
 		<span>FILE NAME</span>
 		<span class="w-full">
-			<input class="w-full" type="text" value={file.filename} />
+			<input class="w-full" type="text" value={file.filename} readonly />
 		</span>
 	</li>
 </ul>
