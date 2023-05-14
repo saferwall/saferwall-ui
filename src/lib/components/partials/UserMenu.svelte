@@ -34,7 +34,7 @@
 </script>
 
 <div
-	class="relative flex justify-center cursor-pointer"
+	class="relative flex justify-center cursor-pointer z-40"
 	use:clickOutside={{ enabled: open, cb: () => (open = false) }}
 >
 	<div class="flex items-center space-x-3" on:mouseup={() => (open = !open)}>
@@ -48,7 +48,7 @@
 			data-sveltekit-preload-data="tap"
 		>
 			<li class="user__menu__item">
-				<a class="menu__link" href="/profile">
+				<a class="menu__link" href="/account/profile">
 					<Icon name="user" />
 					<span class="menu__label">Profile</span>
 				</a>
