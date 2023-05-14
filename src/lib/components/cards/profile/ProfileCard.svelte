@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { env } from '$env/dynamic/public';
+	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
 	import Avatar from '../../Avatar.svelte';
 	import Button from '../../form/Button.svelte';
 
 	export let bio: string = '';
 	export let url: string = '';
 	export let username: string;
+	export let followed: boolean = false;
 	export let loggedIn: boolean = false;
 	export let selfProfile: boolean = false;
 </script>
@@ -48,11 +50,10 @@
 		</div>
 		<div class="actions__ flex flex-col pt-4 w-full md:w-max h-full flex-shrink-0 my-auto">
 			{#if selfProfile}
-				<Button theme="primary" size="lg">Edit my profile</Button>
+				<Button href="/account/settings" theme="primary" size="lg">Edit my profile</Button>
 			{:else}
-				<Button href={loggedIn ? undefined : '/auth/login'} theme="primary" size="lg">
-					Follow
-				</Button>
+				<!-- TODO: user follow status -->
+				<ButtonFollow {loggedIn} {followed} size="xl" />
 			{/if}
 		</div>
 	</section>
