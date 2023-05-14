@@ -2,7 +2,10 @@ import { env } from "$env/dynamic/public";
 import { browser } from "$app/environment";
 
 import type { APIFile } from "./types/files";
-import type { Activity, ChangePasswordData, LoginData, RegisterData, Session, User } from "./types";
+import type {
+    Activity, User, Session,
+    ChangePasswordData, LoginData, RegisterData, UpdateProfileData
+} from "./types";
 
 export type APIConfig = {
     url: string;
@@ -113,6 +116,17 @@ export class APIClient {
     public async changePassword(data: ChangePasswordData): Promise<Session> {
         return this.request<Session>('auth/password', false, {
             method: 'POST',
+            body: JSON.stringify(data)
+        });
+    }
+
+    public async updateProfile(data: UpdateProfileData): Promise<Session> {
+        if (!data.username) {
+            throw new Error('Update profile failed: invalid empty username');
+        }
+
+        return this.request<Session>(`users/${data.username}`, false, {
+            method: 'PATCH',
             body: JSON.stringify(data)
         });
     }

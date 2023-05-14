@@ -2,6 +2,7 @@ import { fail } from '@sveltejs/kit';
 import { SESSION_KEY } from '$lib/config';
 import type { PageServerLoad, Actions } from './$types';
 import { APIClient } from '$lib/api';
+import type { Session } from '$lib/types';
 
 export const load = (async ({ parent, cookies, locals }: any) => {
     await parent();
@@ -34,14 +35,10 @@ export const actions = {
         }
 
         try {
-            const { token } = await new APIClient().singIn({
+            const session: Session = await new APIClient().singIn({
                 username,
                 password
             });
-            const session = {
-                token,
-                username
-            };
 
             cookies.set(SESSION_KEY, JSON.stringify(session), {
                 httpOnly: true,

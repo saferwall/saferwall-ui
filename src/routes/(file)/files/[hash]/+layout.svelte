@@ -5,17 +5,16 @@
 
 	export let data: PageData;
 
-	const { hash, file } = data;
-	const { submissions } = file;
-
+	$: hash = data.hash;
 	$: fileMenu = data.fileMenu;
 	$: activeMenu = data.activeMenu;
+	$: submissions = data.file.submissions;
 	$: fileName = (submissions && submissions[submissions.length - 1].filename) || '';
 </script>
 
 <svelte:head>
 	<title>{fileName} - {activeMenu.name} - {hash} - Saferwall</title>
-	<meta name="description" content="{fileName} file scan - hash {hash}" />
+	<meta name="description" content="Scan results for file {fileName} hash {hash}." />
 </svelte:head>
 
 <FileNavbar {hash} {activeMenu} {fileMenu} />

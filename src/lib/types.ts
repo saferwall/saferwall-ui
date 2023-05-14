@@ -43,25 +43,9 @@ export type ActivityType = 'comment' | 'like' | 'submit';
 
 export type ProfileSection = 'likes' | 'comments' | 'submissions' | 'followers' | 'following';
 
-export interface LoginData {
-    username: string;
-    password: string;
-}
-export interface RegisterData {
-    email: string;
-    username: string;
-    password: string;
-}
-
 export interface Session {
     token: string;
-    username?: string;
-}
-
-export interface ChangePasswordData {
-    guid: string;
-    token: string;
-    password: string;
+    username: string;
 }
 
 export interface User {
@@ -85,4 +69,29 @@ export interface User {
     followers: string[];
     last_seen: number;
     member_since: number;
+}
+
+export interface LoginData {
+    username: string;
+    password: string;
+}
+
+export interface RegisterData {
+    email: string;
+    username: string;
+    password: string;
+}
+
+export interface ChangePasswordData {
+    guid: string;
+    token: string;
+    password: string;
+}
+
+export interface UpdateProfileData {
+    username: string;
+    name: string;
+    bio: string;
+    location: string;
+    url: string;
 }
