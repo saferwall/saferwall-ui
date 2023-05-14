@@ -17,19 +17,19 @@ export const handle: Handle = (async ({ event, resolve }) => {
         }
 
         const session = JSON.parse(sessionData);
-        const { username, token } = session;
-        const user: User = await new APIClient().getUser(username);
+        const user: User = await new APIClient().getUser(session.username);
 
         event.locals.session = session;
-        event.locals.user = {
-            username: user.username,
-            email: user.email,
-            name: user.name,
-            admin: user.admin,
-            type: user.type,
-            member_since: user.member_since,
-            confirmed: user.confirmed
-        };
+        event.locals.user =
+            [
+                'username', 'name',
+                'location', 'url',
+                'bio', 'confirmed',
+                'member_since', 'admin'
+            ].reduce((obj: any, key) =>
+                (obj[key] = (user as any)[key], obj), {}
+            );
+
     } catch (error) {
 
     }
