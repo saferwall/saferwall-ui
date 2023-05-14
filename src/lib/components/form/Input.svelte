@@ -3,10 +3,12 @@
 	export let type = 'text';
 	export let name = '';
 	export let label = '';
+	export let value = '';
 	export let error = false;
 	export let placeholder = ' ';
 	export let required = false;
 	export let disabled = false;
+	export let readonly = false;
 	export { cclass as class };
 
 	const isPassword = type === 'password';
@@ -20,7 +22,16 @@
 	{#if label}
 		<span class="input__label">{label}</span>
 	{/if}
-	<input {required} {type} {disabled} {name} {placeholder} class="input__field {cclass}" />
+	<input
+		{required}
+		{type}
+		{disabled}
+		{name}
+		{placeholder}
+		class="input__field {cclass}"
+		{value}
+		{readonly}
+	/>
 	{#if isPassword}
 		<svg class="icon" class:visible={passwordVisible} on:mouseup={togglePassword}
 			><use href="/images/images.svg#icon-eye" /></svg
@@ -36,6 +47,10 @@
 			@apply w-full;
 			@apply px-4 pt-3 pb-3.5;
 			@apply border rounded;
+		}
+
+		input:read-only {
+			@apply cursor-default;
 		}
 
 		&.error {
@@ -56,7 +71,7 @@
 		&__label {
 			@apply font-light;
 			@apply absolute transition-all;
-			@apply text-grayx-500 left-4 top-1/2 -translate-y-1/2 text-base;
+			@apply text-grayx-500 left-4 top-1/2 -translate-y-1/2 text-sm;
 		}
 
 		&:has(input:not(:placeholder-shown)),

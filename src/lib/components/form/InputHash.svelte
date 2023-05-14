@@ -20,7 +20,7 @@
 		bind:this={ref}
 		class="w-full py-2.5 bg-transparent focus:outline-none"
 		type="text"
-		readonly
 		value={hash}
+		readonly
 	/>
 </p>
