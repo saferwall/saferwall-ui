@@ -1,27 +1,54 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	import BaseCard from './BaseCard.svelte';
 
-	export let heading: { title: string; count?: number; url: string; active?: boolean }[] = [];
+	interface TabItem {
+		title: string;
+		count?: number;
+		url?: string;
+		active?: boolean;
+	}
+
+	const dispatch = createEventDispatcher();
+
+	export let direction: 'vertical' | 'horizontal' = 'vertical';
+	export let heading: TabItem[] = [];
+
+	$: items = heading;
+	const changeTab = (tab: TabItem) => {
+		heading = heading.map((item) => ((item.active = item.title === tab.title), item));
+		dispatch('change', tab);
+	};
 </script>
 
-<BaseCard class="card__tabs" padding={false}>
-	<div
-		class="border-b flex overflow-x-auto no-scroll-style items-center"
-		data-sveltekit-preload-data="hover"
-	>
+<BaseCard class={`card__tabs ${direction}`} padding={false}>
+	<div class="tabs__menu no-scroll-style" data-sveltekit-preload-data="hover">
 		<slot name="heading">
-			{#each heading as item}
-				<a href={item.url} class="card__tabs__item" class:active={item.active}>
-					{item.title}
+			{#each items as item}
+				{#if item.url}
+					<a href={item.url} class="card__tabs__item" class:active={item.active}>
+						<span>{item.title}</span>
 
-					{#if item.count != undefined}
-						<span class="text-sm text-gray-400">({item.count})</span>
-					{/if}
-				</a>
+						{#if item.count != undefined}
+							<span class="text-sm text-gray-400">({item.count})</span>
+						{/if}
+					</a>
+				{:else}
+					<span
+						on:mouseup={() => changeTab(item)}
+						class="card__tabs__item"
+						class:active={item.active}
+					>
+						<span>{item.title}</span>
+						{#if item.count != undefined}
+							<span class="text-sm text-gray-400">({item.count})</span>
+						{/if}
+					</span>
+				{/if}
 			{/each}
 		</slot>
 	</div>
-	<div class="px-6 md:px-10">
+	<div class="px-6 md:px-10 flex-grow">
 		<slot />
 	</div>
 </BaseCard>
@@ -34,6 +61,29 @@
 		.active {
 			@apply text-primary;
 		}
+
+		.card__tabs__item:hover:after,
+		.active:after {
+			@apply font-semibold;
+		}
+
+		.tabs__menu {
+			@apply flex;
+		}
+
+		.card__tabs__item {
+			@apply relative inline-flex items-center flex-shrink-0 space-x-1;
+			@apply cursor-pointer p-4 px-6 md:px-10 hover:text-primary;
+		}
+	}
+
+	:global(.card__tabs.vertical) {
+		@apply flex flex-col;
+
+		.tabs__menu {
+			@apply border-b overflow-x-auto items-center;
+		}
+
 		.card__tabs__item:hover:after,
 		.active:after {
 			@apply content-[''] absolute w-full bottom-0 left-0;
@@ -41,9 +91,21 @@
 		}
 	}
 
-	:global(.card__tabs__item) {
-		@apply cursor-pointer;
-		@apply relative flex-shrink-0;
-		@apply p-4 px-6 md:px-10 hover:text-primary;
+	:global(.card__tabs.horizontal) {
+		@apply flex flex-row py-6;
+
+		.tabs__menu {
+			@apply flex flex-col border-r space-y-4;
+		}
+
+		.card__tabs__item:hover:after,
+		.active:after {
+			@apply content-[''] absolute h-full top-0 right-0;
+			@apply border-r-2 border-primary text-primary;
+		}
+
+		.card__tabs__item {
+			@apply py-1;
+		}
 	}
 </style>
