@@ -39,3 +39,7 @@ a.link:not([href='']) {
 :global(.markdown-body) {
 	@apply prose;
 }
+
+.bytemd-fullscreen {
+	@apply z-50;
+}
