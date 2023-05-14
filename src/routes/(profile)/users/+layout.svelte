@@ -12,12 +12,16 @@
 	$: profile = data.profile;
 	$: loggedIn = data.user !== undefined;
 	$: selfProfile = data.user?.username === data.username;
+	$: followed = data.profile.followers?.includes(data.user?.username);
 </script>
 
+<svelte:head>
+	<title>{profile.username} Profile - Saferwall</title>
+</svelte:head>
 <Navbar {user} />
 <main class="flex-1 flex flex-col py-4 h-full bg-grayx space-y-6">
 	<ProfileHeading />
-	<ProfileCard {loggedIn} {...profile} {selfProfile} />
+	<ProfileCard {loggedIn} {...profile} {selfProfile} {followed} />
 	<slot />
 </main>
 <Footer />
