@@ -1,14 +1,9 @@
 <script lang="ts">
 	let cclass = '';
 	export let type = 'text';
-	export let name = '';
 	export let label = '';
-	export let value = '';
 	export let error = false;
 	export let placeholder = ' ';
-	export let required = false;
-	export let disabled = false;
-	export let readonly = false;
 	export { cclass as class };
 
 	const isPassword = type === 'password';
@@ -16,22 +11,15 @@
 		type = type === 'password' ? 'text' : 'password';
 	};
 	$: passwordVisible = type !== 'password';
+
+	console.log($$restProps);
 </script>
 
 <label class="input peer-focus" class:labeled={label} class:error>
 	{#if label}
 		<span class="input__label">{label}</span>
 	{/if}
-	<input
-		{required}
-		{type}
-		{disabled}
-		{name}
-		{placeholder}
-		class="input__field {cclass}"
-		{value}
-		{readonly}
-	/>
+	<input on:change class="input__field {cclass}" {type} {placeholder} {...$$restProps} />
 	{#if isPassword}
 		<svg class="icon" class:visible={passwordVisible} on:mouseup={togglePassword}
 			><use href="/images/icons.svg#icon-eye" /></svg
