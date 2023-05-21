@@ -1,15 +1,14 @@
 import { fail } from '@sveltejs/kit';
-import type { PageServerLoad, Actions } from './$types';
 import { APIClient } from '$lib/api';
+import type { PageServerLoad, Actions } from './$types';
 
-export const load = (async ({ parent, cookies, locals }: any) => {
+export const load = (async ({ parent }: any) => {
     await parent();
-
     return {};
 }) satisfies PageServerLoad;
 
 export const actions = {
-    default: async ({ cookies, request }) => {
+    default: async ({ request }) => {
         const data = await request.formData();
 
         const email = data.get('email') as string;

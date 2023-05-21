@@ -29,7 +29,7 @@
 					<p class="text-grayx-500">Member since {getMemberSince(activity.author.member_since)}</p>
 				</div>
 				<div>
-					<ButtonFollow {loggedIn} followed={activity.follow} />
+					<ButtonFollow username={activity.author.username} {loggedIn} followed={activity.follow} />
 				</div>
 			</div>
 			<div

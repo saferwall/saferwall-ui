@@ -7,7 +7,7 @@
 	import Button from '../form/Button.svelte';
 	import InputSearch from '../form/InputSearch.svelte';
 
-	export let user: User;
+	export let user: User | undefined;
 </script>
 
 <nav

@@ -3,7 +3,6 @@
 
 	import Avatar from '$lib/components/Avatar.svelte';
 	import DateTime from '$lib/components/DateTime.svelte';
-	import Button from '$lib/components/form/Button.svelte';
 	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
 
 	export let item: APIItemFollow;
@@ -21,7 +20,9 @@
 				<DateTime class="text-gray-400 text-sm" date={item.member_since} />
 			</div>
 		</div>
-		<ButtonFollow {loggedIn} followed={item.follow} />
+		<div class="z-30">
+			<ButtonFollow username={item.username} {loggedIn} followed={item.follow} />
+		</div>
 	</div>
 	<a class="absolute opacity-0 z-10 inset-0" href="/users/{item.username}">
 		{item.username}

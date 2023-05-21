@@ -1,9 +1,10 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { LayoutData } from './$types';
 
 	import TabsCard from '$lib/components/cards/TabsCard.svelte';
 
-	export let data: PageData;
+	export let data: LayoutData;
+
 	$: profile = data.profile;
 	$: section = data.section;
 	$: username = data.username;

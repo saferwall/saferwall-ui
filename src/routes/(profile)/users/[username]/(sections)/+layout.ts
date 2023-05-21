@@ -1,6 +1,6 @@
 import { APIClient } from "$lib/api";
 import type { LayoutLoad } from "./$types";
-import type { ProfileSection, Session } from "$lib/types";
+import type { ProfileSection } from "$lib/types";
 import type { APIPagination } from "$lib/types/pagination";
 import type { APIUser, APIItem } from "$lib/types/users";
 
@@ -8,7 +8,7 @@ export const load = (async ({ params, parent, url }): Promise<{
     username: string,
     profile: APIUser,
     currentPath: string,
-    pagination: APIPagination<APIItem> | unknown,
+    pagination: APIPagination<APIItem>,
     section: ProfileSection
 }> => {
     const { username } = params;

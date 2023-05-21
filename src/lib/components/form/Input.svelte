@@ -11,8 +11,6 @@
 		type = type === 'password' ? 'text' : 'password';
 	};
 	$: passwordVisible = type !== 'password';
-
-	console.log($$restProps);
 </script>
 
 <label class="input peer-focus" class:labeled={label} class:error>

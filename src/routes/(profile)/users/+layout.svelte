@@ -1,18 +1,17 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-
 	import Footer from '$lib/components/partials/Footer.svelte';
 	import Navbar from '$lib/components/partials/Navbar.svelte';
 	import ProfileHeading from '$lib/components/partials/ProfileHeading.svelte';
 	import ProfileCard from '$lib/components/cards/profile/ProfileCard.svelte';
+	import type { LayoutData } from './$types';
 
-	export let data: PageData;
+	export let data: LayoutData;
 
 	$: user = data.user;
 	$: profile = data.profile;
 	$: loggedIn = data.user !== undefined;
 	$: selfProfile = data.user?.username === data.username;
-	$: followed = data.profile.followers?.includes(data.user?.username);
+	$: followed = data.profile.followers?.includes(data.user?.username!);
 </script>
 
 <svelte:head>

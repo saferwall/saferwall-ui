@@ -4,7 +4,7 @@
 	import Icon from '../Icon.svelte';
 
 	let open: boolean = false;
-	export let user: User;
+	export let user: User | undefined;
 
 	$: username = user?.username;
 

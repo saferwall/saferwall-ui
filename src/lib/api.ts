@@ -81,6 +81,14 @@ export class APIClient {
         return this.request<User>(`users/${username}`, true);
     }
 
+    public async followUser(username: string, follow: boolean = true): Promise<User> {
+        const type = follow ? 'follow' : 'unfollow';
+
+        return this.request<User>(`users/${username}/${type}`, false, {
+            method: 'POST'
+        });
+    }
+
     public async singIn(data: LoginData): Promise<Session> {
         return this.request<Session>('auth/login', false, {
             method: 'POST',

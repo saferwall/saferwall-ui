@@ -1,10 +1,12 @@
 import { APIClient } from "$lib/api";
+import type { Session } from "$lib/types";
 import type { APIUser } from "$lib/types/users";
 import type { LayoutServerLoad } from './$types';
 
 export const load = (async ({ params, locals }): Promise<{
     username: string,
-    profile: APIUser
+    profile: APIUser,
+    session: Session
 }> => {
     const username = params.username!;
     const user = await new APIClient(locals.session).getUser(username);
@@ -12,5 +14,6 @@ export const load = (async ({ params, locals }): Promise<{
     return {
         profile: user,
         username: username,
+        session: locals.session,
     };
 }) satisfies LayoutServerLoad;

@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { env } from '$env/dynamic/public';
-	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
 	import Avatar from '../../Avatar.svelte';
 	import Button from '../../form/Button.svelte';
+	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
 
 	export let bio: string = '';
 	export let url: string = '';
@@ -53,7 +52,7 @@
 				<Button href="/account/settings" theme="primary" size="lg">Edit my profile</Button>
 			{:else}
 				<!-- TODO: user follow status -->
-				<ButtonFollow {loggedIn} {followed} size="xl" />
+				<ButtonFollow {username} {loggedIn} {followed} size="xl" />
 			{/if}
 		</div>
 	</section>
