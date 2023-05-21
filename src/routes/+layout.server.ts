@@ -1,8 +1,9 @@
-import type { User } from '$lib/types';
+import type { Session, User } from '$lib/types';
 import type { LayoutServerLoad } from './$types';
 
 export const load = (async ({ locals }): Promise<{
-    user?: User
+    user?: User,
+    session?: Session
 }> => {
 
     return {

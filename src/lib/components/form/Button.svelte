@@ -15,7 +15,7 @@
 
 {#if href}
 	<a on:mouseup {href} {target} class="button button--{theme} button--size--{size} {cclass}">
-		{#if icon}<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>{/if}
+		{#if icon && !loading}<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>{/if}
 		<Loading {loading}><slot /></Loading>
 	</a>
 {:else}
@@ -25,7 +25,7 @@
 		disabled={loading || disabled}
 		class="button button--{theme} button--size--{size} {cclass}"
 	>
-		{#if icon}
+		{#if icon && !loading}
 			<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>
 		{/if}
 		<Loading {loading}>
@@ -56,7 +56,7 @@
 			@apply bg-primary text-white border-primary;
 
 			&.light {
-				@apply bg-primary-200 text-primary bg-opacity-30 border-transparent;
+				@apply bg-primary-100 text-primary bg-opacity-50 border-transparent;
 			}
 		}
 

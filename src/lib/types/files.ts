@@ -16,4 +16,6 @@ export interface APIFile {
     class?: string;
     file_format?: string;
     pe?: any;
+    submissions?: any[];
+    liked?: boolean;
 }

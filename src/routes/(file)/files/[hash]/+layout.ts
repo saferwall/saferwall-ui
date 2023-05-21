@@ -11,7 +11,7 @@ export const load = (async ({ parent, params, url }): Promise<{
     hash: string,
     paths: string[]
 }> => {
-    await parent();
+    const parentData = await parent();
 
     const { hash } = params;
     const paths = url.pathname.toString().split(`/files/`)[1].split('/');
@@ -20,7 +20,7 @@ export const load = (async ({ parent, params, url }): Promise<{
 
     let file: any, menus: FileMenu[];
     try {
-        file = await new APIClient().request<APIFile>(`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta`);
+        file = await new APIClient(parentData.session).getFileSummary(hash);
 
         menus = [...fileMenu].filter(menu => {
             if (

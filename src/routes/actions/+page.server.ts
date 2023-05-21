@@ -23,5 +23,21 @@ export const actions = {
         } catch (response: any) {
             return fail(400, await response.json());
         }
+    },
+    like: async ({ request, locals }) => {
+        const data = await request.formData();
+
+        const hash = data.get('hash') as string;
+        const like = data.get('like') as string === 'like' ? true : false;
+
+        try {
+            await new APIClient(locals.session).likeFile(hash, like);
+            return {
+                hash,
+                like
+            };
+        } catch (response: any) {
+            return fail(400, await response.json());
+        }
     }
 } satisfies Actions;

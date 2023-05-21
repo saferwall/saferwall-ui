@@ -2,6 +2,7 @@ import { env } from "$env/dynamic/public";
 import { browser } from "$app/environment";
 
 import type { APIFile } from "./types/files";
+import type APISummary from "./types/summary";
 import type {
     Activity, User, Session,
     ChangePasswordData, LoginData, RegisterData, UpdateProfileData, UpdateEmailData, UpdatePasswordData
@@ -73,18 +74,33 @@ export class APIClient {
         return this.request<Activity[]>(`users/activities?per_page=10`);
     }
 
-    public async getFile(id: string): Promise<APIFile> {
-        return this.request<APIFile>(`files/${id}`, true);
+    public async getFile(hash: string): Promise<APIFile> {
+        return this.request<APIFile>(`files/${hash}`, true);
+    }
+
+    public async getFileMeta(hash: string): Promise<APIFile> {
+        return this.request<APIFile>(`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta,liked`);
+    }
+    public async getFileSummary(hash: string): Promise<APIFile & APISummary> {
+        return this.request<APIFile & APISummary>(`files/${hash}/summary`);
     }
 
     public async getUser(username: string): Promise<User> {
         return this.request<User>(`users/${username}`, true);
     }
 
-    public async followUser(username: string, follow: boolean = true): Promise<User> {
+    public async followUser(username: string, follow: boolean = true): Promise<unknown> {
         const type = follow ? 'follow' : 'unfollow';
 
-        return this.request<User>(`users/${username}/${type}`, false, {
+        return this.request<unknown>(`users/${username}/${type}`, false, {
+            method: 'POST'
+        });
+    }
+
+    public async likeFile(hash: string, like: boolean = true): Promise<unknown> {
+        const type = like ? 'like' : 'unlike';
+
+        return this.request<unknown>(`files/${hash}/${type}`, false, {
             method: 'POST'
         });
     }
