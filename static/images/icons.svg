@@ -19,7 +19,6 @@
         <path fill="#F48931"
             d="M24.12.91c-.68 6.17-2.43 9.49-3.99 11.4-1.97 2.12-4.91 4.56-6.15 7.88-.28.64-.55 1.33-.78 2.02l-.1.32c-.22.67-.4 1.33-.55 1.94a.3.3 0 0 1-.28.24h.87a2.48 2.48 0 0 0 2.38-1.76c.26-.94.58-1.86.95-2.76 1.23-3.32 4.17-5.76 6.15-7.88 1.4-1.73 2.97-4.61 3.76-9.7-.54-.66-1.1-1.28-1.7-1.89a.33.33 0 0 0-.56.2Zm14.57 22.95a15.33 15.33 0 0 1-.92 2.99l-.03.07-.02.03-.16.33-.03.06c-.64 1.24-1.8 3.12-2.4 3.13l-.02.03h.13a4.96 4.96 0 0 0 3.9-1.98c.45-.56.85-1.17 1.19-1.81-.5-1.36-1.3-3.62-1.64-2.85Z" />
     </symbol>
-
     <symbol id="illustration-email-sent" fill="none" viewBox="0 0 129 122">
         <path fill="#E6F4F0"
             d="M114.21 15.6c-15.78-8.87-32.73 9.02-47.95-.75-6.75-4.8-10.03-9.63-17.64-13.04C30.13-2 16.57 11.04 13.68 24.29c-2.64 9.87 6.36 16.75 13.45 30.35.11.22.2.44.28.67 3.29 9.77.85 13.83-7.46 14.16-13.4.38-22.38 10.01-17.96 22.86 9.74 18.53 31.1 27.96 53.02 28.72 26.81.91 51.5-13.98 62.45-37.39l.1-.22c7.25-19 21.26-56.02-3.35-67.85Z" />
@@ -134,12 +133,10 @@
         <path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
             d="m12 7-4.13 4L6 9.18" />
     </symbol>
-
     <symbol id="icon-calendar" fill="none" viewBox="0 0 15 15">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
             d="M11.88 2.5H3.12c-.69 0-1.25.56-1.25 1.25v8.75c0 .69.56 1.25 1.25 1.25h8.75c.7 0 1.26-.56 1.26-1.25V3.75c0-.69-.56-1.25-1.26-1.25ZM10 1.25v2.5m-5-2.5v2.5m-3.12 2.5h11.25" />
     </symbol>
-
     <symbol
         id="icon-search"
         fill="none"
@@ -172,19 +169,15 @@
         <path stroke="#F08039" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
             d="M10 18a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-12.33v4.96m0 2.7h0" />
     </symbol>
-
     <symbol id="icon-close" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
         stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
     </symbol>
-
-
     <symbol id="icon-user" fill="none" viewBox="0 0 21 21">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
             stroke-width="1.2"
             d="M17.5 18.375v-1.75a3.5 3.5 0 0 0-3.5-3.5H7a3.5 3.5 0 0 0-3.5 3.5v1.75m7-8.75a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" />
     </symbol>
-
     <symbol id="icon-cog" fill="none" viewBox="0 0 21 21">
         <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
             clip-path="url(#a)">
@@ -198,11 +191,12 @@
             </clipPath>
         </defs>
     </symbol>
-
-
     <symbol id="icon-logout" fill="none" viewBox="0 0 21 21">
         <path stroke="#959595" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
             d="M7.875 18.375h-3.5a1.75 1.75 0 0 1-1.75-1.75V4.375a1.75 1.75 0 0 1 1.75-1.75h3.5M14 14.875l4.375-4.375L14 6.125m4.375 4.375h-10.5" />
     </symbol>
-
+    <symbol id="icon-delete-alert" fill="none" viewBox="0 0 54 46">
+        <path stroke="#EF870C" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M22.867 3.329 2.397 37.5a4.834 4.834 0 0 0 4.133 7.25h40.938a4.834 4.834 0 0 0 4.133-7.25L31.131 3.33a4.833 4.833 0 0 0-8.264 0v0ZM27 16v13m0 6.084h.024" />
+    </symbol>
 </svg>

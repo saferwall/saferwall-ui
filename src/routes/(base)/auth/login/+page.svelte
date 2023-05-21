@@ -19,10 +19,7 @@
 
 			if (type === 'failure') {
 				errors = data;
-
-				if (data.error) {
-					error = data.error.message;
-				}
+				error = data?.message;
 
 				loading = false;
 				return;

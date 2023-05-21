@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { Viewer } from 'bytemd';
 	import type { Author } from '$lib/types/comments';
 	import { getMemberSince } from '$lib/utils/date';
-	import { Viewer } from 'bytemd';
 
 	import Avatar from '$lib/components/Avatar.svelte';
 	import BaseCard from '../BaseCard.svelte';

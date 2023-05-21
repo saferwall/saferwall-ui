@@ -6,7 +6,6 @@
 	import ActivityMeta from './ActivityMeta.svelte';
 
 	import Avatar from './Avatar.svelte';
-	import Button from './form/Button.svelte';
 	import ButtonFollow from './form/ButtonFollow.svelte';
 	import InputHash from './form/InputHash.svelte';
 

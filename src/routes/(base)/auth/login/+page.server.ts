@@ -45,14 +45,15 @@ export const actions = {
                 secure: true,
                 path: '/'
             });
+
             return { success: true };
-        } catch (error: any) {
+        } catch (response: any) {
             cookies.delete(SESSION_KEY, {
                 httpOnly: true,
                 secure: true,
                 path: '/'
             });
-            return fail(400, { error: await error.json() });
+            return fail(400, await response.json());
         }
     }
 } satisfies Actions;

@@ -4,7 +4,7 @@ import { browser } from "$app/environment";
 import type { APIFile } from "./types/files";
 import type {
     Activity, User, Session,
-    ChangePasswordData, LoginData, RegisterData, UpdateProfileData
+    ChangePasswordData, LoginData, RegisterData, UpdateProfileData, UpdateEmailData, UpdatePasswordData
 } from "./types";
 
 export type APIConfig = {
@@ -121,13 +121,29 @@ export class APIClient {
     }
 
     public async updateProfile(data: UpdateProfileData): Promise<Session> {
-        if (!data.username) {
-            throw new Error('Update profile failed: invalid empty username');
-        }
-
         return this.request<Session>(`users/${data.username}`, false, {
             method: 'PATCH',
             body: JSON.stringify(data)
+        });
+    }
+
+    public async updateEmail(data: UpdateEmailData): Promise<Session> {
+        return this.request<Session>(`users/${data.username}/email`, false, {
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        });
+    }
+
+    public async updatePassword(data: UpdatePasswordData): Promise<Session> {
+        return this.request<Session>(`users/${data.username}/password`, false, {
+            method: 'PATCH',
+            body: JSON.stringify(data)
+        });
+    }
+
+    public async deleteAccount(username: string): Promise<any> {
+        return this.request<any>(`users/${username}`, false, {
+            method: 'DELETE',
         });
     }
 

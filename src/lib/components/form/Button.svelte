@@ -4,6 +4,7 @@
 	let cclass: string = '';
 	export let size: string = 'base';
 	export let theme: string = 'base';
+	export let disabled: boolean = false;
 	export let loading: boolean = false;
 	export let icon: string | undefined = undefined;
 	export let target: string | undefined = undefined;
@@ -14,18 +15,18 @@
 
 {#if href}
 	<a on:mouseup {href} {target} class="button button--{theme} button--size--{size} {cclass}">
-		{#if icon}<svg class="icon"><use href="/images/images.svg#icon-{icon}" /></svg>{/if}
+		{#if icon}<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>{/if}
 		<Loading {loading}><slot /></Loading>
 	</a>
 {:else}
 	<button
 		on:mouseup
 		{type}
-		disabled={loading}
+		disabled={loading || disabled}
 		class="button button--{theme} button--size--{size} {cclass}"
 	>
 		{#if icon}
-			<svg class="icon"><use href="/images/images.svg#icon-{icon}" /></svg>
+			<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>
 		{/if}
 		<Loading {loading}>
 			<slot />
@@ -67,6 +68,15 @@
 		&--primary.active,
 		&--primary:hover {
 			@apply bg-opacity-90 border-opacity-90;
+		}
+
+		&--danger {
+			@apply bg-red-500 text-white border-red-500;
+			@apply focus:outline-red-500 hover:outline-red-500 hover:bg-opacity-95;
+
+			&.light {
+				@apply bg-red-200 text-red-500 bg-opacity-30 border-transparent;
+			}
 		}
 
 		&--size {

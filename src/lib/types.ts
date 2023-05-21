@@ -95,3 +95,15 @@ export interface UpdateProfileData {
     location: string;
     url: string;
 }
+
+export interface UpdateEmailData {
+    username: string;
+    email: string;
+    password: string;
+}
+
+export interface UpdatePasswordData {
+    username: string;
+    old: string;
+    new: string;
+}

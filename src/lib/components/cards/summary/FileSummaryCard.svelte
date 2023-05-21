@@ -71,7 +71,7 @@
 			<p>
 				<span class="sr-only">{fileType}</span>
 				<svg class="w-14 h-14"
-					><use href="/images/images.svg#icon-{getFileTypeIcon(fileType)}" /></svg
+					><use href="/images/icons.svg#icon-{getFileTypeIcon(fileType)}" /></svg
 				>
 			</p>
 		</article>

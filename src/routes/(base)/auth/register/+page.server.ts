@@ -37,8 +37,8 @@ export const actions = {
             });
 
             return { success: true };
-        } catch (error: any) {
-            return fail(400, { error: await error.json() });
+        } catch (response: any) {
+            return fail(400, await response.json());
         }
     }
 } satisfies Actions;

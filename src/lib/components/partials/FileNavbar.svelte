@@ -18,7 +18,7 @@
 			<li class="fnavbar__item flex-grow inline-flex">
 				<a class="fnavbar__link" href="/">
 					<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
-						<use href="/images/images.svg#icon-cloud" />
+						<use href="/images/icons.svg#icon-cloud" />
 					</svg>
 					<span>Browse file</span>
 				</a>

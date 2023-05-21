@@ -29,7 +29,7 @@
 		<span class="avatar__text">{username?.slice(0, 3)}</span>
 	{:else}
 		<svg class="w-full h-full text-grayx-100">
-			<use href="/images/images.svg#default-avatar" />
+			<use href="/images/icons.svg#default-avatar" />
 		</svg>
 	{/if}
 </a>

@@ -9,7 +9,7 @@
 	<li class="meta__item">
 		<span>CLASSIFICATION</span>
 		<div class="capitalize label label--{getLabelClass(file.class)}">
-			<svg class="w-4 h-4"><use href="/images/images.svg#icon-{getLabelIcon(file.class)}" /></svg>
+			<svg class="w-4 h-4"><use href="/images/icons.svg#icon-{getLabelIcon(file.class)}" /></svg>
 			<span>{getLabelClass(file.class)}</span>
 		</div>
 	</li>

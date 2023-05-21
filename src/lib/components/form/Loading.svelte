@@ -3,7 +3,7 @@
 </script>
 
 {#if loading}
-	<svg class="w-6 h-6 animate-spin"><use href="/images/images.svg#icon-loading" /></svg>
+	<svg class="w-6 h-6 animate-spin"><use href="/images/icons.svg#icon-loading" /></svg>
 {:else}
 	<slot />
 {/if}

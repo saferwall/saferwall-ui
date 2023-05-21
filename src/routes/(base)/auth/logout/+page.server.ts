@@ -1,7 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { SESSION_KEY } from '$lib/config';
-import type { PageServerLoad, Actions } from './$types';
-import { invalidateAll } from '$app/navigation';
+import type { PageServerLoad } from './$types';
 
 export const load = (async ({ cookies, locals }: any) => {
     try {

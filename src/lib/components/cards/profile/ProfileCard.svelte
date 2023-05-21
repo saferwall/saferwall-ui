@@ -32,7 +32,7 @@
 							rel="noreferrer"
 						>
 							<svg class="w-4 h-4">
-								<use href="/images/images.svg#icon-link" />
+								<use href="/images/icons.svg#icon-link" />
 							</svg>
 							<div class="py-2 bg-transparent focus:outline-none px-1 truncate inline-flex w-max">
 								{url}

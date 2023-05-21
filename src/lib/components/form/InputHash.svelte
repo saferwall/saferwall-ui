@@ -13,7 +13,7 @@
 >
 	<a href="/files/{hash}" class="hover:text-primary text-grayx-500">
 		<svg class="w-4 h-4 ">
-			<use href="/images/images.svg#icon-link" />
+			<use href="/images/icons.svg#icon-link" />
 		</svg>
 	</a>
 	<input

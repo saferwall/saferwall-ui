@@ -25,7 +25,8 @@ export const handle: Handle = (async ({ event, resolve }) => {
                 'username', 'name',
                 'location', 'url',
                 'bio', 'confirmed',
-                'member_since', 'admin'
+                'member_since', 'admin',
+                'email'
             ].reduce((obj: any, key) =>
                 (obj[key] = (user as any)[key], obj), {}
             );

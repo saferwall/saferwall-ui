@@ -20,7 +20,7 @@
 			<div class="w-full md:w-max">
 				<Button class="w-full md:w-max md:border-none" size="sm">
 					<svg class="w-4 h-4 mr-2">
-						<use href="/images/images.svg#icon-like" />
+						<use href="/images/icons.svg#icon-like" />
 					</svg>
 					<span>Like</span>
 				</Button>

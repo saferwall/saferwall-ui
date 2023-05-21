@@ -8,5 +8,5 @@
 </script>
 
 <svg class="icon {size} {cclass}">
-	<use href="/images/images.svg#icon-{name}" />
+	<use href="/images/icons.svg#icon-{name}" />
 </svg>

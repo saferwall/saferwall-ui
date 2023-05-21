@@ -8,7 +8,7 @@
 		Show {#if expanded}less{:else}{mode}{/if}
 	</span>
 	<svg class="icon" class:expanded>
-		<use href="/images/images.svg#icon-arrow-down" />
+		<use href="/images/icons.svg#icon-arrow-down" />
 	</svg>
 </div>
 

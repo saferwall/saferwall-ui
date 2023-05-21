@@ -34,7 +34,7 @@
 	/>
 	{#if isPassword}
 		<svg class="icon" class:visible={passwordVisible} on:mouseup={togglePassword}
-			><use href="/images/images.svg#icon-eye" /></svg
+			><use href="/images/icons.svg#icon-eye" /></svg
 		>
 	{/if}
 </label>
