@@ -44,4 +44,4 @@ export interface APIFollower extends APIItemFollow { }
 export interface APIFollowing extends APIItemFollow { }
 
 
-export type APIItem = APILike | APIComment | APISubmission | APIFollower | APIFollowing;
+export type APIItem = APILike | APIComment | APISubmission | APIFollower | APIFollowing | any;

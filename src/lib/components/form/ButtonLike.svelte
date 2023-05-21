@@ -38,7 +38,7 @@
 		{loading}
 		{...$$restProps}
 	>
-		<div class="ml-2">{liked ? 'Unlike' : 'Like'}</div>
+		<div class="ml-1">{liked ? 'Unlike' : 'Like'}</div>
 		<div slot="loading">
 			{liked ? 'Unlike' : 'Like'}ing...
 		</div>

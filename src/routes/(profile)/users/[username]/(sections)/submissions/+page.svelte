@@ -3,10 +3,11 @@
 
 	import InputHash from '$lib/components/form/InputHash.svelte';
 	import ActivityMeta from '$lib/components/ActivityMeta.svelte';
-	import Button from '$lib/components/form/Button.svelte';
+	import ButtonLike from '$lib/components/form/ButtonLike.svelte';
 
 	export let data: PageData;
 
+	$: loggedIn = data.user !== undefined;
 	$: items = data.pagination.items || [];
 </script>
 
@@ -18,12 +19,13 @@
 				<ActivityMeta file={item.file} />
 			</div>
 			<div class="w-full md:w-max">
-				<Button class="w-full md:w-max md:border-none" size="sm">
-					<svg class="w-4 h-4 mr-2">
-						<use href="/images/icons.svg#icon-like" />
-					</svg>
-					<span>Like</span>
-				</Button>
+				<ButtonLike
+					class="w-full md:w-max md:border-none"
+					size="sm"
+					{loggedIn}
+					liked={item.liked}
+					hash={item.file.hash}
+				/>
 			</div>
 		</li>
 	{/each}
