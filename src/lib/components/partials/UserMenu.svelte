@@ -71,11 +71,12 @@
 
 <style lang="scss">
 	.user__menu__item {
-		@apply py-3 px-6 w-44;
+		@apply w-44;
 		@apply font-normal text-lg text-grayx-800;
 
 		.menu__link {
 			@apply flex items-center;
+			@apply py-3 px-6;
 		}
 
 		.menu__label {
