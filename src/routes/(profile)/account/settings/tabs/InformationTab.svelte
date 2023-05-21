@@ -23,7 +23,7 @@
 		error = '';
 		success = false;
 		loading = true;
-		return async ({ result, form }) => {
+		return async ({ result }) => {
 			loading = false;
 			if (result.type == 'failure') {
 				error = result.data?.message;
@@ -31,7 +31,6 @@
 
 			if (result.type == 'success') {
 				success = true;
-				form.reset();
 			}
 		};
 	}}
