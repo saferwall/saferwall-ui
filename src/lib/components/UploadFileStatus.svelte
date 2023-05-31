@@ -59,34 +59,34 @@
 	.error {
 		@apply text-red-500;
 	}
-	.status--0 {
+	.status--1 {
 		@apply bg-yellow-500;
 	}
-	.label--0 {
+	.label--1 {
 		@apply text-yellow-500;
 	}
-	.status--1 {
+	.status--2 {
 		@apply bg-green-500;
 	}
-	.label--1 {
+	.label--2 {
 		@apply text-green-500;
 	}
-	.status--2 {
+	.status--3 {
 		@apply bg-blue-600;
 	}
-	.label--2 {
+	.label--3 {
 		@apply text-blue-600;
 	}
-	.status--3 {
+	.status--4 {
 		@apply bg-cyan-500;
 	}
-	.label--3 {
+	.label--4 {
 		@apply text-cyan-500;
 	}
-	.status--4 {
+	.status--5 {
 		@apply bg-green-600;
 	}
-	.label--4 {
+	.label--5 {
 		@apply text-green-600;
 	}
 </style>
