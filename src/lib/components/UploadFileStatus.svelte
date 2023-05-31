@@ -15,7 +15,7 @@
 	export let status: number;
 
 	$: statusItem = FILE_UPLOAD_STATUS.find((s) => status === s.value);
-	$: progress = (((statusItem?.value || UploadStatus.UPLOADING) + 1) / UploadStatus.FINISHED) * 100;
+	$: progress = ((statusItem?.value || UploadStatus.UPLOADING) / UploadStatus.FINISHED) * 100;
 </script>
 
 <article class="flex flex-col w-fill space-y-2 p-4 border rounded-xl" class:error>
