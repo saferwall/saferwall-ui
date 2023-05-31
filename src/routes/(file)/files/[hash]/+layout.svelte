@@ -5,7 +5,7 @@
 
 	export let data: LayoutData;
 
-	$: hash = data.sha256;
+	$: hash = data.hash;
 	$: fileMenu = data.fileMenu;
 	$: activeMenu = data.activeMenu;
 	$: submissions = data.file.submissions;
