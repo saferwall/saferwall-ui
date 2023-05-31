@@ -3,7 +3,9 @@
 	import Icon from './Icon.svelte';
 
 	const dispatch = createEventDispatcher();
+
 	export let close: boolean = true;
+	export let icon: string = 'close';
 	export let type: 'error' | 'warning' | 'success' | 'info' = 'info';
 
 	const onClose = () => {
@@ -15,7 +17,7 @@
 	<slot />
 	{#if close}
 		<div class="cursor-pointer" on:mouseup={onClose}>
-			<Icon name="close" />
+			<Icon name={icon} />
 		</div>
 	{/if}
 </div>

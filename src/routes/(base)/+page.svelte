@@ -6,6 +6,7 @@
 	export let data: PageData;
 
 	// TODO: infinite scroll <> loading activities
+	$: session = data.session;
 	$: activities = data.pagination.items;
 	$: loggedIn = data.user !== undefined;
 </script>
@@ -15,6 +16,6 @@
 </svelte:head>
 
 <div class="container mx-auto py-10 space-y-20">
-	<UploadBox {loggedIn} />
+	<UploadBox {loggedIn} {session} />
 	<LatestActivities {loggedIn} {activities} />
 </div>

@@ -1,6 +1,6 @@
 import { APIClient } from "$lib/api";
 import type { LayoutLoad } from "./$types";
-import type { ProfileSection } from "$lib/types";
+import type { ProfileSection, User } from "$lib/types";
 import type { APIPagination } from "$lib/types/pagination";
 import type { APIUser, APIItem } from "$lib/types/users";
 
@@ -9,7 +9,8 @@ export const load = (async ({ params, parent, url }): Promise<{
     profile: APIUser,
     currentPath: string,
     pagination: APIPagination<APIItem>,
-    section: ProfileSection
+    section: ProfileSection,
+    user: User
 }> => {
     const { username } = params;
     const data = await parent() as any;

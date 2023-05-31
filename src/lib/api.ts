@@ -43,11 +43,7 @@ export class APIClient {
         return init;
     }
 
-    public async request<T>(
-        endpoint: string,
-        cache: boolean = false,
-        args: any = {}
-    ): Promise<T> {
+    public async request<T>(endpoint: string, cache: boolean = false, args: any = {}): Promise<T> {
         const url = `${this.apiConfig.url}/${endpoint}`;
         const init: RequestInit = {
             headers: {
@@ -62,7 +58,8 @@ export class APIClient {
 
         this.setAuthHeaders(init);
 
-        const response = await fetch(url, init);
+        const response: any = await fetch(url, init);
+
         if (!response.ok) {
             throw response;
         }
@@ -74,6 +71,24 @@ export class APIClient {
         return this.request<Activity[]>(`users/activities?per_page=10`);
     }
 
+    public async getFileStatus(hash: string): Promise<number> {
+        return this.request<{ status: number }>(`files/${hash}?fields=status`, false)
+            .then(res => res.status);
+    }
+    public async uploadFile(file: File): Promise<APIFile> {
+        const data: any = new FormData();
+        data.append('file', file);
+
+        return this.request<APIFile>(`files/`, false, {
+            method: 'POST',
+            headers: {
+                'Content-Length': file.size
+            },
+            body: data
+        })
+
+    }
+
     public async getFile(hash: string): Promise<APIFile> {
         return this.request<APIFile>(`files/${hash}`, true);
     }
@@ -81,6 +96,7 @@ export class APIClient {
     public async getFileMeta(hash: string): Promise<APIFile> {
         return this.request<APIFile>(`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta,liked`);
     }
+
     public async getFileSummary(hash: string): Promise<APIFile & APISummary> {
         return this.request<APIFile & APISummary>(`files/${hash}/summary`);
     }

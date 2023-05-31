@@ -97,6 +97,10 @@
         <path fill="currentColor" stroke="currentColor" stroke-width=".5"
             d="M15.56 10.36 10 15.53l-5.56-5.17 1.02-.95 3.82 3.54V1h1.44v11.96l3.82-3.55 1.02.95Zm3.7 6.5H.74v1.34h18.5v-1.34Z" />
     </symbol>
+    <symbol id="icon-restart" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke="currentColor" stroke-linejoin="round"
+            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+    </symbol>
     <symbol id="icon-rescan" fill="none" viewBox="0 0 16 19">
         <path fill="currentColor" stroke="currentColor" stroke-width=".3"
             d="M13.09 5.74A7.14 7.14 0 0 0 8 3.64H6.95l1.69-1.7L7.7 1 4.4 4.3l3.25 3.3.95-.93-1.68-1.7H8a5.86 5.86 0 1 1-5.86 5.86v-.67H.81v.67a7.2 7.2 0 1 0 12.28-5.09Z" />

@@ -105,5 +105,15 @@ export interface UpdateEmailData {
 export interface UpdatePasswordData {
     username: string;
     old: string;
-    new: string;
+    new_password: string;
+}
+
+
+export interface QueueFile {
+    file: File;
+    status: number;
+    hash?: string;
+    error?: string;
+    updateStatus: () => void;
+    uploadFile: () => void;
 }

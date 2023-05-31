@@ -52,7 +52,7 @@ export const actions = {
             await new APIClient(locals.session).updatePassword({
                 username,
                 old: oldPassword,
-                new: newPassword
+                new_password: newPassword
             });
             return { success: true };
         } catch (response: any) {
