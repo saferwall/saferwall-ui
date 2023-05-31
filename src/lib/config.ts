@@ -1,9 +1,9 @@
 export const SESSION_KEY = 'session';
 
 export enum UploadStatus {
-    _START = 2,
-    UPLOADING = 0,
-    UPLOADED = 1,
+    _START = 3,
+    UPLOADING = 1,
+    UPLOADED = 2,
     QUEUEING = 0 + UploadStatus._START,
     PROCESSING = 1 + UploadStatus._START,
     FINISHED = 2 + UploadStatus._START,

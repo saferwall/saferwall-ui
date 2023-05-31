@@ -15,7 +15,7 @@
 	export let status: number;
 
 	$: statusItem = FILE_UPLOAD_STATUS.find((s) => status === s.value);
-	$: progress = (((statusItem?.value || 0) + 1) / UploadStatus.FINISHED) * 100;
+	$: progress = (((statusItem?.value || 1) + 1) / UploadStatus.FINISHED) * 100;
 </script>
 
 <article class="flex flex-col w-fill space-y-2 p-4 border rounded-xl" class:error>
@@ -26,7 +26,7 @@
 		</p>
 		<div
 			class={`flex items-center space-x-1 font-bold ${
-				error ? 'error' : 'label--' + (statusItem?.value || 0)
+				error ? 'error' : 'label--' + (statusItem?.value || 1)
 			}`}
 		>
 			{#if progress < 100 && !error}
@@ -41,7 +41,7 @@
 	{/if}
 
 	<div class="progress w-full h-2 relative bg-gray-200 rounded-xl overflow-hidden">
-		<div class={`h-full status--${statusItem?.value || 0}`} style={`width: ${progress}%`} />
+		<div class={`h-full status--${statusItem?.value || 1}`} style={`width: ${progress}%`} />
 	</div>
 
 	{#if error}
