@@ -11,7 +11,7 @@
 
 	let inputFiles: HTMLElement;
 
-	const selectFiles = () => inputFiles.click();
+	const selectFiles = () => (loggedIn ? inputFiles.click() : null);
 	const onFilesChanges = (e: Event & any) => {
 		for (const file of [...e.target.files]) {
 			processToQueue(file);
