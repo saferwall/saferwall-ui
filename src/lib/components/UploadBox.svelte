@@ -25,7 +25,7 @@
 	const processToQueue = (file: File) => {
 		const queue: QueueFile = {
 			file: file,
-			status: 1,
+			status: UploadStatus.UPLOADING,
 			uploadFile: () => {},
 			updateStatus: () => {}
 		};
@@ -37,7 +37,7 @@
 				.uploadFile(file)
 				.then(({ status, sha256 }) => {
 					queue.hash = sha256;
-					queue.status = (status || 1) + UploadStatus._START;
+					queue.status = (status || UploadStatus.UPLOADING) + UploadStatus._START;
 					const reCheckStatus = () => setTimeout(() => queue.updateStatus(), 2000);
 					queue.updateStatus = () => {
 						client
