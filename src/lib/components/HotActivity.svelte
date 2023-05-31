@@ -7,7 +7,7 @@
 
 	export let date: number;
 	export let title: string;
-	export let files: { hash: string; tags: string[] }[] = [];
+	export let files: { sha256: string; tags: string[] }[] = [];
 	export let refs: { title: string; url: string }[] = [];
 
 	$: srotedFiles = files.sort((a, b) => a.tags.length - b.tags.length);
@@ -26,7 +26,7 @@
 		<ul class="space-y-2">
 			{#each srotedFiles as file}
 				<li class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2">
-					<InputHash hash={file.hash} />
+					<InputHash hash={file.sha256} />
 					<BasicTags tags={file.tags} />
 				</li>
 			{/each}

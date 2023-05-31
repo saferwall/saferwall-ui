@@ -40,7 +40,7 @@
 						<a class="activity__info__author" href="/users/{activity.author.username}">
 							{activity.author.username}
 						</a>
-						<a class="activity__info__type" href="/files/{activity.file?.sha256}"
+						<a class="activity__info__type" href="/files/{activity.file?.hash}"
 							>{getActivityTitle(activity.type)}</a
 						>
 					</span>
@@ -48,7 +48,7 @@
 						{timeSince(activity.date * 1000)}
 					</time>
 				</p>
-				<InputHash hash={activity.file?.sha256} />
+				<InputHash hash={activity.file?.hash} />
 				{#if activity.file}
 					<ActivityMeta file={activity.file} />
 				{/if}

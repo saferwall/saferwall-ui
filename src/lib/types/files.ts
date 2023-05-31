@@ -10,6 +10,7 @@ export interface FileTags {
 
 export interface APIFile {
     filename: string;
+    hash?: string;
     sha256: string;
     multiav: FileMultiav;
     tags?: FileTags;

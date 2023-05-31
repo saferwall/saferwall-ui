@@ -40,7 +40,7 @@
 						<SvelteMarkdown {options} source={item.comment} />
 					</div>
 				</div>
-				<InputHash hash={item.file.sha256} />
+				<InputHash hash={item.file.hash} />
 				<ActivityMeta file={item.file} />
 			</div>
 		</li>
