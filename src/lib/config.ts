@@ -1,13 +1,13 @@
 export const SESSION_KEY = 'session';
 
 export enum UploadStatus {
-    _START = 3,
+    _START = 2,
     UPLOADING = 1,
     UPLOADED = 2,
-    QUEUEING = 0 + UploadStatus._START,
-    PROCESSING = 1 + UploadStatus._START,
-    FINISHED = 2 + UploadStatus._START,
-    READY = 3 + UploadStatus._START,
+    QUEUEING = 1 + UploadStatus._START,
+    PROCESSING = 2 + UploadStatus._START,
+    FINISHED = 3 + UploadStatus._START,
+    READY = 4 + UploadStatus._START,
 }
 export const FILE_UPLOAD_STATUS = [
     {

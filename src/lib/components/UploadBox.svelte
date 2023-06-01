@@ -45,7 +45,7 @@
 							.then((status) => {
 								queue.status = status + UploadStatus._START;
 
-								if (status !== UploadStatus.FINISHED) {
+								if (status !== UploadStatus.FINISHED - UploadStatus._START) {
 									reCheckStatus();
 								}
 							})
