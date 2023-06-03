@@ -1,0 +1,24 @@
+.vscode
+README.md
+**/.env
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Prettier
+.prettierrc
+.pretieriignore
+
+# Build
+build
+package
+node_modules
+
+# NPM
+.npmrc
