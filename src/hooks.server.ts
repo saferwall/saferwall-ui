@@ -2,7 +2,7 @@ import { dev } from '$app/environment';
 import { APIClient } from '$lib/api';
 import { SESSION_KEY } from '$lib/config';
 import type { User } from '$lib/types';
-import type { Handle } from '@sveltejs/kit';
+import type { Handle, HandleServerError } from '@sveltejs/kit';
 
 export const handle: Handle = (async ({ event, resolve }) => {
     if (dev) {
@@ -32,9 +32,23 @@ export const handle: Handle = (async ({ event, resolve }) => {
             );
 
     } catch (error) {
-
+        console.error('hooks error: ', error);
     }
 
     return await resolve(event)
 }) satisfies Handle;
 
+export const handleError = (async ({ error, event }: any) => {
+
+    event.cookies.delete(SESSION_KEY, {
+        httpOnly: true,
+        secure: true,
+        path: '/'
+    });
+
+
+    return {
+        message: error?.message,
+        status: error?.status,
+    };
+}) satisfies HandleServerError;
