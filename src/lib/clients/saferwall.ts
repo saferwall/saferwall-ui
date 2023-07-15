@@ -1,4 +1,5 @@
 import { env } from '$env/dynamic/public';
+import { DEFAULT_PAGINATION_ITEMS } from '$lib/config';
 
 import type { APIPagination, Pagination } from '$lib/types/pagination';
 import type {
@@ -201,7 +202,7 @@ export class SaferwallClient {
 
 	private generatePaginateQuery(pagination?: Pagination): string {
 		const query = new URLSearchParams({
-			per_page: '1'
+			per_page: String(DEFAULT_PAGINATION_ITEMS)
 		});
 
 		if (pagination) {
