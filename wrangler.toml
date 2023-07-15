@@ -1,6 +1,6 @@
 name = "saferwall"
-compatibility_date = "2023-01-26"
+compatibility_date = "2023-07-15"
 
 kv_namespaces = [
-    { binding = "HOT_ACTIVITIES", id = "724ef4df56724aa9be1fd1eb0cdf5904", preview_id = "e03e92fea2214841a401f13481af664a" }
+    { binding = "HOT_ACTIVITIES", id = "c67c115fd45340b9942903cd634b757e", preview_id = "96d30c3c21434b059e0747b0672eab78" }
 ]
