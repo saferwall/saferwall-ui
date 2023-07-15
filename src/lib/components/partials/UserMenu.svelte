@@ -3,7 +3,7 @@
 	import Avatar from '../Avatar.svelte';
 	import Icon from '../Icon.svelte';
 
-	let open: boolean = false;
+	let open = false;
 	export let user: User | undefined;
 
 	$: username = user?.username;

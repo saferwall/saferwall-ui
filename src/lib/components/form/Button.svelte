@@ -4,8 +4,8 @@
 	let cclass: string = '';
 	export let size: string = 'base';
 	export let theme: string = 'base';
-	export let disabled: boolean = false;
-	export let loading: boolean = false;
+	export let disabled = false;
+	export let loading = false;
 	export let icon: string | undefined = undefined;
 	export let target: string | undefined = undefined;
 	export let href: string | undefined = undefined;

@@ -4,8 +4,8 @@
 
 	export let size: string = 'sm';
 	export let hash: string;
-	export let liked: boolean = false;
-	export let loggedIn: boolean = false;
+	export let liked = false;
+	export let loggedIn = false;
 
 	let loading = false;
 </script>

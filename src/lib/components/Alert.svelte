@@ -4,7 +4,7 @@
 
 	const dispatch = createEventDispatcher();
 
-	export let close: boolean = true;
+	export let close = true;
 	export let icon: string = 'close';
 	export let type: 'error' | 'warning' | 'success' | 'info' = 'info';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let mode: 'all' | 'more' = 'all';
-	export let expanded: boolean = false;
+	export let expanded = false;
 </script>
 
 <div class="button" on:mouseup>
