@@ -9,15 +9,6 @@
 	$: section = data.section;
 	$: username = data.username;
 	$: currentPath = data.currentPath;
-	$: itemsCount = data.pagination.items?.length || 0;
-
-	const generatePath = (path: string) => {
-		const sectionPath = `/users/${username}/${path}`;
-		return {
-			url: sectionPath,
-			active: sectionPath == currentPath
-		};
-	};
 
 	$: heading = [
 		{
@@ -46,6 +37,16 @@
 			...generatePath('comments')
 		}
 	];
+
+	$: itemsCount = data.pagination.items?.length || 0;
+
+	const generatePath = (path: string) => {
+		const sectionPath = `/users/${username}/${path}`;
+		return {
+			url: sectionPath,
+			active: sectionPath == currentPath
+		};
+	};
 </script>
 
 <section class="container mx-auto pb-10">

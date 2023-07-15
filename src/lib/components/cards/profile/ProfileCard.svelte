@@ -6,9 +6,9 @@
 	export let bio: string = '';
 	export let url: string = '';
 	export let username: string;
-	export let followed: boolean = false;
-	export let loggedIn: boolean = false;
-	export let selfProfile: boolean = false;
+	export let followed = false;
+	export let loggedIn = false;
+	export let selfProfile = false;
 </script>
 
 <div class="container mx-auto">

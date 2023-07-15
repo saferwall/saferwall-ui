@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Activity, Tag } from '$lib/types';
+	import type { Activity } from '$lib/types';
 	import { parseTags } from '$lib/utils/data';
 	import { getMemberSince } from '$lib/utils/date';
 	import { getActivityTitle, timeSince, timeToDateISO } from '$lib/utils/format';
@@ -10,7 +10,7 @@
 	import InputHash from './form/InputHash.svelte';
 
 	export let activity: Activity;
-	export let loggedIn: boolean = false;
+	export let loggedIn = false;
 
 	$: tags = parseTags(activity.file?.tags || {});
 </script>
@@ -54,7 +54,10 @@
 				{/if}
 			</div>
 		</div>
-		<div class="tags flex flex-row lg:flex-col items-center md:items-start lg:space-y-1">
+		<div
+			class="tags flex flex-row lg:flex-col items-center md:items-start lg:space-y-1"
+			class:max-lg:hidden={tags.length === 0}
+		>
 			<p class="tags__title hidden lg:block">TAGS</p>
 			<ul class="tags__list">
 				{#if tags.length > 0}

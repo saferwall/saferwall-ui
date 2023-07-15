@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { APIClient } from '$lib/api';
+	import { SaferwallClient } from '$lib/clients/saferwall';
 	import { UploadStatus } from '$lib/config';
 	import type { QueueFile, Session } from '$lib/types';
 	import UploadFileStatus from './UploadFileStatus.svelte';
 	import ButtonBrowse from './form/ButtonBrowse.svelte';
 
 	export let session: Session;
-	export let loggedIn: boolean = false;
+	export let loggedIn = false;
 	let queueFiles: QueueFile[] = [];
 
 	let inputFiles: HTMLElement;
@@ -21,7 +21,7 @@
 	const triggerQueueUpdate = () =>
 		(queueFiles = queueFiles.sort((qA, qB) => qA.status - qB.status));
 
-	const client = new APIClient(session);
+	const client = new SaferwallClient(session);
 	const processToQueue = (file: File) => {
 		const queue: QueueFile = {
 			file: file,

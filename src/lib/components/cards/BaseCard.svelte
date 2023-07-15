@@ -1,8 +1,8 @@
 <script lang="ts">
 	let cclass = '';
-	export let flex: boolean = true;
-	export let padding: boolean = true;
-	export let spacing: boolean = true;
+	export let flex = true;
+	export let padding = true;
+	export let spacing = true;
 
 	export { cclass as class };
 </script>

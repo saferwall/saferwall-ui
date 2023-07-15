@@ -6,7 +6,7 @@
 	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
 
 	export let item: APIItemFollow;
-	export let loggedIn: boolean = false;
+	export let loggedIn = false;
 </script>
 
 <article

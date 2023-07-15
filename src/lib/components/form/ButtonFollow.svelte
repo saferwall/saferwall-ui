@@ -3,8 +3,8 @@
 	import Button from './Button.svelte';
 
 	export let username: string;
-	export let followed: boolean = false;
-	export let loggedIn: boolean = false;
+	export let followed = false;
+	export let loggedIn = false;
 
 	let loading = false;
 </script>

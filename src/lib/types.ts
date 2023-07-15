@@ -1,5 +1,9 @@
 import type { APIFile } from "./types/files";
 
+export type SaferwallConfig = {
+    url: string;
+}
+
 export interface Error {
     details: unknown;
     message: string;
