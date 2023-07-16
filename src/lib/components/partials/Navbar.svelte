@@ -22,7 +22,7 @@
 	<div class="inline-flex space-x-8">
 		<ul class="navbar__menu space-x-8 items-center text-grayx-500">
 			<li>
-				<a class="menu__link" href="https://about.saferwall.com/" target="_blank" rel="noreferrer">
+				<a class="menu__link" href="https://docs.saferwall.com/" target="_blank" rel="noreferrer">
 					About saferwall
 				</a>
 			</li>
