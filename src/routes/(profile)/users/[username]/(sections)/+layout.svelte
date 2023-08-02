@@ -16,11 +16,15 @@
 			count: profile.likes_count,
 			...generatePath('likes')
 		},
-		{
-			title: 'Submissions',
-			count: profile.submissions_count,
-			...generatePath('submissions')
-		},
+		...(profile.username !== 'Administrator'
+			? [
+					{
+						title: 'Submissions',
+						count: profile.submissions_count,
+						...generatePath('submissions')
+					}
+			  ]
+			: []),
 		{
 			title: 'Followers',
 			count: profile.followers_count,
