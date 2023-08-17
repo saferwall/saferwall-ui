@@ -6,7 +6,7 @@
 
 	$: multiav = data.antivirus.multiav;
 	$: firstScan = multiav.first_scan;
-	$: lastScan = multiav.first_scan;
+	$: lastScan = multiav.last_scan;
 
 	// TODO: find out if the first scan & last are same
 </script>
