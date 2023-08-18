@@ -13,9 +13,9 @@
 <nav
 	class="navbar w-full px-8 py-5 flex justify-between border-b border-gray-400 border-opacity-20"
 >
-	<div class="flex space-x-5">
+	<div class="flex space-x-5 flex-grow">
 		<Logo />
-		<div class="navbar__search w-80">
+		<div class="navbar__search max-w-[680px] flex-grow pr-12">
 			<InputSearch />
 		</div>
 	</div>

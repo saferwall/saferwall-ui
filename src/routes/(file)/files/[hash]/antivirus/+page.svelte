@@ -4,6 +4,8 @@
 
 	export let data: PageData;
 
+	$: first_scan = data.antivirus.first_seen;
+	$: last_scan = data.antivirus.last_scanned;
 	$: multiav = data.antivirus.multiav;
 	$: firstScan = multiav.first_scan;
 	$: lastScan = multiav.first_scan;
@@ -16,15 +18,15 @@
 		class="flex md:space-y-0 md:flex-row md:space-x-10  max-md:bg-white max-md:rounded-xl max-md:shadow-base max-md:p-6"
 	>
 		<AntivirusScanCard
-			sortBy="first"
 			title="First Scan"
 			result={firstScan}
+			date={first_scan}
 			class="max-md:rounded-none max-md:shadow-none max-md:p-0"
 		/>
 		<AntivirusScanCard
-			sortBy="last"
 			title="Last scan"
 			result={lastScan}
+			date={last_scan}
 			class="max-md:rounded-none max-md:shadow-none max-md:p-0"
 		/>
 	</div>

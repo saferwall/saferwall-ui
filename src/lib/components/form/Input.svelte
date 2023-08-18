@@ -31,7 +31,7 @@
 
 		&__field {
 			@apply w-full;
-			@apply px-4 pt-3 pb-3.5;
+			@apply px-4 pt-3 pb-3;
 			@apply border rounded;
 		}
 

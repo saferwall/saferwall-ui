@@ -10,7 +10,7 @@ export const load = (async ({
 }> => {
 	const { hash } = params;
 
-	const antivirus = await new SaferwallClient().request<APIFile>(
+	const antivirus = await new SaferwallClient().request<APIAntivirus>(
 		`files/${hash}?fields=multiav,first_seen,last_scanned`
 	);
 

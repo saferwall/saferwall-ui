@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Footer from '$lib/components/partials/Footer.svelte';
 	import Navbar from '$lib/components/partials/Navbar.svelte';
-	import type { PageData } from './$types';
+	import type { LayoutData } from './$types';
 
-	export let data: PageData;
+	export let data: LayoutData;
 
 	$: user = data.user;
 </script>
