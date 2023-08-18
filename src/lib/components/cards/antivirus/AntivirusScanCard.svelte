@@ -15,7 +15,7 @@
 		(resultA, resultB) => resultA.update - resultB.update
 	);
 
-	$: dateScan = sortBy === 'last' ? sortedResults[0] : sortedResults[sortedResults.length - 1];
+	$: dateScan = sortBy === 'first' ? sortedResults[0] : sortedResults[sortedResults.length - 1];
 </script>
 
 <BaseCard class="w-full {cclass}">
