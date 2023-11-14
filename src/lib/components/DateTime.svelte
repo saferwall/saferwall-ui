@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { timestampToFormattedDate } from '$lib/utils/date';
-	import { timeSince } from '$lib/utils/format';
+	import { timeSince, timestampToFormattedDate } from '$lib/utils';
 
 	export let date: number;
 
-	$: formattedDate = date && timeSince(date * 1000);
-	$: base = timestampToFormattedDate(date * 1000);
-
 	let cclass: string = '';
 	export { cclass as class };
+
+	$: formattedDate = date && timeSince(date * 1000);
+	$: base = timestampToFormattedDate(date * 1000);
 </script>
 
 {#if date}

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { Scan, ScanResult } from '$lib/types/antivirus';
-	import BaseCard from '../BaseCard.svelte';
+	import type { Saferwall } from '$lib/types';
 	import DateTime from '$lib/components/DateTime.svelte';
+	import Card from '../../Card.svelte';
 	import AntivirusResult from './AntivirusResult.svelte';
 
-	export let result: Scan;
+	export let result: Saferwall.Scan;
 
 	export let date: number;
 	export let title = 'Scan Results';
@@ -13,14 +13,14 @@
 	export { cclass as class };
 </script>
 
-<BaseCard class="w-full {cclass}">
+<Card class="w-full {cclass}">
 	<div class="space-y-2">
 		<h2>{title}</h2>
-		<p class="text-grayx-500">
+		<p class="text-neutral-500">
 			<DateTime {date} />
 		</p>
 	</div>
-	<div class="border-t border-grayx-100" />
+	<div class="border-t border-neutral-100" />
 	<table class="card__list">
 		{#each Object.entries(result) as [key, item]}
 			<tr class="card__item">
@@ -31,4 +31,4 @@
 			</tr>
 		{/each}
 	</table>
-</BaseCard>
+</Card>

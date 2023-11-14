@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/form/Button.svelte';
-	import type { Struct } from '$lib/types/resource';
+	import type { Struct } from '$lib/types';
 	import DirectoryTable from './DirectoryTable.svelte';
 
 	let tableOpen = false;

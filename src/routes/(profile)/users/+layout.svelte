@@ -18,7 +18,7 @@
 	<title>{profile.username} Profile - Saferwall</title>
 </svelte:head>
 <Navbar {user} />
-<main class="flex-1 flex flex-col py-4 h-full bg-grayx space-y-6">
+<main class="flex-1 flex flex-col py-4 h-full bg-neutral space-y-6">
 	<ProfileHeading />
 	<ProfileCard {loggedIn} {...profile} {selfProfile} {followed} />
 	<slot />

@@ -2,10 +2,10 @@
 	import { enhance } from '$app/forms';
 	import Button from './Button.svelte';
 
-	export let size: string = 'sm';
-	export let hash: string;
 	export let liked = false;
 	export let loggedIn = false;
+	export let hash: string;
+	export let size: string = 'sm';
 
 	let loading = false;
 </script>

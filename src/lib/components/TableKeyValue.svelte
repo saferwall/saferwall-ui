@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { splitCamelCase, valueToHex } from '$lib/utils/format';
+	import { splitCamelCase, valueToHex } from '$lib/utils';
 
 	export let header = true;
 	export let hexValue = true;

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { FileMenu } from '$lib/types';
+	import type { Menus } from '$lib/types';
 
 	export let hash = '';
-	export let fileMenu: FileMenu[] = [];
+	export let fileMenu: Menus.File[] = [];
 	export let activeMenu: { name: string; path: string };
 
 	$: isActivePath = (path: string): boolean => path === activeMenu.path;
@@ -47,7 +47,7 @@
 
 		&__link {
 			@apply transition-all duration-200 ease-in-out;
-			@apply flex items-center space-x-2 w-auto text-grayx-500;
+			@apply flex items-center space-x-2 w-auto text-neutral-500;
 			@apply p-2.5 px-5 rounded-full font-medium;
 		}
 

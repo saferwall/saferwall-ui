@@ -1,28 +1,36 @@
 <script lang="ts">
 	import Loading from './Loading.svelte';
 
-	let cclass: string = '';
-	export let size: string = 'base';
-	export let theme: string = 'base';
-	export let disabled = false;
 	export let loading = false;
+	export let disabled = false;
 	export let icon: string | undefined = undefined;
-	export let target: string | undefined = undefined;
 	export let href: string | undefined = undefined;
+	export let target: string | undefined = undefined;
+	export let size: 'xss' | 'xs' | 'sm' | 'lg' | 'base' = 'base';
+	export let theme: 'base' | 'gray' | 'primary' | 'danger' = 'base';
 	export let type: 'button' | 'submit' | 'reset' | undefined = 'button';
+
+	let cclass: string = '';
 	export { cclass as class };
 </script>
 
 {#if href}
-	<a on:mouseup {href} {target} class="button button--{theme} button--size--{size} {cclass}">
+	<a
+		{...$$props}
+		{href}
+		{target}
+		on:mouseup
+		class="button button--{theme} button--size--{size} {cclass}"
+	>
 		{#if icon && !loading}<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>{/if}
 		<Loading {loading}><slot /></Loading>
 	</a>
 {:else}
 	<button
-		on:mouseup
+		{...$$props}
 		{type}
 		disabled={loading || disabled}
+		on:mouseup
 		class="button button--{theme} button--size--{size} {cclass}"
 	>
 		{#if icon && !loading}
@@ -48,7 +56,7 @@
 			@apply text-primary bg-white;
 		}
 		&--gray {
-			@apply text-grayx-500 bg-white;
+			@apply text-neutral-500 bg-white;
 		}
 		&--base.active,
 		&--base:hover,

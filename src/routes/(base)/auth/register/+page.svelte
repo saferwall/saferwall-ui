@@ -5,8 +5,8 @@
 	import Alert from '$lib/components/Alert.svelte';
 	import AuthActionDone from '$lib/components/AuthActionDone.svelte';
 
-	let finished = false;
 	let loading = false;
+	let finished = false;
 	let error: string = '';
 	let errors: Record<string, boolean> = {};
 
@@ -81,7 +81,7 @@
 		</label>
 		<Button type="submit" {loading} theme="primary" size="lg">Create account</Button>
 	</form>
-	<div class="border-t border-grayx-100 p-6">
+	<div class="border-t border-neutral-100 p-6">
 		<p class="text-center text-sm">
 			already have an account ? <a href="/auth/login" class="link">Sign In</a>
 		</p>

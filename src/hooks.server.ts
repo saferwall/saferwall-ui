@@ -1,7 +1,7 @@
 import { dev } from '$app/environment';
 import { SaferwallClient } from '$lib/clients/saferwall';
 import { SESSION_KEY } from '$lib/config';
-import type { User } from '$lib/types';
+import type { Saferwall } from '$lib/types';
 import type { Handle, HandleServerError } from '@sveltejs/kit';
 
 export const handle: Handle = (async ({ event, resolve }) => {
@@ -17,7 +17,7 @@ export const handle: Handle = (async ({ event, resolve }) => {
 		}
 
 		const session = JSON.parse(sessionData);
-		const user: User = await new SaferwallClient().getUser(session.username);
+		const user: Saferwall.User = await new SaferwallClient().getUser(session.username);
 
 		event.locals.session = session;
 		event.locals.user = [

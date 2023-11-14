@@ -1,11 +1,12 @@
 <script lang="ts">
+	import type { QueueFile, Saferwall } from '$lib/types';
+
 	import { SaferwallClient } from '$lib/clients/saferwall';
 	import { UploadStatus } from '$lib/config';
-	import type { QueueFile, Session } from '$lib/types';
 	import UploadFileStatus from './UploadFileStatus.svelte';
 	import ButtonBrowse from './form/ButtonBrowse.svelte';
 
-	export let session: Session;
+	export let session: Saferwall.Session;
 	export let loggedIn = false;
 	let queueFiles: QueueFile[] = [];
 

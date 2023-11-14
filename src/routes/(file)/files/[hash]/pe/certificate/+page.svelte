@@ -1,7 +1,7 @@
 <script lang="ts">
 	import TableKeyValue from '$lib/components/TableKeyValue.svelte';
 	import ValidityBox from '$lib/components/ValidityBox.svelte';
-	import { translateGroupValue, valueToHex } from '$lib/utils/format';
+	import { translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

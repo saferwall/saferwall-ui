@@ -9,7 +9,7 @@
 </script>
 
 <Navbar {user} />
-<main class="flex-1 flex flex-col h-full bg-grayx">
+<main class="flex-1 flex flex-col h-full bg-neutral">
 	<slot />
 </main>
 <Footer />

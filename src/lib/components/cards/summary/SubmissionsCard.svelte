@@ -1,17 +1,21 @@
 <script lang="ts">
-	import type { Submission } from '$lib/types/summary';
-	import { timestampToFormattedDate } from '$lib/utils/date';
-	import BaseCard from '../../cards/BaseCard.svelte';
+	import type { Saferwall } from '$lib/types';
+	import { timestampToFormattedDate } from '$lib/utils';
+	import Card from '../../Card.svelte';
 	import ButtonShowMore from '../../form/ButtonShowMore.svelte';
 
 	const maxRecords = 10;
-	export let submissions: Submission[] = [];
+	export let submissions: Saferwall.Submission[] = [];
 
 	$: expanded = false;
 	$: activeExpanding = submissions.length > maxRecords;
+
+	const onShowMoreMouseUp = () => {
+		expanded = !expanded;
+	};
 </script>
 
-<BaseCard>
+<Card>
 	<h1 class="card__title">Submissions</h1>
 	<div class="flex flex-col">
 		<table class="card__table">
@@ -33,7 +37,7 @@
 			</tbody>
 		</table>
 		{#if activeExpanding}
-			<ButtonShowMore on:mouseup={() => (expanded = !expanded)} {expanded} />
+			<ButtonShowMore on:mouseup={onShowMoreMouseUp} {expanded} />
 		{/if}
 	</div>
-</BaseCard>
+</Card>

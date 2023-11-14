@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import BaseCard from './BaseCard.svelte';
+	import Card from '../Card.svelte';
 
 	interface TabItem {
 		title: string;
@@ -15,13 +15,14 @@
 	export let heading: TabItem[] = [];
 
 	$: items = heading;
-	const changeTab = (tab: TabItem) => {
+
+	const onTabMouseUp = (tab: TabItem) => {
 		heading = heading.map((item) => ((item.active = item.title === tab.title), item));
 		dispatch('change', tab);
 	};
 </script>
 
-<BaseCard class={`card__tabs ${direction}`} padding={false}>
+<Card class={`card__tabs ${direction}`} padding={false}>
 	<div class="tabs__menu no-scroll-style" data-sveltekit-preload-data="hover">
 		<slot name="heading">
 			{#each items as item}
@@ -35,7 +36,7 @@
 					</a>
 				{:else}
 					<span
-						on:mouseup={() => changeTab(item)}
+						on:mouseup={() => onTabMouseUp(item)}
 						class="card__tabs__item"
 						class:active={item.active}
 					>
@@ -51,7 +52,7 @@
 	<div class="px-6 md:px-10 flex-grow">
 		<slot />
 	</div>
-</BaseCard>
+</Card>
 
 <style lang="scss">
 	:global(.card__tabs) {

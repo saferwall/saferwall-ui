@@ -1,21 +1,21 @@
 <script lang="ts">
+	import type { Saferwall } from '$lib/types';
+
 	import { SaferwallClient } from '$lib/clients/saferwall';
-	import type { Session } from '$lib/types';
-	import type { APIItem } from '$lib/types/users';
 	import LoadMore from './LoadMore.svelte';
 
-	export let initItems: APIItem[] = [];
-	export let session: Session;
 	export let username: string;
 	export let section: string;
-	export let pagination: any;
+	export let pagination: Saferwall.Pagination<Saferwall.Activities.All>;
+	export let session: Saferwall.Session;
+	export let initItems: Saferwall.Activities.All[] = [];
 
 	let loading = false;
-	let items: APIItem[] = [...initItems];
+	let items: Saferwall.Activities.All[] = [...initItems];
 	let updatedPagination = { ...pagination };
 	let reachEnd = updatedPagination.page >= pagination.page_count;
 
-	const loadMoreItems = async () => {
+	const onLoadMore = async () => {
 		loading = true;
 
 		try {
@@ -49,4 +49,4 @@
 	<slot {items} />
 </ul>
 
-<LoadMore on:load={loadMoreItems} {loading} {reachEnd}>Load more</LoadMore>
+<LoadMore on:load={onLoadMore} {loading} {reachEnd}>Load more</LoadMore>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { valueToHex } from '$lib/utils/format';
+	import { valueToHex } from '$lib/utils';
 
 	export let title: string;
 	export let hexValue = true;

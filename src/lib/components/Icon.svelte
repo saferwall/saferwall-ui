@@ -1,9 +1,8 @@
 <script lang="ts">
-	let cclass = '';
-
 	export let name: string;
 	export let size: string = 'w-6 h-6';
 
+	let cclass = '';
 	export { cclass as class };
 </script>
 

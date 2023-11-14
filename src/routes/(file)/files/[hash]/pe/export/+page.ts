@@ -1,5 +1,5 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
-import type { APIFile } from '$lib/types/files';
+import type { APIFile } from '$lib/types';
 import type { PageLoad } from './$types';
 
 export const load = (async ({

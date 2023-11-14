@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
-	import BaseCard from '$lib/components/cards/BaseCard.svelte';
+	import Card from '$lib/components/Card.svelte';
 	import { peMenu } from '$lib/data/menus';
 
 	export let data: LayoutData;
@@ -9,7 +9,7 @@
 </script>
 
 <div class="files__layout container mx-auto w-full h-full items-center justify-center">
-	<BaseCard class="flex flex-col md:flex-row space-x-4" flex={false} padding={false}>
+	<Card class="flex flex-col md:flex-row space-x-4" flex={false} padding={false}>
 		<ul>
 			{#each peMenu as item}
 				<li><a class:active={item.path === activeMenu} href={item.path}>{item.title}</a></li>
@@ -18,7 +18,7 @@
 		<div class="w-full h-full overflow-x-auto py-4">
 			<slot />
 		</div>
-	</BaseCard>
+	</Card>
 </div>
 
 <style lang="scss">

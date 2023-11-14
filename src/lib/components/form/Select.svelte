@@ -1,9 +1,10 @@
 <script lang="ts">
-	let cclass = '';
 	export let name = '';
 	export let label = '';
 	export let required = false;
 	export let disabled = false;
+
+	let cclass = '';
 	export { cclass as class };
 </script>
 
@@ -11,7 +12,7 @@
 	{#if label}
 		<span class="select__label">{label}</span>
 	{/if}
-	<select {required} {disabled} {name} class="select__field {cclass}">
+	<select {required} {disabled} {name} class="select__field {cclass}" on:change>
 		<slot />
 	</select>
 </label>
@@ -39,12 +40,12 @@
 		&__label {
 			@apply font-light;
 			@apply absolute transition-all;
-			@apply text-grayx-500 left-4 top-1/2 -translate-y-1/2 text-base;
+			@apply text-neutral-500 left-4 top-1/2 -translate-y-1/2 text-base;
 		}
 
 		.icon {
 			@apply w-6 h-6;
-			@apply text-grayx-400 hover:cursor-pointer hover:text-grayx-900;
+			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-900;
 			@apply absolute right-3 -translate-y-1/2 top-1/2;
 
 			&.visible {

@@ -203,4 +203,13 @@
         <path stroke="#EF870C" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M22.867 3.329 2.397 37.5a4.834 4.834 0 0 0 4.133 7.25h40.938a4.834 4.834 0 0 0 4.133-7.25L31.131 3.33a4.833 4.833 0 0 0-8.264 0v0ZM27 16v13m0 6.084h.024" />
     </symbol>
+    <symbol id="icon-filter" fill="none" viewBox="0 0 19 19">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M17.417 2.375H1.584l6.333 7.49v5.177l3.167 1.583v-6.76l6.333-7.49Z" />
+    </symbol>
+    <symbol id="icon-properties" fill="none" viewBox="0 0 17 13">
+        <path stroke="currentColor" stroke-width="1.3"
+            d="M16.501 1H4.723m11.778 5.499H4.723m11.778 5.5H4.723M2.95 1H.5m2.45 5.5H.5M2.95 12H.5" />
+    </symbol>
 </svg>

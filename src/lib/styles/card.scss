@@ -14,7 +14,7 @@
 	&__table {
 		@apply table table-auto;
 		thead {
-			@apply text-left text-grayx-500 uppercase;
+			@apply text-left text-neutral-500 uppercase;
 		}
 		tbody {
 			@apply divide-y;
@@ -27,7 +27,7 @@
 
 	&__item {
 		@apply flex flex-col md:flex-row md:table-row;
-		@apply py-1 md:px-3 lg:px-6 bg-grayx-50;
+		@apply py-1 md:px-3 lg:px-6 bg-neutral-50;
 
 		&:nth-child(2n) {
 			@apply bg-white;
@@ -37,7 +37,7 @@
 			@apply min-w-[80px] text-left rounded-l;
 		}
 		&__content {
-			@apply break-all rounded-r text-grayx-800;
+			@apply break-all rounded-r text-neutral-800;
 		}
 
 		&__title,

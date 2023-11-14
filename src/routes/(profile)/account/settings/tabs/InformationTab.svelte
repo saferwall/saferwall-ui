@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { User } from '$lib/types';
 
 	import Icon from '$lib/components/Icon.svelte';
 	import Avatar from '$lib/components/Avatar.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Alert from '$lib/components/Alert.svelte';
+	import type { Saferwall } from '$lib/types';
 
-	export let user: User;
+	export let user: Saferwall.User;
 
 	let error = '';
 	let success = false;

@@ -44,7 +44,7 @@ module.exports = {
         purplex: {
           DEFAULT: '#6C5ED1'
         },
-        grayx: {
+        neutral: {
           DEFAULT: '#F6F6F6',
           '50': '#F8F8F8',
           '100': '#f0f0f0',
