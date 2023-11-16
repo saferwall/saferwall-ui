@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Pagination } from '$lib/types';
+	import type { Pagination, Saferwall } from '$lib/types';
 	import type { PageData } from './$types';
 
 	import { goto } from '$app/navigation';
@@ -30,6 +30,9 @@
 	$: pids = data.filters.pids || [];
 	$: groups = data.pagination.items || [];
 	$: hprops = data.hprops;
+	$: if (data) {
+		entries = {};
+	}
 
 	$: isEntryOpen = (index: number) => entries[index] == true;
 
@@ -110,9 +113,7 @@
 				type,
 				name,
 				value: entry.args[argIndex]
-			}));
-
-			console.log(entry.values);
+			})) as any as Saferwall.ApiCall.Entry[];
 		}
 
 		entries[index] = newStatus;
@@ -128,8 +129,6 @@
 			.then((res) => res.json())
 			.then((res) => {
 				w32apis = res;
-
-				groups.forEach((_, index) => toggleEntry(index));
 			});
 	});
 </script>
@@ -146,13 +145,13 @@
 			class="flex items-center justify-center space-x-4"
 		>
 			<Input name="search" icon="search" placeholder="Search anything..." />
-			<div class="flex-shrink-0 flex-grow text-gray-600">
+			<!-- <div class="flex-shrink-0 flex-grow text-gray-600">
 				<Button icon="filter">
 					<span class="px-2 py-0.5">Process filter</span>
 				</Button>
-			</div>
+			</div> -->
 			<div class="properties relative flex-shrink-0 flex-grow text-gray-600 ">
-				<Button icon="properties" on:mouseup={toggleProperties}>
+				<Button icon="properties" on:mouseup={toggleProperties} on:keyup={toggleProperties}>
 					<span class="px-2 py-0.5">Properties</span>
 				</Button>
 				{#if displayProperties}
@@ -161,6 +160,9 @@
 							<li class="flex flex-row items-center justify-between pb-2">
 								<span class="text-sm text-neutral-500 font-semibold">Show table</span>
 								<button
+									on:keyup={(e) => (e.key === 'Escape' ? toggleProperties() : null)}
+									on:click={toggleProperties}
+									autofocus
 									type="button"
 									class="text-xs bg-neutral-50 rounded-full border border-neutral p-1"
 								>
@@ -267,7 +269,7 @@
 														<td>{entry.type}</td>
 														<td>{entry.name}</td>
 														<td class="w-full">
-															<ApiTraceValue {entry} />
+															<ApiTraceValue {...entry} />
 														</td>
 													</tr>
 												{/each}

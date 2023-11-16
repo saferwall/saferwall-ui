@@ -12,8 +12,6 @@ export const load = (async ({ url, parent }) => {
 	const pids = url.searchParams.get('pids')?.split(',');
 	const hprops = url.searchParams.get('hprops')?.split(',');
 
-	console.log(url.searchParams.get('hprops'));
-
 	const pagination = await new SaferwallClient().getFileReport(default_behavior_id!, {
 		page: page > 0 ? page : undefined,
 		per_page: per_page > 0 ? per_page : undefined

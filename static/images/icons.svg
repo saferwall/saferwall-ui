@@ -212,4 +212,12 @@
         <path stroke="currentColor" stroke-width="1.3"
             d="M16.501 1H4.723m11.778 5.499H4.723m11.778 5.5H4.723M2.95 1H.5m2.45 5.5H.5M2.95 12H.5" />
     </symbol>
+    <symbol id="icon-value-in" fill="none" viewBox="0 0 25 24">
+        <path stroke="#6EBA14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M2.422 12h17m-7-7 7 7-7 7" />
+    </symbol>
+    <symbol id="icon-value-out" fill="none" viewBox="0 0 25 24">
+        <path stroke="#7035EC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M18.422 8h-17m7 7-7-7 7-7" />
+    </symbol>
 </svg>

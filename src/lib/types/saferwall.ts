@@ -160,18 +160,7 @@ export namespace Saferwall {
 			tid: string;
 			ts: number;
 
-			values: Value[];
-		};
-
-		export type Value = {
-			name: string;
-			type: string;
-			value: {
-				val?: string;
-				in?: string;
-				out?: string;
-				[key: string]: unknown;
-			};
+			values: ApiCall.Entry[];
 		};
 	}
 
@@ -282,6 +271,7 @@ export namespace Saferwall {
 		export interface Entry {
 			name: string;
 			type: string;
+			value: EntryValue;
 		}
 
 		export type EntryValue =
