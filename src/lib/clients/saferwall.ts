@@ -43,15 +43,7 @@ export class SaferwallClient {
 
 		this.setAuthHeaders(init);
 
-		console.group('[REQUEST]:', endpoint);
-		console.time('TOTAL');
-		console.log('ARGS:', Object.keys(args).length);
-		console.log('METHOD:', init.method);
-
 		const response: any = await fetch(url, init);
-
-		console.timeEnd('TOTAL');
-		console.groupEnd();
 
 		if (!response.ok) {
 			throw response;
