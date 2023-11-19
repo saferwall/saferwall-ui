@@ -29,7 +29,9 @@
 <section class="container mx-auto space-y-6">
 	<FileSummaryCard {...summaryCard} />
 	<BasePropsCard {properties} />
-	<ExifFileMetadataCard {exif} />
+	{#if exif}
+		<ExifFileMetadataCard {exif} />
+	{/if}
 	<SubmissionsCard {submissions} />
 	<IndicatorsCard {indicators} />
 	<VirtualScreensCard />

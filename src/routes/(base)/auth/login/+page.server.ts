@@ -2,7 +2,6 @@ import { fail } from '@sveltejs/kit';
 import { SESSION_KEY } from '$lib/config';
 import type { PageServerLoad, Actions } from './$types';
 import { SaferwallClient } from '$lib/clients/saferwall';
-import type { Session } from '$lib/types';
 
 export const load = (async ({ parent, cookies, locals }: any) => {
 	await parent();
@@ -33,7 +32,7 @@ export const actions = {
 		}
 
 		try {
-			const session: Session = await new SaferwallClient().singIn({
+			const session = await new SaferwallClient().singIn({
 				username,
 				password
 			});

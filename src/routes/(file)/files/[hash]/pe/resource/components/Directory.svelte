@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { Entry, Struct } from '$lib/types/resource';
+	import type { Saferwall } from '$lib/types';
 	import DirectoryEntry from './DirectoryEntry.svelte';
 	import ResourceData from './ResourceData.svelte';
 
-	export let Entries: Entry[];
-	export let Struct: Struct[];
+	export let Entries: Saferwall.Resource.Entry[];
+	export let Struct: Saferwall.Resource.Struct[];
 </script>
 
 {#if Entries}

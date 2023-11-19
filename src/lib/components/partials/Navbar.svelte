@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import type { User } from '$lib/types';
+	import type { Saferwall } from '$lib/types';
 
-	import Logo from './Logo.svelte';
-	import UserMenu from './UserMenu.svelte';
+	import { page } from '$app/stores';
 	import Button from '../form/Button.svelte';
 	import InputSearch from '../form/InputSearch.svelte';
+	import Logo from './Logo.svelte';
+	import UserMenu from './UserMenu.svelte';
 
-	export let user: User | undefined;
+	export let user: Saferwall.User | undefined = undefined;
 </script>
 
 <nav
@@ -20,7 +20,7 @@
 		</div>
 	</div>
 	<div class="inline-flex space-x-8">
-		<ul class="navbar__menu space-x-8 items-center text-grayx-500">
+		<ul class="navbar__menu space-x-8 items-center text-neutral-500">
 			<li>
 				<a class="menu__link" href="https://docs.saferwall.com/" target="_blank" rel="noreferrer">
 					About saferwall
@@ -53,11 +53,7 @@
 			@apply hidden xl:flex;
 
 			a {
-				@apply text-grayx-900;
-			}
-
-			&__link {
-				@apply hover:text-grayx-600;
+				@apply text-neutral-900;
 			}
 		}
 

@@ -5,18 +5,16 @@
 	import Icon from '$lib/components/Icon.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Select from '$lib/components/form/Select.svelte';
-	import BaseCard from '$lib/components/cards/BaseCard.svelte';
+	import Card from '$lib/components/Card.svelte';
 
 	export let data: PageData;
 
-	const maxPages = 5;
-
 	// TODO: implement search
 	// TODO: to upgrade, use a clean one
-	$: pages = Array(maxPages)
+	$: pages = Array(5)
 		.fill(0)
-		.map((_val, index) => {
-			const page = currentPage + (index - Math.floor(maxPages / 2));
+		.map((_val, index, list) => {
+			const page = currentPage + (index - Math.floor(list.length / 2));
 			if (page == currentPage || (page >= 1 && page <= totalPages)) {
 				return page;
 			}
@@ -39,11 +37,11 @@
 		return `?page=${page}&per_page=${perPage}`;
 	};
 
-	const handlePerPage = (page: number, event: any) => {
+	const handlePageLimit = (page: number, event: any) => {
 		goto(generatePagination(page, parseInt(event.target.value)));
 	};
 
-	$: items = Object.entries(data.pagination.items).reduce(
+	$: items = Object.entries(data.pagination?.items).reduce(
 		(list: [string, string][], [encoding, values]) => {
 			const valuesMapped = values.map((val: string) => {
 				return [encoding, val];
@@ -55,7 +53,7 @@
 </script>
 
 <section class="file__strings container mx-auto">
-	<BaseCard class="overflow-x-auto">
+	<Card class="overflow-x-auto">
 		<table class="table">
 			<thead>
 				<th class="w-1/4">
@@ -99,15 +97,15 @@
 					</li>
 				{/each}
 			</ul>
-			<div on:change={(event) => handlePerPage(currentPage, event)}>
-				<Select name="per_page">
+			<div>
+				<Select name="per_page" on:change={(event) => handlePageLimit(currentPage, event)}>
 					{#each perPages as count}
 						<option selected={perPage == count}>{count}</option>
 					{/each}
 				</Select>
 			</div>
 		</form>
-	</BaseCard>
+	</Card>
 </section>
 
 <style lang="scss">
@@ -125,7 +123,7 @@
 		tr {
 			@apply border even:bg-gray-50;
 			td {
-				@apply text-sm text-grayx-900 p-4;
+				@apply text-sm text-neutral-900 p-4;
 
 				&:first-child {
 					@apply border-r;

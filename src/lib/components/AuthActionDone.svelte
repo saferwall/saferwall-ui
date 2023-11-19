@@ -9,7 +9,7 @@
 	<svg class={imageSize}><use href="/images/icons.svg#{image}" /></svg>
 	<div class="flex flex-col items-center space-y-3">
 		<h1 class="text-2xl font-bold">{title}</h1>
-		<p class="text-grayx-700">{@html description}</p>
+		<p class="text-neutral-700">{@html description}</p>
 	</div>
 	<slot />
 </div>

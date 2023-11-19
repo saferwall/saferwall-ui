@@ -6,7 +6,7 @@
 	import Input from './Input.svelte';
 
 	let validHash = true;
-	const onInputSearchChange = (event: Event & any) => {
+	const onInputSearchChange = (event: Event & { target: EventTarget & HTMLInputElement }) => {
 		const hash = event.target.value;
 
 		validHash = isStringSHA256(hash);

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Icon from '$lib/components/Icon.svelte';
-	import { timeSince } from '$lib/utils/format';
+	import { timeSince } from '$lib/utils';
 
+	export let update: number;
 	export let output: string;
 	export let infected: boolean;
-	export let update: number;
 
 	$: lastUpdated = timeSince(update * 1000);
 </script>

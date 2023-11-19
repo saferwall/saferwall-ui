@@ -4,7 +4,7 @@
 		splitCamelCase,
 		translateGroupValue,
 		valueToHex
-	} from '$lib/utils/format';
+	} from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

@@ -1,12 +1,11 @@
 <script lang="ts">
-	import type { APIItemFollow } from '$lib/types/users';
-
 	import Avatar from '$lib/components/Avatar.svelte';
 	import DateTime from '$lib/components/DateTime.svelte';
 	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
+	import type { Saferwall } from '$lib/types';
 
-	export let item: APIItemFollow;
 	export let loggedIn = false;
+	export let item: Saferwall.Activities.Follow;
 </script>
 
 <article

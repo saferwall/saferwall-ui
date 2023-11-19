@@ -5,8 +5,8 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import AuthActionDone from '$lib/components/AuthActionDone.svelte';
 
-	let finished = false;
 	let loading = false;
+	let finished = false;
 	let error: string = '';
 	let errors: Record<string, boolean> = {};
 
@@ -51,7 +51,7 @@
 		{#if error}
 			<Alert type="error" on:close={() => (error = '')}>{error}</Alert>
 		{/if}
-		<p class="text-grayx-700">
+		<p class="text-neutral-700">
 			Enter your account email address and we’ll send you a link to confirm your email.
 		</p>
 		<div class="space-y-4">

@@ -4,11 +4,13 @@
 
 	export let data: PageData;
 
-	$: first_scan = data.antivirus.first_seen;
-	$: last_scan = data.antivirus.last_scanned;
-	$: multiav = data.antivirus.multiav;
 	$: firstScan = multiav.first_scan;
+	$: first_scan = data.antivirus.first_seen;
+
 	$: lastScan = multiav.last_scan;
+	$: last_scan = data.antivirus.last_scanned;
+
+	$: multiav = data.antivirus.multiav;
 
 	// TODO: find out if the first scan & last are same
 </script>

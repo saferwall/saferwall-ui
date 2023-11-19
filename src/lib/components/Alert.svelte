@@ -13,7 +13,7 @@
 	};
 </script>
 
-<div class={`alert ${type}`}>
+<div class={`alert alert--${type}`}>
 	<slot />
 	{#if close}
 		<div class="cursor-pointer" on:mouseup={onClose}>
@@ -27,16 +27,16 @@
 		@apply flex items-center justify-between;
 		@apply border p-4 rounded font-medium;
 
-		&.error {
+		&--error {
 			@apply text-red-500 border-red-400;
 		}
-		&.success {
+		&--success {
 			@apply text-green-500 border-green-400;
 		}
-		&.info {
+		&--info {
 			@apply text-blue-500 border-blue-400;
 		}
-		&.warning {
+		&--warning {
 			@apply text-orange-500 border-orange-400;
 		}
 	}

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import BaseCard from '../../cards/BaseCard.svelte';
+	import Card from '../../Card.svelte';
 	import ComingSoon from '../../partials/ComingSoon.svelte';
 </script>
 
-<BaseCard>
+<Card>
 	<h1 class="card__title">Virtual Screens</h1>
 	<div class="relative grid md:grid-cols-2 lg:grid-cols-3 gap-10 pb-12">
 		<div class="virtual__preview" />
@@ -11,7 +11,7 @@
 		<div class="virtual__preview hidden lg:block" />
 		<ComingSoon />
 	</div>
-</BaseCard>
+</Card>
 
 <style lang="scss">
 	.virtual {

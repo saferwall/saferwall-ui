@@ -11,6 +11,7 @@ export enum UploadStatus {
 	FINISHED = 3 + UploadStatus._START,
 	READY = 4 + UploadStatus._START
 }
+
 export const FILE_UPLOAD_STATUS = [
 	{
 		title: 'Uploading',

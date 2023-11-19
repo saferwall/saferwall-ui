@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import type { APIFollower } from '$lib/types/users';
-	import type { APIPagination } from '$lib/types/pagination';
+	import type { APIPagination } from '$lib/types';
 	import FollowCard from '$lib/components/cards/profile/FollowCard.svelte';
 
 	export let data: PageData;

@@ -1,25 +1,35 @@
 <script lang="ts">
-	let cclass = '';
-	export let type = 'text';
 	export let label = '';
-	export let error = false;
 	export let placeholder = ' ';
-	export { cclass as class };
+	export let icon: string = '';
+	export let type = 'text';
+	export let error = false;
+	export let value: string | undefined = undefined;
 
 	const isPassword = type === 'password';
-	const togglePassword = () => {
+	$: passwordVisible = type !== 'password';
+
+	const onPasswirdIconMouseUp = () => {
 		type = type === 'password' ? 'text' : 'password';
 	};
-	$: passwordVisible = type !== 'password';
 </script>
 
 <label class="input peer-focus" class:labeled={label} class:error>
+	{#if icon}
+		<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>
+	{/if}
 	{#if label}
 		<span class="input__label">{label}</span>
 	{/if}
-	<input on:change class="input__field {cclass}" {type} {placeholder} {...$$restProps} />
+	<input
+		{...$$props}
+		on:change
+		bind:value
+		{placeholder}
+		class="input__element {$$props.class} {icon ? 'input--icon' : ''}"
+	/>
 	{#if isPassword}
-		<svg class="icon" class:visible={passwordVisible} on:mouseup={togglePassword}
+		<svg class="password-icon" class:visible={passwordVisible} on:mouseup={onPasswirdIconMouseUp}
 			><use href="/images/icons.svg#icon-eye" /></svg
 		>
 	{/if}
@@ -29,10 +39,14 @@
 	.input {
 		@apply flex w-full relative;
 
-		&__field {
+		&__element {
 			@apply w-full;
 			@apply px-4 pt-3 pb-3;
 			@apply border rounded;
+
+			&.input--icon {
+				@apply pl-10;
+			}
 		}
 
 		input:read-only {
@@ -40,7 +54,7 @@
 		}
 
 		&.error {
-			.input__field {
+			.input__element {
 				@apply border-red-400;
 			}
 			.input__label {
@@ -49,7 +63,7 @@
 		}
 
 		&.labeled {
-			.input__field {
+			.input__element {
 				@apply px-4 pt-6 pb-2;
 			}
 		}
@@ -57,7 +71,7 @@
 		&__label {
 			@apply font-light;
 			@apply absolute transition-all;
-			@apply text-grayx-500 left-4 top-1/2 -translate-y-1/2 text-sm;
+			@apply text-neutral-500 left-4 top-1/2 -translate-y-1/2 text-sm;
 		}
 
 		&:has(input:not(:placeholder-shown)),
@@ -68,8 +82,14 @@
 		}
 
 		.icon {
+			@apply w-5 h-5;
+			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-900;
+			@apply absolute left-3 -translate-y-1/2 top-1/2;
+		}
+
+		.password-icon {
 			@apply w-6 h-6;
-			@apply text-grayx-400 hover:cursor-pointer hover:text-grayx-900;
+			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-900;
 			@apply absolute right-3 -translate-y-1/2 top-1/2;
 
 			&.visible {

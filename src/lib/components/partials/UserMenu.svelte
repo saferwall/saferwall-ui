@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { User } from '$lib/types';
+	import type { Saferwall } from '$lib/types';
 	import Avatar from '../Avatar.svelte';
 	import Icon from '../Icon.svelte';
 
 	let open = false;
-	export let user: User | undefined;
+	export let user: Saferwall.User | undefined = undefined;
 
 	$: username = user?.username;
 
@@ -72,7 +72,7 @@
 <style lang="scss">
 	.user__menu__item {
 		@apply w-44;
-		@apply font-normal text-lg text-grayx-800;
+		@apply font-normal text-lg text-neutral-800;
 
 		.menu__link {
 			@apply flex items-center;

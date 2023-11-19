@@ -2,7 +2,7 @@
 	import type { PageData } from './$types';
 
 	import Icon from '$lib/components/Icon.svelte';
-	import { translateGroupValue, valueToHex } from '$lib/utils/format';
+	import { translateGroupValue, valueToHex } from '$lib/utils';
 
 	export let data: PageData;
 	$: groups = data.items;
@@ -106,11 +106,11 @@
 				@apply relative z-0;
 
 				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-grayx-200 border-t-0;
+					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-200 border-t-0;
 				}
 
 				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-grayx-200;
+					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-200;
 				}
 
 				&.expanded:nth-child(2n + 1):after {

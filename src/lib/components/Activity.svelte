@@ -1,18 +1,16 @@
 <script lang="ts">
-	import type { Activity } from '$lib/types';
-	import { parseTags } from '$lib/utils/data';
-	import { getMemberSince } from '$lib/utils/date';
-	import { getActivityTitle, timeSince, timeToDateISO } from '$lib/utils/format';
+	import type { Saferwall } from '$lib/types';
+	import { getActivityTitle, parseTags, timeSince, timeToDateISO } from '$lib/utils';
 	import ActivityMeta from './ActivityMeta.svelte';
 
 	import Avatar from './Avatar.svelte';
 	import ButtonFollow from './form/ButtonFollow.svelte';
 	import InputHash from './form/InputHash.svelte';
 
-	export let activity: Activity;
 	export let loggedIn = false;
+	export let activity: Saferwall.Activities.All;
 
-	$: tags = parseTags(activity.file?.tags || {});
+	$: tags = parseTags(activity.file?.tags);
 </script>
 
 <article>
@@ -26,7 +24,9 @@
 					<a href="/users/{activity.author.username}" class="font-bold"
 						>{activity.author.username}</a
 					>
-					<p class="text-grayx-500">Member since {getMemberSince(activity.author.member_since)}</p>
+					<p class="text-neutral-500">
+						Member since {timeSince(activity.author.member_since)}
+					</p>
 				</div>
 				<div>
 					<ButtonFollow username={activity.author.username} {loggedIn} followed={activity.follow} />
@@ -67,7 +67,7 @@
 						</li>
 					{/each}
 				{:else}
-					<p class="text-grayx-800 font-medium">No tags.</p>
+					<p class="text-neutral-800 font-medium">No tags.</p>
 				{/if}
 			</ul>
 		</div>
@@ -77,7 +77,7 @@
 <style lang="scss">
 	.activity {
 		&__time {
-			@apply text-grayx-400;
+			@apply text-neutral-400;
 		}
 
 		&__author,
@@ -85,7 +85,7 @@
 			@apply md:px-8 2xl:px-10 lg:w-48 2xl:w-60;
 
 			&__title {
-				@apply font-semibold text-grayx-400;
+				@apply font-semibold text-neutral-400;
 			}
 		}
 

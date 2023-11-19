@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { splitCamelCase, translateGroupValue, valueToHex } from '$lib/utils/format';
+	import { splitCamelCase, translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	const maxRecords = 20;

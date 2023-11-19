@@ -1,8 +1,8 @@
 <script lang="ts">
+	import type { Saferwall } from '$lib/types';
 	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
-	import type { Exif } from '$lib/types/summary';
-	import { convertBytes } from '$lib/utils/format';
-	import BaseCard from '../BaseCard.svelte';
+	import { convertBytes } from '$lib/utils';
+	import Card from '../../Card.svelte';
 
 	const maxRecords = 10;
 	const formatterProps: any = {
@@ -10,14 +10,18 @@
 		InitializedDataSize: convertBytes
 	};
 
-	export let exif: Exif = {};
+	export let exif: Saferwall.Exif = {};
 
 	$: expanded = false;
 	$: items = Object.entries(exif);
 	$: activeExpanding = Object.keys(exif)?.length > maxRecords;
+
+	const onShowMoreMouseUp = () => {
+		expanded = !expanded;
+	};
 </script>
 
-<BaseCard>
+<Card>
 	<h1 class="card__title">ExifTool File Metadata</h1>
 	<div class="flex flex-col">
 		<table class="card__list" class:expanded>
@@ -37,7 +41,7 @@
 			{/each}
 		</table>
 		{#if activeExpanding}
-			<ButtonShowMore on:mouseup={() => (expanded = !expanded)} {expanded} />
+			<ButtonShowMore on:mouseup={onShowMoreMouseUp} {expanded} />
 		{/if}
 	</div>
-</BaseCard>
+</Card>

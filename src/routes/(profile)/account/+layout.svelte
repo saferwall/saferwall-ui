@@ -15,7 +15,7 @@
 </svelte:head>
 
 <Navbar {user} />
-<main class="flex-1 flex flex-col py-4 h-full bg-grayx space-y-6">
+<main class="flex-1 flex flex-col py-4 h-full bg-neutral space-y-6">
 	<ProfileHeading title="Settings" />
 	<slot />
 </main>

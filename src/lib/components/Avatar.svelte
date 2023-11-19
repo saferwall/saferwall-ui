@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { env } from '$env/dynamic/public';
+	import { PUBLIC_AVATAR_API_URL } from '$env/static/public';
 
 	const DEFAULT_AVATAR = '/images/default-avatar.svg';
 
@@ -9,11 +9,11 @@
 
 	$: avatarImage =
 		image ||
-		(username && env.PUBLIC_AVATAR_API_URL.replace('{username}', `${username}`.toLowerCase())) ||
+		(username && PUBLIC_AVATAR_API_URL.replace('{username}', `${username}`.toLowerCase())) ||
 		DEFAULT_AVATAR;
 
-	const setDefaultAvatar = (event: any) => {
-		event.target.src = DEFAULT_AVATAR;
+	const onImageError = (event: Event & { currentTarget: EventTarget & Element }) => {
+		(event.currentTarget as HTMLImageElement).src = DEFAULT_AVATAR;
 	};
 </script>
 
@@ -23,12 +23,12 @@
 			class="avatar__image"
 			src={avatarImage}
 			alt="Avatar of {username}"
-			on:error={(event) => setDefaultAvatar(event)}
+			on:error={onImageError}
 		/>
 	{:else if username}
 		<span class="avatar__text">{username?.slice(0, 3)}</span>
 	{:else}
-		<svg class="w-full h-full text-grayx-100">
+		<svg class="w-full h-full text-neutral-100">
 			<use href="/images/icons.svg#default-avatar" />
 		</svg>
 	{/if}
@@ -37,10 +37,10 @@
 <style lang="scss">
 	.avatar {
 		@apply rounded-full bg-white overflow-hidden;
-		@apply border border-grayx flex-shrink-0 inline-block;
+		@apply border border-neutral flex-shrink-0 inline-block;
 
 		&:has(&__text) {
-			@apply flex items-center justify-center flex-shrink-0 text-2xl font-bold text-grayx-900;
+			@apply flex items-center justify-center flex-shrink-0 text-2xl font-bold text-neutral-900;
 		}
 
 		&__image {

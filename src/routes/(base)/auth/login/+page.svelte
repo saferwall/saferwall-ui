@@ -62,7 +62,7 @@
 		Didn't confirm registration? <a href="/auth/confirm" class="link">Send confirmation</a>
 	</p>
 </form>
-<div class="border-t border-grayx-100 p-6">
+<div class="border-t border-neutral-100 p-6">
 	<p class="text-center text-sm">
 		Not a member ? <a href="/auth/register" class="link">Create your account</a>
 	</p>

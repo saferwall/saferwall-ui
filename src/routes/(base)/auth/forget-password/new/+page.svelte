@@ -5,8 +5,8 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 
-	let finished = false;
 	let loading = false;
+	let finished = false;
 	let error: string = '';
 	let errors: Record<string, boolean> = {};
 
@@ -55,7 +55,7 @@
 		{#if error}
 			<Alert type="error" on:close={() => (error = '')}>{error}</Alert>
 		{/if}
-		<p class="text-grayx-700">Enter your new password</p>
+		<p class="text-neutral-700">Enter your new password</p>
 		<div class="space-y-4">
 			<Input
 				required

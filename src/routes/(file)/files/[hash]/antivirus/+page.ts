@@ -1,16 +1,11 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
-import type { APIAntivirus } from '$lib/types/antivirus';
-import type { APIFile } from '$lib/types/files';
+import type { Saferwall } from '$lib/types';
 import type { PageLoad } from './$types';
 
-export const load = (async ({
-	params
-}): Promise<{
-	antivirus: APIAntivirus;
-}> => {
+export const load = (async ({ params }) => {
 	const { hash } = params;
 
-	const antivirus = await new SaferwallClient().request<APIAntivirus>(
+	const antivirus = await new SaferwallClient().request<Saferwall.Antivirus>(
 		`files/${hash}?fields=multiav,first_seen,last_scanned`
 	);
 

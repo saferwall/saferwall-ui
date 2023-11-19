@@ -1,21 +1,24 @@
 <script lang="ts">
-	import type { APIFile } from '$lib/types/files';
-	import { getLabelClass, getLabelIcon } from '$lib/utils/format';
+	import type { Saferwall } from '$lib/types';
+	import { getLabelClass, getLabelIcon } from '$lib/utils';
 
-	export let file: APIFile;
+	export let file: Saferwall.File;
+
+	$: labelIcon = getLabelIcon(file.class);
+	$: labelClass = getLabelClass(file.class);
 </script>
 
 <ul class="meta flex flex-wrap md:flex-nowrap md:items-center md:justify-center">
 	<li class="meta__item">
 		<span>CLASSIFICATION</span>
-		<div class="capitalize label label--{getLabelClass(file.class)}">
-			<svg class="w-4 h-4"><use href="/images/icons.svg#icon-{getLabelIcon(file.class)}" /></svg>
-			<span>{getLabelClass(file.class)}</span>
+		<div class="capitalize label label--{labelClass}">
+			<svg class="w-4 h-4"><use href="/images/icons.svg#icon-{labelIcon}" /></svg>
+			<span>{labelClass}</span>
 		</div>
 	</li>
 	<li class="meta__item">
 		<span>ANTIVIRUS</span>
-		<span>{file.multiav.value}/{file.multiav.count}</span>
+		<span>{file.multiav?.value}/{file.multiav?.count}</span>
 	</li>
 	<li class="meta__item grow">
 		<span>FILE NAME</span>
@@ -33,7 +36,7 @@
 			@apply flex flex-col mr-4;
 
 			& span:first-child {
-				@apply font-medium text-grayx-400;
+				@apply font-medium text-neutral-400;
 			}
 			& span:last-child {
 				@apply font-medium;
