@@ -4,9 +4,7 @@
 	export let icon: string = '';
 	export let type = 'text';
 	export let error = false;
-
-	let cclass = '';
-	export { cclass as class };
+	export let value: string | undefined = undefined;
 
 	const isPassword = type === 'password';
 	$: passwordVisible = type !== 'password';
@@ -24,11 +22,11 @@
 		<span class="input__label">{label}</span>
 	{/if}
 	<input
+		{...$$props}
 		on:change
-		class="input__element {cclass} {icon ? 'input--icon' : ''}"
-		{type}
+		bind:value
 		{placeholder}
-		{...$$restProps}
+		class="input__element {$$props.class} {icon ? 'input--icon' : ''}"
 	/>
 	{#if isPassword}
 		<svg class="password-icon" class:visible={passwordVisible} on:mouseup={onPasswirdIconMouseUp}

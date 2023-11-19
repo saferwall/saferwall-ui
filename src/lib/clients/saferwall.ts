@@ -16,7 +16,8 @@ export class SaferwallClient {
 	private authorization?: string;
 
 	private config: Saferwall.Config = {
-		url: `${env.PUBLIC_API_URL}`
+		url: `${env.PUBLIC_API_URL}`,
+		artifactsUrl: `${env.PUBLIC_ARTIFACTS_URL}`
 	};
 
 	private get isLoggedIn(): boolean {
@@ -29,24 +30,38 @@ export class SaferwallClient {
 		}
 	}
 
-	public async request<T>(endpoint: string, args: any = {}): Promise<T> {
-		const url = `${this.config.url}${endpoint}`;
+	public async request<T>(endpoint: string, args: any = {}, toJson = true): Promise<T> {
+		const url = `${!endpoint.startsWith('https://') ? this.config.url : ''}${endpoint}`;
 		const init: RequestInit = {
+			method: 'GET',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				...(args.headers ?? {})
 			},
 			...args
 		};
 
 		this.setAuthHeaders(init);
 
+		console.group('[REQUEST]:', endpoint);
+		console.time('TOTAL');
+		console.log('ARGS:', Object.keys(args).length);
+		console.log('METHOD:', init.method);
+
 		const response: any = await fetch(url, init);
+
+		console.timeEnd('TOTAL');
+		console.groupEnd();
 
 		if (!response.ok) {
 			throw response;
 		}
 
-		return response.json();
+		if (toJson) {
+			return response.json();
+		}
+
+		return response;
 	}
 
 	public async getActivities(pagination?: Pagination) {
@@ -94,9 +109,30 @@ export class SaferwallClient {
 		return this.request<Saferwall.File & Saferwall.Summary>(`files/${hash}/summary`);
 	}
 
-	public async getFileReport(report_id: string, pagination?: Pagination) {
-		return this.request<Saferwall.Pagination<Saferwall.Report.Item>>(
-			`behaviors/${report_id}/api-trace?` + this.generatePaginateQuery(pagination)
+	public async getFileApiTrace(guid: string, pagination?: Pagination & Partial<{ pid: string[] }>) {
+		return this.request<Saferwall.Pagination<Saferwall.Behaviors.ApiTrace.Item>>(
+			`behaviors/${guid}/api-trace?` + this.generatePaginateQuery(pagination)
+		);
+	}
+
+	public async getFileProcessTree(guid: string) {
+		return this.request<{ proc_tree: Saferwall.Behaviors.ProcessItem[] }>(
+			`behaviors/${guid}/?fields=proc_tree`
+		).then((res) => res.proc_tree ?? []);
+	}
+
+	public async getFileBuffData(
+		hash: string,
+		guid: string,
+		procName: string,
+		pid: string,
+		tid: string,
+		buffId: string
+	) {
+		return this.request<Response>(
+			`${this.config.artifactsUrl}saferwall-artifacts/${hash}/${guid}/api-buffers/${procName}__${pid}__${tid}__${buffId}.buff`,
+			{},
+			false
 		);
 	}
 

@@ -6,12 +6,9 @@
 	export let icon: string | undefined = undefined;
 	export let href: string | undefined = undefined;
 	export let target: string | undefined = undefined;
-	export let size: 'xss' | 'xs' | 'sm' | 'lg' | 'base' = 'base';
+	export let size: 'base' | 'xss' | 'xs' | 'sm' | 'md' | 'lg' = 'base';
 	export let theme: 'base' | 'gray' | 'primary' | 'danger' = 'base';
 	export let type: 'button' | 'submit' | 'reset' | undefined = 'button';
-
-	let cclass: string = '';
-	export { cclass as class };
 </script>
 
 {#if href}
@@ -20,7 +17,7 @@
 		{href}
 		{target}
 		on:mouseup
-		class="button button--{theme} button--size--{size} {cclass}"
+		class="button button--{theme} button--size--{size} {$$props.class}"
 	>
 		{#if icon && !loading}<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>{/if}
 		<Loading {loading}><slot /></Loading>
@@ -31,7 +28,7 @@
 		{type}
 		disabled={loading || disabled}
 		on:mouseup
-		class="button button--{theme} button--size--{size} {cclass}"
+		class="button button--{theme} button--size--{size} {$$props.class}"
 	>
 		{#if icon && !loading}
 			<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>
@@ -96,6 +93,9 @@
 			}
 			&--sm {
 				@apply py-2 text-sm;
+			}
+			&--md {
+				@apply py-2.5 text-sm;
 			}
 			&--lg {
 				@apply py-3 px-5;

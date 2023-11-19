@@ -149,12 +149,15 @@ export function asciiReversed(value: string) {
 	return value;
 }
 
-export function hexToASCII(value: string): string {
-	var hex = value ? value.toString() : ''; // force conversion
-	var str = '';
-	for (var i = 0; i < hex.length && hex.substr(i, 2) !== '00'; i += 2)
-		str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-	return str;
+export function hexToASCII(hex: string): string {
+	return new TextDecoder('utf-8').decode(
+		new Uint8Array(
+			hex
+				.replace(/\s/g, '')
+				.match(/.{1,2}/g)!
+				.map((byte) => parseInt(byte, 16))
+		)
+	);
 }
 
 /**
@@ -371,4 +374,17 @@ export const getResourceTypeName = (type: ResourceType): string => {
 	};
 
 	return rsrcTypeMap[type] ?? '?';
+};
+
+export const byteToHex = (byte: number) => {
+	const unsignedByte = byte & 0xff;
+	if (unsignedByte < 16) {
+		return '0' + unsignedByte.toString(16).toUpperCase();
+	} else {
+		return unsignedByte.toString(16).toUpperCase();
+	}
+};
+
+export const toHexString = (bytes: number[]) => {
+	return Array.from(bytes).map((byte) => byteToHex(byte));
 };

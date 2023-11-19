@@ -8,12 +8,9 @@
 
 	export let date: number;
 	export let title = 'Scan Results';
-
-	let cclass: string = '';
-	export { cclass as class };
 </script>
 
-<Card class="w-full {cclass}">
+<Card class="w-full {$$props.class}">
 	<div class="space-y-2">
 		<h2>{title}</h2>
 		<p class="text-neutral-500">

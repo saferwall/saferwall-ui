@@ -12,6 +12,7 @@
 	import Input from '$lib/components/form/Input.svelte';
 	import Select from '$lib/components/form/Select.svelte';
 	import ApiTraceValue from './components/ApiTraceValue.svelte';
+	import FiltersDrawer from './components/FilterDrawer.svelte';
 
 	export let data: PageData;
 
@@ -27,10 +28,13 @@
 	let entries: Record<number, boolean> = {};
 
 	let w32apis: Record<string, string[]> = {};
-	$: pids = data.filters.pids || [];
+
+	$: search = data.search;
 	$: groups = data.pagination.items || [];
-	$: hprops = data.hprops;
+	$: pids = (data.filters.pids || []).filter(Boolean);
+	$: hprops = (data.hprops || []).filter(Boolean);
 	$: if (data) {
+		// reset open entries state on data change
 		entries = {};
 	}
 
@@ -57,14 +61,18 @@
 						? generateQueryParams({ ...formParams, page: pageNumber, hprops })
 						: undefined
 			};
-		});
+		})
+		.filter((p) => totalPages > 0);
 
 	$: perPages = [5, 10, 20, 40, 50, 100, 300].filter((page) => page <= totalCount);
 
+	$: hash = data.hash;
+	$: session = data.session;
 	$: currentPage = data.pagination.page;
 	$: perPage = data.pagination.per_page;
 	$: totalPages = data.pagination.page_count;
 	$: totalCount = data.pagination.total_count;
+	$: behavior_id = data.file.default_behavior_id;
 
 	const generateQueryParams = (
 		options: Pagination & {
@@ -88,7 +96,7 @@
 			page: currentPage,
 			per_page: parseInt(formData?.get('per_page') as string),
 			search: formData?.get('search') as string,
-			hprops: updateHiddenProps.length > 0 ? updateHiddenProps : hprops
+			hprops: updateHiddenProps
 		};
 	};
 
@@ -103,7 +111,12 @@
 		);
 	};
 
-	const toggleEntry = (index: number) => {
+	const onFiltersChanges = ({ detail }: { detail: string[] }) => {
+		pids = [...detail];
+		handleFormChanges();
+	};
+
+	const onEntryToggleMouseUp = (index: number) => {
 		const entry = groups[index];
 
 		const newStatus = !isEntryOpen(index);
@@ -113,7 +126,7 @@
 				type,
 				name,
 				value: entry.args[argIndex]
-			})) as any as Saferwall.ApiCall.Entry[];
+			})) as any as Saferwall.Behaviors.ApiTrace.Entry[];
 		}
 
 		entries[index] = newStatus;
@@ -122,7 +135,26 @@
 	$: isActiveProperty = (id: string): boolean => !hprops || !hprops?.includes(id);
 
 	$: displayProperties = false;
-	const toggleProperties = () => (displayProperties = !displayProperties);
+	const onPropsToggleAction = () => (displayProperties = !displayProperties);
+
+	$: filterDrawer = false;
+	const onOpenDrawMouseUp = () => {
+		filterDrawer = true;
+	};
+
+	const onBuffLoadEvent = (index: number, entry: any, buffId: string) => {
+		throw new Error('Todo');
+		// const group = groups[index];
+
+		// if (!entry) {
+		// 	throw new Error('No Entry found');
+		// }
+
+		// new SaferwallClient(session)
+		// 	.getFileBuffData(hash, behavior_id, /*procname*/ 'ashore.exe', group.pid, group.tid, buffId)
+		// 	.then((r) => r.text())
+		// 	.then((r) => console.log(r));
+	};
 
 	onMount(() => {
 		fetch('/data/w32apis-ui.json')
@@ -136,7 +168,7 @@
 <div class="container mx-auto">
 	<div
 		data-sveltekit-preload-data
-		class="flex flex-col bg-white text-gray-700 rounded overflow-auto w-full h-full p-6 space-y-6"
+		class="flex flex-col bg-white text-gray-700 rounded overflow-auto w-full h-full p-6 gap-4"
 	>
 		<form
 			data-sveltekit-keepfocus
@@ -144,24 +176,36 @@
 			on:change={handleFormChanges}
 			class="flex items-center justify-center space-x-4"
 		>
-			<Input name="search" icon="search" placeholder="Search anything..." />
-			<!-- <div class="flex-shrink-0 flex-grow text-gray-600">
-				<Button icon="filter">
-					<span class="px-2 py-0.5">Process filter</span>
+			<Input name="search" icon="search" bind:search placeholder="Search anything..." />
+			<div class="flex-shrink-0 flex-grow text-gray-600">
+				<Button
+					on:mouseup={onOpenDrawMouseUp}
+					icon="filter"
+					class={pids.length > 0 ? 'border-primary' : ''}
+				>
+					<span class="px-2 py-0.5"> Process filter </span>
+
+					{#if pids.length > 0}
+						<span
+							class="flex items-center justify-center rounded-full w-6 h-6 bg-primary text-white text-sm"
+						>
+							{pids.length}
+						</span>
+					{/if}
 				</Button>
-			</div> -->
-			<div class="properties relative flex-shrink-0 flex-grow text-gray-600 ">
-				<Button icon="properties" on:mouseup={toggleProperties} on:keyup={toggleProperties}>
+			</div>
+			<div class="properties relative flex-shrink-0 flex-grow text-gray-600">
+				<Button icon="properties" on:mouseup={onPropsToggleAction} on:keyup={onPropsToggleAction}>
 					<span class="px-2 py-0.5">Properties</span>
 				</Button>
 				{#if displayProperties}
-					<Overlay on:mouseup={toggleProperties}>
+					<Overlay on:mouseup={onPropsToggleAction}>
 						<ul class="absolute top-[120%] left-0 w-52 shadow z-50 bg-white rounded-lg p-4">
 							<li class="flex flex-row items-center justify-between pb-2">
 								<span class="text-sm text-neutral-500 font-semibold">Show table</span>
 								<button
-									on:keyup={(e) => (e.key === 'Escape' ? toggleProperties() : null)}
-									on:click={toggleProperties}
+									on:keyup={(e) => (e.key === 'Escape' ? onPropsToggleAction() : null)}
+									on:click={onPropsToggleAction}
 									autofocus
 									type="button"
 									class="text-xs bg-neutral-50 rounded-full border border-neutral p-1"
@@ -219,10 +263,10 @@
 					{/if}
 				</thead>
 				<tbody>
-					{#each groups as group, index}
+					{#each groups as trace, index}
 						<tr
 							class="box"
-							on:mouseup={() => toggleEntry(index)}
+							on:mouseup={() => onEntryToggleMouseUp(index)}
 							class:expanded={isEntryOpen(index)}
 						>
 							<td class="pl-4">
@@ -232,25 +276,25 @@
 									class={'transition-all ' + (isEntryOpen(index) === true ? '' : '-rotate-90')}
 								/>
 							</td>
-							<td>{timestampToFormattedDate(group.ts)}</td>
+							<td>{timestampToFormattedDate(trace.ts)}</td>
 							{#if isActiveProperty('pid')}
-								<td>{group.pid}</td>
+								<td>{trace.pid}</td>
 							{/if}
 							{#if isActiveProperty('tid')}
-								<td>{group.tid}</td>
+								<td>{trace.tid}</td>
 							{/if}
 							{#if isActiveProperty('api')}
-								<td>{group.name}</td>
+								<td>{trace.name}</td>
 							{/if}
 							{#if isActiveProperty('args')}
 								<td>
 									<p class="truncate">
-										{group.args?.map((a) => a?.value)?.filter((a) => a) || 'NaN'}
+										{trace.args?.map((a) => a?.value)?.filter((a) => a) || 'NaN'}
 									</p>
 								</td>
 							{/if}
 							{#if isActiveProperty('ret')}
-								<td>{group.ret}</td>
+								<td>{trace.ret}</td>
 							{/if}
 						</tr>
 						{#if isEntryOpen(index)}
@@ -264,12 +308,17 @@
 												<th class="w-full">Value</th>
 											</thead>
 											<tbody>
-												{#each group?.values || [] as entry}
+												{#each trace?.values || [] as entry}
 													<tr>
 														<td>{entry.type}</td>
 														<td>{entry.name}</td>
 														<td class="w-full">
-															<ApiTraceValue {...entry} />
+															<ApiTraceValue
+																on:load={({ detail: buffId }) => {
+																	onBuffLoadEvent(index, entry, buffId);
+																}}
+																{...entry}
+															/>
 														</td>
 													</tr>
 												{/each}
@@ -300,6 +349,15 @@
 		</div>
 	</div>
 </div>
+
+<FiltersDrawer
+	{pids}
+	{session}
+	{behavior_id}
+	open={filterDrawer}
+	on:change={onFiltersChanges}
+	on:close={() => (filterDrawer = false)}
+/>
 
 <style lang="scss">
 	table.groups {
@@ -360,7 +418,7 @@
 		tbody {
 			tr {
 				td {
-					@apply w-1/4;
+					@apply py-2 align-top;
 				}
 			}
 		}

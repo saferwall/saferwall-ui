@@ -24,6 +24,10 @@ button {
 	@apply flex flex-col min-h-full;
 }
 
+.overlay-no-scroll {
+	@apply overflow-hidden;
+}
+
 .container {
 	@apply px-4 md:px-0;
 }

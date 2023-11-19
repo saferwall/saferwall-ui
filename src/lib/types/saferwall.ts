@@ -4,6 +4,7 @@ export namespace Saferwall {
 
 	export type Config = {
 		url: string;
+		artifactsUrl: string;
 	};
 
 	export interface Pagination<T = any> {
@@ -149,19 +150,52 @@ export namespace Saferwall {
 		}
 	}
 
-	export namespace Report {
-		export type Item = {
-			args: Array<{
-				value: string;
-			}>;
-			name: string;
-			pid: string;
-			ret: string;
-			tid: string;
-			ts: number;
+	export namespace Behaviors {
+		export namespace ApiTrace {
+			export interface Entry {
+				name: string;
+				type: string;
+				value: EntryValue;
+			}
 
-			values: ApiCall.Entry[];
-		};
+			export type EntryValue = Partial<{
+				val: any;
+				in: any;
+				out: any;
+				buf_id: any;
+				in_id: any;
+				out_id: any;
+			}>;
+
+			export interface Item {
+				args: Array<{
+					value: string;
+				}>;
+				name: string;
+				pid: string;
+				ret: string;
+				tid: string;
+				ts: number;
+
+				values: Entry[];
+			}
+		}
+
+		export enum Detection {
+			CLEAN = 'clean',
+			UNKNWON = 'unknown',
+			MALICIOUS = 'malicious'
+		}
+		export interface ProcessItem {
+			detection: Detection;
+			file_type: string;
+			parent_link: string;
+			parent_pid: string;
+			path: string;
+			pid: string;
+			proc_name: string;
+		}
+		export type ProcessTree = ProcessItem[];
 	}
 
 	export type Exif = Partial<{
@@ -265,26 +299,5 @@ export namespace Saferwall {
 		export interface Following extends Follow {}
 
 		export type All = Like | Comment | Submission | Follower | Following | any;
-	}
-
-	export namespace ApiCall {
-		export interface Entry {
-			name: string;
-			type: string;
-			value: EntryValue;
-		}
-
-		export type EntryValue =
-			| {
-					val: any;
-			  }
-			| {
-					in: any;
-					out: any;
-			  }
-			| {
-					in_buf_id: any;
-					out_buf_id: any;
-			  };
 	}
 }

@@ -3,11 +3,15 @@ module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        "16": "repeat(16, minmax(0, 1fr))"
+      },
       fontFamily: {
         primary: 'Manrope',
       },
       borderRadius: {
-        DEFAULT: "6px"
+        DEFAULT: "6px",
+        'sm': '0.225rem',
       },
       boxShadow: {
         'base': '0px 2px 9px rgb(0 0 0 / 0.05)'
