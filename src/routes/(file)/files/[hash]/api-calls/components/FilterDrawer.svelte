@@ -29,6 +29,7 @@
 	onMount(() => {
 		new SaferwallClient(session).getFileProcessTree(behavior_id).then((items) => {
 			processItems = items;
+			dispatch('filters', items);
 		});
 	});
 </script>

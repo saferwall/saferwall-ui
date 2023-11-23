@@ -11,7 +11,7 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import Select from '$lib/components/form/Select.svelte';
-	import ApiTraceValue from './components/ApiTraceValue.svelte';
+	import ApiTraceRow from './components/ApiTraceRow.svelte';
 	import FiltersDrawer from './components/FilterDrawer.svelte';
 
 	export let data: PageData;
@@ -33,12 +33,14 @@
 	$: groups = data.pagination.items || [];
 	$: pids = (data.filters.pids || []).filter(Boolean);
 	$: hprops = (data.hprops || []).filter(Boolean);
+
+	// reset open entries state on data change
 	$: if (data) {
-		// reset open entries state on data change
 		entries = {};
 	}
 
 	$: isEntryOpen = (index: number) => entries[index] == true;
+	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
 
 	$: pages = Array(5)
 		.fill(0)
@@ -73,6 +75,7 @@
 	$: totalPages = data.pagination.page_count;
 	$: totalCount = data.pagination.total_count;
 	$: behavior_id = data.file.default_behavior_id;
+	$: filters = [] as Saferwall.Behaviors.ProcessTree;
 
 	const generateQueryParams = (
 		options: Pagination & {
@@ -142,20 +145,6 @@
 		filterDrawer = true;
 	};
 
-	const onBuffLoadEvent = (index: number, entry: any, buffId: string) => {
-		throw new Error('Todo');
-		// const group = groups[index];
-
-		// if (!entry) {
-		// 	throw new Error('No Entry found');
-		// }
-
-		// new SaferwallClient(session)
-		// 	.getFileBuffData(hash, behavior_id, /*procname*/ 'ashore.exe', group.pid, group.tid, buffId)
-		// 	.then((r) => r.text())
-		// 	.then((r) => console.log(r));
-	};
-
 	onMount(() => {
 		fetch('/data/w32apis-ui.json')
 			.then((res) => res.json())
@@ -204,9 +193,9 @@
 							<li class="flex flex-row items-center justify-between pb-2">
 								<span class="text-sm text-neutral-500 font-semibold">Show table</span>
 								<button
+									autofocus
 									on:keyup={(e) => (e.key === 'Escape' ? onPropsToggleAction() : null)}
 									on:click={onPropsToggleAction}
-									autofocus
 									type="button"
 									class="text-xs bg-neutral-50 rounded-full border border-neutral p-1"
 								>
@@ -300,31 +289,15 @@
 						{#if isEntryOpen(index)}
 							<tr class="box__body" class:hidden={!isEntryOpen(index)}>
 								<td colspan="8" class="overflow-hidden">
-									<div class="px-4 relative py-2 -mt-7 border-l">
-										<table class="items w-full">
-											<thead>
-												<th>Type</th>
-												<th>Name</th>
-												<th class="w-full">Value</th>
-											</thead>
-											<tbody>
-												{#each trace?.values || [] as entry}
-													<tr>
-														<td>{entry.type}</td>
-														<td>{entry.name}</td>
-														<td class="w-full">
-															<ApiTraceValue
-																on:load={({ detail: buffId }) => {
-																	onBuffLoadEvent(index, entry, buffId);
-																}}
-																{...entry}
-															/>
-														</td>
-													</tr>
-												{/each}
-											</tbody>
-										</table>
-									</div>
+									<ApiTraceRow
+										{trace}
+										{session}
+										{hash}
+										{behavior_id}
+										procName={getProcName(groups[index].pid)}
+										pid={groups[index].pid}
+										tid={groups[index].tid}
+									/>
 								</td>
 							</tr>
 						{/if}
@@ -355,6 +328,9 @@
 	{session}
 	{behavior_id}
 	open={filterDrawer}
+	on:filters={(event) => {
+		filters = event.detail ?? [];
+	}}
 	on:change={onFiltersChanges}
 	on:close={() => (filterDrawer = false)}
 />
@@ -401,24 +377,6 @@
 				td {
 					@apply cursor-pointer;
 					@apply py-4 rounded;
-				}
-			}
-		}
-	}
-
-	table.items {
-		@apply w-full ml-8;
-		@apply border-l-2 border-neutral-200;
-
-		tbody td,
-		thead th {
-			@apply md:pl-8;
-		}
-
-		tbody {
-			tr {
-				td {
-					@apply py-2 align-top;
 				}
 			}
 		}

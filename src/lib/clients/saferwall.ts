@@ -2,6 +2,7 @@ import { env } from '$env/dynamic/public';
 import { DEFAULT_PAGINATION_ITEMS } from '$lib/config';
 
 import type {
+	ApiTraceBufferDto,
 	ChangePasswordDto,
 	LoginDto,
 	Pagination,
@@ -30,10 +31,9 @@ export class SaferwallClient {
 		}
 	}
 
-	public async request<T>(endpoint: string, args: any = {}, toJson = true): Promise<T> {
-		const url = `${!endpoint.startsWith('https://') ? this.config.url : ''}${endpoint}`;
+	public async request<T>(endpoint: string, args: RequestInit = {}, toJson = true): Promise<T> {
+		const url = `${endpoint.startsWith('https://') ? '' : this.config.url}${endpoint}`;
 		const init: RequestInit = {
-			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
 				...(args.headers ?? {})
@@ -81,7 +81,7 @@ export class SaferwallClient {
 		return this.request<Saferwall.File>(`files/`, {
 			method: 'POST',
 			headers: {
-				'Content-Length': file.size
+				'Content-Length': `${file.size}`
 			},
 			body: data
 		});
@@ -113,19 +113,14 @@ export class SaferwallClient {
 		).then((res) => res.proc_tree ?? []);
 	}
 
-	public async getFileBuffData(
-		hash: string,
-		guid: string,
-		procName: string,
-		pid: string,
-		tid: string,
-		buffId: string
-	) {
+	public async getFileBuffData({ hash, guid, procName, pid, tid, buffId }: ApiTraceBufferDto) {
 		return this.request<Response>(
-			`${this.config.artifactsUrl}saferwall-artifacts/${hash}/${guid}/api-buffers/${procName}__${pid}__${tid}__${buffId}.buff`,
-			{},
+			`${this.config.artifactsUrl}${hash}/${guid}/api-buffers/${procName}__${pid}__${tid}__${buffId}.buff`,
+			{
+				headers: {}
+			},
 			false
-		);
+		).then((res) => res.arrayBuffer());
 	}
 
 	public async getUser(username: string) {

@@ -34,3 +34,12 @@ export interface UpdatePasswordDto {
 	old: string;
 	new_password: string;
 }
+
+export interface ApiTraceBufferDto {
+	hash: string;
+	guid: string;
+	procName: string;
+	pid: string;
+	tid: string;
+	buffId: string;
+}

@@ -3,17 +3,19 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import type { Saferwall } from '$lib/types';
 	import { hexToASCII, toHexString } from '$lib/utils';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, getContext } from 'svelte';
 
+	export let loading = false;
 	export let value: Saferwall.Behaviors.ApiTrace.EntryValue;
 
-	const dispatch = createEventDispatcher();
-
-	$: [hex] = Array.isArray(value.val)
-		? value.val.reduce(
+	$: buffId = value.buf_id;
+	$: val = value.val;
+	$: hex = Array.isArray(val)
+		? val.reduce(
 				([lines, current], int, index) => {
-					current.push(Math.abs(int));
-					if (current.length === 16 || value.val === index) {
+					current.push(int);
+
+					if (current.length === 16 || val.length === index) {
 						const hexStr = toHexString(current);
 						lines.push([hexStr, hexToASCII(hexStr.join(' '))]);
 						current = [];
@@ -22,49 +24,48 @@
 					return [lines, current];
 				},
 				[[], []]
-		  )
+		  )[0]
 		: [];
 
-	$: buffId = value.buf_id;
-
-	let loading = false;
 	let open = false;
 	const onToggleMouseUp = () => (open = !open);
 
+	const dispatch = createEventDispatcher();
 	const onLoadMoreMouseUp = (e: MouseEvent) => {
-		dispatch('load', buffId);
-		loading = true;
+		dispatch('load');
 	};
 </script>
 
 <div class="flex flex-col value flex-1">
-	{#if value.val}
-		<div class="value-hex flex flex-col">
-			{#if Array.isArray(value.val)}
+	{#if val}
+		<div class="value-hex flex flex-col relative">
+			{#if Array.isArray(val)}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div class="flex flex-col gap-x-4 w-full text-sm">
+				<div
+					class="relative flex flex-col gap-x-4 w-full text-sm max-h-96 overflow-y-auto border-b border-t pl-10"
+				>
+					<span class="absolute left-0 w-5 h-5 p-1">
+						<Icon
+							on:click={onToggleMouseUp}
+							name="arrow-down"
+							size={`w-full h-full ${open ? '' : '-rotate-90'}`}
+						/>
+					</span>
 					{#each hex as [v, string], index}
 						{#if open || index === 0}
 							<div class="flex flex-row gap-4">
-								<div class="col-span-2 flex gap-2 items-center">
-									<span class="w-3"
-										>{#if index === 0}
-											<Icon
-												on:click={onToggleMouseUp}
-												name="arrow-down"
-												size={`w-3 h-3 ${open ? '' : '-rotate-90'}`}
-											/>
-										{/if}</span
-									>
+								<div hex>
 									<pre>{v.join(' ')}</pre>
 								</div>
-								<div class="col-span-1 border-r border-l w-36 px-0.5">{string}</div>
+								<div string>{string}</div>
 							</div>
 						{/if}
 					{/each}
-					{#if buffId && open && value.val?.length <= 5000}
-						<div>
-							<Button {loading} on:mouseup={onLoadMoreMouseUp}>Load All</Button>
+					{#if open && buffId && value.val?.length <= 5000}
+						<div class="my-3">
+							<Button size="xs" {loading} disabled={loading} on:mouseup={onLoadMoreMouseUp}>
+								Load All
+							</Button>
 						</div>
 					{/if}
 				</div>
@@ -107,6 +108,13 @@
 		&-hex {
 			@apply font-sans;
 			@apply flex flex-col;
+		}
+
+		[hex] {
+			@apply col-span-2 flex gap-2 items-center;
+		}
+		[string] {
+			@apply col-span-1 border-r border-l w-56 px-2;
 		}
 	}
 </style>
