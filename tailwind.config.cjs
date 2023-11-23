@@ -3,11 +3,15 @@ module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        "16": "repeat(16, minmax(0, 1fr))"
+      },
       fontFamily: {
         primary: 'Manrope',
       },
       borderRadius: {
-        DEFAULT: "6px"
+        DEFAULT: "6px",
+        'sm': '0.225rem',
       },
       boxShadow: {
         'base': '0px 2px 9px rgb(0 0 0 / 0.05)'
@@ -44,7 +48,7 @@ module.exports = {
         purplex: {
           DEFAULT: '#6C5ED1'
         },
-        grayx: {
+        neutral: {
           DEFAULT: '#F6F6F6',
           '50': '#F8F8F8',
           '100': '#f0f0f0',

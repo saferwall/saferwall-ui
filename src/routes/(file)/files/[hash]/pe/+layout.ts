@@ -1,12 +1,6 @@
-import type { APIFile } from '$lib/types/files';
 import type { LayoutLoad } from './$types';
 
-export const load = (async ({
-	parent
-}): Promise<{
-	activePEMenu: string;
-	file: APIFile;
-}> => {
+export const load = (async ({ parent }) => {
 	const { paths, ...parentData } = await parent();
 	return {
 		...parentData,

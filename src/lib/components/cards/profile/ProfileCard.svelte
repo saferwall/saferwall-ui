@@ -1,7 +1,7 @@
 <script lang="ts">
+	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
 	import Avatar from '../../Avatar.svelte';
 	import Button from '../../form/Button.svelte';
-	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
 
 	export let bio: string = '';
 	export let url: string = '';
@@ -42,7 +42,7 @@
 				{#if bio}
 					<div class="space-y-1">
 						<h1 class="font-semibold text-gray-800">Biography</h1>
-						<p class="text-grayx-500">{bio}</p>
+						<p class="text-neutral-500">{bio}</p>
 					</div>
 				{/if}
 			</div>

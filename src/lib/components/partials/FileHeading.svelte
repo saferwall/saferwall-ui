@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { FileMenu } from '$lib/types';
+	import type { Menus } from '$lib/types';
 	import Button from '$lib/components/form/Button.svelte';
 	import ButtonLike from '../form/ButtonLike.svelte';
 
 	export let hash = '';
 	export let liked = false;
 	export let loggedIn = false;
-	export let activeMenu: FileMenu;
+	export let activeMenu: Menus.File;
 
 	$: downloadLink = `https://api.saferwall.com/v1/files/${hash}/download/`;
 	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/file/${hash}/${activeMenu.path}`;

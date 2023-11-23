@@ -1,22 +1,21 @@
 <script lang="ts">
-	import type { Properties } from '$lib/types/summary';
-	import { parseTags } from '$lib/utils/data';
-	import { convertBytes } from '$lib/utils/format';
-	import BaseCard from '../BaseCard.svelte';
+	import type { Saferwall } from '$lib/types';
+	import { convertBytes, parseTags } from '$lib/utils';
+	import Card from '../../Card.svelte';
 
 	const ingoreProps: string[] = ['Tags', 'Packer', 'TrID'];
 	const formatterProps: any = {
 		Size: convertBytes
 	};
 
-	export let properties: Properties = {};
+	export let properties: Saferwall.Properties = {};
 
-	$: trid = properties?.TrID;
-	$: packer = properties?.Packer;
-	$: tags = parseTags(properties?.Tags || {});
+	$: trid = properties?.TrID!;
+	$: packer = properties?.Packer!;
+	$: tags = parseTags(properties?.Tags);
 </script>
 
-<BaseCard>
+<Card>
 	<h1 class="card__title">Basic properties</h1>
 	<table class="card__list">
 		{#each Object.entries(properties) as [key, value]}
@@ -79,4 +78,4 @@
 			</tr>
 		{/if}
 	</table>
-</BaseCard>
+</Card>

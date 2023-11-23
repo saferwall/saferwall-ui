@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let active: string | undefined = undefined;
 	export let items: string[] = [];
+	export let active: string | undefined = undefined;
 
 	const dispatch = createEventDispatcher();
-	let activeItem = active || items[0] || '';
 
-	const setActive = (item: string): void => {
+	let activeItem = active || items[0] || '';
+	const onToggleMouseUp = (item: string): void => {
 		activeItem = item;
 		dispatch('change', item);
 	};
@@ -15,7 +15,7 @@
 
 <ul class="multitoggle">
 	{#each items as item}
-		<li on:mouseup={() => setActive(item)} class="item" class:active={activeItem == item}>
+		<li on:mouseup={() => onToggleMouseUp(item)} class="item" class:active={activeItem == item}>
 			{item}
 		</li>
 	{/each}
@@ -23,11 +23,11 @@
 
 <style lang="scss">
 	.multitoggle {
-		@apply flex items-center p-1 rounded-full border border-grayx space-x-1;
+		@apply flex items-center p-1 rounded-full border border-neutral space-x-1;
 
 		.item {
 			@apply py-2 px-4 rounded-full;
-			@apply text-grayx-500 cursor-pointer;
+			@apply text-neutral-500 cursor-pointer;
 
 			&:hover,
 			&.active {

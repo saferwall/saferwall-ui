@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { SaferwallClient } from '$lib/clients/saferwall';
-	import UploadBox from '$lib/components/UploadBox.svelte';
-	import LatestActivities from '$lib/sections/LatestActivities.svelte';
 	import type { PageData } from './$types';
+	import { SaferwallClient } from '$lib/clients/saferwall';
+	import LatestActivities from '$lib/components/LatestActivities.svelte';
+	import UploadBox from '$lib/components/UploadBox.svelte';
 
 	export let data: PageData;
 
@@ -10,11 +10,11 @@
 	let reachEnd = false;
 
 	$: session = data.session;
+	$: loggedIn = data.user !== undefined;
 	$: activities = data.pagination.items;
 	$: pagination = data.pagination as any;
-	$: loggedIn = data.user !== undefined;
 
-	const loadMoreActivities = async () => {
+	const onLoadMore = async () => {
 		loading = true;
 
 		try {
@@ -45,5 +45,5 @@
 
 <div class="container mx-auto py-10 space-y-20">
 	<UploadBox {loggedIn} {session} />
-	<LatestActivities on:load={loadMoreActivities} {loading} {reachEnd} {loggedIn} {activities} />
+	<LatestActivities on:load={onLoadMore} {loading} {reachEnd} {loggedIn} {activities} />
 </div>

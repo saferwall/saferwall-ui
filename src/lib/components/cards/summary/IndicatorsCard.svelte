@@ -1,5 +1,5 @@
 <script lang="ts">
-	import BaseCard from '../../cards/BaseCard.svelte';
+	import Card from '../../Card.svelte';
 	import ButtonShowMore from '../../form/ButtonShowMore.svelte';
 	import CommingSoon from '../../partials/ComingSoon.svelte';
 
@@ -11,7 +11,7 @@
 	$: activeExpanding = indicators.length > maxRecords;
 </script>
 
-<BaseCard>
+<Card>
 	<h1 class="card__title">Indicators</h1>
 	<div class="flex flex-col relative overflow-hidden">
 		<table class="card__table">
@@ -41,7 +41,7 @@
 			<ButtonShowMore on:mouseup={() => (expanded = !expanded)} {expanded} />
 		{/if}
 	</div>
-</BaseCard>
+</Card>
 
 <style lang="scss">
 	.indicator {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { splitCamelCase, valueToHex } from '$lib/utils/format';
+	import { splitCamelCase, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;

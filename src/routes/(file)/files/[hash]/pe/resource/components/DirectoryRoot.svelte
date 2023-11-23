@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Entry, Struct } from '$lib/types/resource';
+	import type { Entry, Struct } from '$lib/types';
 	import DirectoryEntry from './DirectoryEntry.svelte';
 
 	export let Entries: Entry[];

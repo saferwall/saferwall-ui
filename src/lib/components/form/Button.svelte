@@ -1,29 +1,34 @@
 <script lang="ts">
 	import Loading from './Loading.svelte';
 
-	let cclass: string = '';
-	export let size: string = 'base';
-	export let theme: string = 'base';
-	export let disabled = false;
 	export let loading = false;
+	export let disabled = false;
 	export let icon: string | undefined = undefined;
-	export let target: string | undefined = undefined;
 	export let href: string | undefined = undefined;
+	export let target: string | undefined = undefined;
+	export let size: 'base' | 'xss' | 'xs' | 'sm' | 'md' | 'lg' = 'base';
+	export let theme: 'base' | 'gray' | 'primary' | 'danger' = 'base';
 	export let type: 'button' | 'submit' | 'reset' | undefined = 'button';
-	export { cclass as class };
 </script>
 
 {#if href}
-	<a on:mouseup {href} {target} class="button button--{theme} button--size--{size} {cclass}">
+	<a
+		{...$$props}
+		{href}
+		{target}
+		on:mouseup
+		class="button button--{theme} button--size--{size} {$$props.class}"
+	>
 		{#if icon && !loading}<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>{/if}
 		<Loading {loading}><slot /></Loading>
 	</a>
 {:else}
 	<button
-		on:mouseup
+		{...$$props}
 		{type}
 		disabled={loading || disabled}
-		class="button button--{theme} button--size--{size} {cclass}"
+		on:mouseup
+		class="button button--{theme} button--size--{size} {$$props.class}"
 	>
 		{#if icon && !loading}
 			<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>
@@ -48,7 +53,7 @@
 			@apply text-primary bg-white;
 		}
 		&--gray {
-			@apply text-grayx-500 bg-white;
+			@apply text-neutral-500 bg-white;
 		}
 		&--base.active,
 		&--base:hover,
@@ -88,6 +93,9 @@
 			}
 			&--sm {
 				@apply py-2 text-sm;
+			}
+			&--md {
+				@apply py-2.5 text-sm;
 			}
 			&--lg {
 				@apply py-3 px-5;

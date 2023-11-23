@@ -1,9 +1,9 @@
 <script lang="ts">
-	import BaseCard from '$lib/components/cards/BaseCard.svelte';
-	import type { Struct } from '$lib/types/resource';
-	import { translateGroupValue } from '$lib/utils/format';
+	import Card from '$lib/components/Card.svelte';
+	import type { Saferwall } from '$lib/types';
+	import { translateGroupValue } from '$lib/utils';
 
-	export let Struct: Struct;
+	export let Struct: Saferwall.Resource.Struct;
 
 	$: rows = Object.entries(Struct).map(([name, value]) => {
 		return {
@@ -13,7 +13,7 @@
 	});
 </script>
 
-<BaseCard class="bg-grayx-50 shadow-lg border border-gray-200" padding={false}>
+<Card class="bg-neutral-50 shadow-lg border border-gray-200" padding={false}>
 	<table>
 		<thead>
 			<th>Member</th>
@@ -28,11 +28,11 @@
 			{/each}
 		</tbody>
 	</table>
-</BaseCard>
+</Card>
 
 <style lang="scss">
 	table {
-		@apply bg-grayx-50 overflow-hidden;
+		@apply bg-neutral-50 overflow-hidden;
 		@apply border border-collapse rounded text-sm;
 
 		tbody td,
@@ -46,7 +46,7 @@
 		}
 
 		tbody td {
-			@apply bg-grayx-50;
+			@apply bg-neutral-50;
 		}
 	}
 </style>

@@ -20,7 +20,7 @@
 </svelte:head>
 
 <FileNavbar {hash} {activeMenu} {fileMenu} />
-<main class="flex-1 flex flex-col h-full bg-grayx">
+<main class="flex-1 flex flex-col h-full bg-neutral">
 	<FileHeading {activeMenu} {hash} {loggedIn} {liked} />
 	<div class="pt-4 pb-10">
 		<slot />

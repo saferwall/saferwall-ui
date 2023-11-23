@@ -1,7 +1,7 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
 import type { LayoutLoad } from './$types';
 import type { ProfileSection, User } from '$lib/types';
-import type { APIPagination } from '$lib/types/pagination';
+import type { APIPagination } from '$lib/types';
 import type { APIUser, APIItem } from '$lib/types/users';
 
 export const load = (async ({

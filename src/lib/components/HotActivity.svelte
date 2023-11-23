@@ -1,24 +1,25 @@
 <script lang="ts">
+	import type { Saferwall } from '$lib/types';
 	import Avatar from './Avatar.svelte';
-	import BasicTags from './BasicTags.svelte';
-	import BaseCard from './cards/BaseCard.svelte';
 	import DateTime from './DateTime.svelte';
+	import Tags from './Tags.svelte';
+	import Card from './Card.svelte';
 	import InputHash from './form/InputHash.svelte';
 
 	export let date: number;
 	export let title: string;
-	export let files: { sha256: string; tags: string[] }[] = [];
+	export let files: Partial<Saferwall.File>[] = [];
 	export let refs: { title: string; url: string }[] = [];
 
-	$: srotedFiles = files.sort((a, b) => a.tags.length - b.tags.length);
+	$: srotedFiles = files.sort((a, b) => a.tags!.length - b.tags!.length);
 </script>
 
-<BaseCard>
+<Card>
 	<div class="flex items-center space-x-2">
 		<Avatar size="md" image="/images/logo-v.webp" />
 		<div class="flex flex-col">
 			<span>Saferwall</span>
-			<DateTime class="text-sm text-grayx-600" {date} />
+			<DateTime class="text-sm text-neutral-600" {date} />
 		</div>
 	</div>
 	<div class="space-y-4">
@@ -27,7 +28,7 @@
 			{#each srotedFiles as file}
 				<li class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2">
 					<InputHash hash={file.sha256} />
-					<BasicTags tags={file.tags} />
+					<Tags tags={file.tags} />
 				</li>
 			{/each}
 		</ul>
@@ -47,4 +48,4 @@
 			{/each}
 		</ul>
 	</div>
-</BaseCard>
+</Card>

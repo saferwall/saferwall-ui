@@ -5,8 +5,8 @@
 	import Alert from '$lib/components/Alert.svelte';
 	import { enhance } from '$app/forms';
 
-	let finished = false;
 	let loading = false;
+	let finished = false;
 	let error: string = '';
 	let errors: Record<string, boolean> = {};
 
@@ -51,7 +51,7 @@
 		{#if error}
 			<Alert type="error" on:close={() => (error = '')}>{error}</Alert>
 		{/if}
-		<p class="text-grayx-700">
+		<p class="text-neutral-700">
 			We have just sent a confirmation link of your account to the email address.
 		</p>
 		<div class="space-y-4">

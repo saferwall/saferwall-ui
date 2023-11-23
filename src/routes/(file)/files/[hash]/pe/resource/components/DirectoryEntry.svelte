@@ -1,16 +1,16 @@
 <script script lang="ts">
 	import Button from '$lib/components/form/Button.svelte';
 	import Icon from '$lib/components/Icon.svelte';
-	import type { Data, Directory, Entry, Struct } from '$lib/types/resource';
+	import type { Saferwall } from '$lib/types';
 	import DirectoryComponent from './Directory.svelte';
 	import DirectoryTable from './DirectoryTable.svelte';
 
 	export let isRoot = false;
 
-	export let Directory: Directory;
-	export let Struct: Struct;
 	export let ID: string;
 	export let Name: string;
+	export let Directory: Saferwall.Resource.Directory;
+	export let Struct: Saferwall.Resource.Struct;
 
 	$: structOpen = false;
 	$: tableOpen = false;
@@ -66,12 +66,12 @@
 		}
 		&:before {
 			@apply top-7 mt-0.5 left-8 ml-2 z-30;
-			@apply h-8 w-[1px] bg-grayx-200;
+			@apply h-8 w-[1px] bg-neutral-200;
 		}
 
 		&:after {
 			@apply top-14 mt-1.5 left-8 ml-2 z-30;
-			@apply w-5 h-[1px] bg-grayx-200;
+			@apply w-5 h-[1px] bg-neutral-200;
 		}
 	}
 </style>

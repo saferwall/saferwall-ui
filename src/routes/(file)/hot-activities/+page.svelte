@@ -12,7 +12,7 @@
 	<title>Hot activities - Saferwall</title>
 </svelte:head>
 
-<main class="flex-1 flex flex-col h-full bg-grayx">
+<main class="flex-1 flex flex-col h-full bg-neutral">
 	<div class="container py-12 mx-auto h-full flex flex-col flex-1 space-y-10">
 		<h1 class="text-2xl font-medium">Hot Activities</h1>
 		{#if activities.length > 0}

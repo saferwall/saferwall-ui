@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
-	import { translateGroupValue, valueToHex } from '$lib/utils/format';
+	import { translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	const maxRecords = 20;

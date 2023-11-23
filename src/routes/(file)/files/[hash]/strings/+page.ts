@@ -1,15 +1,9 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
-import type { APIPagination } from '$lib/types/pagination';
-import type { APIStrings } from '$lib/types/strings';
+import type { APIPagination, APIStrings } from '$lib/types';
 import type { PageLoad } from './$types';
 
 // TODO: implement search
-export const load = (async ({
-	params,
-	url
-}): Promise<{
-	pagination: APIPagination<APIStrings>;
-}> => {
+export const load = (async ({ params, url }) => {
 	const { hash } = params;
 
 	const page = parseInt(url.searchParams.get('page')!) || 1;
@@ -23,7 +17,7 @@ export const load = (async ({
 		urlParams.append('per_page', per_page.toString());
 	}
 
-	const pagination = await new SaferwallClient().request<APIFile>(
+	const pagination = await new SaferwallClient().request<APIPagination<APIStrings>>(
 		`files/${hash}/strings?${urlParams.toString()}`
 	);
 	pagination.items = pagination.items ?? [];

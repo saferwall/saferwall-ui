@@ -1,10 +1,5 @@
 <script lang="ts">
-	import {
-		getDataDirectoryLabel,
-		splitCamelCase,
-		translateGroupValue,
-		valueToHex
-	} from '$lib/utils/format';
+	import { splitCamelCase, translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
