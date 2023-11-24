@@ -220,4 +220,15 @@
         <path stroke="#7035EC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M18.422 8h-17m7 7-7-7 7-7" />
     </symbol>
+    <symbol id="icon-plus-circle" fill="none" viewBox="0 0 18 18">
+        <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
+            clip-path="url(#a)">
+            <path d="M9 16.5a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15ZM9 6v6M6 9h6" />
+        </g>
+        <defs>
+            <clipPath id="a">
+                <path fill="currentColor" d="M0 0h18v18H0z" />
+            </clipPath>
+        </defs>
+    </symbol>
 </svg>

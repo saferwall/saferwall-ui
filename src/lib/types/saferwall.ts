@@ -290,14 +290,14 @@ export namespace Saferwall {
 			member_since: number;
 		}
 
-		export interface Like extends Base { }
-		export interface Submission extends Base { }
+		export interface Like extends Base {}
+		export interface Submission extends Base {}
 		export interface Comment extends Base {
 			comment: string;
 		}
 
-		export interface Follower extends Follow { }
-		export interface Following extends Follow { }
+		export interface Follower extends Follow {}
+		export interface Following extends Follow {}
 
 		export type All = Like | Comment | Submission | Follower | Following | any;
 	}
