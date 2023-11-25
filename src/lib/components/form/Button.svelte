@@ -13,32 +13,43 @@
 
 {#if href}
 	<a
+		on:mouseup
 		{...$$props}
 		{href}
 		{target}
-		on:mouseup
 		class="button button--{theme} button--size--{size} {$$props.class}"
 	>
-		{#if icon && !loading}<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>{/if}
-		<Loading {loading}><slot /></Loading>
+		<Loading {loading}>
+			<div class="content">
+				{#if icon}
+					<svg class="icon" class:opacity-0={loading}
+						><use href="/images/icons.svg#icon-{icon}" /></svg
+					>{/if}
+				<slot />
+			</div>
+		</Loading>
 	</a>
 {:else}
 	<button
+		on:mouseup
 		{...$$props}
 		{type}
 		disabled={loading || disabled}
-		on:mouseup
 		class="button button--{theme} button--size--{size} {$$props.class}"
 	>
-		{#if icon && !loading}
-			<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>
-		{/if}
 		<Loading {loading}>
-			<slot />
+			<div class="content">
+				{#if icon}
+					<svg class="icon" class:opacity-0={loading}
+						><use href="/images/icons.svg#icon-{icon}" /></svg
+					>
+				{/if}
+				<slot />
+				{#if loading}
+					<slot name="loading" />
+				{/if}
+			</div>
 		</Loading>
-		{#if loading}
-			<slot name="loading" />
-		{/if}
 	</button>
 {/if}
 
@@ -46,8 +57,12 @@
 	.button {
 		@apply py-2.5 px-4;
 		@apply font-semibold;
-		@apply inline-flex justify-center items-center space-x-4;
 		@apply border rounded;
+
+		&,
+		.content {
+			@apply inline-flex justify-center items-center space-x-4;
+		}
 
 		&--base {
 			@apply text-primary bg-white;

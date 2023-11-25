@@ -123,6 +123,12 @@ export class SaferwallClient {
 		).then((res) => res.arrayBuffer());
 	}
 
+	public async rescanFile(hash: string) {
+		return this.request<unknown>(`files/${hash}/rescan`, {
+			method: 'POST'
+		});
+	}
+
 	public async getUser(username: string) {
 		return this.request<Saferwall.User>(`users/${username}`);
 	}

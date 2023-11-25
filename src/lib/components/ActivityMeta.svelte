@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Saferwall } from '$lib/types';
 	import { getLabelClass, getLabelIcon } from '$lib/utils';
+	import Icon from './Icon.svelte';
 
 	export let file: Saferwall.File;
 
@@ -12,7 +13,7 @@
 	<li class="meta__item">
 		<span>CLASSIFICATION</span>
 		<div class="capitalize label label--{labelClass}">
-			<svg class="w-4 h-4"><use href="/images/icons.svg#icon-{labelIcon}" /></svg>
+			<Icon size="w-5 h-4" class="mr-1" name={labelIcon} />
 			<span>{labelClass}</span>
 		</div>
 	</li>
