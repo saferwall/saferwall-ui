@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { SaferwallClient } from '$lib/clients/saferwall';
 	import type { Saferwall } from '$lib/types';
+	import { slide } from 'svelte/transition';
 	import ApiTraceValue from './ApiTraceValue.svelte';
 
 	export let session: Saferwall.Session;

@@ -178,6 +178,9 @@ export namespace Saferwall {
 				ts: number;
 
 				values: Entry[];
+
+				// virtual
+				open?: boolean;
 			}
 		}
 

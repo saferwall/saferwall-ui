@@ -13,6 +13,8 @@
 	import Select from '$lib/components/form/Select.svelte';
 	import ApiTraceRow from './components/ApiTraceRow.svelte';
 	import FiltersDrawer from './components/FilterDrawer.svelte';
+	import { slide } from 'svelte/transition';
+	import { quintInOut } from 'svelte/easing';
 
 	export let data: PageData;
 
@@ -25,7 +27,6 @@
 	];
 
 	let form: HTMLFormElement;
-	let entries: Record<number, boolean> = {};
 
 	let w32apis: Record<string, string[]> = {};
 
@@ -34,12 +35,6 @@
 	$: pids = (data.filters.pids || []).filter(Boolean);
 	$: hprops = (data.hprops || []).filter(Boolean);
 
-	// reset open entries state on data change
-	$: if (data) {
-		entries = {};
-	}
-
-	$: isEntryOpen = (index: number) => entries[index] == true;
 	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
 
 	$: pages = Array(5)
@@ -119,10 +114,8 @@
 		handleFormChanges();
 	};
 
-	const onEntryToggleMouseUp = (index: number) => {
+	const onEntryToggleMouseUp = (index: number, trace: any) => {
 		const entry = groups[index];
-
-		const newStatus = !isEntryOpen(index);
 
 		if (!entry.values) {
 			entry.values = w32apis[entry.name]!.map(([type, name], argIndex) => ({
@@ -131,8 +124,6 @@
 				value: entry.args[argIndex]
 			})) as any as Saferwall.Behaviors.ApiTrace.Entry[];
 		}
-
-		entries[index] = newStatus;
 	};
 
 	$: isActiveProperty = (id: string): boolean => !hprops || !hprops?.includes(id);
@@ -255,14 +246,18 @@
 					{#each groups as trace, index}
 						<tr
 							class="box"
-							on:mouseup={() => onEntryToggleMouseUp(index)}
-							class:expanded={isEntryOpen(index)}
+							on:mouseup={() => {
+								trace.open = !trace.open;
+
+								onEntryToggleMouseUp(index, trace);
+							}}
+							class:expanded={trace.open}
 						>
 							<td class="pl-4">
 								<Icon
 									size="w-4 h-4"
 									name="arrow-down"
-									class={'transition-all ' + (isEntryOpen(index) === true ? '' : '-rotate-90')}
+									class={'transition-all ' + (trace.open === true ? '' : '-rotate-90')}
 								/>
 							</td>
 							<td>{timestampToFormattedDate(trace.ts)}</td>
@@ -286,18 +281,20 @@
 								<td>{trace.ret}</td>
 							{/if}
 						</tr>
-						{#if isEntryOpen(index)}
-							<tr class="box__body" class:hidden={!isEntryOpen(index)}>
+						{#if trace.open}
+							<tr class="box__body" class:hidden={!trace.open}>
 								<td colspan="8" class="overflow-hidden">
-									<ApiTraceRow
-										{trace}
-										{session}
-										{hash}
-										{behavior_id}
-										procName={getProcName(groups[index].pid)}
-										pid={groups[index].pid}
-										tid={groups[index].tid}
-									/>
+									<div transition:slide={{ axis: 'y', duration: 200 }}>
+										<ApiTraceRow
+											{trace}
+											{session}
+											{hash}
+											{behavior_id}
+											procName={getProcName(groups[index].pid)}
+											pid={groups[index].pid}
+											tid={groups[index].tid}
+										/>
+									</div>
 								</td>
 							</tr>
 						{/if}
