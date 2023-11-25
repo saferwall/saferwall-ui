@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { splitCamelCase, valueToHex } from '$lib/utils';
 
+	export let lines = false;
 	export let header = true;
 	export let hexValue = true;
 	export let camelCase = true;
@@ -8,7 +9,7 @@
 </script>
 
 <table class="w-full">
-	<tbody>
+	<tbody class:divide-y={lines} class:divide-neutral-100={lines}>
 		{#if header}
 			<tr>
 				<td class="font-semibold text-base">Member</td>
@@ -28,6 +29,11 @@
 <style lang="scss">
 	table {
 		@apply w-full;
+		.divide-y {
+			td {
+				@apply px-4;
+			}
+		}
 
 		tbody tr {
 			td {
