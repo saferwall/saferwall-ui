@@ -196,6 +196,7 @@ export namespace Saferwall {
 			proc_name: string;
 		}
 		export type ProcessTree = ProcessItem[];
+		export type NestedProcessTree = ProcessItem & { children: NestedProcessTree[] };
 	}
 
 	export type Exif = Partial<{

@@ -109,7 +109,7 @@ export class SaferwallClient {
 
 	public async getFileProcessTree(guid: string) {
 		return this.request<{ proc_tree: Saferwall.Behaviors.ProcessItem[] }>(
-			`behaviors/${guid}/?fields=proc_tree`
+			`behaviors/${guid}?fields=proc_tree`
 		).then((res) => res.proc_tree ?? []);
 	}
 
