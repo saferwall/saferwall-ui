@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import Icon from './Icon.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -20,14 +21,10 @@
 	>
 		<div class="flex-center space-x-1">
 			{#if loading}
-				<svg class="w-6 h-6 animate-spin">
-					<use href="/images/icons.svg#icon-loading" />
-				</svg>
+				<Icon name="loading" size="w-6 h-6" class="animate-spin" />
 			{:else}
 				<span><slot /></span>
-				<svg class="w-4 h-4">
-					<use href="/images/icons.svg#icon-arrow-down" />
-				</svg>
+				<Icon name="arrow-down" size="w-4 h-4" />
 			{/if}
 		</div>
 	</div>

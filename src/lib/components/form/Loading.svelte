@@ -1,9 +1,14 @@
 <script lang="ts">
+	import Icon from '../Icon.svelte';
+
 	export let loading = true;
 </script>
 
-{#if loading}
-	<svg class="w-6 h-6 animate-spin"><use href="/images/icons.svg#icon-loading" /></svg>
-{:else}
-	<slot />
-{/if}
+<div class="relative">
+	<span class:text-transparent={loading}><slot /></span>
+	{#if loading}
+		<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+			<Icon name="loading" class="w-6 h-6 animate-spin" />
+		</div>
+	{/if}
+</div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$lib/components/Icon.svelte';
 	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
 	import Avatar from '../../Avatar.svelte';
 	import Button from '../../form/Button.svelte';
@@ -30,9 +31,7 @@
 							class="inline-flex items-center font-medium text-primary-600 bg-primary-600 bg-opacity-10 rounded px-4 space-x-2 max-w-full w-max mt-4"
 							rel="noreferrer"
 						>
-							<svg class="w-4 h-4">
-								<use href="/images/icons.svg#icon-link" />
-							</svg>
+							<Icon name="link" size="w-4 h-4" />
 							<div class="py-2 bg-transparent focus:outline-none px-1 truncate inline-flex w-max">
 								{url}
 							</div>

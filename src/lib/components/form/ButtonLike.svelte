@@ -13,17 +13,17 @@
 <form
 	action="/actions?/like"
 	method="post"
-	use:enhance={({ data }) => {
+	use:enhance={({ formData }) => {
 		loading = true;
 
-		data.append('hash', hash);
-		data.append('like', liked ? 'unlike' : 'like');
+		formData.append('hash', hash);
+		formData.append('like', liked ? 'unlike' : 'like');
 
 		return async ({ result }) => {
 			loading = false;
 
 			if (result.type === 'success') {
-				liked = result.data?.like;
+				liked = Boolean(result.data?.like);
 			}
 		};
 	}}

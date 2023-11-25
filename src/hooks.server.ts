@@ -45,6 +45,8 @@ export const handleError = (async ({ error, event }: any) => {
 		path: '/'
 	});
 
+	console.error(error);
+
 	return {
 		message: error?.message,
 		status: error?.status

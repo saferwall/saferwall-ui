@@ -6,6 +6,7 @@
 	export let data: LayoutData;
 
 	$: hash = data.hash;
+	$: session = data.session;
 	$: fileMenu = data.fileMenu;
 	$: activeMenu = data.activeMenu;
 	$: submissions = data.file.submissions;
@@ -21,7 +22,7 @@
 
 <FileNavbar {hash} {activeMenu} {fileMenu} />
 <main class="flex-1 flex flex-col h-full bg-neutral">
-	<FileHeading {activeMenu} {hash} {loggedIn} {liked} />
+	<FileHeading {session} {activeMenu} {hash} {loggedIn} {liked} />
 	<div class="pt-4 pb-10">
 		<slot />
 	</div>

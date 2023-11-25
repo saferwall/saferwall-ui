@@ -11,7 +11,7 @@ export const fileMenu: Menus.File[] = [
 	{ name: 'Antivirus', path: 'antivirus' },
 	{ name: 'Dynamic Overview', path: 'dynamic-overview' },
 	{ name: 'API Calls', path: 'api-calls' },
-	{ name: 'Files MemDumps', path: 'files-memdumps' },
+	{ name: 'Files & MemDumps', path: 'files-memdumps' },
 	{ name: 'Comments', path: 'comments' }
 ];
 

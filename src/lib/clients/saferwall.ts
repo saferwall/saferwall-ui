@@ -109,7 +109,7 @@ export class SaferwallClient {
 
 	public async getFileProcessTree(guid: string) {
 		return this.request<{ proc_tree: Saferwall.Behaviors.ProcessItem[] }>(
-			`behaviors/${guid}/?fields=proc_tree`
+			`behaviors/${guid}?fields=proc_tree`
 		).then((res) => res.proc_tree ?? []);
 	}
 
@@ -121,6 +121,12 @@ export class SaferwallClient {
 			},
 			false
 		).then((res) => res.arrayBuffer());
+	}
+
+	public async rescanFile(hash: string) {
+		return this.request<unknown>(`files/${hash}/rescan`, {
+			method: 'POST'
+		});
 	}
 
 	public async getUser(username: string) {

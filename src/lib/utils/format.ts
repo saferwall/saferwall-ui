@@ -34,7 +34,7 @@ const activityTypes: { [key: string]: string } = {
  */
 export function parseTags(fileTags: any): Saferwall.Tag[] {
 	const visitedTags: string[] = [];
-	return Object.keys(fileTags).reduce((tags: Saferwall.Tag[], category: string) => {
+	return Object.keys(fileTags ?? {}).reduce((tags: Saferwall.Tag[], category: string) => {
 		let items: string | string[] | undefined = fileTags[category];
 
 		if (!items) {
