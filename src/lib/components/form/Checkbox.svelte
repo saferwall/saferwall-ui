@@ -1,20 +1,27 @@
 <script lang="ts">
 	export let checked: boolean = false;
-	export let group: undefined = undefined;
+	export let group: any = [];
 	export let value: string | undefined = undefined;
+	export let size: 'sm' | 'lg' | '' = '';
 </script>
 
-<label class={$$props.class}>
+<label class={`${size} ${$$props.class}`}>
 	<input type="checkbox" on:click on:change bind:group bind:checked {value} {...$$restProps} />
-	<slot />
+	{#if $$slots}
+		<span>
+			<slot />
+		</span>
+	{/if}
 </label>
 
 <style lang="scss">
 	label {
 		@apply cursor-pointer;
+		@apply inline-flex items-center space-x-2;
 
 		input {
-			@apply w-6 h-6 shrink-0;
+			@apply w-6 h-6;
+			@apply shrink-0;
 			@apply outline-none appearance-none;
 			@apply relative border-2 border-neutral-300/40 rounded;
 			transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -36,6 +43,18 @@
 
 			&:focus {
 				@apply border-primary-400;
+			}
+		}
+
+		&.sm {
+			input {
+				@apply w-4 h-4 rounded-sm;
+			}
+		}
+
+		&.lg {
+			input {
+				@apply w-8 h-8;
 			}
 		}
 	}
