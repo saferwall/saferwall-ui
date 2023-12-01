@@ -1,9 +1,11 @@
 <script lang="ts">
 	import Card from '$lib/components/Card.svelte';
 	import type { Saferwall } from '$lib/types';
-	import ProcessTreeView from './ProcessTreeView.svelte';
+	import ProcessTreeView from './components/ProcessTreeView.svelte';
 
 	export let data;
+	$: session = data.session;
+	$: behaviorId = data.behaviorId;
 
 	$: processTree = buildProcessTrees(data.processArray);
 
@@ -38,7 +40,7 @@
 			<svelte:fragment slot="header">
 				<h1 class="text-2xl">Process Tree</h1>
 			</svelte:fragment>
-			<ProcessTreeView trees={processTree} parent={false} />
+			<ProcessTreeView {behaviorId} {session} trees={processTree} parent={false} />
 		</Card>
 	</section>
 </div>

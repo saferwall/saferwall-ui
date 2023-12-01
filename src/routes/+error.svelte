@@ -11,7 +11,6 @@
 		<h3 class="text-3xl text-redx">
 			{$page.error?.message}
 		</h3>
-
 		<p class="italic text-gray-500 mt-8 text-sm">
 			{randomErrorQuote()}
 		</p>

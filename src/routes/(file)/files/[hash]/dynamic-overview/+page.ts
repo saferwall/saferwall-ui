@@ -11,6 +11,7 @@ export const load: PageLoad = async ({ parent }) => {
 	const processArray = await new SaferwallClient(session).getFileProcessTree(default_behavior_id);
 
 	return {
-		processArray
+		processArray,
+		behaviorId: default_behavior_id
 	};
 };

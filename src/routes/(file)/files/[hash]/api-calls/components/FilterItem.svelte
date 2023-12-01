@@ -4,11 +4,10 @@
 	import { Saferwall } from '$lib/types';
 	import { createEventDispatcher, tick } from 'svelte';
 
-	//TODO: fix bind:group and remove dispatch:change
 	const dispatch = createEventDispatcher();
 
 	export let item: Saferwall.Behaviors.ProcessItem;
-	export let group: any = undefined;
+	export let group: any[] = [];
 
 	const toggleCheckbox = async (e: MouseEvent) => {
 		await tick();
@@ -29,7 +28,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div on:change={() => dispatch('change')} class="wrapper">
-	<Checkbox bind:group name="pid[]" value={pid} />
+	<Checkbox checked={group.includes(pid)} name="pid[]" value={pid} />
 	<div class="content" on:mouseup|stopPropagation={toggleCheckbox}>
 		<div class="basic">
 			<div>

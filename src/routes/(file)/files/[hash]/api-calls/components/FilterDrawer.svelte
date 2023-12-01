@@ -8,12 +8,12 @@
 	import { SaferwallClient } from '$lib/clients/saferwall';
 	import type { Saferwall } from '$lib/types';
 
-	export let behavior_id: string;
+	export let behaviorId: string;
 	export let session: Saferwall.Session;
-	export let open = false;
 
 	const dispatch = createEventDispatcher();
 
+	export let open = false;
 	export let pids: string[] = [];
 	let processItems: Saferwall.Behaviors.ProcessItem[] = [];
 
@@ -27,7 +27,7 @@
 		: processItems;
 
 	onMount(() => {
-		new SaferwallClient(session).getFileProcessTree(behavior_id).then((items) => {
+		new SaferwallClient(session).getFileProcessTree(behaviorId).then((items) => {
 			processItems = items;
 			dispatch('filters', items);
 		});

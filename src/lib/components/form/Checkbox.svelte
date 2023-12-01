@@ -1,12 +1,11 @@
 <script lang="ts">
 	export let checked: boolean = false;
-	export let group: any = [];
 	export let value: string | undefined = undefined;
-	export let size: 'sm' | 'lg' | '' = '';
+	export let size: 'sm' | 'lg' | 'base' = 'base';
 </script>
 
 <label class={`${size} ${$$props.class}`}>
-	<input type="checkbox" on:click on:change bind:group bind:checked {value} {...$$restProps} />
+	<input type="checkbox" on:click on:change bind:checked {value} {...$$restProps} />
 	{#if $$slots}
 		<span>
 			<slot />

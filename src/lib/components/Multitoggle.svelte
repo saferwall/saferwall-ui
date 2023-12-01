@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
+	export let max = 1;
+	export let name: string | undefined = undefined;
+
 	type MultitoggleItem = {
 		label: string;
 		value: any;
 	} & Partial<{
 		checked: boolean;
 	}>;
-
-	export let max = 1;
 	export let items: MultitoggleItem[] = [];
-	export let name: string | undefined = undefined;
 
 	$: selected = new Set([...items.filter((i) => i.checked)]);
 	$: dispatch('change', selected);
@@ -54,7 +54,7 @@
 
 <style lang="scss">
 	.multitoggle {
-		@apply flex items-center p-1 rounded-full border border-neutral space-x-1;
+		@apply flex items-center rounded-full space-x-1;
 
 		.item {
 			@apply py-2 px-4 rounded-full;

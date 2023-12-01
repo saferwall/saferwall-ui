@@ -1,17 +1,18 @@
-<script>
+<script lang="ts">
 	import { slide } from 'svelte/transition';
 	import Icon from './Icon.svelte';
 
 	export let expandable = false;
 
 	let open = true;
-	const onTogglePress = () => {
+	const onPress = () => {
 		open = !open;
 	};
 </script>
 
 <div class="flex flex-col">
-	<div on:click={onTogglePress} on:keypress={onTogglePress} class="cursor-pointer">
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div on:click={onPress} class="cursor-pointer">
 		<div class="flex items-start space-x-4">
 			{#if expandable}
 				<div class="pt-2 text-neutral-400">

@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { SaferwallClient } from '$lib/clients/saferwall';
 	import type { Saferwall } from '$lib/types';
-	import { slide } from 'svelte/transition';
 	import ApiTraceValue from './ApiTraceValue.svelte';
 
 	export let session: Saferwall.Session;
-	export let behavior_id: string;
+	export let behaviorId: string;
 	export let hash: string;
 	export let procName: string;
 	export let pid: string;
@@ -21,7 +20,7 @@
 			entry.value.val = await new SaferwallClient(session)
 				.getFileBuffData({
 					hash,
-					guid: behavior_id,
+					behaviorId,
 					procName,
 					pid,
 					tid,

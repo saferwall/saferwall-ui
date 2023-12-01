@@ -101,21 +101,43 @@ export class SaferwallClient {
 		return this.request<Saferwall.File & Saferwall.Summary>(`files/${hash}/summary`);
 	}
 
-	public async getFileApiTrace(guid: string, pagination?: Pagination & Partial<{ pid: string[] }>) {
+	public async getFileApiTrace(
+		behaviorId: string,
+		pagination?: Pagination & Partial<{ pid: string[] }>
+	) {
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.ApiTrace.Item>>(
-			`behaviors/${guid}/api-trace?` + this.generatePaginateQuery(pagination)
+			`behaviors/${behaviorId}/api-trace?` + this.generatePaginateQuery(pagination)
 		);
 	}
 
-	public async getFileProcessTree(guid: string) {
+	public async getFileProcessTree(behaviorId: string) {
 		return this.request<{ proc_tree: Saferwall.Behaviors.ProcessItem[] }>(
-			`behaviors/${guid}?fields=proc_tree`
+			`behaviors/${behaviorId}?fields=proc_tree`
 		).then((res) => res.proc_tree ?? []);
 	}
 
-	public async getFileBuffData({ hash, guid, procName, pid, tid, buffId }: ApiTraceBufferDto) {
+	public async getFileSystemEvents(behaviorId: string) {
+		return this.request<Saferwall.Pagination<Saferwall.Behaviors.SystemEvent>>(
+			`behaviors/${behaviorId}/sys-events`
+		).then((res) => res.items ?? []);
+	}
+
+	public async getFileCapabilities(behaviorId: string) {
+		return this.request<{ capabilities: Saferwall.Behaviors.Capability[] }>(
+			`behaviors/${behaviorId}?fields=capabilities`
+		).then((res) => res.capabilities ?? []);
+	}
+
+	public async getFileBuffData({
+		hash,
+		behaviorId,
+		procName,
+		pid,
+		tid,
+		buffId
+	}: ApiTraceBufferDto) {
 		return this.request<Response>(
-			`${this.config.artifactsUrl}${hash}/${guid}/api-buffers/${procName}__${pid}__${tid}__${buffId}.buff`,
+			`${this.config.artifactsUrl}${hash}/${behaviorId}/api-buffers/${procName}__${pid}__${tid}__${buffId}.buff`,
 			{
 				headers: {}
 			},

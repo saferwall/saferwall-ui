@@ -200,6 +200,21 @@ export namespace Saferwall {
 		}
 		export type ProcessTree = ProcessItem[];
 		export type NestedProcessTree = ProcessItem & { children: NestedProcessTree[] };
+
+		export interface SystemEvent {
+			op: 'create' | 'read' | 'write' | 'string';
+			path: string;
+			pid: string;
+			type: string;
+		}
+
+		export interface Capability {
+			category: string;
+			description: string;
+			module: string;
+			pid: string;
+			severity: string;
+		}
 	}
 
 	export type Exif = Partial<{

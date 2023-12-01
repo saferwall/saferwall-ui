@@ -11,10 +11,9 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import Select from '$lib/components/form/Select.svelte';
+	import { slide } from 'svelte/transition';
 	import ApiTraceRow from './components/ApiTraceRow.svelte';
 	import FiltersDrawer from './components/FilterDrawer.svelte';
-	import { slide } from 'svelte/transition';
-	import { quintInOut } from 'svelte/easing';
 
 	export let data: PageData;
 
@@ -69,7 +68,7 @@
 	$: perPage = data.pagination.per_page;
 	$: totalPages = data.pagination.page_count;
 	$: totalCount = data.pagination.total_count;
-	$: behavior_id = data.file.default_behavior_id;
+	$: behaviorId = data.file.default_behavior_id;
 	$: filters = [] as Saferwall.Behaviors.ProcessTree;
 
 	const generateQueryParams = (
@@ -137,11 +136,11 @@
 	};
 
 	onMount(() => {
-		fetch('/data/w32apis-ui.json')
+		fetch('/data/w32apis-ui.json', {
+			cache: 'force-cache'
+		})
 			.then((res) => res.json())
-			.then((res) => {
-				w32apis = res;
-			});
+			.then((res) => (w32apis = res));
 	});
 </script>
 
@@ -289,7 +288,7 @@
 											{trace}
 											{session}
 											{hash}
-											{behavior_id}
+											{behaviorId}
 											procName={getProcName(groups[index].pid)}
 											pid={groups[index].pid}
 											tid={groups[index].tid}
@@ -323,10 +322,10 @@
 <FiltersDrawer
 	{pids}
 	{session}
-	{behavior_id}
+	{behaviorId}
 	open={filterDrawer}
 	on:filters={(event) => {
-		filters = event.detail ?? [];
+		filters = [...(event.detail ?? [])];
 	}}
 	on:change={onFiltersChanges}
 	on:close={() => (filterDrawer = false)}

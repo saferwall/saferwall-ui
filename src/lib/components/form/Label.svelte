@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let size: 'base' | 'xs' | 'sm' = 'base';
-	export let theme: 'base' | 'gray' | 'primary' | 'danger' = 'base';
+	export let theme: 'base' | 'gray' | 'primary' | 'warning' | 'info' | 'danger' = 'base';
 </script>
 
 <div {...$$props} class={`label label--${size} label--${theme} ${$$props.class}`}>
@@ -27,6 +27,14 @@
 
 		&--danger {
 			@apply bg-red-100 text-red-500;
+		}
+
+		&--warning {
+			@apply bg-red-100 text-orange-500;
+		}
+
+		&--info {
+			@apply bg-red-100 text-purple-500;
 		}
 
 		&--xs {
