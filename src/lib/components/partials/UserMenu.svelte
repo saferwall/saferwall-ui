@@ -8,7 +8,10 @@
 
 	$: username = user?.username;
 
-	const clickOutside = (node: Node, { enabled: initialEnabled, cb }: any) => {
+	const clickOutside = (
+		node: Node,
+		{ enabled: initialEnabled, cb }: { enabled: boolean; cb: Function }
+	) => {
 		const handleOutsideClick = ({ target }: any) => {
 			if (!node.contains(target)) {
 				cb();

@@ -6,7 +6,7 @@
 
 	export let data: PageData;
 
-	$: certificate = data.certificate;
+	$: certificate = data.security;
 
 	$: headers = [
 		['Length', valueToHex(certificate.Header.Length)],

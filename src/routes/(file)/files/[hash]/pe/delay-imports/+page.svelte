@@ -5,7 +5,7 @@
 	import { translateGroupValue, valueToHex } from '$lib/utils';
 
 	export let data: PageData;
-	$: groups = data.items;
+	$: groups = data.delayImport ?? [];
 
 	let entries: Record<number, boolean> = {};
 	$: isEntryOpen = (index: number) => {

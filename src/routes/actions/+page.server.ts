@@ -2,7 +2,7 @@ import { fail, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { SaferwallClient } from '$lib/clients/saferwall';
 
-export const load = (async ({ parent }: any) => {
+export const load = (async ({ parent }) => {
 	await parent();
 	return {};
 }) satisfies PageServerLoad;
@@ -20,8 +20,8 @@ export const actions = {
 				username,
 				follow
 			};
-		} catch (response: any) {
-			return fail(400, await response.json());
+		} catch (response) {
+			return fail(400, await (response as Response).json());
 		}
 	},
 	like: async ({ request, locals }) => {
@@ -36,8 +36,8 @@ export const actions = {
 				hash,
 				like
 			};
-		} catch (response: any) {
-			return fail(400, await response.json());
+		} catch (response) {
+			return fail(400, await (response as Response).json());
 		}
 	}
 } satisfies Actions;

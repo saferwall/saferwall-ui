@@ -1,5 +1,5 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
-import type { APIFile } from '$lib/types';
+import type { Saferwall } from '$lib/types';
 import type { PageLoad } from './$types';
 
 export const load = (async ({
@@ -7,9 +7,9 @@ export const load = (async ({
 }): Promise<{
 	dosHeader: any;
 }> => {
-	const { hash } = params;
-
-	const { pe } = await new SaferwallClient().request<APIFile>(`files/${hash}?fields=pe.dos_header`);
+	const { pe } = await new SaferwallClient().request<Saferwall.File>(
+		`files/${params.hash}?fields=pe.dos_header`
+	);
 
 	return {
 		dosHeader: pe.dos_header

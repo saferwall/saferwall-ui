@@ -1,22 +1,21 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import Input from '$lib/components/form/Input.svelte';
-	import Button from '$lib/components/form/Button.svelte';
 	import Alert from '$lib/components/Alert.svelte';
+	import Button from '$lib/components/form/Button.svelte';
+	import Input from '$lib/components/form/Input.svelte';
 	import { redirect } from '@sveltejs/kit';
+	import type { SubmitFunction } from './$types';
 
 	let loading = false;
 	let error: string = '';
 	let errors: Record<string, boolean> = {};
 
-	const handleFormSubmit = (_event: any) => {
+	const handleFormSubmit: SubmitFunction = () => {
 		error = '';
 		errors = {};
 		loading = true;
 
-		return async ({ result, update }: any) => {
-			const { data, type } = result;
-
+		return async ({ result: { data, type }, update }) => {
 			if (type === 'failure') {
 				errors = data;
 				error = data?.message;

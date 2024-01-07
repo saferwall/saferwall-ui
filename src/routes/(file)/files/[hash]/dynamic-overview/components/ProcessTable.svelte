@@ -1,15 +1,13 @@
 <script lang="ts">
-	import type { Saferwall } from '$lib/types';
-
-	import { slide } from 'svelte/transition';
-
 	import { SaferwallClient } from '$lib/clients/saferwall';
 	import Card from '$lib/components/Card.svelte';
 	import Multitoggle from '$lib/components/Multitoggle.svelte';
 	import Checkbox from '$lib/components/form/Checkbox.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import Label from '$lib/components/form/Label.svelte';
+	import type { Saferwall } from '$lib/types';
 	import { onMount } from 'svelte';
+	import { slide } from 'svelte/transition';
 
 	export let behaviorId: string;
 	export let session: Saferwall.Session;
@@ -34,6 +32,7 @@
 			);
 		})
 		.filter(filterByQuery);
+
 	let capabilitiesItems: Saferwall.Behaviors.Capability[] = [];
 	$: filteredcapabilitiesItems = capabilitiesItems
 		.filter((item) => {
@@ -99,9 +98,7 @@
 		}
 	};
 
-	onMount(() => {
-		fetchData();
-	});
+	onMount(() => fetchData());
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

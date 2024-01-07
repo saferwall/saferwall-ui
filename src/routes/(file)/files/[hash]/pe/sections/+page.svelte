@@ -4,10 +4,10 @@
 
 	export let data: PageData;
 
-	$: sections = data.sections.reduce((groups: any[], { Header, Entropy }: any) => {
+	$: sections = data.sections.reduce((groups: any[], { Header, Entropy }) => {
 		const name = String.fromCharCode.apply(null, Header.Name);
 
-		const items: any = Object.entries(Header).filter(([field]) => field !== 'Name');
+		const items = Object.entries(Header).filter(([field]) => field !== 'Name');
 		items.unshift(['Entropy', Entropy]);
 
 		groups.push({

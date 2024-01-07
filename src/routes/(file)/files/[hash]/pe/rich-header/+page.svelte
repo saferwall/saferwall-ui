@@ -4,8 +4,8 @@
 
 	export let data: PageData;
 
-	$: columns = Object.keys(data.richHeader?.CompIDs[0]);
 	$: richHeaders = data.richHeader?.CompIDs;
+	$: columns = Object.keys(data.richHeader?.CompIDs[0]);
 </script>
 
 <article>

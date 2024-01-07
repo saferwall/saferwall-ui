@@ -1,6 +1,5 @@
 import { env } from '$env/dynamic/public';
 import { DEFAULT_PAGINATION_ITEMS } from '$lib/config';
-
 import type {
 	ApiTraceBufferDto,
 	ChangePasswordDto,
@@ -41,9 +40,7 @@ export class SaferwallClient {
 			...args
 		};
 
-		this.setAuthHeaders(init);
-
-		const response: any = await fetch(url, init);
+		const response: any = await fetch(url, this.setAuthHeaders(init));
 
 		if (!response.ok) {
 			throw response;

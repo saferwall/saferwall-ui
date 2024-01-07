@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { splitCamelCase, valueToHex } from '$lib/utils';
+	import type { A } from 'vitest/dist/types-71ccd11d';
 
 	export let lines = false;
 	export let header = true;
 	export let hexValue = true;
 	export let camelCase = true;
-	export let items: [string, any][] = [];
+	export let items: any[][] = [];
 </script>
 
 <table class="w-full">

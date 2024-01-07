@@ -1,17 +1,15 @@
 <script lang="ts">
-	import type { Pagination, Saferwall } from '$lib/types';
-	import type { PageData } from './$types';
-
 	import { goto } from '$app/navigation';
-	import { cleanUndefinedKeyValue, timestampToFormattedDate } from '$lib/utils';
-	import { onMount } from 'svelte';
-
 	import Icon from '$lib/components/Icon.svelte';
 	import Overlay from '$lib/components/Overlay.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import Select from '$lib/components/form/Select.svelte';
+	import type { Pagination, Saferwall } from '$lib/types';
+	import { cleanUndefinedKeyValue, timestampToFormattedDate } from '$lib/utils';
+	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
+	import type { PageData } from './$types';
 	import ApiTraceRow from './components/ApiTraceRow.svelte';
 	import FiltersDrawer from './components/FilterDrawer.svelte';
 
@@ -158,7 +156,7 @@
 			<Input name="search" icon="search" bind:search placeholder="Search anything..." />
 			<div class="flex-shrink-0 flex-grow text-gray-600">
 				<Button
-					on:mouseup={onOpenDrawMouseUp}
+					on:click={onOpenDrawMouseUp}
 					icon="filter"
 					class={pids.length > 0 ? 'border-primary' : ''}
 				>
@@ -174,7 +172,7 @@
 				</Button>
 			</div>
 			<div class="properties relative flex-shrink-0 flex-grow text-gray-600">
-				<Button icon="properties" on:mouseup={onPropsToggleAction} on:keyup={onPropsToggleAction}>
+				<Button icon="properties" on:click={onPropsToggleAction} on:keyup={onPropsToggleAction}>
 					<span class="px-2 py-0.5">Properties</span>
 				</Button>
 				{#if displayProperties}

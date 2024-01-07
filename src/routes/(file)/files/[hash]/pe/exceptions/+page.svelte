@@ -21,14 +21,17 @@
 						value: translateGroupValue(value, 'Exceptions', key)
 					};
 				}),
-			codes: (exception.UnwinInfo.UnwindCodes || []).map((code: any) => {
-				return {
-					...code,
-					value: [translateGroupValue(code.UnwindOp, 'Exceptions', 'UnwindOp'), code.Operand].join(
-						' , '
-					)
-				};
-			})
+			codes: (exception.UnwinInfo.UnwindCodes || []).map(
+				(code: { UnwindOp: string; Operand: string }) => {
+					return {
+						...code,
+						value: [
+							translateGroupValue(code.UnwindOp, 'Exceptions', 'UnwindOp'),
+							code.Operand
+						].join(' , ')
+					};
+				}
+			)
 		};
 	});
 

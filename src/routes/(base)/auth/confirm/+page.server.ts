@@ -2,7 +2,7 @@ import { fail } from '@sveltejs/kit';
 import { SaferwallClient } from '$lib/clients/saferwall';
 import type { PageServerLoad, Actions } from './$types';
 
-export const load = (async ({ parent }: any) => {
+export const load = (async ({ parent }) => {
 	await parent();
 
 	return {};
@@ -15,7 +15,10 @@ export const actions = {
 		const email = data.get('email') as string;
 
 		const requiredFields: Record<string, boolean> = {};
-		if (!email) requiredFields.email = true;
+
+		if (!email) {
+			requiredFields.email = true;
+		}
 
 		if (Object.keys(requiredFields).length > 0) {
 			return fail(400, { ...requiredFields, missing: true });
@@ -23,9 +26,11 @@ export const actions = {
 
 		try {
 			await new SaferwallClient().sendConfirmation(email);
-			return { success: true };
-		} catch (response: any) {
-			return fail(400, await response.json());
+			return {
+				success: true
+			};
+		} catch (response: unknown) {
+			return fail(400, await (response as Response).json());
 		}
 	}
 } satisfies Actions;

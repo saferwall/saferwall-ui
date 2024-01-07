@@ -3,7 +3,7 @@
 	export let mode: 'all' | 'more' = 'all';
 </script>
 
-<div class="button" on:mouseup>
+<div class="button" on:click>
 	<span>
 		Show {#if expanded}less{:else}{mode}{/if}
 	</span>

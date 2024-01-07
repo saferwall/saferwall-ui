@@ -11,7 +11,7 @@
 	imageSize="w-24 h-24"
 	image="illustration-done"
 	title="Congratulation !"
-	description="Your registration has been confirmed. "
+	description="Your registration has been confirmed."
 >
 	<Button href="/auth/login" theme="primary" size="lg">Login</Button>
 </AuthActionDone>

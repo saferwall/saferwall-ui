@@ -1,6 +1,6 @@
-import type { Menus } from '$lib/types';
+import type { Menu } from '$lib/types';
 
-export const fileMenu: Menus.File[] = [
+export const fileMenu: Menu.File[] = [
 	{ name: 'Summary', path: 'summary' },
 	{
 		name: 'PE',
@@ -15,7 +15,7 @@ export const fileMenu: Menus.File[] = [
 	{ name: 'Comments', path: 'comments' }
 ];
 
-export const peMenu: Menus.PE[] = [
+export const peMenu: Menu.PE[] = [
 	{ field: 'dos_header', path: 'dos-header', title: 'DOS Header' },
 	{ field: 'nt_header', path: 'nt-header', title: 'NT Header' },
 	{ field: 'rich_header', path: 'rich-header', title: 'Rich Header' },

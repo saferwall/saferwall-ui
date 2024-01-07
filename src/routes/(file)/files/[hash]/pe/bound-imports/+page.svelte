@@ -4,12 +4,9 @@
 	import { translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
-	const maxRecords = 20;
 	export let data: PageData;
 
-	// TODO: split into components
-
-	$: groups = data.items;
+	$: groups = data.boundImport;
 
 	let entries: Record<number, boolean> = {};
 

@@ -14,7 +14,7 @@
 		<div class="py-1 relative">
 			<Button
 				size="xss"
-				on:mouseup={() => (tableOpen = !tableOpen)}
+				on:click={() => (tableOpen = !tableOpen)}
 				class={tableOpen ? `!text-red-500 !bg-gray-100 !outline-gray-100 !border-gray-100` : ''}
 			>
 				{tableOpen ? 'Hide Table' : 'Show Table'}

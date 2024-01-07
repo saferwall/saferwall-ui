@@ -41,7 +41,7 @@
 			{/each}
 		</table>
 		{#if activeExpanding}
-			<ButtonShowMore on:mouseup={onShowMoreMouseUp} {expanded} />
+			<ButtonShowMore on:click={onShowMoreMouseUp} {expanded} />
 		{/if}
 	</div>
 </Card>

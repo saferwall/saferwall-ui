@@ -31,7 +31,7 @@
 	const onToggleMouseUp = () => (open = !open);
 
 	const dispatch = createEventDispatcher();
-	const onLoadMoreMouseUp = (e: MouseEvent) => {
+	const onClickLoadMore = (e: MouseEvent) => {
 		dispatch('load');
 	};
 </script>
@@ -63,7 +63,7 @@
 					{/each}
 					{#if open && buffId && value.val?.length <= 5000}
 						<div class="my-3">
-							<Button size="xs" {loading} disabled={loading} on:mouseup={onLoadMoreMouseUp}>
+							<Button size="xs" {loading} disabled={loading} on:click={onClickLoadMore}>
 								Load All
 							</Button>
 						</div>

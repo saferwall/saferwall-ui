@@ -388,3 +388,19 @@ export const byteToHex = (byte: number) => {
 export const toHexString = (bytes: number[]) => {
 	return Array.from(bytes).map((byte) => byteToHex(byte));
 };
+
+export const signatureToGuid = (signature: {
+	Data1: number;
+	Data2: number;
+	Data3: number;
+	Data4: Array<number>;
+}) => {
+	const { Data1, Data2, Data3, Data4 } = signature;
+	const guidStr = `${byteToHex(Data1).padStart(8, '0')}-${byteToHex(Data2).padStart(
+		4,
+		'0'
+	)}-${byteToHex(Data3).padStart(4, '0')}-${Data4.map((b) => byteToHex(b).padStart(2, '0')).join(
+		''
+	)}`;
+	return guidStr.toUpperCase();
+};

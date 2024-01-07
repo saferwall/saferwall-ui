@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let max = 1;
+	export let border = false;
 	export let name: string | undefined = undefined;
 
 	type MultitoggleItem = {
@@ -40,10 +41,17 @@
 				return true;
 			})
 		]);
+
+		items = [
+			...items.map((item) => {
+				item.checked = selected.has(item);
+				return item;
+			})
+		];
 	};
 </script>
 
-<ul class="multitoggle">
+<ul class="multitoggle" class:with-border={border}>
 	{#each items as item}
 		<li class="item" class:active={selected.has(item)} on:mouseup={() => onToggleMouseUp(item)}>
 			<input type="checkbox" {name} bind:value={item.value} checked={selected.has(item)} />
@@ -54,7 +62,15 @@
 
 <style lang="scss">
 	.multitoggle {
-		@apply flex items-center rounded-full space-x-1;
+		@apply inline-flex items-center rounded-full space-x-1;
+
+		&.with-border {
+			@apply border border-gray-100 p-1.5;
+
+			.item {
+				@apply py-1.5 px-4;
+			}
+		}
 
 		.item {
 			@apply py-2 px-4 rounded-full;

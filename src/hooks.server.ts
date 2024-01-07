@@ -30,12 +30,18 @@ export const handle: Handle = (async ({ event, resolve }) => {
 			'member_since',
 			'admin',
 			'email'
-		].reduce((obj: any, key) => ((obj[key] = (user as any)[key]), obj), {});
+		].reduce(
+			(finalUserData, key) => ({
+				...finalUserData,
+				[key]: user[key as keyof typeof user]
+			}),
+			{} as Record<string, any>
+		);
 	} catch (error) {
 		console.error('hooks error: ', error);
 	}
 
-	return await resolve(event);
+	return resolve(event);
 }) satisfies Handle;
 
 export const handleError = (async ({ error, event }: any) => {
@@ -45,7 +51,7 @@ export const handleError = (async ({ error, event }: any) => {
 		path: '/'
 	});
 
-	console.error(error);
+	console.error('handle error :', error);
 
 	return {
 		message: error?.message,

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { Menus } from '$lib/types';
+	import type { Menu } from '$lib/types';
 
 	export let hash = '';
-	export let fileMenu: Menus.File[] = [];
+	export let activeFileMenu: Menu.File[] = [];
 	export let activeMenu: { name: string; path: string };
 
-	$: isActivePath = (path: string): boolean => path === activeMenu.path;
-	$: applyFilePath = (path: string): string => `/files/${hash}/${path}`;
+	$: isPathActive = (path: string): boolean => path === activeMenu.path;
+	$: generateFilePath = (path: string): string => `/files/${hash}/${path}`;
 </script>
 
 <section
@@ -23,12 +23,12 @@
 					<span>Browse file</span>
 				</a>
 			</li>
-			{#each fileMenu as menu}
+			{#each activeFileMenu as item}
 				<li class="fnavbar__item">
 					<a
 						class="fnavbar__link"
-						class:active={isActivePath(menu.path)}
-						href={applyFilePath(menu.path)}>{menu.name}</a
+						class:active={isPathActive(item.path)}
+						href={generateFilePath(item.path)}>{item.name}</a
 					>
 				</li>
 			{/each}

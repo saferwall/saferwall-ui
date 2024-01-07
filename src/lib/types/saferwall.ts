@@ -71,7 +71,21 @@ export namespace Saferwall {
 		tags?: Tags;
 		class?: string;
 		file_format?: string;
-		pe?: any;
+		pe: {
+			sections: any[];
+			exception: any[];
+			delay_import: any[];
+			boundImport: any[];
+			iat?: any;
+			debug?: Debug.All;
+			dos_header?: any;
+			security?: Record<string, any>;
+			rich_header?: Record<string, any>;
+			tls: {
+				Struct: any;
+				Callbacks: any;
+			};
+		} & { [key: string]: any };
 		submissions?: any[];
 		liked?: boolean;
 		type?: string | 'file';
@@ -318,5 +332,105 @@ export namespace Saferwall {
 		export interface Following extends Follow {}
 
 		export type All = Like | Comment | Submission | Follower | Following | any;
+	}
+
+	export namespace Debug {
+		export enum Type {
+			EX_DLL_CHAR = 20,
+			CODE_VIEW = 2,
+			REPRO = 16,
+			VC_FEATURE = 12,
+			FPO = 3,
+			POGO = 13
+		}
+
+		export type Struct<K> = {
+			AddressOfRawData: number;
+			Characteristics: number;
+			MajorVersion: number;
+			MinorVersion: number;
+			PointerToRawData: number;
+			SizeOfData: number;
+			TimeDateStamp: number;
+			Type: K;
+		};
+
+		export type EX_DLL_CHAR = Data<Type.EX_DLL_CHAR, 1>;
+
+		export type POGO = Data<
+			Type.POGO,
+			{
+				Entries: Array<{
+					Name: string;
+					Rva: number;
+					Size: number;
+				}>;
+				Signature: number;
+			}
+		>;
+
+		export type CODE_VIEW = Data<
+			Type.CODE_VIEW,
+			{
+				Age: number;
+				CvSignature: number;
+				PDBFileName: string;
+				Signature: {
+					Data1: number;
+					Data2: number;
+					Data3: number;
+					Data4: Array<number>;
+				};
+			}
+		>;
+
+		export type REPRO = Data<
+			Type.REPRO,
+			{
+				Hash: string;
+				Size: number;
+			}
+		>;
+
+		export type VC_FEATURE = Data<
+			Type.VC_FEATURE,
+			{
+				'/GS': number;
+				'/sdl': number;
+				'C/C++': number;
+				GuardN: number;
+				'Pre VC 11': number;
+			}
+		>;
+
+		export type FPO = Data<
+			Type.FPO,
+			{
+				FrameType: number;
+				HasSEH: number;
+				NumLocals: number;
+				OffStart: number;
+				ParamsSize: number;
+				ProcSize: number;
+				PrologLength: number;
+				Reserved: number;
+				SavedRegsCount: number;
+				UseBP: number;
+			}[]
+		>;
+
+		export interface Data<K, T> {
+			Info: T;
+			Struct: Struct<K>;
+		}
+
+		export type List<T> = Array<T>;
+		export type All =
+			| List<CODE_VIEW>
+			| List<EX_DLL_CHAR>
+			| List<POGO>
+			| List<REPRO>
+			| List<VC_FEATURE>
+			| List<FPO>;
 	}
 }
