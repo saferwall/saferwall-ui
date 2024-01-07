@@ -47,6 +47,7 @@ export const actions = {
 			return {
 				success: true
 			};
+		} catch (response) {
 			return fail(400, await (response as Response).json());
 		}
 	}
