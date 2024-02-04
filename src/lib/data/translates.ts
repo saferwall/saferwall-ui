@@ -154,8 +154,8 @@ export const guardFlagsMap: Record<number, string> = {
 };
 
 export const GFIDMap: Record<number, string> = {
-	0x1: 'FIDSupressed',
-	0x2: 'ExportSupressed'
+	0x1: 'FID Supressed',
+	0x2: 'Export Supressed'
 };
 
 export const magicMap: Record<number, string> = {

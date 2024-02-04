@@ -23,7 +23,7 @@
 	</Table.Header>
 	<Table.Body>
 		{#each data as row, index}
-			{#if index <= maxRecords || expanded}
+			{#if index < maxRecords || expanded}
 				<Table.Row>
 					<Table.Val>{valueToHex(row.RVA)}</Table.Val>
 					<Table.Val>{valueToHex(row.IATValue)}</Table.Val>
@@ -33,7 +33,7 @@
 			{/if}
 		{/each}
 
-		{#if data.length > maxRecords}
+		{#if data.length >= maxRecords}
 			<Table.Row>
 				<Table.Val colspan="4">
 					<ButtonShowMore bind:expanded on:click={onClickExpand} />

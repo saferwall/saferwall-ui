@@ -1,4 +1,4 @@
-import type { Menu } from '$lib/types';
+import { Saferwall, type Menu } from '$lib/types';
 
 export const fileMenu: Menu.File[] = [
 	{ name: 'Summary', path: 'summary' },
@@ -16,21 +16,21 @@ export const fileMenu: Menu.File[] = [
 ];
 
 export const peMenu: Menu.PE[] = [
-	{ field: 'dos_header', path: 'dos-header', title: 'DOS Header' },
-	{ field: 'nt_header', path: 'nt-header', title: 'NT Header' },
-	{ field: 'rich_header', path: 'rich-header', title: 'Rich Header' },
-	{ field: 'sections', path: 'sections', title: 'Sections' },
-	{ field: 'export', path: 'export', title: 'Export' },
-	{ field: 'import', path: 'imports', title: 'Imports' },
-	{ field: 'resource', path: 'resource', title: 'Resource' },
-	{ field: 'exceptions', path: 'exceptions', title: 'Exceptions' },
-	{ field: 'security', path: 'certificate', title: 'Certificate' },
-	{ field: 'reloc', path: 'relocations', title: 'Relocations' },
-	{ field: 'debug', path: 'debugs', title: 'Debugs' },
-	{ field: 'tls', path: 'tls', title: 'TLS' },
-	{ field: 'load_config', path: 'load-config', title: 'Load config' },
-	{ field: 'bound_import', path: 'bound-imports', title: 'Bound imports' },
-	{ field: 'iat', path: 'iat', title: 'IAT' },
-	{ field: 'delay_import', path: 'delay-imports', title: 'Delay import' },
-	{ field: 'clr', path: 'clr', title: 'CLR' }
+	{ field: Saferwall.PeMeta.DOS_HEADER, path: 'dos-header', title: 'DOS Header' },
+	{ field: Saferwall.PeMeta.NT_HEADER, path: 'nt-header', title: 'NT Header' },
+	{ field: Saferwall.PeMeta.RICH_HEADER, path: 'rich-header', title: 'Rich Header' },
+	{ field: Saferwall.PeMeta.SECTIONS, path: 'sections', title: 'Sections' },
+	{ field: Saferwall.PeMeta.EXPORT, path: 'export', title: 'Export' },
+	{ field: Saferwall.PeMeta.IMPORT, path: 'imports', title: 'Imports' },
+	{ field: Saferwall.PeMeta.RESOURCE, path: 'resource', title: 'Resource' },
+	{ field: Saferwall.PeMeta.EXCEPTIONS, path: 'exceptions', title: 'Exceptions' },
+	{ field: Saferwall.PeMeta.SECURITY, path: 'certificate', title: 'Certificate' },
+	{ field: Saferwall.PeMeta.RELOC, path: 'relocations', title: 'Relocations' },
+	{ field: Saferwall.PeMeta.DEBUG, path: 'debugs', title: 'Debugs' },
+	{ field: Saferwall.PeMeta.TLS, path: 'tls', title: 'TLS' },
+	{ field: Saferwall.PeMeta.LOAD_CONFIG, path: 'load-config', title: 'Load config' },
+	{ field: Saferwall.PeMeta.BOUND_IMPORT, path: 'bound-imports', title: 'Bound imports' },
+	{ field: Saferwall.PeMeta.IAT, path: 'iat', title: 'IAT' },
+	{ field: Saferwall.PeMeta.DELAY_IMPORT, path: 'delay-imports', title: 'Delay import' },
+	{ field: Saferwall.PeMeta.CLR, path: 'clr', title: 'CLR' }
 ];

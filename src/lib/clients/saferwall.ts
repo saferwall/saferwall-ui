@@ -40,8 +40,6 @@ export class SaferwallClient {
 			...args
 		};
 
-		console.log('-->', url);
-
 		const response: any = await fetch(url, this.setAuthHeaders(init));
 
 		if (!response.ok) {
@@ -92,7 +90,7 @@ export class SaferwallClient {
 
 	public async getFileMeta(hash: string) {
 		return this.request<Saferwall.File>(
-			`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta,liked`
+			`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta`
 		);
 	}
 

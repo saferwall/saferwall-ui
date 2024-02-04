@@ -3,17 +3,32 @@
 	import type { Saferwall } from '$lib/types';
 	import type { PageData } from './$types';
 	import CFGIAT from './tabs/CFGIAT.svelte';
+	import CFGLongJump from './tabs/CFGLongJump.svelte';
+	import DVRT from './tabs/DVRT.svelte';
 	import GFIDS from './tabs/GFIDS.svelte';
-	import Struct from './tabs/Struct.svelte';
+	import LoadCfgStruct from './tabs/LoadCfgStruct.svelte';
+	import SEH from './tabs/SEH.svelte';
+	import VolatileMetadata from './tabs/VolatileMetadata.svelte';
 
 	export let data: PageData;
+
+	const tabsLabelsMap: Partial<Record<keyof Saferwall.Pe.LoadConfig.Root, string>> = {
+		CFGIAT: 'CFG IAT',
+		GFIDS: 'GFIDs',
+		LoadCfgStruct: 'Load CFG Struct',
+		SEH: 'SEH',
+		VolatileMetadata: 'Volatile Metadata',
+		CFGLongJump: 'CFG Long Jump'
+	};
 
 	const componentsClass: Record<keyof Saferwall.Pe.LoadConfig.Root, any> = {
 		CFGIAT: CFGIAT,
 		GFIDS: GFIDS,
-		LoadCfgStruct: Struct,
-		SEH: Struct,
-		VolatileMetadata: Struct
+		LoadCfgStruct: LoadCfgStruct,
+		SEH: SEH,
+		VolatileMetadata: VolatileMetadata,
+		DVRT: DVRT,
+		CFGLongJump: CFGLongJump
 	};
 
 	let { loadConfig } = data;
@@ -26,31 +41,29 @@
 		data?: any;
 		component?: any;
 	}[] = loadConfig
-		? Object.entries(loadConfig).map(([key, value], index) => {
-				return {
-					label: key,
-					value: key,
-					data: value,
-					checked: index === 0,
-					component: componentsClass?.[key as keyof typeof componentsClass]
-				};
-		  })
+		? (Object.entries(loadConfig) as [keyof typeof componentsClass, any][]).map(
+				([key, value], index) => {
+					return {
+						label: tabsLabelsMap[key] ?? key,
+						value: key,
+						data: value,
+						checked: index === 0,
+						component: componentsClass?.[key]
+					};
+				}
+		  )
 		: [];
 </script>
 
 <section class="flex flex-col gap-4 pr-4">
-	<h1 class="title">Debugs</h1>
-	<div>
+	<h1 class="title">Load Config</h1>
+	<div class="mt-4">
 		<Multitoggle bind:items={tabs} border />
 	</div>
 
-	<div class="flex flex-col gap-6">
-		<div>
-			{#each tabs as tab}
-				{#if tab.checked}
-					<svelte:component this={tab.component} data={tab.data} />
-				{/if}
-			{/each}
-		</div>
-	</div>
+	{#each tabs as tab}
+		{#if tab.checked}
+			<svelte:component this={tab.component} data={tab.data} />
+		{/if}
+	{/each}
 </section>

@@ -91,6 +91,7 @@ export namespace Saferwall {
 			security?: Security;
 			rich_header?: RicheHeader;
 			load_config?: LoadConfig.Root;
+			clr?: CLR.Root;
 			tls: {
 				Struct: any;
 				Callbacks: any;
@@ -103,9 +104,52 @@ export namespace Saferwall {
 				CFGIAT: Cfgiat[];
 				GFIDS: Gfids[];
 				LoadCfgStruct: LoadCfgStruct;
-				SEH: number[];
+				SEH: SEH[];
+				CFGLongJump: CFGLongJump[];
 				VolatileMetadata: VolatileMetadata;
+				DVRT: DVRT.Root[];
 			}
+
+			export namespace DVRT {
+				export interface Root {
+					Entries: Entry[];
+					ImgDynRelocTable: ImgDynRelocTable;
+				}
+
+				export interface Entry {
+					ImgDynReloc: ImgDynReloc;
+					RelocBlocks: RelocBlock[];
+				}
+
+				export interface ImgDynReloc {
+					BaseRelocSize: number;
+					Symbol: number;
+				}
+
+				export interface RelocBlock {
+					ImgBaseReloc: ImgBaseReloc;
+					TypeOffsets: TypeOffset[];
+				}
+
+				export interface ImgBaseReloc {
+					SizeOfBlock: number;
+					VirtualAddress: number;
+				}
+
+				export interface TypeOffset {
+					DynamicSymbolOffset: number;
+					Type: number;
+					Value: number;
+				}
+
+				export interface ImgDynRelocTable {
+					Size: number;
+					Version: number;
+				}
+			}
+
+			export type SEH = number;
+			export type CFGLongJump = number;
 
 			export interface Cfgiat {
 				Description: string;
@@ -195,6 +239,110 @@ export namespace Saferwall {
 				VolatileAccessTableSize: number;
 				VolatileInfoRangeTable: number;
 				VolatileInfoRangeTableSize: number;
+			}
+		}
+
+		export namespace CLR {
+			export interface Root {
+				clr_header: ClrHeader;
+				metadata_header: MetadataHeader;
+				metadata_stream_headers: MetadataStreamHeader[];
+				metadata_tables: MetadataTables;
+				metadata_tables_stream_header: MetadataTablesStreamHeader;
+			}
+
+			export interface ClrHeader {
+				Cb: number;
+				CodeManagerTable: CodeManagerTable;
+				EntryPointRVAorToken: number;
+				ExportAddressTableJumps: ExportAddressTableJumps;
+				Flags: number;
+				MajorRuntimeVersion: number;
+				ManagedNativeHeader: ManagedNativeHeader;
+				MetaData: MetaData;
+				MinorRuntimeVersion: number;
+				Resources: Resources;
+				StrongNameSignature: StrongNameSignature;
+				VTableFixups: VtableFixups;
+			}
+
+			export interface CodeManagerTable {
+				Size: number;
+				VirtualAddress: number;
+			}
+
+			export interface ExportAddressTableJumps {
+				Size: number;
+				VirtualAddress: number;
+			}
+
+			export interface ManagedNativeHeader {
+				Size: number;
+				VirtualAddress: number;
+			}
+
+			export interface MetaData {
+				Size: number;
+				VirtualAddress: number;
+			}
+
+			export interface Resources {
+				Size: number;
+				VirtualAddress: number;
+			}
+
+			export interface StrongNameSignature {
+				Size: number;
+				VirtualAddress: number;
+			}
+
+			export interface VtableFixups {
+				Size: number;
+				VirtualAddress: number;
+			}
+
+			export interface MetadataHeader {
+				ExtraData: number;
+				Flags: number;
+				MajorVersion: number;
+				MinorVersion: number;
+				Signature: number;
+				Streams: number;
+				Version: string;
+				VersionString: number;
+			}
+
+			export interface MetadataStreamHeader {
+				Name: string;
+				Offset: number;
+				Size: number;
+			}
+
+			export type MetadataTables = Record<string, MetadataTable>;
+
+			export interface Content {
+				EncBaseID: number;
+				EncID: number;
+				Generation: number;
+				Mvid: number;
+				Name: number;
+			}
+
+			export interface MetadataTable {
+				Content: any;
+				CountCols: number;
+				Name: string;
+				SizeRecord: number;
+			}
+
+			export interface MetadataTablesStreamHeader {
+				Heaps: number;
+				MajorVersion: number;
+				MaskValid: number;
+				MinorVersion: number;
+				Reserved: number;
+				Rid: number;
+				Sorted: number;
 			}
 		}
 
@@ -402,6 +550,26 @@ export namespace Saferwall {
 		module: string;
 	}
 
+	export enum PeMeta {
+		DOS_HEADER = 'dos_header',
+		RICH_HEADER = 'rich_header',
+		NT_HEADER = 'nt_header',
+		SECTIONS = 'sections',
+		EXPORT = 'export',
+		IMPORT = 'import',
+		RESOURCE = 'resource',
+		RELOC = 'reloc',
+		DEBUG = 'debug',
+		TLS = 'tls',
+		LOAD_CONFIG = 'load_config',
+		IAT = 'iat',
+		DELAY_IMPORT = 'delay_import',
+		SECURITY = 'security',
+		EXCEPTIONS = 'exceptions',
+		BOUND_IMPORT = 'bound_import',
+		CLR = 'clr'
+	}
+
 	export interface Summary {
 		class: string;
 		comments_count: number;
@@ -412,6 +580,7 @@ export namespace Saferwall {
 		last_scanned: number;
 		liked: boolean;
 		multiav: Multiav;
+		pe_meta: PeMeta[];
 		properties: Properties;
 		sha256: string;
 		signature: string;

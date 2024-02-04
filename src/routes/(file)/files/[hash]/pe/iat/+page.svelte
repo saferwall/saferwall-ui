@@ -1,14 +1,16 @@
 <script lang="ts">
 	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
+	import Table from '$lib/components/table';
 	import { valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	$: iats = data.iat;
+	$: rows = data.iat ?? [];
 	$: columns = ['Rva', 'Value', 'Meaning'];
 
 	$: expanded = false;
+	$: colsLength = columns.length + 1;
 
 	const maxRecords = 20;
 	const onClickExpand = () => {
@@ -18,25 +20,31 @@
 
 <article>
 	<h1 class="title">IAT</h1>
-	<table class="w-full">
-		<thead>
-			<th>#</th>
+	<Table.Root class="w-full">
+		<Table.Header>
+			<Table.Col>#</Table.Col>
 			{#each columns as column}
-				<th>{column}</th>
+				<Table.Col>{column}</Table.Col>
 			{/each}
-		</thead>
-		<tbody>
-			{#each iats as item, i}
-				{#if i <= maxRecords || expanded}
-					<tr>
-						<td>{item.Index}</td>
+		</Table.Header>
+		<Table.Body>
+			{#each rows as row, index}
+				{#if index < maxRecords || expanded}
+					<Table.Row>
+						<Table.Val>{row.Index}</Table.Val>
 						{#each columns as column}
-							<td>{valueToHex(item[column])}</td>
+							<Table.Val>{valueToHex(row[column])}</Table.Val>
 						{/each}
-					</tr>
+					</Table.Row>
 				{/if}
 			{/each}
-		</tbody>
-	</table>
-	<ButtonShowMore bind:expanded on:click={onClickExpand} />
+			{#if rows.length >= maxRecords}
+				<Table.Row>
+					<Table.Val colspan={colsLength}>
+						<ButtonShowMore bind:expanded on:click={onClickExpand} />
+					</Table.Val>
+				</Table.Row>
+			{/if}
+		</Table.Body>
+	</Table.Root>
 </article>

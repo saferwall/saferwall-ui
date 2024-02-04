@@ -18,7 +18,7 @@
 	};
 </script>
 
-<article>
+<article class="boxes">
 	<h1 class="title">Imports</h1>
 	<table class="groups">
 		<thead>
@@ -38,7 +38,7 @@
 					on:mouseup={() => (entries[index] = !isEntryOpen(index))}
 					class:expanded={isEntryOpen(index)}
 				>
-					<td class="px-0 !pr-0">
+					<td class="!pr-0">
 						<Icon
 							size="w-4 h-4"
 							name="arrow-down"
@@ -94,47 +94,3 @@
 		</tbody>
 	</table>
 </article>
-
-<style lang="scss">
-	table.groups {
-		@apply pr-4 border-separate border-spacing-y-2 w-full;
-
-		thead th {
-			@apply font-bold;
-		}
-
-		tbody {
-			tr {
-				@apply relative z-0;
-
-				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-200 border-t-0;
-				}
-
-				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-200;
-				}
-
-				&.expanded:nth-child(2n + 1):after {
-					@apply rounded-b-none border-b-0;
-				}
-
-				td {
-					@apply p-4 py-4 rounded;
-				}
-			}
-		}
-	}
-
-	table.items {
-		@apply w-full;
-
-		tbody tr {
-			@apply even:bg-gray-50;
-
-			td {
-				@apply py-2 w-1/4;
-			}
-		}
-	}
-</style>

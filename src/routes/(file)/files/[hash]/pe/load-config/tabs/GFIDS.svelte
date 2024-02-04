@@ -17,21 +17,21 @@
 <Table.Root class="w-full">
 	<Table.Header>
 		<Table.Col class="lg:w-1/12">Target</Table.Col>
-		<Table.Col class="lg:w-1/12">Flags</Table.Col>
+		<Table.Col class="lg:w-2/12">Flags</Table.Col>
 		<Table.Col class="lg:w-full">Description</Table.Col>
 	</Table.Header>
 	<Table.Body>
 		{#each data as row, index}
-			{#if index <= maxRecords || expanded}
+			{#if index < maxRecords || expanded}
 				<Table.Row>
 					<Table.Val>{valueToHex(row.Target)}</Table.Val>
-					<Table.Val>{GFIDMap[row.Flags]}</Table.Val>
+					<Table.Val>{GFIDMap[row.Flags] ?? '-'}</Table.Val>
 					<Table.Val>{row.Description}</Table.Val>
 				</Table.Row>
 			{/if}
 		{/each}
 
-		{#if data.length > maxRecords}
+		{#if data.length >= maxRecords}
 			<Table.Row>
 				<Table.Val colspan="4">
 					<ButtonShowMore bind:expanded on:click={onClickExpand} />

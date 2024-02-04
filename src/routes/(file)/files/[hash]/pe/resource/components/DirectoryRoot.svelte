@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Entry, Struct } from '$lib/types';
+	import type { Saferwall } from '$lib/types';
 	import DirectoryEntry from './DirectoryEntry.svelte';
 
-	export let Entries: Entry[];
+	export let Entries: Saferwall.Resource.Entry[];
 </script>
 
 <section class="py-4 space-y-4">

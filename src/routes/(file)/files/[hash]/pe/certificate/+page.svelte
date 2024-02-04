@@ -58,7 +58,9 @@
 
 	<article>
 		<h1 class="title">Signer Certificate</h1>
-		<TableKeyValue items={signer} />
+		<div>
+			<TableKeyValue items={signer} />
+		</div>
 	</article>
 </section>
 
