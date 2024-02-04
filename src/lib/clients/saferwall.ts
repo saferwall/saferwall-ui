@@ -40,6 +40,8 @@ export class SaferwallClient {
 			...args
 		};
 
+		console.log('-->', url);
+
 		const response: any = await fetch(url, this.setAuthHeaders(init));
 
 		if (!response.ok) {

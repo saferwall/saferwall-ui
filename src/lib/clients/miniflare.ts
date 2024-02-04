@@ -2,18 +2,18 @@ import { Miniflare, Log, LogLevel } from 'miniflare';
 import { dev } from '$app/environment';
 
 export const fallBackPlatformToMiniFlareInDev = async (_platform: App.Platform) => {
-    if (!dev) return _platform;
+	if (!dev) return _platform;
 
-    if (_platform) return _platform;
-    const mf = new Miniflare({
-        log: new Log(LogLevel.INFO),
-        kvPersist: './.kv-data', // Use filebase or in memory store
-        kvNamespaces: ['HOT_ACTIVITIES'], //Declare array with NameSpaces
-        globalAsyncIO: true,
-        globalTimers: true,
-        globalRandom: true,
+	if (_platform) return _platform;
+	const mf = new Miniflare({
+		log: new Log(LogLevel.INFO),
+		kvPersist: './.kv-data', // Use filebase or in memory store
+		kvNamespaces: ['HOT_ACTIVITIES'], //Declare array with NameSpaces
+		globalAsyncIO: true,
+		globalTimers: true,
+		globalRandom: true,
 
-        script: `
+		script: `
 		addEventListener("fetch", (event) => {
 			event.waitUntil(Promise.resolve(event.request.url));
 			event.respondWith(new Response(event.request.headers.get("X-Message")));
@@ -22,11 +22,11 @@ export const fallBackPlatformToMiniFlareInDev = async (_platform: App.Platform) 
 			event.waitUntil(Promise.resolve(event.scheduledTime));
 		});
 		`
-    });
+	});
 
-    const env: any = await mf.getBindings();
+	const env: any = await mf.getBindings();
 
-    const platform: App.Platform = { env };
+	const platform: App.Platform = { env };
 
-    return platform;
+	return platform;
 };

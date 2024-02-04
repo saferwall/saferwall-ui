@@ -37,7 +37,7 @@
 	<article class="summary__card flex-grow">
 		<h2 class="sr-only">Analyse score</h2>
 		<div class="flex items-center space-x-6">
-			<div class="rounded-full font-bold text-lg bg-gray-200  p-1.5">
+			<div class="rounded-full font-bold text-lg bg-gray-200 p-1.5">
 				<div class="flex flex-center flex-col w-24 h-24 rounded-full bg-white">
 					<span class="text-3xl {scoreColor}">{score.value}</span>
 					<span class="text-neutral-300">/ {score.count}</span>

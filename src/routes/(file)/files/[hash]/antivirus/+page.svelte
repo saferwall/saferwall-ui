@@ -17,7 +17,7 @@
 
 <div class="container mx-auto pb-20">
 	<div
-		class="flex md:space-y-0 md:flex-row md:space-x-10  max-md:bg-white max-md:rounded-xl max-md:shadow-base max-md:p-6"
+		class="flex md:space-y-0 md:flex-row md:space-x-10 max-md:bg-white max-md:rounded-xl max-md:shadow-base max-md:p-6"
 	>
 		<AntivirusScanCard
 			title="First Scan"

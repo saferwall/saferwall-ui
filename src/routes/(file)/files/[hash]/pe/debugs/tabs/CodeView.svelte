@@ -3,12 +3,12 @@
 	import TableKeyValue from '$lib/components/TableKeyValue.svelte';
 	import { signatureToGuid } from '$lib/utils';
 
-	export let item: Saferwall.Debug.CODE_VIEW;
+	export let data: Saferwall.Debug.CODE_VIEW;
 
-	$: Signature = signatureToGuid(item.Info?.Signature);
+	$: Signature = signatureToGuid(data.Info?.Signature);
 
 	$: items = Object.entries({
-		...item.Info,
+		...data.Info,
 		Signature
 	});
 </script>

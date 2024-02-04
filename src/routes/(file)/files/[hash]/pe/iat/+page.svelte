@@ -3,7 +3,6 @@
 	import { valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
-	const maxIatRecords = 20;
 	export let data: PageData;
 
 	$: iats = data.iat;
@@ -11,6 +10,7 @@
 
 	$: expanded = false;
 
+	const maxRecords = 20;
 	const onClickExpand = () => {
 		expanded = !expanded;
 	};
@@ -27,12 +27,14 @@
 		</thead>
 		<tbody>
 			{#each iats as item, i}
-				<tr class:hidden={!expanded && i > maxIatRecords}>
-					<td>{item.Index}</td>
-					{#each columns as column}
-						<td>{valueToHex(item[column])}</td>
-					{/each}
-				</tr>
+				{#if i <= maxRecords || expanded}
+					<tr>
+						<td>{item.Index}</td>
+						{#each columns as column}
+							<td>{valueToHex(item[column])}</td>
+						{/each}
+					</tr>
+				{/if}
 			{/each}
 		</tbody>
 	</table>

@@ -51,7 +51,7 @@ export const handleError = (async ({ error, event }: any) => {
 		path: '/'
 	});
 
-	console.error('handle error :', error);
+	console.error('[hook] handle error', error);
 
 	return {
 		message: error?.message,

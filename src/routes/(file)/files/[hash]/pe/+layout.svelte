@@ -53,7 +53,7 @@
 	}
 
 	.files__layout :global(table thead th) {
-		@apply py-4 font-medium;
+		@apply py-4 font-semibold;
 	}
 	.files__layout :global(table tr td) {
 		@apply py-2 text-gray-800;

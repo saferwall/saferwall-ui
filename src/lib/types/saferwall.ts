@@ -71,26 +71,136 @@ export namespace Saferwall {
 		tags?: Tags;
 		class?: string;
 		file_format?: string;
-		pe: {
-			sections: any[];
-			exception: any[];
-			delay_import: any[];
-			boundImport: any[];
-			iat?: any;
-			debug?: Debug.All;
-			dos_header?: any;
-			security?: Record<string, any>;
-			rich_header?: Record<string, any>;
-			tls: {
-				Struct: any;
-				Callbacks: any;
-			};
-		} & { [key: string]: any };
+		pe: Pe.Root;
 		submissions?: any[];
 		liked?: boolean;
 		type?: string | 'file';
 		status?: number;
 		default_behavior_id?: string;
+	}
+
+	export namespace Pe {
+		export interface Root {
+			sections: any[];
+			exception: any[];
+			delay_import: any[];
+			boundImport: any[];
+			iat?: any;
+			debug?: Debug;
+			dos_header?: any;
+			security?: Security;
+			rich_header?: RicheHeader;
+			load_config?: LoadConfig.Root;
+			tls: {
+				Struct: any;
+				Callbacks: any;
+			};
+			[key: string]: any;
+		}
+
+		export namespace LoadConfig {
+			export interface Root {
+				CFGIAT: Cfgiat[];
+				GFIDS: Gfids[];
+				LoadCfgStruct: LoadCfgStruct;
+				SEH: number[];
+				VolatileMetadata: VolatileMetadata;
+			}
+
+			export interface Cfgiat {
+				Description: string;
+				IATValue: number;
+				INTValue: number;
+				RVA: number;
+			}
+
+			export interface Gfids {
+				Description: string;
+				Flags: number;
+				Target: number;
+			}
+
+			export interface LoadCfgStruct {
+				CHPEMetadataPointer: number;
+				CSDVersion: number;
+				CodeIntegrity: CodeIntegrity;
+				CriticalSectionDefaultTimeout: number;
+				DeCommitFreeBlockThreshold: number;
+				DeCommitTotalFreeThreshold: number;
+				DependentLoadFlags: number;
+				DynamicValueRelocTable: number;
+				DynamicValueRelocTableOffset: number;
+				DynamicValueRelocTableSection: number;
+				EditList: number;
+				EnclaveConfigurationPointer: number;
+				GlobalFlagsClear: number;
+				GlobalFlagsSet: number;
+				GuardAddressTakenIatEntryCount: number;
+				GuardAddressTakenIatEntryTable: number;
+				GuardCFCheckFunctionPointer: number;
+				GuardCFDispatchFunctionPointer: number;
+				GuardCFFunctionCount: number;
+				GuardCFFunctionTable: number;
+				GuardEHContinuationCount: number;
+				GuardEHContinuationTable: number;
+				GuardFlags: number;
+				GuardLongJumpTargetCount: number;
+				GuardLongJumpTargetTable: number;
+				GuardRFFailureRoutine: number;
+				GuardRFFailureRoutineFunctionPointer: number;
+				GuardRFVerifyStackPointerFunctionPointer: number;
+				GuardXFGCheckFunctionPointer: number;
+				GuardXFGDispatchFunctionPointer: number;
+				GuardXFGTableDispatchFunctionPointer: number;
+				HotPatchTableOffset: number;
+				LockPrefixTable: number;
+				MajorVersion: number;
+				MaximumAllocationSize: number;
+				MinorVersion: number;
+				ProcessAffinityMask: number;
+				ProcessHeapFlags: number;
+				Reserved2: number;
+				Reserved3: number;
+				SEHandlerCount: number;
+				SEHandlerTable: number;
+				SecurityCookie: number;
+				Size: number;
+				TimeDateStamp: number;
+				VirtualMemoryThreshold: number;
+				VolatileMetadataPointer: number;
+			}
+
+			export interface CodeIntegrity {
+				Catalog: number;
+				CatalogOffset: number;
+				Flags: number;
+				Reserved: number;
+			}
+
+			export interface VolatileMetadata {
+				AccessRVATable: number[];
+				InfoRangeTable: InfoRangeTable[];
+				Struct: Struct;
+			}
+
+			export interface InfoRangeTable {
+				Rva: number;
+				Size: number;
+			}
+
+			export interface Struct {
+				Size: number;
+				Version: number;
+				VolatileAccessTable: number;
+				VolatileAccessTableSize: number;
+				VolatileInfoRangeTable: number;
+				VolatileInfoRangeTableSize: number;
+			}
+		}
+
+		export type Debug = Debug.All;
+		export type Security = Record<string, any>;
+		export type RicheHeader = Record<string, any>;
 	}
 
 	export interface ScanResult {
@@ -309,7 +419,7 @@ export namespace Saferwall {
 	}
 
 	export namespace Activities {
-		export interface Base {
+		export interface Root {
 			id: string;
 			file: File;
 			date: number;
@@ -322,9 +432,9 @@ export namespace Saferwall {
 			member_since: number;
 		}
 
-		export interface Like extends Base {}
-		export interface Submission extends Base {}
-		export interface Comment extends Base {
+		export interface Like extends Root {}
+		export interface Submission extends Root {}
+		export interface Comment extends Root {
 			comment: string;
 		}
 

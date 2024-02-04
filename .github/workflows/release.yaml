@@ -25,8 +25,8 @@ jobs:
       - name: Generate build version
         id: prep
         run: |
-            version=$(cat VERSION)
-            echo "BUILD_VERSION=${version}" >>$GITHUB_OUTPUT
+          version=$(cat VERSION)
+          echo "BUILD_VERSION=${version}" >>$GITHUB_OUTPUT
 
       - name: Build and push
         id: docker_build

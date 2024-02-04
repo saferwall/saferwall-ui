@@ -1,5 +1,5 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
-import type { APIFile } from '$lib/types';
+import type { Saferwall } from '$lib/types';
 import type { PageLoad } from './$types';
 
 export const load = (async ({
@@ -9,7 +9,9 @@ export const load = (async ({
 }> => {
 	const { hash } = params;
 
-	const { pe } = await new SaferwallClient().request<APIFile>(`files/${hash}?fields=pe.nt_header`);
+	const { pe } = await new SaferwallClient().request<Saferwall.File>(
+		`files/${hash}?fields=pe.nt_header`
+	);
 
 	const signature = pe.nt_header?.Signature;
 	if (signature) {

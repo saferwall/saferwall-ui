@@ -1,4110 +1,1305 @@
 {
-    "BCryptDecrypt": [
-        [
-            "BCRYPT_KEY_HANDLE",
-            "hKey"
-        ],
-        [
-            "PUCHAR",
-            "pbInput"
-        ],
-        [
-            "ULONG",
-            "cbInput"
-        ],
-        [
-            "void*",
-            "pPaddingInfo"
-        ],
-        [
-            "PUCHAR",
-            "pbIV"
-        ],
-        [
-            "ULONG",
-            "cbIV"
-        ],
-        [
-            "PUCHAR",
-            "pbOutput"
-        ],
-        [
-            "ULONG",
-            "cbOutput"
-        ],
-        [
-            "ULONG",
-            "pcbResult"
-        ],
-        [
-            "ULONG",
-            "dwFlags"
-        ]
-    ],
-    "BCryptEncrypt": [
-        [
-            "BCRYPT_KEY_HANDLE",
-            "hKey"
-        ],
-        [
-            "PUCHAR",
-            "pbInput"
-        ],
-        [
-            "ULONG",
-            "cbInput"
-        ],
-        [
-            "void*",
-            "pPaddingInfo"
-        ],
-        [
-            "PUCHAR",
-            "pbIV"
-        ],
-        [
-            "ULONG",
-            "cbIV"
-        ],
-        [
-            "PUCHAR",
-            "pbOutput"
-        ],
-        [
-            "ULONG",
-            "cbOutput"
-        ],
-        [
-            "ULONG",
-            "pcbResult"
-        ],
-        [
-            "ULONG",
-            "dwFlags"
-        ]
-    ],
-    "BCryptGenRandom": [
-        [
-            "BCRYPT_ALG_HANDLE",
-            "hAlgorithm"
-        ],
-        [
-            "PUCHAR",
-            "pbBuffer"
-        ],
-        [
-            "ULONG",
-            "cbBuffer"
-        ],
-        [
-            "ULONG",
-            "dwFlags"
-        ]
-    ],
-    "BCryptHashData": [
-        [
-            "BCRYPT_HASH_HANDLE",
-            "hHash"
-        ],
-        [
-            "PUCHAR",
-            "pbInput"
-        ],
-        [
-            "ULONG",
-            "cbInput"
-        ],
-        [
-            "ULONG",
-            "dwFlags"
-        ]
-    ],
-    "BCryptOpenAlgorithmProvider": [
-        [
-            "BCRYPT_ALG_HANDLE",
-            "phAlgorithm"
-        ],
-        [
-            "LPCWSTR",
-            "pszAlgId"
-        ],
-        [
-            "LPCWSTR",
-            "pszImplementation"
-        ],
-        [
-            "ULONG",
-            "dwFlags"
-        ]
-    ],
-    "BeginUpdateResourceA": [
-        [
-            "LPCSTR",
-            "pFileName"
-        ],
-        [
-            "BOOL",
-            "bDeleteExistingResources"
-        ]
-    ],
-    "BeginUpdateResourceW": [
-        [
-            "LPCWSTR",
-            "pFileName"
-        ],
-        [
-            "BOOL",
-            "bDeleteExistingResources"
-        ]
-    ],
-    "ChangeServiceConfigA": [
-        [
-            "SC_HANDLE",
-            "hService"
-        ],
-        [
-            "DWORD",
-            "dwServiceType"
-        ],
-        [
-            "DWORD",
-            "dwStartType"
-        ],
-        [
-            "DWORD",
-            "dwErrorControl"
-        ],
-        [
-            "LPCSTR",
-            "lpBinaryPathName"
-        ],
-        [
-            "LPCSTR",
-            "lpLoadOrderGroup"
-        ],
-        [
-            "LPDWORD",
-            "lpdwTagId"
-        ],
-        [
-            "LPCSTR",
-            "lpDependencies"
-        ],
-        [
-            "LPCSTR",
-            "lpServiceStartName"
-        ],
-        [
-            "LPCSTR",
-            "lpPassword"
-        ],
-        [
-            "LPCSTR",
-            "lpDisplayName"
-        ]
-    ],
-    "ChangeServiceConfigW": [
-        [
-            "SC_HANDLE",
-            "hService"
-        ],
-        [
-            "DWORD",
-            "dwServiceType"
-        ],
-        [
-            "DWORD",
-            "dwStartType"
-        ],
-        [
-            "DWORD",
-            "dwErrorControl"
-        ],
-        [
-            "LPCWSTR",
-            "lpBinaryPathName"
-        ],
-        [
-            "LPCWSTR",
-            "lpLoadOrderGroup"
-        ],
-        [
-            "LPDWORD",
-            "lpdwTagId"
-        ],
-        [
-            "LPCWSTR",
-            "lpDependencies"
-        ],
-        [
-            "LPCWSTR",
-            "lpServiceStartName"
-        ],
-        [
-            "LPCWSTR",
-            "lpPassword"
-        ],
-        [
-            "LPCWSTR",
-            "lpDisplayName"
-        ]
-    ],
-    "CloseHandle": [
-        [
-            "HANDLE",
-            "hObject"
-        ]
-    ],
-    "CloseServiceHandle": [
-        [
-            "SC_HANDLE",
-            "hSCObject"
-        ]
-    ],
-    "ControlService": [
-        [
-            "SC_HANDLE",
-            "hService"
-        ],
-        [
-            "DWORD",
-            "dwControl"
-        ],
-        [
-            "LPSERVICE_STATUS",
-            "lpServiceStatus"
-        ]
-    ],
-    "ControlServiceExA": [
-        [
-            "SC_HANDLE",
-            "hService"
-        ],
-        [
-            "DWORD",
-            "dwControl"
-        ],
-        [
-            "DWORD",
-            "dwInfoLevel"
-        ],
-        [
-            "PVOID",
-            "pControlParams"
-        ]
-    ],
-    "ControlServiceExW": [
-        [
-            "SC_HANDLE",
-            "hService"
-        ],
-        [
-            "DWORD",
-            "dwControl"
-        ],
-        [
-            "DWORD",
-            "dwInfoLevel"
-        ],
-        [
-            "PVOID",
-            "pControlParams"
-        ]
-    ],
-    "CopyFileA": [
-        [
-            "LPCSTR",
-            "lpExistingFileName"
-        ],
-        [
-            "LPCSTR",
-            "lpNewFileName"
-        ],
-        [
-            "BOOL",
-            "bFailIfExists"
-        ]
-    ],
-    "CopyFileExA": [
-        [
-            "LPCSTR",
-            "lpExistingFileName"
-        ],
-        [
-            "LPCSTR",
-            "lpNewFileName"
-        ],
-        [
-            "",
-            "lpProgressRoutine"
-        ],
-        [
-            "LPVOID",
-            "lpData"
-        ],
-        [
-            "LPBOOL",
-            "pbCancel"
-        ],
-        [
-            "DWORD",
-            "dwCopyFlags"
-        ]
-    ],
-    "CopyFileExW": [
-        [
-            "LPCWSTR",
-            "lpExistingFileName"
-        ],
-        [
-            "LPCWSTR",
-            "lpNewFileName"
-        ],
-        [
-            "",
-            "lpProgressRoutine"
-        ],
-        [
-            "LPVOID",
-            "lpData"
-        ],
-        [
-            "LPBOOL",
-            "pbCancel"
-        ],
-        [
-            "DWORD",
-            "dwCopyFlags"
-        ]
-    ],
-    "CopyFileW": [
-        [
-            "LPCWSTR",
-            "lpExistingFileName"
-        ],
-        [
-            "LPCWSTR",
-            "lpNewFileName"
-        ],
-        [
-            "BOOL",
-            "bFailIfExists"
-        ]
-    ],
-    "CreateDirectoryA": [
-        [
-            "LPCSTR",
-            "lpPathName"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpSecurityAttributes"
-        ]
-    ],
-    "CreateDirectoryExA": [
-        [
-            "LPCSTR",
-            "lpTemplateDirectory"
-        ],
-        [
-            "LPCSTR",
-            "lpNewDirectory"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpSecurityAttributes"
-        ]
-    ],
-    "CreateDirectoryExW": [
-        [
-            "LPCWSTR",
-            "lpTemplateDirectory"
-        ],
-        [
-            "LPCWSTR",
-            "lpNewDirectory"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpSecurityAttributes"
-        ]
-    ],
-    "CreateDirectoryW": [
-        [
-            "LPCWSTR",
-            "lpPathName"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpSecurityAttributes"
-        ]
-    ],
-    "CreateEventA": [
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpEventAttributes"
-        ],
-        [
-            "BOOL",
-            "bManualReset"
-        ],
-        [
-            "BOOL",
-            "bInitialState"
-        ],
-        [
-            "LPCSTR",
-            "lpName"
-        ]
-    ],
-    "CreateEventW": [
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpEventAttributes"
-        ],
-        [
-            "BOOL",
-            "bManualReset"
-        ],
-        [
-            "BOOL",
-            "bInitialState"
-        ],
-        [
-            "LPCWSTR",
-            "lpName"
-        ]
-    ],
-    "CreateFile2": [
-        [
-            "LPCWSTR",
-            "lpFileName"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ],
-        [
-            "DWORD",
-            "dwShareMode"
-        ],
-        [
-            "DWORD",
-            "dwCreationDisposition"
-        ],
-        [
-            "LPCREATEFILE2_EXTENDED_PARAMETERS",
-            "pCreateExParams"
-        ]
-    ],
-    "CreateFileA": [
-        [
-            "LPCSTR",
-            "lpFileName"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ],
-        [
-            "DWORD",
-            "dwShareMode"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpSecurityAttributes"
-        ],
-        [
-            "DWORD",
-            "dwCreationDisposition"
-        ],
-        [
-            "DWORD",
-            "dwFlagsAndAttributes"
-        ],
-        [
-            "HANDLE",
-            "hTemplateFile"
-        ]
-    ],
-    "CreateFileMappingA": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpFileMappingAttributes"
-        ],
-        [
-            "DWORD",
-            "flProtect"
-        ],
-        [
-            "DWORD",
-            "dwMaximumSizeHigh"
-        ],
-        [
-            "DWORD",
-            "dwMaximumSizeLow"
-        ],
-        [
-            "LPCSTR",
-            "lpName"
-        ]
-    ],
-    "CreateFileW": [
-        [
-            "LPCWSTR",
-            "lpFileName"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ],
-        [
-            "DWORD",
-            "dwShareMode"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpSecurityAttributes"
-        ],
-        [
-            "DWORD",
-            "dwCreationDisposition"
-        ],
-        [
-            "DWORD",
-            "dwFlagsAndAttributes"
-        ],
-        [
-            "HANDLE",
-            "hTemplateFile"
-        ]
-    ],
-    "CreateMutexA": [
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpMutexAttributes"
-        ],
-        [
-            "BOOL",
-            "bInitialOwner"
-        ],
-        [
-            "LPCSTR",
-            "lpName"
-        ]
-    ],
-    "CreateMutexExA": [
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpMutexAttributes"
-        ],
-        [
-            "LPCSTR",
-            "lpName"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ]
-    ],
-    "CreateMutexExW": [
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpMutexAttributes"
-        ],
-        [
-            "LPCWSTR",
-            "lpName"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ]
-    ],
-    "CreateMutexW": [
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpMutexAttributes"
-        ],
-        [
-            "BOOL",
-            "bInitialOwner"
-        ],
-        [
-            "LPCWSTR",
-            "lpName"
-        ]
-    ],
-    "CreateProcessA": [
-        [
-            "LPCSTR",
-            "lpApplicationName"
-        ],
-        [
-            "LPSTR",
-            "lpCommandLine"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpProcessAttributes"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpThreadAttributes"
-        ],
-        [
-            "BOOL",
-            "bInheritHandles"
-        ],
-        [
-            "DWORD",
-            "dwCreationFlags"
-        ],
-        [
-            "LPVOID",
-            "lpEnvironment"
-        ],
-        [
-            "LPCSTR",
-            "lpCurrentDirectory"
-        ],
-        [
-            "LPSTARTUPINFOA",
-            "lpStartupInfo"
-        ],
-        [
-            "LPPROCESS_INFORMATION",
-            "lpProcessInformation"
-        ]
-    ],
-    "CreateProcessAsUserA": [
-        [
-            "HANDLE",
-            "hToken"
-        ],
-        [
-            "LPCSTR",
-            "lpApplicationName"
-        ],
-        [
-            "LPSTR",
-            "lpCommandLine"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpProcessAttributes"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpThreadAttributes"
-        ],
-        [
-            "BOOL",
-            "bInheritHandles"
-        ],
-        [
-            "DWORD",
-            "dwCreationFlags"
-        ],
-        [
-            "LPVOID",
-            "lpEnvironment"
-        ],
-        [
-            "LPCSTR",
-            "lpCurrentDirectory"
-        ],
-        [
-            "LPSTARTUPINFOA",
-            "lpStartupInfo"
-        ],
-        [
-            "LPPROCESS_INFORMATION",
-            "lpProcessInformation"
-        ]
-    ],
-    "CreateProcessAsUserW": [
-        [
-            "HANDLE",
-            "hToken"
-        ],
-        [
-            "LPCWSTR",
-            "lpApplicationName"
-        ],
-        [
-            "LPWSTR",
-            "lpCommandLine"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpProcessAttributes"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpThreadAttributes"
-        ],
-        [
-            "BOOL",
-            "bInheritHandles"
-        ],
-        [
-            "DWORD",
-            "dwCreationFlags"
-        ],
-        [
-            "LPVOID",
-            "lpEnvironment"
-        ],
-        [
-            "LPCWSTR",
-            "lpCurrentDirectory"
-        ],
-        [
-            "LPSTARTUPINFOW",
-            "lpStartupInfo"
-        ],
-        [
-            "LPPROCESS_INFORMATION",
-            "lpProcessInformation"
-        ]
-    ],
-    "CreateProcessW": [
-        [
-            "LPCWSTR",
-            "lpApplicationName"
-        ],
-        [
-            "LPWSTR",
-            "lpCommandLine"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpProcessAttributes"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpThreadAttributes"
-        ],
-        [
-            "BOOL",
-            "bInheritHandles"
-        ],
-        [
-            "DWORD",
-            "dwCreationFlags"
-        ],
-        [
-            "LPVOID",
-            "lpEnvironment"
-        ],
-        [
-            "LPCWSTR",
-            "lpCurrentDirectory"
-        ],
-        [
-            "LPSTARTUPINFOW",
-            "lpStartupInfo"
-        ],
-        [
-            "LPPROCESS_INFORMATION",
-            "lpProcessInformation"
-        ]
-    ],
-    "CreateProcessWithTokenW": [
-        [
-            "HANDLE",
-            "hToken"
-        ],
-        [
-            "DWORD",
-            "dwLogonFlags"
-        ],
-        [
-            "LPCWSTR",
-            "lpApplicationName"
-        ],
-        [
-            "LPWSTR",
-            "lpCommandLine"
-        ],
-        [
-            "DWORD",
-            "dwCreationFlags"
-        ],
-        [
-            "LPVOID",
-            "lpEnvironment"
-        ],
-        [
-            "LPCWSTR",
-            "lpCurrentDirectory"
-        ],
-        [
-            "LPSTARTUPINFOW",
-            "lpStartupInfo"
-        ],
-        [
-            "LPPROCESS_INFORMATION",
-            "lpProcessInformation"
-        ]
-    ],
-    "CreateSemaphoreA": [
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpSemaphoreAttributes"
-        ],
-        [
-            "LONG",
-            "lInitialCount"
-        ],
-        [
-            "LONG",
-            "lMaximumCount"
-        ],
-        [
-            "LPCSTR",
-            "lpName"
-        ]
-    ],
-    "CreateSemaphoreExA": [
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpSemaphoreAttributes"
-        ],
-        [
-            "LONG",
-            "lInitialCount"
-        ],
-        [
-            "LONG",
-            "lMaximumCount"
-        ],
-        [
-            "LPCSTR",
-            "lpName"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ]
-    ],
-    "CreateServiceA": [
-        [
-            "SC_HANDLE",
-            "hSCManager"
-        ],
-        [
-            "LPCSTR",
-            "lpServiceName"
-        ],
-        [
-            "LPCSTR",
-            "lpDisplayName"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ],
-        [
-            "DWORD",
-            "dwServiceType"
-        ],
-        [
-            "DWORD",
-            "dwStartType"
-        ],
-        [
-            "DWORD",
-            "dwErrorControl"
-        ],
-        [
-            "LPCSTR",
-            "lpBinaryPathName"
-        ],
-        [
-            "LPCSTR",
-            "lpLoadOrderGroup"
-        ],
-        [
-            "LPDWORD",
-            "lpdwTagId"
-        ],
-        [
-            "LPCSTR",
-            "lpDependencies"
-        ],
-        [
-            "LPCSTR",
-            "lpServiceStartName"
-        ],
-        [
-            "LPCSTR",
-            "lpPassword"
-        ]
-    ],
-    "CreateServiceW": [
-        [
-            "SC_HANDLE",
-            "hSCManager"
-        ],
-        [
-            "LPCWSTR",
-            "lpServiceName"
-        ],
-        [
-            "LPCWSTR",
-            "lpDisplayName"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ],
-        [
-            "DWORD",
-            "dwServiceType"
-        ],
-        [
-            "DWORD",
-            "dwStartType"
-        ],
-        [
-            "DWORD",
-            "dwErrorControl"
-        ],
-        [
-            "LPCWSTR",
-            "lpBinaryPathName"
-        ],
-        [
-            "LPCWSTR",
-            "lpLoadOrderGroup"
-        ],
-        [
-            "LPDWORD",
-            "lpdwTagId"
-        ],
-        [
-            "LPCWSTR",
-            "lpDependencies"
-        ],
-        [
-            "LPCWSTR",
-            "lpServiceStartName"
-        ],
-        [
-            "LPCWSTR",
-            "lpPassword"
-        ]
-    ],
-    "CreateThread": [
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpThreadAttributes"
-        ],
-        [
-            "SIZE_T",
-            "dwStackSize"
-        ],
-        [
-            "",
-            "lpStartAddress"
-        ],
-        [
-            "LPVOID",
-            "lpParameter"
-        ],
-        [
-            "DWORD",
-            "dwCreationFlags"
-        ],
-        [
-            "LPDWORD",
-            "lpThreadId"
-        ]
-    ],
-    "CreateToolhelp32Snapshot": [
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD",
-            "th32ProcessID"
-        ]
-    ],
-    "CryptAcquireContextA": [
-        [
-            "HCRYPTPROV",
-            "phProv"
-        ],
-        [
-            "LPCSTR",
-            "szContainer"
-        ],
-        [
-            "LPCSTR",
-            "szProvider"
-        ],
-        [
-            "DWORD",
-            "dwProvType"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ]
-    ],
-    "CryptAcquireContextW": [
-        [
-            "HCRYPTPROV",
-            "phProv"
-        ],
-        [
-            "LPCWSTR",
-            "szContainer"
-        ],
-        [
-            "LPCWSTR",
-            "szProvider"
-        ],
-        [
-            "DWORD",
-            "dwProvType"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ]
-    ],
-    "CryptDestroyHash": [
-        [
-            "HCRYPTHASH",
-            "hHash"
-        ]
-    ],
-    "CryptGenRandom": [
-        [
-            "HCRYPTPROV",
-            "hProv"
-        ],
-        [
-            "DWORD",
-            "dwLen"
-        ],
-        [
-            "BYTE",
-            "pbBuffer"
-        ]
-    ],
-    "CryptReleaseContext": [
-        [
-            "HCRYPTPROV",
-            "hProv"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ]
-    ],
-    "DeleteFileA": [
-        [
-            "LPCSTR",
-            "lpFileName"
-        ]
-    ],
-    "DeleteFileW": [
-        [
-            "LPCWSTR",
-            "lpFileName"
-        ]
-    ],
-    "DeviceIoControl": [
-        [
-            "HANDLE",
-            "hDevice"
-        ],
-        [
-            "DWORD",
-            "dwIoControlCode"
-        ],
-        [
-            "LPVOID",
-            "lpInBuffer"
-        ],
-        [
-            "DWORD",
-            "nInBufferSize"
-        ],
-        [
-            "LPVOID",
-            "lpOutBuffer"
-        ],
-        [
-            "DWORD",
-            "nOutBufferSize"
-        ],
-        [
-            "LPDWORD",
-            "lpBytesReturned"
-        ],
-        [
-            "LPOVERLAPPED",
-            "lpOverlapped"
-        ]
-    ],
-    "DuplicateToken": [
-        [
-            "HANDLE",
-            "ExistingTokenHandle"
-        ],
-        [
-            "",
-            "ImpersonationLevel"
-        ],
-        [
-            "PHANDLE",
-            "DuplicateTokenHandle"
-        ]
-    ],
-    "DuplicateTokenEx": [
-        [
-            "HANDLE",
-            "hExistingToken"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpTokenAttributes"
-        ],
-        [
-            "",
-            "ImpersonationLevel"
-        ],
-        [
-            "",
-            "TokenType"
-        ],
-        [
-            "PHANDLE",
-            "phNewToken"
-        ]
-    ],
-    "ExitProcess": [
-        [
-            "UINT",
-            "uExitCode"
-        ]
-    ],
-    "ExitThread": [
-        [
-            "DWORD",
-            "dwExitCode"
-        ]
-    ],
-    "FindClose": [
-        [
-            "HANDLE",
-            "hFindFile"
-        ]
-    ],
-    "FindFirstVolumeW": [
-        [
-            "LPWSTR",
-            "lpszVolumeName"
-        ],
-        [
-            "DWORD",
-            "cchBufferLength"
-        ]
-    ],
-    "FindNextVolumeW": [
-        [
-            "HANDLE",
-            "hFindVolume"
-        ],
-        [
-            "LPWSTR",
-            "lpszVolumeName"
-        ],
-        [
-            "DWORD",
-            "cchBufferLength"
-        ]
-    ],
-    "FindResourceA": [
-        [
-            "HMODULE",
-            "hModule"
-        ],
-        [
-            "LPCSTR",
-            "lpName"
-        ],
-        [
-            "LPCSTR",
-            "lpType"
-        ]
-    ],
-    "FindResourceW": [
-        [
-            "HMODULE",
-            "hModule"
-        ],
-        [
-            "LPCWSTR",
-            "lpName"
-        ],
-        [
-            "LPCWSTR",
-            "lpType"
-        ]
-    ],
-    "FlushFileBuffers": [
-        [
-            "HANDLE",
-            "hFile"
-        ]
-    ],
-    "GetCommandLineA": [],
-    "GetCommandLineW": [],
-    "GetCurrentProcessId": [],
-    "GetDiskFreeSpaceA": [
-        [
-            "LPCSTR",
-            "lpRootPathName"
-        ],
-        [
-            "LPDWORD",
-            "lpSectorsPerCluster"
-        ],
-        [
-            "LPDWORD",
-            "lpBytesPerSector"
-        ],
-        [
-            "LPDWORD",
-            "lpNumberOfFreeClusters"
-        ],
-        [
-            "LPDWORD",
-            "lpTotalNumberOfClusters"
-        ]
-    ],
-    "GetDiskFreeSpaceW": [
-        [
-            "LPCWSTR",
-            "lpRootPathName"
-        ],
-        [
-            "LPDWORD",
-            "lpSectorsPerCluster"
-        ],
-        [
-            "LPDWORD",
-            "lpBytesPerSector"
-        ],
-        [
-            "LPDWORD",
-            "lpNumberOfFreeClusters"
-        ],
-        [
-            "LPDWORD",
-            "lpTotalNumberOfClusters"
-        ]
-    ],
-    "GetDriveTypeA": [
-        [
-            "LPCSTR",
-            "lpRootPathName"
-        ]
-    ],
-    "GetDriveTypeW": [
-        [
-            "LPCWSTR",
-            "lpRootPathName"
-        ]
-    ],
-    "GetEnvironmentVariableA": [
-        [
-            "LPCSTR",
-            "lpName"
-        ],
-        [
-            "LPSTR",
-            "lpBuffer"
-        ],
-        [
-            "DWORD",
-            "nSize"
-        ]
-    ],
-    "GetEnvironmentVariableW": [
-        [
-            "LPCWSTR",
-            "lpName"
-        ],
-        [
-            "LPWSTR",
-            "lpBuffer"
-        ],
-        [
-            "DWORD",
-            "nSize"
-        ]
-    ],
-    "GetFileAttributesA": [
-        [
-            "LPCSTR",
-            "lpFileName"
-        ]
-    ],
-    "GetFileAttributesExA": [
-        [
-            "LPCSTR",
-            "lpFileName"
-        ],
-        [
-            "",
-            "fInfoLevelId"
-        ],
-        [
-            "LPVOID",
-            "lpFileInformation"
-        ]
-    ],
-    "GetFileAttributesExW": [
-        [
-            "LPCWSTR",
-            "lpFileName"
-        ],
-        [
-            "",
-            "fInfoLevelId"
-        ],
-        [
-            "LPVOID",
-            "lpFileInformation"
-        ]
-    ],
-    "GetFileAttributesW": [
-        [
-            "LPCWSTR",
-            "lpFileName"
-        ]
-    ],
-    "GetFileInformationByHandle": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "LPBY_HANDLE_FILE_INFORMATION",
-            "lpFileInformation"
-        ]
-    ],
-    "GetFileInformationByHandleEx": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "",
-            "FileInformationClass"
-        ],
-        [
-            "LPVOID",
-            "lpFileInformation"
-        ],
-        [
-            "DWORD",
-            "dwBufferSize"
-        ]
-    ],
-    "GetFileSize": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "LPDWORD",
-            "lpFileSizeHigh"
-        ]
-    ],
-    "GetFileSizeEx": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "",
-            "lpFileSize"
-        ]
-    ],
-    "GetLogicalDriveStringsA": [
-        [
-            "DWORD",
-            "nBufferLength"
-        ],
-        [
-            "LPSTR",
-            "lpBuffer"
-        ]
-    ],
-    "GetLogicalDriveStringsW": [
-        [
-            "DWORD",
-            "nBufferLength"
-        ],
-        [
-            "LPWSTR",
-            "lpBuffer"
-        ]
-    ],
-    "GetLogicalDrives": [],
-    "GetModuleFileNameA": [
-        [
-            "HMODULE",
-            "hModule"
-        ],
-        [
-            "LPSTR",
-            "lpFilename"
-        ],
-        [
-            "DWORD",
-            "nSize"
-        ]
-    ],
-    "GetModuleFileNameW": [
-        [
-            "HMODULE",
-            "hModule"
-        ],
-        [
-            "LPWSTR",
-            "lpFilename"
-        ],
-        [
-            "DWORD",
-            "nSize"
-        ]
-    ],
-    "GetModuleHandleA": [
-        [
-            "LPCSTR",
-            "lpModuleName"
-        ]
-    ],
-    "GetModuleHandleW": [
-        [
-            "LPCWSTR",
-            "lpModuleName"
-        ]
-    ],
-    "GetProcAddress": [
-        [
-            "HMODULE",
-            "hModule"
-        ],
-        [
-            "LPCSTR",
-            "lpProcName"
-        ]
-    ],
-    "GetSystemDirectoryA": [
-        [
-            "LPSTR",
-            "lpBuffer"
-        ],
-        [
-            "UINT",
-            "uSize"
-        ]
-    ],
-    "GetSystemDirectoryW": [
-        [
-            "LPWSTR",
-            "lpBuffer"
-        ],
-        [
-            "UINT",
-            "uSize"
-        ]
-    ],
-    "GetSystemInfo": [
-        [
-            "LPSYSTEM_INFO",
-            "lpSystemInfo"
-        ]
-    ],
-    "GetSystemTimeAsFileTime": [
-        [
-            "LPFILETIME",
-            "lpSystemTimeAsFileTime"
-        ]
-    ],
-    "GetThreadContext": [
-        [
-            "HANDLE",
-            "hThread"
-        ],
-        [
-            "LPCONTEXT",
-            "lpContext"
-        ]
-    ],
-    "GetTokenInformation": [
-        [
-            "HANDLE",
-            "TokenHandle"
-        ],
-        [
-            "",
-            "TokenInformationClass"
-        ],
-        [
-            "LPVOID",
-            "TokenInformation"
-        ],
-        [
-            "DWORD",
-            "TokenInformationLength"
-        ],
-        [
-            "PDWORD",
-            "ReturnLength"
-        ]
-    ],
-    "GetUserGeoID": [
-        [
-            "GEOCLASS",
-            "GeoClass"
-        ]
-    ],
-    "GetVolumeInformationA": [
-        [
-            "LPCSTR",
-            "lpRootPathName"
-        ],
-        [
-            "LPSTR",
-            "lpVolumeNameBuffer"
-        ],
-        [
-            "DWORD",
-            "nVolumeNameSize"
-        ],
-        [
-            "LPDWORD",
-            "lpVolumeSerialNumber"
-        ],
-        [
-            "LPDWORD",
-            "lpMaximumComponentLength"
-        ],
-        [
-            "LPDWORD",
-            "lpFileSystemFlags"
-        ],
-        [
-            "LPSTR",
-            "lpFileSystemNameBuffer"
-        ],
-        [
-            "DWORD",
-            "nFileSystemNameSize"
-        ]
-    ],
-    "GetVolumeInformationW": [
-        [
-            "LPCWSTR",
-            "lpRootPathName"
-        ],
-        [
-            "LPWSTR",
-            "lpVolumeNameBuffer"
-        ],
-        [
-            "DWORD",
-            "nVolumeNameSize"
-        ],
-        [
-            "LPDWORD",
-            "lpVolumeSerialNumber"
-        ],
-        [
-            "LPDWORD",
-            "lpMaximumComponentLength"
-        ],
-        [
-            "LPDWORD",
-            "lpFileSystemFlags"
-        ],
-        [
-            "LPWSTR",
-            "lpFileSystemNameBuffer"
-        ],
-        [
-            "DWORD",
-            "nFileSystemNameSize"
-        ]
-    ],
-    "GetVolumePathNamesForVolumeNameW": [
-        [
-            "LPCWSTR",
-            "lpszVolumeName"
-        ],
-        [
-            "LPWCH",
-            "lpszVolumePathNames"
-        ],
-        [
-            "DWORD",
-            "cchBufferLength"
-        ],
-        [
-            "PDWORD",
-            "lpcchReturnLength"
-        ]
-    ],
-    "GlobalAlloc": [
-        [
-            "UINT",
-            "uFlags"
-        ],
-        [
-            "SIZE_T",
-            "dwBytes"
-        ]
-    ],
-    "GlobalFree": [
-        [
-            "HGLOBAL",
-            "hMem"
-        ]
-    ],
-    "GlobalLock": [
-        [
-            "HGLOBAL",
-            "hMem"
-        ]
-    ],
-    "GlobalUnlock": [
-        [
-            "HGLOBAL",
-            "hMem"
-        ]
-    ],
-    "HeapAlloc": [
-        [
-            "HANDLE",
-            "hHeap"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "SIZE_T",
-            "dwBytes"
-        ]
-    ],
-    "HeapFree": [
-        [
-            "HANDLE",
-            "hHeap"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "LPVOID",
-            "lpMem"
-        ]
-    ],
-    "HttpOpenRequestA": [
-        [
-            "HINTERNET",
-            "hConnect"
-        ],
-        [
-            "LPCSTR",
-            "lpszVerb"
-        ],
-        [
-            "LPCSTR",
-            "lpszObjectName"
-        ],
-        [
-            "LPCSTR",
-            "lpszVersion"
-        ],
-        [
-            "LPCSTR",
-            "lpszReferrer"
-        ],
-        [
-            "LPCSTR",
-            "lplpszAcceptTypes"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD_PTR",
-            "dwContext"
-        ]
-    ],
-    "HttpOpenRequestW": [
-        [
-            "HINTERNET",
-            "hConnect"
-        ],
-        [
-            "LPCWSTR",
-            "lpszVerb"
-        ],
-        [
-            "LPCWSTR",
-            "lpszObjectName"
-        ],
-        [
-            "LPCWSTR",
-            "lpszVersion"
-        ],
-        [
-            "LPCWSTR",
-            "lpszReferrer"
-        ],
-        [
-            "LPCWSTR",
-            "lplpszAcceptTypes"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD_PTR",
-            "dwContext"
-        ]
-    ],
-    "HttpSendRequestA": [
-        [
-            "HINTERNET",
-            "hRequest"
-        ],
-        [
-            "LPCSTR",
-            "lpszHeaders"
-        ],
-        [
-            "DWORD",
-            "dwHeadersLength"
-        ],
-        [
-            "LPVOID",
-            "lpOptional"
-        ],
-        [
-            "DWORD",
-            "dwOptionalLength"
-        ]
-    ],
-    "HttpSendRequestW": [
-        [
-            "HINTERNET",
-            "hRequest"
-        ],
-        [
-            "LPCWSTR",
-            "lpszHeaders"
-        ],
-        [
-            "DWORD",
-            "dwHeadersLength"
-        ],
-        [
-            "LPVOID",
-            "lpOptional"
-        ],
-        [
-            "DWORD",
-            "dwOptionalLength"
-        ]
-    ],
-    "ImpersonateLoggedOnUser": [
-        [
-            "HANDLE",
-            "hToken"
-        ]
-    ],
-    "InitializeSecurityDescriptor": [
-        [
-            "PSECURITY_DESCRIPTOR",
-            "pSecurityDescriptor"
-        ],
-        [
-            "DWORD",
-            "dwRevision"
-        ]
-    ],
-    "InitiateSystemShutdownExA": [
-        [
-            "LPSTR",
-            "lpMachineName"
-        ],
-        [
-            "LPSTR",
-            "lpMessage"
-        ],
-        [
-            "DWORD",
-            "dwTimeout"
-        ],
-        [
-            "BOOL",
-            "bForceAppsClosed"
-        ],
-        [
-            "BOOL",
-            "bRebootAfterShutdown"
-        ],
-        [
-            "DWORD",
-            "dwReason"
-        ]
-    ],
-    "InitiateSystemShutdownExW": [
-        [
-            "LPWSTR",
-            "lpMachineName"
-        ],
-        [
-            "LPWSTR",
-            "lpMessage"
-        ],
-        [
-            "DWORD",
-            "dwTimeout"
-        ],
-        [
-            "BOOL",
-            "bForceAppsClosed"
-        ],
-        [
-            "BOOL",
-            "bRebootAfterShutdown"
-        ],
-        [
-            "DWORD",
-            "dwReason"
-        ]
-    ],
-    "InternetConnectA": [
-        [
-            "HINTERNET",
-            "hInternet"
-        ],
-        [
-            "LPCSTR",
-            "lpszServerName"
-        ],
-        [
-            "INTERNET_PORT",
-            "nServerPort"
-        ],
-        [
-            "LPCSTR",
-            "lpszUserName"
-        ],
-        [
-            "LPCSTR",
-            "lpszPassword"
-        ],
-        [
-            "DWORD",
-            "dwService"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD_PTR",
-            "dwContext"
-        ]
-    ],
-    "InternetConnectW": [
-        [
-            "HINTERNET",
-            "hInternet"
-        ],
-        [
-            "LPCWSTR",
-            "lpszServerName"
-        ],
-        [
-            "INTERNET_PORT",
-            "nServerPort"
-        ],
-        [
-            "LPCWSTR",
-            "lpszUserName"
-        ],
-        [
-            "LPCWSTR",
-            "lpszPassword"
-        ],
-        [
-            "DWORD",
-            "dwService"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD_PTR",
-            "dwContext"
-        ]
-    ],
-    "InternetCrackUrlA": [
-        [
-            "LPCSTR",
-            "lpszUrl"
-        ],
-        [
-            "DWORD",
-            "dwUrlLength"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "LPURL_COMPONENTSA",
-            "lpUrlComponents"
-        ]
-    ],
-    "InternetCrackUrlW": [
-        [
-            "LPCWSTR",
-            "lpszUrl"
-        ],
-        [
-            "DWORD",
-            "dwUrlLength"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "LPURL_COMPONENTSW",
-            "lpUrlComponents"
-        ]
-    ],
-    "InternetOpenA": [
-        [
-            "LPCSTR",
-            "lpszAgent"
-        ],
-        [
-            "DWORD",
-            "dwAccessType"
-        ],
-        [
-            "LPCSTR",
-            "lpszProxy"
-        ],
-        [
-            "LPCSTR",
-            "lpszProxyBypass"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ]
-    ],
-    "InternetOpenUrlA": [
-        [
-            "HINTERNET",
-            "hInternet"
-        ],
-        [
-            "LPCSTR",
-            "lpszUrl"
-        ],
-        [
-            "LPCSTR",
-            "lpszHeaders"
-        ],
-        [
-            "DWORD",
-            "dwHeadersLength"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD_PTR",
-            "dwContext"
-        ]
-    ],
-    "InternetOpenUrlW": [
-        [
-            "HINTERNET",
-            "hInternet"
-        ],
-        [
-            "LPCWSTR",
-            "lpszUrl"
-        ],
-        [
-            "LPCWSTR",
-            "lpszHeaders"
-        ],
-        [
-            "DWORD",
-            "dwHeadersLength"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD_PTR",
-            "dwContext"
-        ]
-    ],
-    "InternetOpenW": [
-        [
-            "LPCWSTR",
-            "lpszAgent"
-        ],
-        [
-            "DWORD",
-            "dwAccessType"
-        ],
-        [
-            "LPCWSTR",
-            "lpszProxy"
-        ],
-        [
-            "LPCWSTR",
-            "lpszProxyBypass"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ]
-    ],
-    "InternetQueryOptionA": [
-        [
-            "HINTERNET",
-            "hInternet"
-        ],
-        [
-            "DWORD",
-            "dwOption"
-        ],
-        [
-            "LPVOID",
-            "lpBuffer"
-        ],
-        [
-            "LPDWORD",
-            "lpdwBufferLength"
-        ]
-    ],
-    "InternetReadFile": [
-        [
-            "HINTERNET",
-            "hFile"
-        ],
-        [
-            "LPVOID",
-            "lpBuffer"
-        ],
-        [
-            "DWORD",
-            "dwNumberOfBytesToRead"
-        ],
-        [
-            "LPDWORD",
-            "lpdwNumberOfBytesRead"
-        ]
-    ],
-    "InternetReadFileExA": [
-        [
-            "HINTERNET",
-            "hFile"
-        ],
-        [
-            "LPINTERNET_BUFFERSA",
-            "lpBuffersOut"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD_PTR",
-            "dwContext"
-        ]
-    ],
-    "InternetReadFileExW": [
-        [
-            "HINTERNET",
-            "hFile"
-        ],
-        [
-            "LPINTERNET_BUFFERSW",
-            "lpBuffersOut"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "DWORD_PTR",
-            "dwContext"
-        ]
-    ],
-    "InternetWriteFile": [
-        [
-            "HINTERNET",
-            "hFile"
-        ],
-        [
-            "LPCVOID",
-            "lpBuffer"
-        ],
-        [
-            "DWORD",
-            "dwNumberOfBytesToWrite"
-        ],
-        [
-            "LPDWORD",
-            "lpdwNumberOfBytesWritten"
-        ]
-    ],
-    "IsWow64Process": [
-        [
-            "HANDLE",
-            "hProcess"
-        ],
-        [
-            "PBOOL",
-            "Wow64Process"
-        ]
-    ],
-    "LoadLibraryA": [
-        [
-            "LPCSTR",
-            "lpLibFileName"
-        ]
-    ],
-    "LoadLibraryExA": [
-        [
-            "LPCSTR",
-            "lpLibFileName"
-        ],
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ]
-    ],
-    "LoadLibraryExW": [
-        [
-            "LPCWSTR",
-            "lpLibFileName"
-        ],
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ]
-    ],
-    "LoadLibraryW": [
-        [
-            "LPCWSTR",
-            "lpLibFileName"
-        ]
-    ],
-    "LoadResource": [
-        [
-            "HMODULE",
-            "hModule"
-        ],
-        [
-            "HRSRC",
-            "hResInfo"
-        ]
-    ],
-    "LocalAlloc": [
-        [
-            "UINT",
-            "uFlags"
-        ],
-        [
-            "SIZE_T",
-            "uBytes"
-        ]
-    ],
-    "LocalFree": [
-        [
-            "HLOCAL",
-            "hMem"
-        ]
-    ],
-    "LockResource": [
-        [
-            "HGLOBAL",
-            "hResData"
-        ]
-    ],
-    "LogonUserA": [
-        [
-            "LPCSTR",
-            "lpszUsername"
-        ],
-        [
-            "LPCSTR",
-            "lpszDomain"
-        ],
-        [
-            "LPCSTR",
-            "lpszPassword"
-        ],
-        [
-            "DWORD",
-            "dwLogonType"
-        ],
-        [
-            "DWORD",
-            "dwLogonProvider"
-        ],
-        [
-            "PHANDLE",
-            "phToken"
-        ]
-    ],
-    "LogonUserW": [
-        [
-            "LPCWSTR",
-            "lpszUsername"
-        ],
-        [
-            "LPCWSTR",
-            "lpszDomain"
-        ],
-        [
-            "LPCWSTR",
-            "lpszPassword"
-        ],
-        [
-            "DWORD",
-            "dwLogonType"
-        ],
-        [
-            "DWORD",
-            "dwLogonProvider"
-        ],
-        [
-            "PHANDLE",
-            "phToken"
-        ]
-    ],
-    "LookupAccountSidA": [
-        [
-            "LPCSTR",
-            "lpSystemName"
-        ],
-        [
-            "PSID",
-            "Sid"
-        ],
-        [
-            "LPSTR",
-            "Name"
-        ],
-        [
-            "LPDWORD",
-            "cchName"
-        ],
-        [
-            "LPSTR",
-            "ReferencedDomainName"
-        ],
-        [
-            "LPDWORD",
-            "cchReferencedDomainName"
-        ],
-        [
-            "",
-            "peUse"
-        ]
-    ],
-    "LookupAccountSidW": [
-        [
-            "LPCWSTR",
-            "lpSystemName"
-        ],
-        [
-            "PSID",
-            "Sid"
-        ],
-        [
-            "LPWSTR",
-            "Name"
-        ],
-        [
-            "LPDWORD",
-            "cchName"
-        ],
-        [
-            "LPWSTR",
-            "ReferencedDomainName"
-        ],
-        [
-            "LPDWORD",
-            "cchReferencedDomainName"
-        ],
-        [
-            "",
-            "peUse"
-        ]
-    ],
-    "LookupPrivilegeValueA": [
-        [
-            "LPCSTR",
-            "lpSystemName"
-        ],
-        [
-            "LPCSTR",
-            "lpName"
-        ],
-        [
-            "PLUID",
-            "lpLuid"
-        ]
-    ],
-    "LookupPrivilegeValueW": [
-        [
-            "LPCWSTR",
-            "lpSystemName"
-        ],
-        [
-            "LPCWSTR",
-            "lpName"
-        ],
-        [
-            "PLUID",
-            "lpLuid"
-        ]
-    ],
-    "MapViewOfFile": [
-        [
-            "HANDLE",
-            "hFileMappingObject"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ],
-        [
-            "DWORD",
-            "dwFileOffsetHigh"
-        ],
-        [
-            "DWORD",
-            "dwFileOffsetLow"
-        ],
-        [
-            "SIZE_T",
-            "dwNumberOfBytesToMap"
-        ]
-    ],
-    "MoveFileA": [
-        [
-            "LPCSTR",
-            "lpExistingFileName"
-        ],
-        [
-            "LPCSTR",
-            "lpNewFileName"
-        ]
-    ],
-    "MoveFileExA": [
-        [
-            "LPCSTR",
-            "lpExistingFileName"
-        ],
-        [
-            "LPCSTR",
-            "lpNewFileName"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ]
-    ],
-    "MoveFileExW": [
-        [
-            "LPCWSTR",
-            "lpExistingFileName"
-        ],
-        [
-            "LPCWSTR",
-            "lpNewFileName"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ]
-    ],
-    "MoveFileW": [
-        [
-            "LPCWSTR",
-            "lpExistingFileName"
-        ],
-        [
-            "LPCWSTR",
-            "lpNewFileName"
-        ]
-    ],
-    "OpenMutexW": [
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ],
-        [
-            "BOOL",
-            "bInheritHandle"
-        ],
-        [
-            "LPCWSTR",
-            "lpName"
-        ]
-    ],
-    "OpenProcess": [
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ],
-        [
-            "BOOL",
-            "bInheritHandle"
-        ],
-        [
-            "DWORD",
-            "dwProcessId"
-        ]
-    ],
-    "OpenProcessToken": [
-        [
-            "HANDLE",
-            "ProcessHandle"
-        ],
-        [
-            "DWORD",
-            "DesiredAccess"
-        ],
-        [
-            "PHANDLE",
-            "TokenHandle"
-        ]
-    ],
-    "OpenSCManagerA": [
-        [
-            "LPCSTR",
-            "lpMachineName"
-        ],
-        [
-            "LPCSTR",
-            "lpDatabaseName"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ]
-    ],
-    "OpenSCManagerW": [
-        [
-            "LPCWSTR",
-            "lpMachineName"
-        ],
-        [
-            "LPCWSTR",
-            "lpDatabaseName"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ]
-    ],
-    "OpenServiceA": [
-        [
-            "SC_HANDLE",
-            "hSCManager"
-        ],
-        [
-            "LPCSTR",
-            "lpServiceName"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ]
-    ],
-    "OpenServiceW": [
-        [
-            "SC_HANDLE",
-            "hSCManager"
-        ],
-        [
-            "LPCWSTR",
-            "lpServiceName"
-        ],
-        [
-            "DWORD",
-            "dwDesiredAccess"
-        ]
-    ],
-    "OpenThreadToken": [
-        [
-            "HANDLE",
-            "ThreadHandle"
-        ],
-        [
-            "DWORD",
-            "DesiredAccess"
-        ],
-        [
-            "BOOL",
-            "OpenAsSelf"
-        ],
-        [
-            "PHANDLE",
-            "TokenHandle"
-        ]
-    ],
-    "PathAppendW": [
-        [
-            "LPWSTR",
-            "pszPath"
-        ],
-        [
-            "LPCWSTR",
-            "pszMore"
-        ]
-    ],
-    "PathFileExistsA": [
-        [
-            "LPCSTR",
-            "pszPath"
-        ]
-    ],
-    "PathFileExistsW": [
-        [
-            "LPCWSTR",
-            "pszPath"
-        ]
-    ],
-    "PathFindExtensionA": [
-        [
-            "LPCSTR",
-            "pszPath"
-        ]
-    ],
-    "PathFindExtensionW": [
-        [
-            "LPCWSTR",
-            "pszPath"
-        ]
-    ],
-    "Process32First": [
-        [
-            "HANDLE",
-            "hSnapshot"
-        ],
-        [
-            "LPPROCESSENTRY32",
-            "lppe"
-        ]
-    ],
-    "Process32FirstW": [
-        [
-            "HANDLE",
-            "hSnapshot"
-        ],
-        [
-            "LPPROCESSENTRY32W",
-            "lppe"
-        ]
-    ],
-    "Process32Next": [
-        [
-            "HANDLE",
-            "hSnapshot"
-        ],
-        [
-            "LPPROCESSENTRY32",
-            "lppe"
-        ]
-    ],
-    "Process32NextW": [
-        [
-            "HANDLE",
-            "hSnapshot"
-        ],
-        [
-            "LPPROCESSENTRY32W",
-            "lppe"
-        ]
-    ],
-    "ReadFile": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "LPVOID",
-            "lpBuffer"
-        ],
-        [
-            "DWORD",
-            "nNumberOfBytesToRead"
-        ],
-        [
-            "LPDWORD",
-            "lpNumberOfBytesRead"
-        ],
-        [
-            "LPOVERLAPPED",
-            "lpOverlapped"
-        ]
-    ],
-    "ReadFileEx": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "LPVOID",
-            "lpBuffer"
-        ],
-        [
-            "DWORD",
-            "nNumberOfBytesToRead"
-        ],
-        [
-            "LPOVERLAPPED",
-            "lpOverlapped"
-        ],
-        [
-            "",
-            "lpCompletionRoutine"
-        ]
-    ],
-    "ReadProcessMemory": [
-        [
-            "HANDLE",
-            "hProcess"
-        ],
-        [
-            "LPCVOID",
-            "lpBaseAddress"
-        ],
-        [
-            "LPVOID",
-            "lpBuffer"
-        ],
-        [
-            "SIZE_T",
-            "nSize"
-        ],
-        [
-            "SIZE_T",
-            "lpNumberOfBytesRead"
-        ]
-    ],
-    "RegCloseKey": [
-        [
-            "HKEY",
-            "hKey"
-        ]
-    ],
-    "RegCreateKeyA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCSTR",
-            "lpSubKey"
-        ],
-        [
-            "*PHKEY",
-            "phkResult"
-        ]
-    ],
-    "RegCreateKeyExA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCSTR",
-            "lpSubKey"
-        ],
-        [
-            "DWORD",
-            "Reserved"
-        ],
-        [
-            "LPSTR",
-            "lpClass"
-        ],
-        [
-            "DWORD",
-            "dwOptions"
-        ],
-        [
-            "REGSAM",
-            "samDesired"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpSecurityAttributes"
-        ],
-        [
-            "*PHKEY",
-            "phkResult"
-        ],
-        [
-            "LPDWORD",
-            "lpdwDisposition"
-        ]
-    ],
-    "RegCreateKeyExW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCWSTR",
-            "lpSubKey"
-        ],
-        [
-            "DWORD",
-            "Reserved"
-        ],
-        [
-            "LPWSTR",
-            "lpClass"
-        ],
-        [
-            "DWORD",
-            "dwOptions"
-        ],
-        [
-            "REGSAM",
-            "samDesired"
-        ],
-        [
-            "LPSECURITY_ATTRIBUTES",
-            "lpSecurityAttributes"
-        ],
-        [
-            "*PHKEY",
-            "phkResult"
-        ],
-        [
-            "LPDWORD",
-            "lpdwDisposition"
-        ]
-    ],
-    "RegCreateKeyW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCWSTR",
-            "lpSubKey"
-        ],
-        [
-            "*PHKEY",
-            "phkResult"
-        ]
-    ],
-    "RegDeleteKeyA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCSTR",
-            "lpSubKey"
-        ]
-    ],
-    "RegDeleteKeyW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCWSTR",
-            "lpSubKey"
-        ]
-    ],
-    "RegDeleteValueA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCSTR",
-            "lpValueName"
-        ]
-    ],
-    "RegDeleteValueW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCWSTR",
-            "lpValueName"
-        ]
-    ],
-    "RegEnumKeyExA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "DWORD",
-            "dwIndex"
-        ],
-        [
-            "LPSTR",
-            "lpName"
-        ],
-        [
-            "LPDWORD",
-            "lpcchName"
-        ],
-        [
-            "LPDWORD",
-            "lpReserved"
-        ],
-        [
-            "LPSTR",
-            "lpClass"
-        ],
-        [
-            "LPDWORD",
-            "lpcchClass"
-        ],
-        [
-            "PFILETIME",
-            "lpftLastWriteTime"
-        ]
-    ],
-    "RegEnumKeyExW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "DWORD",
-            "dwIndex"
-        ],
-        [
-            "LPWSTR",
-            "lpName"
-        ],
-        [
-            "LPDWORD",
-            "lpcchName"
-        ],
-        [
-            "LPDWORD",
-            "lpReserved"
-        ],
-        [
-            "LPWSTR",
-            "lpClass"
-        ],
-        [
-            "LPDWORD",
-            "lpcchClass"
-        ],
-        [
-            "PFILETIME",
-            "lpftLastWriteTime"
-        ]
-    ],
-    "RegEnumKeyW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "DWORD",
-            "dwIndex"
-        ],
-        [
-            "LPWSTR",
-            "lpName"
-        ],
-        [
-            "DWORD",
-            "cchName"
-        ]
-    ],
-    "RegEnumValueA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "DWORD",
-            "dwIndex"
-        ],
-        [
-            "LPSTR",
-            "lpValueName"
-        ],
-        [
-            "LPDWORD",
-            "lpcchValueName"
-        ],
-        [
-            "LPDWORD",
-            "lpReserved"
-        ],
-        [
-            "LPDWORD",
-            "lpType"
-        ],
-        [
-            "LPBYTE",
-            "lpData"
-        ],
-        [
-            "LPDWORD",
-            "lpcbData"
-        ]
-    ],
-    "RegEnumValueW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "DWORD",
-            "dwIndex"
-        ],
-        [
-            "LPWSTR",
-            "lpValueName"
-        ],
-        [
-            "LPDWORD",
-            "lpcchValueName"
-        ],
-        [
-            "LPDWORD",
-            "lpReserved"
-        ],
-        [
-            "LPDWORD",
-            "lpType"
-        ],
-        [
-            "LPBYTE",
-            "lpData"
-        ],
-        [
-            "LPDWORD",
-            "lpcbData"
-        ]
-    ],
-    "RegOpenKeyA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCSTR",
-            "lpSubKey"
-        ],
-        [
-            "*PHKEY",
-            "phkResult"
-        ]
-    ],
-    "RegOpenKeyExA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCSTR",
-            "lpSubKey"
-        ],
-        [
-            "DWORD",
-            "ulOptions"
-        ],
-        [
-            "REGSAM",
-            "samDesired"
-        ],
-        [
-            "*PHKEY",
-            "phkResult"
-        ]
-    ],
-    "RegOpenKeyExW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCWSTR",
-            "lpSubKey"
-        ],
-        [
-            "DWORD",
-            "ulOptions"
-        ],
-        [
-            "REGSAM",
-            "samDesired"
-        ],
-        [
-            "*PHKEY",
-            "phkResult"
-        ]
-    ],
-    "RegOpenKeyW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCWSTR",
-            "lpSubKey"
-        ],
-        [
-            "*PHKEY",
-            "phkResult"
-        ]
-    ],
-    "RegQueryInfoKeyA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPSTR",
-            "lpClass"
-        ],
-        [
-            "LPDWORD",
-            "lpcchClass"
-        ],
-        [
-            "LPDWORD",
-            "lpReserved"
-        ],
-        [
-            "LPDWORD",
-            "lpcSubKeys"
-        ],
-        [
-            "LPDWORD",
-            "lpcbMaxSubKeyLen"
-        ],
-        [
-            "LPDWORD",
-            "lpcbMaxClassLen"
-        ],
-        [
-            "LPDWORD",
-            "lpcValues"
-        ],
-        [
-            "LPDWORD",
-            "lpcbMaxValueNameLen"
-        ],
-        [
-            "LPDWORD",
-            "lpcbMaxValueLen"
-        ],
-        [
-            "LPDWORD",
-            "lpcbSecurityDescriptor"
-        ],
-        [
-            "PFILETIME",
-            "lpftLastWriteTime"
-        ]
-    ],
-    "RegQueryInfoKeyW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPWSTR",
-            "lpClass"
-        ],
-        [
-            "LPDWORD",
-            "lpcchClass"
-        ],
-        [
-            "LPDWORD",
-            "lpReserved"
-        ],
-        [
-            "LPDWORD",
-            "lpcSubKeys"
-        ],
-        [
-            "LPDWORD",
-            "lpcbMaxSubKeyLen"
-        ],
-        [
-            "LPDWORD",
-            "lpcbMaxClassLen"
-        ],
-        [
-            "LPDWORD",
-            "lpcValues"
-        ],
-        [
-            "LPDWORD",
-            "lpcbMaxValueNameLen"
-        ],
-        [
-            "LPDWORD",
-            "lpcbMaxValueLen"
-        ],
-        [
-            "LPDWORD",
-            "lpcbSecurityDescriptor"
-        ],
-        [
-            "PFILETIME",
-            "lpftLastWriteTime"
-        ]
-    ],
-    "RegQueryValueExA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCSTR",
-            "lpValueName"
-        ],
-        [
-            "LPDWORD",
-            "lpReserved"
-        ],
-        [
-            "LPDWORD",
-            "lpType"
-        ],
-        [
-            "LPBYTE",
-            "lpData"
-        ],
-        [
-            "LPDWORD",
-            "lpcbData"
-        ]
-    ],
-    "RegQueryValueExW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCWSTR",
-            "lpValueName"
-        ],
-        [
-            "LPDWORD",
-            "lpReserved"
-        ],
-        [
-            "LPDWORD",
-            "lpType"
-        ],
-        [
-            "LPBYTE",
-            "lpData"
-        ],
-        [
-            "LPDWORD",
-            "lpcbData"
-        ]
-    ],
-    "RegSetValueA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCSTR",
-            "lpSubKey"
-        ],
-        [
-            "DWORD",
-            "dwType"
-        ],
-        [
-            "LPCSTR",
-            "lpData"
-        ],
-        [
-            "DWORD",
-            "cbData"
-        ]
-    ],
-    "RegSetValueExA": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCSTR",
-            "lpValueName"
-        ],
-        [
-            "DWORD",
-            "Reserved"
-        ],
-        [
-            "DWORD",
-            "dwType"
-        ],
-        [
-            "BYTE",
-            "lpData"
-        ],
-        [
-            "DWORD",
-            "cbData"
-        ]
-    ],
-    "RegSetValueExW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCWSTR",
-            "lpValueName"
-        ],
-        [
-            "DWORD",
-            "Reserved"
-        ],
-        [
-            "DWORD",
-            "dwType"
-        ],
-        [
-            "BYTE",
-            "lpData"
-        ],
-        [
-            "DWORD",
-            "cbData"
-        ]
-    ],
-    "RegSetValueW": [
-        [
-            "HKEY",
-            "hKey"
-        ],
-        [
-            "LPCWSTR",
-            "lpSubKey"
-        ],
-        [
-            "DWORD",
-            "dwType"
-        ],
-        [
-            "LPCWSTR",
-            "lpData"
-        ],
-        [
-            "DWORD",
-            "cbData"
-        ]
-    ],
-    "ResumeThread": [
-        [
-            "HANDLE",
-            "hThread"
-        ]
-    ],
-    "SHGetFolderPathA": [
-        [
-            "HWND",
-            "hwnd"
-        ],
-        [
-            "int",
-            "csidl"
-        ],
-        [
-            "HANDLE",
-            "hToken"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "LPSTR",
-            "pszPath"
-        ]
-    ],
-    "SHGetFolderPathW": [
-        [
-            "HWND",
-            "hwnd"
-        ],
-        [
-            "int",
-            "csidl"
-        ],
-        [
-            "HANDLE",
-            "hToken"
-        ],
-        [
-            "DWORD",
-            "dwFlags"
-        ],
-        [
-            "LPWSTR",
-            "pszPath"
-        ]
-    ],
-    "SetEvent": [
-        [
-            "HANDLE",
-            "hEvent"
-        ]
-    ],
-    "SetFileAttributesA": [
-        [
-            "LPCSTR",
-            "lpFileName"
-        ],
-        [
-            "DWORD",
-            "dwFileAttributes"
-        ]
-    ],
-    "SetFileAttributesW": [
-        [
-            "LPCWSTR",
-            "lpFileName"
-        ],
-        [
-            "DWORD",
-            "dwFileAttributes"
-        ]
-    ],
-    "SetFilePointer": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "LONG",
-            "lDistanceToMove"
-        ],
-        [
-            "PLONG",
-            "lpDistanceToMoveHigh"
-        ],
-        [
-            "DWORD",
-            "dwMoveMethod"
-        ]
-    ],
-    "SetFilePointerEx": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "",
-            "liDistanceToMove"
-        ],
-        [
-            "",
-            "lpNewFilePointer"
-        ],
-        [
-            "DWORD",
-            "dwMoveMethod"
-        ]
-    ],
-    "SetThreadContext": [
-        [
-            "HANDLE",
-            "hThread"
-        ],
-        [
-            "CONTEXT",
-            "lpContext"
-        ]
-    ],
-    "SetThreadPriority": [
-        [
-            "HANDLE",
-            "hThread"
-        ],
-        [
-            "int",
-            "nPriority"
-        ]
-    ],
-    "SetVolumeMountPointA": [
-        [
-            "LPCSTR",
-            "lpszVolumeMountPoint"
-        ],
-        [
-            "LPCSTR",
-            "lpszVolumeName"
-        ]
-    ],
-    "SetVolumeMountPointW": [
-        [
-            "LPCWSTR",
-            "lpszVolumeMountPoint"
-        ],
-        [
-            "LPCWSTR",
-            "lpszVolumeName"
-        ]
-    ],
-    "ShellExecuteA": [
-        [
-            "HWND",
-            "hwnd"
-        ],
-        [
-            "LPCSTR",
-            "lpOperation"
-        ],
-        [
-            "LPCSTR",
-            "lpFile"
-        ],
-        [
-            "LPCSTR",
-            "lpParameters"
-        ],
-        [
-            "LPCSTR",
-            "lpDirectory"
-        ],
-        [
-            "INT",
-            "nShowCmd"
-        ]
-    ],
-    "ShellExecuteExA": [
-        [
-            "SHELLEXECUTEINFOA",
-            "pExecInfo"
-        ]
-    ],
-    "ShellExecuteExW": [
-        [
-            "SHELLEXECUTEINFOW",
-            "pExecInfo"
-        ]
-    ],
-    "ShellExecuteW": [
-        [
-            "HWND",
-            "hwnd"
-        ],
-        [
-            "LPCWSTR",
-            "lpOperation"
-        ],
-        [
-            "LPCWSTR",
-            "lpFile"
-        ],
-        [
-            "LPCWSTR",
-            "lpParameters"
-        ],
-        [
-            "LPCWSTR",
-            "lpDirectory"
-        ],
-        [
-            "INT",
-            "nShowCmd"
-        ]
-    ],
-    "SizeofResource": [
-        [
-            "HMODULE",
-            "hModule"
-        ],
-        [
-            "HRSRC",
-            "hResInfo"
-        ]
-    ],
-    "Sleep": [
-        [
-            "DWORD",
-            "dwMilliseconds"
-        ]
-    ],
-    "SleepEx": [
-        [
-            "DWORD",
-            "dwMilliseconds"
-        ],
-        [
-            "BOOL",
-            "bAlertable"
-        ]
-    ],
-    "StartServiceA": [
-        [
-            "SC_HANDLE",
-            "hService"
-        ],
-        [
-            "DWORD",
-            "dwNumServiceArgs"
-        ],
-        [
-            "LPCSTR",
-            "lpServiceArgVectors"
-        ]
-    ],
-    "StartServiceW": [
-        [
-            "SC_HANDLE",
-            "hService"
-        ],
-        [
-            "DWORD",
-            "dwNumServiceArgs"
-        ],
-        [
-            "LPCWSTR",
-            "lpServiceArgVectors"
-        ]
-    ],
-    "StrStrA": [
-        [
-            "PCSTR",
-            "pszFirst"
-        ],
-        [
-            "PCSTR",
-            "pszSrch"
-        ]
-    ],
-    "StrStrIW": [
-        [
-            "PCWSTR",
-            "pszFirst"
-        ],
-        [
-            "PCWSTR",
-            "pszSrch"
-        ]
-    ],
-    "StrStrW": [
-        [
-            "PCWSTR",
-            "pszFirst"
-        ],
-        [
-            "PCWSTR",
-            "pszSrch"
-        ]
-    ],
-    "SuspendThread": [
-        [
-            "HANDLE",
-            "hThread"
-        ]
-    ],
-    "TerminateProcess": [
-        [
-            "HANDLE",
-            "hProcess"
-        ],
-        [
-            "UINT",
-            "uExitCode"
-        ]
-    ],
-    "Thread32First": [
-        [
-            "HANDLE",
-            "hSnapshot"
-        ],
-        [
-            "LPTHREADENTRY32",
-            "lpte"
-        ]
-    ],
-    "Thread32Next": [
-        [
-            "HANDLE",
-            "hSnapshot"
-        ],
-        [
-            "LPTHREADENTRY32",
-            "lpte"
-        ]
-    ],
-    "UnmapViewOfFile": [
-        [
-            "LPCVOID",
-            "lpBaseAddress"
-        ]
-    ],
-    "UpdateResourceA": [
-        [
-            "HANDLE",
-            "hUpdate"
-        ],
-        [
-            "LPCSTR",
-            "lpType"
-        ],
-        [
-            "LPCSTR",
-            "lpName"
-        ],
-        [
-            "WORD",
-            "wLanguage"
-        ],
-        [
-            "LPVOID",
-            "lpData"
-        ],
-        [
-            "DWORD",
-            "cb"
-        ]
-    ],
-    "UpdateResourceW": [
-        [
-            "HANDLE",
-            "hUpdate"
-        ],
-        [
-            "LPCWSTR",
-            "lpType"
-        ],
-        [
-            "LPCWSTR",
-            "lpName"
-        ],
-        [
-            "WORD",
-            "wLanguage"
-        ],
-        [
-            "LPVOID",
-            "lpData"
-        ],
-        [
-            "DWORD",
-            "cb"
-        ]
-    ],
-    "VerifyVersionInfoA": [
-        [
-            "LPOSVERSIONINFOEXA",
-            "lpVersionInformation"
-        ],
-        [
-            "DWORD",
-            "dwTypeMask"
-        ],
-        [
-            "DWORDLONG",
-            "dwlConditionMask"
-        ]
-    ],
-    "VerifyVersionInfoW": [
-        [
-            "LPOSVERSIONINFOEXW",
-            "lpVersionInformation"
-        ],
-        [
-            "DWORD",
-            "dwTypeMask"
-        ],
-        [
-            "DWORDLONG",
-            "dwlConditionMask"
-        ]
-    ],
-    "VirtualAlloc": [
-        [
-            "LPVOID",
-            "lpAddress"
-        ],
-        [
-            "SIZE_T",
-            "dwSize"
-        ],
-        [
-            "DWORD",
-            "flAllocationType"
-        ],
-        [
-            "DWORD",
-            "flProtect"
-        ]
-    ],
-    "VirtualAllocEx": [
-        [
-            "HANDLE",
-            "hProcess"
-        ],
-        [
-            "LPVOID",
-            "lpAddress"
-        ],
-        [
-            "SIZE_T",
-            "dwSize"
-        ],
-        [
-            "DWORD",
-            "flAllocationType"
-        ],
-        [
-            "DWORD",
-            "flProtect"
-        ]
-    ],
-    "VirtualAllocExNuma": [
-        [
-            "HANDLE",
-            "hProcess"
-        ],
-        [
-            "LPVOID",
-            "lpAddress"
-        ],
-        [
-            "SIZE_T",
-            "dwSize"
-        ],
-        [
-            "DWORD",
-            "flAllocationType"
-        ],
-        [
-            "DWORD",
-            "flProtect"
-        ],
-        [
-            "DWORD",
-            "nndPreferred"
-        ]
-    ],
-    "VirtualFree": [
-        [
-            "LPVOID",
-            "lpAddress"
-        ],
-        [
-            "SIZE_T",
-            "dwSize"
-        ],
-        [
-            "DWORD",
-            "dwFreeType"
-        ]
-    ],
-    "VirtualFreeEx": [
-        [
-            "HANDLE",
-            "hProcess"
-        ],
-        [
-            "LPVOID",
-            "lpAddress"
-        ],
-        [
-            "SIZE_T",
-            "dwSize"
-        ],
-        [
-            "DWORD",
-            "dwFreeType"
-        ]
-    ],
-    "VirtualProtect": [
-        [
-            "LPVOID",
-            "lpAddress"
-        ],
-        [
-            "SIZE_T",
-            "dwSize"
-        ],
-        [
-            "DWORD",
-            "flNewProtect"
-        ],
-        [
-            "PDWORD",
-            "lpflOldProtect"
-        ]
-    ],
-    "VirtualProtectEx": [
-        [
-            "HANDLE",
-            "hProcess"
-        ],
-        [
-            "LPVOID",
-            "lpAddress"
-        ],
-        [
-            "SIZE_T",
-            "dwSize"
-        ],
-        [
-            "DWORD",
-            "flNewProtect"
-        ],
-        [
-            "PDWORD",
-            "lpflOldProtect"
-        ]
-    ],
-    "VirtualQuery": [
-        [
-            "LPCVOID",
-            "lpAddress"
-        ],
-        [
-            "PMEMORY_BASIC_INFORMATION",
-            "lpBuffer"
-        ],
-        [
-            "SIZE_T",
-            "dwLength"
-        ]
-    ],
-    "VirtualQueryEx": [
-        [
-            "HANDLE",
-            "hProcess"
-        ],
-        [
-            "LPCVOID",
-            "lpAddress"
-        ],
-        [
-            "PMEMORY_BASIC_INFORMATION",
-            "lpBuffer"
-        ],
-        [
-            "SIZE_T",
-            "dwLength"
-        ]
-    ],
-    "WSAStartup": [
-        [
-            "WORD",
-            "wVersionRequired"
-        ],
-        [
-            "LPWSADATA",
-            "lpWSAData"
-        ]
-    ],
-    "WinExec": [
-        [
-            "LPCSTR",
-            "lpCmdLine"
-        ],
-        [
-            "UINT",
-            "uCmdShow"
-        ]
-    ],
-    "Wow64DisableWow64FsRedirection": [
-        [
-            "PVOID",
-            "OldValue"
-        ]
-    ],
-    "Wow64RevertWow64FsRedirection": [
-        [
-            "PVOID",
-            "OlValue"
-        ]
-    ],
-    "WriteFile": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "LPCVOID",
-            "lpBuffer"
-        ],
-        [
-            "DWORD",
-            "nNumberOfBytesToWrite"
-        ],
-        [
-            "LPDWORD",
-            "lpNumberOfBytesWritten"
-        ],
-        [
-            "LPOVERLAPPED",
-            "lpOverlapped"
-        ]
-    ],
-    "WriteFileEx": [
-        [
-            "HANDLE",
-            "hFile"
-        ],
-        [
-            "LPCVOID",
-            "lpBuffer"
-        ],
-        [
-            "DWORD",
-            "nNumberOfBytesToWrite"
-        ],
-        [
-            "LPOVERLAPPED",
-            "lpOverlapped"
-        ],
-        [
-            "",
-            "lpCompletionRoutine"
-        ]
-    ],
-    "bind": [
-        [
-            "SOCKET",
-            "s"
-        ],
-        [
-            "",
-            "addr"
-        ],
-        [
-            "int",
-            "namelen"
-        ]
-    ],
-    "gethostbyname": [
-        [
-            "char",
-            "name"
-        ]
-    ],
-    "lstrcmpW": [
-        [
-            "LPCWSTR",
-            "lpString1"
-        ],
-        [
-            "LPCWSTR",
-            "lpString2"
-        ]
-    ],
-    "lstrlenW": [
-        [
-            "LPCWSTR",
-            "lpString"
-        ]
-    ],
-    "recv": [
-        [
-            "SOCKET",
-            "s"
-        ],
-        [
-            "char",
-            "buf"
-        ],
-        [
-            "int",
-            "len"
-        ],
-        [
-            "int",
-            "flags"
-        ]
-    ]
+	"BCryptDecrypt": [
+		["BCRYPT_KEY_HANDLE", "hKey"],
+		["PUCHAR", "pbInput"],
+		["ULONG", "cbInput"],
+		["void*", "pPaddingInfo"],
+		["PUCHAR", "pbIV"],
+		["ULONG", "cbIV"],
+		["PUCHAR", "pbOutput"],
+		["ULONG", "cbOutput"],
+		["ULONG", "pcbResult"],
+		["ULONG", "dwFlags"]
+	],
+	"BCryptEncrypt": [
+		["BCRYPT_KEY_HANDLE", "hKey"],
+		["PUCHAR", "pbInput"],
+		["ULONG", "cbInput"],
+		["void*", "pPaddingInfo"],
+		["PUCHAR", "pbIV"],
+		["ULONG", "cbIV"],
+		["PUCHAR", "pbOutput"],
+		["ULONG", "cbOutput"],
+		["ULONG", "pcbResult"],
+		["ULONG", "dwFlags"]
+	],
+	"BCryptGenRandom": [
+		["BCRYPT_ALG_HANDLE", "hAlgorithm"],
+		["PUCHAR", "pbBuffer"],
+		["ULONG", "cbBuffer"],
+		["ULONG", "dwFlags"]
+	],
+	"BCryptHashData": [
+		["BCRYPT_HASH_HANDLE", "hHash"],
+		["PUCHAR", "pbInput"],
+		["ULONG", "cbInput"],
+		["ULONG", "dwFlags"]
+	],
+	"BCryptOpenAlgorithmProvider": [
+		["BCRYPT_ALG_HANDLE", "phAlgorithm"],
+		["LPCWSTR", "pszAlgId"],
+		["LPCWSTR", "pszImplementation"],
+		["ULONG", "dwFlags"]
+	],
+	"BeginUpdateResourceA": [
+		["LPCSTR", "pFileName"],
+		["BOOL", "bDeleteExistingResources"]
+	],
+	"BeginUpdateResourceW": [
+		["LPCWSTR", "pFileName"],
+		["BOOL", "bDeleteExistingResources"]
+	],
+	"ChangeServiceConfigA": [
+		["SC_HANDLE", "hService"],
+		["DWORD", "dwServiceType"],
+		["DWORD", "dwStartType"],
+		["DWORD", "dwErrorControl"],
+		["LPCSTR", "lpBinaryPathName"],
+		["LPCSTR", "lpLoadOrderGroup"],
+		["LPDWORD", "lpdwTagId"],
+		["LPCSTR", "lpDependencies"],
+		["LPCSTR", "lpServiceStartName"],
+		["LPCSTR", "lpPassword"],
+		["LPCSTR", "lpDisplayName"]
+	],
+	"ChangeServiceConfigW": [
+		["SC_HANDLE", "hService"],
+		["DWORD", "dwServiceType"],
+		["DWORD", "dwStartType"],
+		["DWORD", "dwErrorControl"],
+		["LPCWSTR", "lpBinaryPathName"],
+		["LPCWSTR", "lpLoadOrderGroup"],
+		["LPDWORD", "lpdwTagId"],
+		["LPCWSTR", "lpDependencies"],
+		["LPCWSTR", "lpServiceStartName"],
+		["LPCWSTR", "lpPassword"],
+		["LPCWSTR", "lpDisplayName"]
+	],
+	"CloseHandle": [["HANDLE", "hObject"]],
+	"CloseServiceHandle": [["SC_HANDLE", "hSCObject"]],
+	"ControlService": [
+		["SC_HANDLE", "hService"],
+		["DWORD", "dwControl"],
+		["LPSERVICE_STATUS", "lpServiceStatus"]
+	],
+	"ControlServiceExA": [
+		["SC_HANDLE", "hService"],
+		["DWORD", "dwControl"],
+		["DWORD", "dwInfoLevel"],
+		["PVOID", "pControlParams"]
+	],
+	"ControlServiceExW": [
+		["SC_HANDLE", "hService"],
+		["DWORD", "dwControl"],
+		["DWORD", "dwInfoLevel"],
+		["PVOID", "pControlParams"]
+	],
+	"CopyFileA": [
+		["LPCSTR", "lpExistingFileName"],
+		["LPCSTR", "lpNewFileName"],
+		["BOOL", "bFailIfExists"]
+	],
+	"CopyFileExA": [
+		["LPCSTR", "lpExistingFileName"],
+		["LPCSTR", "lpNewFileName"],
+		["", "lpProgressRoutine"],
+		["LPVOID", "lpData"],
+		["LPBOOL", "pbCancel"],
+		["DWORD", "dwCopyFlags"]
+	],
+	"CopyFileExW": [
+		["LPCWSTR", "lpExistingFileName"],
+		["LPCWSTR", "lpNewFileName"],
+		["", "lpProgressRoutine"],
+		["LPVOID", "lpData"],
+		["LPBOOL", "pbCancel"],
+		["DWORD", "dwCopyFlags"]
+	],
+	"CopyFileW": [
+		["LPCWSTR", "lpExistingFileName"],
+		["LPCWSTR", "lpNewFileName"],
+		["BOOL", "bFailIfExists"]
+	],
+	"CreateDirectoryA": [
+		["LPCSTR", "lpPathName"],
+		["LPSECURITY_ATTRIBUTES", "lpSecurityAttributes"]
+	],
+	"CreateDirectoryExA": [
+		["LPCSTR", "lpTemplateDirectory"],
+		["LPCSTR", "lpNewDirectory"],
+		["LPSECURITY_ATTRIBUTES", "lpSecurityAttributes"]
+	],
+	"CreateDirectoryExW": [
+		["LPCWSTR", "lpTemplateDirectory"],
+		["LPCWSTR", "lpNewDirectory"],
+		["LPSECURITY_ATTRIBUTES", "lpSecurityAttributes"]
+	],
+	"CreateDirectoryW": [
+		["LPCWSTR", "lpPathName"],
+		["LPSECURITY_ATTRIBUTES", "lpSecurityAttributes"]
+	],
+	"CreateEventA": [
+		["LPSECURITY_ATTRIBUTES", "lpEventAttributes"],
+		["BOOL", "bManualReset"],
+		["BOOL", "bInitialState"],
+		["LPCSTR", "lpName"]
+	],
+	"CreateEventW": [
+		["LPSECURITY_ATTRIBUTES", "lpEventAttributes"],
+		["BOOL", "bManualReset"],
+		["BOOL", "bInitialState"],
+		["LPCWSTR", "lpName"]
+	],
+	"CreateFile2": [
+		["LPCWSTR", "lpFileName"],
+		["DWORD", "dwDesiredAccess"],
+		["DWORD", "dwShareMode"],
+		["DWORD", "dwCreationDisposition"],
+		["LPCREATEFILE2_EXTENDED_PARAMETERS", "pCreateExParams"]
+	],
+	"CreateFileA": [
+		["LPCSTR", "lpFileName"],
+		["DWORD", "dwDesiredAccess"],
+		["DWORD", "dwShareMode"],
+		["LPSECURITY_ATTRIBUTES", "lpSecurityAttributes"],
+		["DWORD", "dwCreationDisposition"],
+		["DWORD", "dwFlagsAndAttributes"],
+		["HANDLE", "hTemplateFile"]
+	],
+	"CreateFileMappingA": [
+		["HANDLE", "hFile"],
+		["LPSECURITY_ATTRIBUTES", "lpFileMappingAttributes"],
+		["DWORD", "flProtect"],
+		["DWORD", "dwMaximumSizeHigh"],
+		["DWORD", "dwMaximumSizeLow"],
+		["LPCSTR", "lpName"]
+	],
+	"CreateFileW": [
+		["LPCWSTR", "lpFileName"],
+		["DWORD", "dwDesiredAccess"],
+		["DWORD", "dwShareMode"],
+		["LPSECURITY_ATTRIBUTES", "lpSecurityAttributes"],
+		["DWORD", "dwCreationDisposition"],
+		["DWORD", "dwFlagsAndAttributes"],
+		["HANDLE", "hTemplateFile"]
+	],
+	"CreateMutexA": [
+		["LPSECURITY_ATTRIBUTES", "lpMutexAttributes"],
+		["BOOL", "bInitialOwner"],
+		["LPCSTR", "lpName"]
+	],
+	"CreateMutexExA": [
+		["LPSECURITY_ATTRIBUTES", "lpMutexAttributes"],
+		["LPCSTR", "lpName"],
+		["DWORD", "dwFlags"],
+		["DWORD", "dwDesiredAccess"]
+	],
+	"CreateMutexExW": [
+		["LPSECURITY_ATTRIBUTES", "lpMutexAttributes"],
+		["LPCWSTR", "lpName"],
+		["DWORD", "dwFlags"],
+		["DWORD", "dwDesiredAccess"]
+	],
+	"CreateMutexW": [
+		["LPSECURITY_ATTRIBUTES", "lpMutexAttributes"],
+		["BOOL", "bInitialOwner"],
+		["LPCWSTR", "lpName"]
+	],
+	"CreateProcessA": [
+		["LPCSTR", "lpApplicationName"],
+		["LPSTR", "lpCommandLine"],
+		["LPSECURITY_ATTRIBUTES", "lpProcessAttributes"],
+		["LPSECURITY_ATTRIBUTES", "lpThreadAttributes"],
+		["BOOL", "bInheritHandles"],
+		["DWORD", "dwCreationFlags"],
+		["LPVOID", "lpEnvironment"],
+		["LPCSTR", "lpCurrentDirectory"],
+		["LPSTARTUPINFOA", "lpStartupInfo"],
+		["LPPROCESS_INFORMATION", "lpProcessInformation"]
+	],
+	"CreateProcessAsUserA": [
+		["HANDLE", "hToken"],
+		["LPCSTR", "lpApplicationName"],
+		["LPSTR", "lpCommandLine"],
+		["LPSECURITY_ATTRIBUTES", "lpProcessAttributes"],
+		["LPSECURITY_ATTRIBUTES", "lpThreadAttributes"],
+		["BOOL", "bInheritHandles"],
+		["DWORD", "dwCreationFlags"],
+		["LPVOID", "lpEnvironment"],
+		["LPCSTR", "lpCurrentDirectory"],
+		["LPSTARTUPINFOA", "lpStartupInfo"],
+		["LPPROCESS_INFORMATION", "lpProcessInformation"]
+	],
+	"CreateProcessAsUserW": [
+		["HANDLE", "hToken"],
+		["LPCWSTR", "lpApplicationName"],
+		["LPWSTR", "lpCommandLine"],
+		["LPSECURITY_ATTRIBUTES", "lpProcessAttributes"],
+		["LPSECURITY_ATTRIBUTES", "lpThreadAttributes"],
+		["BOOL", "bInheritHandles"],
+		["DWORD", "dwCreationFlags"],
+		["LPVOID", "lpEnvironment"],
+		["LPCWSTR", "lpCurrentDirectory"],
+		["LPSTARTUPINFOW", "lpStartupInfo"],
+		["LPPROCESS_INFORMATION", "lpProcessInformation"]
+	],
+	"CreateProcessW": [
+		["LPCWSTR", "lpApplicationName"],
+		["LPWSTR", "lpCommandLine"],
+		["LPSECURITY_ATTRIBUTES", "lpProcessAttributes"],
+		["LPSECURITY_ATTRIBUTES", "lpThreadAttributes"],
+		["BOOL", "bInheritHandles"],
+		["DWORD", "dwCreationFlags"],
+		["LPVOID", "lpEnvironment"],
+		["LPCWSTR", "lpCurrentDirectory"],
+		["LPSTARTUPINFOW", "lpStartupInfo"],
+		["LPPROCESS_INFORMATION", "lpProcessInformation"]
+	],
+	"CreateProcessWithTokenW": [
+		["HANDLE", "hToken"],
+		["DWORD", "dwLogonFlags"],
+		["LPCWSTR", "lpApplicationName"],
+		["LPWSTR", "lpCommandLine"],
+		["DWORD", "dwCreationFlags"],
+		["LPVOID", "lpEnvironment"],
+		["LPCWSTR", "lpCurrentDirectory"],
+		["LPSTARTUPINFOW", "lpStartupInfo"],
+		["LPPROCESS_INFORMATION", "lpProcessInformation"]
+	],
+	"CreateSemaphoreA": [
+		["LPSECURITY_ATTRIBUTES", "lpSemaphoreAttributes"],
+		["LONG", "lInitialCount"],
+		["LONG", "lMaximumCount"],
+		["LPCSTR", "lpName"]
+	],
+	"CreateSemaphoreExA": [
+		["LPSECURITY_ATTRIBUTES", "lpSemaphoreAttributes"],
+		["LONG", "lInitialCount"],
+		["LONG", "lMaximumCount"],
+		["LPCSTR", "lpName"],
+		["DWORD", "dwFlags"],
+		["DWORD", "dwDesiredAccess"]
+	],
+	"CreateServiceA": [
+		["SC_HANDLE", "hSCManager"],
+		["LPCSTR", "lpServiceName"],
+		["LPCSTR", "lpDisplayName"],
+		["DWORD", "dwDesiredAccess"],
+		["DWORD", "dwServiceType"],
+		["DWORD", "dwStartType"],
+		["DWORD", "dwErrorControl"],
+		["LPCSTR", "lpBinaryPathName"],
+		["LPCSTR", "lpLoadOrderGroup"],
+		["LPDWORD", "lpdwTagId"],
+		["LPCSTR", "lpDependencies"],
+		["LPCSTR", "lpServiceStartName"],
+		["LPCSTR", "lpPassword"]
+	],
+	"CreateServiceW": [
+		["SC_HANDLE", "hSCManager"],
+		["LPCWSTR", "lpServiceName"],
+		["LPCWSTR", "lpDisplayName"],
+		["DWORD", "dwDesiredAccess"],
+		["DWORD", "dwServiceType"],
+		["DWORD", "dwStartType"],
+		["DWORD", "dwErrorControl"],
+		["LPCWSTR", "lpBinaryPathName"],
+		["LPCWSTR", "lpLoadOrderGroup"],
+		["LPDWORD", "lpdwTagId"],
+		["LPCWSTR", "lpDependencies"],
+		["LPCWSTR", "lpServiceStartName"],
+		["LPCWSTR", "lpPassword"]
+	],
+	"CreateThread": [
+		["LPSECURITY_ATTRIBUTES", "lpThreadAttributes"],
+		["SIZE_T", "dwStackSize"],
+		["", "lpStartAddress"],
+		["LPVOID", "lpParameter"],
+		["DWORD", "dwCreationFlags"],
+		["LPDWORD", "lpThreadId"]
+	],
+	"CreateToolhelp32Snapshot": [
+		["DWORD", "dwFlags"],
+		["DWORD", "th32ProcessID"]
+	],
+	"CryptAcquireContextA": [
+		["HCRYPTPROV", "phProv"],
+		["LPCSTR", "szContainer"],
+		["LPCSTR", "szProvider"],
+		["DWORD", "dwProvType"],
+		["DWORD", "dwFlags"]
+	],
+	"CryptAcquireContextW": [
+		["HCRYPTPROV", "phProv"],
+		["LPCWSTR", "szContainer"],
+		["LPCWSTR", "szProvider"],
+		["DWORD", "dwProvType"],
+		["DWORD", "dwFlags"]
+	],
+	"CryptDestroyHash": [["HCRYPTHASH", "hHash"]],
+	"CryptGenRandom": [
+		["HCRYPTPROV", "hProv"],
+		["DWORD", "dwLen"],
+		["BYTE", "pbBuffer"]
+	],
+	"CryptReleaseContext": [
+		["HCRYPTPROV", "hProv"],
+		["DWORD", "dwFlags"]
+	],
+	"DeleteFileA": [["LPCSTR", "lpFileName"]],
+	"DeleteFileW": [["LPCWSTR", "lpFileName"]],
+	"DeviceIoControl": [
+		["HANDLE", "hDevice"],
+		["DWORD", "dwIoControlCode"],
+		["LPVOID", "lpInBuffer"],
+		["DWORD", "nInBufferSize"],
+		["LPVOID", "lpOutBuffer"],
+		["DWORD", "nOutBufferSize"],
+		["LPDWORD", "lpBytesReturned"],
+		["LPOVERLAPPED", "lpOverlapped"]
+	],
+	"DuplicateToken": [
+		["HANDLE", "ExistingTokenHandle"],
+		["", "ImpersonationLevel"],
+		["PHANDLE", "DuplicateTokenHandle"]
+	],
+	"DuplicateTokenEx": [
+		["HANDLE", "hExistingToken"],
+		["DWORD", "dwDesiredAccess"],
+		["LPSECURITY_ATTRIBUTES", "lpTokenAttributes"],
+		["", "ImpersonationLevel"],
+		["", "TokenType"],
+		["PHANDLE", "phNewToken"]
+	],
+	"ExitProcess": [["UINT", "uExitCode"]],
+	"ExitThread": [["DWORD", "dwExitCode"]],
+	"FindClose": [["HANDLE", "hFindFile"]],
+	"FindFirstVolumeW": [
+		["LPWSTR", "lpszVolumeName"],
+		["DWORD", "cchBufferLength"]
+	],
+	"FindNextVolumeW": [
+		["HANDLE", "hFindVolume"],
+		["LPWSTR", "lpszVolumeName"],
+		["DWORD", "cchBufferLength"]
+	],
+	"FindResourceA": [
+		["HMODULE", "hModule"],
+		["LPCSTR", "lpName"],
+		["LPCSTR", "lpType"]
+	],
+	"FindResourceW": [
+		["HMODULE", "hModule"],
+		["LPCWSTR", "lpName"],
+		["LPCWSTR", "lpType"]
+	],
+	"FlushFileBuffers": [["HANDLE", "hFile"]],
+	"GetCommandLineA": [],
+	"GetCommandLineW": [],
+	"GetCurrentProcessId": [],
+	"GetDiskFreeSpaceA": [
+		["LPCSTR", "lpRootPathName"],
+		["LPDWORD", "lpSectorsPerCluster"],
+		["LPDWORD", "lpBytesPerSector"],
+		["LPDWORD", "lpNumberOfFreeClusters"],
+		["LPDWORD", "lpTotalNumberOfClusters"]
+	],
+	"GetDiskFreeSpaceW": [
+		["LPCWSTR", "lpRootPathName"],
+		["LPDWORD", "lpSectorsPerCluster"],
+		["LPDWORD", "lpBytesPerSector"],
+		["LPDWORD", "lpNumberOfFreeClusters"],
+		["LPDWORD", "lpTotalNumberOfClusters"]
+	],
+	"GetDriveTypeA": [["LPCSTR", "lpRootPathName"]],
+	"GetDriveTypeW": [["LPCWSTR", "lpRootPathName"]],
+	"GetEnvironmentVariableA": [
+		["LPCSTR", "lpName"],
+		["LPSTR", "lpBuffer"],
+		["DWORD", "nSize"]
+	],
+	"GetEnvironmentVariableW": [
+		["LPCWSTR", "lpName"],
+		["LPWSTR", "lpBuffer"],
+		["DWORD", "nSize"]
+	],
+	"GetFileAttributesA": [["LPCSTR", "lpFileName"]],
+	"GetFileAttributesExA": [
+		["LPCSTR", "lpFileName"],
+		["", "fInfoLevelId"],
+		["LPVOID", "lpFileInformation"]
+	],
+	"GetFileAttributesExW": [
+		["LPCWSTR", "lpFileName"],
+		["", "fInfoLevelId"],
+		["LPVOID", "lpFileInformation"]
+	],
+	"GetFileAttributesW": [["LPCWSTR", "lpFileName"]],
+	"GetFileInformationByHandle": [
+		["HANDLE", "hFile"],
+		["LPBY_HANDLE_FILE_INFORMATION", "lpFileInformation"]
+	],
+	"GetFileInformationByHandleEx": [
+		["HANDLE", "hFile"],
+		["", "FileInformationClass"],
+		["LPVOID", "lpFileInformation"],
+		["DWORD", "dwBufferSize"]
+	],
+	"GetFileSize": [
+		["HANDLE", "hFile"],
+		["LPDWORD", "lpFileSizeHigh"]
+	],
+	"GetFileSizeEx": [
+		["HANDLE", "hFile"],
+		["", "lpFileSize"]
+	],
+	"GetLogicalDriveStringsA": [
+		["DWORD", "nBufferLength"],
+		["LPSTR", "lpBuffer"]
+	],
+	"GetLogicalDriveStringsW": [
+		["DWORD", "nBufferLength"],
+		["LPWSTR", "lpBuffer"]
+	],
+	"GetLogicalDrives": [],
+	"GetModuleFileNameA": [
+		["HMODULE", "hModule"],
+		["LPSTR", "lpFilename"],
+		["DWORD", "nSize"]
+	],
+	"GetModuleFileNameW": [
+		["HMODULE", "hModule"],
+		["LPWSTR", "lpFilename"],
+		["DWORD", "nSize"]
+	],
+	"GetModuleHandleA": [["LPCSTR", "lpModuleName"]],
+	"GetModuleHandleW": [["LPCWSTR", "lpModuleName"]],
+	"GetProcAddress": [
+		["HMODULE", "hModule"],
+		["LPCSTR", "lpProcName"]
+	],
+	"GetSystemDirectoryA": [
+		["LPSTR", "lpBuffer"],
+		["UINT", "uSize"]
+	],
+	"GetSystemDirectoryW": [
+		["LPWSTR", "lpBuffer"],
+		["UINT", "uSize"]
+	],
+	"GetSystemInfo": [["LPSYSTEM_INFO", "lpSystemInfo"]],
+	"GetSystemTimeAsFileTime": [["LPFILETIME", "lpSystemTimeAsFileTime"]],
+	"GetThreadContext": [
+		["HANDLE", "hThread"],
+		["LPCONTEXT", "lpContext"]
+	],
+	"GetTokenInformation": [
+		["HANDLE", "TokenHandle"],
+		["", "TokenInformationClass"],
+		["LPVOID", "TokenInformation"],
+		["DWORD", "TokenInformationLength"],
+		["PDWORD", "ReturnLength"]
+	],
+	"GetUserGeoID": [["GEOCLASS", "GeoClass"]],
+	"GetVolumeInformationA": [
+		["LPCSTR", "lpRootPathName"],
+		["LPSTR", "lpVolumeNameBuffer"],
+		["DWORD", "nVolumeNameSize"],
+		["LPDWORD", "lpVolumeSerialNumber"],
+		["LPDWORD", "lpMaximumComponentLength"],
+		["LPDWORD", "lpFileSystemFlags"],
+		["LPSTR", "lpFileSystemNameBuffer"],
+		["DWORD", "nFileSystemNameSize"]
+	],
+	"GetVolumeInformationW": [
+		["LPCWSTR", "lpRootPathName"],
+		["LPWSTR", "lpVolumeNameBuffer"],
+		["DWORD", "nVolumeNameSize"],
+		["LPDWORD", "lpVolumeSerialNumber"],
+		["LPDWORD", "lpMaximumComponentLength"],
+		["LPDWORD", "lpFileSystemFlags"],
+		["LPWSTR", "lpFileSystemNameBuffer"],
+		["DWORD", "nFileSystemNameSize"]
+	],
+	"GetVolumePathNamesForVolumeNameW": [
+		["LPCWSTR", "lpszVolumeName"],
+		["LPWCH", "lpszVolumePathNames"],
+		["DWORD", "cchBufferLength"],
+		["PDWORD", "lpcchReturnLength"]
+	],
+	"GlobalAlloc": [
+		["UINT", "uFlags"],
+		["SIZE_T", "dwBytes"]
+	],
+	"GlobalFree": [["HGLOBAL", "hMem"]],
+	"GlobalLock": [["HGLOBAL", "hMem"]],
+	"GlobalUnlock": [["HGLOBAL", "hMem"]],
+	"HeapAlloc": [
+		["HANDLE", "hHeap"],
+		["DWORD", "dwFlags"],
+		["SIZE_T", "dwBytes"]
+	],
+	"HeapFree": [
+		["HANDLE", "hHeap"],
+		["DWORD", "dwFlags"],
+		["LPVOID", "lpMem"]
+	],
+	"HttpOpenRequestA": [
+		["HINTERNET", "hConnect"],
+		["LPCSTR", "lpszVerb"],
+		["LPCSTR", "lpszObjectName"],
+		["LPCSTR", "lpszVersion"],
+		["LPCSTR", "lpszReferrer"],
+		["LPCSTR", "lplpszAcceptTypes"],
+		["DWORD", "dwFlags"],
+		["DWORD_PTR", "dwContext"]
+	],
+	"HttpOpenRequestW": [
+		["HINTERNET", "hConnect"],
+		["LPCWSTR", "lpszVerb"],
+		["LPCWSTR", "lpszObjectName"],
+		["LPCWSTR", "lpszVersion"],
+		["LPCWSTR", "lpszReferrer"],
+		["LPCWSTR", "lplpszAcceptTypes"],
+		["DWORD", "dwFlags"],
+		["DWORD_PTR", "dwContext"]
+	],
+	"HttpSendRequestA": [
+		["HINTERNET", "hRequest"],
+		["LPCSTR", "lpszHeaders"],
+		["DWORD", "dwHeadersLength"],
+		["LPVOID", "lpOptional"],
+		["DWORD", "dwOptionalLength"]
+	],
+	"HttpSendRequestW": [
+		["HINTERNET", "hRequest"],
+		["LPCWSTR", "lpszHeaders"],
+		["DWORD", "dwHeadersLength"],
+		["LPVOID", "lpOptional"],
+		["DWORD", "dwOptionalLength"]
+	],
+	"ImpersonateLoggedOnUser": [["HANDLE", "hToken"]],
+	"InitializeSecurityDescriptor": [
+		["PSECURITY_DESCRIPTOR", "pSecurityDescriptor"],
+		["DWORD", "dwRevision"]
+	],
+	"InitiateSystemShutdownExA": [
+		["LPSTR", "lpMachineName"],
+		["LPSTR", "lpMessage"],
+		["DWORD", "dwTimeout"],
+		["BOOL", "bForceAppsClosed"],
+		["BOOL", "bRebootAfterShutdown"],
+		["DWORD", "dwReason"]
+	],
+	"InitiateSystemShutdownExW": [
+		["LPWSTR", "lpMachineName"],
+		["LPWSTR", "lpMessage"],
+		["DWORD", "dwTimeout"],
+		["BOOL", "bForceAppsClosed"],
+		["BOOL", "bRebootAfterShutdown"],
+		["DWORD", "dwReason"]
+	],
+	"InternetConnectA": [
+		["HINTERNET", "hInternet"],
+		["LPCSTR", "lpszServerName"],
+		["INTERNET_PORT", "nServerPort"],
+		["LPCSTR", "lpszUserName"],
+		["LPCSTR", "lpszPassword"],
+		["DWORD", "dwService"],
+		["DWORD", "dwFlags"],
+		["DWORD_PTR", "dwContext"]
+	],
+	"InternetConnectW": [
+		["HINTERNET", "hInternet"],
+		["LPCWSTR", "lpszServerName"],
+		["INTERNET_PORT", "nServerPort"],
+		["LPCWSTR", "lpszUserName"],
+		["LPCWSTR", "lpszPassword"],
+		["DWORD", "dwService"],
+		["DWORD", "dwFlags"],
+		["DWORD_PTR", "dwContext"]
+	],
+	"InternetCrackUrlA": [
+		["LPCSTR", "lpszUrl"],
+		["DWORD", "dwUrlLength"],
+		["DWORD", "dwFlags"],
+		["LPURL_COMPONENTSA", "lpUrlComponents"]
+	],
+	"InternetCrackUrlW": [
+		["LPCWSTR", "lpszUrl"],
+		["DWORD", "dwUrlLength"],
+		["DWORD", "dwFlags"],
+		["LPURL_COMPONENTSW", "lpUrlComponents"]
+	],
+	"InternetOpenA": [
+		["LPCSTR", "lpszAgent"],
+		["DWORD", "dwAccessType"],
+		["LPCSTR", "lpszProxy"],
+		["LPCSTR", "lpszProxyBypass"],
+		["DWORD", "dwFlags"]
+	],
+	"InternetOpenUrlA": [
+		["HINTERNET", "hInternet"],
+		["LPCSTR", "lpszUrl"],
+		["LPCSTR", "lpszHeaders"],
+		["DWORD", "dwHeadersLength"],
+		["DWORD", "dwFlags"],
+		["DWORD_PTR", "dwContext"]
+	],
+	"InternetOpenUrlW": [
+		["HINTERNET", "hInternet"],
+		["LPCWSTR", "lpszUrl"],
+		["LPCWSTR", "lpszHeaders"],
+		["DWORD", "dwHeadersLength"],
+		["DWORD", "dwFlags"],
+		["DWORD_PTR", "dwContext"]
+	],
+	"InternetOpenW": [
+		["LPCWSTR", "lpszAgent"],
+		["DWORD", "dwAccessType"],
+		["LPCWSTR", "lpszProxy"],
+		["LPCWSTR", "lpszProxyBypass"],
+		["DWORD", "dwFlags"]
+	],
+	"InternetQueryOptionA": [
+		["HINTERNET", "hInternet"],
+		["DWORD", "dwOption"],
+		["LPVOID", "lpBuffer"],
+		["LPDWORD", "lpdwBufferLength"]
+	],
+	"InternetReadFile": [
+		["HINTERNET", "hFile"],
+		["LPVOID", "lpBuffer"],
+		["DWORD", "dwNumberOfBytesToRead"],
+		["LPDWORD", "lpdwNumberOfBytesRead"]
+	],
+	"InternetReadFileExA": [
+		["HINTERNET", "hFile"],
+		["LPINTERNET_BUFFERSA", "lpBuffersOut"],
+		["DWORD", "dwFlags"],
+		["DWORD_PTR", "dwContext"]
+	],
+	"InternetReadFileExW": [
+		["HINTERNET", "hFile"],
+		["LPINTERNET_BUFFERSW", "lpBuffersOut"],
+		["DWORD", "dwFlags"],
+		["DWORD_PTR", "dwContext"]
+	],
+	"InternetWriteFile": [
+		["HINTERNET", "hFile"],
+		["LPCVOID", "lpBuffer"],
+		["DWORD", "dwNumberOfBytesToWrite"],
+		["LPDWORD", "lpdwNumberOfBytesWritten"]
+	],
+	"IsWow64Process": [
+		["HANDLE", "hProcess"],
+		["PBOOL", "Wow64Process"]
+	],
+	"LoadLibraryA": [["LPCSTR", "lpLibFileName"]],
+	"LoadLibraryExA": [
+		["LPCSTR", "lpLibFileName"],
+		["HANDLE", "hFile"],
+		["DWORD", "dwFlags"]
+	],
+	"LoadLibraryExW": [
+		["LPCWSTR", "lpLibFileName"],
+		["HANDLE", "hFile"],
+		["DWORD", "dwFlags"]
+	],
+	"LoadLibraryW": [["LPCWSTR", "lpLibFileName"]],
+	"LoadResource": [
+		["HMODULE", "hModule"],
+		["HRSRC", "hResInfo"]
+	],
+	"LocalAlloc": [
+		["UINT", "uFlags"],
+		["SIZE_T", "uBytes"]
+	],
+	"LocalFree": [["HLOCAL", "hMem"]],
+	"LockResource": [["HGLOBAL", "hResData"]],
+	"LogonUserA": [
+		["LPCSTR", "lpszUsername"],
+		["LPCSTR", "lpszDomain"],
+		["LPCSTR", "lpszPassword"],
+		["DWORD", "dwLogonType"],
+		["DWORD", "dwLogonProvider"],
+		["PHANDLE", "phToken"]
+	],
+	"LogonUserW": [
+		["LPCWSTR", "lpszUsername"],
+		["LPCWSTR", "lpszDomain"],
+		["LPCWSTR", "lpszPassword"],
+		["DWORD", "dwLogonType"],
+		["DWORD", "dwLogonProvider"],
+		["PHANDLE", "phToken"]
+	],
+	"LookupAccountSidA": [
+		["LPCSTR", "lpSystemName"],
+		["PSID", "Sid"],
+		["LPSTR", "Name"],
+		["LPDWORD", "cchName"],
+		["LPSTR", "ReferencedDomainName"],
+		["LPDWORD", "cchReferencedDomainName"],
+		["", "peUse"]
+	],
+	"LookupAccountSidW": [
+		["LPCWSTR", "lpSystemName"],
+		["PSID", "Sid"],
+		["LPWSTR", "Name"],
+		["LPDWORD", "cchName"],
+		["LPWSTR", "ReferencedDomainName"],
+		["LPDWORD", "cchReferencedDomainName"],
+		["", "peUse"]
+	],
+	"LookupPrivilegeValueA": [
+		["LPCSTR", "lpSystemName"],
+		["LPCSTR", "lpName"],
+		["PLUID", "lpLuid"]
+	],
+	"LookupPrivilegeValueW": [
+		["LPCWSTR", "lpSystemName"],
+		["LPCWSTR", "lpName"],
+		["PLUID", "lpLuid"]
+	],
+	"MapViewOfFile": [
+		["HANDLE", "hFileMappingObject"],
+		["DWORD", "dwDesiredAccess"],
+		["DWORD", "dwFileOffsetHigh"],
+		["DWORD", "dwFileOffsetLow"],
+		["SIZE_T", "dwNumberOfBytesToMap"]
+	],
+	"MoveFileA": [
+		["LPCSTR", "lpExistingFileName"],
+		["LPCSTR", "lpNewFileName"]
+	],
+	"MoveFileExA": [
+		["LPCSTR", "lpExistingFileName"],
+		["LPCSTR", "lpNewFileName"],
+		["DWORD", "dwFlags"]
+	],
+	"MoveFileExW": [
+		["LPCWSTR", "lpExistingFileName"],
+		["LPCWSTR", "lpNewFileName"],
+		["DWORD", "dwFlags"]
+	],
+	"MoveFileW": [
+		["LPCWSTR", "lpExistingFileName"],
+		["LPCWSTR", "lpNewFileName"]
+	],
+	"OpenMutexW": [
+		["DWORD", "dwDesiredAccess"],
+		["BOOL", "bInheritHandle"],
+		["LPCWSTR", "lpName"]
+	],
+	"OpenProcess": [
+		["DWORD", "dwDesiredAccess"],
+		["BOOL", "bInheritHandle"],
+		["DWORD", "dwProcessId"]
+	],
+	"OpenProcessToken": [
+		["HANDLE", "ProcessHandle"],
+		["DWORD", "DesiredAccess"],
+		["PHANDLE", "TokenHandle"]
+	],
+	"OpenSCManagerA": [
+		["LPCSTR", "lpMachineName"],
+		["LPCSTR", "lpDatabaseName"],
+		["DWORD", "dwDesiredAccess"]
+	],
+	"OpenSCManagerW": [
+		["LPCWSTR", "lpMachineName"],
+		["LPCWSTR", "lpDatabaseName"],
+		["DWORD", "dwDesiredAccess"]
+	],
+	"OpenServiceA": [
+		["SC_HANDLE", "hSCManager"],
+		["LPCSTR", "lpServiceName"],
+		["DWORD", "dwDesiredAccess"]
+	],
+	"OpenServiceW": [
+		["SC_HANDLE", "hSCManager"],
+		["LPCWSTR", "lpServiceName"],
+		["DWORD", "dwDesiredAccess"]
+	],
+	"OpenThreadToken": [
+		["HANDLE", "ThreadHandle"],
+		["DWORD", "DesiredAccess"],
+		["BOOL", "OpenAsSelf"],
+		["PHANDLE", "TokenHandle"]
+	],
+	"PathAppendW": [
+		["LPWSTR", "pszPath"],
+		["LPCWSTR", "pszMore"]
+	],
+	"PathFileExistsA": [["LPCSTR", "pszPath"]],
+	"PathFileExistsW": [["LPCWSTR", "pszPath"]],
+	"PathFindExtensionA": [["LPCSTR", "pszPath"]],
+	"PathFindExtensionW": [["LPCWSTR", "pszPath"]],
+	"Process32First": [
+		["HANDLE", "hSnapshot"],
+		["LPPROCESSENTRY32", "lppe"]
+	],
+	"Process32FirstW": [
+		["HANDLE", "hSnapshot"],
+		["LPPROCESSENTRY32W", "lppe"]
+	],
+	"Process32Next": [
+		["HANDLE", "hSnapshot"],
+		["LPPROCESSENTRY32", "lppe"]
+	],
+	"Process32NextW": [
+		["HANDLE", "hSnapshot"],
+		["LPPROCESSENTRY32W", "lppe"]
+	],
+	"ReadFile": [
+		["HANDLE", "hFile"],
+		["LPVOID", "lpBuffer"],
+		["DWORD", "nNumberOfBytesToRead"],
+		["LPDWORD", "lpNumberOfBytesRead"],
+		["LPOVERLAPPED", "lpOverlapped"]
+	],
+	"ReadFileEx": [
+		["HANDLE", "hFile"],
+		["LPVOID", "lpBuffer"],
+		["DWORD", "nNumberOfBytesToRead"],
+		["LPOVERLAPPED", "lpOverlapped"],
+		["", "lpCompletionRoutine"]
+	],
+	"ReadProcessMemory": [
+		["HANDLE", "hProcess"],
+		["LPCVOID", "lpBaseAddress"],
+		["LPVOID", "lpBuffer"],
+		["SIZE_T", "nSize"],
+		["SIZE_T", "lpNumberOfBytesRead"]
+	],
+	"RegCloseKey": [["HKEY", "hKey"]],
+	"RegCreateKeyA": [
+		["HKEY", "hKey"],
+		["LPCSTR", "lpSubKey"],
+		["*PHKEY", "phkResult"]
+	],
+	"RegCreateKeyExA": [
+		["HKEY", "hKey"],
+		["LPCSTR", "lpSubKey"],
+		["DWORD", "Reserved"],
+		["LPSTR", "lpClass"],
+		["DWORD", "dwOptions"],
+		["REGSAM", "samDesired"],
+		["LPSECURITY_ATTRIBUTES", "lpSecurityAttributes"],
+		["*PHKEY", "phkResult"],
+		["LPDWORD", "lpdwDisposition"]
+	],
+	"RegCreateKeyExW": [
+		["HKEY", "hKey"],
+		["LPCWSTR", "lpSubKey"],
+		["DWORD", "Reserved"],
+		["LPWSTR", "lpClass"],
+		["DWORD", "dwOptions"],
+		["REGSAM", "samDesired"],
+		["LPSECURITY_ATTRIBUTES", "lpSecurityAttributes"],
+		["*PHKEY", "phkResult"],
+		["LPDWORD", "lpdwDisposition"]
+	],
+	"RegCreateKeyW": [
+		["HKEY", "hKey"],
+		["LPCWSTR", "lpSubKey"],
+		["*PHKEY", "phkResult"]
+	],
+	"RegDeleteKeyA": [
+		["HKEY", "hKey"],
+		["LPCSTR", "lpSubKey"]
+	],
+	"RegDeleteKeyW": [
+		["HKEY", "hKey"],
+		["LPCWSTR", "lpSubKey"]
+	],
+	"RegDeleteValueA": [
+		["HKEY", "hKey"],
+		["LPCSTR", "lpValueName"]
+	],
+	"RegDeleteValueW": [
+		["HKEY", "hKey"],
+		["LPCWSTR", "lpValueName"]
+	],
+	"RegEnumKeyExA": [
+		["HKEY", "hKey"],
+		["DWORD", "dwIndex"],
+		["LPSTR", "lpName"],
+		["LPDWORD", "lpcchName"],
+		["LPDWORD", "lpReserved"],
+		["LPSTR", "lpClass"],
+		["LPDWORD", "lpcchClass"],
+		["PFILETIME", "lpftLastWriteTime"]
+	],
+	"RegEnumKeyExW": [
+		["HKEY", "hKey"],
+		["DWORD", "dwIndex"],
+		["LPWSTR", "lpName"],
+		["LPDWORD", "lpcchName"],
+		["LPDWORD", "lpReserved"],
+		["LPWSTR", "lpClass"],
+		["LPDWORD", "lpcchClass"],
+		["PFILETIME", "lpftLastWriteTime"]
+	],
+	"RegEnumKeyW": [
+		["HKEY", "hKey"],
+		["DWORD", "dwIndex"],
+		["LPWSTR", "lpName"],
+		["DWORD", "cchName"]
+	],
+	"RegEnumValueA": [
+		["HKEY", "hKey"],
+		["DWORD", "dwIndex"],
+		["LPSTR", "lpValueName"],
+		["LPDWORD", "lpcchValueName"],
+		["LPDWORD", "lpReserved"],
+		["LPDWORD", "lpType"],
+		["LPBYTE", "lpData"],
+		["LPDWORD", "lpcbData"]
+	],
+	"RegEnumValueW": [
+		["HKEY", "hKey"],
+		["DWORD", "dwIndex"],
+		["LPWSTR", "lpValueName"],
+		["LPDWORD", "lpcchValueName"],
+		["LPDWORD", "lpReserved"],
+		["LPDWORD", "lpType"],
+		["LPBYTE", "lpData"],
+		["LPDWORD", "lpcbData"]
+	],
+	"RegOpenKeyA": [
+		["HKEY", "hKey"],
+		["LPCSTR", "lpSubKey"],
+		["*PHKEY", "phkResult"]
+	],
+	"RegOpenKeyExA": [
+		["HKEY", "hKey"],
+		["LPCSTR", "lpSubKey"],
+		["DWORD", "ulOptions"],
+		["REGSAM", "samDesired"],
+		["*PHKEY", "phkResult"]
+	],
+	"RegOpenKeyExW": [
+		["HKEY", "hKey"],
+		["LPCWSTR", "lpSubKey"],
+		["DWORD", "ulOptions"],
+		["REGSAM", "samDesired"],
+		["*PHKEY", "phkResult"]
+	],
+	"RegOpenKeyW": [
+		["HKEY", "hKey"],
+		["LPCWSTR", "lpSubKey"],
+		["*PHKEY", "phkResult"]
+	],
+	"RegQueryInfoKeyA": [
+		["HKEY", "hKey"],
+		["LPSTR", "lpClass"],
+		["LPDWORD", "lpcchClass"],
+		["LPDWORD", "lpReserved"],
+		["LPDWORD", "lpcSubKeys"],
+		["LPDWORD", "lpcbMaxSubKeyLen"],
+		["LPDWORD", "lpcbMaxClassLen"],
+		["LPDWORD", "lpcValues"],
+		["LPDWORD", "lpcbMaxValueNameLen"],
+		["LPDWORD", "lpcbMaxValueLen"],
+		["LPDWORD", "lpcbSecurityDescriptor"],
+		["PFILETIME", "lpftLastWriteTime"]
+	],
+	"RegQueryInfoKeyW": [
+		["HKEY", "hKey"],
+		["LPWSTR", "lpClass"],
+		["LPDWORD", "lpcchClass"],
+		["LPDWORD", "lpReserved"],
+		["LPDWORD", "lpcSubKeys"],
+		["LPDWORD", "lpcbMaxSubKeyLen"],
+		["LPDWORD", "lpcbMaxClassLen"],
+		["LPDWORD", "lpcValues"],
+		["LPDWORD", "lpcbMaxValueNameLen"],
+		["LPDWORD", "lpcbMaxValueLen"],
+		["LPDWORD", "lpcbSecurityDescriptor"],
+		["PFILETIME", "lpftLastWriteTime"]
+	],
+	"RegQueryValueExA": [
+		["HKEY", "hKey"],
+		["LPCSTR", "lpValueName"],
+		["LPDWORD", "lpReserved"],
+		["LPDWORD", "lpType"],
+		["LPBYTE", "lpData"],
+		["LPDWORD", "lpcbData"]
+	],
+	"RegQueryValueExW": [
+		["HKEY", "hKey"],
+		["LPCWSTR", "lpValueName"],
+		["LPDWORD", "lpReserved"],
+		["LPDWORD", "lpType"],
+		["LPBYTE", "lpData"],
+		["LPDWORD", "lpcbData"]
+	],
+	"RegSetValueA": [
+		["HKEY", "hKey"],
+		["LPCSTR", "lpSubKey"],
+		["DWORD", "dwType"],
+		["LPCSTR", "lpData"],
+		["DWORD", "cbData"]
+	],
+	"RegSetValueExA": [
+		["HKEY", "hKey"],
+		["LPCSTR", "lpValueName"],
+		["DWORD", "Reserved"],
+		["DWORD", "dwType"],
+		["BYTE", "lpData"],
+		["DWORD", "cbData"]
+	],
+	"RegSetValueExW": [
+		["HKEY", "hKey"],
+		["LPCWSTR", "lpValueName"],
+		["DWORD", "Reserved"],
+		["DWORD", "dwType"],
+		["BYTE", "lpData"],
+		["DWORD", "cbData"]
+	],
+	"RegSetValueW": [
+		["HKEY", "hKey"],
+		["LPCWSTR", "lpSubKey"],
+		["DWORD", "dwType"],
+		["LPCWSTR", "lpData"],
+		["DWORD", "cbData"]
+	],
+	"ResumeThread": [["HANDLE", "hThread"]],
+	"SHGetFolderPathA": [
+		["HWND", "hwnd"],
+		["int", "csidl"],
+		["HANDLE", "hToken"],
+		["DWORD", "dwFlags"],
+		["LPSTR", "pszPath"]
+	],
+	"SHGetFolderPathW": [
+		["HWND", "hwnd"],
+		["int", "csidl"],
+		["HANDLE", "hToken"],
+		["DWORD", "dwFlags"],
+		["LPWSTR", "pszPath"]
+	],
+	"SetEvent": [["HANDLE", "hEvent"]],
+	"SetFileAttributesA": [
+		["LPCSTR", "lpFileName"],
+		["DWORD", "dwFileAttributes"]
+	],
+	"SetFileAttributesW": [
+		["LPCWSTR", "lpFileName"],
+		["DWORD", "dwFileAttributes"]
+	],
+	"SetFilePointer": [
+		["HANDLE", "hFile"],
+		["LONG", "lDistanceToMove"],
+		["PLONG", "lpDistanceToMoveHigh"],
+		["DWORD", "dwMoveMethod"]
+	],
+	"SetFilePointerEx": [
+		["HANDLE", "hFile"],
+		["", "liDistanceToMove"],
+		["", "lpNewFilePointer"],
+		["DWORD", "dwMoveMethod"]
+	],
+	"SetThreadContext": [
+		["HANDLE", "hThread"],
+		["CONTEXT", "lpContext"]
+	],
+	"SetThreadPriority": [
+		["HANDLE", "hThread"],
+		["int", "nPriority"]
+	],
+	"SetVolumeMountPointA": [
+		["LPCSTR", "lpszVolumeMountPoint"],
+		["LPCSTR", "lpszVolumeName"]
+	],
+	"SetVolumeMountPointW": [
+		["LPCWSTR", "lpszVolumeMountPoint"],
+		["LPCWSTR", "lpszVolumeName"]
+	],
+	"ShellExecuteA": [
+		["HWND", "hwnd"],
+		["LPCSTR", "lpOperation"],
+		["LPCSTR", "lpFile"],
+		["LPCSTR", "lpParameters"],
+		["LPCSTR", "lpDirectory"],
+		["INT", "nShowCmd"]
+	],
+	"ShellExecuteExA": [["SHELLEXECUTEINFOA", "pExecInfo"]],
+	"ShellExecuteExW": [["SHELLEXECUTEINFOW", "pExecInfo"]],
+	"ShellExecuteW": [
+		["HWND", "hwnd"],
+		["LPCWSTR", "lpOperation"],
+		["LPCWSTR", "lpFile"],
+		["LPCWSTR", "lpParameters"],
+		["LPCWSTR", "lpDirectory"],
+		["INT", "nShowCmd"]
+	],
+	"SizeofResource": [
+		["HMODULE", "hModule"],
+		["HRSRC", "hResInfo"]
+	],
+	"Sleep": [["DWORD", "dwMilliseconds"]],
+	"SleepEx": [
+		["DWORD", "dwMilliseconds"],
+		["BOOL", "bAlertable"]
+	],
+	"StartServiceA": [
+		["SC_HANDLE", "hService"],
+		["DWORD", "dwNumServiceArgs"],
+		["LPCSTR", "lpServiceArgVectors"]
+	],
+	"StartServiceW": [
+		["SC_HANDLE", "hService"],
+		["DWORD", "dwNumServiceArgs"],
+		["LPCWSTR", "lpServiceArgVectors"]
+	],
+	"StrStrA": [
+		["PCSTR", "pszFirst"],
+		["PCSTR", "pszSrch"]
+	],
+	"StrStrIW": [
+		["PCWSTR", "pszFirst"],
+		["PCWSTR", "pszSrch"]
+	],
+	"StrStrW": [
+		["PCWSTR", "pszFirst"],
+		["PCWSTR", "pszSrch"]
+	],
+	"SuspendThread": [["HANDLE", "hThread"]],
+	"TerminateProcess": [
+		["HANDLE", "hProcess"],
+		["UINT", "uExitCode"]
+	],
+	"Thread32First": [
+		["HANDLE", "hSnapshot"],
+		["LPTHREADENTRY32", "lpte"]
+	],
+	"Thread32Next": [
+		["HANDLE", "hSnapshot"],
+		["LPTHREADENTRY32", "lpte"]
+	],
+	"UnmapViewOfFile": [["LPCVOID", "lpBaseAddress"]],
+	"UpdateResourceA": [
+		["HANDLE", "hUpdate"],
+		["LPCSTR", "lpType"],
+		["LPCSTR", "lpName"],
+		["WORD", "wLanguage"],
+		["LPVOID", "lpData"],
+		["DWORD", "cb"]
+	],
+	"UpdateResourceW": [
+		["HANDLE", "hUpdate"],
+		["LPCWSTR", "lpType"],
+		["LPCWSTR", "lpName"],
+		["WORD", "wLanguage"],
+		["LPVOID", "lpData"],
+		["DWORD", "cb"]
+	],
+	"VerifyVersionInfoA": [
+		["LPOSVERSIONINFOEXA", "lpVersionInformation"],
+		["DWORD", "dwTypeMask"],
+		["DWORDLONG", "dwlConditionMask"]
+	],
+	"VerifyVersionInfoW": [
+		["LPOSVERSIONINFOEXW", "lpVersionInformation"],
+		["DWORD", "dwTypeMask"],
+		["DWORDLONG", "dwlConditionMask"]
+	],
+	"VirtualAlloc": [
+		["LPVOID", "lpAddress"],
+		["SIZE_T", "dwSize"],
+		["DWORD", "flAllocationType"],
+		["DWORD", "flProtect"]
+	],
+	"VirtualAllocEx": [
+		["HANDLE", "hProcess"],
+		["LPVOID", "lpAddress"],
+		["SIZE_T", "dwSize"],
+		["DWORD", "flAllocationType"],
+		["DWORD", "flProtect"]
+	],
+	"VirtualAllocExNuma": [
+		["HANDLE", "hProcess"],
+		["LPVOID", "lpAddress"],
+		["SIZE_T", "dwSize"],
+		["DWORD", "flAllocationType"],
+		["DWORD", "flProtect"],
+		["DWORD", "nndPreferred"]
+	],
+	"VirtualFree": [
+		["LPVOID", "lpAddress"],
+		["SIZE_T", "dwSize"],
+		["DWORD", "dwFreeType"]
+	],
+	"VirtualFreeEx": [
+		["HANDLE", "hProcess"],
+		["LPVOID", "lpAddress"],
+		["SIZE_T", "dwSize"],
+		["DWORD", "dwFreeType"]
+	],
+	"VirtualProtect": [
+		["LPVOID", "lpAddress"],
+		["SIZE_T", "dwSize"],
+		["DWORD", "flNewProtect"],
+		["PDWORD", "lpflOldProtect"]
+	],
+	"VirtualProtectEx": [
+		["HANDLE", "hProcess"],
+		["LPVOID", "lpAddress"],
+		["SIZE_T", "dwSize"],
+		["DWORD", "flNewProtect"],
+		["PDWORD", "lpflOldProtect"]
+	],
+	"VirtualQuery": [
+		["LPCVOID", "lpAddress"],
+		["PMEMORY_BASIC_INFORMATION", "lpBuffer"],
+		["SIZE_T", "dwLength"]
+	],
+	"VirtualQueryEx": [
+		["HANDLE", "hProcess"],
+		["LPCVOID", "lpAddress"],
+		["PMEMORY_BASIC_INFORMATION", "lpBuffer"],
+		["SIZE_T", "dwLength"]
+	],
+	"WSAStartup": [
+		["WORD", "wVersionRequired"],
+		["LPWSADATA", "lpWSAData"]
+	],
+	"WinExec": [
+		["LPCSTR", "lpCmdLine"],
+		["UINT", "uCmdShow"]
+	],
+	"Wow64DisableWow64FsRedirection": [["PVOID", "OldValue"]],
+	"Wow64RevertWow64FsRedirection": [["PVOID", "OlValue"]],
+	"WriteFile": [
+		["HANDLE", "hFile"],
+		["LPCVOID", "lpBuffer"],
+		["DWORD", "nNumberOfBytesToWrite"],
+		["LPDWORD", "lpNumberOfBytesWritten"],
+		["LPOVERLAPPED", "lpOverlapped"]
+	],
+	"WriteFileEx": [
+		["HANDLE", "hFile"],
+		["LPCVOID", "lpBuffer"],
+		["DWORD", "nNumberOfBytesToWrite"],
+		["LPOVERLAPPED", "lpOverlapped"],
+		["", "lpCompletionRoutine"]
+	],
+	"bind": [
+		["SOCKET", "s"],
+		["", "addr"],
+		["int", "namelen"]
+	],
+	"gethostbyname": [["char", "name"]],
+	"lstrcmpW": [
+		["LPCWSTR", "lpString1"],
+		["LPCWSTR", "lpString2"]
+	],
+	"lstrlenW": [["LPCWSTR", "lpString"]],
+	"recv": [
+		["SOCKET", "s"],
+		["char", "buf"],
+		["int", "len"],
+		["int", "flags"]
+	]
 }

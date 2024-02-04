@@ -2,9 +2,9 @@
 	import type { Saferwall } from '$lib/types';
 	import { valueToHex } from '$lib/utils';
 
-	export let item: Saferwall.Debug.POGO;
+	export let data: Saferwall.Debug.POGO;
 
-	$: items = Array.isArray(item.Info?.Entries) ? item.Info?.Entries : [];
+	$: items = Array.isArray(data.Info?.Entries) ? data.Info?.Entries : [];
 </script>
 
 {#if items.length > 0}
