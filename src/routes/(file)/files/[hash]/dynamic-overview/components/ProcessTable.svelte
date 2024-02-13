@@ -98,6 +98,20 @@
 		}
 	};
 
+	const getOperationTheme = (operation: string) => {
+		switch (operation) {
+			case 'create':
+				return 'warning';
+			case 'write':
+				return 'danger';
+			case 'delete':
+				return 'info';
+
+			default:
+				return 'gray';
+		}
+	};
+
 	onMount(() => fetchData());
 </script>
 
@@ -156,19 +170,20 @@
 					{/if}
 				</tbody>
 			{:else}
-				<thead>
-					<th>Operation</th>
-					<th>Path</th>
-					<th>Type</th>
-				</thead>
 				<tbody class="divide-y">
 					{#each filteredSystemEventsItems as item}
 						<tr>
-							<td class="capitalize">{item.op}</td>
-							<td class="capitalize">
-								{item.type}
+							<td>
+								<div class="flex gap-3">
+									<p>{item.path}</p>
+									<Label size="base" theme={getOperationTheme(item.op)} class="capitalize">
+										{item.op}
+									</Label>
+									<Label size="base" class="bg-neutral-50 text-neutral-800 capitalize">
+										{item.type}
+									</Label>
+								</div>
 							</td>
-							<td><Label class="text-sm bg-neutral-100">{item.path}</Label></td>
 						</tr>
 					{/each}
 					{#if filteredSystemEventsItems.length === 0}

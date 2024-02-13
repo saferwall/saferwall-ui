@@ -4,10 +4,10 @@
 
 	export let data: PageData;
 
-	$: firstScan = multiav.first_scan;
+	$: firstScan = multiav.first_scan!;
 	$: first_scan = data.antivirus.first_seen;
 
-	$: lastScan = multiav.last_scan;
+	$: lastScan = multiav.last_scan!;
 	$: last_scan = data.antivirus.last_scanned;
 
 	$: multiav = data.antivirus.multiav;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let size: 'base' | 'xs' | 'sm' = 'base';
+	export let size: 'lg' | 'base' | 'xs' | 'sm' = 'base';
 	export let theme: 'base' | 'gray' | 'primary' | 'warning' | 'info' | 'danger' = 'base';
 </script>
 
@@ -30,11 +30,15 @@
 		}
 
 		&--warning {
-			@apply bg-red-100 text-orange-500;
+			@apply bg-orange-100 text-orange-500;
 		}
 
 		&--info {
-			@apply bg-red-100 text-purple-500;
+			@apply bg-purple-100 text-purple-500;
+		}
+
+		&--lg {
+			@apply text-sm px-3 py-1.5 rounded;
 		}
 
 		&--xs {

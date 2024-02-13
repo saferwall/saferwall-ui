@@ -1,12 +1,10 @@
-import type { Saferwall } from '$lib/types';
 import type { LayoutLoad } from './$types';
 
 export const load = (async ({ parent }) => {
-	const { paths, file, ...parentData } = await parent();
+	const { paths, ...data } = await parent();
 
 	return {
-		...parentData,
-		file: file as unknown as Saferwall.Summary & Saferwall.File,
+		...data,
 		menu: paths[2]
 	};
 }) satisfies LayoutLoad;
