@@ -6,7 +6,7 @@
 	export let output: string;
 	export let infected: boolean;
 
-	$: lastUpdated = timeSince(update * 1000);
+	$: lastUpdated = timeSince(update);
 </script>
 
 <div

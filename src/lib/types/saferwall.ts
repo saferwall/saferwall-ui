@@ -452,7 +452,8 @@ export namespace Saferwall {
 				values: Entry[];
 
 				// virtual
-				open?: boolean;
+				_open?: boolean;
+				_args?: string;
 			}
 		}
 

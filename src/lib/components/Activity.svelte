@@ -44,8 +44,8 @@
 							>{getActivityTitle(activity.type)}</a
 						>
 					</span>
-					<time class="activity__time" datetime={timeToDateISO(activity.date * 1000)}>
-						{timeSince(activity.date * 1000)}
+					<time class="activity__time" datetime={timeToDateISO(activity.date)}>
+						{timeSince(activity.date)}
 					</time>
 				</p>
 				<InputHash hash={activity.file?.hash} />

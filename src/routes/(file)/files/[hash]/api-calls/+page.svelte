@@ -28,7 +28,7 @@
 	let w32apis: Record<string, string[]> = {};
 
 	$: search = data.search;
-	$: groups = data.pagination.items || [];
+	$: rows = data.pagination.items || [];
 	$: pids = (data.filters.pids || []).filter(Boolean);
 	$: hprops = (data.hprops || []).filter(Boolean);
 
@@ -111,16 +111,32 @@
 		handleFormChanges();
 	};
 
-	const onEntryToggleMouseUp = (index: number, trace: any) => {
-		const entry = groups[index];
+	const onRowToggleMouseUp = (index: number, trace: any) => {
+		const row = rows[index];
 
-		if (!entry.values) {
-			entry.values = w32apis[entry.name]!.map(([type, name], argIndex) => ({
+		if (!row.values) {
+			row.values = w32apis[row.name]!.map(([type, name], argIndex) => ({
 				type,
 				name,
-				value: entry.args[argIndex]
+				value: row.args[argIndex]
 			})) as any as Saferwall.Behaviors.ApiTrace.Entry[];
 		}
+	};
+
+	const updateRows = () => {
+		rows = rows.map((row) => {
+			if (!row.values) {
+				row.values = w32apis[row.name]!.map(([type, name], argIndex) => ({
+					type,
+					name,
+					value: row.args[argIndex]
+				})) as any as Saferwall.Behaviors.ApiTrace.Entry[];
+				row._args = row.values
+					.map((e) => `${e.name}:${e.value.val || e.value.in || e.value.out}`)
+					.join(',');
+			}
+			return row;
+		});
 	};
 
 	$: isActiveProperty = (id: string): boolean => !hprops || !hprops?.includes(id);
@@ -134,11 +150,12 @@
 	};
 
 	onMount(() => {
-		fetch('/data/w32apis-ui.json', {
-			cache: 'force-cache'
-		})
+		fetch('/data/w32apis-ui.json', { cache: 'force-cache' })
 			.then((res) => res.json())
-			.then((res) => (w32apis = res));
+			.then((res) => {
+				w32apis = res;
+				updateRows();
+			});
 	});
 </script>
 
@@ -220,8 +237,8 @@
 			</div>
 		</form>
 		<div>
-			<table class="w-full flex-shrink-0 groups">
-				<thead class="groups__thead">
+			<table class="w-full flex-shrink-0 rows">
+				<thead class="rows__thead">
 					<th colspan="2">TIME</th>
 					{#if isActiveProperty('pid')}
 						<th>PID</th>
@@ -240,21 +257,21 @@
 					{/if}
 				</thead>
 				<tbody>
-					{#each groups as trace, index}
+					{#each rows as trace, index}
 						<tr
 							class="box"
 							on:mouseup={() => {
-								trace.open = !trace.open;
+								trace._open = !trace._open;
 
-								onEntryToggleMouseUp(index, trace);
+								onRowToggleMouseUp(index, trace);
 							}}
-							class:expanded={trace.open}
+							class:expanded={trace._open}
 						>
 							<td class="pl-4">
 								<Icon
 									size="w-4 h-4"
 									name="arrow-down"
-									class={'transition-all ' + (trace.open === true ? '' : '-rotate-90')}
+									class={'transition-all ' + (trace._open === true ? '' : '-rotate-90')}
 								/>
 							</td>
 							<td>{timestampToFormattedDate(trace.ts)}</td>
@@ -269,8 +286,8 @@
 							{/if}
 							{#if isActiveProperty('args')}
 								<td>
-									<p class="truncate">
-										{trace.args?.map((a) => a?.value)?.filter((a) => a) || 'NaN'}
+									<p class="truncate text-xs">
+										{trace._args || 'NaN'}
 									</p>
 								</td>
 							{/if}
@@ -278,8 +295,8 @@
 								<td>{trace.ret}</td>
 							{/if}
 						</tr>
-						{#if trace.open}
-							<tr class="box__body" class:hidden={!trace.open}>
+						{#if trace._open}
+							<tr class="box__body" class:hidden={!trace._open}>
 								<td colspan="8" class="overflow-hidden">
 									<div transition:slide={{ axis: 'y', duration: 200 }}>
 										<ApiTraceRow
@@ -287,9 +304,9 @@
 											{session}
 											{hash}
 											{behaviorId}
-											procName={getProcName(groups[index].pid)}
-											pid={groups[index].pid}
-											tid={groups[index].tid}
+											procName={getProcName(rows[index].pid)}
+											pid={rows[index].pid}
+											tid={rows[index].tid}
 										/>
 									</div>
 								</td>
@@ -330,7 +347,7 @@
 />
 
 <style lang="scss">
-	table.groups {
+	table.rows {
 		@apply pr-4 border-separate border-spacing-y-2 w-full;
 
 		thead th {
@@ -338,7 +355,7 @@
 			@apply font-medium text-gray-400 py-3 text-left flex-row;
 		}
 
-		thead.groups__thead > th {
+		thead.rows__thead > th {
 			&:after {
 				content: '<>';
 				@apply transform rotate-90 inline-block w-max h-max text-sm px-2 font-black;

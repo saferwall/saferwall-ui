@@ -25,8 +25,8 @@
 		? 'text-orangex'
 		: 'text-greenx';
 
-	$: lastScannedSince = timeSince(lastScanned * 1000);
-	$: firstSubmissionSince = timeSince(firstSubmission * 1000);
+	$: lastScannedSince = timeSince(lastScanned);
+	$: firstSubmissionSince = timeSince(firstSubmission);
 </script>
 
 <Card
@@ -39,8 +39,8 @@
 		<div class="flex items-center space-x-6">
 			<div class="rounded-full font-bold text-lg bg-gray-200 p-1.5">
 				<div class="flex flex-center flex-col w-24 h-24 rounded-full bg-white">
-					<span class="text-3xl {scoreColor}">{score.value}</span>
-					<span class="text-neutral-300">/ {score.count}</span>
+					<span class="text-3xl {scoreColor}">{score?.value ?? 'N/A'}</span>
+					<span class="text-neutral-300">/ {score?.count ?? '-'}</span>
 				</div>
 			</div>
 			<p class="font-semibold {scoreColor}">

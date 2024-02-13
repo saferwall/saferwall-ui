@@ -14,7 +14,7 @@ export function getMemberSince(timestamp: number): number {
  * @returns The formatted date string in the format "YYYY-MM-DD H:i:s".
  */
 export const timestampToFormattedDate = (timestamp: number): string => {
-	return new Date(timestamp).toISOString().slice(0, -5).replace('T', ' ');
+	return new Date(timestamp * 1000).toISOString().slice(0, -5).replace('T', ' ');
 };
 
 /**
@@ -23,7 +23,7 @@ export const timestampToFormattedDate = (timestamp: number): string => {
  * @returns A string in the format "X time ago", where X is the elapsed time and time is a unit of time (e.g. "2 weeks ago").
  */
 export function timeSince(timestamp: number | Date) {
-	const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
+	const date = timestamp instanceof Date ? timestamp : new Date(timestamp * 1000);
 	const formatter = new Intl.RelativeTimeFormat();
 	const ranges: any = {
 		years: 3600 * 24 * 365,
@@ -51,7 +51,6 @@ export function timeSince(timestamp: number | Date) {
  */
 export function timeToDateISO(timestamp: number): string {
 	const date = new Date();
-	date.setTime(timestamp);
-
+	date.setTime(timestamp * 1000);
 	return date.toISOString();
 }

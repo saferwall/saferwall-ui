@@ -3,8 +3,8 @@
 
 	export let date: number;
 
-	$: formattedDate = date && timeSince(date * 1000);
-	$: base = timestampToFormattedDate(date * 1000);
+	$: formattedDate = date && timeSince(date);
+	$: base = timestampToFormattedDate(date);
 </script>
 
 {#if date}
