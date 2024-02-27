@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn, splitCamelCase, valueToHex } from '$lib/utils';
+	import { cn, translateKeyToTitle, valueToHex } from '$lib/utils';
 	import ButtonShowMore from './form/ButtonShowMore.svelte';
 	import Table from './table';
 
@@ -44,7 +44,7 @@
 					<Table.Val
 						class={cn(!header && 'font-medium align-top whitespace-nowrap max-w-full pr-4')}
 					>
-						{camelCase ? splitCamelCase(key) : key}
+						{camelCase ? translateKeyToTitle(key) : key}
 					</Table.Val>
 					{#if deep && typeof value === 'object' && !Array.isArray(value)}
 						<Table.Val class={cn(deep && 'pt-0 px-0', !header && 'w-full')}>

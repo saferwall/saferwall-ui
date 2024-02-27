@@ -5,4 +5,4 @@
 	export let data: Saferwall.Debug.REPRO;
 </script>
 
-<TableKeyValue header={false} items={Object.entries(data.Info)} />
+<TableKeyValue header={false} items={Object.entries(data.info)} />

@@ -1,22 +1,22 @@
 <script lang="ts">
 	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
 	import Table from '$lib/components/table';
-	import { splitCamelCase, translateGroupValue, valueToHex } from '$lib/utils';
+	import { translateKeyToTitle, translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	$: exportData = data.exportData;
 
-	$: exportHeaders = Object.entries(exportData.Struct).map(([key, value]) => {
+	$: exportHeaders = Object.entries(exportData.struct).map(([key, value]) => {
 		return {
-			key: splitCamelCase(key),
+			key: translateKeyToTitle(key),
 			value: valueToHex(value),
-			formated: translateGroupValue(value, 'Export', key)
+			formated: translateGroupValue(value, 'export', key)
 		};
 	});
 
-	$: rows = exportData.Functions ?? [];
+	$: rows = exportData.functions ?? [];
 
 	const maxRecords = 20;
 	$: expanded = false;
@@ -56,11 +56,11 @@
 				{#each rows as entry, index}
 					{#if index < maxRecords || expanded}
 						<Table.Row>
-							<Table.Val>{entry.Name}</Table.Val>
-							<Table.Val>{entry.Ordinal}</Table.Val>
-							<Table.Val>{valueToHex(entry.NameRVA)}</Table.Val>
-							<Table.Val>{valueToHex(entry.FunctionRVA)}</Table.Val>
-							<Table.Val>{entry.Forwarder}</Table.Val>
+							<Table.Val>{entry.name}</Table.Val>
+							<Table.Val>{entry.ordinal}</Table.Val>
+							<Table.Val>{valueToHex(entry.name_rva)}</Table.Val>
+							<Table.Val>{valueToHex(entry.function_rva)}</Table.Val>
+							<Table.Val>{entry.forwarder}</Table.Val>
 						</Table.Row>
 					{/if}
 				{/each}

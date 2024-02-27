@@ -52,12 +52,12 @@
 						</Table.Val>
 						<Table.Val>{index}</Table.Val>
 						<Table.Val>
-							{translateGroupValue(group.Data.VirtualAddress, 'Relocations', 'VirtualAddress')}
+							{translateGroupValue(group.data.virtual_address, 'relocations', 'virtual_address')}
 						</Table.Val>
 						<Table.Val>
-							{translateGroupValue(group.Data.SizeOfBlock, 'Relocations', 'SizeOfBlock')}
+							{translateGroupValue(group.data.size_of_block, 'relocations', 'size_of_block')}
 						</Table.Val>
-						<Table.Val>{group.Entries.length}</Table.Val>
+						<Table.Val>{group.entries.length}</Table.Val>
 					</Table.Row>
 					{#if isEntryOpen(index)}
 						<Table.Row class={cn('box__body', isEntryOpen(index) ? '' : 'hidden')}>
@@ -76,13 +76,13 @@
 											<Table.Col>Type Value</Table.Col>
 										</Table.Header>
 										<Table.Body>
-											{#each group.Entries as entry, entryIndex}
+											{#each group.entries as entry, entryIndex}
 												<Table.Row>
-													<Table.Val>{entry.Offset}</Table.Val>
-													<Table.Val>{valueToHex(entry.Data)}</Table.Val>
-													<Table.Val>{valueToHex(entry.Type)}</Table.Val>
+													<Table.Val>{entry.offset}</Table.Val>
+													<Table.Val>{valueToHex(entry.data)}</Table.Val>
+													<Table.Val>{valueToHex(entry.type)}</Table.Val>
 													<Table.Val
-														>{translateGroupValue(entry.Type, 'Relocations', 'Type')}</Table.Val
+														>{translateGroupValue(entry.type, 'relocations', 'type')}</Table.Val
 													>
 												</Table.Row>
 											{/each}

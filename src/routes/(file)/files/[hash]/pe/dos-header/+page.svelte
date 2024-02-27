@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { splitCamelCase, valueToHex } from '$lib/utils';
+	import { translateKeyToTitle, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	$: dosHeaders = Object.entries(data.dosHeader).map(([key, value]) => {
 		return {
-			key: splitCamelCase(key),
+			key: translateKeyToTitle(key),
 			value: ['string', 'number'].includes(typeof value) ? valueToHex(value) : value,
 			comment: ''
 		};

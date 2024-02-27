@@ -7,7 +7,7 @@
 	export let data: PageData;
 
 	$: rows = data.iat ?? [];
-	$: columns = ['Rva', 'Value', 'Meaning'];
+	$: columns = ['rva', 'value', 'meaning'];
 
 	$: expanded = false;
 	$: colsLength = columns.length + 1;
@@ -31,7 +31,7 @@
 			{#each rows as row, index}
 				{#if index < maxRecords || expanded}
 					<Table.Row>
-						<Table.Val>{row.Index}</Table.Val>
+						<Table.Val>{row.index}</Table.Val>
 						{#each columns as column}
 							<Table.Val>{valueToHex(row[column])}</Table.Val>
 						{/each}

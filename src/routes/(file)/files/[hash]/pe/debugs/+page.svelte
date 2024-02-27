@@ -52,13 +52,13 @@
 	]
 		.map((c) => ({
 			...c,
-			data: data.debug.find((i) => i.Struct.Type === c.value)!
+			data: data.debug.find((i) => i.struct.type === c.value)!
 		}))
 		.filter((v) => v.data)
 		.map((v, index) => ({ ...v, checked: index === 0 }));
 
 	$: activeTab = tabs.find((v) => v.checked)!;
-	$: currentTabStruct = Object.entries(activeTab?.data?.Struct ?? {});
+	$: currentTabStruct = Object.entries(activeTab?.data?.struct ?? {});
 	$: borderTop =
 		[Saferwall.Debug.Type.FPO, Saferwall.Debug.Type.POGO].includes(activeTab?.value) === false;
 </script>

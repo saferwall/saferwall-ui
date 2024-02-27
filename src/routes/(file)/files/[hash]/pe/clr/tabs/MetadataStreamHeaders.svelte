@@ -9,10 +9,10 @@
 
 	let tabs: (TabItem & Partial<{ data: any; key: string; expanded: boolean }>)[] = data.map(
 		(item, index) => {
-			const { Name, ...data } = item;
+			const { name, ...data } = item;
 			return {
-				key: Name,
-				label: Name,
+				key: name,
+				label: name,
 				data: data,
 				selected: index === 0
 			};

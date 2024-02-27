@@ -1,5 +1,4 @@
 <script lang="ts">
-	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import { translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
@@ -39,10 +38,10 @@
 							class={'transition-all ' + (isEntryOpen(index) === true ? '' : '-rotate-90')}
 						/>
 					</td>
-					<td>{translateGroupValue(group.Name, 'Imports', 'Name')}</td>
-					<td>{translateGroupValue(group.Struct.TimeDateStamp, '', 'TimeDateStamp')}</td>
-					<td>{valueToHex(group.Struct.OffsetModuleName)}</td>
-					<td>{group.Struct.NumberOfModuleForwarderRefs}</td>
+					<td>{translateGroupValue(group.name, 'imports', 'name')}</td>
+					<td>{translateGroupValue(group.struct.time_date_stamp, '', 'time_date_stamp')}</td>
+					<td>{valueToHex(group.struct.offset_module_name)}</td>
+					<td>{group.struct.number_of_module_forwarder_refs}</td>
 				</tr>
 				{#if isEntryOpen(index)}
 					<tr class="box__body" class:hidden={!isEntryOpen(index)}>
@@ -61,13 +60,13 @@
 										<th>Reserved</th>
 									</thead>
 									<tbody>
-										{#if group.ForwardedRefs}
-											{#each group.ForwardedRefs as entry}
+										{#if group.forwarded_refs}
+											{#each group.forwarded_refs as entry}
 												<tr>
-													<td>{entry.Name}</td>
-													<td>{valueToHex(entry.Struct.OffsetModuleName)}</td>
-													<td>{valueToHex(entry.Struct.TimeDateStamp)}</td>
-													<td>{valueToHex(entry.Struct.Reserved)}</td>
+													<td>{entry.name}</td>
+													<td>{valueToHex(entry.struct.offset_module_name)}</td>
+													<td>{valueToHex(entry.struct.time_date_stamp)}</td>
+													<td>{valueToHex(entry.struct.reserved)}</td>
 												</tr>
 											{/each}
 										{/if}

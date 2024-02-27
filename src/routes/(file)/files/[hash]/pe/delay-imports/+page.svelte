@@ -51,17 +51,21 @@
 								class={'transition-all ' + (isEntryOpen(index) === true ? '' : '-rotate-90')}
 							/>
 						</Table.Val>
-						<Table.Val>{translateGroupValue(group.Name, 'DelayImports', 'Name')}</Table.Val>
-						<Table.Val>{valueToHex(group.Descriptor.ModuleHandleRVA)}</Table.Val>
-						<Table.Val>{valueToHex(group.Descriptor.ImportAddressTableRVA)}</Table.Val>
-						<Table.Val>{valueToHex(group.Descriptor.ImportNameTableRVA)}</Table.Val>
-						<Table.Val>{valueToHex(group.Descriptor.BoundImportAddressTableRVA)}</Table.Val>
-						<Table.Val>{valueToHex(group.Descriptor.UnloadInformationTableRVA)}</Table.Val>
+						<Table.Val>{translateGroupValue(group.name, 'delay_imports', 'name')}</Table.Val>
+						<Table.Val>{valueToHex(group.descriptor.module_handle_rva)}</Table.Val>
+						<Table.Val>{valueToHex(group.descriptor.import_address_table_rva)}</Table.Val>
+						<Table.Val>{valueToHex(group.descriptor.import_name_table_rva)}</Table.Val>
+						<Table.Val>{valueToHex(group.descriptor.bound_import_address_table_rva)}</Table.Val>
+						<Table.Val>{valueToHex(group.descriptor.unload_information_table_rva)}</Table.Val>
 						<Table.Val>
-							{translateGroupValue(group.Descriptor.TimeDateStamp, 'DelayImports', 'TimeDateStamp')}
+							{translateGroupValue(
+								group.descriptor.time_date_stamp,
+								'delay_imports',
+								'time_date_stamp'
+							)}
 						</Table.Val>
 					</Table.Row>
-					{#if group.Functions && isEntryOpen(index)}
+					{#if group.functions && isEntryOpen(index)}
 						<Table.Row class={cn('box__body', !isEntryOpen(index) && 'hidden')}>
 							<Table.Val colspan="8">
 								<div class="px-4 relative pt-0">
@@ -80,14 +84,14 @@
 											<Table.Col>Hint</Table.Col>
 										</Table.Header>
 										<Table.Body>
-											{#each group.Functions as entry}
+											{#each group.functions as entry}
 												<Table.Row>
-													<Table.Val>{entry.Name}</Table.Val>
-													<Table.Val>{valueToHex(entry.ThunkRVA)}</Table.Val>
-													<Table.Val>{valueToHex(entry.ThunkValue)}</Table.Val>
-													<Table.Val>{valueToHex(entry.OriginalThunkRVA)}</Table.Val>
-													<Table.Val>{valueToHex(entry.OriginalThunkValue)}</Table.Val>
-													<Table.Val>{valueToHex(entry.Hint)}</Table.Val>
+													<Table.Val>{entry.name}</Table.Val>
+													<Table.Val>{valueToHex(entry.thunk_rva)}</Table.Val>
+													<Table.Val>{valueToHex(entry.thunk_value)}</Table.Val>
+													<Table.Val>{valueToHex(entry.original_thunk_rva)}</Table.Val>
+													<Table.Val>{valueToHex(entry.original_thunk_value)}</Table.Val>
+													<Table.Val>{valueToHex(entry.hint)}</Table.Val>
 												</Table.Row>
 											{/each}
 										</Table.Body>

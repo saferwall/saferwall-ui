@@ -93,58 +93,113 @@ export namespace Saferwall {
 			load_config?: LoadConfig.Root;
 			clr?: CLR.Root;
 			tls: {
-				Struct: any;
-				Callbacks: any;
+				struct: any;
+				callbacks: any;
 			};
 			[key: string]: any;
 		}
 
 		export namespace LoadConfig {
 			export interface Root {
-				CFGIAT: Cfgiat[];
-				GFIDS: Gfids[];
-				LoadCfgStruct: LoadCfgStruct;
-				SEH: SEH[];
-				CFGLongJump: CFGLongJump[];
-				VolatileMetadata: VolatileMetadata;
-				DVRT: DVRT.Root[];
+				cfgiat: Cfgiat[];
+				gfids: Gfids[];
+				load_cfg_struct: LoadCfgStruct;
+				seh: SEH[];
+				cfg_long_jump: CFGLongJump[];
+				volatile_metadata: VolatileMetadata;
+				dvrt: DVRT.Root[];
+				chpe: unknown;
+				enclave: unknown;
+				struct: unknown;
+			}
+
+			export interface Sutrct {
+				cast_guard_os_determined_failure_mode: number;
+				chpe_metadata_pointer: number;
+				code_integrity: CodeIntegrity;
+				critical_section_default_timeout: number;
+				csd_version: number;
+				de_commit_free_block_threshold: number;
+				de_commit_total_free_threshold: number;
+				dependent_load_flags: number;
+				dynamic_value_reloc_table: number;
+				dynamic_value_reloc_table_offset: number;
+				dynamic_value_reloc_table_section: number;
+				edit_list: number;
+				enclave_configuration_pointer: number;
+				global_flags_clear: number;
+				global_flags_set: number;
+				guard_address_taken_iat_entry_count: number;
+				guard_address_taken_iat_entry_table: number;
+				guard_cf_check_function_pointer: number;
+				guard_cf_dispatch_function_pointer: number;
+				guard_cf_function_count: number;
+				guard_cf_function_table: number;
+				guard_eh_continuation_count: number;
+				guard_eh_continuation_table: number;
+				guard_flags: number;
+				guard_long_jump_target_count: number;
+				guard_long_jump_target_table: number;
+				guard_memcpy_function_pointer: number;
+				guard_rf_failure_routine: number;
+				guard_rf_failure_routine_function_pointer: number;
+				guard_rf_verify_stack_pointer_function_pointer: number;
+				guard_xfg_check_function_pointer: number;
+				guard_xfg_dispatch_function_pointer: number;
+				guard_xfg_table_dispatch_function_pointer: number;
+				hot_patch_table_offset: number;
+				lock_prefix_table: number;
+				major_version: number;
+				maximum_allocation_size: number;
+				minor_version: number;
+				process_affinity_mask: number;
+				process_heap_flags: number;
+				reserved_2: number;
+				reserved_3: number;
+				se_handler_count: number;
+				se_handler_table: number;
+				security_cookie: number;
+				size: number;
+				time_date_stamp: number;
+				virtual_memory_threshold: number;
+				volatile_metadata_pointer: number;
 			}
 
 			export namespace DVRT {
 				export interface Root {
-					Entries: Entry[];
-					ImgDynRelocTable: ImgDynRelocTable;
+					entries: Entry[];
+					imgdyn_reloc_table: ImgDynRelocTable;
 				}
 
 				export interface Entry {
-					ImgDynReloc: ImgDynReloc;
-					RelocBlocks: RelocBlock[];
+					img_dyn_reloc: ImgDynReloc;
+					reloc_blocks: RelocBlock[];
 				}
 
 				export interface ImgDynReloc {
-					BaseRelocSize: number;
-					Symbol: number;
+					base_reloc_size: number;
+					symbol: number;
 				}
 
 				export interface RelocBlock {
-					ImgBaseReloc: ImgBaseReloc;
-					TypeOffsets: TypeOffset[];
+					img_base_reloc: ImgBaseReloc;
+					type_offsets: TypeOffset[];
 				}
 
 				export interface ImgBaseReloc {
-					SizeOfBlock: number;
-					VirtualAddress: number;
+					size_of_block: number;
+					virtual_address: number;
 				}
 
 				export interface TypeOffset {
-					DynamicSymbolOffset: number;
-					Type: number;
-					Value: number;
+					dynamic_symbol_offset: number;
+					type: number;
+					value: number;
 				}
 
 				export interface ImgDynRelocTable {
-					Size: number;
-					Version: number;
+					size: number;
+					version: number;
 				}
 			}
 
@@ -152,93 +207,95 @@ export namespace Saferwall {
 			export type CFGLongJump = number;
 
 			export interface Cfgiat {
-				Description: string;
-				IATValue: number;
-				INTValue: number;
-				RVA: number;
+				description: string;
+				iat_value: number;
+				int_value: number;
+				rva: number;
 			}
 
 			export interface Gfids {
-				Description: string;
-				Flags: number;
-				Target: number;
+				description: string;
+				flags: number;
+				target: number;
 			}
 
 			export interface LoadCfgStruct {
-				CHPEMetadataPointer: number;
-				CSDVersion: number;
-				CodeIntegrity: CodeIntegrity;
-				CriticalSectionDefaultTimeout: number;
-				DeCommitFreeBlockThreshold: number;
-				DeCommitTotalFreeThreshold: number;
-				DependentLoadFlags: number;
-				DynamicValueRelocTable: number;
-				DynamicValueRelocTableOffset: number;
-				DynamicValueRelocTableSection: number;
-				EditList: number;
-				EnclaveConfigurationPointer: number;
-				GlobalFlagsClear: number;
-				GlobalFlagsSet: number;
-				GuardAddressTakenIatEntryCount: number;
-				GuardAddressTakenIatEntryTable: number;
-				GuardCFCheckFunctionPointer: number;
-				GuardCFDispatchFunctionPointer: number;
-				GuardCFFunctionCount: number;
-				GuardCFFunctionTable: number;
-				GuardEHContinuationCount: number;
-				GuardEHContinuationTable: number;
-				GuardFlags: number;
-				GuardLongJumpTargetCount: number;
-				GuardLongJumpTargetTable: number;
-				GuardRFFailureRoutine: number;
-				GuardRFFailureRoutineFunctionPointer: number;
-				GuardRFVerifyStackPointerFunctionPointer: number;
-				GuardXFGCheckFunctionPointer: number;
-				GuardXFGDispatchFunctionPointer: number;
-				GuardXFGTableDispatchFunctionPointer: number;
-				HotPatchTableOffset: number;
-				LockPrefixTable: number;
-				MajorVersion: number;
-				MaximumAllocationSize: number;
-				MinorVersion: number;
-				ProcessAffinityMask: number;
-				ProcessHeapFlags: number;
-				Reserved2: number;
-				Reserved3: number;
-				SEHandlerCount: number;
-				SEHandlerTable: number;
-				SecurityCookie: number;
-				Size: number;
-				TimeDateStamp: number;
-				VirtualMemoryThreshold: number;
-				VolatileMetadataPointer: number;
+				cast_guard_os_determined_failure_mode: number;
+				chpe_metadata_pointer: number;
+				code_integrity: CodeIntegrity;
+				critical_section_default_timeout: number;
+				csd_version: number;
+				de_commit_free_block_threshold: number;
+				de_commit_total_free_threshold: number;
+				dependent_load_flags: number;
+				dynamic_value_reloc_table: number;
+				dynamic_value_reloc_table_offset: number;
+				dynamic_value_reloc_table_section: number;
+				edit_list: number;
+				enclave_configuration_pointer: number;
+				global_flags_clear: number;
+				global_flags_set: number;
+				guard_address_taken_iat_entry_count: number;
+				guard_address_taken_iat_entry_table: number;
+				guard_cf_check_function_pointer: number;
+				guard_cf_dispatch_function_pointer: number;
+				guard_cf_function_count: number;
+				guard_cf_function_table: number;
+				guard_eh_continuation_count: number;
+				guard_eh_continuation_table: number;
+				guard_flags: number;
+				guard_long_jump_target_count: number;
+				guard_long_jump_target_table: number;
+				guard_memcpy_function_pointer: number;
+				guard_rf_failure_routine: number;
+				guard_rf_failure_routine_function_pointer: number;
+				guard_rf_verify_stack_pointer_function_pointer: number;
+				guard_xfg_check_function_pointer: number;
+				guard_xfg_dispatch_function_pointer: number;
+				guard_xfg_table_dispatch_function_pointer: number;
+				hot_patch_table_offset: number;
+				lock_prefix_table: number;
+				major_version: number;
+				maximum_allocation_size: number;
+				minor_version: number;
+				process_affinity_mask: number;
+				process_heap_flags: number;
+				reserved_2: number;
+				reserved_3: number;
+				se_handler_count: number;
+				se_handler_table: number;
+				security_cookie: number;
+				size: number;
+				time_date_stamp: number;
+				virtual_memory_threshold: number;
+				volatile_metadata_pointer: number;
 			}
 
 			export interface CodeIntegrity {
-				Catalog: number;
-				CatalogOffset: number;
-				Flags: number;
-				Reserved: number;
+				catalog: number;
+				catalog_offset: number;
+				flags: number;
+				reserved: number;
 			}
 
 			export interface VolatileMetadata {
-				AccessRVATable: number[];
-				InfoRangeTable: InfoRangeTable[];
-				Struct: Struct;
+				access_rva_table: number[];
+				info_range_table: InfoRangeTable[];
+				struct: Struct;
 			}
 
 			export interface InfoRangeTable {
-				Rva: number;
-				Size: number;
+				rva: number;
+				size: number;
 			}
 
 			export interface Struct {
-				Size: number;
-				Version: number;
-				VolatileAccessTable: number;
-				VolatileAccessTableSize: number;
-				VolatileInfoRangeTable: number;
-				VolatileInfoRangeTableSize: number;
+				size: number;
+				version: number;
+				volatile_access_table: number;
+				volatile_access_table_size: number;
+				volatile_info_range_table: number;
+				volatile_info_range_table_size: number;
 			}
 		}
 
@@ -252,97 +309,97 @@ export namespace Saferwall {
 			}
 
 			export interface ClrHeader {
-				Cb: number;
-				CodeManagerTable: CodeManagerTable;
-				EntryPointRVAorToken: number;
-				ExportAddressTableJumps: ExportAddressTableJumps;
-				Flags: number;
-				MajorRuntimeVersion: number;
-				ManagedNativeHeader: ManagedNativeHeader;
-				MetaData: MetaData;
-				MinorRuntimeVersion: number;
-				Resources: Resources;
-				StrongNameSignature: StrongNameSignature;
-				VTableFixups: VtableFixups;
+				cb: number;
+				code_manager_table: CodeManagerTable;
+				entry_point_rva_or_token: number;
+				export_address_table_jumps: ExportAddressTableJumps;
+				flags: number;
+				major_runtime_version: number;
+				managed_native_header: ManagedNativeHeader;
+				metadata: MetaData;
+				minor_runtime_version: number;
+				resources: Resources;
+				strong_name_signature: StrongNameSignature;
+				v_table_fixups: VtableFixups;
 			}
 
 			export interface CodeManagerTable {
-				Size: number;
-				VirtualAddress: number;
+				size: number;
+				virtual_address: number;
 			}
 
 			export interface ExportAddressTableJumps {
-				Size: number;
-				VirtualAddress: number;
+				size: number;
+				virtual_address: number;
 			}
 
 			export interface ManagedNativeHeader {
-				Size: number;
-				VirtualAddress: number;
+				size: number;
+				virtual_address: number;
 			}
 
 			export interface MetaData {
-				Size: number;
-				VirtualAddress: number;
+				size: number;
+				virtual_address: number;
 			}
 
 			export interface Resources {
-				Size: number;
-				VirtualAddress: number;
+				size: number;
+				virtual_address: number;
 			}
 
 			export interface StrongNameSignature {
-				Size: number;
-				VirtualAddress: number;
+				size: number;
+				virtual_address: number;
 			}
 
 			export interface VtableFixups {
-				Size: number;
-				VirtualAddress: number;
+				size: number;
+				virtual_address: number;
 			}
 
 			export interface MetadataHeader {
-				ExtraData: number;
-				Flags: number;
-				MajorVersion: number;
-				MinorVersion: number;
-				Signature: number;
-				Streams: number;
-				Version: string;
-				VersionString: number;
+				extra_data: number;
+				flags: number;
+				major_version: number;
+				minor_version: number;
+				signature: number;
+				streams: number;
+				version: string;
+				version_string: number;
 			}
 
 			export interface MetadataStreamHeader {
-				Name: string;
-				Offset: number;
-				Size: number;
+				name: string;
+				offset: number;
+				size: number;
 			}
 
 			export type MetadataTables = Record<string, MetadataTable>;
 
 			export interface Content {
-				EncBaseID: number;
-				EncID: number;
-				Generation: number;
-				Mvid: number;
-				Name: number;
+				enc_base_id: number;
+				enc_id: number;
+				generation: number;
+				mvid: number;
+				name: number;
 			}
 
 			export interface MetadataTable {
-				Content: any;
-				CountCols: number;
-				Name: string;
-				SizeRecord: number;
+				content: any;
+				count_cols: number;
+				name: string;
+				size_record: number;
 			}
 
 			export interface MetadataTablesStreamHeader {
-				Heaps: number;
-				MajorVersion: number;
-				MaskValid: number;
-				MinorVersion: number;
-				Reserved: number;
-				Rid: number;
-				Sorted: number;
+				heaps: number;
+				major_version: number;
+				mask_valid: number;
+				minor_version: number;
+				reserved: number;
+				rid: number;
+				sorted: number;
 			}
 		}
 
@@ -390,7 +447,7 @@ export namespace Saferwall {
 			CodePage: number;
 			OffsetToData: number;
 			Reserved: number;
-			Size: number;
+			size: number;
 			Name: string;
 
 			Characteristics: number;
@@ -398,7 +455,7 @@ export namespace Saferwall {
 			MinorVersion: number;
 			NumberOfIDEntries: number;
 			NumberOfNamedEntries: number;
-			TimeDateStamp: number;
+			time_date_stamp: number;
 		}
 
 		export interface Data {
@@ -494,7 +551,7 @@ export namespace Saferwall {
 		CodeSize: string;
 		EntryPoint: string;
 		ExifToolVersionNumber: string;
-		FileSize: number | string;
+		Filesize: number | string;
 		FileType: string;
 		FileTypeExtension: string;
 		ImageFileCharacteristics: string;
@@ -530,7 +587,7 @@ export namespace Saferwall {
 		SHA256: string;
 		SHA512: string;
 		SSDeep: string;
-		Size: number;
+		size: number;
 		Tags: Tags;
 		TrID: string[];
 	}> & {
@@ -625,14 +682,14 @@ export namespace Saferwall {
 		}
 
 		export type Struct<K> = {
-			AddressOfRawData: number;
-			Characteristics: number;
-			MajorVersion: number;
-			MinorVersion: number;
-			PointerToRawData: number;
-			SizeOfData: number;
-			TimeDateStamp: number;
-			Type: K;
+			address_if_raw_data: number;
+			characteristics: number;
+			major_version: number;
+			minor_version: number;
+			pointer_to_raw_data: number;
+			size_of_data: number;
+			time_date_stamp: number;
+			type: K;
 		};
 
 		export type EX_DLL_CHAR = Data<Type.EX_DLL_CHAR, 1>;
@@ -640,26 +697,26 @@ export namespace Saferwall {
 		export type POGO = Data<
 			Type.POGO,
 			{
-				Entries: Array<{
-					Name: string;
-					Rva: number;
-					Size: number;
+				entries: Array<{
+					name: string;
+					rva: number;
+					size: number;
 				}>;
-				Signature: number;
+				signature: number;
 			}
 		>;
 
 		export type CODE_VIEW = Data<
 			Type.CODE_VIEW,
 			{
-				Age: number;
-				CvSignature: number;
-				PDBFileName: string;
-				Signature: {
-					Data1: number;
-					Data2: number;
-					Data3: number;
-					Data4: Array<number>;
+				age: number;
+				cv_signature: number;
+				pdb_file_name: string;
+				signature: {
+					data1: number;
+					data2: number;
+					data3: number;
+					data4: Array<number>;
 				};
 			}
 		>;
@@ -667,8 +724,8 @@ export namespace Saferwall {
 		export type REPRO = Data<
 			Type.REPRO,
 			{
-				Hash: string;
-				Size: number;
+				hash: string;
+				size: number;
 			}
 		>;
 
@@ -686,22 +743,22 @@ export namespace Saferwall {
 		export type FPO = Data<
 			Type.FPO,
 			{
-				FrameType: number;
-				HasSEH: number;
-				NumLocals: number;
-				OffStart: number;
-				ParamsSize: number;
-				ProcSize: number;
-				PrologLength: number;
-				Reserved: number;
-				SavedRegsCount: number;
-				UseBP: number;
+				frame_type: number;
+				has_seh: number;
+				num_locals: number;
+				off_start: number;
+				params_size: number;
+				proc_size: number;
+				prolog_length: number;
+				reserved: number;
+				saved_regs_count: number;
+				use_bp: number;
 			}[]
 		>;
 
 		export interface Data<K, T> {
-			Info: T;
-			Struct: Struct<K>;
+			info: T;
+			struct: Struct<K>;
 		}
 
 		export type List<T> = Array<T>;

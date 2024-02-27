@@ -26,16 +26,16 @@
 		{#each rows as row, index}
 			{#if index < maxRecords || expanded}
 				<Table.Row>
-					<Table.Val>{row.Name}</Table.Val>
+					<Table.Val>{row.name}</Table.Val>
 					<Table.Val>
-						{#if row.Content && typeof row.Content === 'object'}
-							<TableKeyValue items={Object.entries(row.Content)} header={false} />
+						{#if row.content && typeof row.content === 'object'}
+							<TableKeyValue items={Object.entries(row.content)} header={false} />
 						{:else}
-							{row.Content}
+							{row.content}
 						{/if}
 					</Table.Val>
-					<Table.Val>{row.CountCols}</Table.Val>
-					<Table.Val>{row.SizeRecord}</Table.Val>
+					<Table.Val>{row.count_cols}</Table.Val>
+					<Table.Val>{row.size_record}</Table.Val>
 				</Table.Row>
 			{/if}
 		{/each}

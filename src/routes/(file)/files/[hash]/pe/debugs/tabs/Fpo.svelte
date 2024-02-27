@@ -4,7 +4,7 @@
 
 	export let data: Saferwall.Debug.FPO;
 
-	$: items = Array.isArray(data.Info) ? data.Info : [];
+	$: items = Array.isArray(data.info) ? data.info : [];
 </script>
 
 {#if items.length > 0}
@@ -25,16 +25,16 @@
 			<tbody>
 				{#each items as row}
 					<tr>
-						<td>{valueToHex(row.OffStart)}</td>
-						<td>{valueToHex(row.ProcSize)}</td>
-						<td>{valueToHex(row.NumLocals)}</td>
-						<td>{valueToHex(row.ParamsSize)}</td>
-						<td>{valueToHex(row.PrologLength)}</td>
-						<td>{valueToHex(row.SavedRegsCount)}</td>
-						<td>{!!row.HasSEH}</td>
-						<td>{!!row.UseBP}</td>
-						<td>{!!row.Reserved}</td>
-						<td>{valueToHex(row.FrameType)}</td>
+						<td>{valueToHex(row.off_start)}</td>
+						<td>{valueToHex(row.proc_size)}</td>
+						<td>{valueToHex(row.num_locals)}</td>
+						<td>{valueToHex(row.params_size)}</td>
+						<td>{valueToHex(row.prolog_length)}</td>
+						<td>{valueToHex(row.saved_regs_count)}</td>
+						<td>{!!row.has_seh}</td>
+						<td>{!!row.use_bp}</td>
+						<td>{!!row.reserved}</td>
+						<td>{valueToHex(row.frame_type)}</td>
 					</tr>
 				{/each}
 			</tbody>
