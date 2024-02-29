@@ -10,7 +10,7 @@ export interface Error {
 	status: number;
 }
 
-export namespace Menus {
+export namespace Menu {
 	export interface File {
 		name: string;
 		path: string;

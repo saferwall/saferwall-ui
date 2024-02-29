@@ -28,7 +28,7 @@
 			<tbody>
 				{#each submissions as submission, i}
 					<tr class:hide={!expanded && i > maxRecords}>
-						<td><time>{timestampToFormattedDate(submission.timestamp * 1000)}</time></td>
+						<td><time>{timestampToFormattedDate(submission.timestamp)}</time></td>
 						<td>{submission.filename}</td>
 						<td class="capitalize">{submission.src}</td>
 						<td>{submission.country}</td>
@@ -37,7 +37,7 @@
 			</tbody>
 		</table>
 		{#if activeExpanding}
-			<ButtonShowMore on:mouseup={onShowMoreMouseUp} {expanded} />
+			<ButtonShowMore on:click={onShowMoreMouseUp} {expanded} />
 		{/if}
 	</div>
 </Card>

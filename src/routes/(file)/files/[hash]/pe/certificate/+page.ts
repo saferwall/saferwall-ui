@@ -1,17 +1,13 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
-import type { APIFile } from '$lib/types';
+import type { Saferwall } from '$lib/types';
 import type { PageLoad } from './$types';
 
-export const load = (async ({
-	params
-}): Promise<{
-	certificate: any;
-}> => {
-	const { hash } = params;
-
-	const { pe } = await new SaferwallClient().request<APIFile>(`files/${hash}?fields=pe.security`);
+export const load = (async ({ params }) => {
+	const { pe } = await new SaferwallClient().request<Saferwall.File>(
+		`files/${params.hash}?fields=pe.security`
+	);
 
 	return {
-		certificate: pe.security
+		security: pe.security
 	};
 }) satisfies PageLoad;

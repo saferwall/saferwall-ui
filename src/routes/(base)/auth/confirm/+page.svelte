@@ -4,19 +4,19 @@
 	import Input from '$lib/components/form/Input.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import AuthActionDone from '$lib/components/AuthActionDone.svelte';
+	import type { SubmitFunction } from './$types';
 
 	let loading = false;
 	let finished = false;
 	let error: string = '';
 	let errors: Record<string, boolean> = {};
 
-	const handleFormSubmit = (_event: any) => {
+	const handleFormSubmit: SubmitFunction = () => {
 		error = '';
 		errors = {};
 		loading = true;
 
-		return async ({ result, update }: any) => {
-			const { data, type } = result;
+		return async ({ result: { data, type }, update }) => {
 			loading = false;
 
 			if (type === 'failure') {
@@ -43,8 +43,8 @@
 	/>
 {:else}
 	<form
-		method="POST"
 		use:enhance={handleFormSubmit}
+		method="POST"
 		class="flex flex-col space-y-6 px-10 lg:px-16 py-14"
 	>
 		<h1 class="text-3xl font-bold">Didn’t confirm registration ?</h1>

@@ -2,7 +2,7 @@ import { fail } from '@sveltejs/kit';
 import { SaferwallClient } from '$lib/clients/saferwall';
 import type { PageServerLoad, Actions } from './$types';
 
-export const load = (async ({ parent }: any) => {
+export const load = (async ({ parent }) => {
 	await parent();
 
 	return {};
@@ -17,17 +17,22 @@ export const actions = {
 		const password = data.get('password') as string;
 
 		const requiredFields: Record<string, boolean> = {};
-		if (!password) requiredFields.password = true;
 
-		if (!token || !guid)
+		if (!password) {
+			requiredFields.password = true;
+		}
+
+		if (!token || !guid) {
 			return fail(400, {
 				error: { message: 'Invalid or expired token' }
 			});
+		}
 
-		if (password.length < 5)
+		if (password.length < 5) {
 			return fail(400, {
 				error: { message: 'Password length must be more than 5 characters' }
 			});
+		}
 
 		if (Object.keys(requiredFields).length > 0) {
 			return fail(400, { ...requiredFields, missing: true });
@@ -39,9 +44,11 @@ export const actions = {
 				token,
 				guid
 			});
-			return { success: true };
-		} catch (response: any) {
-			return fail(400, await response.json());
+			return {
+				success: true
+			};
+		} catch (response) {
+			return fail(400, await (response as Response).json());
 		}
 	}
 } satisfies Actions;

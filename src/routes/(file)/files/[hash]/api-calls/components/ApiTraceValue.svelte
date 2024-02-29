@@ -31,7 +31,7 @@
 	const onToggleMouseUp = () => (open = !open);
 
 	const dispatch = createEventDispatcher();
-	const onLoadMoreMouseUp = (e: MouseEvent) => {
+	const onClickLoadMore = (e: MouseEvent) => {
 		dispatch('load');
 	};
 </script>
@@ -54,16 +54,16 @@
 					{#each hex as [v, string], index}
 						{#if open || index === 0}
 							<div class="flex flex-row gap-4">
-								<div hex>
+								<div data-hex>
 									<pre>{v.join(' ')}</pre>
 								</div>
-								<div string>{string}</div>
+								<div data-string>{string}</div>
 							</div>
 						{/if}
 					{/each}
 					{#if open && buffId && value.val?.length <= 5000}
 						<div class="my-3">
-							<Button size="xs" {loading} disabled={loading} on:mouseup={onLoadMoreMouseUp}>
+							<Button size="xs" {loading} disabled={loading} on:click={onClickLoadMore}>
 								Load All
 							</Button>
 						</div>
@@ -110,10 +110,10 @@
 			@apply flex flex-col;
 		}
 
-		[hex] {
+		[data-hex] {
 			@apply col-span-2 flex gap-2 items-center;
 		}
-		[string] {
+		[data-string] {
 			@apply col-span-1 border-r border-l w-56 px-2;
 		}
 	}

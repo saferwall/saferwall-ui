@@ -41,14 +41,14 @@
 		goto(generatePagination(page, parseInt(event.target.value)));
 	};
 
-	$: items = Object.entries(data.pagination?.items).reduce(
-		(list: [string, string][], [encoding, values]) => {
+	$: items = Object.entries(data.pagination?.items ?? {}).reduce(
+		(list, [encoding, values]: [string, any]) => {
 			const valuesMapped = values.map((val: string) => {
 				return [encoding, val];
 			});
 			return [...list, ...valuesMapped];
 		},
-		[]
+		[] as string[][]
 	);
 </script>
 

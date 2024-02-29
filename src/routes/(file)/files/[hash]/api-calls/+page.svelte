@@ -1,16 +1,15 @@
 <script lang="ts">
-	import type { Pagination, Saferwall } from '$lib/types';
-	import type { PageData } from './$types';
-
 	import { goto } from '$app/navigation';
-	import { cleanUndefinedKeyValue, timestampToFormattedDate } from '$lib/utils';
-	import { onMount } from 'svelte';
-
 	import Icon from '$lib/components/Icon.svelte';
 	import Overlay from '$lib/components/Overlay.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
 	import Select from '$lib/components/form/Select.svelte';
+	import type { Pagination, Saferwall } from '$lib/types';
+	import { cleanUndefinedKeyValue, timestampToFormattedDate } from '$lib/utils';
+	import { onMount } from 'svelte';
+	import { slide } from 'svelte/transition';
+	import type { PageData } from './$types';
 	import ApiTraceRow from './components/ApiTraceRow.svelte';
 	import FiltersDrawer from './components/FilterDrawer.svelte';
 
@@ -25,21 +24,14 @@
 	];
 
 	let form: HTMLFormElement;
-	let entries: Record<number, boolean> = {};
 
 	let w32apis: Record<string, string[]> = {};
 
 	$: search = data.search;
-	$: groups = data.pagination.items || [];
+	$: rows = data.pagination.items || [];
 	$: pids = (data.filters.pids || []).filter(Boolean);
 	$: hprops = (data.hprops || []).filter(Boolean);
 
-	// reset open entries state on data change
-	$: if (data) {
-		entries = {};
-	}
-
-	$: isEntryOpen = (index: number) => entries[index] == true;
 	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
 
 	$: pages = Array(5)
@@ -74,7 +66,7 @@
 	$: perPage = data.pagination.per_page;
 	$: totalPages = data.pagination.page_count;
 	$: totalCount = data.pagination.total_count;
-	$: behavior_id = data.file.default_behavior_id;
+	$: behaviorId = data.file.default_behavior_id;
 	$: filters = [] as Saferwall.Behaviors.ProcessTree;
 
 	const generateQueryParams = (
@@ -119,20 +111,32 @@
 		handleFormChanges();
 	};
 
-	const onEntryToggleMouseUp = (index: number) => {
-		const entry = groups[index];
+	const onRowToggleMouseUp = (index: number, trace: any) => {
+		const row = rows[index];
 
-		const newStatus = !isEntryOpen(index);
-
-		if (!entry.values) {
-			entry.values = w32apis[entry.name]!.map(([type, name], argIndex) => ({
+		if (!row.values) {
+			row.values = w32apis[row.name]!.map(([type, name], argIndex) => ({
 				type,
 				name,
-				value: entry.args[argIndex]
+				value: row.args[argIndex]
 			})) as any as Saferwall.Behaviors.ApiTrace.Entry[];
 		}
+	};
 
-		entries[index] = newStatus;
+	const updateRows = () => {
+		rows = rows.map((row) => {
+			if (!row.values) {
+				row.values = w32apis[row.name]!.map(([type, name], argIndex) => ({
+					type,
+					name,
+					value: row.args[argIndex]
+				})) as any as Saferwall.Behaviors.ApiTrace.Entry[];
+				row._args = row.values
+					.map((e) => `${e.name}:${e.value.val || e.value.in || e.value.out}`)
+					.join(',');
+			}
+			return row;
+		});
 	};
 
 	$: isActiveProperty = (id: string): boolean => !hprops || !hprops?.includes(id);
@@ -146,10 +150,11 @@
 	};
 
 	onMount(() => {
-		fetch('/data/w32apis-ui.json')
+		fetch('/data/w32apis-ui.json', { cache: 'force-cache' })
 			.then((res) => res.json())
 			.then((res) => {
 				w32apis = res;
+				updateRows();
 			});
 	});
 </script>
@@ -168,7 +173,7 @@
 			<Input name="search" icon="search" bind:search placeholder="Search anything..." />
 			<div class="flex-shrink-0 flex-grow text-gray-600">
 				<Button
-					on:mouseup={onOpenDrawMouseUp}
+					on:click={onOpenDrawMouseUp}
 					icon="filter"
 					class={pids.length > 0 ? 'border-primary' : ''}
 				>
@@ -184,7 +189,7 @@
 				</Button>
 			</div>
 			<div class="properties relative flex-shrink-0 flex-grow text-gray-600">
-				<Button icon="properties" on:mouseup={onPropsToggleAction} on:keyup={onPropsToggleAction}>
+				<Button icon="properties" on:click={onPropsToggleAction} on:keyup={onPropsToggleAction}>
 					<span class="px-2 py-0.5">Properties</span>
 				</Button>
 				{#if displayProperties}
@@ -232,8 +237,8 @@
 			</div>
 		</form>
 		<div>
-			<table class="w-full flex-shrink-0 groups">
-				<thead class="groups__thead">
+			<table class="w-full flex-shrink-0 rows">
+				<thead class="rows__thead">
 					<th colspan="2">TIME</th>
 					{#if isActiveProperty('pid')}
 						<th>PID</th>
@@ -252,17 +257,21 @@
 					{/if}
 				</thead>
 				<tbody>
-					{#each groups as trace, index}
+					{#each rows as trace, index}
 						<tr
 							class="box"
-							on:mouseup={() => onEntryToggleMouseUp(index)}
-							class:expanded={isEntryOpen(index)}
+							on:mouseup={() => {
+								trace._open = !trace._open;
+
+								onRowToggleMouseUp(index, trace);
+							}}
+							class:expanded={trace._open}
 						>
 							<td class="pl-4">
 								<Icon
 									size="w-4 h-4"
 									name="arrow-down"
-									class={'transition-all ' + (isEntryOpen(index) === true ? '' : '-rotate-90')}
+									class={'transition-all ' + (trace._open === true ? '' : '-rotate-90')}
 								/>
 							</td>
 							<td>{timestampToFormattedDate(trace.ts)}</td>
@@ -277,8 +286,8 @@
 							{/if}
 							{#if isActiveProperty('args')}
 								<td>
-									<p class="truncate">
-										{trace.args?.map((a) => a?.value)?.filter((a) => a) || 'NaN'}
+									<p class="truncate text-xs">
+										{trace._args || 'NaN'}
 									</p>
 								</td>
 							{/if}
@@ -286,18 +295,20 @@
 								<td>{trace.ret}</td>
 							{/if}
 						</tr>
-						{#if isEntryOpen(index)}
-							<tr class="box__body" class:hidden={!isEntryOpen(index)}>
+						{#if trace._open}
+							<tr class="box__body" class:hidden={!trace._open}>
 								<td colspan="8" class="overflow-hidden">
-									<ApiTraceRow
-										{trace}
-										{session}
-										{hash}
-										{behavior_id}
-										procName={getProcName(groups[index].pid)}
-										pid={groups[index].pid}
-										tid={groups[index].tid}
-									/>
+									<div transition:slide={{ axis: 'y', duration: 200 }}>
+										<ApiTraceRow
+											{trace}
+											{session}
+											{hash}
+											{behaviorId}
+											procName={getProcName(rows[index].pid)}
+											pid={rows[index].pid}
+											tid={rows[index].tid}
+										/>
+									</div>
 								</td>
 							</tr>
 						{/if}
@@ -326,17 +337,17 @@
 <FiltersDrawer
 	{pids}
 	{session}
-	{behavior_id}
+	{behaviorId}
 	open={filterDrawer}
 	on:filters={(event) => {
-		filters = event.detail ?? [];
+		filters = [...(event.detail ?? [])];
 	}}
 	on:change={onFiltersChanges}
 	on:close={() => (filterDrawer = false)}
 />
 
 <style lang="scss">
-	table.groups {
+	table.rows {
 		@apply pr-4 border-separate border-spacing-y-2 w-full;
 
 		thead th {
@@ -344,7 +355,7 @@
 			@apply font-medium text-gray-400 py-3 text-left flex-row;
 		}
 
-		thead.groups__thead > th {
+		thead.rows__thead > th {
 			&:after {
 				content: '<>';
 				@apply transform rotate-90 inline-block w-max h-max text-sm px-2 font-black;

@@ -1,26 +1,28 @@
 <script lang="ts">
-	import type { Saferwall, Menus } from '$lib/types';
-	import Button from '$lib/components/form/Button.svelte';
-	import ButtonLike from '../form/ButtonLike.svelte';
+	import { env } from '$env/dynamic/public';
 	import { SaferwallClient } from '$lib/clients/saferwall';
+	import Button from '$lib/components/form/Button.svelte';
+	import type { Menu, Saferwall } from '$lib/types';
+	import ButtonLike from '../form/ButtonLike.svelte';
 
-	export let hash = '';
+	export let hash: string;
 	export let liked = false;
 	export let loggedIn = false;
-	export let activeMenu: Menus.File;
+	export let activeMenu: Menu.File;
 	export let session: Saferwall.Session;
 
-	$: downloadLink = `https://api.saferwall.com/v1/files/${hash}/download/`;
-	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/file/${hash}/${activeMenu.path}`;
+	$: downloadLink = `${env.PUBLIC_API_URL}files/${hash}/download/`;
+	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/files/${hash}/${activeMenu.path}`;
 
 	let rescaning = false;
-	const onRescanMouseUp = async () => {
+	const onRescanClick = async () => {
 		rescaning = true;
 		try {
 			await new SaferwallClient(session).rescanFile(hash);
-			window.location.reload();
-		} catch (error) {}
-		rescaning = false;
+		} catch (error) {
+			console.error('Rescab failed', error);
+		}
+		window.location.reload();
 	};
 </script>
 
@@ -40,7 +42,7 @@
 				icon="rescan"
 				loading={rescaning}
 				disabled={rescaning}
-				on:mouseup={onRescanMouseUp}
+				on:click={onRescanClick}
 			>
 				<span class="hidden md:block pl-2">Rescan file</span>
 			</Button>

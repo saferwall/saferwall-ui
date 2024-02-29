@@ -7,7 +7,7 @@
 	export let loading = false;
 	export let reachEnd = false;
 
-	const onLoadMoreMouseUp = () => {
+	const onMouseUpLoadMore = () => {
 		if (!loading) {
 			dispatch('load');
 		}
@@ -16,7 +16,7 @@
 
 {#if !reachEnd}
 	<div
-		on:mouseup={onLoadMoreMouseUp}
+		on:mouseup={onMouseUpLoadMore}
 		class="w-full flex-center rounded cursor-pointer text-primary space-x-2 font-medium p-4"
 	>
 		<div class="flex-center space-x-1">

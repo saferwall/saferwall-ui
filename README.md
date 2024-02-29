@@ -1,6 +1,6 @@
 # Saferwall UI
 
-This repository contains the frontend code for the Saferwall threat analysis platform. 
+This repository contains the frontend code for the Saferwall threat analysis platform.
 The Saferwall UI is built with SvelteKit, providing a modern and user-friendly interface for analyzing, triaging, and classifying threats.
 
 ## Features

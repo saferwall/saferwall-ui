@@ -1,26 +1,22 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
-import type { APIFile } from '$lib/types';
+import type { Saferwall } from '$lib/types';
 import type { PageLoad } from './$types';
 
-export const load = (async ({
-	params
-}): Promise<{
-	ntHeader: any;
-}> => {
-	const { hash } = params;
+export const load = (async ({ params: { hash } }) => {
+	const { pe } = await new SaferwallClient().request<Saferwall.File>(
+		`files/${hash}?fields=pe.nt_header`
+	);
 
-	const { pe } = await new SaferwallClient().request<APIFile>(`files/${hash}?fields=pe.nt_header`);
-
-	const signature = pe.nt_header?.Signature;
+	const signature = pe.nt_header?.signature;
 	if (signature) {
-		pe.nt_header.FileHeader.Signature = signature;
-		delete pe.nt_header?.Signature;
+		pe.nt_header.file_header.signature = signature;
+		delete pe.nt_header?.signature;
 	}
 
-	const dataDirectory = pe.nt_header?.OptionalHeader?.DataDirectory;
+	const dataDirectory = pe.nt_header?.optional_header?.data_directories;
 	if (dataDirectory) {
-		pe.nt_header.DataDirectory = dataDirectory;
-		delete pe.nt_header?.OptionalHeader?.DataDirectory;
+		pe.nt_header.data_directories = dataDirectory;
+		delete pe.nt_header?.optional_header?.data_directories;
 	}
 
 	return {

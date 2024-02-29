@@ -4,19 +4,19 @@
 	import AuthActionDone from '$lib/components/AuthActionDone.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
+	import type { SubmitFunction } from './$types';
 
 	let loading = false;
 	let finished = false;
 	let error: string = '';
 	let errors: Record<string, boolean> = {};
 
-	const handleFormSubmit = (_event: any) => {
+	const handleFormSubmit: SubmitFunction = () => {
 		error = '';
 		errors = {};
 		loading = true;
 
-		return async ({ result, update }: any) => {
-			const { data, type } = result;
+		return async ({ result: { data, type }, update }) => {
 			loading = false;
 
 			if (type === 'failure') {

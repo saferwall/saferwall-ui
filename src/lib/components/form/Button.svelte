@@ -13,7 +13,7 @@
 
 {#if href}
 	<a
-		on:mouseup
+		on:click
 		{...$$props}
 		{href}
 		{target}
@@ -31,7 +31,7 @@
 	</a>
 {:else}
 	<button
-		on:mouseup
+		on:click
 		{...$$props}
 		{type}
 		disabled={loading || disabled}

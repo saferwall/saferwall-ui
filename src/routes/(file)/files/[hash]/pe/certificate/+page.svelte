@@ -6,33 +6,41 @@
 
 	export let data: PageData;
 
-	$: certificate = data.certificate;
+	$: certificate = data.security;
 
 	$: headers = [
-		['Length', valueToHex(certificate.Header.Length)],
-		['Revision', valueToHex(certificate.Header.Revision)],
+		['Length', valueToHex(certificate.header.length)],
+		['Revision', valueToHex(certificate.header.revision)],
 		[
-			'CertificateType',
-			translateGroupValue(certificate.Header.CertificateType, 'Certificate', 'CertificateType')
+			'Certificate Type',
+			translateGroupValue(certificate.header.certificate_type, 'certificate', 'certificate_type')
 		]
 	];
 
 	$: signer = [
-		['Issuer Name', valueToHex(certificate.Info.Issuer)],
-		['Subject', valueToHex(certificate.Info.Subject)],
-		['Validity From', [certificate.Info.NotBefore, certificate.Info.NotAfter].join(' to ')],
-		['Serial Number', certificate.Info.SerialNumber],
+		['Issuer Name', valueToHex(certificate.info.issuer)],
+		['Subject', valueToHex(certificate.info.subject)],
+		['Validity From', [certificate.info.notBefore, certificate.info.not_after].join(' to ')],
+		['Serial Number', certificate.info.serial_number],
 		[
 			'Signature Algorithm',
-			translateGroupValue(certificate.Info.SignatureAlgorithm, 'Certificate', 'Signature Algorithm')
+			translateGroupValue(
+				certificate.info.signature_algorithm,
+				'certificate',
+				'signature_algorithm'
+			)
 		],
 		[
 			'PublicKey Algorithm',
-			translateGroupValue(certificate.Info.PublicKeyAlgorithm, 'Certificate', 'PublicKey Algorithm')
+			translateGroupValue(
+				certificate.info.public_key_algorithm,
+				'certificate',
+				'public_key_algorithm'
+			)
 		]
 	];
 
-	$: verified = certificate.Verified;
+	$: verified = certificate.verified;
 </script>
 
 <section class="divide-y">
@@ -58,7 +66,9 @@
 
 	<article>
 		<h1 class="title">Signer Certificate</h1>
-		<TableKeyValue items={signer} />
+		<div>
+			<TableKeyValue items={signer} />
+		</div>
 	</article>
 </section>
 

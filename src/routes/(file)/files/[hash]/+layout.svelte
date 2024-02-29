@@ -7,7 +7,7 @@
 
 	$: hash = data.hash;
 	$: session = data.session;
-	$: fileMenu = data.fileMenu;
+	$: activeFileMenu = data.activeFileMenu;
 	$: activeMenu = data.activeMenu;
 	$: submissions = data.file.submissions;
 	$: fileName = (submissions && submissions[submissions.length - 1].filename) || '';
@@ -20,7 +20,7 @@
 	<meta name="description" content="Scan results for file {fileName} hash {hash}." />
 </svelte:head>
 
-<FileNavbar {hash} {activeMenu} {fileMenu} />
+<FileNavbar {hash} {activeMenu} {activeFileMenu} />
 <main class="flex-1 flex flex-col h-full bg-neutral">
 	<FileHeading {session} {activeMenu} {hash} {loggedIn} {liked} />
 	<div class="pt-4 pb-10">

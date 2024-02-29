@@ -1,75 +1,77 @@
 <script lang="ts">
-	import { splitCamelCase, translateGroupValue, valueToHex } from '$lib/utils';
+	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
+	import Table from '$lib/components/table';
+	import { translateKeyToTitle, translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
-	const maxRecords = 20;
 	export let data: PageData;
 
 	$: exportData = data.exportData;
 
-	$: exportHeaders = Object.entries(exportData.Struct).map(([key, value]) => {
+	$: exportHeaders = Object.entries(exportData.struct).map(([key, value]) => {
 		return {
-			key: splitCamelCase(key),
+			key: translateKeyToTitle(key),
 			value: valueToHex(value),
-			formated: translateGroupValue(value, 'Export', key)
+			formated: translateGroupValue(value, 'export', key)
 		};
 	});
+
+	$: rows = exportData.functions ?? [];
+
+	const maxRecords = 20;
+	$: expanded = false;
+	$: onClickExpand = () => {
+		expanded = !expanded;
+	};
 </script>
 
 <article class="space-y-4">
 	<h1 class="title">Export</h1>
-	<table class="w-full">
-		<tbody>
+	<Table.Root>
+		<Table.Body>
 			{#each exportHeaders as item}
-				<tr>
-					<td>{item.key}</td>
-					<td>{item.value}</td>
-					<td>{item.formated}</td>
-				</tr>
+				<Table.Row>
+					<Table.Val>{item.key}</Table.Val>
+					<Table.Val>{item.value}</Table.Val>
+					<Table.Val>{item.formated}</Table.Val>
+				</Table.Row>
 			{/each}
-		</tbody>
-	</table>
+		</Table.Body>
+	</Table.Root>
 	<div class="mr-4 p-4 border rounded-xl overflow-x-scroll">
 		<h2
 			class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
 		>
 			Functions
 		</h2>
-		<table class="items">
-			<thead>
-				<th>Name</th>
-				<th>Ordinal</th>
-				<th>Name RVA</th>
-				<th>Function RVA</th>
-				<th>Forwarder</th>
-			</thead>
-			<tbody>
-				{#each exportData.Functions as entry}
-					<tr>
-						<td>{entry.Name}</td>
-						<td>{entry.Ordinal}</td>
-						<td>{valueToHex(entry.NameRVA)}</td>
-						<td>{valueToHex(entry.FunctionRVA)}</td>
-						<td>{entry.Forwarder}</td>
-					</tr>
+		<Table.Root striped={true}>
+			<Table.Header>
+				<Table.Col>Name</Table.Col>
+				<Table.Col>Ordinal</Table.Col>
+				<Table.Col>Name RVA</Table.Col>
+				<Table.Col>Function RVA</Table.Col>
+				<Table.Col>Forwarder</Table.Col>
+			</Table.Header>
+			<Table.Body>
+				{#each rows as entry, index}
+					{#if index < maxRecords || expanded}
+						<Table.Row>
+							<Table.Val>{entry.name}</Table.Val>
+							<Table.Val>{entry.ordinal}</Table.Val>
+							<Table.Val>{valueToHex(entry.name_rva)}</Table.Val>
+							<Table.Val>{valueToHex(entry.function_rva)}</Table.Val>
+							<Table.Val>{entry.forwarder}</Table.Val>
+						</Table.Row>
+					{/if}
 				{/each}
-			</tbody>
-		</table>
+				{#if rows.length >= maxRecords}
+					<Table.Row>
+						<Table.Val colspan="5">
+							<ButtonShowMore bind:expanded on:click={onClickExpand} />
+						</Table.Val>
+					</Table.Row>
+				{/if}
+			</Table.Body>
+		</Table.Root>
 	</div>
-
-	<!-- <ButtonShowMore bind:expanded on:mouseup={() => (expanded = !expanded)} /> -->
 </article>
-
-<style lang="scss">
-	table.items {
-		@apply w-full;
-
-		tbody tr {
-			@apply even:bg-gray-50;
-
-			td {
-				@apply py-2 w-1/4;
-			}
-		}
-	}
-</style>

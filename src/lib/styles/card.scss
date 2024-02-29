@@ -57,4 +57,12 @@
 	&--spacing {
 		@apply space-y-6;
 	}
+
+	&--shadow {
+		@apply shadow-base;
+	}
+
+	&--border {
+		@apply border border-neutral-100;
+	}
 }

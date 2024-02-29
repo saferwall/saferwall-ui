@@ -37,7 +37,7 @@ export interface UpdatePasswordDto {
 
 export interface ApiTraceBufferDto {
 	hash: string;
-	guid: string;
+	behaviorId: string;
 	procName: string;
 	pid: string;
 	tid: string;

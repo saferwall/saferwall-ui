@@ -79,7 +79,7 @@
 
 	<div class="flex min-h-[300px] flex-col items-center justify-center space-y-6">
 		<div class="m-auto w-max h-max">
-			<ButtonBrowse href={loggedIn ? undefined : '/auth/login'} on:mouseup={selectFiles} />
+			<ButtonBrowse href={loggedIn ? undefined : '/auth/login'} on:click={selectFiles} />
 		</div>
 
 		<div class="flex flex-col w-full space-y-2">

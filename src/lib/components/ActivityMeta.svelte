@@ -11,21 +11,25 @@
 
 <ul class="meta flex flex-wrap md:flex-nowrap md:items-center md:justify-center">
 	<li class="meta__item">
-		<span>CLASSIFICATION</span>
+		<span>Classification</span>
 		<div class="capitalize label label--{labelClass}">
 			<Icon size="w-5 h-4" class="mr-1" name={labelIcon} />
 			<span>{labelClass}</span>
 		</div>
 	</li>
 	<li class="meta__item">
-		<span>ANTIVIRUS</span>
-		<span>{file.multiav?.value}/{file.multiav?.count}</span>
+		<span>Antivirus</span>
+		<div>
+			{typeof file?.multiav?.value === 'number'
+				? file?.multiav?.value + '/' + file?.multiav?.count
+				: 'N/A'}
+		</div>
 	</li>
 	<li class="meta__item grow">
-		<span>FILE NAME</span>
-		<span class="w-full">
+		<span>File Name</span>
+		<div class="w-full">
 			<input class="w-full" type="text" value={file.filename} readonly />
-		</span>
+		</div>
 	</li>
 </ul>
 
@@ -36,11 +40,15 @@
 		&__item {
 			@apply flex flex-col mr-4;
 
-			& span:first-child {
-				@apply font-medium text-neutral-400;
-			}
-			& span:last-child {
-				@apply font-medium;
+			span {
+				@apply uppercase;
+
+				&:first-child {
+					@apply font-medium text-neutral-400;
+				}
+				&:last-child {
+					@apply font-medium;
+				}
 			}
 		}
 	}

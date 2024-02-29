@@ -38,7 +38,7 @@
 		</table>
 		<CommingSoon />
 		{#if activeExpanding}
-			<ButtonShowMore on:mouseup={() => (expanded = !expanded)} {expanded} />
+			<ButtonShowMore on:click={() => (expanded = !expanded)} {expanded} />
 		{/if}
 	</div>
 </Card>

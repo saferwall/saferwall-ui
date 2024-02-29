@@ -127,18 +127,12 @@ export function cleanUndefinedKeyValue(data: object = {}) {
  * @param {string} text - The input string to be split
  * @returns {string}
  */
-export function splitCamelCase(text: string): string {
-	let result = '';
-	let currentWord = text[0];
-	for (let i = 1; i < text.length; i++) {
-		if (text[i] === text[i].toUpperCase() && text[i - 1] === text[i - 1].toLowerCase()) {
-			result += currentWord + ' ';
-			currentWord = text[i];
-		} else {
-			currentWord += text[i];
-		}
+export function translateKeyToTitle(text: string): string {
+	if (!text || text.length === 0) {
+		return '';
 	}
-	return (result + currentWord).trim();
+	const title = String(text).split('_').join(' ');
+	return title.charAt(0).toUpperCase() + title.slice(1, title.length);
 }
 
 export function asciiReversed(value: string) {
@@ -241,81 +235,85 @@ export function prodIdToVsVersion(prod: number): string {
 }
 
 export const translateGroupValue = (value: any, name: string, sub?: string): any => {
-	if (name === 'FileHeader') {
-		if (sub === 'Characteristics') {
+	if (name === 'file_header') {
+		if (sub === 'characteristics') {
 			return getFileCharacteristics(value).join(',\n') || value;
 		}
-		if (sub === 'Machine') {
+		if (sub === 'machine') {
 			return getMachineName(value);
 		}
-		if (sub === 'Signature') {
+		if (sub === 'signature') {
 			return asciiReversed(hexToASCII(stringToHex(value)));
 		}
 	}
-	if (name === 'Sections') {
-		if (sub === 'Characteristics') {
+	if (name === 'sections') {
+		if (sub === 'characteristics') {
 			return getSectionFlags(value).join(',\n') || value;
 		}
 	}
 
-	if (sub === 'Magic') {
+	if (sub === 'magic') {
 		return magicMap[value] || `?`;
 	}
-	if (sub === 'TimeDateStamp') {
-		const date = new Date(value * 1000);
-		return date.toISOString().split('T').join(' ');
+	if (sub === 'time_date_stamp') {
+		try {
+			const date = new Date(value * 1000);
+			return date.toISOString().split('T').join(' ');
+		} catch (error) {
+			return;
+		}
 	}
-	if (sub?.includes('SizeOf') || sub?.includes('Size')) {
+	if (sub?.includes('size_of') || sub?.includes('size')) {
 		return convertBytes(value);
 	}
-	if (sub?.includes('Subsystem')) {
+	if (sub?.includes('subsystem')) {
 		return subSystemsMap[value] || '?';
 	}
 
-	if (sub === 'ProdID') {
+	if (sub === 'prod_id') {
 		return prodIdsMap[value] || value;
 	}
-	if (sub === 'MSinternalName') {
+	if (sub === 'ms_internal_name') {
 		return prodIdToVsVersion(value);
 	}
-	if (name === 'Relocations') {
-		if (sub === 'Type') {
+	if (name === 'relocations') {
+		if (sub === 'type') {
 			return relocationTypesMap[value] || value;
 		}
-		if (sub === 'VirtualAddress') {
+		if (sub === 'virtual_address') {
 			return valueToHex(value);
 		}
 	}
 
-	if (name === 'Export') {
-		if (sub === 'Characteristics') {
+	if (name === 'export') {
+		if (sub === 'characteristics') {
 			return getFileCharacteristics(value).join(',\n') || value;
 		}
 
 		return value;
 	}
 
-	if (name === 'Exceptions') {
-		if (sub === 'Flags') {
+	if (name === 'exceptions') {
+		if (sub === 'flags') {
 			const flags = getUnwFlags(value).join(',\n');
 			return `${valueToHex(value)} ( ${flags || 'No Flags'} )`;
 		}
 
-		if (sub === 'UnwindOp') {
+		if (sub === 'unwind_op') {
 			return getUnwOpcodes(value) || value;
 		}
 
 		return valueToHex(value);
 	}
 
-	if (name === 'Certificate') {
-		if (sub === 'Signature Algorithm') {
+	if (name === 'certificate') {
+		if (sub === 'signature_algorithm') {
 			return getSignatureAlgo(value);
 		}
-		if (sub === 'PublicKey Algorithm') {
+		if (sub === 'public_key_algorithm') {
 			return getPublicAlgo(value);
 		}
-		if (sub === 'CertificateType') {
+		if (sub === 'certificate_type') {
 			return getCertificateType(value);
 		}
 	}
@@ -387,4 +385,20 @@ export const byteToHex = (byte: number) => {
 
 export const toHexString = (bytes: number[]) => {
 	return Array.from(bytes).map((byte) => byteToHex(byte));
+};
+
+export const signatureToGuid = (signature: {
+	data1: number;
+	data2: number;
+	data3: number;
+	data4: Array<number>;
+}) => {
+	const { data1, data2, data3, data4 } = signature;
+	const guidStr = `${byteToHex(data1).padStart(8, '0')}-${byteToHex(data2).padStart(
+		4,
+		'0'
+	)}-${byteToHex(data3).padStart(4, '0')}-${data4
+		.map((b) => byteToHex(b).padStart(2, '0'))
+		.join('')}`;
+	return guidStr.toUpperCase();
 };

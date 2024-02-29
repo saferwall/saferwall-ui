@@ -1,0 +1,3 @@
+<tfoot {...$$props}>
+	<slot />
+</tfoot>

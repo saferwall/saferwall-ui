@@ -1,13 +1,10 @@
 <script lang="ts">
-	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import { translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	const maxRecords = 20;
 	export let data: PageData;
-
-	// TODO: split into components
 
 	$: groups = data.imports;
 
@@ -18,7 +15,7 @@
 	};
 </script>
 
-<article>
+<article class="boxes">
 	<h1 class="title">Imports</h1>
 	<table class="groups">
 		<thead>
@@ -38,22 +35,32 @@
 					on:mouseup={() => (entries[index] = !isEntryOpen(index))}
 					class:expanded={isEntryOpen(index)}
 				>
-					<td class="px-0 !pr-0">
+					<td class="!pr-0">
 						<Icon
 							size="w-4 h-4"
 							name="arrow-down"
 							class={'transition-all ' + (isEntryOpen(index) === true ? '' : '-rotate-90')}
 						/>
 					</td>
-					<td>{translateGroupValue(group.Name, 'Imports', 'Name')}</td>
-					<td>{valueToHex(group.Descriptor.Name)}</td>
-					<td>{valueToHex(group.Offset)}</td>
-					<td>{valueToHex(group.Descriptor.FirstThunk)}</td>
-					<td>{translateGroupValue(group.Descriptor.TimeDateStamp, 'Imports', 'TimeDateStamp')}</td>
+					<td>{translateGroupValue(group.name, 'imports', 'name')}</td>
+					<td>{valueToHex(group.descriptor.name)}</td>
+					<td>{valueToHex(group.offset)}</td>
+					<td>{valueToHex(group.descriptor.first_thunk)}</td>
 					<td
-						>{translateGroupValue(group.Descriptor.ForwarderChain, 'Imports', 'ForwarderChain')}</td
+						>{translateGroupValue(
+							group.descriptor.time_date_stamp,
+							'imports',
+							'time_date_stamp'
+						)}</td
 					>
-					<td>{group.Functions.length}</td>
+					<td
+						>{translateGroupValue(
+							group.descriptor.forwarder_chain,
+							'imports',
+							'forwarder_chain'
+						)}</td
+					>
+					<td>{group.functions.length}</td>
 				</tr>
 				{#if isEntryOpen(index)}
 					<tr class="box__body" class:hidden={!isEntryOpen(index)}>
@@ -74,14 +81,14 @@
 										<th>Hint</th>
 									</thead>
 									<tbody>
-										{#each group.Functions as entry}
+										{#each group.functions as entry}
 											<tr>
-												<td>{entry.Name}</td>
-												<td>{valueToHex(entry.ThunkRVA)}</td>
-												<td>{valueToHex(entry.ThunkValue)}</td>
-												<td>{valueToHex(entry.OriginalThunkRVA)}</td>
-												<td>{valueToHex(entry.OriginalThunkValue)}</td>
-												<td>{valueToHex(entry.Hint)}</td>
+												<td>{entry.name}</td>
+												<td>{valueToHex(entry.thunk_rva)}</td>
+												<td>{valueToHex(entry.thunk_value)}</td>
+												<td>{valueToHex(entry.original_thunk_rva)}</td>
+												<td>{valueToHex(entry.original_thunk_value)}</td>
+												<td>{valueToHex(entry.hint)}</td>
 											</tr>
 										{/each}
 									</tbody>
@@ -94,47 +101,3 @@
 		</tbody>
 	</table>
 </article>
-
-<style lang="scss">
-	table.groups {
-		@apply pr-4 border-separate border-spacing-y-2 w-full;
-
-		thead th {
-			@apply font-bold;
-		}
-
-		tbody {
-			tr {
-				@apply relative z-0;
-
-				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-200 border-t-0;
-				}
-
-				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-200;
-				}
-
-				&.expanded:nth-child(2n + 1):after {
-					@apply rounded-b-none border-b-0;
-				}
-
-				td {
-					@apply p-4 py-4 rounded;
-				}
-			}
-		}
-	}
-
-	table.items {
-		@apply w-full;
-
-		tbody tr {
-			@apply even:bg-gray-50;
-
-			td {
-				@apply py-2 w-1/4;
-			}
-		}
-	}
-</style>

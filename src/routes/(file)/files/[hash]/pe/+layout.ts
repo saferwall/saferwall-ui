@@ -1,9 +1,10 @@
 import type { LayoutLoad } from './$types';
 
 export const load = (async ({ parent }) => {
-	const { paths, ...parentData } = await parent();
+	const { paths, ...data } = await parent();
+
 	return {
-		...parentData,
-		activePEMenu: paths[2]
+		...data,
+		menu: paths[2]
 	};
 }) satisfies LayoutLoad;
