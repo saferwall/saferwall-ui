@@ -5,4 +5,4 @@
 	export let data: Saferwall.Debug.FPO;
 </script>
 
-<TableKeyValue items={Object.entries(data.Info)} header={false} camelCase={false} />
+<TableKeyValue items={Object.entries(data.info)} header={false} camelCase={false} />

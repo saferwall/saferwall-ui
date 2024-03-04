@@ -3,18 +3,18 @@
 	import DirectoryEntry from './DirectoryEntry.svelte';
 	import ResourceData from './ResourceData.svelte';
 
-	export let Entries: Saferwall.Resource.Entry[];
-	export let Struct: Saferwall.Resource.Struct[];
+	export let entries: Saferwall.Resource.Entry[];
+	export let struct: Saferwall.Resource.Struct[];
 </script>
 
-{#if Entries}
+{#if entries}
 	<ul class="space-y-4">
-		{#each Entries as entry}
+		{#each entries as entry}
 			<li>
 				<DirectoryEntry {...entry} />
 			</li>
 		{/each}
 	</ul>
 {:else}
-	<ResourceData {Struct} />
+	<ResourceData {struct} />
 {/if}

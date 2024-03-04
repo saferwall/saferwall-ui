@@ -5,8 +5,8 @@
 
 	export let data: PageData;
 
-	$: items = Object.entries(data.tls?.Struct ?? {});
-	$: callBacks = Object.values(data.tls?.Callbacks ?? {});
+	$: items = Object.entries(data.tls?.struct ?? {});
+	$: callBacks = Object.values(data.tls?.callbacks ?? {});
 </script>
 
 <article class="space-y-2 pr-4">

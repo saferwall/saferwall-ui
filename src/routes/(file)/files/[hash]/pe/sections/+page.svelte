@@ -1,20 +1,20 @@
 <script lang="ts">
-	import { splitCamelCase, translateGroupValue, valueToHex } from '$lib/utils';
+	import { translateKeyToTitle, translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	$: sections = data.sections.reduce((groups: any[], { Header, Entropy }) => {
-		const name = String.fromCharCode.apply(null, Header.Name);
+	$: sections = data.sections.reduce((groups: any[], { header, entropy }) => {
+		const name = String.fromCharCode.apply(null, header.name);
 
-		const items = Object.entries(Header).filter(([field]) => field !== 'Name');
-		items.unshift(['Entropy', Entropy]);
+		const items = Object.entries(header).filter(([field]) => field !== 'name');
+		items.unshift(['entropy', entropy]);
 
 		groups.push({
 			name,
 			items: items.map(([key, value]: [string, unknown]) => {
 				return {
-					name: splitCamelCase(key),
+					name: translateKeyToTitle(key),
 					value: valueToHex(value),
 					comment: translateGroupValue(value, 'Sections', key)
 				};

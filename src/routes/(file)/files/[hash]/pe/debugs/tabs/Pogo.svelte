@@ -4,7 +4,7 @@
 
 	export let data: Saferwall.Debug.POGO;
 
-	$: items = Array.isArray(data.Info?.Entries) ? data.Info?.Entries : [];
+	$: items = Array.isArray(data.info?.entries) ? data.info?.entries : [];
 </script>
 
 {#if items.length > 0}
@@ -18,9 +18,9 @@
 			<tbody>
 				{#each items as row}
 					<tr>
-						<td>{valueToHex(row.Rva)}</td>
-						<td>{valueToHex(row.Size)}</td>
-						<td>{row.Name}</td>
+						<td>{valueToHex(row.rva)}</td>
+						<td>{valueToHex(row.size)}</td>
+						<td>{row.name}</td>
 					</tr>
 				{/each}
 			</tbody>

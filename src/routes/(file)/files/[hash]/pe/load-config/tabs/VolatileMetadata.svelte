@@ -12,20 +12,20 @@
 	let tabs: (TabItem & Partial<{ data: any; key: string; expanded: boolean }>)[] = [
 		{
 			label: 'Struct',
-			data: data.Struct,
-			key: 'Struct',
+			data: data.struct,
+			key: 'struct',
 			selected: true
 		},
 		{
 			label: 'Access RVA Table',
-			data: data.AccessRVATable,
-			key: 'AccessRVATable',
+			data: data.access_rva_table,
+			key: 'accessrvatable',
 			expanded: false
 		},
 		{
 			label: 'Info Range Table',
-			data: data.InfoRangeTable.map(({ Rva, Size }) => [valueToHex(Rva), convertBytes(Size)]),
-			key: 'InfoRangeTable'
+			data: data.info_range_table.map(({ rva, size }) => [valueToHex(rva), convertBytes(size)]),
+			key: 'info_range_table'
 		}
 	];
 </script>

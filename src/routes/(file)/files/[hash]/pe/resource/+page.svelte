@@ -2,7 +2,7 @@
 	import type { PageData } from './$types';
 	import DirectoryRoot from './components/DirectoryRoot.svelte';
 
-	// TODO: improve show tables (move tables, zindex, scroll)
+	// TODO: allow to move table with mouse
 	export let data: PageData;
 
 	let { resource } = data;

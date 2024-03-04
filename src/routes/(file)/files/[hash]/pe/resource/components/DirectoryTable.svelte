@@ -3,9 +3,9 @@
 	import type { Saferwall } from '$lib/types';
 	import { translateGroupValue } from '$lib/utils';
 
-	export let Struct: Saferwall.Resource.Struct;
+	export let struct: Saferwall.Resource.Struct;
 
-	$: rows = Object.entries(Struct).map(([name, value]) => {
+	$: rows = Object.entries(struct).map(([name, value]) => {
 		return {
 			member: name,
 			value: value
@@ -23,7 +23,7 @@
 			{#each rows as row}
 				<tr>
 					<td>{row.member}</td>
-					<td>{translateGroupValue(row.value, 'Resources', row.member)}</td>
+					<td>{translateGroupValue(row.value, 'resources', row.member)}</td>
 				</tr>
 			{/each}
 		</tbody>

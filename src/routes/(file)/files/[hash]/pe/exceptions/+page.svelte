@@ -1,33 +1,31 @@
 <script lang="ts">
 	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
 	import Icon from '$lib/components/Icon.svelte';
-	import { splitCamelCase, translateGroupValue, valueToHex } from '$lib/utils';
+	import { translateKeyToTitle, translateGroupValue, valueToHex } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	const recordsPerPage = 200;
 	let records = recordsPerPage;
 
 	export let data: PageData;
-	// TODO: split into components
-
 	$: exceptions = data.exceptions?.map((exception) => {
 		return {
-			base: exception.RuntimeFunction,
-			unwind: Object.entries(exception.UnwinInfo)
-				.filter(([key]) => !['FunctionEntry', 'UnwindCodes'].includes(key))
+			base: exception.runtime_function,
+			unwind: Object.entries(exception.unwin_info)
+				.filter(([key]) => !['function_entry', 'unwind_codes'].includes(key))
 				.map(([key, value]) => {
 					return {
-						key: splitCamelCase(key),
-						value: translateGroupValue(value, 'Exceptions', key)
+						key: translateKeyToTitle(key),
+						value: translateGroupValue(value, 'exceptions', key)
 					};
 				}),
-			codes: (exception.UnwinInfo.UnwindCodes || []).map(
-				(code: { UnwindOp: string; Operand: string }) => {
+			codes: (exception.unwin_info.unwind_codes || []).map(
+				(code: { unwind_op: string; operand: string }) => {
 					return {
 						...code,
 						value: [
-							translateGroupValue(code.UnwindOp, 'Exceptions', 'UnwindOp'),
-							code.Operand
+							translateGroupValue(code.unwind_op, 'exceptions', 'unwind_op'),
+							code.operand
 						].join(' , ')
 					};
 				}
@@ -73,9 +71,9 @@
 							class={'transition-all ' + (isEntryOpen(index) === true ? '' : '-rotate-90')}
 						/>
 					</td>
-					<td>{valueToHex(item.base.BeginAddress)}</td>
-					<td>{valueToHex(item.base.EndAddress)}</td>
-					<td>{valueToHex(item.base.UnwindInfoAddress)}</td>
+					<td>{valueToHex(item.base.begin_address)}</td>
+					<td>{valueToHex(item.base.end_address)}</td>
+					<td>{valueToHex(item.base.unwind_info_address)}</td>
 				</tr>
 				{#if isEntryOpen(index)}
 					<tr class="box__body" class:hidden={!isEntryOpen(index)}>
@@ -104,7 +102,7 @@
 																{#each item.codes as code}
 																	<li class="text-sm">
 																		<span class="font-semibold"
-																			>{valueToHex(code.CodeOffset)} :</span
+																			>{valueToHex(code.code_offset)} :</span
 																		>
 																		<span>{code.value}</span>
 																	</li>

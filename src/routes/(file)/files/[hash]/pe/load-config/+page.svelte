@@ -8,31 +8,38 @@
 	import GFIDS from './tabs/GFIDS.svelte';
 	import LoadCfgStruct from './tabs/LoadCfgStruct.svelte';
 	import SEH from './tabs/SEH.svelte';
+	import Struct from './tabs/Struct.svelte';
 	import VolatileMetadata from './tabs/VolatileMetadata.svelte';
 
 	export let data: PageData;
 
 	const tabsLabelsMap: Partial<Record<keyof Saferwall.Pe.LoadConfig.Root, string>> = {
-		CFGIAT: 'CFG IAT',
-		GFIDS: 'GFIDs',
-		LoadCfgStruct: 'Load CFG Struct',
-		SEH: 'SEH',
-		VolatileMetadata: 'Volatile Metadata',
-		CFGLongJump: 'CFG Long Jump'
+		cfgiat: 'CFG IAT',
+		gfids: 'GFIDs',
+		chpe: 'CHPE',
+		enclave: 'ENCLAVE',
+		load_cfg_struct: 'Load CFG Struct',
+		seh: 'SEH',
+		struct: 'STRUCT',
+		dvrt: 'DVRT',
+		volatile_metadata: 'Volatile Metadata',
+		cfg_long_jump: 'CFG Long Jump'
 	};
 
-	const componentsClass: Record<keyof Saferwall.Pe.LoadConfig.Root, any> = {
-		CFGIAT: CFGIAT,
-		GFIDS: GFIDS,
-		LoadCfgStruct: LoadCfgStruct,
-		SEH: SEH,
-		VolatileMetadata: VolatileMetadata,
-		DVRT: DVRT,
-		CFGLongJump: CFGLongJump
+	const componentsClass: Partial<Record<keyof Saferwall.Pe.LoadConfig.Root, any>> = {
+		cfgiat: CFGIAT,
+		gfids: GFIDS,
+		load_cfg_struct: LoadCfgStruct,
+		seh: SEH,
+		volatile_metadata: VolatileMetadata,
+		dvrt: DVRT,
+		cfg_long_jump: CFGLongJump
 	};
 
 	let { loadConfig } = data;
 	$: ({ loadConfig } = data);
+
+	$: console.log(loadConfig);
 
 	let tabs: {
 		label: string;
@@ -63,7 +70,17 @@
 
 	{#each tabs as tab}
 		{#if tab.checked}
-			<svelte:component this={tab.component} data={tab.data} />
+			{#if tab.data}
+				{#if tab.component}
+					<svelte:component this={tab.component} data={tab.data} />
+				{:else}
+					<Struct data={tab.data} />
+				{/if}
+			{:else}
+				<div class="flex flex-grow items-center p-4">
+					<p class="text-center text-neutral-500">No data found</p>
+				</div>
+			{/if}
 		{/if}
 	{/each}
 </section>

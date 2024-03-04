@@ -7,10 +7,12 @@
 
 	export let isRoot = false;
 
-	export let ID: string;
-	export let Name: string;
-	export let Directory: Saferwall.Resource.Directory;
-	export let Struct: Saferwall.Resource.Struct;
+	export let id: string;
+	export let name: string;
+	export let directory: Saferwall.Resource.Directory;
+	export let struct: Saferwall.Resource.Struct;
+
+	console.log(directory);
 
 	$: structOpen = false;
 	$: tableOpen = false;
@@ -25,33 +27,33 @@
 		<Icon name="arrow-down" class={structOpen ? '' : '-rotate-90'} size="w-4 h-4" />
 		<h3 class="cursor-pointer" on:mouseup={() => (structOpen = !structOpen)}>
 			Resource Directory
-			{#if ID}
-				Entry {ID}
+			{#if id}
+				Entry {id}
 			{/if}
-			{#if Name}
-				, Name: {Name}
+			{#if name}
+				, Name: {name}
 			{/if}
 		</h3>
-		{#if Struct}
+		{#if struct}
 			<div class="py-1 relative">
 				<Button
 					size="xss"
-					on:click={() => onClickToggleTable}
+					on:click={() => onClickToggleTable()}
 					class={tableOpen ? `!text-red-500 !bg-gray-100 !outline-gray-100 !border-gray-100` : ''}
 				>
 					{tableOpen ? 'Hide Table' : 'Show Table'}
 				</Button>
 				{#if tableOpen}
 					<div class="absolute block left-44 top-0 z-40">
-						<DirectoryTable {Struct} />
+						<DirectoryTable {struct} />
 					</div>
 				{/if}
 			</div>
 		{/if}
 	</div>
 	{#if structOpen}
-		{#if Directory}
-			<DirectoryComponent {...Directory} />
+		{#if directory}
+			<DirectoryComponent {...directory} />
 		{/if}
 		<div class="relative" />
 	{/if}

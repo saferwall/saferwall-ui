@@ -25,10 +25,10 @@
 		{#each data as row, index}
 			{#if index < maxRecords || expanded}
 				<Table.Row>
-					<Table.Val>{valueToHex(row.RVA)}</Table.Val>
-					<Table.Val>{valueToHex(row.IATValue)}</Table.Val>
-					<Table.Val>{valueToHex(row.INTValue)}</Table.Val>
-					<Table.Val>{row.Description}</Table.Val>
+					<Table.Val>{valueToHex(row.rva)}</Table.Val>
+					<Table.Val>{valueToHex(row.iat_value)}</Table.Val>
+					<Table.Val>{valueToHex(row.int_value)}</Table.Val>
+					<Table.Val>{row.description}</Table.Val>
 				</Table.Row>
 			{/if}
 		{/each}

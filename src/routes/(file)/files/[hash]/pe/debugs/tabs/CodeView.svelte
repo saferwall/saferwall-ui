@@ -5,11 +5,11 @@
 
 	export let data: Saferwall.Debug.CODE_VIEW;
 
-	$: Signature = signatureToGuid(data.Info?.Signature);
+	$: signature = signatureToGuid(data.info?.signature);
 
 	$: items = Object.entries({
-		...data.Info,
-		Signature
+		...data.info,
+		signature
 	});
 </script>
 

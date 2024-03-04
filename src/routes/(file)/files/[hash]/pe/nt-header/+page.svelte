@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {
 		getDataDirectoryLabel,
-		splitCamelCase,
+		translateKeyToTitle,
 		translateGroupValue,
 		valueToHex
 	} from '$lib/utils';
@@ -11,16 +11,19 @@
 
 	$: ntHeaders = Object.entries(data.ntHeader).reduce(
 		(groups: any[], [name, entries]: [string, any]) => {
-			if (name === 'DataDirectory') {
+			if (name === 'data_directories') {
 				groups.push({
 					name: 'Data Directory',
 					columns: ['', 'Size', 'Virtual Address'],
 					items: entries.map(
-						({ Size, VirtualAddress }: { Size: Number; VirtualAddress: number }, index: number) => {
+						(
+							{ size, virtual_address }: { size: Number; virtual_address: number },
+							index: number
+						) => {
 							return {
 								name: getDataDirectoryLabel(index),
-								value: valueToHex(Size),
-								comment: valueToHex(VirtualAddress)
+								value: valueToHex(size),
+								comment: valueToHex(virtual_address)
 							};
 						}
 					)
@@ -29,13 +32,13 @@
 			}
 
 			groups.push({
-				name: splitCamelCase(name),
+				name: translateKeyToTitle(name),
 				items: Object.entries(entries!)
 					.map(([key, value]) => {
 						const origValue = value;
 						value = ['string', 'number'].includes(typeof value) ? valueToHex(origValue) : origValue;
 						return {
-							name: splitCamelCase(key),
+							name: translateKeyToTitle(key),
 							value: value,
 							comment: translateGroupValue(origValue, name, key)
 						};

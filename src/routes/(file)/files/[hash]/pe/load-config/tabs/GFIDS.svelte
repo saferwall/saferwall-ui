@@ -24,9 +24,9 @@
 		{#each data as row, index}
 			{#if index < maxRecords || expanded}
 				<Table.Row>
-					<Table.Val>{valueToHex(row.Target)}</Table.Val>
-					<Table.Val>{GFIDMap[row.Flags] ?? '-'}</Table.Val>
-					<Table.Val>{row.Description}</Table.Val>
+					<Table.Val>{valueToHex(row.target) ?? '-'}</Table.Val>
+					<Table.Val>{GFIDMap[row.flags] ?? '-'}</Table.Val>
+					<Table.Val>{row.description ?? '-'}</Table.Val>
 				</Table.Row>
 			{/if}
 		{/each}
