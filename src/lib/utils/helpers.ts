@@ -14,6 +14,16 @@ export const randomErrorQuote = (): string => {
 		"We're sorry for the trouble. We're working to fix the problem as soon as possible. If you're still having trouble, please don't hesitate to contact us.",
 		"Whoops! It looks like something has gone wrong. We're on it and will have everything back to normal soon. Please reach out to us if you still need help."
 	];
-	const index = Math.floor(Math.random() * quotes.length);
-	return quotes[index];
+
+	return quotes[Math.floor(Math.random() * quotes.length)];
+};
+
+export const copyToClipboard = async (text: string): Promise<boolean> => {
+	try {
+		await navigator.clipboard.writeText(text);
+		return true;
+	} catch (error) {
+		console.error('(Clipboard) Failed to copy:', error);
+		return false;
+	}
 };
