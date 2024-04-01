@@ -39,8 +39,6 @@
 	let { loadConfig } = data;
 	$: ({ loadConfig } = data);
 
-	$: console.log(loadConfig);
-
 	let tabs: {
 		label: string;
 		value: any;

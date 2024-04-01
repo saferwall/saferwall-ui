@@ -12,8 +12,6 @@
 	export let directory: Saferwall.Resource.Directory;
 	export let struct: Saferwall.Resource.Struct;
 
-	console.log(directory);
-
 	$: structOpen = false;
 	$: tableOpen = false;
 
