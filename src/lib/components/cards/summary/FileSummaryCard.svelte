@@ -1,6 +1,7 @@
 <script lang="ts">
+	import FileTypeIcon from '$lib/components/FileTypeIcon.svelte';
 	import type { Saferwall } from '$lib/types';
-	import { getFileTypeIcon, timeSince } from '$lib/utils';
+	import { timeSince } from '$lib/utils';
 	import Card from '../../Card.svelte';
 
 	export let score: Saferwall.Multiav = {
@@ -11,7 +12,7 @@
 	export let lastScanned: number;
 	export let firstSubmission: number;
 	export let signature: string | undefined = undefined;
-	export let fileType: string | undefined = undefined;
+	export let fileExtension: string | undefined = undefined;
 
 	$: scoreColor =
 		score.value == 0
@@ -68,15 +69,13 @@
 			<time datetime="2023-01-01 12:00">{firstSubmissionSince}</time>
 		</p>
 	</article>
-	{#if false}
-		<!-- //todo: File type icons -->
+	<!-- //todo: File type icons -->
+	{#if fileExtension}
 		<article class="summary__card short flex-grow lg:flex-grow-0">
 			<h2 class="sr-only">File type</h2>
 			<p>
-				<span class="sr-only">{fileType}</span>
-				<svg class="w-14 h-14"
-					><use href="/images/icons.svg#icon-{getFileTypeIcon(fileType)}" /></svg
-				>
+				<span class="sr-only">{fileExtension}</span>
+				<FileTypeIcon name={fileExtension} />
 			</p>
 		</article>
 	{/if}

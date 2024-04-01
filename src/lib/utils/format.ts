@@ -111,10 +111,6 @@ export const convertBytes = (bytes: number): string => {
 	return (bytes / 1073741824).toFixed(2) + 'GB';
 };
 
-export function getFileTypeIcon(type: string | undefined): string {
-	return `tmp`;
-}
-
 export function cleanUndefinedKeyValue(data: object = {}) {
 	return Object.entries(data)
 		.filter(([key, value]) => value !== 0 && value)

@@ -16,7 +16,7 @@
 	$: summaryCard = {
 		score: summary.multiav,
 		signature: summary.signature,
-		fileType: summary.file_format,
+		fileExtension: summary.file_extension,
 		lastScanned: summary.last_scanned,
 		firstSubmission: summary.first_seen
 	};
