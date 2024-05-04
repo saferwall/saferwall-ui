@@ -10,7 +10,7 @@
 	export let behaviorId: string;
 	export let session: Saferwall.Session;
 
-	export let parent = true;
+	export let isChild = true;
 	export let trees: Saferwall.Behaviors.NestedProcessTree[];
 
 	let processTableOpen: number[] = [];
@@ -21,7 +21,7 @@
 	};
 </script>
 
-<ul class={`flex flex-col divide-y ${parent ? 'border-t border-neutral-100 mt-6' : ''}`}>
+<ul class={`flex flex-col divide-y ${isChild ? 'border-t border-neutral-100 mt-6' : ''}`}>
 	{#each trees as tree, index (tree.path)}
 		<li class:pl-12={tree.parent_pid === '0x0'} class:ml-12={tree.parent_pid !== '0x0'}>
 			<Expandable expandable={tree.children.length != 0}>
@@ -68,6 +68,7 @@
 					</div>
 				</svelte:fragment>
 				<svelte:fragment slot="expanded">
+					<!-- TODO: fetch children capabilities/events -->
 					<svelte:self trees={tree.children} />
 				</svelte:fragment>
 			</Expandable>

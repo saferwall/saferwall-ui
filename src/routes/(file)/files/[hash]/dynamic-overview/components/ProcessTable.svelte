@@ -112,7 +112,11 @@
 		}
 	};
 
-	onMount(() => fetchData());
+	onMount(() => {
+		if (behaviorId) {
+			fetchData();
+		}
+	});
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

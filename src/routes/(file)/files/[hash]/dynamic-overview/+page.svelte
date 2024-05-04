@@ -40,7 +40,7 @@
 			<svelte:fragment slot="header">
 				<h1 class="text-2xl">Process Tree</h1>
 			</svelte:fragment>
-			<ProcessTreeView {behaviorId} {session} trees={processTree} parent={false} />
+			<ProcessTreeView {behaviorId} {session} trees={processTree} isChild={false} />
 		</Card>
 	</section>
 </div>

@@ -3,7 +3,7 @@ import { fileMenu } from '$lib/data/menu';
 import type { Menu, Saferwall } from '$lib/types';
 import type { LayoutLoad } from './$types';
 
-export const load = (async ({ parent, params, data, url }) => {
+export const load = (async ({ parent, params, url }) => {
 	const parentData = await parent();
 
 	const { hash } = params;
