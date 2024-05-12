@@ -37,7 +37,7 @@
 									{tree.proc_name}
 								</span>
 							</h2>
-							<Label>
+							<Label class="uppercase">
 								{tree.file_type}
 							</Label>
 
@@ -63,13 +63,12 @@
 							<p class="text-neutral-600 text-sm">{tree.path} »</p>
 						</div>
 						{#if processTableOpen.includes(index)}
-							<ProcessTable {behaviorId} {session} />
+							<ProcessTable {behaviorId} {session} pid={tree.pid} />
 						{/if}
 					</div>
 				</svelte:fragment>
 				<svelte:fragment slot="expanded">
-					<!-- TODO: fetch children capabilities/events -->
-					<svelte:self trees={tree.children} />
+					<svelte:self trees={tree.children} {behaviorId} pid={tree.pid} />
 				</svelte:fragment>
 			</Expandable>
 		</li>

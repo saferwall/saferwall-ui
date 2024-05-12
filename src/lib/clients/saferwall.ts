@@ -55,13 +55,13 @@ export class SaferwallClient {
 
 	public async getActivities(pagination?: Pagination) {
 		return this.request<Saferwall.Pagination<Saferwall.Activity>>(
-			`users/activities` + (pagination ? '?' + this.generatePaginateQuery(pagination) : '')
+			`users/activities` + this.generatePaginateQuery(pagination)
 		);
 	}
 
 	public async getUserSectionItems<T>(username: string, section: string, pagination?: Pagination) {
 		return this.request<Saferwall.Pagination<T>>(
-			`users/${username}/${section}?` + this.generatePaginateQuery(pagination)
+			`users/${username}/${section}` + this.generatePaginateQuery(pagination)
 		);
 	}
 
@@ -103,7 +103,25 @@ export class SaferwallClient {
 		pagination?: Pagination & Partial<{ pid: string[] }>
 	) {
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.ApiTrace.Item>>(
-			`behaviors/${behaviorId}/api-trace?` + this.generatePaginateQuery(pagination)
+			`behaviors/${behaviorId}/api-trace` + this.generatePaginateQuery(pagination)
+		);
+	}
+
+	public async getBahviorScreenshots(
+		hash: string,
+		behaviorId: string
+	): Promise<Saferwall.Screenshots> {
+		return this.request<{ screenshots_count: number }>(
+			`behaviors/${behaviorId}/?fields=screenshots_count`
+		).then((res) =>
+			Array(res.screenshots_count || 0)
+				.fill(null)
+				.map((_, index) => {
+					return {
+						preview: `${this.config.artifactsUrl}${hash}/${behaviorId}/screenshots/${index}.min.jpeg`,
+						original: `${this.config.artifactsUrl}${hash}/${behaviorId}/screenshots/${index}.jpeg`
+					};
+				})
 		);
 	}
 
@@ -113,13 +131,30 @@ export class SaferwallClient {
 		).then((res) => res.proc_tree ?? []);
 	}
 
-	public async getFileSystemEvents(behaviorId: string) {
+	public async getFileSystemEvents(behaviorId: string, pid?: string) {
+		const params = new URLSearchParams();
+		if (pid) {
+			params.append('pid', pid);
+		}
+
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.SystemEvent>>(
-			`behaviors/${behaviorId}/sys-events`
+			`behaviors/${behaviorId}/sys-events${(params && '?' + params.toString()) || ''}`
 		).then((res) => res.items ?? []);
 	}
 
-	public async getFileCapabilities(behaviorId: string) {
+	public async getBehaviorArtifcats(behaviorId: string, pagination?: Pagination) {
+		return this.request<Saferwall.Pagination<Saferwall.Behaviors.Artifcats>>(
+			`behaviors/${behaviorId}/artifacts` + this.generatePaginateQuery(pagination)
+		);
+	}
+
+	// TODO: (API) Implement pid filtering
+	public async getFileCapabilities(behaviorId: string, pid?: string) {
+		const params = new URLSearchParams();
+		if (pid) {
+			params.append('pid', pid);
+		}
+
 		return this.request<{ capabilities: Saferwall.Behaviors.Capability[] }>(
 			`behaviors/${behaviorId}?fields=capabilities`
 		).then((res) => res.capabilities ?? []);
@@ -141,7 +176,6 @@ export class SaferwallClient {
 			false
 		).then((res) => res.arrayBuffer());
 	}
-
 	public async rescanFile(hash: string) {
 		return this.request<unknown>(`files/${hash}/rescan`, {
 			method: 'POST'
@@ -256,15 +290,19 @@ export class SaferwallClient {
 	private generatePaginateQuery(pagination?: Pagination): string {
 		const params = {
 			per_page: String(DEFAULT_PAGINATION_ITEMS),
-			...pagination
+			...(pagination ?? {})
 		} as Pagination<string>;
 
 		const query = new URLSearchParams({ ...params });
+
+		if (query.size === 0) {
+			return '';
+		}
 
 		if (this.isLoggedIn) {
 			query.append('logged', '');
 		}
 
-		return query.toString();
+		return '?' + query.toString();
 	}
 }

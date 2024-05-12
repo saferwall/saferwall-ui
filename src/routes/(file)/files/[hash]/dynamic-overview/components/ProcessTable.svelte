@@ -9,6 +9,7 @@
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 
+	export let pid: string | undefined;
 	export let behaviorId: string;
 	export let session: Saferwall.Session;
 
@@ -82,8 +83,8 @@
 
 	const fetchData = async () => {
 		const client = new SaferwallClient(session);
-		client.getFileCapabilities(behaviorId).then((res) => (capabilitiesItems = [...res]));
-		client.getFileSystemEvents(behaviorId).then((res) => (systemEventsItems = [...res]));
+		client.getFileCapabilities(behaviorId, pid).then((res) => (capabilitiesItems = [...res]));
+		client.getFileSystemEvents(behaviorId, pid).then((res) => (systemEventsItems = [...res]));
 	};
 
 	const getSeverityTheme = (severity: string) => {
@@ -122,7 +123,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div transition:slide={{ axis: 'y' }} class="w-full lg:pr-12" on:click|stopPropagation>
 	<Card padding={false} class="flex flex-col gap-2 bg-red-100 px-8 py-6 border border-neutral-200">
-		<div class="inline-flex">
+		<div class="inline-flex uppercase font-medium">
 			<Multitoggle items={sections} on:change={onToggleChange} />
 		</div>
 		<form class="flex flex-row gap-6 lg:gap-12">

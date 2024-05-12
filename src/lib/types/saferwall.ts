@@ -1,3 +1,5 @@
+import type { artifcatsKinds } from '$lib/utils';
+
 export namespace Saferwall {
 	export type ActivityType = 'comment' | 'like' | 'submit';
 	export type ProfileSection = 'likes' | 'comments' | 'submissions' | 'followers' | 'following';
@@ -545,6 +547,19 @@ export namespace Saferwall {
 			pid: string;
 			severity: string;
 		}
+
+		export interface Artifcats {
+			detection: string;
+			file_type: string;
+			kind: keyof typeof artifcatsKinds;
+			matched_rules: string[];
+			name: string;
+			sha256: string;
+			size: number;
+
+			// Virtual
+			_open?: boolean;
+		}
 	}
 
 	export type Exif = Partial<{
@@ -644,6 +659,13 @@ export namespace Saferwall {
 		signature: string;
 		submissions: Submission[];
 	}
+
+	export interface Screenshot {
+		preview: string;
+		original: string;
+	}
+
+	export type Screenshots = Saferwall.Screenshot[];
 
 	export namespace Activities {
 		export interface Root {
