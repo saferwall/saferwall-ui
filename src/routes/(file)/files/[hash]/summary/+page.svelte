@@ -22,7 +22,7 @@
 	$: exif = summary.exif;
 	$: properties = summary.properties;
 	$: submissions = summary.submissions;
-	$: behavior = data.behavior;
+	$: behavior = summary.default_behavior_report;
 	$: screenshots = behavior?.screenshots;
 	$: indicators = behavior?.capabilities;
 </script>

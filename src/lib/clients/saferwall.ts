@@ -99,7 +99,30 @@ export class SaferwallClient {
 	}
 
 	public async getFileSummary(hash: string) {
-		return this.request<Saferwall.File & Saferwall.Summary>(`files/${hash}/summary`);
+		return this.request<Saferwall.File & Saferwall.Summary>(`files/${hash}/summary`).then(
+			(file) => {
+				return {
+					...file,
+					default_behavior_report: file.default_behavior_report
+						? {
+								...file.default_behavior_report,
+								screenshots: Array(file.default_behavior_report.screenshots_count || 0)
+									.fill(null)
+									.map((_, index) => {
+										return {
+											preview: `${this.config.artifactsUrl}${hash}/${
+												file.default_behavior_report!.id
+											}/screenshots/${index}.min.jpeg`,
+											original: `${this.config.artifactsUrl}${hash}/${
+												file.default_behavior_report!.id
+											}/screenshots/${index}.jpeg`
+										};
+									})
+						  }
+						: undefined
+				};
+			}
+		);
 	}
 
 	public async getFileApiTrace(
@@ -109,24 +132,6 @@ export class SaferwallClient {
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.ApiTrace.Item>>(
 			`behaviors/${behaviorId}/api-trace` + this.generatePaginateQuery(pagination)
 		);
-	}
-
-	public async getDefaultBehaviorReport(hash: string) {
-		return this.request<{ default_behavior_report: Saferwall.Behaviors.DefaultReport }>(
-			`files/${hash}/?fields=default_behavior_report`
-		).then(({ default_behavior_report: report }) => {
-			return {
-				...report,
-				screenshots: Array(report.screenshots_count || 0)
-					.fill(null)
-					.map((_, index) => {
-						return {
-							preview: `${this.config.artifactsUrl}${hash}/${report.id}/screenshots/${index}.min.jpeg`,
-							original: `${this.config.artifactsUrl}${hash}/${report.id}/screenshots/${index}.jpeg`
-						};
-					})
-			};
-		});
 	}
 
 	public async getFileProcessTree(behaviorId: string) {
