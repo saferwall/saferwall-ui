@@ -1,14 +1,10 @@
 <script lang="ts">
-	import { SaferwallClient } from '$lib/clients/saferwall';
 	import BasePropsCard from '$lib/components/cards/summary/BasicPropsCard.svelte';
 	import ExifFileMetadataCard from '$lib/components/cards/summary/ExifFileMetadataCard.svelte';
 	import FileSummaryCard from '$lib/components/cards/summary/FileSummaryCard.svelte';
 	import IndicatorsCard from '$lib/components/cards/summary/IndicatorsCard.svelte';
 	import SubmissionsCard from '$lib/components/cards/summary/SubmissionsCard.svelte';
 	import VirtualScreensCard from '$lib/components/cards/summary/VirtualScreensCard.svelte';
-	import { indicators } from '$lib/data/demo';
-	import { onMount } from 'svelte';
-	import type { Saferwall } from '$lib/types';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -24,18 +20,11 @@
 	};
 
 	$: exif = summary.exif;
-	$: hash = summary.sha256;
-	$: behaviorId = summary.default_behavior_id;
 	$: properties = summary.properties;
 	$: submissions = summary.submissions;
-	$: screenshots = [] as Saferwall.Screenshots;
-
-	onMount(() => {
-		let saferwall = new SaferwallClient();
-		if (behaviorId) {
-			saferwall.getBahviorScreenshots(hash, behaviorId).then((images) => (screenshots = images));
-		}
-	});
+	$: behavior = data.behavior;
+	$: screenshots = behavior?.screenshots;
+	$: indicators = behavior?.capabilities;
 </script>
 
 <section class="container mx-auto space-y-6">
@@ -45,8 +34,12 @@
 		<ExifFileMetadataCard {exif} />
 	{/if}
 	<SubmissionsCard {submissions} />
-	<IndicatorsCard {indicators} />
-	{#if behaviorId && screenshots.length > 0}
-		<VirtualScreensCard {screenshots} />
+	{#if behavior}
+		{#if indicators && indicators.length > 0}
+			<IndicatorsCard {indicators} />
+		{/if}
+		{#if screenshots && screenshots.length > 0}
+			<VirtualScreensCard {screenshots} />
+		{/if}
 	{/if}
 </section>

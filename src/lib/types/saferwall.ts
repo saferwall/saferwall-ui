@@ -79,6 +79,7 @@ export namespace Saferwall {
 		type?: string | 'file';
 		status?: number;
 		default_behavior_id?: string;
+		default_behavior_report?: Behaviors.DefaultReport;
 	}
 
 	export namespace Pe {
@@ -482,6 +483,13 @@ export namespace Saferwall {
 	}
 
 	export namespace Behaviors {
+		export interface DefaultReport {
+			id: string;
+			capabilities: Capability[];
+			screenshots_count: number;
+			screenshots?: Screenshots;
+		}
+
 		export namespace ApiTrace {
 			export interface Entry {
 				name: string;
@@ -545,6 +553,7 @@ export namespace Saferwall {
 			description: string;
 			module: string;
 			pid: string;
+			rule_id: string;
 			severity: string;
 		}
 

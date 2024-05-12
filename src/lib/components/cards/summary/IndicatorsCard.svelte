@@ -1,14 +1,27 @@
 <script lang="ts">
+	import Label from '$lib/components/form/Label.svelte';
+	import type { Saferwall } from '$lib/types';
 	import Card from '../../Card.svelte';
 	import ButtonShowMore from '../../form/ButtonShowMore.svelte';
-	import CommingSoon from '../../partials/ComingSoon.svelte';
 
 	const maxRecords = 10;
 
-	export let indicators: any[] = [];
+	export let indicators: Saferwall.Behaviors.DefaultReport['capabilities'] = [];
 
 	$: expanded = false;
 	$: activeExpanding = indicators.length > maxRecords;
+
+	const getSeverityTheme = (value: string): Label['$$prop_def']['theme'] => {
+		switch (value) {
+			case 'high':
+				return 'danger';
+			case 'informative':
+				return 'warning';
+
+			default:
+				return 'base';
+		}
+	};
 </script>
 
 <Card>
@@ -26,9 +39,9 @@
 					<tr class:hide={!expanded && i > maxRecords}>
 						<td>{indicator.description}</td>
 						<td>
-							<div class="indicator__label indicator__label--{indicator.severity}">
+							<Label theme={getSeverityTheme(indicator.severity)}>
 								{indicator.severity}
-							</div>
+							</Label>
 						</td>
 						<td>{indicator.category}</td>
 						<td>{indicator.module}</td>
@@ -36,35 +49,8 @@
 				{/each}
 			</tbody>
 		</table>
-		<CommingSoon />
 		{#if activeExpanding}
 			<ButtonShowMore on:click={() => (expanded = !expanded)} {expanded} />
 		{/if}
 	</div>
 </Card>
-
-<style lang="scss">
-	.indicator {
-		&__label {
-			@apply inline-flex py-2.5 px-5 rounded;
-			@apply capitalize font-semibold;
-			@apply bg-gray-300 text-gray-800;
-
-			&--malicious {
-				@apply bg-redx text-redx;
-			}
-			&--suspicious {
-				@apply bg-orangex text-orangex;
-			}
-			&--informational {
-				@apply bg-purplex text-purplex;
-			}
-
-			&--malicious,
-			&--suspicious,
-			&--informational {
-				@apply bg-opacity-10;
-			}
-		}
-	}
-</style>

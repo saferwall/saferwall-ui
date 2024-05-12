@@ -111,22 +111,22 @@ export class SaferwallClient {
 		);
 	}
 
-	public async getBahviorScreenshots(
-		hash: string,
-		behaviorId: string
-	): Promise<Saferwall.Screenshots> {
-		return this.request<{ screenshots_count: number }>(
-			`behaviors/${behaviorId}/?fields=screenshots_count`
-		).then((res) =>
-			Array(res.screenshots_count || 0)
-				.fill(null)
-				.map((_, index) => {
-					return {
-						preview: `${this.config.artifactsUrl}${hash}/${behaviorId}/screenshots/${index}.min.jpeg`,
-						original: `${this.config.artifactsUrl}${hash}/${behaviorId}/screenshots/${index}.jpeg`
-					};
-				})
-		);
+	public async getDefaultBehaviorReport(hash: string) {
+		return this.request<{ default_behavior_report: Saferwall.Behaviors.DefaultReport }>(
+			`files/${hash}/?fields=default_behavior_report`
+		).then(({ default_behavior_report: report }) => {
+			return {
+				...report,
+				screenshots: Array(report.screenshots_count || 0)
+					.fill(null)
+					.map((_, index) => {
+						return {
+							preview: `${this.config.artifactsUrl}${hash}/${report.id}/screenshots/${index}.min.jpeg`,
+							original: `${this.config.artifactsUrl}${hash}/${report.id}/screenshots/${index}.jpeg`
+						};
+					})
+			};
+		});
 	}
 
 	public async getFileProcessTree(behaviorId: string) {
