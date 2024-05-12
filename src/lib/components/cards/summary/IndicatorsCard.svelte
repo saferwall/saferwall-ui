@@ -38,12 +38,12 @@
 				{#each indicators as indicator, i}
 					<tr class:hide={!expanded && i > maxRecords}>
 						<td>{indicator.description}</td>
-						<td>
+						<td class="capitalize">
 							<Label theme={getSeverityTheme(indicator.severity)}>
 								{indicator.severity}
 							</Label>
 						</td>
-						<td>{indicator.category}</td>
+						<td class="capitalize">{indicator.category}</td>
 						<td>{indicator.module}</td>
 					</tr>
 				{/each}
