@@ -59,7 +59,11 @@ export class SaferwallClient {
 		);
 	}
 
-	public async getUserSectionItems<T>(username: string, section: string, pagination?: Pagination) {
+	public async getUserSectionItems<T = Saferwall.Activities.Root>(
+		username: string,
+		section: string,
+		pagination?: Pagination
+	) {
 		return this.request<Saferwall.Pagination<T>>(
 			`users/${username}/${section}` + this.generatePaginateQuery(pagination)
 		);

@@ -3,18 +3,18 @@
 	export let mode: 'all' | 'more' = 'all';
 </script>
 
-<div class="button" on:click>
+<button type="button" class="button" on:click>
 	<span>
 		Show {#if expanded}less{:else}{mode}{/if}
 	</span>
 	<svg class="icon" class:expanded>
 		<use href="/images/icons.svg#icon-arrow-down" />
 	</svg>
-</div>
+</button>
 
 <style lang="scss">
 	.button {
-		@apply relative cursor-pointer;
+		@apply relative cursor-pointer focus:outline-none;
 		@apply w-full pt-3 select-none flex items-center justify-center space-x-2;
 		@apply text-center font-semibold text-primary;
 
