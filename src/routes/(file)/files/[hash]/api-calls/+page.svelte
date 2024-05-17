@@ -58,7 +58,9 @@
 		})
 		.filter((p) => totalPages > 0);
 
-	$: perPages = [5, 10, 20, 40, 50, 100, 300].filter((page) => page <= totalCount);
+	$: perPages = [5, 10, 20, 40, 50, 100, 300].filter(
+		(page, index) => index < 1 || page <= totalCount
+	);
 
 	$: hash = data.hash;
 	$: session = data.session;

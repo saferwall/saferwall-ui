@@ -487,6 +487,7 @@ export namespace Saferwall {
 			id: string;
 			capabilities: Capability[];
 			screenshots_count: number;
+			screenshots?: Screenshots;
 		}
 
 		export namespace ApiTrace {

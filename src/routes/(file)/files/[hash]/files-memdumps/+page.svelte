@@ -18,10 +18,10 @@
 	$: search = data.search;
 	$: filters = data.filters;
 	$: categories = data.categories;
-	$: items = data.pagination.items;
+	$: items = data.pagination.items || [];
 
 	const handleFormChanges = (form: Event) => {
-		// TODO
+		// TODO: filter result
 	};
 </script>
 
@@ -52,7 +52,8 @@
 			<table class="table-auto w-full">
 				<thead class="text-left uppercase text-neutral-500 text-sm">
 					<th colspan="2">File Name</th>
-					<th>Category</th>
+					<th class="lg:w-44">Category</th>
+					<th class="lg:w-44">Verdict</th>
 					<!-- <th>Actions</th> -->
 				</thead>
 				<tbody class="divide-y divide-neutral-100">
@@ -64,9 +65,12 @@
 								</div>
 							</td>
 							<td>{item.name}</td>
-							<td class="lg:w-34">
+							<td class="lg:w-44 capitalize">
+								{getArtifcatKind(item.kind)}
+							</td>
+							<td class="lg:w-44">
 								<Label theme={'base'}>
-									{getArtifcatKind(item.kind)}
+									{item.detection || 'N/A'}
 								</Label>
 							</td>
 							<!-- <td>
@@ -99,14 +103,18 @@
 													'File Size': convertBytes(item.size),
 													'MIME Type': item.file_type,
 													SHA256: item.sha256,
-													...(item.matched_rules.length
-														? { 'Matched Rules': item.matched_rules }
-														: {})
-												})}
+													'Matched Rules': item.matched_rules.join(', ')
+												}).filter(([_, val]) => val)}
 											/>
 										</div>
 									</div>
 								{/if}
+							</td>
+						</tr>
+					{:else}
+						<tr>
+							<td class="py-12 text-center" colspan="4">
+								It looks like we didn't find any data.
 							</td>
 						</tr>
 					{/each}
