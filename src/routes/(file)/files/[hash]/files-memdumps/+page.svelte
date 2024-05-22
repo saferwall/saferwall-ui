@@ -122,7 +122,7 @@
 												lines={true}
 												items={Object.entries({
 													'File Size': convertBytes(item.size),
-													'MIME Type': item.file_type,
+													'Magic': item.magic,
 													SHA256: item.sha256,
 													'Matched Rules': item.matched_rules.join(', ')
 												}).filter(([_, val]) => val)}
