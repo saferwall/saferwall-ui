@@ -4,6 +4,6 @@
 
 <style>
 	td {
-		@apply p-1;
+		@apply p-2;
 	}
 </style>

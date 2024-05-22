@@ -8,6 +8,10 @@
 	let error = '';
 	let loading = false;
 	let disabled = true;
+
+	const onConfirmChange = (event: { currentTarget: EventTarget & { checked: boolean } }) => {
+		disabled = !event.currentTarget!.checked;
+	};
 </script>
 
 <div class="space-y-4 md:max-w-screen-sm">
@@ -44,11 +48,7 @@
 		{/if}
 		<div>
 			<label class="font-semibold">
-				<input
-					type="checkbox"
-					name="confirm"
-					on:change={(event) => (disabled = !event.target.checked)}
-				/>
+				<input type="checkbox" name="confirm" on:change={onConfirmChange} />
 				I understand that this action cannot be undone.
 			</label>
 		</div>

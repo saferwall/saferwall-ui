@@ -49,6 +49,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"bigger-picture": "^1.1.16",
 		"bytemd": "^1.20.0",
 		"github-markdown-css": "^5.1.0",
 		"nprogress": "^0.2.0",

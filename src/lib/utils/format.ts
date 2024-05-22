@@ -27,6 +27,13 @@ const activityTypes: { [key: string]: string } = {
 	submit: 'submitted a file'
 };
 
+export const artifcatsKinds = {
+	memdmp: 'Memory Dumps',
+	filecreate: 'Dropped Files',
+	codeinject: 'Injected Code',
+	memfree: 'Freed Buffers'
+};
+
 /**
  * Parse mixed tags to basic tag name & category
  * @param fileTags mix of tags with value type string|array
@@ -81,6 +88,17 @@ export function getLabelClass(classification?: string): string {
 		return `unknown`;
 	}
 	return classification.split('.')[1].toLowerCase();
+}
+
+/**
+ * Parse artifcats kind
+ */
+export function getArtifcatKind(kind?: keyof typeof artifcatsKinds): string {
+	if (!kind) {
+		return 'Unknown';
+	}
+
+	return artifcatsKinds[kind];
 }
 
 /**

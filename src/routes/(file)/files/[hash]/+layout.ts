@@ -17,11 +17,18 @@ export const load = (async ({ parent, params, url }) => {
 
 	try {
 		file = await new SaferwallClient(parentData.session).getFileSummary(hash);
-
-		activeFileMenu = [...fileMenu].filter(
-			(menu) =>
-				`${menu.name}`.toLowerCase() !== 'pe' || `${file.file_format}`.toLowerCase() === 'pe'
-		);
+		activeFileMenu = [...fileMenu]
+			.filter(
+				(menu) =>
+					`${menu.name}`.toLowerCase() !== 'pe' || `${file.file_format}`.toLowerCase() === 'pe'
+			)
+			.filter(
+				(menu) =>
+					!(
+						['files-memdumps', 'dynamic-overview'].includes(menu.path) &&
+						!file.default_behavior_report
+					)
+			);
 	} catch (error) {
 		activeFileMenu = [...fileMenu].filter((menu) => `${menu.name}`.toLowerCase() !== 'pe');
 	}

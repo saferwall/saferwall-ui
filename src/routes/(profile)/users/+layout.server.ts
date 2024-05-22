@@ -1,16 +1,8 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
-import type { Session } from '$lib/types';
-import type { APIUser } from '$lib/types/users';
+import type { Saferwall } from '$lib/types';
 import type { LayoutServerLoad } from './$types';
 
-export const load = (async ({
-	params,
-	locals
-}): Promise<{
-	username: string;
-	profile: APIUser;
-	session: Session;
-}> => {
+export const load = (async ({ params, locals }) => {
 	const username = params.username!;
 	const user = await new SaferwallClient(locals.session).getUser(username);
 

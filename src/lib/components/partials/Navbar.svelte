@@ -23,7 +23,7 @@
 		<ul class="navbar__menu space-x-8 items-center text-neutral-500">
 			<li>
 				<a class="menu__link" href="https://docs.saferwall.com/" target="_blank" rel="noreferrer">
-					About saferwall
+					Documentation
 				</a>
 			</li>
 			<li>

@@ -55,13 +55,17 @@ export class SaferwallClient {
 
 	public async getActivities(pagination?: Pagination) {
 		return this.request<Saferwall.Pagination<Saferwall.Activity>>(
-			`users/activities` + (pagination ? '?' + this.generatePaginateQuery(pagination) : '')
+			`users/activities` + this.generatePaginateQuery(pagination)
 		);
 	}
 
-	public async getUserSectionItems<T>(username: string, section: string, pagination?: Pagination) {
+	public async getUserSectionItems<T = Saferwall.Activities.Root>(
+		username: string,
+		section: string,
+		pagination?: Pagination
+	) {
 		return this.request<Saferwall.Pagination<T>>(
-			`users/${username}/${section}?` + this.generatePaginateQuery(pagination)
+			`users/${username}/${section}` + this.generatePaginateQuery(pagination)
 		);
 	}
 
@@ -95,7 +99,30 @@ export class SaferwallClient {
 	}
 
 	public async getFileSummary(hash: string) {
-		return this.request<Saferwall.File & Saferwall.Summary>(`files/${hash}/summary`);
+		return this.request<Saferwall.File & Saferwall.Summary>(`files/${hash}/summary`).then(
+			(file) => {
+				return {
+					...file,
+					default_behavior_report: file.default_behavior_report
+						? {
+								...file.default_behavior_report,
+								screenshots: Array(file.default_behavior_report.screenshots_count || 0)
+									.fill(null)
+									.map((_, index) => {
+										return {
+											preview: `${this.config.artifactsUrl}${hash}/${
+												file.default_behavior_report!.id
+											}/screenshots/${index}.min.jpeg`,
+											original: `${this.config.artifactsUrl}${hash}/${
+												file.default_behavior_report!.id
+											}/screenshots/${index}.jpeg`
+										};
+									})
+						  }
+						: undefined
+				};
+			}
+		);
 	}
 
 	public async getFileApiTrace(
@@ -103,7 +130,7 @@ export class SaferwallClient {
 		pagination?: Pagination & Partial<{ pid: string[] }>
 	) {
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.ApiTrace.Item>>(
-			`behaviors/${behaviorId}/api-trace?` + this.generatePaginateQuery(pagination)
+			`behaviors/${behaviorId}/api-trace` + this.generatePaginateQuery(pagination)
 		);
 	}
 
@@ -113,13 +140,39 @@ export class SaferwallClient {
 		).then((res) => res.proc_tree ?? []);
 	}
 
-	public async getFileSystemEvents(behaviorId: string) {
+	public async getFileSystemEvents(behaviorId: string, pid?: string) {
+		const params = new URLSearchParams();
+		if (pid) {
+			params.append('pid', pid);
+		}
+
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.SystemEvent>>(
-			`behaviors/${behaviorId}/sys-events`
+			`behaviors/${behaviorId}/sys-events${(params && '?' + params.toString()) || ''}`
 		).then((res) => res.items ?? []);
 	}
 
-	public async getFileCapabilities(behaviorId: string) {
+	public async getBehaviorArtifcats(
+		behaviorId: string,
+		categories?: string[],
+		pagination?: Pagination
+	) {
+		const params = this.generatePaginationParams(pagination);
+		if (categories && categories.length > 0) {
+			categories.forEach((kind) => params.append('kind', kind));
+		}
+
+		return this.request<Saferwall.Pagination<Saferwall.Behaviors.Artifcats>>(
+			`behaviors/${behaviorId}/artifacts?` + params.toString()
+		);
+	}
+
+	// TODO: (API) Implement pid filtering
+	public async getFileCapabilities(behaviorId: string, pid?: string) {
+		const params = new URLSearchParams();
+		if (pid) {
+			params.append('pid', pid);
+		}
+
 		return this.request<{ capabilities: Saferwall.Behaviors.Capability[] }>(
 			`behaviors/${behaviorId}?fields=capabilities`
 		).then((res) => res.capabilities ?? []);
@@ -141,7 +194,6 @@ export class SaferwallClient {
 			false
 		).then((res) => res.arrayBuffer());
 	}
-
 	public async rescanFile(hash: string) {
 		return this.request<unknown>(`files/${hash}/rescan`, {
 			method: 'POST'
@@ -253,18 +305,26 @@ export class SaferwallClient {
 		return init;
 	}
 
-	private generatePaginateQuery(pagination?: Pagination): string {
+	private generatePaginationParams(pagination?: Pagination): URLSearchParams {
 		const params = {
 			per_page: String(DEFAULT_PAGINATION_ITEMS),
-			...pagination
+			...(pagination ?? {})
 		} as Pagination<string>;
 
 		const query = new URLSearchParams({ ...params });
 
-		if (this.isLoggedIn) {
+		if (this.isLoggedIn && query.size > 0) {
 			query.append('logged', '');
 		}
 
-		return query.toString();
+		return query;
+	}
+	private generatePaginateQuery(pagination?: Pagination): string {
+		const query = this.generatePaginationParams(pagination);
+
+		if (query.size === 0) {
+			return '';
+		}
+		return '?' + query.toString();
 	}
 }

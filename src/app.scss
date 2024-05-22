@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'bigger-picture/css';
+html.bp-lock {
+	overflow-y: unset;
+}
+
 @import './lib/styles/card.scss';
 @import './lib/styles/tags.scss';
 @import './lib/styles/scrollbar.scss';

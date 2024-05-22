@@ -30,7 +30,7 @@
 	$: search = data.search;
 	$: rows = data.pagination.items || [];
 	$: pids = (data.filters.pids || []).filter(Boolean);
-	$: hprops = (data.hprops || []).filter(Boolean);
+	$: hiddenProps = (data.hiddenProps || []).filter(Boolean);
 
 	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
 
@@ -52,13 +52,19 @@
 				number: pageNumber,
 				href:
 					typeof pageNumber === 'number'
-						? generateQueryParams({ ...formParams, page: pageNumber, hprops })
+						? generateQueryParams({
+								...formParams,
+								page: pageNumber,
+								hprops: hiddenProps
+						  })
 						: undefined
 			};
 		})
 		.filter((p) => totalPages > 0);
 
-	$: perPages = [5, 10, 20, 40, 50, 100, 300].filter((page) => page <= totalCount);
+	$: perPages = [5, 10, 20, 40, 50, 100, 300].filter(
+		(page, index) => index < 1 || page <= totalCount
+	);
 
 	$: hash = data.hash;
 	$: session = data.session;
@@ -66,7 +72,7 @@
 	$: perPage = data.pagination.per_page;
 	$: totalPages = data.pagination.page_count;
 	$: totalCount = data.pagination.total_count;
-	$: behaviorId = data.file.default_behavior_id;
+	$: behaviorId = data.behaviorId!;
 	$: filters = [] as Saferwall.Behaviors.ProcessTree;
 
 	const generateQueryParams = (
@@ -95,7 +101,7 @@
 		};
 	};
 
-	$: formParams = (currentPage || hprops || form) && getFormParams();
+	$: formParams = (currentPage || hiddenProps || form) && getFormParams();
 
 	const handleFormChanges = () => {
 		goto(
@@ -139,7 +145,7 @@
 		});
 	};
 
-	$: isActiveProperty = (id: string): boolean => !hprops || !hprops?.includes(id);
+	$: isActiveProperty = (id: string): boolean => !hiddenProps || !hiddenProps?.includes(id);
 
 	$: displayProperties = false;
 	const onPropsToggleAction = () => (displayProperties = !displayProperties);
@@ -159,10 +165,10 @@
 	});
 </script>
 
-<div class="container mx-auto">
+<div class="container mx-auto flex flex-col flex-1">
 	<div
 		data-sveltekit-preload-data
-		class="flex flex-col bg-white text-gray-700 rounded overflow-auto w-full h-full p-6 gap-4"
+		class="flex-1 bg-white text-gray-700 rounded overflow-auto p-6 gap-4"
 	>
 		<form
 			data-sveltekit-keepfocus
@@ -236,8 +242,8 @@
 				</Select>
 			</div>
 		</form>
-		<div>
-			<table class="w-full flex-shrink-0 rows">
+		<div class="flex flex-1 h-full">
+			<table class="w-full flex-shrink-0 rows h-full">
 				<thead class="rows__thead">
 					<th colspan="2">TIME</th>
 					{#if isActiveProperty('pid')}

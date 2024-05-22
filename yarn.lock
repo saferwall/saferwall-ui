@@ -1386,6 +1386,11 @@ balanced-match@^1.0.0:
   resolved "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
+bigger-picture@^1.1.16:
+  version "1.1.16"
+  resolved "https://registry.yarnpkg.com/bigger-picture/-/bigger-picture-1.1.16.tgz#cfcd092bad1f7d6e6c5d25167dd9e45ae1225a81"
+  integrity sha512-dLy5K0NFgvknqU21HektQTdP7ZlLNVJ7BFPRvB0/XqZ0qfLAntIT0Pa78HvXLl2M9H/x7t74HlNRJdgb7NtEgA==
+
 binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"

@@ -5,10 +5,10 @@
 	import Card from '../../Card.svelte';
 
 	const maxRecords = 10;
-	const formatterProps: any = {
+	const formatterProps = {
 		CodeSize: convertBytes,
 		InitializedDataSize: convertBytes
-	};
+	} as Record<string, Function>;
 
 	export let exif: Saferwall.Exif = {};
 

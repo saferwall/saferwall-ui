@@ -1,3 +1,5 @@
+import type { artifcatsKinds } from '$lib/utils';
+
 export namespace Saferwall {
 	export type ActivityType = 'comment' | 'like' | 'submit';
 	export type ProfileSection = 'likes' | 'comments' | 'submissions' | 'followers' | 'following';
@@ -77,6 +79,7 @@ export namespace Saferwall {
 		type?: string | 'file';
 		status?: number;
 		default_behavior_id?: string;
+		default_behavior_report?: Behaviors.DefaultReport;
 	}
 
 	export namespace Pe {
@@ -480,6 +483,13 @@ export namespace Saferwall {
 	}
 
 	export namespace Behaviors {
+		export interface DefaultReport {
+			id: string;
+			capabilities: Capability[];
+			screenshots_count: number;
+			screenshots?: Screenshots;
+		}
+
 		export namespace ApiTrace {
 			export interface Entry {
 				name: string;
@@ -543,7 +553,21 @@ export namespace Saferwall {
 			description: string;
 			module: string;
 			pid: string;
+			rule_id: string;
 			severity: string;
+		}
+
+		export interface Artifcats {
+			detection: string;
+			file_type: string;
+			kind: keyof typeof artifcatsKinds;
+			matched_rules: string[];
+			name: string;
+			sha256: string;
+			size: number;
+
+			// Virtual
+			_open?: boolean;
 		}
 	}
 
@@ -644,6 +668,13 @@ export namespace Saferwall {
 		signature: string;
 		submissions: Submission[];
 	}
+
+	export interface Screenshot {
+		preview: string;
+		original: string;
+	}
+
+	export type Screenshots = Saferwall.Screenshot[];
 
 	export namespace Activities {
 		export interface Root {
