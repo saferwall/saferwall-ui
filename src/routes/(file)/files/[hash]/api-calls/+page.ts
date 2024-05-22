@@ -1,10 +1,15 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
+import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load = (async ({ url, parent }) => {
+export const load = (async ({ url, parent, params }) => {
 	const {
-		file: { default_behavior_id }
+		file: { default_behavior_report: behaviorReport }
 	} = await parent();
+
+	if (!behaviorReport || !behaviorReport.id) {
+		throw redirect(307, `/files/${params.hash}/summary`);
+	}
 
 	const search = url.searchParams.get('search');
 	const page = parseInt(url.searchParams.get('page')!) || 1;
@@ -22,7 +27,7 @@ export const load = (async ({ url, parent }) => {
 		args.pid = pids;
 	}
 
-	const pagination = await new SaferwallClient().getFileApiTrace(default_behavior_id!, args);
+	const pagination = await new SaferwallClient().getFileApiTrace(behaviorReport.id!, args);
 
 	pagination.items = pagination.items ?? [];
 
