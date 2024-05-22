@@ -10,18 +10,34 @@
 	import Icon from '$lib/components/Icon.svelte';
 	import Label from '$lib/components/form/Label.svelte';
 	import TableKeyValue from '$lib/components/TableKeyValue.svelte';
+	import { goto } from '$app/navigation';
+	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
 
 	export let data: PageData;
 
 	let form: HTMLFormElement;
 
-	$: search = data.search;
 	$: filters = data.filters;
 	$: categories = data.categories;
 	$: items = data.pagination.items || [];
+	let search = data.search;
 
-	const handleFormChanges = (form: Event) => {
-		// TODO: filter result
+	const generateParams = (categories: string[]) => {
+		const query = new URLSearchParams();
+		if (categories.length > 0) {
+			query.append('categories', categories.join(','));
+		}
+		if (search && search?.length > 0) {
+			query.append('search', search);
+		}
+
+		return '?' + query.toString();
+	};
+
+	const handleFormChanges = (event: Event) => {
+		const data = new FormData(event.currentTarget as HTMLFormElement);
+		const activeCategories = data.getAll('categories') as string[];
+		goto(generateParams(activeCategories));
 	};
 </script>
 
@@ -32,14 +48,19 @@
 	>
 		<form
 			data-sveltekit-keepfocus
+			class="flex items-center justify-center gap-12"
 			bind:this={form}
 			on:change={handleFormChanges}
-			class="flex items-center justify-center gap-12"
 		>
-			<Input name="search" icon="search" bind:search placeholder="Search anything..." />
+			<Input name="search" icon="search" bind:value={search} placeholder="Search anything..." />
 			<div class="grid grid-cols-2 gap-2 xl:gap-4 text-sm flex-shrink-0 flex-grow text-gray-600">
 				{#each categories as item}
-					<Checkbox size="sm" name="categories" group={filters.categories} value={item.name}>
+					<Checkbox
+						size="sm"
+						name="categories"
+						value={item.name}
+						checked={filters.categories.includes(item.name)}
+					>
 						{item.label}
 					</Checkbox>
 				{/each}
@@ -69,7 +90,7 @@
 								{getArtifcatKind(item.kind)}
 							</td>
 							<td class="lg:w-44">
-								<Label theme={'base'}>
+								<Label theme={item.detection ? 'danger' : 'base'}>
 									{item.detection || 'N/A'}
 								</Label>
 							</td>

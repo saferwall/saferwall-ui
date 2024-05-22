@@ -2,11 +2,11 @@ import { SaferwallClient } from '$lib/clients/saferwall';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ locals }) => {
-	const pagination: any = await new SaferwallClient(locals.session).getActivities();
+	const pagination = await new SaferwallClient(locals.session).getActivities();
 
 	return {
-		session: locals.session,
+		pagination,
 		user: locals.user,
-		pagination
+		session: locals.session
 	};
 }) satisfies PageServerLoad;

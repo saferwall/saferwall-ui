@@ -151,9 +151,18 @@ export class SaferwallClient {
 		).then((res) => res.items ?? []);
 	}
 
-	public async getBehaviorArtifcats(behaviorId: string, pagination?: Pagination) {
+	public async getBehaviorArtifcats(
+		behaviorId: string,
+		categories?: string[],
+		pagination?: Pagination
+	) {
+		const params = this.generatePaginationParams(pagination);
+		if (categories && categories.length > 0) {
+			categories.forEach((kind) => params.append('kind', kind));
+		}
+
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.Artifcats>>(
-			`behaviors/${behaviorId}/artifacts` + this.generatePaginateQuery(pagination)
+			`behaviors/${behaviorId}/artifacts?` + params.toString()
 		);
 	}
 
@@ -296,7 +305,7 @@ export class SaferwallClient {
 		return init;
 	}
 
-	private generatePaginateQuery(pagination?: Pagination): string {
+	private generatePaginationParams(pagination?: Pagination): URLSearchParams {
 		const params = {
 			per_page: String(DEFAULT_PAGINATION_ITEMS),
 			...(pagination ?? {})
@@ -304,14 +313,18 @@ export class SaferwallClient {
 
 		const query = new URLSearchParams({ ...params });
 
-		if (query.size === 0) {
-			return '';
-		}
-
-		if (this.isLoggedIn) {
+		if (this.isLoggedIn && query.size > 0) {
 			query.append('logged', '');
 		}
 
+		return query;
+	}
+	private generatePaginateQuery(pagination?: Pagination): string {
+		const query = this.generatePaginationParams(pagination);
+
+		if (query.size === 0) {
+			return '';
+		}
 		return '?' + query.toString();
 	}
 }

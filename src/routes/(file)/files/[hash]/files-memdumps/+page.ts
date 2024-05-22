@@ -21,13 +21,23 @@ export const load = (async ({ url, parent, params }) => {
 	}
 
 	const search = url.searchParams.get('search');
-	const categories = url.searchParams
-		.get('categories')
-		?.toLowerCase()
-		?.split(',')
-		?.filter((c) => categoriesList.find((_) => _.name === c));
+	const page = Math.abs(parseInt(url.searchParams.get('page')!) || 1);
+	const perPage = Math.abs(parseInt(url.searchParams.get('per_page')!) || 200);
+	const categories =
+		url.searchParams
+			.get('categories')
+			?.toLowerCase()
+			?.split(',')
+			?.filter((c) => categoriesList.find((_) => _.name === c)) || [];
 
-	const pagination = await new SaferwallClient(session).getBehaviorArtifcats(behaviorReport.id);
+	const pagination = await new SaferwallClient(session).getBehaviorArtifcats(
+		behaviorReport.id,
+		categories,
+		{
+			per_page: perPage,
+			page: page
+		}
+	);
 
 	return {
 		behaviorId: behaviorReport.id,

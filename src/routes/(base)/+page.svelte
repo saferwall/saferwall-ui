@@ -12,7 +12,7 @@
 	$: session = data.session;
 	$: loggedIn = data.user !== undefined;
 	$: activities = data.pagination.items;
-	$: pagination = data.pagination as any;
+	$: pagination = data.pagination;
 
 	const onLoadMore = async () => {
 		loading = true;
@@ -24,7 +24,7 @@
 
 			if (newActivities.items === null) {
 				reachEnd = true;
-				throw new Error('user has reached the end of the activities');
+				throw new Error('User has reached end of activities');
 			}
 
 			activities = [...activities, ...newActivities.items];

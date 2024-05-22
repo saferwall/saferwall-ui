@@ -34,7 +34,13 @@
 	$: totalCount = data.pagination.total_count;
 
 	const generatePagination = (page: number, perPage: number) => {
-		return `?page=${page}&per_page=${perPage}`;
+		return (
+			'?' +
+			new URLSearchParams({
+				page: page.toString(),
+				per_page: perPage.toString()
+			}).toString()
+		);
 	};
 
 	const handlePageLimit = (page: number, event: any) => {

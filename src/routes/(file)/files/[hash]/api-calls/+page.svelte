@@ -30,7 +30,7 @@
 	$: search = data.search;
 	$: rows = data.pagination.items || [];
 	$: pids = (data.filters.pids || []).filter(Boolean);
-	$: hprops = (data.hprops || []).filter(Boolean);
+	$: hiddenProps = (data.hiddenProps || []).filter(Boolean);
 
 	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
 
@@ -52,7 +52,11 @@
 				number: pageNumber,
 				href:
 					typeof pageNumber === 'number'
-						? generateQueryParams({ ...formParams, page: pageNumber, hprops })
+						? generateQueryParams({
+								...formParams,
+								page: pageNumber,
+								hprops: hiddenProps
+						  })
 						: undefined
 			};
 		})
@@ -68,7 +72,7 @@
 	$: perPage = data.pagination.per_page;
 	$: totalPages = data.pagination.page_count;
 	$: totalCount = data.pagination.total_count;
-	$: behaviorId = data.file.default_behavior_report?.id;
+	$: behaviorId = data.behaviorId!;
 	$: filters = [] as Saferwall.Behaviors.ProcessTree;
 
 	const generateQueryParams = (
@@ -97,7 +101,7 @@
 		};
 	};
 
-	$: formParams = (currentPage || hprops || form) && getFormParams();
+	$: formParams = (currentPage || hiddenProps || form) && getFormParams();
 
 	const handleFormChanges = () => {
 		goto(
@@ -141,7 +145,7 @@
 		});
 	};
 
-	$: isActiveProperty = (id: string): boolean => !hprops || !hprops?.includes(id);
+	$: isActiveProperty = (id: string): boolean => !hiddenProps || !hiddenProps?.includes(id);
 
 	$: displayProperties = false;
 	const onPropsToggleAction = () => (displayProperties = !displayProperties);
