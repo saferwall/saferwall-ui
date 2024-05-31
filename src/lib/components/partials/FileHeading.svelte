@@ -44,7 +44,7 @@
 				disabled={rescaning}
 				on:click={onRescanClick}
 			>
-				<span class="hidden md:block pl-2">Rescan file</span>
+				<span class="hidden md:block pl-2">Rescan</span>
 			</Button>
 			<ButtonLike size="lg" {hash} {loggedIn} {liked} />
 			<Button target="_blank" size="lg" icon="twitter" href={shareTwitterLink}>
