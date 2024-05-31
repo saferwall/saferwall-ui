@@ -25,14 +25,11 @@
 
 	let form: HTMLFormElement;
 
-	let w32apis: Record<string, string[]> = {};
+	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
 
 	$: search = data.search;
-	$: rows = data.pagination.items || [];
 	$: pids = (data.filters.pids || []).filter(Boolean);
 	$: hiddenProps = (data.hiddenProps || []).filter(Boolean);
-
-	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
 
 	$: pages = Array(5)
 		.fill(0)
@@ -74,6 +71,9 @@
 	$: totalCount = data.pagination.total_count;
 	$: behaviorId = data.behaviorId!;
 	$: filters = [] as Saferwall.Behaviors.ProcessTree;
+
+	$: w32apis = {} as Record<string, string[]>;
+	$: rows = updateRows(data.pagination.items, w32apis);
 
 	const generateQueryParams = (
 		options: Pagination & {
@@ -129,9 +129,12 @@
 		}
 	};
 
-	const updateRows = () => {
-		rows = rows.map((row) => {
-			if (!row.values) {
+	const updateRows = (
+		rows: Saferwall.Behaviors.ApiTrace.Item[],
+		w32apis: Record<string, string[]>
+	) => {
+		return rows?.map((row) => {
+			if (!row.values && w32apis?.[row.name]) {
 				row.values = w32apis[row.name]!.map(([type, name], argIndex) => ({
 					type,
 					name,
@@ -158,10 +161,7 @@
 	onMount(() => {
 		fetch('/data/w32apis-ui.json', { cache: 'force-cache' })
 			.then((res) => res.json())
-			.then((res) => {
-				w32apis = res;
-				updateRows();
-			});
+			.then((res) => (w32apis = res));
 	});
 </script>
 
