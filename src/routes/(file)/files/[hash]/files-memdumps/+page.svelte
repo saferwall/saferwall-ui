@@ -1,17 +1,18 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-	import { slide } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
+	import { goto } from '$app/navigation';
 	import { convertBytes, getArtifcatKind } from '$lib/utils';
+	import { quintOut } from 'svelte/easing';
+	import { slide } from 'svelte/transition';
+	import type { PageData } from './$types';
 
-	import Checkbox from '$lib/components/form/Checkbox.svelte';
-	import Input from '$lib/components/form/Input.svelte';
+	import { PUBLIC_ARTIFACTS_URL } from '$env/static/public';
 	import Card from '$lib/components/Card.svelte';
 	import Icon from '$lib/components/Icon.svelte';
-	import Label from '$lib/components/form/Label.svelte';
 	import TableKeyValue from '$lib/components/TableKeyValue.svelte';
-	import { goto } from '$app/navigation';
-	import ButtonShowMore from '$lib/components/form/ButtonShowMore.svelte';
+	import Checkbox from '$lib/components/form/Checkbox.svelte';
+	import Input from '$lib/components/form/Input.svelte';
+	import Label from '$lib/components/form/Label.svelte';
+	import type { Saferwall } from '$lib/types';
 
 	export let data: PageData;
 
@@ -20,8 +21,10 @@
 	$: filters = data.filters;
 	$: categories = data.categories;
 	$: items = data.pagination.items || [];
-	let search = data.search;
+	$: hash = data.hash;
+	$: behaviorId = data.behaviorId;
 
+	let search = data.search;
 	const generateParams = (categories: string[]) => {
 		const query = new URLSearchParams();
 		if (categories.length > 0) {
@@ -38,6 +41,10 @@
 		const data = new FormData(event.currentTarget as HTMLFormElement);
 		const activeCategories = data.getAll('categories') as string[];
 		goto(generateParams(activeCategories));
+	};
+
+	const generateDownloadLink = (item: Saferwall.Behaviors.Artifacts): string => {
+		return `${PUBLIC_ARTIFACTS_URL}${hash}/${behaviorId}/artifacts/${item.name}`;
 	};
 </script>
 
@@ -75,7 +82,7 @@
 					<th colspan="2">File Name</th>
 					<th class="lg:w-44">Category</th>
 					<th class="lg:w-44">Verdict</th>
-					<!-- <th>Actions</th> -->
+					<th class="text-center w-18">Actions</th>
 				</thead>
 				<tbody class="divide-y divide-neutral-100">
 					{#each items as item}
@@ -85,7 +92,11 @@
 									<Icon name="arrow-down" size="w-3 h-5" />
 								</div>
 							</td>
-							<td>{item.name}</td>
+							<td>
+								<p>
+									{item.name}
+								</p>
+							</td>
 							<td class="lg:w-44 capitalize">
 								{getArtifcatKind(item.kind)}
 							</td>
@@ -94,23 +105,26 @@
 									{item.detection || 'N/A'}
 								</Label>
 							</td>
-							<!-- <td>
-								<div class="flex flex-row items-center gap-2">
-									<div
-										class="flex items-center justify-center w-8 h-8 rounded-full bg-white border text-primary stroke-2"
+							<td>
+								<div class="flex flex-row items-center justify-center gap-2">
+									<a
+										download={item.name}
+										href={generateDownloadLink(item)}
+										on:click={(event) => event.stopImmediatePropagation()}
+										class="flex items-center justify-center w-8 h-8 rounded-full bg-white border text-primary stroke-2 hover:bg-opacity-90"
 									>
 										<Icon size="w-4 h-4" name="download" />
-									</div>
-									<div
+									</a>
+									<!-- <div
 										class="flex items-center justify-center w-8 h-8 rounded-full bg-white border text-primary stroke-2"
 									>
 										<Icon size="w-4 h-4" name="eye" />
-									</div>
+									</div> -->
 								</div>
-							</td> -->
+							</td>
 						</tr>
 						<tr class="py-0 border-none">
-							<td class="!py-0" colspan="6">
+							<td class="!py-0" colspan="7">
 								{#if item._open}
 									<div
 										class="p-4 text-gray-900"
@@ -122,7 +136,7 @@
 												lines={true}
 												items={Object.entries({
 													'File Size': convertBytes(item.size),
-													'Magic': item.magic,
+													Magic: item.magic,
 													SHA256: item.sha256,
 													'Matched Rules': item.matched_rules.join(', ')
 												}).filter(([_, val]) => val)}
@@ -134,7 +148,7 @@
 						</tr>
 					{:else}
 						<tr>
-							<td class="py-12 text-center" colspan="4">
+							<td class="py-12 text-center" colspan="6">
 								It looks like we didn't find any data.
 							</td>
 						</tr>

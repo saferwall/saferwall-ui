@@ -1,9 +1,9 @@
 import { SaferwallClient } from '$lib/clients/saferwall';
-import { artifcatsKinds, convertBytes, getArtifcatKind } from '$lib/utils';
+import { artifactsKinds } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-const categoriesList = Object.entries(artifcatsKinds).map(([name, label]) => {
+const categoriesList = Object.entries(artifactsKinds).map(([name, label]) => {
 	return {
 		name,
 		label
@@ -30,7 +30,7 @@ export const load = (async ({ url, parent, params }) => {
 			?.split(',')
 			?.filter((c) => categoriesList.find((_) => _.name === c)) || [];
 
-	const pagination = await new SaferwallClient(session).getBehaviorArtifcats(
+	const pagination = await new SaferwallClient(session).getBehaviorArtifacts(
 		behaviorReport.id,
 		categories,
 		{

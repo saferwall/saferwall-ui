@@ -1,4 +1,4 @@
-import type { artifcatsKinds } from '$lib/utils';
+import type { artifactsKinds } from '$lib/utils';
 
 export namespace Saferwall {
 	export type ActivityType = 'comment' | 'like' | 'submit';
@@ -557,10 +557,10 @@ export namespace Saferwall {
 			severity: string;
 		}
 
-		export interface Artifcats {
+		export interface Artifacts {
 			detection: string;
 			file_type: string;
-			kind: keyof typeof artifcatsKinds;
+			kind: keyof typeof artifactsKinds;
 			matched_rules: string[];
 			name: string;
 			sha256: string;

@@ -27,7 +27,7 @@ const activityTypes: { [key: string]: string } = {
 	submit: 'submitted a file'
 };
 
-export const artifcatsKinds = {
+export const artifactsKinds = {
 	memdmp: 'Memory Dumps',
 	filecreate: 'Dropped Files',
 	codeinject: 'Injected Code',
@@ -91,14 +91,14 @@ export function getLabelClass(classification?: string): string {
 }
 
 /**
- * Parse artifcats kind
+ * Parse artifacts kind
  */
-export function getArtifcatKind(kind?: keyof typeof artifcatsKinds): string {
+export function getArtifcatKind(kind?: keyof typeof artifactsKinds): string {
 	if (!kind) {
 		return 'Unknown';
 	}
 
-	return artifcatsKinds[kind];
+	return artifactsKinds[kind];
 }
 
 /**

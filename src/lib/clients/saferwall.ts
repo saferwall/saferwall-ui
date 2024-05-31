@@ -151,7 +151,7 @@ export class SaferwallClient {
 		).then((res) => res.items ?? []);
 	}
 
-	public async getBehaviorArtifcats(
+	public async getBehaviorArtifacts(
 		behaviorId: string,
 		categories?: string[],
 		pagination?: Pagination
@@ -161,7 +161,7 @@ export class SaferwallClient {
 			categories.forEach((kind) => params.append('kind', kind));
 		}
 
-		return this.request<Saferwall.Pagination<Saferwall.Behaviors.Artifcats>>(
+		return this.request<Saferwall.Pagination<Saferwall.Behaviors.Artifacts>>(
 			`behaviors/${behaviorId}/artifacts?` + params.toString()
 		);
 	}
@@ -194,6 +194,7 @@ export class SaferwallClient {
 			false
 		).then((res) => res.arrayBuffer());
 	}
+
 	public async rescanFile(hash: string) {
 		return this.request<unknown>(`files/${hash}/rescan`, {
 			method: 'POST'
@@ -319,6 +320,7 @@ export class SaferwallClient {
 
 		return query;
 	}
+
 	private generatePaginateQuery(pagination?: Pagination): string {
 		const query = this.generatePaginationParams(pagination);
 
