@@ -291,7 +291,7 @@
 								<td>{trace.name}</td>
 							{/if}
 							{#if isActiveProperty('args')}
-								<td>
+								<td class="max-w-xs">
 									<p class="truncate text-xs">
 										{trace._args || 'NaN'}
 									</p>
