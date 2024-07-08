@@ -25,7 +25,7 @@ export const load = (async ({ parent, params, url }) => {
 			.filter(
 				(menu) =>
 					!(
-						['files-memdumps', 'dynamic-overview'].includes(menu.path) &&
+						['files-memdumps', 'dynamic-overview', 'api-calls'].includes(menu.path) &&
 						!file.default_behavior_report
 					)
 			);
