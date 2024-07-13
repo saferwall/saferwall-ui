@@ -14,7 +14,7 @@
 
 <div class="container mx-auto">
 	<section
-		class="flex flex-col md:flex-row items-center justify-start bg-white shadow rounded-lg px-6 md:px-12 pb-6 md:pb-10 w-full md:space-x-12"
+		class="flex flex-col md:flex-row items-center justify-start bg-white dark:bg-neutral-600 rounded-card px-6 md:px-12 pb-6 md:pb-10 w-full md:space-x-12"
 	>
 		<div class="inline-flex relative w-full items-start md:space-x-12 pt-12">
 			<div class="inline-flex absolute md:static -top-14 -right-0">
@@ -22,13 +22,13 @@
 			</div>
 			<div class="grow space-y-4 w-full">
 				<div class="flex flex-col">
-					<h1 class="text-2xl font-semibold text-gray-800">{username}</h1>
-					<a href="/users/{username}">@{username}</a>
+					<h1 class="text-2xl font-semibold text-gray-100">{username}</h1>
+					<a class="text-gray-400" href="/users/{username}">@{username}</a>
 					{#if url}
 						<a
 							href={url}
 							target="_blank"
-							class="inline-flex items-center font-medium text-primary-600 bg-primary-600 bg-opacity-10 rounded px-4 space-x-2 max-w-full w-max mt-4"
+							class="inline-flex items-center font-medium text-primary-600 bg-primary-600 bg-opacity-10 px-4 space-x-2 max-w-full w-max mt-4"
 							rel="noreferrer"
 						>
 							<Icon name="link" size="w-4 h-4" />
@@ -48,7 +48,7 @@
 		</div>
 		<div class="actions__ flex flex-col pt-4 w-full md:w-max h-full flex-shrink-0 my-auto">
 			{#if selfProfile}
-				<Button href="/account/settings" theme="primary" size="lg">Edit my profile</Button>
+				<Button href="/account/settings" theme="brand" size="lg">Edit my profile</Button>
 			{:else}
 				<!-- TODO: user follow status -->
 				<ButtonFollow {username} {loggedIn} {followed} size="xl" />

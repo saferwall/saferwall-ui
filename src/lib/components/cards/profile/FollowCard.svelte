@@ -16,7 +16,7 @@
 			<Avatar username={item.username} size="base" />
 			<div class="flex flex-col w-full">
 				<h2 class="font-medium text-lg">@{item.username}</h2>
-				<DateTime class="text-gray-400 text-sm" date={item.member_since} />
+				<DateTime class="text-gray-400 text-xs" date={item.member_since} />
 			</div>
 		</div>
 		<div class="z-30">

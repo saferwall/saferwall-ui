@@ -1,12 +1,6 @@
-import type { Saferwall } from '$lib/types';
 import type { LayoutServerLoad } from './$types';
 
-export const load = (async ({
-	locals
-}): Promise<{
-	user: Saferwall.User;
-	session: Saferwall.Session;
-}> => {
+export const load = (async ({ locals }) => {
 	return {
 		user: locals.user,
 		session: locals.session

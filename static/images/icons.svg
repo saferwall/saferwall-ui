@@ -196,7 +196,8 @@
         </defs>
     </symbol>
     <symbol id="icon-logout" fill="none" viewBox="0 0 21 21">
-        <path stroke="#959595" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="1.2"
             d="M7.875 18.375h-3.5a1.75 1.75 0 0 1-1.75-1.75V4.375a1.75 1.75 0 0 1 1.75-1.75h3.5M14 14.875l4.375-4.375L14 6.125m4.375 4.375h-10.5" />
     </symbol>
     <symbol id="icon-delete-alert" fill="none" viewBox="0 0 54 46">
@@ -238,5 +239,23 @@
     <symbol id="icon-check-line" fill="none" stroke="currentColor" stroke-width="1.5"
         viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+    </symbol>
+    <symbol id="icon-dark-mode" fill="none" viewBox="0 0 18 18">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M16.86 9.7a7.87 7.87 0 1 1-8.57-8.56 6.12 6.12 0 0 0 8.57 8.57Z" />
+    </symbol>
+    <symbol id="icon-light-mode" fill="none" viewBox="0 0 18 18">
+        <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            stroke-width="1.5"
+            clip-path="url(#a)">
+            <path
+                d="M9 12.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Zm0-12v1.5m0 13.5v1.5M3.17 3.17l1.06 1.06m9.54 9.54 1.07 1.07M.75 9h1.5m13.5 0h1.5M3.17 14.84l1.06-1.07m9.54-9.54 1.07-1.07" />
+        </g>
+        <defs>
+            <clipPath id="a">
+                <path fill="currentColor" d="M0 0h18v18H0z" />
+            </clipPath>
+        </defs>
     </symbol>
 </svg>

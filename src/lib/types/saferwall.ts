@@ -412,7 +412,7 @@ export namespace Saferwall {
 	}
 
 	export interface ScanResult {
-		infected: boolean;
+		infected?: boolean;
 		output: string;
 		update: number;
 	}

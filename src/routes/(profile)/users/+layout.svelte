@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Footer from '$lib/components/partials/Footer.svelte';
-	import Navbar from '$lib/components/partials/Navbar.svelte';
-	import ProfileHeading from '$lib/components/partials/ProfileHeading.svelte';
 	import ProfileCard from '$lib/components/cards/profile/ProfileCard.svelte';
+	import Header from '$lib/components/navigation/Header.svelte';
+	import Footer from '$lib/components/partials/Footer.svelte';
+	import ProfileHeading from '$lib/components/partials/ProfileHeading.svelte';
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
@@ -15,10 +15,10 @@
 </script>
 
 <svelte:head>
-	<title>{profile.username} Profile - Saferwall</title>
+	<title>{profile.username} Profile - Saferwall Beta 1.0</title>
 </svelte:head>
-<Navbar {user} />
-<main class="flex-1 flex flex-col py-4 h-full bg-neutral space-y-6">
+<Header {user} />
+<main class="flex-1 flex flex-col py-4 h-full bg-background space-y-6">
 	<ProfileHeading />
 	<ProfileCard {loggedIn} {...profile} {selfProfile} {followed} />
 	<slot />

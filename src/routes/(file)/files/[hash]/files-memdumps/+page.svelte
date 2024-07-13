@@ -60,7 +60,7 @@
 			on:change={handleFormChanges}
 		>
 			<Input name="search" icon="search" bind:value={search} placeholder="Search anything..." />
-			<div class="grid grid-cols-2 gap-2 xl:gap-4 text-sm flex-shrink-0 flex-grow text-gray-600">
+			<div class="grid grid-cols-2 gap-2 xl:gap-4 text-xs flex-shrink-0 flex-grow text-gray-600">
 				{#each categories as item}
 					<Checkbox
 						size="sm"
@@ -78,7 +78,7 @@
 	<Card padding={false}>
 		<div class="pb-2">
 			<table class="table-auto w-full">
-				<thead class="text-left uppercase text-neutral-500 text-sm">
+				<thead class="text-left uppercase text-neutral-500 text-xs">
 					<th colspan="2">File Name</th>
 					<th class="lg:w-44">Category</th>
 					<th class="lg:w-44">Verdict</th>
@@ -130,7 +130,7 @@
 										class="p-4 text-gray-900"
 										transition:slide={{ duration: 300, easing: quintOut, axis: 'y' }}
 									>
-										<div class="border rounded-lg shadow-lg shadow-neutral-100">
+										<div class="border rounded-lg">
 											<TableKeyValue
 												header={false}
 												lines={true}
@@ -183,7 +183,7 @@
 				&:last-child {
 					@apply px-4;
 				}
-				@apply py-2 font-light text-sm;
+				@apply py-2 font-light text-xs;
 			}
 		}
 	}

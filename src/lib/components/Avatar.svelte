@@ -3,7 +3,7 @@
 
 	const DEFAULT_AVATAR = '/images/default-avatar.svg';
 
-	export let size: string = 'base';
+	export let size: 'base' | 'xs' | 'sm' | 'lg' = 'base';
 	export let image: string | undefined = undefined;
 	export let username: string | undefined = undefined;
 
@@ -17,7 +17,7 @@
 	};
 </script>
 
-<a class="avatar avatar--{size}" href="/users/{username}">
+<a class="avatar avatar--{size}" on:click href="/users/{username}">
 	{#if avatarImage}
 		<img
 			class="avatar__image"
@@ -37,7 +37,7 @@
 <style lang="scss">
 	.avatar {
 		@apply rounded-full bg-white overflow-hidden;
-		@apply border border-neutral flex-shrink-0 inline-block;
+		@apply border border-neutral-500 flex-shrink-0 inline-block;
 
 		&:has(&__text) {
 			@apply flex items-center justify-center flex-shrink-0 text-2xl font-bold text-neutral-900;
@@ -48,11 +48,11 @@
 		}
 
 		&--xs {
-			@apply w-10 h-10;
+			@apply w-9 h-9;
 		}
 
 		&--sm {
-			@apply w-12 h-12;
+			@apply w-10 h-10;
 		}
 
 		&--md {

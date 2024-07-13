@@ -1,15 +1,14 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-	import { SaferwallClient } from '$lib/clients/saferwall';
 	import LatestActivities from '$lib/components/LatestActivities.svelte';
 	import UploadBox from '$lib/components/UploadBox.svelte';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	let loading = false;
 	let reachEnd = false;
 
-	$: session = data.session;
+	$: client = data.client;
 	$: loggedIn = data.user !== undefined;
 	$: activities = data.pagination.items;
 	$: pagination = data.pagination;
@@ -20,7 +19,7 @@
 		try {
 			pagination.page += 1;
 
-			const newActivities = await new SaferwallClient(session).getActivities(pagination);
+			const newActivities = await client.getActivities(pagination);
 
 			if (newActivities.items === null) {
 				reachEnd = true;
@@ -40,10 +39,10 @@
 </script>
 
 <svelte:head>
-	<title>Saferwall 2.0</title>
+	<title>Saferwall Beta 1.0</title>
 </svelte:head>
 
 <div class="container mx-auto py-10 space-y-20">
-	<UploadBox {loggedIn} {session} />
+	<UploadBox {loggedIn} {client} />
 	<LatestActivities on:load={onLoadMore} {loading} {reachEnd} {loggedIn} {activities} />
 </div>

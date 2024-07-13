@@ -11,13 +11,13 @@
 </script>
 
 <Card class="w-full {$$props.class}">
-	<div class="space-y-2">
-		<h2>{title}</h2>
+	<div>
+		<h2 class="font-semibold text-lg">{title}</h2>
 		<p class="text-neutral-500">
 			<DateTime {date} />
 		</p>
 	</div>
-	<div class="border-t border-neutral-100" />
+	<div class="border-t border-neutral-500" />
 	<table class="card__list">
 		{#each Object.entries(result) as [key, item]}
 			<tr class="card__item">

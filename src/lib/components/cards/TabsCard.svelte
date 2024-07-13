@@ -31,7 +31,7 @@
 						<span>{item.title}</span>
 
 						{#if item.count != undefined}
-							<span class="text-sm text-gray-400">({item.count})</span>
+							<span class="text-xs text-gray-400">({item.count})</span>
 						{/if}
 					</a>
 				{:else}
@@ -42,7 +42,7 @@
 					>
 						<span>{item.title}</span>
 						{#if item.count != undefined}
-							<span class="text-sm text-gray-400">({item.count})</span>
+							<span class="text-xs text-gray-400">({item.count})</span>
 						{/if}
 					</span>
 				{/if}
@@ -82,13 +82,13 @@
 		@apply flex flex-col;
 
 		.tabs__menu {
-			@apply border-b overflow-x-auto items-center;
+			@apply border-b border-neutral-200 overflow-x-auto items-center;
 		}
 
 		.card__tabs__item:hover:after,
 		.active:after {
 			@apply content-[''] absolute w-full bottom-0 left-0;
-			@apply border-b-2 border-primary text-primary;
+			@apply border-b-2 border-neutral-200 text-primary;
 		}
 	}
 
@@ -102,7 +102,7 @@
 		.card__tabs__item:hover:after,
 		.active:after {
 			@apply content-[''] absolute h-full top-0 right-0;
-			@apply border-r-2 border-primary text-primary;
+			@apply border-r-2 border-neutral-200 text-primary;
 		}
 
 		.card__tabs__item {

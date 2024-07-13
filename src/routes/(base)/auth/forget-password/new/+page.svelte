@@ -33,7 +33,7 @@
 </script>
 
 <svelte:head>
-	<title>New password - Saferwall</title>
+	<title>New password - Saferwall Beta 1.0</title>
 </svelte:head>
 
 {#if finished}
@@ -43,7 +43,7 @@
 		title="Congratulation !"
 		description="Your password has been successfully reset."
 	>
-		<Button href="/auth/login" theme="primary" size="lg">Login</Button>
+		<Button href="/auth/login" theme="brand" size="lg">Login</Button>
 	</AuthActionDone>
 {:else}
 	<form
@@ -66,6 +66,6 @@
 				disabled={loading}
 			/>
 		</div>
-		<Button {loading} type="submit" theme="primary" size="lg">Change password</Button>
+		<Button {loading} type="submit" theme="brand" size="lg">Change password</Button>
 	</form>
 {/if}

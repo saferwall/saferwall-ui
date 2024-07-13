@@ -36,7 +36,7 @@
 			placeholder="Insert comment here ..."
 		/>
 		<div class="w-full flex pt-4">
-			<Button class="grow md:grow-0" size="sm" theme="gray">Comment</Button>
+			<Button class="grow md:grow-0" size="sm">Comment</Button>
 		</div>
 	</Card>
 </section>

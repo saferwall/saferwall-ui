@@ -32,7 +32,7 @@
 </script>
 
 <svelte:head>
-	<title>Forgot password - Saferwall</title>
+	<title>Forgot password - Saferwall Beta 1.0</title>
 </svelte:head>
 
 {#if finished}
@@ -63,6 +63,6 @@
 				disabled={loading}
 			/>
 		</div>
-		<Button {loading} type="submit" theme="primary" size="lg">Login</Button>
+		<Button {loading} type="submit" theme="brand" size="lg">Login</Button>
 	</form>
 {/if}

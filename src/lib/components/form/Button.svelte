@@ -7,7 +7,7 @@
 	export let href: string | undefined = undefined;
 	export let target: string | undefined = undefined;
 	export let size: 'base' | 'xss' | 'xs' | 'sm' | 'md' | 'lg' = 'base';
-	export let theme: 'base' | 'gray' | 'primary' | 'danger' = 'base';
+	export let theme: 'base' | 'gray' | 'brand' | 'danger' = 'base';
 	export let type: 'button' | 'submit' | 'reset' | undefined = 'button';
 </script>
 
@@ -56,7 +56,7 @@
 <style lang="scss">
 	.button {
 		@apply py-2.5 px-4;
-		@apply font-semibold;
+		@apply font-medium;
 		@apply border rounded;
 
 		&,
@@ -64,39 +64,36 @@
 			@apply inline-flex justify-center items-center space-x-4;
 		}
 
+		/**
+		 * Base Theme
+		 */
+		&,
 		&--base {
-			@apply text-primary bg-white;
+			@apply text-brand bg-transparent border-neutral-700;
 		}
-		&--gray {
-			@apply text-neutral-500 bg-white;
-		}
+
+		&.active,
+		&:hover,
 		&--base.active,
-		&--base:hover,
-		&--primary {
-			@apply bg-primary text-white border-primary;
-
-			&.light {
-				@apply bg-primary-100 text-primary bg-opacity-50 border-transparent;
-			}
+		&--base:hover {
+			@apply bg-brand-300 border-brand-300;
 		}
 
-		&--gray.active,
-		&--gray:hover {
-			@apply text-primary;
+		/**
+		 * Brand Theme
+		 */
+		&--brand {
+			@apply bg-brand-400 border-brand-400 text-white;
 		}
 
-		&--primary.active,
-		&--primary:hover {
-			@apply bg-opacity-90 border-opacity-90;
+		&--brand.active,
+		&--brand:hover {
+			@apply bg-brand-500 border-brand-500;
 		}
 
 		&--danger {
 			@apply bg-red-500 text-white border-red-500;
 			@apply focus:outline-red-500 hover:outline-red-500 hover:bg-opacity-95;
-
-			&.light {
-				@apply bg-red-200 text-red-500 bg-opacity-30 border-transparent;
-			}
 		}
 
 		&--size {
@@ -107,10 +104,10 @@
 				@apply text-xs py-2;
 			}
 			&--sm {
-				@apply py-2 text-sm;
+				@apply py-2 text-xs;
 			}
 			&--md {
-				@apply py-2.5 text-sm;
+				@apply py-2.5 text-xs;
 			}
 			&--lg {
 				@apply py-3 px-5;
