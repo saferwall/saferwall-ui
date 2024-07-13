@@ -1,17 +1,19 @@
-import { SaferwallClient } from '$lib/clients/saferwall';
+import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from '../$types';
-import type { Saferwall } from '$lib/types';
 
-export const load: PageLoad = async ({ parent }) => {
+export const load: PageLoad = async ({ parent, params }) => {
 	const {
-		session,
-		file: { default_behavior_id }
+		client,
+		file: { default_behavior_report: behaviorReport }
 	} = await parent();
 
-	const processArray = await new SaferwallClient(session).getFileProcessTree(default_behavior_id);
+	if (!behaviorReport || !behaviorReport.id) {
+		throw redirect(307, `/files/${params.hash}/summary`);
+	}
 
+	const processArray = await client.getFileProcessTree(behaviorReport.id);
 	return {
-		processArray,
-		behaviorId: default_behavior_id
+		behaviorId: behaviorReport.id,
+		processArray
 	};
 };

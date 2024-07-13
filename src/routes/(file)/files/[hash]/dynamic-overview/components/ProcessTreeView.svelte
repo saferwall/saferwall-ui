@@ -1,16 +1,16 @@
-<!-- svelte-ignore a11y-click-events-have-key-events -->
 <script lang="ts">
 	import type { Saferwall } from '$lib/types';
 
+	import type { SaferwallClient } from '$lib/clients/saferwall';
 	import Expandable from '$lib/components/Expandable.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import Label from '$lib/components/form/Label.svelte';
 	import ProcessTable from './ProcessTable.svelte';
 
 	export let behaviorId: string;
-	export let session: Saferwall.Session;
+	export let client: SaferwallClient;
 
-	export let parent = true;
+	export let isChild = true;
 	export let trees: Saferwall.Behaviors.NestedProcessTree[];
 
 	let processTableOpen: number[] = [];
@@ -21,7 +21,7 @@
 	};
 </script>
 
-<ul class={`flex flex-col divide-y ${parent ? 'border-t border-neutral-100 mt-6' : ''}`}>
+<ul class={`flex flex-col divide-y ${isChild ? 'border-t border-neutral-500 mt-6' : ''}`}>
 	{#each trees as tree, index (tree.path)}
 		<li class:pl-12={tree.parent_pid === '0x0'} class:ml-12={tree.parent_pid !== '0x0'}>
 			<Expandable expandable={tree.children.length != 0}>
@@ -37,20 +37,22 @@
 									{tree.proc_name}
 								</span>
 							</h2>
-							<Label>
+							<Label class="uppercase">
 								{tree.file_type}
 							</Label>
 
 							<Label
 								theme={tree.detection === 'clean'
-									? 'primary'
+									? 'brand'
 									: tree.detection === 'malicious'
-									? 'danger'
-									: 'base'}
+										? 'danger'
+										: 'base'}
 							>
 								{tree.detection}
 							</Label>
 						</div>
+						<!-- svelte-ignore a11y-click-events-have-key-events -->
+						<!-- svelte-ignore a11y-no-static-element-interactions -->
 						<div
 							on:click|stopPropagation={() => onFilePathClick(index)}
 							class="flex space-x-2 items-center text-neutral-300 transition-all"
@@ -60,15 +62,15 @@
 								name={processTableOpen.includes(index) ? 'minus-circle' : 'plus-circle'}
 								size="w-5 h-5"
 							/>
-							<p class="text-neutral-600 text-sm">{tree.path} »</p>
+							<p class="text-neutral-600 text-xs">{tree.path} »</p>
 						</div>
 						{#if processTableOpen.includes(index)}
-							<ProcessTable {behaviorId} {session} />
+							<ProcessTable {behaviorId} {client} pid={tree.pid} />
 						{/if}
 					</div>
 				</svelte:fragment>
 				<svelte:fragment slot="expanded">
-					<svelte:self trees={tree.children} />
+					<svelte:self trees={tree.children} {behaviorId} pid={tree.pid} />
 				</svelte:fragment>
 			</Expandable>
 		</li>

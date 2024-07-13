@@ -6,7 +6,7 @@
 	export let data: LayoutData;
 
 	$: hash = data.hash;
-	$: session = data.session;
+	$: client = data.client;
 	$: activeFileMenu = data.activeFileMenu;
 	$: activeMenu = data.activeMenu;
 	$: submissions = data.file.submissions;
@@ -16,14 +16,14 @@
 </script>
 
 <svelte:head>
-	<title>{fileName} - {activeMenu.name} - {hash} - Saferwall</title>
+	<title>{fileName} - {activeMenu.name} - {hash} - Saferwall Beta 1.0</title>
 	<meta name="description" content="Scan results for file {fileName} hash {hash}." />
 </svelte:head>
 
 <FileNavbar {hash} {activeMenu} {activeFileMenu} />
-<main class="flex-1 flex flex-col h-full bg-neutral">
-	<FileHeading {session} {activeMenu} {hash} {loggedIn} {liked} />
-	<div class="pt-4 pb-10">
+<main class="flex-1 flex flex-col h-full bg-background">
+	<FileHeading {client} {activeMenu} {hash} {loggedIn} {liked} />
+	<div class="flex flex-col flex-1 pt-4 pb-10">
 		<slot />
 	</div>
 </main>

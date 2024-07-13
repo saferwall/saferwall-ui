@@ -33,7 +33,7 @@
 </script>
 
 <svelte:head>
-	<title>Confirm account - Saferwall</title>
+	<title>Confirm account - Saferwall Beta 1.0</title>
 </svelte:head>
 
 {#if finished}
@@ -64,6 +64,6 @@
 				disabled={loading}
 			/>
 		</div>
-		<Button {loading} type="submit" theme="primary" size="lg">Send confirmation</Button>
+		<Button {loading} type="submit" theme="brand" size="lg">Send confirmation</Button>
 	</form>
 {/if}

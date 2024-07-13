@@ -3,6 +3,7 @@
 	import ButtonShowMore from './form/ButtonShowMore.svelte';
 	import Table from './table';
 
+	export let className = '';
 	export let deep = true;
 	export let lines = false;
 	export let header: boolean | string[] = true;
@@ -16,9 +17,11 @@
 	$: onClickExpend = () => {
 		expanded = !expanded;
 	};
+
+	export { className as class };
 </script>
 
-<Table.Root class={cn(deep && !parent && 'pt-0')}>
+<Table.Root class={cn(deep && !parent && 'pt-0', className)}>
 	<Table.Body class={cn(lines ? `dividey divide-y divide-neutral-100` : '')}>
 		{#if header}
 			<Table.Row>
@@ -26,21 +29,21 @@
 					{#each header as item, index}
 						<Table.Val
 							class={cn(
-								'font-semibold text-base align-top',
+								'font-medium text-base align-top',
 								index === 0 ? '' : 'w-full',
 								!header && 'font-medium whitespace-nowrap max-w-full pr-4'
 							)}>{item}</Table.Val
 						>
 					{/each}
 				{:else}
-					<Table.Val class="font-semibold text-base align-top">Member</Table.Val>
-					<Table.Val class="font-semibold text-base align-top">Value</Table.Val>
+					<Table.Val class="font-medium text-base align-top">Member</Table.Val>
+					<Table.Val class="font-medium text-base align-top">Value</Table.Val>
 				{/if}
 			</Table.Row>
 		{/if}
 		{#each items as [key, value], index}
 			{#if !maxRecords || expanded || index < maxRecords}
-				<Table.Row>
+				<Table.Row class="p-2">
 					<Table.Val
 						class={cn(!header && 'font-medium align-top whitespace-nowrap max-w-full pr-4')}
 					>

@@ -1,15 +1,15 @@
 <script lang="ts">
+	import { SaferwallClient } from '$lib/clients/saferwall';
 	import Drawer from '$lib/components/Drawer.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
-	import { createEventDispatcher, onMount, tick } from 'svelte';
-	import FilterItem from './FilterItem.svelte';
-	import { SaferwallClient } from '$lib/clients/saferwall';
 	import type { Saferwall } from '$lib/types';
+	import { createEventDispatcher, onMount } from 'svelte';
+	import FilterItem from './FilterItem.svelte';
 
 	export let behaviorId: string;
-	export let session: Saferwall.Session;
+	export let client: SaferwallClient;
 
 	const dispatch = createEventDispatcher();
 
@@ -23,11 +23,11 @@
 		? processItems.filter(
 				(v) =>
 					!query || JSON.stringify(Object.values(v)).toLowerCase().includes(query?.toLowerCase())
-		  )
+			)
 		: processItems;
 
 	onMount(() => {
-		new SaferwallClient(session).getFileProcessTree(behaviorId).then((items) => {
+		client.getFileProcessTree(behaviorId).then((items) => {
 			processItems = items;
 			dispatch('filters', items);
 		});
@@ -46,7 +46,7 @@
 					<span class="font-medium text-gray-900">Process Filter</span>
 				</div>
 				<div class="col-span-1 justify-self-end">
-					<Button theme="primary" class="w-24" size="md">Apply</Button>
+					<Button theme="brand" class="w-24" size="md">Apply</Button>
 				</div>
 			</div>
 			<Input name="search" bind:value={query} icon="search" placeholder="Quick search..." />

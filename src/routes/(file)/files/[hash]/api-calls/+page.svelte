@@ -25,14 +25,11 @@
 
 	let form: HTMLFormElement;
 
-	let w32apis: Record<string, string[]> = {};
+	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
 
 	$: search = data.search;
-	$: rows = data.pagination.items || [];
 	$: pids = (data.filters.pids || []).filter(Boolean);
-	$: hprops = (data.hprops || []).filter(Boolean);
-
-	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
+	$: hiddenProps = (data.hiddenProps || []).filter(Boolean);
 
 	$: pages = Array(5)
 		.fill(0)
@@ -52,22 +49,31 @@
 				number: pageNumber,
 				href:
 					typeof pageNumber === 'number'
-						? generateQueryParams({ ...formParams, page: pageNumber, hprops })
+						? generateQueryParams({
+								...formParams,
+								page: pageNumber,
+								hprops: hiddenProps
+							})
 						: undefined
 			};
 		})
 		.filter((p) => totalPages > 0);
 
-	$: perPages = [5, 10, 20, 40, 50, 100, 300].filter((page) => page <= totalCount);
+	$: perPages = [5, 10, 20, 40, 50, 100, 300].filter(
+		(page, index) => index < 1 || page <= totalCount
+	);
 
 	$: hash = data.hash;
-	$: session = data.session;
+	$: client = data.client;
 	$: currentPage = data.pagination.page;
 	$: perPage = data.pagination.per_page;
 	$: totalPages = data.pagination.page_count;
 	$: totalCount = data.pagination.total_count;
-	$: behaviorId = data.file.default_behavior_id;
+	$: behaviorId = data.behaviorId!;
 	$: filters = [] as Saferwall.Behaviors.ProcessTree;
+
+	$: w32apis = {} as Record<string, string[]>;
+	$: rows = updateRows(data.pagination.items, w32apis);
 
 	const generateQueryParams = (
 		options: Pagination & {
@@ -95,7 +101,7 @@
 		};
 	};
 
-	$: formParams = (currentPage || hprops || form) && getFormParams();
+	$: formParams = (currentPage || hiddenProps || form) && getFormParams();
 
 	const handleFormChanges = () => {
 		goto(
@@ -123,9 +129,12 @@
 		}
 	};
 
-	const updateRows = () => {
-		rows = rows.map((row) => {
-			if (!row.values) {
+	const updateRows = (
+		rows: Saferwall.Behaviors.ApiTrace.Item[],
+		w32apis: Record<string, string[]>
+	) => {
+		return rows?.map((row) => {
+			if (!row.values && w32apis?.[row.name]) {
 				row.values = w32apis[row.name]!.map(([type, name], argIndex) => ({
 					type,
 					name,
@@ -139,7 +148,7 @@
 		});
 	};
 
-	$: isActiveProperty = (id: string): boolean => !hprops || !hprops?.includes(id);
+	$: isActiveProperty = (id: string): boolean => !hiddenProps || !hiddenProps?.includes(id);
 
 	$: displayProperties = false;
 	const onPropsToggleAction = () => (displayProperties = !displayProperties);
@@ -152,17 +161,14 @@
 	onMount(() => {
 		fetch('/data/w32apis-ui.json', { cache: 'force-cache' })
 			.then((res) => res.json())
-			.then((res) => {
-				w32apis = res;
-				updateRows();
-			});
+			.then((res) => (w32apis = res));
 	});
 </script>
 
-<div class="container mx-auto">
+<div class="container mx-auto flex flex-col flex-1">
 	<div
 		data-sveltekit-preload-data
-		class="flex flex-col bg-white text-gray-700 rounded overflow-auto w-full h-full p-6 gap-4"
+		class="flex-1 bg-white text-gray-700 rounded overflow-auto p-6 gap-4"
 	>
 		<form
 			data-sveltekit-keepfocus
@@ -181,7 +187,7 @@
 
 					{#if pids.length > 0}
 						<span
-							class="flex items-center justify-center rounded-full w-6 h-6 bg-primary text-white text-sm"
+							class="flex items-center justify-center rounded-full w-6 h-6 bg-primary text-white text-xs"
 						>
 							{pids.length}
 						</span>
@@ -194,15 +200,15 @@
 				</Button>
 				{#if displayProperties}
 					<Overlay on:mouseup={onPropsToggleAction}>
-						<ul class="absolute top-[120%] left-0 w-52 shadow z-50 bg-white rounded-lg p-4">
+						<ul class="absolute top-[120%] left-0 w-52 z-50 bg-white rounded-lg p-4">
 							<li class="flex flex-row items-center justify-between pb-2">
-								<span class="text-sm text-neutral-500 font-semibold">Show table</span>
+								<span class="text-xs text-neutral-500 font-semibold">Show table</span>
 								<button
 									autofocus
 									on:keyup={(e) => (e.key === 'Escape' ? onPropsToggleAction() : null)}
 									on:click={onPropsToggleAction}
 									type="button"
-									class="text-xs bg-neutral-50 rounded-full border border-neutral p-1"
+									class="text-xs bg-neutral-50 rounded-full border border-neutral-500 p-1"
 								>
 									<Icon name="close" size="w-4 h-4" />
 								</button>
@@ -218,7 +224,7 @@
 										value={property.id}
 									/>
 									<span>{property.name}</span>
-									<label for={property.id} class="py-0.5 text-sm px-2 text-primary font-semibold">
+									<label for={property.id} class="py-0.5 text-xs px-2 text-primary font-semibold">
 										Hide
 									</label>
 								</li>
@@ -236,8 +242,8 @@
 				</Select>
 			</div>
 		</form>
-		<div>
-			<table class="w-full flex-shrink-0 rows">
+		<div class="flex flex-1 h-full">
+			<table class="w-full flex-shrink-0 rows h-full">
 				<thead class="rows__thead">
 					<th colspan="2">TIME</th>
 					{#if isActiveProperty('pid')}
@@ -285,7 +291,7 @@
 								<td>{trace.name}</td>
 							{/if}
 							{#if isActiveProperty('args')}
-								<td>
+								<td class="max-w-xs">
 									<p class="truncate text-xs">
 										{trace._args || 'NaN'}
 									</p>
@@ -301,7 +307,7 @@
 									<div transition:slide={{ axis: 'y', duration: 200 }}>
 										<ApiTraceRow
 											{trace}
-											{session}
+											{client}
 											{hash}
 											{behaviorId}
 											procName={getProcName(rows[index].pid)}
@@ -336,7 +342,7 @@
 
 <FiltersDrawer
 	{pids}
-	{session}
+	{client}
 	{behaviorId}
 	open={filterDrawer}
 	on:filters={(event) => {
@@ -358,7 +364,7 @@
 		thead.rows__thead > th {
 			&:after {
 				content: '<>';
-				@apply transform rotate-90 inline-block w-max h-max text-sm px-2 font-black;
+				@apply transform rotate-90 inline-block w-max h-max text-xs px-2 font-black;
 			}
 		}
 
@@ -367,7 +373,7 @@
 				@apply relative z-0 whitespace-nowrap;
 
 				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-200 border-t-0;
+					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-500 border-t-0;
 				}
 
 				&.expanded {
@@ -375,12 +381,9 @@
 				}
 
 				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-200;
+					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-500;
 				}
 
-				&.expanded ~ .box__body:after {
-					@apply shadow-xl shadow-neutral-100;
-				}
 				&.expanded:after {
 					@apply rounded-b-none border-b-0;
 				}

@@ -1,13 +1,11 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-	import type { APIFollower } from '$lib/types/users';
-	import type { APIPagination } from '$lib/types';
 	import FollowCard from '$lib/components/cards/profile/FollowCard.svelte';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	$: loggedIn = data.user !== undefined;
-	$: paginationItems = (data.pagination as APIPagination<APIFollower>).items;
+	$: paginationItems = data.pagination.items;
 	$: items = Array.isArray(paginationItems) ? paginationItems : [];
 </script>
 

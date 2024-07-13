@@ -26,7 +26,7 @@
 			<span>{item.label}</span>
 
 			{#if item.count != undefined}
-				<span class="text-sm text-gray-400">({item.count})</span>
+				<span class="text-xs text-gray-400">({item.count})</span>
 			{/if}
 		</a>
 	{:else}
@@ -39,7 +39,7 @@
 		>
 			<span>{item.label}</span>
 			{#if item.count != undefined}
-				<span class="text-sm text-gray-400">({item.count})</span>
+				<span class="text-xs text-gray-400">({item.count})</span>
 			{/if}
 		</span>
 	{/if}

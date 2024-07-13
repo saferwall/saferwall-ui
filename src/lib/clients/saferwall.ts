@@ -13,7 +13,15 @@ import type {
 } from '$lib/types';
 
 export class SaferwallClient {
-	private authorization?: string;
+	private session?: Saferwall.Session;
+
+	private get authorization() {
+		if (this.session && this.session.token) {
+			return `Bearer ${this.session.token}`;
+		}
+
+		return undefined;
+	}
 
 	private config: Saferwall.Config = {
 		url: `${env.PUBLIC_API_URL}`,
@@ -25,9 +33,15 @@ export class SaferwallClient {
 	}
 
 	constructor(session?: Saferwall.Session) {
-		if (session && session.token) {
-			this.authorization = `Bearer ${session.token}`;
-		}
+		this.setSession(session);
+	}
+
+	public setSession(session?: Saferwall.Session) {
+		this.session = session;
+	}
+
+	public removeSession() {
+		this.session = undefined;
 	}
 
 	public async request<T>(endpoint: string, args: RequestInit = {}, toJson = true): Promise<T> {
@@ -55,18 +69,22 @@ export class SaferwallClient {
 
 	public async getActivities(pagination?: Pagination) {
 		return this.request<Saferwall.Pagination<Saferwall.Activity>>(
-			`users/activities` + (pagination ? '?' + this.generatePaginateQuery(pagination) : '')
+			`users/activities` + this.generatePaginateQuery(pagination)
 		);
 	}
 
-	public async getUserSectionItems<T>(username: string, section: string, pagination?: Pagination) {
+	public async getUserSectionItems<T = Saferwall.Activities.Root>(
+		username: string,
+		section: string,
+		pagination?: Pagination
+	) {
 		return this.request<Saferwall.Pagination<T>>(
-			`users/${username}/${section}?` + this.generatePaginateQuery(pagination)
+			`users/${username}/${section}` + this.generatePaginateQuery(pagination)
 		);
 	}
 
 	public async getFileStatus(hash: string): Promise<number> {
-		return this.request<{ status: number }>(`files/${hash}?fields=status`).then(
+		return this.request<{ status: number }>(`files/${hash}?fields=status&${Date.now()}`).then(
 			(res) => res.status
 		);
 	}
@@ -89,13 +107,48 @@ export class SaferwallClient {
 	}
 
 	public async getFileMeta(hash: string) {
+		const fields = [
+			'first_seen',
+			'submissions',
+			'sha256',
+			'last_scanned',
+			'multiav',
+			'file_format',
+			'pe.meta'
+		];
+
 		return this.request<Saferwall.File>(
-			`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta`
+			`files/${hash}?${new URLSearchParams({
+				fields: fields.join(',')
+			})}`
 		);
 	}
 
 	public async getFileSummary(hash: string) {
-		return this.request<Saferwall.File & Saferwall.Summary>(`files/${hash}/summary`);
+		return this.request<Saferwall.File & Saferwall.Summary>(`files/${hash}/summary`).then(
+			(file) => {
+				return {
+					...file,
+					default_behavior_report: file.default_behavior_report
+						? {
+								...file.default_behavior_report,
+								screenshots: Array(file.default_behavior_report.screenshots_count || 0)
+									.fill(null)
+									.map((_, index) => {
+										return {
+											preview: `${this.config.artifactsUrl}${hash}/${
+												file.default_behavior_report!.id
+											}/screenshots/${index}.min.jpeg`,
+											original: `${this.config.artifactsUrl}${hash}/${
+												file.default_behavior_report!.id
+											}/screenshots/${index}.jpeg`
+										};
+									})
+							}
+						: undefined
+				};
+			}
+		);
 	}
 
 	public async getFileApiTrace(
@@ -103,7 +156,7 @@ export class SaferwallClient {
 		pagination?: Pagination & Partial<{ pid: string[] }>
 	) {
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.ApiTrace.Item>>(
-			`behaviors/${behaviorId}/api-trace?` + this.generatePaginateQuery(pagination)
+			`behaviors/${behaviorId}/api-trace` + this.generatePaginateQuery(pagination)
 		);
 	}
 
@@ -113,13 +166,39 @@ export class SaferwallClient {
 		).then((res) => res.proc_tree ?? []);
 	}
 
-	public async getFileSystemEvents(behaviorId: string) {
+	public async getFileSystemEvents(behaviorId: string, pid?: string) {
+		const params = new URLSearchParams();
+		if (pid) {
+			params.append('pid', pid);
+		}
+
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.SystemEvent>>(
-			`behaviors/${behaviorId}/sys-events`
+			`behaviors/${behaviorId}/sys-events${(params && '?' + params.toString()) || ''}`
 		).then((res) => res.items ?? []);
 	}
 
-	public async getFileCapabilities(behaviorId: string) {
+	public async getBehaviorArtifacts(
+		behaviorId: string,
+		categories?: string[],
+		pagination?: Pagination
+	) {
+		const params = this.generatePaginationParams(pagination);
+		if (categories && categories.length > 0) {
+			categories.forEach((kind) => params.append('kind', kind));
+		}
+
+		return this.request<Saferwall.Pagination<Saferwall.Behaviors.Artifacts>>(
+			`behaviors/${behaviorId}/artifacts?` + params.toString()
+		);
+	}
+
+	// TODO: (API) Implement pid filtering
+	public async getFileCapabilities(behaviorId: string, pid?: string) {
+		const params = new URLSearchParams();
+		if (pid) {
+			params.append('pid', pid);
+		}
+
 		return this.request<{ capabilities: Saferwall.Behaviors.Capability[] }>(
 			`behaviors/${behaviorId}?fields=capabilities`
 		).then((res) => res.capabilities ?? []);
@@ -238,7 +317,7 @@ export class SaferwallClient {
 		return this.request('auth/logout', {
 			method: 'DELETE'
 		}).then(() => {
-			this.authorization = undefined;
+			this.removeSession();
 		});
 	}
 
@@ -253,18 +332,27 @@ export class SaferwallClient {
 		return init;
 	}
 
-	private generatePaginateQuery(pagination?: Pagination): string {
+	private generatePaginationParams(pagination?: Pagination): URLSearchParams {
 		const params = {
 			per_page: String(DEFAULT_PAGINATION_ITEMS),
-			...pagination
+			...(pagination ?? {})
 		} as Pagination<string>;
 
 		const query = new URLSearchParams({ ...params });
 
-		if (this.isLoggedIn) {
+		if (this.isLoggedIn && query.size > 0) {
 			query.append('logged', '');
 		}
 
-		return query.toString();
+		return query;
+	}
+
+	private generatePaginateQuery(pagination?: Pagination): string {
+		const query = this.generatePaginationParams(pagination);
+
+		if (query.size === 0) {
+			return '';
+		}
+		return '?' + query.toString();
 	}
 }

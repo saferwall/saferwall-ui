@@ -1,12 +1,10 @@
-import { SaferwallClient } from '$lib/clients/saferwall';
 import { fileMenu } from '$lib/data/menu';
 import type { Menu, Saferwall } from '$lib/types';
 import type { LayoutLoad } from './$types';
 
-export const load = (async ({ parent, params, data, url }) => {
-	const parentData = await parent();
+export const load = (async ({ parent, params: { hash }, url }) => {
+	const { client } = await parent();
 
-	const { hash } = params;
 	const paths = url.pathname.split(`/files/`)[1].split('/');
 
 	const activePath = paths[1];
@@ -16,17 +14,25 @@ export const load = (async ({ parent, params, data, url }) => {
 		activeFileMenu: Menu.File[];
 
 	try {
-		file = await new SaferwallClient(parentData.session).getFileSummary(hash);
-
-		activeFileMenu = [...fileMenu].filter(
-			(menu) =>
-				`${menu.name}`.toLowerCase() !== 'pe' || `${file.file_format}`.toLowerCase() === 'pe'
-		);
+		file = await client.getFileSummary(hash);
+		activeFileMenu = [...fileMenu]
+			.filter(
+				(menu) =>
+					`${menu.name}`.toLowerCase() !== 'pe' || `${file.file_format}`.toLowerCase() === 'pe'
+			)
+			.filter(
+				(menu) =>
+					!(
+						['files-memdumps', 'dynamic-overview', 'api-calls'].includes(menu.path) &&
+						!file.default_behavior_report
+					)
+			);
 	} catch (error) {
 		activeFileMenu = [...fileMenu].filter((menu) => `${menu.name}`.toLowerCase() !== 'pe');
 	}
 
 	return {
+		client,
 		hash,
 		file,
 		paths,

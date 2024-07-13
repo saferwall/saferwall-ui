@@ -27,6 +27,13 @@ const activityTypes: { [key: string]: string } = {
 	submit: 'submitted a file'
 };
 
+export const artifactsKinds = {
+	memdmp: 'Memory Dumps',
+	filecreate: 'Dropped Files',
+	codeinject: 'Injected Code',
+	memfree: 'Freed Buffers'
+};
+
 /**
  * Parse mixed tags to basic tag name & category
  * @param fileTags mix of tags with value type string|array
@@ -84,6 +91,17 @@ export function getLabelClass(classification?: string): string {
 }
 
 /**
+ * Parse artifacts kind
+ */
+export function getArtifcatKind(kind?: keyof typeof artifactsKinds): string {
+	if (!kind) {
+		return 'Unknown';
+	}
+
+	return artifactsKinds[kind];
+}
+
+/**
  * Returns the icon for a given classification label.
  * @param classification label
  * @returns icon
@@ -110,10 +128,6 @@ export const convertBytes = (bytes: number): string => {
 
 	return (bytes / 1073741824).toFixed(2) + 'GB';
 };
-
-export function getFileTypeIcon(type: string | undefined): string {
-	return `tmp`;
-}
 
 export function cleanUndefinedKeyValue(data: object = {}) {
 	return Object.entries(data)

@@ -1,10 +1,10 @@
 <script lang="ts">
-	export let checked: boolean = false;
+	export let checked = false;
 	export let value: string | undefined = undefined;
 	export let size: 'sm' | 'lg' | 'base' = 'base';
 </script>
 
-<label class={`${size} ${$$props.class}`}>
+<label class={`${size} ${$$props.class || ''}`}>
 	<input type="checkbox" on:click on:change bind:checked {value} {...$$restProps} />
 	{#if $$slots}
 		<span>
@@ -22,8 +22,10 @@
 			@apply w-6 h-6;
 			@apply shrink-0;
 			@apply outline-none appearance-none;
-			@apply relative border-2 border-neutral-300/40 rounded;
-			transition: background-color 0.3s ease, border-color 0.3s ease;
+			@apply relative border-2 border-neutral-500 rounded;
+			transition:
+				background-color 0.3s ease,
+				border-color 0.3s ease;
 
 			&:checked {
 				@apply bg-primary border-primary;

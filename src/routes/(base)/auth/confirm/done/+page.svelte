@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Account confirmed - Saferwall</title>
+	<title>Account confirmed - Saferwall Beta 1.0</title>
 </svelte:head>
 
 <AuthActionDone
@@ -13,5 +13,5 @@
 	title="Congratulation !"
 	description="Your registration has been confirmed."
 >
-	<Button href="/auth/login" theme="primary" size="lg">Login</Button>
+	<Button href="/auth/login" theme="brand" size="lg">Login</Button>
 </AuthActionDone>

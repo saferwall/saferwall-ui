@@ -9,8 +9,9 @@
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 
+	export let pid: string | undefined;
 	export let behaviorId: string;
-	export let session: Saferwall.Session;
+	export let client: SaferwallClient;
 
 	enum ProcessSections {
 		CAPABILITIES = 'capabilities',
@@ -81,9 +82,8 @@
 	};
 
 	const fetchData = async () => {
-		const client = new SaferwallClient(session);
-		client.getFileCapabilities(behaviorId).then((res) => (capabilitiesItems = [...res]));
-		client.getFileSystemEvents(behaviorId).then((res) => (systemEventsItems = [...res]));
+		client.getFileCapabilities(behaviorId, pid).then((res) => (capabilitiesItems = [...res]));
+		client.getFileSystemEvents(behaviorId, pid).then((res) => (systemEventsItems = [...res]));
 	};
 
 	const getSeverityTheme = (severity: string) => {
@@ -112,20 +112,25 @@
 		}
 	};
 
-	onMount(() => fetchData());
+	onMount(() => {
+		if (behaviorId) {
+			fetchData();
+		}
+	});
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div transition:slide={{ axis: 'y' }} class="w-full lg:pr-12" on:click|stopPropagation>
-	<Card padding={false} class="flex flex-col gap-2 bg-red-100 px-8 py-6 border border-neutral-200">
-		<div class="inline-flex">
+	<Card padding={false} class="flex flex-col gap-2 bg-red-100 px-8 py-6 border border-neutral-500">
+		<div class="inline-flex uppercase font-medium">
 			<Multitoggle items={sections} on:change={onToggleChange} />
 		</div>
 		<form class="flex flex-row gap-6 lg:gap-12">
 			<Input name="search" icon="search" bind:value={query} placeholder="Search anything..." />
 			<div class="flex flex-row flex-shrink-0 items-center gap-6">
 				<strong class="text-neutral-600">FILTER BY</strong>
-				<div class="flex flex-row items-center text-sm font-medium text-gray-800 gap-2">
+				<div class="flex flex-row items-center text-xs font-medium text-gray-800 gap-2">
 					{#each selectedSection?.filters as filter}
 						<Checkbox
 							name="filters"

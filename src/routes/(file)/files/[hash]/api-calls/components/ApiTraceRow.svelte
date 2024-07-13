@@ -3,7 +3,7 @@
 	import type { Saferwall } from '$lib/types';
 	import ApiTraceValue from './ApiTraceValue.svelte';
 
-	export let session: Saferwall.Session;
+	export let client: SaferwallClient;
 	export let behaviorId: string;
 	export let hash: string;
 	export let procName: string;
@@ -17,7 +17,7 @@
 	const onBuffLoadEvent = async (entry: Saferwall.Behaviors.ApiTrace.Entry) => {
 		loading = true;
 		try {
-			entry.value.val = await new SaferwallClient(session)
+			entry.value.val = await client
 				.getFileBuffData({
 					hash,
 					behaviorId,
