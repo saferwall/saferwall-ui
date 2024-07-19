@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Terms of Service - Saferwall Beta 1.0</title>
+	<title>Terms of Service - Saferwall</title>
 </svelte:head>
 
 <div class="container mx-auto py-16">

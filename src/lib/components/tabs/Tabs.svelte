@@ -3,13 +3,14 @@
 	import Card from '../Card.svelte';
 	import TabHeader from './TabHeader.svelte';
 
+	export let shadow = false;
 	export let center = false;
 	export let padding = false;
 	export let tabs: TabItem[] = [];
 	export let direction: 'vertical' | 'horizontal' = 'vertical';
 </script>
 
-<Card class={`card__tabs ${direction}`} {padding}>
+<Card {shadow} class={`card__tabs ${direction}`} {padding}>
 	<div class="tabs__menu no-scroll-style" class:center data-sveltekit-preload-data="hover">
 		<slot name="tabs">
 			<TabHeader

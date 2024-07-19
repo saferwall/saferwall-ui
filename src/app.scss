@@ -7,7 +7,6 @@ html.bp-lock {
 	overflow-y: unset;
 }
 
-@import './lib/styles/vars.scss';
 @import './lib/styles/card.scss';
 @import './lib/styles/tags.scss';
 @import './lib/styles/scrollbar.scss';
@@ -16,18 +15,18 @@ html.bp-lock {
 html,
 body {
 	@apply font-primary;
-	@apply min-h-screen h-full bg-background;
+	@apply min-h-screen h-full;
 }
 
 select,
 input,
 textarea,
 button {
-	@apply focus:outline-none border border-transparent focus:border-neutral-500;
+	@apply focus:outline focus:outline-primary;
 }
 
 #app {
-	@apply flex flex-col min-h-full text-xs;
+	@apply flex flex-col min-h-full;
 }
 
 .overlay-no-scroll {
@@ -99,11 +98,11 @@ a.link:not([href='']) {
 				@apply relative z-0;
 
 				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-500 border-t-0;
+					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-200 border-t-0;
 				}
 
 				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-500;
+					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-200;
 				}
 
 				&.expanded:after {
@@ -118,10 +117,10 @@ a.link:not([href='']) {
 	}
 
 	table.items {
-		@apply w-full dark:text-white;
+		@apply w-full;
 
 		tbody tr {
-			@apply even:bg-gray-50 dark:bg-surface-menu;
+			@apply even:bg-gray-50;
 
 			td {
 				@apply py-3 w-1/4;

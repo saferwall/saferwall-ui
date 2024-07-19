@@ -13,15 +13,7 @@ import type {
 } from '$lib/types';
 
 export class SaferwallClient {
-	private session?: Saferwall.Session;
-
-	private get authorization() {
-		if (this.session && this.session.token) {
-			return `Bearer ${this.session.token}`;
-		}
-
-		return undefined;
-	}
+	private authorization?: string;
 
 	private config: Saferwall.Config = {
 		url: `${env.PUBLIC_API_URL}`,
@@ -33,15 +25,9 @@ export class SaferwallClient {
 	}
 
 	constructor(session?: Saferwall.Session) {
-		this.setSession(session);
-	}
-
-	public setSession(session?: Saferwall.Session) {
-		this.session = session;
-	}
-
-	public removeSession() {
-		this.session = undefined;
+		if (session && session.token) {
+			this.authorization = `Bearer ${session.token}`;
+		}
 	}
 
 	public async request<T>(endpoint: string, args: RequestInit = {}, toJson = true): Promise<T> {
@@ -84,7 +70,7 @@ export class SaferwallClient {
 	}
 
 	public async getFileStatus(hash: string): Promise<number> {
-		return this.request<{ status: number }>(`files/${hash}?fields=status&${Date.now()}`).then(
+		return this.request<{ status: number }>(`files/${hash}?fields=status`).then(
 			(res) => res.status
 		);
 	}
@@ -107,20 +93,8 @@ export class SaferwallClient {
 	}
 
 	public async getFileMeta(hash: string) {
-		const fields = [
-			'first_seen',
-			'submissions',
-			'sha256',
-			'last_scanned',
-			'multiav',
-			'file_format',
-			'pe.meta'
-		];
-
 		return this.request<Saferwall.File>(
-			`files/${hash}?${new URLSearchParams({
-				fields: fields.join(',')
-			})}`
+			`files/${hash}?fields=first_seen,submissions,sha256,last_scanned,multiav,file_format,pe.meta`
 		);
 	}
 
@@ -144,7 +118,7 @@ export class SaferwallClient {
 											}/screenshots/${index}.jpeg`
 										};
 									})
-							}
+						  }
 						: undefined
 				};
 			}
@@ -317,7 +291,7 @@ export class SaferwallClient {
 		return this.request('auth/logout', {
 			method: 'DELETE'
 		}).then(() => {
-			this.removeSession();
+			this.authorization = undefined;
 		});
 	}
 

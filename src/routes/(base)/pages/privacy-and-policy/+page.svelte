@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Privacy and policy - Saferwall Beta 1.0</title>
+	<title>Privacy and policy - Saferwall</title>
 </svelte:head>
 
 <div class="container mx-auto py-16">

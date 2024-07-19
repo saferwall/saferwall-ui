@@ -28,7 +28,7 @@
 
 <style lang="scss">
 	.pe {
-		@apply text-xs;
+		@apply text-sm;
 
 		:global(table thead) {
 			@apply text-left;

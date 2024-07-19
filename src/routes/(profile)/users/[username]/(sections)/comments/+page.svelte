@@ -10,9 +10,11 @@
 
 	export let data: PageData;
 
-	$: file = data.item.file;
+	const options = {
+		sanitize: true
+	};
 	$: username = data.user.username;
-	$: items = Array.isArray(data.pagination.items) ? data.pagination.items : [];
+	$: items = Array.isArray(data.pagination.items) ? (data.pagination.items as any) : [];
 </script>
 
 <ul class="divide-y">
@@ -23,7 +25,7 @@
 					<div class="flex flex-col md:flex-row space-y-4 md:space-y-0 justify-between">
 						<div class="flex items-center space-x-4">
 							<Avatar {username} size="sm" />
-							<DateTime class="text-gray-500 text-xs" date={item.date} />
+							<DateTime class="text-gray-500 text-sm" date={item.date} />
 						</div>
 						<div class="w-full md:w-max">
 							<Button class="w-full md:w-max md:border-none" size="sm">
@@ -35,11 +37,11 @@
 						</div>
 					</div>
 					<div class="bg-gray-50 border border-opacity-20 border-gray-300 w-full p-2 rounded">
-						<SvelteMarkdown options={{ sanitize: true }} source={item.comment} />
+						<SvelteMarkdown {options} source={item.comment} />
 					</div>
 				</div>
-				<InputHash hash={file.hash} />
-				<ActivityMeta {file} />
+				<InputHash hash={item.file.hash} />
+				<ActivityMeta file={item.file} />
 			</div>
 		</li>
 	{/each}

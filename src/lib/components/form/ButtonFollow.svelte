@@ -32,7 +32,7 @@
 		type="submit"
 		class="w-full md:w-max z-30"
 		href={loggedIn ? undefined : '/auth/login'}
-		theme={followed ? 'brand' : 'base'}
+		theme={followed ? 'primary light' : 'base'}
 		{loading}
 		{...$$restProps}
 	>

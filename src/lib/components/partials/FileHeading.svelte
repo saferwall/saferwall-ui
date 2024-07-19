@@ -2,14 +2,14 @@
 	import { env } from '$env/dynamic/public';
 	import { SaferwallClient } from '$lib/clients/saferwall';
 	import Button from '$lib/components/form/Button.svelte';
-	import type { Menu } from '$lib/types';
+	import type { Menu, Saferwall } from '$lib/types';
 	import ButtonLike from '../form/ButtonLike.svelte';
 
 	export let hash: string;
-	export let client: SaferwallClient;
 	export let liked = false;
 	export let loggedIn = false;
 	export let activeMenu: Menu.File;
+	export let session: Saferwall.Session;
 
 	$: downloadLink = `${env.PUBLIC_API_URL}files/${hash}/download/`;
 	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/files/${hash}/${activeMenu.path}`;
@@ -18,20 +18,15 @@
 	const onRescanClick = async () => {
 		rescaning = true;
 		try {
-			await client.rescanFile(hash);
+			await new SaferwallClient(session).rescanFile(hash);
 		} catch (error) {
 			console.error('Rescab failed', error);
-			// @ts-ignore
-			if (error.status === 401) {
-				location.href = "/auth/login";
-				return;
-			}
 		}
 		window.location.reload();
 	};
 </script>
 
-<section class="file__header no-scroll-style">
+<section class="file-header no-scroll-style">
 	<div class="flex items-end justify-between space-x-12">
 		<h1 class="text-3xl font-semibold flex-shrink-0">
 			<span class="sr-only">File {hash}</span>
@@ -40,8 +35,8 @@
 
 		<div class="space-x-2 flex flex-shrink-0">
 			<Button size="lg" icon="download" href={downloadLink}>
-				<span class="hidden md:block pl-2">Download file</span>
-			</Button>
+				<span class="hidden md:block pl-2">Download file</span></Button
+			>
 			<Button
 				size="lg"
 				icon="rescan"
@@ -60,12 +55,11 @@
 </section>
 
 <style lang="scss">
-	:global(.file__header .button) {
-		@apply border-none space-x-0;
+	:global(.file-header .button) {
+		@apply shadow-base border-none space-x-0;
 	}
 
-	.file__header {
+	.file-header {
 		@apply container mx-auto pt-6 pb-2 overflow-x-auto mb-2;
-		@apply text-neutral-100;
 	}
 </style>

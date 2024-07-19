@@ -9,7 +9,7 @@ export const load = (async ({ parent }) => {
 }) satisfies PageServerLoad;
 
 export const actions = {
-	default: async ({ request, locals: { client } }) => {
+	default: async ({ request }) => {
 		const data = await request.formData();
 
 		const email = data.get('email') as string;
@@ -25,7 +25,7 @@ export const actions = {
 		}
 
 		try {
-			await client.sendConfirmation(email);
+			await new SaferwallClient().sendConfirmation(email);
 			return {
 				success: true
 			};

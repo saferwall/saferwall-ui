@@ -1,37 +1,23 @@
 import { dev } from '$app/environment';
 import { SaferwallClient } from '$lib/clients/saferwall';
-import { SESSION_KEY, THEME_KEY } from '$lib/config';
-import { parseTheme } from '$lib/stores/theme';
+import { SESSION_KEY } from '$lib/config';
 import type { Saferwall } from '$lib/types';
 import type { Handle, HandleServerError } from '@sveltejs/kit';
-
-const resolveEvent: Handle = ({ resolve, event }) => {
-	const theme = parseTheme(event.cookies.get(THEME_KEY));
-
-	return resolve(event, {
-		transformPageChunk: ({ html }) => {
-			return html.replace('data-theme', `class="${theme}"`);
-		}
-	});
-};
 
 export const handle: Handle = (async ({ event, resolve }) => {
 	if (dev) {
 		const { fallBackPlatformToMiniFlareInDev } = await import('$lib/clients/miniflare');
-		event.platform = await fallBackPlatformToMiniFlareInDev(event.platform!);
+		event.platform = await fallBackPlatformToMiniFlareInDev(event.platform);
 	}
 
-	const client = new SaferwallClient();
-	event.locals.client = client;
 	try {
 		const sessionData = event.cookies.get(SESSION_KEY);
 		if (!sessionData) {
-			return await resolveEvent({ event, resolve });
+			return await resolve(event);
 		}
 
 		const session = JSON.parse(sessionData);
-		client.setSession(session);
-		const user = await client.getUser(session.username);
+		const user: Saferwall.User = await new SaferwallClient().getUser(session.username);
 
 		event.locals.session = session;
 		event.locals.user = [
@@ -49,13 +35,13 @@ export const handle: Handle = (async ({ event, resolve }) => {
 				...finalUserData,
 				[key]: user[key as keyof typeof user]
 			}),
-			{} as Saferwall.User
+			{} as Record<string, any>
 		);
 	} catch (error) {
 		console.error('hooks error: ', error);
 	}
 
-	return resolveEvent({ event, resolve });
+	return resolve(event);
 }) satisfies Handle;
 
 export const handleError = (async ({ error, event }: any) => {

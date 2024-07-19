@@ -30,7 +30,7 @@
 <section class="container mx-auto space-y-6">
 	<FileSummaryCard {...summaryCard} />
 	<BasePropsCard {properties} />
-	{#if exif && Object.keys(exif).length}
+	{#if exif}
 		<ExifFileMetadataCard {exif} />
 	{/if}
 	<SubmissionsCard {submissions} />

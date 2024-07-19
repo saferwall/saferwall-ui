@@ -2,10 +2,10 @@ import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ parent }) => {
-	const { user } = await parent();
+	const data = (await parent()) as any;
 
-	if (user) {
-		throw redirect(301, `/users/${user.username}/likes`);
+	if (data.user) {
+		throw redirect(301, `/users/${data.user.username}/likes`);
 	}
 
 	throw redirect(301, '/auth/login');

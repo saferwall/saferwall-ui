@@ -40,36 +40,31 @@
 	class="relative flex justify-center cursor-pointer z-40"
 	use:clickOutside={{ enabled: open, cb: () => (open = false) }}
 >
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<span
-		class="flex items-center gap-3"
-		on:mouseup={(event) => {
-			open = !open;
-		}}
-	>
-		<Avatar {username} on:click={(event) => event.preventDefault()} size="xs" />
-	</span>
+	<div class="flex items-center space-x-3" on:mouseup={() => (open = !open)}>
+		<Avatar {username} size="xs" />
+		<span class="text-lg">{username}</span>
+	</div>
 
 	{#if open}
 		<ul
-			class="absolute top-14 -right-4 bg-background py-4 rounded drop-shadow-xl"
+			class="absolute top-14 -right-4 bg-white py-4 rounded shadow drop-shadow-xl"
 			data-sveltekit-preload-data="tap"
 		>
 			<li class="user__menu__item">
 				<a class="menu__link" href="/account/profile">
-					<Icon size="w-5 h-5" name="user" />
+					<Icon name="user" />
 					<span class="menu__label">Profile</span>
 				</a>
 			</li>
 			<li class="user__menu__item">
 				<a class="menu__link" href="/account/settings">
-					<Icon size="w-5 h-5" name="cog" />
+					<Icon name="cog" />
 					<span class="menu__label">Settings</span>
 				</a>
 			</li>
 			<li class="user__menu__item">
 				<a data-sveltekit-reload class="menu__link" href="/auth/logout">
-					<Icon size="w-5 h-5" name="logout" />
+					<Icon name="logout" />
 					<span class="menu__label">Logout</span>
 				</a>
 			</li>
@@ -80,11 +75,11 @@
 <style lang="scss">
 	.user__menu__item {
 		@apply w-44;
-		@apply font-normal text-xs text-gray-100;
+		@apply font-normal text-lg text-neutral-800;
 
 		.menu__link {
 			@apply flex items-center;
-			@apply py-2 px-4;
+			@apply py-3 px-6;
 		}
 
 		.menu__label {
