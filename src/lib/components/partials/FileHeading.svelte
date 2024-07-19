@@ -21,6 +21,11 @@
 			await client.rescanFile(hash);
 		} catch (error) {
 			console.error('Rescab failed', error);
+			// @ts-ignore
+			if (error.status === 401) {
+				location.href = "/auth/login";
+				return;
+			}
 		}
 		window.location.reload();
 	};
