@@ -22,8 +22,10 @@
 			@apply w-6 h-6;
 			@apply shrink-0;
 			@apply outline-none appearance-none;
-			@apply relative border-2 border-neutral-300/40 rounded;
-			transition: background-color 0.3s ease, border-color 0.3s ease;
+			@apply relative border-2 border-neutral-500 rounded;
+			transition:
+				background-color 0.3s ease,
+				border-color 0.3s ease;
 
 			&:checked {
 				@apply bg-primary border-primary;

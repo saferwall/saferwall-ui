@@ -42,7 +42,7 @@
 		</li>
 		<li class="flex flex-col gap-2">
 			<b>Raw:</b>
-			<p class="border border-neutral-100 p-2 rounded mr-4">
+			<p class="border border-neutral-500 p-2 rounded mr-4">
 				<code class="break-all">{data.richHeader?.raw}</code>
 			</p>
 		</li>

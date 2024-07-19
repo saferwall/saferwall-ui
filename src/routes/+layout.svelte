@@ -19,7 +19,7 @@
 </script>
 
 <svelte:head>
-	<title>Saferwall 2.0</title>
+	<title>Saferwall Beta 1.0</title>
 </svelte:head>
 
 <slot />

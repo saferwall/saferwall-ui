@@ -13,7 +13,7 @@
 	});
 </script>
 
-<Card class="bg-neutral-50 shadow-lg border border-gray-200" padding={false}>
+<Card class="bg-neutral-50 border border-gray-200" padding={false}>
 	<table>
 		<thead>
 			<th>Member</th>
@@ -33,7 +33,7 @@
 <style lang="scss">
 	table {
 		@apply bg-neutral-50 overflow-hidden;
-		@apply border border-collapse rounded text-sm;
+		@apply border border-collapse rounded text-xs;
 
 		tbody td,
 		thead th {

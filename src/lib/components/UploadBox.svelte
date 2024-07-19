@@ -1,14 +1,13 @@
 <script lang="ts">
-	import type { QueueFile, Saferwall } from '$lib/types';
+	import type { QueueFile } from '$lib/types';
 
 	import { SaferwallClient } from '$lib/clients/saferwall';
 	import { UploadStatus } from '$lib/config';
 	import UploadFileStatus from './UploadFileStatus.svelte';
 	import ButtonBrowse from './form/ButtonBrowse.svelte';
 
-	export let session: Saferwall.Session;
+	export let client: SaferwallClient;
 	export let loggedIn = false;
-	let queueFiles: QueueFile[] = [];
 
 	let inputFiles: HTMLElement;
 
@@ -19,10 +18,10 @@
 		}
 		(inputFiles as HTMLFormElement).value = '';
 	};
-	const triggerQueueUpdate = () =>
-		(queueFiles = queueFiles.sort((qA, qB) => qA.status - qB.status));
 
-	const client = new SaferwallClient(session);
+	$: queueFiles = [] as QueueFile[];
+	$: triggerQueueUpdate = () => (queueFiles = queueFiles.sort((qA, qB) => qA.status - qB.status));
+
 	const processToQueue = (file: File) => {
 		const queue: QueueFile = {
 			file: file,
@@ -38,15 +37,16 @@
 				.uploadFile(file)
 				.then(({ status, sha256 }) => {
 					queue.hash = sha256;
-					queue.status = (status || UploadStatus.UPLOADING) + UploadStatus._START;
+					queue.status = status || UploadStatus.UPLOADING;
 					const reCheckStatus = () => setTimeout(() => queue.updateStatus(), 2000);
 					queue.updateStatus = () => {
 						client
 							.getFileStatus(sha256)
 							.then((status) => {
-								queue.status = status + UploadStatus._START;
+								queue.status = status;
+								queueFiles = [...queueFiles];
 
-								if (status !== UploadStatus.FINISHED - UploadStatus._START) {
+								if (status < UploadStatus.FINISHED) {
 									reCheckStatus();
 								}
 							})
@@ -67,14 +67,14 @@
 		};
 		queue.uploadFile();
 
-		queueFiles.push(queue);
+		queueFiles = [...queueFiles, queue];
 		triggerQueueUpdate();
 	};
 </script>
 
-<section class="bg-white rounded-xl shadow p-8 md:p-12 flex flex-col justify-between space-y-6">
-	<h1 class="text-xl font-medium">Welcome to Saferwall</h1>
-
+<section
+	class="bg-white dark:bg-surface-menu rounded-card p-8 md:p-12 flex flex-col justify-between space-y-6"
+>
 	<input class="hidden" type="file" multiple bind:this={inputFiles} on:change={onFilesChanges} />
 
 	<div class="flex min-h-[300px] flex-col items-center justify-center space-y-6">
@@ -96,7 +96,7 @@
 	</div>
 
 	<div class="m-auto text-center max-w-screen-md">
-		<p class="text-sm md:text-base md:px-8">
+		<p class="text-xs md:text-base md:px-8">
 			By using Saferwall you consent to our
 			<a class="link" target="_blank" rel="noreferrer" href="/pages/terms-of-service">
 				Terms of Service

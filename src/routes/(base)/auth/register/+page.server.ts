@@ -1,6 +1,5 @@
 import { fail } from '@sveltejs/kit';
-import { SaferwallClient } from '$lib/clients/saferwall';
-import type { PageServerLoad, Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ parent }) => {
 	await parent();
@@ -8,7 +7,7 @@ export const load = (async ({ parent }) => {
 }) satisfies PageServerLoad;
 
 export const actions = {
-	default: async ({ request }) => {
+	default: async ({ request, locals: { client } }) => {
 		const data = await request.formData();
 
 		const email = data.get('email') as string;
@@ -25,7 +24,7 @@ export const actions = {
 		}
 
 		try {
-			await new SaferwallClient().signUp({
+			await client.signUp({
 				email,
 				username,
 				password

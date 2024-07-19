@@ -1,11 +1,9 @@
-import { SaferwallClient } from '$lib/clients/saferwall';
 import type { Saferwall } from '$lib/types';
 import type { PageLoad } from './$types';
 
-export const load = (async ({ params }) => {
-	const { pe } = await new SaferwallClient().request<Saferwall.File>(
-		`files/${params.hash}?fields=pe.iat`
-	);
+export const load = (async ({ params, parent }) => {
+	const { client } = await parent();
+	const { pe } = await client.request<Saferwall.File>(`files/${params.hash}?fields=pe.iat`);
 
 	return {
 		iat: pe.iat

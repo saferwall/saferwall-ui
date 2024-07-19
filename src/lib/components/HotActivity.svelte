@@ -19,7 +19,7 @@
 		<Avatar size="md" image="/images/logo-v.webp" />
 		<div class="flex flex-col">
 			<span>Saferwall</span>
-			<DateTime class="text-sm text-neutral-600" {date} />
+			<DateTime class="text-xs text-neutral-600" {date} />
 		</div>
 	</div>
 	<div class="space-y-4">

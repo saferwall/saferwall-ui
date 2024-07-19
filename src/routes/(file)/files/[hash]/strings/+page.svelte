@@ -64,7 +64,7 @@
 			<thead>
 				<th class="w-1/4">
 					<div class="flex items-center space-x-3 justify-between">
-						<span>Encoding</span>
+						<span class="font-semibold">Encoding</span>
 						<label class="flex-center">
 							<Icon name="search" size="w-4 h-4" class="text-gray-300" />
 							<input type="text" placeholder="Search encodings..." />
@@ -73,7 +73,7 @@
 				</th>
 				<th>
 					<div class="flex items-center space-x-3 justify-between">
-						<span>Value</span>
+						<span class="font-semibold">Value</span>
 						<label class="flex-center">
 							<Icon name="search" size="w-4 h-4" class="text-gray-300" />
 							<input type="text" placeholder="Search value..." />
@@ -129,7 +129,7 @@
 		tr {
 			@apply border even:bg-gray-50;
 			td {
-				@apply text-sm text-neutral-900 p-4;
+				@apply text-xs text-neutral-900 p-4;
 
 				&:first-child {
 					@apply border-r;

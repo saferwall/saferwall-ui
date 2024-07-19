@@ -24,7 +24,7 @@
 					return [lines, current];
 				},
 				[[], []]
-		  )[0]
+			)[0]
 		: [];
 
 	let open = false;
@@ -42,7 +42,7 @@
 			{#if Array.isArray(val)}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div
-					class="relative flex flex-col gap-x-4 w-full text-sm max-h-96 overflow-y-auto border-b border-t pl-10"
+					class="relative flex flex-col gap-x-4 w-full text-xs max-h-96 overflow-y-auto border-b border-t pl-10"
 				>
 					<span class="absolute left-0 w-5 h-5 p-1">
 						<Icon

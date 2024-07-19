@@ -1,12 +1,10 @@
-import { SaferwallClient } from '$lib/clients/saferwall';
 import { fileMenu } from '$lib/data/menu';
 import type { Menu, Saferwall } from '$lib/types';
 import type { LayoutLoad } from './$types';
 
-export const load = (async ({ parent, params, url }) => {
-	const parentData = await parent();
+export const load = (async ({ parent, params: { hash }, url }) => {
+	const { client } = await parent();
 
-	const { hash } = params;
 	const paths = url.pathname.split(`/files/`)[1].split('/');
 
 	const activePath = paths[1];
@@ -16,7 +14,7 @@ export const load = (async ({ parent, params, url }) => {
 		activeFileMenu: Menu.File[];
 
 	try {
-		file = await new SaferwallClient(parentData.session).getFileSummary(hash);
+		file = await client.getFileSummary(hash);
 		activeFileMenu = [...fileMenu]
 			.filter(
 				(menu) =>
@@ -34,6 +32,7 @@ export const load = (async ({ parent, params, url }) => {
 	}
 
 	return {
+		client,
 		hash,
 		file,
 		paths,

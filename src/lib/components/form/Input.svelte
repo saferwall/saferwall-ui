@@ -9,7 +9,7 @@
 	const isPassword = type === 'password';
 	$: passwordVisible = type !== 'password';
 
-	const onPasswirdIconMouseUp = () => {
+	const onPasswordEyeTogglePress = () => {
 		type = type === 'password' ? 'text' : 'password';
 	};
 </script>
@@ -26,12 +26,12 @@
 		on:change
 		bind:value
 		{placeholder}
-		class="input__element {$$props.class} {icon ? 'input--icon' : ''}"
+		class="input__element bg-transparent {$$props.class} {icon ? 'input--icon' : ''}"
 	/>
 	{#if isPassword}
-		<svg class="password-icon" class:visible={passwordVisible} on:mouseup={onPasswirdIconMouseUp}
-			><use href="/images/icons.svg#icon-eye" /></svg
-		>
+		<button class="password-icon" type="button" on:mousedown={onPasswordEyeTogglePress}>
+			<svg class:visible={passwordVisible}><use href="/images/icons.svg#icon-eye" /></svg>
+		</button>
 	{/if}
 </label>
 
@@ -39,10 +39,14 @@
 	.input {
 		@apply flex w-full relative;
 
+		input {
+			@apply focus:outline-none;
+			@apply border border-neutral-700 focus:border-gray-500 rounded;
+		}
+
 		&__element {
 			@apply w-full;
 			@apply px-4 pt-3 pb-3;
-			@apply border rounded;
 
 			&.input--icon {
 				@apply pl-10;
@@ -69,15 +73,15 @@
 		}
 
 		&__label {
-			@apply font-light;
+			@apply font-regular placeholder:font-regular;
 			@apply absolute transition-all;
-			@apply text-neutral-500 left-4 top-1/2 -translate-y-1/2 text-sm;
+			@apply text-neutral-500 left-4 top-1/2 -translate-y-1/2 text-xs;
 		}
 
 		&:has(input:not(:placeholder-shown)),
 		&:has(:focus) {
 			.input__label {
-				@apply top-4 text-sm;
+				@apply top-4 text-xs;
 			}
 		}
 
@@ -94,6 +98,10 @@
 
 			&.visible {
 				@apply text-primary animate-pulse;
+			}
+
+			svg {
+				@apply w-full h-full;
 			}
 		}
 	}

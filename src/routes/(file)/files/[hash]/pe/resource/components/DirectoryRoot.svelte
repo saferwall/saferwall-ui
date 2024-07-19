@@ -9,7 +9,7 @@
 	<h3 class="text-lg font-semibold">Resource Directory</h3>
 	<ul class="space-y-4">
 		{#each entries as entry}
-			<li class="border border-graya rounded-lg shadow-sm py-2">
+			<li class="border border-graya rounded-lg py-2">
 				<DirectoryEntry isRoot={true} {...entry} />
 			</li>
 		{/each}

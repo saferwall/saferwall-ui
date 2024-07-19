@@ -17,7 +17,7 @@
 <Card spacing={false}>
 	<div class="flex space-x-6 items-center">
 		<Avatar size="md" username={author.username} />
-		<div class="text-sm">
+		<div class="text-xs">
 			<a href="/users/{author.username}" class="font-bold">{author.username}</a>
 			<p class="text-neutral-500">Member since {getMemberSince(author.member_since)}</p>
 		</div>

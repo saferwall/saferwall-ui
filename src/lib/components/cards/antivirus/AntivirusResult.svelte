@@ -7,19 +7,25 @@
 	export let infected: boolean;
 
 	$: lastUpdated = timeSince(update);
+	$: isNA = infected === true || infected === false;
 </script>
 
 <div
-	class="flex items-center space-x-2 text-sm"
-	class:text-redx={infected}
-	class:text-greenx={!infected}
+	class="flex items-center space-x-2 text-xs"
+	class:text-red={infected === true}
+	class:text-green={infected === false}
+	class:text-gray-300={!isNA}
 >
-	<Icon size="w-5 h-5" name={infected ? 'alert' : 'check'} />
+	{#if isNA}
+		<Icon size="w-5 h-5" name={infected ? 'alert' : 'check'} />
+	{/if}
 	<span title={`Last Updated : ${lastUpdated}`}>
-		{#if infected}
+		{#if infected === true}
 			{output}
-		{:else}
+		{:else if infected === false}
 			{infected ? 'Infected' : 'Clean'}
+		{:else}
+			N/A
 		{/if}
 	</span>
 </div>

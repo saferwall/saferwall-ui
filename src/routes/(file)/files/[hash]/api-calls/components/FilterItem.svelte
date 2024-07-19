@@ -19,10 +19,10 @@
 	$: status = item.detection?.toLowerCase();
 	$: detectionTheme = (
 		status == Saferwall.Behaviors.Detection.CLEAN
-			? 'primary'
+			? 'brand'
 			: status == Saferwall.Behaviors.Detection.MALICIOUS
-			? 'danger'
-			: 'gray'
+				? 'danger'
+				: 'gray'
 	) as any;
 </script>
 
@@ -32,7 +32,7 @@
 	<div class="content" on:mouseup|stopPropagation={toggleCheckbox}>
 		<div class="basic">
 			<div>
-				<span class="text-sm">PID ({pid})</span>
+				<span class="text-xs">PID ({pid})</span>
 				<Label size="xs">Parent PID ({item.parent_pid})</Label>
 			</div>
 			<div class="h-3.5 w-0.5 rounded-xl bg-primary/80" />
@@ -44,7 +44,7 @@
 				<Label theme={detectionTheme}>{item.detection}</Label>
 			{/if}
 		</div>
-		<p class="font-light text-sm text-neutral-600 break-all">
+		<p class="font-light text-xs text-neutral-600 break-all">
 			{item.path}
 		</p>
 	</div>

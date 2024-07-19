@@ -16,15 +16,15 @@
 
 	$: scoreColor =
 		score.value == 0
-			? 'text-greenx'
+			? 'text-green'
 			: score.value! / (score.count || 1) > 0.5
-			? 'text-redx'
-			: 'text-orangex';
+				? 'text-red'
+				: 'text-orange';
 	$: signatureColor = signature?.includes('not')
-		? 'text-redx'
+		? 'text-red'
 		: signature?.includes('invalid')
-		? 'text-orangex'
-		: 'text-greenx';
+			? 'text-orange'
+			: 'text-green';
 
 	$: lastScannedSince = timeSince(lastScanned);
 	$: firstSubmissionSince = timeSince(firstSubmission);
@@ -33,7 +33,7 @@
 <Card
 	flex={false}
 	padding={false}
-	class="summary flex lg:justify-between flex-wrap lg:flex-nowrap lg:items-center bg-white rounded w-full shadow-base lg:p-4"
+	class="summary flex lg:justify-between flex-wrap lg:flex-nowrap lg:items-center rounded w-full lg:p-4"
 >
 	<article class="summary__card flex-grow">
 		<h2 class="sr-only">Analyse score</h2>
@@ -41,7 +41,7 @@
 			<div class="rounded-full font-bold text-lg bg-gray-200 p-1.5">
 				<div class="flex flex-center flex-col w-24 h-24 rounded-full bg-white">
 					<span class="text-3xl {scoreColor}">{score?.value ?? 'N/A'}</span>
-					<span class="text-neutral-300">/ {score?.count ?? '-'}</span>
+					<span class="text-gray-300">/ {score?.count ?? '-'}</span>
 				</div>
 			</div>
 			<p class="font-semibold {scoreColor}">
@@ -84,10 +84,9 @@
 <style lang="scss">
 	.summary {
 		&__card {
-			@apply p-6 lg:px-4 lg:py-0 w-1/2 md:w-auto;
+			@apply p-6 lg:px-4 lg:py-0 w-1/2 md:w-auto text-xs;
 
-			@apply flex flex-col border border-neutral-50 justify-center;
-			@apply lg:border-t-0 lg:border-b-0 lg:border-r-0;
+			@apply flex flex-col justify-center;
 
 			&:first-child {
 				@apply lg:border-none w-full md:w-auto p-6;
@@ -102,7 +101,7 @@
 			}
 
 			&__desc {
-				@apply font-semibold text-base;
+				@apply font-medium;
 			}
 
 			&.short {

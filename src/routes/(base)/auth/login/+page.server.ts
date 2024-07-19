@@ -1,7 +1,6 @@
-import { fail } from '@sveltejs/kit';
 import { SESSION_KEY } from '$lib/config';
-import type { PageServerLoad, Actions } from './$types';
-import { SaferwallClient } from '$lib/clients/saferwall';
+import { fail, isRedirect, redirect } from '@sveltejs/kit';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ parent, cookies, locals }) => {
 	await parent();
@@ -17,7 +16,7 @@ export const load = (async ({ parent, cookies, locals }) => {
 }) satisfies PageServerLoad;
 
 export const actions = {
-	default: async ({ cookies, request }) => {
+	default: async ({ cookies, request, locals: { client } }) => {
 		const data = await request.formData();
 
 		const username = data.get('username') as string;
@@ -37,7 +36,7 @@ export const actions = {
 		}
 
 		try {
-			const session = await new SaferwallClient().singIn({
+			const session = await client.singIn({
 				username,
 				password
 			});
@@ -48,16 +47,21 @@ export const actions = {
 				path: '/'
 			});
 
-			return {
-				success: true
-			};
-		} catch (response) {
+			client.setSession(session);
+
+			throw redirect(303, '/');
+		} catch (error) {
+			if (isRedirect(error)) {
+				throw error;
+			}
+
 			cookies.delete(SESSION_KEY, {
 				httpOnly: true,
 				secure: true,
 				path: '/'
 			});
-			return fail(400, await (response as Response).json());
+
+			return fail(400, await (error as Response).json());
 		}
 	}
 } satisfies Actions;

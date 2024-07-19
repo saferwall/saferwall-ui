@@ -9,17 +9,17 @@
 
 	export let data: PageData;
 
+	$: client = data.client;
 	$: section = data.section;
 	$: username = data.username;
-	$: session = data.session;
 	$: loggedIn = data.user !== undefined;
 	$: pagination = data.pagination;
 </script>
 
 <LoadMoreContainer
 	initItems={data.pagination?.items}
+	{client}
 	{username}
-	{session}
 	{pagination}
 	{section}
 	let:items

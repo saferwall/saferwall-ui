@@ -100,7 +100,7 @@
 														<div class="pl-5 pt-4">
 															<ul class="border-l border-gray-100 pl-5 py-2">
 																{#each item.codes as code}
-																	<li class="text-sm">
+																	<li class="text-xs">
 																		<span class="font-semibold"
 																			>{valueToHex(code.code_offset)} :</span
 																		>
@@ -139,11 +139,11 @@
 				@apply relative z-0;
 
 				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-200 border-t-0;
+					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-500 border-t-0;
 				}
 
 				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-200;
+					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-500;
 				}
 
 				&.expanded:nth-child(2n + 1):after {

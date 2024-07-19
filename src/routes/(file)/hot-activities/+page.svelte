@@ -9,10 +9,10 @@
 </script>
 
 <svelte:head>
-	<title>Hot activities - Saferwall</title>
+	<title>Hot activities - Saferwall Beta 1.0</title>
 </svelte:head>
 
-<main class="flex-1 flex flex-col h-full bg-neutral">
+<main class="flex-1 flex flex-col h-full bg-background">
 	<div class="container py-12 mx-auto h-full flex flex-col flex-1 space-y-10">
 		<h1 class="text-2xl font-medium">Hot Activities</h1>
 		{#if activities.length > 0}
@@ -23,10 +23,10 @@
 			</div>
 		{:else}
 			<div class="flex flex-1 flex-col justify-center my-auto items-center space-y-6 h-full">
-				<div class="bg-white rounded-full p-4">
+				<div class="bg-transparent rounded-full p-4">
 					<Icon size="w-24 h-24" name="hot-fire" />
 				</div>
-				<p class="text-gray-800">No hot activity currently available.</p>
+				<p class="text-gray-500">No hot activity currently available.</p>
 			</div>
 		{/if}
 	</div>

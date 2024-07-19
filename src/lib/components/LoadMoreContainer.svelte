@@ -4,10 +4,10 @@
 	import { SaferwallClient } from '$lib/clients/saferwall';
 	import LoadMore from './LoadMore.svelte';
 
+	export let client: SaferwallClient;
 	export let username: string;
 	export let section: string;
 	export let pagination: Saferwall.Pagination<Saferwall.Activities.All>;
-	export let session: Saferwall.Session;
 	export let initItems: Saferwall.Activities.All[] = [];
 
 	let loading = false;
@@ -21,11 +21,7 @@
 		try {
 			updatedPagination.page += 1;
 
-			const paginationResp = await new SaferwallClient(session).getUserSectionItems(
-				username,
-				section,
-				updatedPagination
-			);
+			const paginationResp = await client.getUserSectionItems(username, section, updatedPagination);
 
 			if (paginationResp.items === null) {
 				reachEnd = true;

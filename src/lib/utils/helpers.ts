@@ -27,3 +27,15 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
 		return false;
 	}
 };
+
+export const orderObjectKeys = (obj: any) => {
+	return Object.keys(obj)
+		.sort()
+		.reduce(
+			(currentObj, key) => {
+				currentObj[key] = obj[key];
+				return currentObj;
+			},
+			{} as typeof obj
+		);
+};

@@ -53,7 +53,7 @@
 								...formParams,
 								page: pageNumber,
 								hprops: hiddenProps
-						  })
+							})
 						: undefined
 			};
 		})
@@ -64,7 +64,7 @@
 	);
 
 	$: hash = data.hash;
-	$: session = data.session;
+	$: client = data.client;
 	$: currentPage = data.pagination.page;
 	$: perPage = data.pagination.per_page;
 	$: totalPages = data.pagination.page_count;
@@ -187,7 +187,7 @@
 
 					{#if pids.length > 0}
 						<span
-							class="flex items-center justify-center rounded-full w-6 h-6 bg-primary text-white text-sm"
+							class="flex items-center justify-center rounded-full w-6 h-6 bg-primary text-white text-xs"
 						>
 							{pids.length}
 						</span>
@@ -200,15 +200,15 @@
 				</Button>
 				{#if displayProperties}
 					<Overlay on:mouseup={onPropsToggleAction}>
-						<ul class="absolute top-[120%] left-0 w-52 shadow z-50 bg-white rounded-lg p-4">
+						<ul class="absolute top-[120%] left-0 w-52 z-50 bg-white rounded-lg p-4">
 							<li class="flex flex-row items-center justify-between pb-2">
-								<span class="text-sm text-neutral-500 font-semibold">Show table</span>
+								<span class="text-xs text-neutral-500 font-semibold">Show table</span>
 								<button
 									autofocus
 									on:keyup={(e) => (e.key === 'Escape' ? onPropsToggleAction() : null)}
 									on:click={onPropsToggleAction}
 									type="button"
-									class="text-xs bg-neutral-50 rounded-full border border-neutral p-1"
+									class="text-xs bg-neutral-50 rounded-full border border-neutral-500 p-1"
 								>
 									<Icon name="close" size="w-4 h-4" />
 								</button>
@@ -224,7 +224,7 @@
 										value={property.id}
 									/>
 									<span>{property.name}</span>
-									<label for={property.id} class="py-0.5 text-sm px-2 text-primary font-semibold">
+									<label for={property.id} class="py-0.5 text-xs px-2 text-primary font-semibold">
 										Hide
 									</label>
 								</li>
@@ -307,7 +307,7 @@
 									<div transition:slide={{ axis: 'y', duration: 200 }}>
 										<ApiTraceRow
 											{trace}
-											{session}
+											{client}
 											{hash}
 											{behaviorId}
 											procName={getProcName(rows[index].pid)}
@@ -342,7 +342,7 @@
 
 <FiltersDrawer
 	{pids}
-	{session}
+	{client}
 	{behaviorId}
 	open={filterDrawer}
 	on:filters={(event) => {
@@ -364,7 +364,7 @@
 		thead.rows__thead > th {
 			&:after {
 				content: '<>';
-				@apply transform rotate-90 inline-block w-max h-max text-sm px-2 font-black;
+				@apply transform rotate-90 inline-block w-max h-max text-xs px-2 font-black;
 			}
 		}
 
@@ -373,7 +373,7 @@
 				@apply relative z-0 whitespace-nowrap;
 
 				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-200 border-t-0;
+					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-500 border-t-0;
 				}
 
 				&.expanded {
@@ -381,12 +381,9 @@
 				}
 
 				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-200;
+					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-500;
 				}
 
-				&.expanded ~ .box__body:after {
-					@apply shadow-xl shadow-neutral-100;
-				}
 				&.expanded:after {
 					@apply rounded-b-none border-b-0;
 				}

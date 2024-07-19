@@ -23,7 +23,10 @@
 	};
 </script>
 
-<article class="flex flex-col w-fill space-y-2 p-4 border rounded-xl" class:error>
+<article
+	class="flex flex-col w-fill space-y-2 p-4 border border-neutral-200 rounded-xl"
+	class:error
+>
 	<div class="flex justify-between">
 		<p>
 			<span>File:</span> <strong>{file.name}</strong>
@@ -43,7 +46,7 @@
 		<InputHash {hash} />
 	{/if}
 
-	<div class="progress w-full h-2 relative bg-gray-200 rounded-xl overflow-hidden">
+	<div class="progress w-full h-2 relative bg-neutral-200 rounded-xl overflow-hidden">
 		<div class={`h-full status--${currentStatus}`} style={`width: ${progress}%`} />
 	</div>
 

@@ -72,7 +72,7 @@
 			required
 		/>
 	</div>
-	<Button {loading} theme="primary" size="lg" type="submit">
+	<Button {loading} theme="brand" size="lg" type="submit">
 		Change
 		<span slot="loading" class="ml-1">Saving ...</span>
 	</Button>
