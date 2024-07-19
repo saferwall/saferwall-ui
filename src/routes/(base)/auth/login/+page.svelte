@@ -14,6 +14,7 @@
 		error = '';
 		errors = {};
 		loading = true;
+		console.log("test");
 
 		return async ({ result: { data, type }, update }) => {
 			if (type === 'failure') {

@@ -72,7 +72,7 @@
 	{/if}
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.user__menu__item {
 		@apply w-44;
 		@apply font-normal text-lg text-neutral-800;

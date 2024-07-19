@@ -30,7 +30,7 @@
 	</table>
 </Card>
 
-<style lang="scss">
+<style lang="postcss">
 	table {
 		@apply bg-neutral-50 overflow-hidden;
 		@apply border border-collapse rounded text-sm;

@@ -81,7 +81,7 @@
 	</table>
 </article>
 
-<style lang="scss">
+<style lang="postcss">
 	table.groups {
 		@apply pr-4 border-separate border-spacing-y-2 w-full;
 

@@ -1,5 +1,5 @@
 <script>
-	import '../app.scss';
+	import '../app.css';
 
 	import NProgress from 'nprogress';
 	import { navigating } from '$app/stores';

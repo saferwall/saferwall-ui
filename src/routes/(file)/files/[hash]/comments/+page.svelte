@@ -41,7 +41,7 @@
 	</Card>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	.file__comments {
 		:global(.bytemd) {
 			@apply h-44;

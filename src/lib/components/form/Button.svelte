@@ -53,7 +53,7 @@
 	</button>
 {/if}
 
-<style lang="scss">
+<style lang="postcss">
 	.button {
 		@apply py-2.5 px-4;
 		@apply font-semibold;

@@ -34,7 +34,7 @@
 	{/if}
 </a>
 
-<style lang="scss">
+<style lang="postcss">
 	.avatar {
 		@apply rounded-full bg-white overflow-hidden;
 		@apply border border-neutral flex-shrink-0 inline-block;

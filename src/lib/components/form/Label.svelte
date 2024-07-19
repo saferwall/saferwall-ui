@@ -7,7 +7,7 @@
 	<slot />
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.label {
 		@apply inline-block h-max rounded-sm;
 		@apply text-sm font-medium;

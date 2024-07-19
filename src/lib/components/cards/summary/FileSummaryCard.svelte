@@ -81,7 +81,7 @@
 	{/if}
 </Card>
 
-<style lang="scss">
+<style lang="postcss">
 	.summary {
 		&__card {
 			@apply p-6 lg:px-4 lg:py-0 w-1/2 md:w-auto;

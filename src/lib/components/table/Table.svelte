@@ -8,7 +8,7 @@
 	<slot name="footer" />
 </table>
 
-<style lang="scss">
+<style lang="postcss">
 	table {
 		@apply w-full;
 

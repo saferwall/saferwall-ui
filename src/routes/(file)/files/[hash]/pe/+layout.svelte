@@ -26,7 +26,7 @@
 	</Card>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	.pe {
 		@apply text-sm;
 

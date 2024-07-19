@@ -59,7 +59,7 @@
 	</div>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	:global(.file-header .button) {
 		@apply shadow-base border-none space-x-0;
 	}

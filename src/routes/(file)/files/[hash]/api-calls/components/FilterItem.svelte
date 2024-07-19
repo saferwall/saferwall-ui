@@ -50,7 +50,7 @@
 	</div>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.wrapper {
 		@apply flex flex-row justify-center items-center gap-3 py-5 cursor-pointer;
 

@@ -25,17 +25,20 @@
 		{...$$props}
 		on:change
 		bind:value
+		{...{type}}
 		{placeholder}
 		class="input__element {$$props.class} {icon ? 'input--icon' : ''}"
 	/>
 	{#if isPassword}
-		<svg class="password-icon" class:visible={passwordVisible} on:mouseup={onPasswirdIconMouseUp}
-			><use href="/images/icons.svg#icon-eye" /></svg
-		>
+		<button class="password-dim password-icon outline-none" class:visible={passwordVisible} type="button" on:click={onPasswirdIconMouseUp}>
+			<svg class="password-dim"
+				><use href="/images/icons.svg#icon-eye" /></svg
+			>
+		</button>
 	{/if}
 </label>
 
-<style lang="scss">
+<style lang="postcss">
 	.input {
 		@apply flex w-full relative;
 
@@ -87,8 +90,10 @@
 			@apply absolute left-3 -translate-y-1/2 top-1/2;
 		}
 
-		.password-icon {
+		.password-dim {
 			@apply w-6 h-6;
+		}
+		.password-icon {
 			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-900;
 			@apply absolute right-3 -translate-y-1/2 top-1/2;
 

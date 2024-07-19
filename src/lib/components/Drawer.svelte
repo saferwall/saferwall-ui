@@ -45,7 +45,7 @@
 
 <svelte:window on:keyup={closeDrawer} />
 
-<style lang="scss">
+<style lang="postcss">
 	.drawer {
 		&--xl {
 			@apply max-w-screen-xl;

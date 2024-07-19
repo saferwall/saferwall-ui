@@ -51,7 +51,7 @@
 	{/each}
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	section {
 		article:first-child {
 			@apply pt-0;

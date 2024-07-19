@@ -75,7 +75,7 @@
 	{/each}
 </ul>
 
-<style lang="scss">
+<style lang="postcss">
 	ul {
 		li {
 			@apply cursor-pointer py-6;

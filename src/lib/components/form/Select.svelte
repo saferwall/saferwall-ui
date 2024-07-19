@@ -14,7 +14,7 @@
 	</select>
 </label>
 
-<style lang="scss">
+<style lang="postcss">
 	.select {
 		@apply flex w-full relative;
 

@@ -206,7 +206,7 @@
 	</Card>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	table {
 		thead {
 			@apply text-neutral-400 uppercase;

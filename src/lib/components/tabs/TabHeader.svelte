@@ -45,7 +45,7 @@
 	{/if}
 {/each}
 
-<style lang="scss">
+<style lang="postcss">
 	.tab__header__item {
 		&:hover,
 		&.active {

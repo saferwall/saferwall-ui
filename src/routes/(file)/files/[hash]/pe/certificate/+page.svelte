@@ -72,7 +72,7 @@
 	</article>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	table {
 		@apply w-full;
 

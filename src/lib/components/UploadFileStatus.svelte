@@ -52,7 +52,7 @@
 	{/if}
 </article>
 
-<style lang="scss">
+<style lang="postcss">
 	.progress {
 		@apply bg-gray-600;
 	}

@@ -65,7 +65,7 @@
 	<ButtonShowMore on:click={onClickMoreToggle} expanded={showAll} />
 </Card>
 
-<style lang="scss">
+<style lang="postcss">
 	.virtual {
 		&__screens {
 			@apply relative grid grid-cols-2 lg:grid-cols-3 gap-2;

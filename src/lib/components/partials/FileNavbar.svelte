@@ -36,7 +36,7 @@
 	</div>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	.fnavbar {
 		@apply py-4;
 		@apply border-b border-gray-400 border-opacity-20;

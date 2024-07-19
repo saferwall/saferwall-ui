@@ -2,7 +2,7 @@
 	<slot />
 </tbody>
 
-<style lang="scss">
+<style lang="postcss">
 	tbody {
 		td {
 			@apply p-1;

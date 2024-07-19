@@ -43,7 +43,7 @@
 	</div>
 </nav>
 
-<style lang="scss">
+<style lang="postcss">
 	.navbar {
 		&__search {
 			@apply hidden lg:flex;

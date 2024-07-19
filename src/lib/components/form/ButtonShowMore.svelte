@@ -12,7 +12,7 @@
 	</svg>
 </button>
 
-<style lang="scss">
+<style lang="postcss">
 	.button {
 		@apply relative cursor-pointer focus:outline-none;
 		@apply w-full pt-3 select-none flex items-center justify-center space-x-2;

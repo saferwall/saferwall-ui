@@ -74,7 +74,7 @@
 	</div>
 </article>
 
-<style lang="scss">
+<style lang="postcss">
 	.activity {
 		&__time {
 			@apply text-neutral-400;
