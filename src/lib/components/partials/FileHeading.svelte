@@ -4,6 +4,7 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import type { Menu, Saferwall } from '$lib/types';
 	import ButtonLike from '../form/ButtonLike.svelte';
+	import { goto } from '$app/navigation';
 
 	export let hash: string;
 	export let liked = false;
@@ -15,6 +16,7 @@
 	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/files/${hash}/${activeMenu.path}`;
 
 	let rescaning = false;
+	let downloadLoading = false;
 	const onRescanClick = async () => {
 		rescaning = true;
 		try {
@@ -39,7 +41,27 @@
 		</h1>
 
 		<div class="space-x-2 flex flex-shrink-0">
-			<Button size="lg" icon="download" href={downloadLink}>
+			<Button size="lg" loading={downloadLoading} icon="download" href={downloadLink} on:click={(e) => {
+				e.preventDefault();
+				downloadLoading = true;
+				window.fetch(downloadLink, {
+					headers: {
+						"Authorization": `Bearer ${session.token}`
+					}
+				}).then(res => {
+					if (res.status === 401) {
+						downloadLoading = false;
+						goto("/auth/login");
+						return;
+					}
+					return res.blob()
+				}).then(blob => {
+					if (!blob) return;
+					downloadLoading = false;
+					let file = URL.createObjectURL(blob);
+					location.assign(file);
+				});
+			}}>
 				<span class="hidden md:block pl-2">Download file</span></Button
 			>
 			<Button
