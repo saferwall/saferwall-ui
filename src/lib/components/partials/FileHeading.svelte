@@ -10,7 +10,7 @@
 	export let liked = false;
 	export let loggedIn = false;
 	export let activeMenu: Menu.File;
-	export let session: Saferwall.Session;
+	export let session: Saferwall.Session | undefined;
 
 	$: downloadLink = `${env.PUBLIC_API_URL}files/${hash}/download/`;
 	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/files/${hash}/${activeMenu.path}`;
@@ -44,9 +44,14 @@
 			<Button size="lg" loading={downloadLoading} icon="download" href={downloadLink} on:click={(e) => {
 				e.preventDefault();
 				downloadLoading = true;
+				if (!session || !session.token) {
+					goto("/auth/login");
+					return;
+				}
 				window.fetch(downloadLink, {
 					headers: {
-						"Authorization": `Bearer ${session.token}`
+						"Authorization": `Bearer ${session.token}`,
+						"Content-Type": "application/json"
 					}
 				}).then(res => {
 					if (res.status === 401) {
