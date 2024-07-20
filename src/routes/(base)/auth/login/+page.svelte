@@ -3,7 +3,6 @@
 	import Alert from '$lib/components/Alert.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
-	import { redirect } from '@sveltejs/kit';
 	import type { SubmitFunction } from './$types';
 
 	let loading = false;
@@ -23,8 +22,6 @@
 				loading = false;
 				return;
 			}
-
-			redirect(303, '/');
 			update();
 		};
 	};
