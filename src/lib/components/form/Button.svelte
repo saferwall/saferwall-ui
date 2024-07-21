@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Loading from './Loading.svelte';
+	import { twMerge } from 'tailwind-merge';
 
+	let Class = "";
+	export { Class as class };
 	export let loading = false;
 	export let disabled = false;
 	export let icon: string | undefined = undefined;
@@ -17,7 +20,7 @@
 		{...$$props}
 		{href}
 		{target}
-		class="button button--{theme} button--size--{size} {$$props.class}"
+		class="button button--{theme} button--size--{size} {twMerge($$props.class, Class)}"
 	>
 		<Loading {loading}>
 			<div class="content">
@@ -35,7 +38,7 @@
 		{...$$props}
 		{type}
 		disabled={loading || disabled}
-		class="button button--{theme} button--size--{size} {$$props.class}"
+		class="button button--{theme} button--size--{size} {twMerge($$props.class, Class)}"
 	>
 		<Loading {loading}>
 			<div class="content">

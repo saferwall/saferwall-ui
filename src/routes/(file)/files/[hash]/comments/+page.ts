@@ -2,6 +2,8 @@ import { SaferwallClient } from '$lib/clients/saferwall';
 import type { Saferwall } from '$lib/types';
 import type { PageLoad } from './$types';
 
+// export const prerender = true;
+// export const ssr = false;
 export const load = (async ({ params }) => {
 	const { hash } = params;
 

@@ -1,13 +1,13 @@
 <script lang="ts">
 	import type { Saferwall } from '$lib/types';
 	import { getMemberSince } from '$lib/utils';
-	import { Viewer } from 'bytemd';
 
 	import Avatar from '$lib/components/Avatar.svelte';
 	import DateTime from '$lib/components/DateTime.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Card from '../../Card.svelte';
+	import Viewer from './Viewer.svelte';
 
 	export let author: Saferwall.Author;
 	export let comment: string;

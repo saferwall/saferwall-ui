@@ -51,10 +51,6 @@ a.link:not([href='']) {
 	@apply prose;
 }
 
-.bytemd-fullscreen {
-	@apply z-50;
-}
-
 .table-border {
 	@apply w-full overflow-hidden rounded-xl border border-gray-200;
 
