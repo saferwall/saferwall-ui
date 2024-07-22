@@ -4,12 +4,16 @@
 	import Card from '$lib/components/Card.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Editor from '$lib/components/editor/Editor.svelte';
-	import { CommentApi } from '$lib/api';
-	import { goto } from '$app/navigation';
+	import { CommentApi, Configuration } from '$lib/api';
+	import { goto, invalidateAll } from '$app/navigation';
+	import NProgress from 'nprogress';
 
+
+	NProgress.configure({
+		minimum: 0.16
+	});
 
 	export let data: PageData;
-
 	$: comments = data.pagination.items;
 
 	let comment = "";
@@ -26,32 +30,41 @@
 		</div>
 	{/if}
 	<Card spacing={false}>
-		<Editor bind:value={comment}></Editor>
-		<div class="w-full flex pt-4">
-			<Button class="grow md:grow-0" size="sm" theme="gray" loading={postingComment} on:click={() => {
-				if (!data?.session?.token) {
-					goto("/auth/login");
-				}
-				postingComment = true;
-				let api = new CommentApi({accessToken: data.session.token, isJsonMime: (mime) => mime === "application/json"});
-				api.commentsPost({
-					body: comment,
-					sha256: data.hash,
-					username: data.session.username
-				}, {
-					headers: {
-						"Authorization": `Bearer ${data.session.token}`,
-						"Content-Type": "application/json"
+			<Editor bind:value={comment}></Editor>
+			<div class="w-full flex pt-4">
+				<Button class="grow md:grow-0" size="sm" theme="gray" loading={postingComment} on:click={() => {
+					if (!data?.session?.token || !data?.session?.username) {
+						goto("/auth/login");
+						return;
 					}
-				}).then(res => {
-					console.log({res});
-				}).catch(err => {
-					console.log({err});
-				}).finally(() => {
-					postingComment = false;
-				})
-			}}>Comment</Button>
-		</div>
+					postingComment = true;
+		
+					let token = data?.session?.token || "";
+					let username = data?.session?.username || "";
+					let api = new CommentApi(new Configuration({accessToken: token}));
+					NProgress.start();
+					api.commentsPost({
+						body: comment,
+						sha256: data.hash,
+						username
+					})
+					.finally(() => {
+						postingComment = false;
+					})
+					.then(async () => {
+						await invalidateAll();
+						NProgress.done();
+						document.body.scrollIntoView();
+					})
+					.catch(err => {
+						NProgress.done();
+						console.error(err);
+						goto("/auth/login");
+						return;
+					})
+
+				}}>Comment</Button>
+			</div>
 	</Card>
 </section>
 

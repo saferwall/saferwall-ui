@@ -44,6 +44,7 @@
 						client
 							.getFileStatus(sha256)
 							.then((status) => {
+								console.log({queue, status, "UploadStatus.FINISHED": UploadStatus.FINISHED, "UploadStatus._START": UploadStatus._START})
 								queue.status = status + UploadStatus._START;
 
 								if (status !== UploadStatus.FINISHED - UploadStatus._START) {

@@ -7,13 +7,15 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import Avatar from '$lib/components/Avatar.svelte';
 	import DateTime from '$lib/components/DateTime.svelte';
+	import Viewer from '$lib/components/cards/comments/Viewer.svelte';
 
 	export let data: PageData;
 
 	const options = {
 		sanitize: true
 	};
-	$: username = data.user.username;
+
+	$: username = data.username;
 	$: items = Array.isArray(data.pagination.items) ? (data.pagination.items as any) : [];
 </script>
 
@@ -37,7 +39,7 @@
 						</div>
 					</div>
 					<div class="bg-gray-50 border border-opacity-20 border-gray-300 w-full p-2 rounded">
-						<SvelteMarkdown {options} source={item.comment} />
+						<Viewer value={item.comment}></Viewer>
 					</div>
 				</div>
 				<InputHash hash={item.file.hash} />

@@ -11,6 +11,7 @@ export const load = (async ({ params: { username }, parent, url: { pathname } })
 
 	return {
 		...data,
+		username,
 		section,
 		pagination,
 		currentPath: pathname

@@ -154,6 +154,12 @@ export interface EntityBehavior {
      * @type {object}
      * @memberof EntityBehavior
      */
+    'artifacts'?: object;
+    /**
+     * 
+     * @type {object}
+     * @memberof EntityBehavior
+     */
     'capabilities'?: object;
     /**
      * 
@@ -270,7 +276,7 @@ export interface EntityFile {
      * @type {object}
      * @memberof EntityFile
      */
-    'behaviors'?: object;
+    'behavior_scans'?: object;
     /**
      * 
      * @type {Array<number>}
@@ -291,10 +297,10 @@ export interface EntityFile {
     'crc32'?: string;
     /**
      * 
-     * @type {string}
+     * @type {object}
      * @memberof EntityFile
      */
-    'default_behavior_id'?: string;
+    'default_behavior_report'?: object;
     /**
      * 
      * @type {{ [key: string]: string; }}
@@ -838,7 +844,8 @@ export const ActivityApiAxiosParamCreator = function (configuration?: Configurat
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
             if (perPage !== undefined) {
                 localVarQueryParameter['per_page'] = perPage;
@@ -1438,6 +1445,40 @@ export const BehaviorApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
+         * Returns a paginated list of artifacts\' metadata such as memdumps, created files, etc ..
+         * @summary List of artifacts\' metadata.
+         * @param {string} id Behavior report GUID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        behaviorsIdArtifactsGet: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('behaviorsIdArtifactsGet', 'id', id)
+            const localVarPath = `/behaviors/{id}/artifacts/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Retrieves the full behavior report of a file.
          * @summary Check a behavior report.
          * @param {string} id Behavior report GUID
@@ -1529,6 +1570,19 @@ export const BehaviorApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns a paginated list of artifacts\' metadata such as memdumps, created files, etc ..
+         * @summary List of artifacts\' metadata.
+         * @param {string} id Behavior report GUID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async behaviorsIdArtifactsGet(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.behaviorsIdArtifactsGet(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BehaviorApi.behaviorsIdArtifactsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Retrieves the full behavior report of a file.
          * @summary Check a behavior report.
          * @param {string} id Behavior report GUID
@@ -1575,6 +1629,16 @@ export const BehaviorApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.behaviorsIdApiTraceGet(id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns a paginated list of artifacts\' metadata such as memdumps, created files, etc ..
+         * @summary List of artifacts\' metadata.
+         * @param {string} id Behavior report GUID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        behaviorsIdArtifactsGet(id: string, options?: any): AxiosPromise<object> {
+            return localVarFp.behaviorsIdArtifactsGet(id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Retrieves the full behavior report of a file.
          * @summary Check a behavior report.
          * @param {string} id Behavior report GUID
@@ -1614,6 +1678,18 @@ export class BehaviorApi extends BaseAPI {
      */
     public behaviorsIdApiTraceGet(id: string, options?: RawAxiosRequestConfig) {
         return BehaviorApiFp(this.configuration).behaviorsIdApiTraceGet(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a paginated list of artifacts\' metadata such as memdumps, created files, etc ..
+     * @summary List of artifacts\' metadata.
+     * @param {string} id Behavior report GUID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof BehaviorApi
+     */
+    public behaviorsIdArtifactsGet(id: string, options?: RawAxiosRequestConfig) {
+        return BehaviorApiFp(this.configuration).behaviorsIdArtifactsGet(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1671,6 +1747,10 @@ export const CommentApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -1743,6 +1823,10 @@ export const CommentApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Bearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1778,6 +1862,10 @@ export const CommentApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -1997,7 +2085,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
             if (perPage !== undefined) {
                 localVarQueryParameter['per_page'] = perPage;
@@ -2042,7 +2131,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
             if (file !== undefined) { 
@@ -2086,7 +2176,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -2123,7 +2214,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -2160,7 +2252,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -2197,7 +2290,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -2302,7 +2396,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -2339,7 +2434,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -2376,7 +2472,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -2413,7 +2510,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -2494,7 +2592,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -2531,7 +2630,8 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -3139,7 +3239,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
             if (perPage !== undefined) {
                 localVarQueryParameter['per_page'] = perPage;
@@ -3223,7 +3324,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -3265,7 +3367,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
             if (perPage !== undefined) {
                 localVarQueryParameter['per_page'] = perPage;
@@ -3310,7 +3413,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -3350,7 +3454,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -3390,7 +3495,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -3429,7 +3535,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
             if (perPage !== undefined) {
                 localVarQueryParameter['per_page'] = perPage;
@@ -3476,7 +3583,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
             if (perPage !== undefined) {
                 localVarQueryParameter['per_page'] = perPage;
@@ -3521,7 +3629,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -3560,7 +3669,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
             if (perPage !== undefined) {
                 localVarQueryParameter['per_page'] = perPage;
@@ -3608,7 +3718,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -3651,7 +3762,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     
@@ -3693,7 +3805,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
             if (perPage !== undefined) {
                 localVarQueryParameter['per_page'] = perPage;
@@ -3738,7 +3851,8 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarQueryParameter = {} as any;
 
             // authentication Bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
 
 
     

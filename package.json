@@ -11,7 +11,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test:unit": "vitest",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"format": "prettier --plugin-search-dir . --write .",
+		"gen-api": "openapi-generator-cli generate -i ../webapis/docs/swagger.json -g typescript-axios -o src/lib/api"
 	},
 	"type": "module",
 	"devDependencies": {
