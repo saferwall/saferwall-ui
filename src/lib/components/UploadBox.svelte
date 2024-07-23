@@ -14,22 +14,24 @@
 
 	const selectFiles = () => (loggedIn ? inputFiles.click() : null);
 	const onFilesChanges = (e: Event & any) => {
-		for (const file of [...e.target.files]) {
-			processToQueue(file);
-		}
+		[...e.target.files].forEach(processToQueue);
 		(inputFiles as HTMLFormElement).value = '';
 	};
 	const triggerQueueUpdate = () =>
-		(queueFiles = queueFiles.sort((qA, qB) => qA.status - qB.status));
+		(queueFiles = [...queueFiles.sort((qA, qB) => qA.status - qB.status)]);
 
 	const client = new SaferwallClient(session);
-	const processToQueue = (file: File) => {
+	const processToQueue = (file: File, queueItemIndex: number) => {
 		const queue: QueueFile = {
-			file: file,
+			file,
 			status: UploadStatus.UPLOADING,
 			uploadFile: () => {},
 			updateStatus: () => {}
 		};
+		
+		const removeItemAfterDelay = () => {
+			setTimeout(() => { queueFiles = [...queueFiles.toSpliced(queueFiles.indexOf(queue), 1)]; }, 3000);
+		}
 
 		queue.uploadFile = () => {
 			queue.error = undefined;
@@ -38,17 +40,19 @@
 				.uploadFile(file)
 				.then(({ status, sha256 }) => {
 					queue.hash = sha256;
-					queue.status = (status || UploadStatus.UPLOADING) + UploadStatus._START;
+					queue.status = status ?? queue.status;
 					const reCheckStatus = () => setTimeout(() => queue.updateStatus(), 2000);
 					queue.updateStatus = () => {
 						client
 							.getFileStatus(sha256)
 							.then((status) => {
-								console.log({queue, status, "UploadStatus.FINISHED": UploadStatus.FINISHED, "UploadStatus._START": UploadStatus._START})
-								queue.status = status + UploadStatus._START;
+								queue.status = status;
+								triggerQueueUpdate();
 
-								if (status !== UploadStatus.FINISHED - UploadStatus._START) {
+								if (status !== UploadStatus.FINISHED && status !== UploadStatus.FAILED) {
 									reCheckStatus();
+								} else {
+									removeItemAfterDelay();
 								}
 							})
 							.catch(() => reCheckStatus());
@@ -59,9 +63,10 @@
 					triggerQueueUpdate();
 				})
 				.catch(async (err) => {
-					const body = await err.json();
-					queue.error = body.message;
+					queue.error = typeof err.json === "function" ? await err.json().message : err.message;
+					queue.status = UploadStatus.FAILED;
 					triggerQueueUpdate();
+					removeItemAfterDelay();
 				});
 
 			triggerQueueUpdate();
@@ -85,12 +90,7 @@
 
 		<div class="flex flex-col w-full space-y-2">
 			{#each queueFiles as queue}
-				<UploadFileStatus
-					hash={queue.hash}
-					file={queue.file}
-					error={queue.error}
-					status={queue.status}
-					on:reupload={() => queue.uploadFile()}
+				<UploadFileStatus {...queue} on:reupload={() => queue.uploadFile()}
 				/>
 			{/each}
 		</div>

@@ -15,7 +15,7 @@
 	export let hash: string | undefined = undefined;
 
 	$: itemStatus = FILE_UPLOAD_STATUS.find((s) => status === s.value);
-	$: currentStatus = itemStatus?.value || UploadStatus.UPLOADING;
+	$: currentStatus = itemStatus?.value ?? UploadStatus.QUEUEING;
 	$: progress = (currentStatus / UploadStatus.FINISHED) * 100;
 
 	const onAlertClose = () => {
@@ -35,7 +35,7 @@
 			{#if progress < 100 && !error}
 				<Icon name="restart" class="animate-spin" />
 			{/if}
-			<span>{error ? 'Failed' : itemStatus?.title || 'Unknown'}</span>
+			<span>{itemStatus?.title || 'Unknown'}</span>
 		</div>
 	</div>
 
@@ -60,39 +60,40 @@
 		@apply text-red-500;
 	}
 	.status {
-		&--1 {
+		&---1 {
+			@apply bg-red-500;
+		}
+		&--0 {
 			@apply bg-yellow-500;
+		}
+		&--1 {
+			@apply bg-blue-600;
 		}
 		&--2 {
 			@apply bg-green-500;
 		}
 
 		&--3 {
-			@apply bg-blue-600;
-		}
-		&--4 {
 			@apply bg-cyan-500;
-		}
-		&--5 {
-			@apply bg-green-600;
 		}
 	}
 
 	.label {
-		&--1 {
+		&---1 {
+			@apply text-red-500;
+		}
+		&--0 {
 			@apply text-yellow-500;
+		}
+		&--1 {
+			@apply text-blue-600;
 		}
 		&--2 {
 			@apply text-green-500;
 		}
+
 		&--3 {
-			@apply text-blue-600;
-		}
-		&--4 {
 			@apply text-cyan-500;
-		}
-		&--5 {
-			@apply text-green-600;
 		}
 	}
 </style>
