@@ -9,7 +9,7 @@
 	<TableKeyValue header={false} items={Object.entries(data)} deep={true} />
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	:global(.loadConfig tr td:first-child) {
 		@apply max-w-full whitespace-nowrap;
 		@apply pr-4;

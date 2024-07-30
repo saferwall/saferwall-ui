@@ -15,7 +15,7 @@ import type {
 export class SaferwallClient {
 	private session?: Saferwall.Session;
 
-	private get authorization() {
+	get authorization() {
 		if (this.session && this.session.token) {
 			return `Bearer ${this.session.token}`;
 		}

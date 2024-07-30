@@ -57,7 +57,7 @@
 	{/if}
 </article>
 
-<style lang="scss">
+<style lang="postcss">
 	.isRoot {
 		@apply -ml-4;
 	}

@@ -54,7 +54,7 @@
 	</div>
 </Card>
 
-<style lang="scss">
+<style lang="postcss">
 	:global(.card__tabs) {
 		@apply space-y-0;
 

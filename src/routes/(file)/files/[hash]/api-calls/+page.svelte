@@ -352,7 +352,7 @@
 	on:close={() => (filterDrawer = false)}
 />
 
-<style lang="scss">
+<style lang="postcss">
 	table.rows {
 		@apply pr-4 border-separate border-spacing-y-2 w-full;
 

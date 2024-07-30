@@ -19,7 +19,7 @@
 	<span>{label}</span>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.validity {
 		@apply flex items-center space-x-2;
 		@apply font-semibold px-4 py-2.5 rounded w-fit;

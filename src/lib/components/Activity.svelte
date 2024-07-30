@@ -76,7 +76,7 @@
 	</div>
 </article>
 
-<style lang="scss">
+<style lang="postcss">
 	.activity {
 		&__time {
 			@apply text-gray-500;

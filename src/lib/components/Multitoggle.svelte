@@ -60,7 +60,7 @@
 	{/each}
 </ul>
 
-<style lang="scss">
+<style lang="postcss">
 	.multitoggle {
 		@apply inline-flex items-center rounded-full space-x-1;
 

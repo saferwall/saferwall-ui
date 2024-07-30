@@ -3,7 +3,7 @@
 
 	const DEFAULT_AVATAR = '/images/default-avatar.svg';
 
-	export let size: 'base' | 'xs' | 'sm' | 'lg' = 'base';
+	export let size: 'base' | 'xs' | 'sm' | 'md' | 'lg' = 'base';
 	export let image: string | undefined = undefined;
 	export let username: string | undefined = undefined;
 
@@ -34,7 +34,7 @@
 	{/if}
 </a>
 
-<style lang="scss">
+<style lang="postcss">
 	.avatar {
 		@apply rounded-full bg-white overflow-hidden;
 		@apply border border-neutral-500 flex-shrink-0 inline-block;

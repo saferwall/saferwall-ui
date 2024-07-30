@@ -22,7 +22,7 @@
 	{/if}
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.alert {
 		@apply flex items-center justify-between;
 		@apply border p-4 rounded font-medium;

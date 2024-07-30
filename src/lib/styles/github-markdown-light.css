@@ -1,0 +1,1482 @@
+/*light*/
+.markdown-body[data-theme="light"],
+.markdown-body-light {
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	margin: 0;
+	color: #1f2328;
+	background-color: #ffffff;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+	font-size: 16px;
+	line-height: 1.5;
+	word-wrap: break-word;
+	scroll-behavior: auto;
+}
+
+.markdown-body[data-theme="light"] .octicon,
+.markdown-body-light .octicon {
+	display: inline-block;
+	fill: currentColor;
+	vertical-align: text-bottom;
+}
+
+.markdown-body[data-theme="light"] h1:hover .anchor .octicon-link:before,
+.markdown-body-light h1:hover .anchor .octicon-link:before,
+.markdown-body[data-theme="light"] h2:hover .anchor .octicon-link:before,
+.markdown-body-light h2:hover .anchor .octicon-link:before,
+.markdown-body[data-theme="light"] h3:hover .anchor .octicon-link:before,
+.markdown-body-light h3:hover .anchor .octicon-link:before,
+.markdown-body[data-theme="light"] h4:hover .anchor .octicon-link:before,
+.markdown-body-light h4:hover .anchor .octicon-link:before,
+.markdown-body[data-theme="light"] h5:hover .anchor .octicon-link:before,
+.markdown-body-light h5:hover .anchor .octicon-link:before,
+.markdown-body[data-theme="light"] h6:hover .anchor .octicon-link:before,
+.markdown-body-light h6:hover .anchor .octicon-link:before {
+	width: 16px;
+	height: 16px;
+	content: ' ';
+	display: inline-block;
+	background-color: currentColor;
+	-webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+	mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+}
+
+.markdown-body[data-theme="light"] details,
+.markdown-body-light details,
+.markdown-body[data-theme="light"] figcaption,
+.markdown-body-light figcaption,
+.markdown-body[data-theme="light"] figure,
+.markdown-body-light figure {
+	display: block;
+}
+
+.markdown-body[data-theme="light"] summary,
+.markdown-body-light summary {
+	display: list-item;
+}
+
+.markdown-body[data-theme="light"] [hidden],
+.markdown-body-light [hidden] {
+	display: none !important;
+}
+
+.markdown-body[data-theme="light"] a,
+.markdown-body-light a {
+	background-color: transparent;
+	color: #0969da;
+	text-decoration: none;
+}
+
+.markdown-body[data-theme="light"] abbr[title],
+.markdown-body-light abbr[title] {
+	border-bottom: none;
+	-webkit-text-decoration: underline dotted;
+	text-decoration: underline dotted;
+}
+
+.markdown-body[data-theme="light"] b,
+.markdown-body-light b,
+.markdown-body[data-theme="light"] strong,
+.markdown-body-light strong {
+	font-weight: 600;
+}
+
+.markdown-body[data-theme="light"] dfn,
+.markdown-body-light dfn {
+	font-style: italic;
+}
+
+.markdown-body[data-theme="light"] h1,
+.markdown-body-light h1 {
+	margin: 0.67em 0;
+	font-weight: 600;
+	padding-bottom: 0.3em;
+	font-size: 2em;
+	border-bottom: 1px solid #d0d7deb3;
+}
+
+.markdown-body[data-theme="light"] mark,
+.markdown-body-light mark {
+	background-color: #fff8c5;
+	color: #1f2328;
+}
+
+.markdown-body[data-theme="light"] small,
+.markdown-body-light small {
+	font-size: 90%;
+}
+
+.markdown-body[data-theme="light"] sub,
+.markdown-body-light sub,
+.markdown-body[data-theme="light"] sup,
+.markdown-body-light sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+.markdown-body[data-theme="light"] sub,
+.markdown-body-light sub {
+	bottom: -0.25em;
+}
+
+.markdown-body[data-theme="light"] sup,
+.markdown-body-light sup {
+	top: -0.5em;
+}
+
+.markdown-body[data-theme="light"] img,
+.markdown-body-light img {
+	border-style: none;
+	max-width: 100%;
+	box-sizing: content-box;
+	background-color: #ffffff;
+}
+
+.markdown-body[data-theme="light"] code,
+.markdown-body-light code,
+.markdown-body[data-theme="light"] kbd,
+.markdown-body-light kbd,
+.markdown-body[data-theme="light"] pre,
+.markdown-body-light pre,
+.markdown-body[data-theme="light"] samp,
+.markdown-body-light samp {
+	font-family: monospace;
+	font-size: 1em;
+}
+
+.markdown-body[data-theme="light"] figure,
+.markdown-body-light figure {
+	margin: 1em 40px;
+}
+
+.markdown-body[data-theme="light"] hr,
+.markdown-body-light hr {
+	box-sizing: content-box;
+	overflow: hidden;
+	background: transparent;
+	border-bottom: 1px solid #d0d7deb3;
+	height: 0.25em;
+	padding: 0;
+	margin: 24px 0;
+	background-color: #d0d7de;
+	border: 0;
+}
+
+.markdown-body[data-theme="light"] input,
+.markdown-body-light input {
+	font: inherit;
+	margin: 0;
+	overflow: visible;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.markdown-body[data-theme="light"] [type=button],
+.markdown-body-light [type=button],
+.markdown-body[data-theme="light"] [type=reset],
+.markdown-body-light [type=reset],
+.markdown-body[data-theme="light"] [type=submit],
+.markdown-body-light [type=submit] {
+	-webkit-appearance: button;
+	appearance: button;
+}
+
+.markdown-body[data-theme="light"] [type=checkbox],
+.markdown-body-light [type=checkbox],
+.markdown-body[data-theme="light"] [type=radio],
+.markdown-body-light [type=radio] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.markdown-body[data-theme="light"] [type=number]::-webkit-inner-spin-button,
+.markdown-body-light [type=number]::-webkit-inner-spin-button,
+.markdown-body[data-theme="light"] [type=number]::-webkit-outer-spin-button,
+.markdown-body-light [type=number]::-webkit-outer-spin-button {
+	height: auto;
+}
+
+.markdown-body[data-theme="light"] [type=search]::-webkit-search-cancel-button,
+.markdown-body-light [type=search]::-webkit-search-cancel-button,
+.markdown-body[data-theme="light"] [type=search]::-webkit-search-decoration,
+.markdown-body-light [type=search]::-webkit-search-decoration {
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.markdown-body[data-theme="light"] ::-webkit-input-placeholder,
+.markdown-body-light ::-webkit-input-placeholder {
+	color: inherit;
+	opacity: 0.54;
+}
+
+.markdown-body[data-theme="light"] ::-webkit-file-upload-button,
+.markdown-body-light ::-webkit-file-upload-button {
+	-webkit-appearance: button;
+	appearance: button;
+	font: inherit;
+}
+
+.markdown-body[data-theme="light"] a:hover,
+.markdown-body-light a:hover {
+	text-decoration: underline;
+}
+
+.markdown-body[data-theme="light"] ::placeholder,
+.markdown-body-light ::placeholder {
+	color: #636c76;
+	opacity: 1;
+}
+
+.markdown-body[data-theme="light"] hr::before,
+.markdown-body-light hr::before {
+	display: table;
+	content: "";
+}
+
+.markdown-body[data-theme="light"] hr::after,
+.markdown-body-light hr::after {
+	display: table;
+	clear: both;
+	content: "";
+}
+
+.markdown-body[data-theme="light"] table,
+.markdown-body-light table {
+	border-spacing: 0;
+	border-collapse: collapse;
+	display: block;
+	width: max-content;
+	max-width: 100%;
+	overflow: auto;
+}
+
+.markdown-body[data-theme="light"] td,
+.markdown-body-light td,
+.markdown-body[data-theme="light"] th,
+.markdown-body-light th {
+	padding: 0;
+}
+
+.markdown-body[data-theme="light"] details summary,
+.markdown-body-light details summary {
+	cursor: pointer;
+}
+
+.markdown-body[data-theme="light"] details:not([open])>*:not(summary),
+.markdown-body-light details:not([open])>*:not(summary) {
+	display: none;
+}
+
+.markdown-body[data-theme="light"] a:focus,
+.markdown-body-light a:focus,
+.markdown-body[data-theme="light"] [role=button]:focus,
+.markdown-body-light [role=button]:focus {
+	outline: 2px solid #0969da;
+	outline-offset: -2px;
+	box-shadow: none;
+}
+
+.markdown-body[data-theme="light"] input[type=radio]:focus,
+.markdown-body-light input[type=radio]:focus,
+.markdown-body[data-theme="light"] input[type=checkbox]:focus,
+.markdown-body-light input[type=checkbox]:focus {
+	outline: 2px solid #0969da;
+	outline-offset: -2px;
+	box-shadow: none;
+}
+
+.markdown-body[data-theme="light"] a:focus:not(:focus-visible),
+.markdown-body-light a:focus:not(:focus-visible),
+.markdown-body[data-theme="light"] [role=button]:focus:not(:focus-visible),
+.markdown-body-light [role=button]:focus:not(:focus-visible) {
+	outline: solid 1px transparent;
+}
+
+.markdown-body[data-theme="light"] input[type=radio]:focus:not(:focus-visible),
+.markdown-body-light input[type=radio]:focus:not(:focus-visible),
+.markdown-body[data-theme="light"] input[type=checkbox]:focus:not(:focus-visible),
+.markdown-body-light input[type=checkbox]:focus:not(:focus-visible) {
+	outline: solid 1px transparent;
+}
+
+.markdown-body[data-theme="light"] a:focus-visible,
+.markdown-body-light a:focus-visible,
+.markdown-body[data-theme="light"] [role=button]:focus-visible,
+.markdown-body-light [role=button]:focus-visible {
+	outline: 2px solid #0969da;
+	outline-offset: -2px;
+	box-shadow: none;
+}
+
+.markdown-body[data-theme="light"] input[type=radio]:focus-visible,
+.markdown-body-light input[type=radio]:focus-visible,
+.markdown-body[data-theme="light"] input[type=checkbox]:focus-visible,
+.markdown-body-light input[type=checkbox]:focus-visible {
+	outline: 2px solid #0969da;
+	outline-offset: -2px;
+	box-shadow: none;
+}
+
+.markdown-body[data-theme="light"] a:not([class]):focus,
+.markdown-body-light a:not([class]):focus,
+.markdown-body[data-theme="light"] a:not([class]):focus-visible,
+.markdown-body-light a:not([class]):focus-visible {
+	outline-offset: 0;
+}
+
+.markdown-body[data-theme="light"] input[type=radio]:focus,
+.markdown-body-light input[type=radio]:focus,
+.markdown-body[data-theme="light"] input[type=radio]:focus-visible,
+.markdown-body-light input[type=radio]:focus-visible {
+	outline-offset: 0;
+}
+
+.markdown-body[data-theme="light"] input[type=checkbox]:focus,
+.markdown-body-light input[type=checkbox]:focus,
+.markdown-body[data-theme="light"] input[type=checkbox]:focus-visible,
+.markdown-body-light input[type=checkbox]:focus-visible {
+	outline-offset: 0;
+}
+
+.markdown-body[data-theme="light"] kbd,
+.markdown-body-light kbd {
+	display: inline-block;
+	padding: 3px 5px;
+	font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+	line-height: 10px;
+	color: #1f2328;
+	vertical-align: middle;
+	background-color: #f6f8fa;
+	border: solid 1px #afb8c133;
+	border-bottom-color: #afb8c133;
+	border-radius: 6px;
+	box-shadow: inset 0 -1px 0 #afb8c133;
+}
+
+.markdown-body[data-theme="light"] h1,
+.markdown-body-light h1,
+.markdown-body[data-theme="light"] h2,
+.markdown-body-light h2,
+.markdown-body[data-theme="light"] h3,
+.markdown-body-light h3,
+.markdown-body[data-theme="light"] h4,
+.markdown-body-light h4,
+.markdown-body[data-theme="light"] h5,
+.markdown-body-light h5,
+.markdown-body[data-theme="light"] h6,
+.markdown-body-light h6 {
+	margin-top: 24px;
+	margin-bottom: 16px;
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+.markdown-body[data-theme="light"] h2,
+.markdown-body-light h2 {
+	font-weight: 600;
+	padding-bottom: 0.3em;
+	font-size: 1.5em;
+	border-bottom: 1px solid #d0d7deb3;
+}
+
+.markdown-body[data-theme="light"] h3,
+.markdown-body-light h3 {
+	font-weight: 600;
+	font-size: 1.25em;
+}
+
+.markdown-body[data-theme="light"] h4,
+.markdown-body-light h4 {
+	font-weight: 600;
+	font-size: 1em;
+}
+
+.markdown-body[data-theme="light"] h5,
+.markdown-body-light h5 {
+	font-weight: 600;
+	font-size: 0.875em;
+}
+
+.markdown-body[data-theme="light"] h6,
+.markdown-body-light h6 {
+	font-weight: 600;
+	font-size: 0.85em;
+	color: #636c76;
+}
+
+.markdown-body[data-theme="light"] p,
+.markdown-body-light p {
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+.markdown-body[data-theme="light"] blockquote,
+.markdown-body-light blockquote {
+	margin: 0;
+	padding: 0 1em;
+	color: #636c76;
+	border-left: 0.25em solid #d0d7de;
+}
+
+.markdown-body[data-theme="light"] ul,
+.markdown-body-light ul {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 2em;
+}
+
+.markdown-body[data-theme="light"] ol,
+.markdown-body-light ol {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 2em;
+}
+
+.markdown-body[data-theme="light"] ol ol,
+.markdown-body-light ol ol {
+	list-style-type: lower-roman;
+}
+
+.markdown-body[data-theme="light"] ul ol,
+.markdown-body-light ul ol {
+	list-style-type: lower-roman;
+}
+
+.markdown-body[data-theme="light"] ul ul ol,
+.markdown-body-light ul ul ol,
+.markdown-body[data-theme="light"] ul ol ol,
+.markdown-body-light ul ol ol {
+	list-style-type: lower-alpha;
+}
+
+.markdown-body[data-theme="light"] ol ul ol,
+.markdown-body-light ol ul ol,
+.markdown-body[data-theme="light"] ol ol ol,
+.markdown-body-light ol ol ol {
+	list-style-type: lower-alpha;
+}
+
+.markdown-body[data-theme="light"] dd,
+.markdown-body-light dd {
+	margin-left: 0;
+}
+
+.markdown-body[data-theme="light"] tt,
+.markdown-body-light tt,
+.markdown-body[data-theme="light"] code,
+.markdown-body-light code,
+.markdown-body[data-theme="light"] samp,
+.markdown-body-light samp {
+	font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+	font-size: 12px;
+}
+
+.markdown-body[data-theme="light"] pre,
+.markdown-body-light pre {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+	font-size: 12px;
+	word-wrap: normal;
+}
+
+.markdown-body[data-theme="light"] .octicon,
+.markdown-body-light .octicon {
+	display: inline-block;
+	overflow: visible !important;
+	vertical-align: text-bottom;
+	fill: currentColor;
+}
+
+.markdown-body[data-theme="light"] input::-webkit-outer-spin-button,
+.markdown-body-light input::-webkit-outer-spin-button,
+.markdown-body[data-theme="light"] input::-webkit-inner-spin-button,
+.markdown-body-light input::-webkit-inner-spin-button {
+	margin: 0;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.markdown-body[data-theme="light"] .mr-2,
+.markdown-body-light .mr-2 {
+	margin-right: 0.5rem !important;
+}
+
+.markdown-body[data-theme="light"]::before,
+.markdown-body-light::before {
+	display: table;
+	content: "";
+}
+
+.markdown-body[data-theme="light"]::after,
+.markdown-body-light::after {
+	display: table;
+	clear: both;
+	content: "";
+}
+
+.markdown-body[data-theme="light"]>*:first-child,
+.markdown-body-light>*:first-child {
+	margin-top: 0 !important;
+}
+
+.markdown-body[data-theme="light"]>*:last-child,
+.markdown-body-light>*:last-child {
+	margin-bottom: 0 !important;
+}
+
+.markdown-body[data-theme="light"] a:not([href]),
+.markdown-body-light a:not([href]) {
+	color: inherit;
+	text-decoration: none;
+}
+
+.markdown-body[data-theme="light"] .absent,
+.markdown-body-light .absent {
+	color: #d1242f;
+}
+
+.markdown-body[data-theme="light"] .anchor,
+.markdown-body-light .anchor {
+	float: left;
+	padding-right: 4px;
+	margin-left: -20px;
+	line-height: 1;
+}
+
+.markdown-body[data-theme="light"] .anchor:focus,
+.markdown-body-light .anchor:focus {
+	outline: none;
+}
+
+.markdown-body[data-theme="light"] p,
+.markdown-body-light p,
+.markdown-body[data-theme="light"] blockquote,
+.markdown-body-light blockquote,
+.markdown-body[data-theme="light"] ul,
+.markdown-body-light ul,
+.markdown-body[data-theme="light"] ol,
+.markdown-body-light ol,
+.markdown-body[data-theme="light"] dl,
+.markdown-body-light dl,
+.markdown-body[data-theme="light"] table,
+.markdown-body-light table,
+.markdown-body[data-theme="light"] pre,
+.markdown-body-light pre,
+.markdown-body[data-theme="light"] details,
+.markdown-body-light details {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+.markdown-body[data-theme="light"] blockquote> :first-child,
+.markdown-body-light blockquote> :first-child {
+	margin-top: 0;
+}
+
+.markdown-body[data-theme="light"] blockquote> :last-child,
+.markdown-body-light blockquote> :last-child {
+	margin-bottom: 0;
+}
+
+.markdown-body[data-theme="light"] h1 .octicon-link,
+.markdown-body-light h1 .octicon-link,
+.markdown-body[data-theme="light"] h2 .octicon-link,
+.markdown-body-light h2 .octicon-link,
+.markdown-body[data-theme="light"] h3 .octicon-link,
+.markdown-body-light h3 .octicon-link,
+.markdown-body[data-theme="light"] h4 .octicon-link,
+.markdown-body-light h4 .octicon-link,
+.markdown-body[data-theme="light"] h5 .octicon-link,
+.markdown-body-light h5 .octicon-link,
+.markdown-body[data-theme="light"] h6 .octicon-link,
+.markdown-body-light h6 .octicon-link {
+	color: #1f2328;
+	vertical-align: middle;
+	visibility: hidden;
+}
+
+.markdown-body[data-theme="light"] h1:hover .anchor,
+.markdown-body-light h1:hover .anchor,
+.markdown-body[data-theme="light"] h2:hover .anchor,
+.markdown-body-light h2:hover .anchor,
+.markdown-body[data-theme="light"] h3:hover .anchor,
+.markdown-body-light h3:hover .anchor,
+.markdown-body[data-theme="light"] h4:hover .anchor,
+.markdown-body-light h4:hover .anchor,
+.markdown-body[data-theme="light"] h5:hover .anchor,
+.markdown-body-light h5:hover .anchor,
+.markdown-body[data-theme="light"] h6:hover .anchor,
+.markdown-body-light h6:hover .anchor {
+	text-decoration: none;
+}
+
+.markdown-body[data-theme="light"] h1:hover .anchor .octicon-link,
+.markdown-body-light h1:hover .anchor .octicon-link,
+.markdown-body[data-theme="light"] h2:hover .anchor .octicon-link,
+.markdown-body-light h2:hover .anchor .octicon-link,
+.markdown-body[data-theme="light"] h3:hover .anchor .octicon-link,
+.markdown-body-light h3:hover .anchor .octicon-link,
+.markdown-body[data-theme="light"] h4:hover .anchor .octicon-link,
+.markdown-body-light h4:hover .anchor .octicon-link,
+.markdown-body[data-theme="light"] h5:hover .anchor .octicon-link,
+.markdown-body-light h5:hover .anchor .octicon-link,
+.markdown-body[data-theme="light"] h6:hover .anchor .octicon-link,
+.markdown-body-light h6:hover .anchor .octicon-link {
+	visibility: visible;
+}
+
+.markdown-body[data-theme="light"] h1 tt,
+.markdown-body-light h1 tt,
+.markdown-body[data-theme="light"] h1 code,
+.markdown-body-light h1 code {
+	padding: 0 0.2em;
+	font-size: inherit;
+}
+
+.markdown-body[data-theme="light"] h2 tt,
+.markdown-body-light h2 tt,
+.markdown-body[data-theme="light"] h2 code,
+.markdown-body-light h2 code {
+	padding: 0 0.2em;
+	font-size: inherit;
+}
+
+.markdown-body[data-theme="light"] h3 tt,
+.markdown-body-light h3 tt,
+.markdown-body[data-theme="light"] h3 code,
+.markdown-body-light h3 code {
+	padding: 0 0.2em;
+	font-size: inherit;
+}
+
+.markdown-body[data-theme="light"] h4 tt,
+.markdown-body-light h4 tt,
+.markdown-body[data-theme="light"] h4 code,
+.markdown-body-light h4 code {
+	padding: 0 0.2em;
+	font-size: inherit;
+}
+
+.markdown-body[data-theme="light"] h5 tt,
+.markdown-body-light h5 tt,
+.markdown-body[data-theme="light"] h5 code,
+.markdown-body-light h5 code {
+	padding: 0 0.2em;
+	font-size: inherit;
+}
+
+.markdown-body[data-theme="light"] h6 tt,
+.markdown-body-light h6 tt,
+.markdown-body[data-theme="light"] h6 code,
+.markdown-body-light h6 code {
+	padding: 0 0.2em;
+	font-size: inherit;
+}
+
+.markdown-body[data-theme="light"] summary h1,
+.markdown-body-light summary h1,
+.markdown-body[data-theme="light"] summary h2,
+.markdown-body-light summary h2,
+.markdown-body[data-theme="light"] summary h3,
+.markdown-body-light summary h3,
+.markdown-body[data-theme="light"] summary h4,
+.markdown-body-light summary h4,
+.markdown-body[data-theme="light"] summary h5,
+.markdown-body-light summary h5,
+.markdown-body[data-theme="light"] summary h6,
+.markdown-body-light summary h6 {
+	display: inline-block;
+}
+
+.markdown-body[data-theme="light"] summary h1 .anchor,
+.markdown-body-light summary h1 .anchor,
+.markdown-body[data-theme="light"] summary h2 .anchor,
+.markdown-body-light summary h2 .anchor,
+.markdown-body[data-theme="light"] summary h3 .anchor,
+.markdown-body-light summary h3 .anchor,
+.markdown-body[data-theme="light"] summary h4 .anchor,
+.markdown-body-light summary h4 .anchor,
+.markdown-body[data-theme="light"] summary h5 .anchor,
+.markdown-body-light summary h5 .anchor,
+.markdown-body[data-theme="light"] summary h6 .anchor,
+.markdown-body-light summary h6 .anchor {
+	margin-left: -40px;
+}
+
+.markdown-body[data-theme="light"] summary h1,
+.markdown-body-light summary h1,
+.markdown-body[data-theme="light"] summary h2,
+.markdown-body-light summary h2 {
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.markdown-body[data-theme="light"] ul.no-list,
+.markdown-body-light ul.no-list {
+	padding: 0;
+	list-style-type: none;
+}
+
+.markdown-body[data-theme="light"] ol.no-list,
+.markdown-body-light ol.no-list {
+	padding: 0;
+	list-style-type: none;
+}
+
+.markdown-body[data-theme="light"] ol[type="a s"],
+.markdown-body-light ol[type="a s"] {
+	list-style-type: lower-alpha;
+}
+
+.markdown-body[data-theme="light"] ol[type="A s"],
+.markdown-body-light ol[type="A s"] {
+	list-style-type: upper-alpha;
+}
+
+.markdown-body[data-theme="light"] ol[type="i s"],
+.markdown-body-light ol[type="i s"] {
+	list-style-type: lower-roman;
+}
+
+.markdown-body[data-theme="light"] ol[type="I s"],
+.markdown-body-light ol[type="I s"] {
+	list-style-type: upper-roman;
+}
+
+.markdown-body[data-theme="light"] ol[type="1"],
+.markdown-body-light ol[type="1"] {
+	list-style-type: decimal;
+}
+
+.markdown-body[data-theme="light"] div>ol:not([type]),
+.markdown-body-light div>ol:not([type]) {
+	list-style-type: decimal;
+}
+
+.markdown-body[data-theme="light"] ul ul,
+.markdown-body-light ul ul,
+.markdown-body[data-theme="light"] ul ol,
+.markdown-body-light ul ol {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.markdown-body[data-theme="light"] ol ol,
+.markdown-body-light ol ol,
+.markdown-body[data-theme="light"] ol ul,
+.markdown-body-light ol ul {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.markdown-body[data-theme="light"] li>p,
+.markdown-body-light li>p {
+	margin-top: 16px;
+}
+
+.markdown-body[data-theme="light"] li+li,
+.markdown-body-light li+li {
+	margin-top: 0.25em;
+}
+
+.markdown-body[data-theme="light"] dl,
+.markdown-body-light dl {
+	padding: 0;
+}
+
+.markdown-body[data-theme="light"] dl dt,
+.markdown-body-light dl dt {
+	padding: 0;
+	margin-top: 16px;
+	font-size: 1em;
+	font-style: italic;
+	font-weight: 600;
+}
+
+.markdown-body[data-theme="light"] dl dd,
+.markdown-body-light dl dd {
+	padding: 0 16px;
+	margin-bottom: 16px;
+}
+
+.markdown-body[data-theme="light"] table th,
+.markdown-body-light table th {
+	font-weight: 600;
+	padding: 6px 13px;
+	border: 1px solid #d0d7de;
+}
+
+.markdown-body[data-theme="light"] table td,
+.markdown-body-light table td {
+	padding: 6px 13px;
+	border: 1px solid #d0d7de;
+}
+
+.markdown-body[data-theme="light"] table td> :last-child,
+.markdown-body-light table td> :last-child {
+	margin-bottom: 0;
+}
+
+.markdown-body[data-theme="light"] table tr,
+.markdown-body-light table tr {
+	background-color: #ffffff;
+	border-top: 1px solid #d0d7deb3;
+}
+
+.markdown-body[data-theme="light"] table tr:nth-child(2n),
+.markdown-body-light table tr:nth-child(2n) {
+	background-color: #f6f8fa;
+}
+
+.markdown-body[data-theme="light"] table img,
+.markdown-body-light table img {
+	background-color: transparent;
+}
+
+.markdown-body[data-theme="light"] img[align=right],
+.markdown-body-light img[align=right] {
+	padding-left: 20px;
+}
+
+.markdown-body[data-theme="light"] img[align=left],
+.markdown-body-light img[align=left] {
+	padding-right: 20px;
+}
+
+.markdown-body[data-theme="light"] .emoji,
+.markdown-body-light .emoji {
+	max-width: none;
+	vertical-align: text-top;
+	background-color: transparent;
+}
+
+.markdown-body[data-theme="light"] span.frame,
+.markdown-body-light span.frame {
+	display: block;
+	overflow: hidden;
+}
+
+.markdown-body[data-theme="light"] span.frame>span,
+.markdown-body-light span.frame>span {
+	display: block;
+	float: left;
+	width: auto;
+	padding: 7px;
+	margin: 13px 0 0;
+	overflow: hidden;
+	border: 1px solid #d0d7de;
+}
+
+.markdown-body[data-theme="light"] span.frame span img,
+.markdown-body-light span.frame span img {
+	display: block;
+	float: left;
+}
+
+.markdown-body[data-theme="light"] span.frame span span,
+.markdown-body-light span.frame span span {
+	display: block;
+	padding: 5px 0 0;
+	clear: both;
+	color: #1f2328;
+}
+
+.markdown-body[data-theme="light"] span.align-center,
+.markdown-body-light span.align-center {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body[data-theme="light"] span.align-center>span,
+.markdown-body-light span.align-center>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: center;
+}
+
+.markdown-body[data-theme="light"] span.align-center span img,
+.markdown-body-light span.align-center span img {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.markdown-body[data-theme="light"] span.align-right,
+.markdown-body-light span.align-right {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body[data-theme="light"] span.align-right>span,
+.markdown-body-light span.align-right>span {
+	display: block;
+	margin: 13px 0 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body[data-theme="light"] span.align-right span img,
+.markdown-body-light span.align-right span img {
+	margin: 0;
+	text-align: right;
+}
+
+.markdown-body[data-theme="light"] span.float-left,
+.markdown-body-light span.float-left {
+	display: block;
+	float: left;
+	margin-right: 13px;
+	overflow: hidden;
+}
+
+.markdown-body[data-theme="light"] span.float-left span,
+.markdown-body-light span.float-left span {
+	margin: 13px 0 0;
+}
+
+.markdown-body[data-theme="light"] span.float-right,
+.markdown-body-light span.float-right {
+	display: block;
+	float: right;
+	margin-left: 13px;
+	overflow: hidden;
+}
+
+.markdown-body[data-theme="light"] span.float-right>span,
+.markdown-body-light span.float-right>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body[data-theme="light"] code,
+.markdown-body-light code,
+.markdown-body[data-theme="light"] tt,
+.markdown-body-light tt {
+	padding: 0.2em 0.4em;
+	margin: 0;
+	font-size: 85%;
+	white-space: break-spaces;
+	background-color: #afb8c133;
+	border-radius: 6px;
+}
+
+.markdown-body[data-theme="light"] code br,
+.markdown-body-light code br,
+.markdown-body[data-theme="light"] tt br,
+.markdown-body-light tt br {
+	display: none;
+}
+
+.markdown-body[data-theme="light"] del code,
+.markdown-body-light del code {
+	text-decoration: inherit;
+}
+
+.markdown-body[data-theme="light"] samp,
+.markdown-body-light samp {
+	font-size: 85%;
+}
+
+.markdown-body[data-theme="light"] pre code,
+.markdown-body-light pre code {
+	font-size: 100%;
+}
+
+.markdown-body[data-theme="light"] pre>code,
+.markdown-body-light pre>code {
+	padding: 0;
+	margin: 0;
+	word-break: normal;
+	white-space: pre;
+	background: transparent;
+	border: 0;
+}
+
+.markdown-body[data-theme="light"] .highlight,
+.markdown-body-light .highlight {
+	margin-bottom: 16px;
+}
+
+.markdown-body[data-theme="light"] .highlight pre,
+.markdown-body-light .highlight pre {
+	margin-bottom: 0;
+	word-break: normal;
+	padding: 16px;
+	overflow: auto;
+	font-size: 85%;
+	line-height: 1.45;
+	color: #1f2328;
+	background-color: #f6f8fa;
+	border-radius: 6px;
+}
+
+.markdown-body[data-theme="light"] pre,
+.markdown-body-light pre {
+	padding: 16px;
+	overflow: auto;
+	font-size: 85%;
+	line-height: 1.45;
+	color: #1f2328;
+	background-color: #f6f8fa;
+	border-radius: 6px;
+}
+
+.markdown-body[data-theme="light"] pre code,
+.markdown-body-light pre code,
+.markdown-body[data-theme="light"] pre tt,
+.markdown-body-light pre tt {
+	display: inline;
+	max-width: auto;
+	padding: 0;
+	margin: 0;
+	overflow: visible;
+	line-height: inherit;
+	word-wrap: normal;
+	background-color: transparent;
+	border: 0;
+}
+
+.markdown-body[data-theme="light"] .csv-data td,
+.markdown-body-light .csv-data td,
+.markdown-body[data-theme="light"] .csv-data th,
+.markdown-body-light .csv-data th {
+	padding: 5px;
+	overflow: hidden;
+	font-size: 12px;
+	line-height: 1;
+	text-align: left;
+	white-space: nowrap;
+}
+
+.markdown-body[data-theme="light"] .csv-data .blob-num,
+.markdown-body-light .csv-data .blob-num {
+	padding: 10px 8px 9px;
+	text-align: right;
+	background: #ffffff;
+	border: 0;
+}
+
+.markdown-body[data-theme="light"] .csv-data tr,
+.markdown-body-light .csv-data tr {
+	border-top: 0;
+}
+
+.markdown-body[data-theme="light"] .csv-data th,
+.markdown-body-light .csv-data th {
+	font-weight: 600;
+	background: #f6f8fa;
+	border-top: 0;
+}
+
+.markdown-body[data-theme="light"] [data-footnote-ref]::before,
+.markdown-body-light [data-footnote-ref]::before {
+	content: "[";
+}
+
+.markdown-body[data-theme="light"] [data-footnote-ref]::after,
+.markdown-body-light [data-footnote-ref]::after {
+	content: "]";
+}
+
+.markdown-body[data-theme="light"] .footnotes,
+.markdown-body-light .footnotes {
+	font-size: 12px;
+	color: #636c76;
+	border-top: 1px solid #d0d7de;
+}
+
+.markdown-body[data-theme="light"] .footnotes ol,
+.markdown-body-light .footnotes ol {
+	padding-left: 16px;
+}
+
+.markdown-body[data-theme="light"] .footnotes ol ul,
+.markdown-body-light .footnotes ol ul {
+	display: inline-block;
+	padding-left: 16px;
+	margin-top: 16px;
+}
+
+.markdown-body[data-theme="light"] .footnotes li,
+.markdown-body-light .footnotes li {
+	position: relative;
+}
+
+.markdown-body[data-theme="light"] .footnotes li:target,
+.markdown-body-light .footnotes li:target {
+	color: #1f2328;
+}
+
+.markdown-body[data-theme="light"] .footnotes li:target::before,
+.markdown-body-light .footnotes li:target::before {
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	bottom: -8px;
+	left: -24px;
+	pointer-events: none;
+	content: "";
+	border: 2px solid #0969da;
+	border-radius: 6px;
+}
+
+.markdown-body[data-theme="light"] .footnotes .data-footnote-backref g-emoji,
+.markdown-body-light .footnotes .data-footnote-backref g-emoji {
+	font-family: monospace;
+}
+
+.markdown-body[data-theme="light"] .pl-c,
+.markdown-body-light .pl-c {
+	color: #57606a;
+}
+
+.markdown-body[data-theme="light"] .pl-c1,
+.markdown-body-light .pl-c1,
+.markdown-body[data-theme="light"] .pl-s .pl-v,
+.markdown-body-light .pl-s .pl-v {
+	color: #0550ae;
+}
+
+.markdown-body[data-theme="light"] .pl-e,
+.markdown-body-light .pl-e,
+.markdown-body[data-theme="light"] .pl-en,
+.markdown-body-light .pl-en {
+	color: #6639ba;
+}
+
+.markdown-body[data-theme="light"] .pl-smi,
+.markdown-body-light .pl-smi,
+.markdown-body[data-theme="light"] .pl-s .pl-s1,
+.markdown-body-light .pl-s .pl-s1 {
+	color: #24292f;
+}
+
+.markdown-body[data-theme="light"] .pl-ent,
+.markdown-body-light .pl-ent {
+	color: #0550ae;
+}
+
+.markdown-body[data-theme="light"] .pl-k,
+.markdown-body-light .pl-k {
+	color: #cf222e;
+}
+
+.markdown-body[data-theme="light"] .pl-s,
+.markdown-body-light .pl-s,
+.markdown-body[data-theme="light"] .pl-pds,
+.markdown-body-light .pl-pds,
+.markdown-body[data-theme="light"] .pl-s .pl-pse .pl-s1,
+.markdown-body-light .pl-s .pl-pse .pl-s1 {
+	color: #0a3069;
+}
+
+.markdown-body[data-theme="light"] .pl-sr,
+.markdown-body-light .pl-sr {
+	color: #0a3069;
+}
+
+.markdown-body[data-theme="light"] .pl-sr .pl-cce,
+.markdown-body-light .pl-sr .pl-cce,
+.markdown-body[data-theme="light"] .pl-sr .pl-sre,
+.markdown-body-light .pl-sr .pl-sre,
+.markdown-body[data-theme="light"] .pl-sr .pl-sra,
+.markdown-body-light .pl-sr .pl-sra {
+	color: #0a3069;
+}
+
+.markdown-body[data-theme="light"] .pl-v,
+.markdown-body-light .pl-v,
+.markdown-body[data-theme="light"] .pl-smw,
+.markdown-body-light .pl-smw {
+	color: #953800;
+}
+
+.markdown-body[data-theme="light"] .pl-bu,
+.markdown-body-light .pl-bu {
+	color: #82071e;
+}
+
+.markdown-body[data-theme="light"] .pl-ii,
+.markdown-body-light .pl-ii {
+	color: #f6f8fa;
+	background-color: #82071e;
+}
+
+.markdown-body[data-theme="light"] .pl-c2,
+.markdown-body-light .pl-c2 {
+	color: #f6f8fa;
+	background-color: #cf222e;
+}
+
+.markdown-body[data-theme="light"] .pl-sr .pl-cce,
+.markdown-body-light .pl-sr .pl-cce {
+	font-weight: bold;
+	color: #116329;
+}
+
+.markdown-body[data-theme="light"] .pl-ml,
+.markdown-body-light .pl-ml {
+	color: #3b2300;
+}
+
+.markdown-body[data-theme="light"] .pl-mh,
+.markdown-body-light .pl-mh {
+	font-weight: bold;
+	color: #0550ae;
+}
+
+.markdown-body[data-theme="light"] .pl-mh .pl-en,
+.markdown-body-light .pl-mh .pl-en {
+	font-weight: bold;
+	color: #0550ae;
+}
+
+.markdown-body[data-theme="light"] .pl-ms,
+.markdown-body-light .pl-ms {
+	font-weight: bold;
+	color: #0550ae;
+}
+
+.markdown-body[data-theme="light"] .pl-mi,
+.markdown-body-light .pl-mi {
+	font-style: italic;
+	color: #24292f;
+}
+
+.markdown-body[data-theme="light"] .pl-mb,
+.markdown-body-light .pl-mb {
+	font-weight: bold;
+	color: #24292f;
+}
+
+.markdown-body[data-theme="light"] .pl-md,
+.markdown-body-light .pl-md {
+	color: #82071e;
+	background-color: #ffebe9;
+}
+
+.markdown-body[data-theme="light"] .pl-mi1,
+.markdown-body-light .pl-mi1 {
+	color: #116329;
+	background-color: #dafbe1;
+}
+
+.markdown-body[data-theme="light"] .pl-mc,
+.markdown-body-light .pl-mc {
+	color: #953800;
+	background-color: #ffd8b5;
+}
+
+.markdown-body[data-theme="light"] .pl-mi2,
+.markdown-body-light .pl-mi2 {
+	color: #eaeef2;
+	background-color: #0550ae;
+}
+
+.markdown-body[data-theme="light"] .pl-mdr,
+.markdown-body-light .pl-mdr {
+	font-weight: bold;
+	color: #8250df;
+}
+
+.markdown-body[data-theme="light"] .pl-ba,
+.markdown-body-light .pl-ba {
+	color: #57606a;
+}
+
+.markdown-body[data-theme="light"] .pl-sg,
+.markdown-body-light .pl-sg {
+	color: #8c959f;
+}
+
+.markdown-body[data-theme="light"] .pl-corl,
+.markdown-body-light .pl-corl {
+	text-decoration: underline;
+	color: #0a3069;
+}
+
+.markdown-body[data-theme="light"] [role=button]:focus:not(:focus-visible),
+.markdown-body-light [role=button]:focus:not(:focus-visible),
+.markdown-body[data-theme="light"] [role=tabpanel][tabindex="0"]:focus:not(:focus-visible),
+.markdown-body-light [role=tabpanel][tabindex="0"]:focus:not(:focus-visible),
+.markdown-body[data-theme="light"] button:focus:not(:focus-visible),
+.markdown-body-light button:focus:not(:focus-visible),
+.markdown-body[data-theme="light"] summary:focus:not(:focus-visible),
+.markdown-body-light summary:focus:not(:focus-visible),
+.markdown-body[data-theme="light"] a:focus:not(:focus-visible),
+.markdown-body-light a:focus:not(:focus-visible) {
+	outline: none;
+	box-shadow: none;
+}
+
+.markdown-body[data-theme="light"] [tabindex="0"]:focus:not(:focus-visible),
+.markdown-body-light [tabindex="0"]:focus:not(:focus-visible),
+.markdown-body[data-theme="light"] details-dialog:focus:not(:focus-visible),
+.markdown-body-light details-dialog:focus:not(:focus-visible) {
+	outline: none;
+}
+
+.markdown-body[data-theme="light"] g-emoji,
+.markdown-body-light g-emoji {
+	display: inline-block;
+	min-width: 1ch;
+	font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	font-size: 1em;
+	font-style: normal !important;
+	font-weight: 400;
+	line-height: 1;
+	vertical-align: -0.075em;
+}
+
+.markdown-body[data-theme="light"] g-emoji img,
+.markdown-body-light g-emoji img {
+	width: 1em;
+	height: 1em;
+}
+
+.markdown-body[data-theme="light"] .task-list-item,
+.markdown-body-light .task-list-item {
+	list-style-type: none;
+}
+
+.markdown-body[data-theme="light"] .task-list-item label,
+.markdown-body-light .task-list-item label {
+	font-weight: 400;
+}
+
+.markdown-body[data-theme="light"] .task-list-item.enabled label,
+.markdown-body-light .task-list-item.enabled label {
+	cursor: pointer;
+}
+
+.markdown-body[data-theme="light"] .task-list-item+.task-list-item,
+.markdown-body-light .task-list-item+.task-list-item {
+	margin-top: 0.25rem;
+}
+
+.markdown-body[data-theme="light"] .task-list-item .handle,
+.markdown-body-light .task-list-item .handle {
+	display: none;
+}
+
+.markdown-body[data-theme="light"] .task-list-item-checkbox,
+.markdown-body-light .task-list-item-checkbox {
+	margin: 0 0.2em 0.25em -1.4em;
+	vertical-align: middle;
+}
+
+.markdown-body[data-theme="light"] .contains-task-list,
+.markdown-body-light .contains-task-list {
+	position: relative;
+}
+
+.markdown-body[data-theme="light"] .contains-task-list:dir(rtl) .task-list-item-checkbox,
+.markdown-body-light .contains-task-list:dir(rtl) .task-list-item-checkbox {
+	margin: 0 -1.6em 0.25em 0.2em;
+}
+
+.markdown-body[data-theme="light"] .contains-task-list:hover .task-list-item-convert-container,
+.markdown-body-light .contains-task-list:hover .task-list-item-convert-container,
+.markdown-body[data-theme="light"] .contains-task-list:focus-within .task-list-item-convert-container,
+.markdown-body-light .contains-task-list:focus-within .task-list-item-convert-container {
+	display: block;
+	width: auto;
+	height: 24px;
+	overflow: visible;
+	clip: auto;
+}
+
+.markdown-body[data-theme="light"] ::-webkit-calendar-picker-indicator,
+.markdown-body-light ::-webkit-calendar-picker-indicator {
+	filter: invert(50%);
+}
+
+.markdown-body[data-theme="light"] .markdown-alert,
+.markdown-body-light .markdown-alert {
+	padding: 0.5rem 1rem;
+	margin-bottom: 1rem;
+	color: inherit;
+	border-left: 0.25em solid #d0d7de;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert> :first-child,
+.markdown-body-light .markdown-alert> :first-child {
+	margin-top: 0;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert> :last-child,
+.markdown-body-light .markdown-alert> :last-child {
+	margin-bottom: 0;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert .markdown-alert-title,
+.markdown-body-light .markdown-alert .markdown-alert-title {
+	display: flex;
+	font-weight: 500;
+	align-items: center;
+	line-height: 1;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert.markdown-alert-note,
+.markdown-body-light .markdown-alert.markdown-alert-note {
+	border-left-color: #0969da;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert.markdown-alert-note .markdown-alert-title,
+.markdown-body-light .markdown-alert.markdown-alert-note .markdown-alert-title {
+	color: #0969da;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert.markdown-alert-important,
+.markdown-body-light .markdown-alert.markdown-alert-important {
+	border-left-color: #8250df;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert.markdown-alert-important .markdown-alert-title,
+.markdown-body-light .markdown-alert.markdown-alert-important .markdown-alert-title {
+	color: #8250df;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert.markdown-alert-warning,
+.markdown-body-light .markdown-alert.markdown-alert-warning {
+	border-left-color: #bf8700;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert.markdown-alert-warning .markdown-alert-title,
+.markdown-body-light .markdown-alert.markdown-alert-warning .markdown-alert-title {
+	color: #9a6700;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert.markdown-alert-tip,
+.markdown-body-light .markdown-alert.markdown-alert-tip {
+	border-left-color: #1a7f37;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert.markdown-alert-tip .markdown-alert-title,
+.markdown-body-light .markdown-alert.markdown-alert-tip .markdown-alert-title {
+	color: #1a7f37;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert.markdown-alert-caution,
+.markdown-body-light .markdown-alert.markdown-alert-caution {
+	border-left-color: #cf222e;
+}
+
+.markdown-body[data-theme="light"] .markdown-alert.markdown-alert-caution .markdown-alert-title,
+.markdown-body-light .markdown-alert.markdown-alert-caution .markdown-alert-title {
+	color: #d1242f;
+}
+
+.markdown-body[data-theme="light"]>*:first-child>.heading-element:first-child,
+.markdown-body-light>*:first-child>.heading-element:first-child {
+	margin-top: 0 !important;
+}

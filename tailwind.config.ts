@@ -1,5 +1,7 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import { Config } from "tailwindcss";
+
+
+export default {
 	darkMode: 'class',
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	important: true,
@@ -9,9 +11,9 @@ module.exports = {
 				primary: 'Inter'
 			},
 			fontWeight: {
-				regular: 400,
-				medium: 500,
-				semibold: 600
+				regular: "400",
+				medium: "500",
+				semibold: "600"
 			},
 			fontSize: {
 				'xs': '14px',
@@ -105,4 +107,4 @@ module.exports = {
 		}
 	},
 	plugins: [require('@tailwindcss/typography')]
-};
+} satisfies Config;

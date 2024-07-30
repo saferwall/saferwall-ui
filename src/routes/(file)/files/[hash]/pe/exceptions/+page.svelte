@@ -126,7 +126,7 @@
 	<ButtonShowMore mode="more" bind:expanded on:mouseup={() => paginationTrigger()} />
 </article>
 
-<style lang="scss">
+<style lang="postcss">
 	table.exceptions {
 		@apply pr-4 border-separate border-spacing-y-2 w-full;
 

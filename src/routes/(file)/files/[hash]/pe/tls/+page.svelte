@@ -17,7 +17,7 @@
 	{/if}
 </article>
 
-<style lang="scss">
+<style lang="postcss">
 	article {
 		@apply space-y-4 py-10;
 

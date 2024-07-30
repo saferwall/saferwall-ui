@@ -37,7 +37,7 @@
 	</li>
 </ul>
 
-<style lang="scss">
+<style lang="postcss">
 	.meta {
 		@apply w-full md:gap-4;
 

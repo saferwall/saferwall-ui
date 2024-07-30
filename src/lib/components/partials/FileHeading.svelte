@@ -4,9 +4,11 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import type { Menu } from '$lib/types';
 	import ButtonLike from '../form/ButtonLike.svelte';
+	import { goto } from '$app/navigation';
 
 	export let hash: string;
 	export let client: SaferwallClient;
+	
 	export let liked = false;
 	export let loggedIn = false;
 	export let activeMenu: Menu.File;
@@ -15,6 +17,7 @@
 	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/files/${hash}/${activeMenu.path}`;
 
 	let rescaning = false;
+	let downloadLoading = false;
 	const onRescanClick = async () => {
 		rescaning = true;
 		try {
@@ -23,7 +26,7 @@
 			console.error('Rescab failed', error);
 			// @ts-ignore
 			if (error.status === 401) {
-				location.href = "/auth/login";
+				goto("/auth/login");
 				return;
 			}
 		}
@@ -39,7 +42,32 @@
 		</h1>
 
 		<div class="space-x-2 flex flex-shrink-0">
-			<Button size="lg" icon="download" href={downloadLink}>
+			<Button size="lg" loading={downloadLoading} icon="download" href={downloadLink} on:click={(e) => {
+				e.preventDefault();
+				downloadLoading = true;
+				if (!client.authorization) {
+					goto("/auth/login");
+					return;
+				}
+				window.fetch(downloadLink, {
+					headers: {
+						"Authorization": client.authorization,
+						"Content-Type": "application/json"
+					}
+				}).then(res => {
+					if (res.status === 401) {
+						downloadLoading = false;
+						goto("/auth/login");
+						return;
+					}
+					return res.blob()
+				}).then(blob => {
+					if (!blob) return;
+					downloadLoading = false;
+					let file = URL.createObjectURL(blob);
+					location.assign(file);
+				});
+			}}>
 				<span class="hidden md:block pl-2">Download file</span>
 			</Button>
 			<Button
@@ -59,7 +87,7 @@
 	</div>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	:global(.file__header .button) {
 		@apply border-none space-x-0;
 	}

@@ -57,7 +57,7 @@
 	</table>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	table {
 		@apply my-2;
 

@@ -114,7 +114,7 @@
 	</Card>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	table {
 		th {
 			@apply border rounded;

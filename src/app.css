@@ -1,17 +1,18 @@
+@import "./lib/styles/vars.css";
+@import "./lib/styles/card.css";
+@import "./lib/styles/tags.css";
+@import "./lib/styles/scrollbar.css";
+@import "./lib/styles/progress.css";
+@import "./lib/styles/github-markdown.css";
+@import "bigger-picture/css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import 'bigger-picture/css';
 html.bp-lock {
 	overflow-y: unset;
 }
 
-@import './lib/styles/vars.scss';
-@import './lib/styles/card.scss';
-@import './lib/styles/tags.scss';
-@import './lib/styles/scrollbar.scss';
-@import './lib/styles/progress.scss';
 
 html,
 body {

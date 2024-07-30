@@ -14,7 +14,7 @@
 	</time>
 {/if}
 
-<style class="scss">
+<style lang="postcss">
 	span {
 		@apply transition-all duration-200 delay-200;
 	}

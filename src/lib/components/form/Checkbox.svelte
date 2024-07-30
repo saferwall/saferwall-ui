@@ -13,7 +13,7 @@
 	{/if}
 </label>
 
-<style lang="scss">
+<style lang="postcss">
 	label {
 		@apply cursor-pointer;
 		@apply inline-flex items-center space-x-2;

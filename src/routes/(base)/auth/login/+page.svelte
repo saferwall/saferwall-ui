@@ -13,9 +13,11 @@
 		error = '';
 		errors = {};
 		loading = true;
-
+		
+		// @ts-ignore
 		return async ({ result: { data, type }, update }) => {
 			if (type === 'failure') {
+				// @ts-ignore
 				errors = data;
 				error = data?.message;
 
