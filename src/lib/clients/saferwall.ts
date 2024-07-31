@@ -13,7 +13,7 @@ import type {
 } from '$lib/types';
 
 export class SaferwallClient {
-	private session?: Saferwall.Session;
+	session?: Saferwall.Session;
 
 	get authorization() {
 		if (this.session && this.session.token) {
@@ -341,7 +341,7 @@ export class SaferwallClient {
 		const query = new URLSearchParams({ ...params });
 
 		if (this.isLoggedIn && query.size > 0) {
-			query.append('logged', '');
+			// query.append('logged', '');
 		}
 
 		return query;

@@ -1,18 +1,16 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
-	import SvelteMarkdown from 'svelte-markdown';
 	import InputHash from '$lib/components/form/InputHash.svelte';
 	import ActivityMeta from '$lib/components/ActivityMeta.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Avatar from '$lib/components/Avatar.svelte';
 	import DateTime from '$lib/components/DateTime.svelte';
+	import Viewer from '$lib/components/cards/comments/Viewer.svelte';
 
 	export let data: PageData;
 
-	$: file = data.item.file;
-	$: username = data.user.username;
-	$: items = Array.isArray(data.pagination.items) ? data.pagination.items : [];
+	$: username = data.username;
+	$: items = Array.isArray(data.pagination.items) ? data.pagination.items as any[] : [];
 </script>
 
 <ul class="divide-y">
@@ -34,12 +32,12 @@
 							</Button>
 						</div>
 					</div>
-					<div class="bg-gray-50 border border-opacity-20 border-gray-300 w-full p-2 rounded">
-						<SvelteMarkdown options={{ sanitize: true }} source={item.comment} />
+					<div class="bg-zinc-50 dark:bg-zinc-950 dark:border-zinc-800 border border-opacity-20 border-zinc-300 w-full p-2 rounded">
+						<Viewer value={item.comment}></Viewer>
 					</div>
 				</div>
-				<InputHash hash={file.hash} />
-				<ActivityMeta {file} />
+				<InputHash hash={item.file.hash} />
+				<ActivityMeta file={item.file} />
 			</div>
 		</li>
 	{/each}

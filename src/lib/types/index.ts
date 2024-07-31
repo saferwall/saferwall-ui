@@ -25,7 +25,7 @@ export namespace Menu {
 }
 
 export interface QueueFile {
-	file: Saferwall.File;
+	file: File;
 	status: number;
 	hash?: string;
 	error?: string;
