@@ -17,7 +17,7 @@
 	export let value: string;
 </script>
 
-<div class="markdown-body *:[background-color:transparent] md-to-html p-2" data-theme={isLight ? "light" : "dark"}>
+<div class="markdown-body bg-transparent md-to-html p-2" data-theme={isLight ? "light" : "dark"}>
 	{@html mdToHtml}
 </div>
 

@@ -24,7 +24,7 @@
 
 	const processToQueue = (file: File) => {
 		const queue: QueueFile = {
-			file: file,
+			file,
 			status: UploadStatus.UPLOADING,
 			uploadFile: () => {},
 			updateStatus: () => {}

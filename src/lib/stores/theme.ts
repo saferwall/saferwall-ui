@@ -12,6 +12,10 @@ export const theme = writable<Theme>(Theme.SYSTEM);
 
 export const systemPrefersDarkMode: Readable<{ matches: boolean }> = {
 	subscribe(callback) {
+		if (!browser) {
+			callback({ matches: true });
+			return () => {}
+		}
 		const windowMatchMedia = window.matchMedia("(prefers-color-scheme: dark)");
 		callback(windowMatchMedia); // get initial
 		windowMatchMedia.addEventListener("change", callback) // listen for change
