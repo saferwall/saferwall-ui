@@ -11,7 +11,7 @@
 
 <article class="flex-1">
 	<h1 class="title">Resource</h1>
-	<section class="overflow-y-auto h-full relative">
+	<section class="overflow-y-auto h-full relative dark:text-zinc-100 text-zinc-900">
 		<DirectoryRoot isRoot={true} {...resource} />
 	</section>
 </article>
