@@ -51,6 +51,13 @@
 			>
 		{/if}
 		<Input
+			label="Current Password"
+			error={errors?.password}
+			name="password"
+			type="password"
+			required
+		/>
+		<Input
 			label="New Password"
 			error={errors?.new_password}
 			name="new_password"
@@ -61,13 +68,6 @@
 			label="Confirm Password"
 			error={errors?.confirm_password}
 			name="confirm_password"
-			type="password"
-			required
-		/>
-		<Input
-			label="Current Password"
-			error={errors?.password}
-			name="password"
 			type="password"
 			required
 		/>

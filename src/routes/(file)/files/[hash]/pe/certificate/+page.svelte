@@ -44,7 +44,7 @@
 </script>
 
 <section class="divide-y">
-	<article>
+	<article class="border-t-zinc-300 dark:border-t-zinc-700">
 		<h1 class="title">Certificate</h1>
 		<table class="w-full">
 			<tbody>

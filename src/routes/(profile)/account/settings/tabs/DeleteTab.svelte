@@ -18,7 +18,7 @@
 	<Icon name="delete-alert" size="w-16 h-16" />
 
 	<h1 class="text-lg font-semibold">This action is permanent</h1>
-	<p class="text-neutral-700 text-lg">
+	<p class="text-zinc-700 dark:text-zinc-300 text-lg">
 		Deleting a user account is not a reversible change. Any information associated with this account
 		will be removed, and cannot be recovered.
 	</p>

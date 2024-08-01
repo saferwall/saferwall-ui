@@ -43,7 +43,7 @@
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span
 		class="flex items-center gap-3"
-		on:mouseup={(event) => {
+		on:click={(event) => {
 			open = !open;
 		}}
 	>
@@ -52,7 +52,7 @@
 
 	{#if open}
 		<ul
-			class="absolute top-14 -right-4 bg-background py-4 rounded drop-shadow-xl"
+			class="absolute top-14 -right-4 bg-white dark:bg-zinc-900 py-4 rounded drop-shadow-xl shadow-inner"
 			data-sveltekit-preload-data="tap"
 		>
 			<li class="user__menu__item">
@@ -93,7 +93,7 @@
 
 		&:hover {
 			@apply cursor-pointer;
-			@apply bg-primary-50 text-primary;
+			@apply bg-primary-50 text-primary dark:bg-zinc-800 dark:text-zinc-200;
 		}
 	}
 </style>

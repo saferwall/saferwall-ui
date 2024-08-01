@@ -69,7 +69,7 @@
 						</li>
 					{/each}
 				{:else}
-					<p class="text-neutral-800 font-medium">No tags.</p>
+					<p class="text-zinc-400 font-medium">No tags.</p>
 				{/if}
 			</ul>
 		</div>

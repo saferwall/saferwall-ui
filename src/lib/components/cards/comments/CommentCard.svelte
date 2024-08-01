@@ -25,7 +25,7 @@
 			<Button size="xss">Follow</Button>
 		</div>
 	</div>
-	<section class="prose my-2">
+	<section class="my-2">
 		<Viewer value={comment} />
 	</section>
 	<div class="flex items-center text-neutral-500 space-x-2">

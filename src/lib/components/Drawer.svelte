@@ -24,7 +24,7 @@
 </script>
 
 {#if open}
-	<Overlay on:mouseup={closeDrawer}>
+	<Overlay on:click={closeDrawer}>
 		<div
 			transition:fly={{ duration: 300, easing: quintInOut, x: '100%' }}
 			class={`drawer fixed top-0 right-0 h-full w-full bg-white z-50 drawer--${size}`}

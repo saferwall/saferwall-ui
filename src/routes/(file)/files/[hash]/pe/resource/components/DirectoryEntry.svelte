@@ -22,16 +22,12 @@
 
 <article class="pl-8 rounded group w-full" class:open={structOpen} class:isRoot>
 	<div class="text-md font-medium flex items-center space-x-2">
-		<Icon name="arrow-down" class={structOpen ? '' : '-rotate-90'} size="w-4 h-4" />
-		<h3 class="cursor-pointer" on:mouseup={() => (structOpen = !structOpen)}>
-			Resource Directory
-			{#if id}
-				Entry {id}
-			{/if}
-			{#if name}
-				, Name: {name}
-			{/if}
-		</h3>
+		<button on:click={() => (structOpen = !structOpen)} class="flex gap-2 items-center focus:border-none">
+			<Icon name="arrow-down" class={structOpen ? '' : '-rotate-90'} size="w-4 h-4" />
+			<h3 class="cursor-pointer">
+				{`Resource Directory${id ? ` Entry ${id}` : ""}${name ? `, Name: ${name}`: ""}`}
+			</h3>
+		</button>
 		{#if struct}
 			<div class="py-1 relative">
 				<Button

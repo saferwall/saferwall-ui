@@ -32,6 +32,7 @@
 			<use href="/images/icons.svg#default-avatar" />
 		</svg>
 	{/if}
+	<slot/>
 </a>
 
 <style lang="postcss">

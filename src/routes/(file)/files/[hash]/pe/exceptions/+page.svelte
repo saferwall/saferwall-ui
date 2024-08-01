@@ -61,7 +61,7 @@
 			{#each exceptions.slice(0, records) as item, index}
 				<tr
 					class="box"
-					on:mouseup={() => (entries[index] = !isEntryOpen(index))}
+					on:click={() => (entries[index] = !isEntryOpen(index))}
 					class:expanded={isEntryOpen(index)}
 				>
 					<td class="px-0 !pr-0">
@@ -123,7 +123,7 @@
 		</tbody>
 	</table>
 
-	<ButtonShowMore mode="more" bind:expanded on:mouseup={() => paginationTrigger()} />
+	<ButtonShowMore mode="more" bind:expanded on:click={() => paginationTrigger()} />
 </article>
 
 <style lang="postcss">

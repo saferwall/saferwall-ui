@@ -15,7 +15,7 @@
 
 <ul class="divide-y">
 	{#each items as item}
-		<li class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6 py-6 lg:py-8">
+		<li class="flex flex-col md:flex-row space-y-6 border-t-zinc-300 dark:border-t-zinc-700 md:space-y-0 md:space-x-6 py-6 lg:py-8">
 			<div class="w-full space-y-4">
 				<div class="flex flex-col space-y-2">
 					<div class="flex flex-col md:flex-row space-y-4 md:space-y-0 justify-between">
@@ -32,7 +32,7 @@
 							</Button>
 						</div>
 					</div>
-					<div class="bg-zinc-50 dark:bg-zinc-950 dark:border-zinc-800 border border-opacity-20 border-zinc-300 w-full p-2 rounded">
+					<div class="bg-zinc-50 dark:bg-zinc-800 dark:border-zinc-800 border border-opacity-20 border-zinc-300 w-full p-2 rounded">
 						<Viewer value={item.comment}></Viewer>
 					</div>
 				</div>

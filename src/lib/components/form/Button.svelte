@@ -92,7 +92,7 @@
 		}
 
 		&--danger {
-			@apply bg-red-500 text-white border-red-500;
+			@apply bg-red-500 hover:bg-red-600 text-white border-red-500;
 			@apply focus:outline-red-500 hover:outline-red-500 hover:bg-opacity-95;
 		}
 
@@ -115,7 +115,7 @@
 		}
 
 		&:disabled {
-			@apply bg-opacity-60 border-opacity-5;
+			@apply bg-opacity-60 border-opacity-5 cursor-not-allowed;
 		}
 
 		.icon {

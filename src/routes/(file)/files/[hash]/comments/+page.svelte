@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { systemPrefersDarkMode, Theme, theme } from "$lib/stores/theme";
+	import { isLight } from "$lib/stores/theme";
 	import 'github-markdown-css/github-markdown-light.css';
 
 	import Card from '$lib/components/Card.svelte';
@@ -13,7 +13,6 @@
 	export let data: PageData;
 
 	$: comments = data.pagination.items;
-	$: isLight = $theme !== Theme.SYSTEM ? ($theme === Theme.LIGHT) : !$systemPrefersDarkMode.matches;
 
 	let comment = '';
 </script>
@@ -30,7 +29,7 @@
 	<Card spacing={false}>
 		<Editor bind:value={comment}
 		extensions={[
-			isLight ? 
+			$isLight ? 
 			vscodeLightInit({
 				settings: {
 					lineHighlight: "#f0f0f07f",

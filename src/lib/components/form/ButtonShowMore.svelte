@@ -17,11 +17,12 @@
 		@apply relative cursor-pointer focus:outline-none;
 		@apply w-full pt-3 select-none flex items-center justify-center space-x-2;
 		@apply text-center font-semibold text-primary;
+		@apply border-none;
 
 		&:not(:has(.expanded)):before {
 			@apply content-[''];
 			@apply absolute h-48 -top-48;
-			@apply bg-gradient-to-b from-transparent to-white w-full;
+			@apply bg-gradient-to-b from-transparent to-white dark:to-neutral-600 w-full;
 		}
 
 		.icon {

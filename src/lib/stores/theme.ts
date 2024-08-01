@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { THEME_KEY } from '$lib/config';
-import { writable, type Readable } from 'svelte/store';
+import { derived, writable, type Readable } from 'svelte/store';
 
 export enum Theme {
 	DARK = 'dark',
@@ -9,7 +9,6 @@ export enum Theme {
 }
 
 export const theme = writable<Theme>(Theme.SYSTEM);
-
 export const systemPrefersDarkMode: Readable<{ matches: boolean }> = {
 	subscribe(callback) {
 		if (!browser) {
@@ -24,6 +23,10 @@ export const systemPrefersDarkMode: Readable<{ matches: boolean }> = {
 		}
 	}
 }
+export const isLight = derived([theme, systemPrefersDarkMode], ([theme, { matches: prefersDark }]) => theme === Theme.LIGHT || (theme === Theme.SYSTEM && !prefersDark))
+export const themeString = derived(isLight, (isLight) => ["dark", "light"][Number(isLight)]);
+export const oppositeThemeString = derived(isLight, (isLight) => ["dark", "light"][Number(!isLight)]);
+
 
 export const parseTheme = (input: unknown) => {
 	switch (input) {

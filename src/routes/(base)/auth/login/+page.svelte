@@ -43,7 +43,7 @@
 	{#if error}
 		<Alert type="error" on:close={() => (error = '')}>{error}</Alert>
 	{/if}
-	<div class="space-y-4">
+	<div class="space-y-4 ">
 		<Input label="Username or email" name="username" error={errors.username} disabled={loading} />
 		<Input
 			label="Password"
