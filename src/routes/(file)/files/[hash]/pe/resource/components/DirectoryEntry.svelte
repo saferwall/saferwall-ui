@@ -12,7 +12,7 @@
 	export let directory: Saferwall.Resource.Directory;
 	export let struct: Saferwall.Resource.Struct;
 
-	$: structOpen = false;
+	$: structOpen = true;
 	$: tableOpen = false;
 
 	const onClickToggleTable = () => {
@@ -20,34 +20,34 @@
 	};
 </script>
 
-<article class="pl-8 rounded group w-full" class:open={structOpen} class:isRoot>
-	<div class="text-md font-medium flex items-center space-x-2">
-		<button on:click={() => (structOpen = !structOpen)} class="flex gap-2 items-center focus:border-none">
+<article class="pl-8 rounded group w-full not-table" class:open={structOpen} class:isRoot>
+	<div class="text-md pl-8 -ml-8 font-medium flex items-center space-x-2">
+		<button on:click={() => (structOpen = !structOpen)} class="flex gap-2 items-center !border-none">
 			<Icon name="arrow-down" class={structOpen ? '' : '-rotate-90'} size="w-4 h-4" />
 			<h3 class="cursor-pointer">
 				{`Resource Directory${id ? ` Entry ${id}` : ""}${name ? `, Name: ${name}`: ""}`}
 			</h3>
 		</button>
-		{#if struct}
-			<div class="py-1 relative">
-				<Button
-					size="xss"
-					on:click={() => onClickToggleTable()}
-					class={tableOpen ? `!text-red-500 !bg-gray-100 !outline-gray-100 !border-gray-100` : ''}
-				>
-					{tableOpen ? 'Hide Table' : 'Show Table'}
-				</Button>
-				{#if tableOpen}
-					<div class="absolute block left-44 top-0 z-40">
-						<DirectoryTable {struct} />
-					</div>
-				{/if}
-			</div>
-		{/if}
 	</div>
 	{#if structOpen}
 		{#if directory}
-			<DirectoryComponent {...directory} />
+			<DirectoryComponent {...directory} >
+				<article class="pl-8 rounded group w-full" class:open={tableOpen}>
+					<div class="text-md pl-8 -ml-8 font-medium flex items-center space-x-2">
+						<button on:click={() => (tableOpen = !tableOpen)} class="flex gap-2 items-center !border-none">
+							<Icon name="arrow-down" class={tableOpen ? '' : '-rotate-90'} size="w-4 h-4" />
+							<h3 class="cursor-pointer">
+								{tableOpen ? 'Hide Table' : 'Show Table'}
+							</h3>
+						</button>
+					</div>
+					{#if tableOpen}
+						<div class="pl-4">
+							<DirectoryTable {struct} />
+						</div>
+					{/if}
+				</article>
+			</DirectoryComponent>
 		{/if}
 		<div class="relative" />
 	{/if}
@@ -57,7 +57,7 @@
 	.isRoot {
 		@apply -ml-4;
 	}
-	.open {
+	/* .not-table.open {
 		@apply relative;
 
 		&:before,
@@ -68,10 +68,14 @@
 			@apply top-7 mt-0.5 left-8 ml-2 z-30;
 			@apply h-8 w-[1px] bg-neutral-200;
 		}
-
-		&:after {
-			@apply top-14 mt-1.5 left-8 ml-2 z-30;
+	} */
+	article {
+		/* @apply relative;
+		&:after:not(.isRoot) {
+			@apply top-3 mt-1.5 left-0 ml-2 z-30;
 			@apply w-5 h-[1px] bg-neutral-200;
-		}
+			@apply content-[''] absolute;
+		} */
+		/* @apply border-l  !rounded-none; */
 	}
 </style>
