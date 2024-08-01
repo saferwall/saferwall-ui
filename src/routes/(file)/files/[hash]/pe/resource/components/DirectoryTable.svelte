@@ -13,7 +13,7 @@
 	});
 </script>
 
-<Card class="bg-neutral-50 border border-gray-200" padding={false}>
+<Card class="bg-neutral-50 border border-zinc-300 dark:border-zinc-700" padding={false}>
 	<table>
 		<thead>
 			<th>Member</th>
@@ -32,21 +32,21 @@
 
 <style lang="postcss">
 	table {
-		@apply bg-neutral-50 overflow-hidden;
-		@apply border border-collapse rounded text-xs;
+		@apply  overflow-hidden;
+		@apply border border-zinc-300 dark:border-zinc-700 border-collapse rounded text-xs;
 
 		tbody td,
 		thead th {
-			@apply py-3 px-6 border bg-white;
+			@apply py-2 px-6 border bg-transparent border-zinc-300 dark:border-zinc-700;
 		}
 
 		th:last-child,
 		td:last-child {
-			@apply bg-white;
+			/* @apply bg-white; */
 		}
 
 		tbody td {
-			@apply bg-neutral-50;
+			/* @apply bg-neutral-50; */
 		}
 	}
 </style>
