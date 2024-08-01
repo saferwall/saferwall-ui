@@ -68,7 +68,7 @@
 					{#if group.functions && isEntryOpen(index)}
 						<Table.Row class={cn('box__body', !isEntryOpen(index) && 'hidden')}>
 							<Table.Val colspan="8">
-								<div class="px-4 relative pt-0">
+								<div class="p-4 relative pt-0">
 									<h2
 										class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
 									>

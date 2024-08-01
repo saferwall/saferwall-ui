@@ -13,7 +13,7 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	on:mouseup
+	on:click
 	transition:fade={{ duration: 200 }}
 	class="fixed z-40 top-0 left-0 w-full h-full bg-gray-600 bg-opacity-30"
 />

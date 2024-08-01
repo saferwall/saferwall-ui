@@ -63,14 +63,14 @@
 	.label {
 		@apply flex items-center gap-0.5;
 
-		&--benign {
-			@apply text-green;
+		&.label--benign, &.label--benign span {
+			@apply !text-green;
 		}
-		&--unknown {
-			@apply text-orange;
+		&.label--unknown, &.label--unknown span {
+			@apply !text-orange;
 		}
-		&--malicious {
-			@apply text-red-500;
+		&.label--malicious, &.label--malicious span {
+			@apply !text-red-500;
 		}
 	}
 </style>

@@ -28,7 +28,7 @@
 						<a
 							href={url}
 							target="_blank"
-							class="inline-flex items-center font-medium text-primary-600 bg-primary-600 bg-opacity-10 px-4 space-x-2 max-w-full w-max mt-4"
+							class="inline-flex items-center font-medium text-primary-600 bg-primary-600 bg-opacity-10 px-4 space-x-2 max-w-full w-max mt-4 rounded"
 							rel="noreferrer"
 						>
 							<Icon name="link" size="w-4 h-4" />
@@ -40,8 +40,8 @@
 				</div>
 				{#if bio}
 					<div class="space-y-1">
-						<h1 class="font-semibold text-gray-800">Biography</h1>
-						<p class="text-neutral-500">{bio}</p>
+						<h1 class="font-semibold text-gray-400 ">Biography</h1>
+						<p class="text-zinc-700 dark:text-zinc-300">{bio}</p>
 					</div>
 				{/if}
 			</div>

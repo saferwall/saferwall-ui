@@ -35,11 +35,11 @@
 		}
 
 		:global(table thead th) {
-			@apply py-4 font-semibold;
+			@apply py-2 px-4 font-semibold;
 		}
 
 		:global(table tr td) {
-			@apply py-2 text-gray-800;
+			@apply py-2 px-4 text-zinc-800 dark:text-zinc-100;
 		}
 
 		:global(.title) {
@@ -54,7 +54,7 @@
 
 				a {
 					@apply font-medium text-gray-400;
-					@apply block py-4 pl-4 pr-10 border-b md:border-b-0 border-r md:rounded-l;
+					@apply block py-4 pl-4 pr-10 border-b md:border-b-0 border-r border-r-zinc-300 dark:border-r-zinc-700 md:rounded-l;
 
 					&.active,
 					&:hover {

@@ -67,7 +67,9 @@ a.link:not([href='']) {
 
 		td,
 		th {
-			@apply px-4 border;
+			@apply
+			/* py-4 */
+			border;
 		}
 
 		th {
@@ -112,7 +114,7 @@ a.link:not([href='']) {
 				}
 
 				td {
-					@apply p-4 py-4 rounded;
+					@apply first:rounded-l last:rounded-r;
 				}
 			}
 		}
@@ -122,10 +124,12 @@ a.link:not([href='']) {
 		@apply w-full dark:text-white;
 
 		tbody tr {
-			@apply even:bg-gray-50 dark:bg-surface-menu;
+			@apply even:bg-zinc-100 even:dark:bg-zinc-800;
+			@apply odd:bg-zinc-200 odd:dark:bg-zinc-700;
 
 			td {
-				@apply py-3 w-1/4;
+				/* @apply py-3; */
+				@apply first:rounded-l last:rounded-r;
 			}
 		}
 	}

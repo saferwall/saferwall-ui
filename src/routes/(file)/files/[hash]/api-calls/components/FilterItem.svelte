@@ -29,7 +29,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div on:change={() => dispatch('change')} class="wrapper">
 	<Checkbox checked={group.includes(pid)} name="pid[]" value={pid} />
-	<div class="content" on:mouseup|stopPropagation={toggleCheckbox}>
+	<div class="content" on:click|stopPropagation={toggleCheckbox}>
 		<div class="basic">
 			<div>
 				<span class="text-xs">PID ({pid})</span>

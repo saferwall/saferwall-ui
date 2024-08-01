@@ -15,8 +15,8 @@
 </script>
 
 {#if !reachEnd}
-	<div
-		on:mouseup={onMouseUpLoadMore}
+	<button
+		on:click={onMouseUpLoadMore}
 		class="w-full flex-center rounded cursor-pointer text-primary space-x-2 font-medium p-4"
 	>
 		<div class="flex-center space-x-1">
@@ -27,5 +27,5 @@
 				<Icon name="arrow-down" size="w-4 h-4" />
 			{/if}
 		</div>
-	</div>
+	</button>
 {/if}

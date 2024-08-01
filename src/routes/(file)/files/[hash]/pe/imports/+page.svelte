@@ -32,7 +32,7 @@
 			{#each groups as group, index}
 				<tr
 					class="box"
-					on:mouseup={() => (entries[index] = !isEntryOpen(index))}
+					on:click={() => (entries[index] = !isEntryOpen(index))}
 					class:expanded={isEntryOpen(index)}
 				>
 					<td class="!pr-0">
@@ -65,7 +65,7 @@
 				{#if isEntryOpen(index)}
 					<tr class="box__body" class:hidden={!isEntryOpen(index)}>
 						<td colspan="8">
-							<div class="px-4 relative pt-0">
+							<div class="p-4 relative pt-0">
 								<h2
 									class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
 								>

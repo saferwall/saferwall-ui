@@ -16,7 +16,7 @@
 <div class={`alert alert--${type}`}>
 	<slot />
 	{#if close}
-		<div class="cursor-pointer" on:mouseup={onClose}>
+		<div class="cursor-pointer" on:click={onClose}>
 			<Icon name={icon} />
 		</div>
 	{/if}

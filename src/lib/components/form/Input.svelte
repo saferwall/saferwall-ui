@@ -78,7 +78,7 @@
 		&__label {
 			@apply font-regular placeholder:font-regular;
 			@apply absolute transition-all;
-			@apply text-neutral-500 left-4 top-1/2 -translate-y-1/2 text-xs;
+			@apply text-zinc-500 left-4 top-1/2 -translate-y-1/2 text-xs;
 		}
 
 		&:has(input:not(:placeholder-shown)),

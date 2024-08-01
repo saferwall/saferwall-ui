@@ -35,7 +35,7 @@
 			class:vertical
 			class:horizontal
 			class:active={item.selected}
-			on:mouseup={() => onTabMouseUp(item)}
+			on:click={() => onTabMouseUp(item)}
 		>
 			<span>{item.label}</span>
 			{#if item.count != undefined}

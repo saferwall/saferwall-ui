@@ -53,7 +53,7 @@
 
 <ul class="multitoggle" class:with-border={border}>
 	{#each items as item}
-		<li class="item" class:active={selected.has(item)} on:mouseup={() => onToggleMouseUp(item)}>
+		<li class="item" class:active={selected.has(item)} on:click={() => onToggleMouseUp(item)}>
 			<input type="checkbox" {name} bind:value={item.value} checked={selected.has(item)} />
 			{item.label || item.value}
 		</li>

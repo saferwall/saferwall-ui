@@ -11,7 +11,7 @@
 
 <section
 	data-sveltekit-preload-data="tap"
-	class="file__navbar bg-white dark:bg-transparent border-t border-primary-100 dark:border-none border-opacity-20 z-10 w-full sticky top-0 overflow-x-auto no-scroll-style"
+	class="file__navbar bg-white dark:bg-background border-t border-primary-100 dark:border-none border-opacity-20 z-10 w-full sticky top-0 overflow-x-auto no-scroll-style"
 >
 	<div class="w-full container mx-auto flex">
 		<ul class="file__navbar__menu flex w-full space-x-3">

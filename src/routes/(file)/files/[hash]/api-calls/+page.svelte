@@ -199,7 +199,7 @@
 					<span class="px-2 py-0.5">Properties</span>
 				</Button>
 				{#if displayProperties}
-					<Overlay on:mouseup={onPropsToggleAction}>
+					<Overlay on:click={onPropsToggleAction}>
 						<ul class="absolute top-[120%] left-0 w-52 z-50 bg-white rounded-lg p-4">
 							<li class="flex flex-row items-center justify-between pb-2">
 								<span class="text-xs text-neutral-500 font-semibold">Show table</span>
@@ -266,7 +266,7 @@
 					{#each rows as trace, index}
 						<tr
 							class="box"
-							on:mouseup={() => {
+							on:click={() => {
 								trace._open = !trace._open;
 
 								onRowToggleMouseUp(index, trace);
