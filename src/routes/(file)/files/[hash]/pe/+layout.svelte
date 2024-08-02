@@ -58,7 +58,7 @@
 
 					&.active,
 					&:hover {
-						@apply bg-primary-100 bg-opacity-20 text-primary relative;
+						@apply bg-primary-100/20 dark:bg-zinc-700 text-primary dark:text-zinc-200 relative;
 
 						&:after {
 							@apply md:content-[''] md:border-r-4 border-primary h-full md:absolute md:-right-1 md:top-0;

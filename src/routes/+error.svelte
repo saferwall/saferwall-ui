@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { randomErrorQuote } from '$lib/utils';
 
-	$: console.error($page.error);
+	// $: console.error($page.error);
 </script>
 
 <section class="flex flex-col space-x-6 items-center justify-center flex-1">

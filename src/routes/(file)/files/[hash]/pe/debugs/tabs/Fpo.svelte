@@ -8,10 +8,11 @@
 </script>
 
 {#if items.length > 0}
-	<div class="table-border">
+<div class="[&_*]:border-zinc-300 [&_*]:dark:border-zinc-700">
+	<div class="table-border overflow-x-auto">
 		<table>
 			<thead>
-				<th>OffStart</th>
+				<th>OffsetStart</th>
 				<th>ProcSize</th>
 				<th>NumLocals</th>
 				<th>ParamsSize</th>
@@ -25,7 +26,7 @@
 			<tbody>
 				{#each items as row}
 					<tr>
-						<td>{valueToHex(row.off_start)}</td>
+						<td>{valueToHex(row.offset_start)}</td>
 						<td>{valueToHex(row.proc_size)}</td>
 						<td>{valueToHex(row.num_locals)}</td>
 						<td>{valueToHex(row.params_size)}</td>
@@ -40,4 +41,5 @@
 			</tbody>
 		</table>
 	</div>
+</div>
 {/if}
