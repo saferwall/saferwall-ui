@@ -8,8 +8,8 @@
 </script>
 
 {#if items.length > 0}
-	<div class="table-border">
-		<table>
+	<div class="table-border border-zinc-300 dark:!border-zinc-600 [&_*]:!border-inherit">
+		<table class="">
 			<thead>
 				<th>Rva</th>
 				<th>Size</th>
