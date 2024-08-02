@@ -12,7 +12,7 @@
 	export let directory: Saferwall.Resource.Directory;
 	export let struct: Saferwall.Resource.Struct;
 
-	$: structOpen = true;
+	$: structOpen = false;
 	$: tableOpen = false;
 
 	const onClickToggleTable = () => {

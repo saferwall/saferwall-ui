@@ -89,6 +89,37 @@ a.link:not([href='']) {
 	}
 }
 
+.table-border-base {
+	@apply border;
+	@apply w-full;
+
+	th {
+		@apply font-bold;
+	}
+
+	td,
+	th {
+		@apply
+		/* py-4 */
+		border;
+	}
+
+	th {
+		@apply border-t-0;
+	}
+
+	th:first-child,
+	td:first-child {
+		@apply border-l-0 border-t-0;
+	}
+
+	th:last-child,
+	td:last-child,
+	tr:last-child td {
+		@apply border-b-0 border-r-0;
+	}
+}
+
 .boxes {
 	table.groups {
 		@apply pr-4 border-separate border-spacing-y-2 w-full;

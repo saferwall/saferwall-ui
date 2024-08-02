@@ -57,7 +57,7 @@
 				<tr>
 					<td>Validity</td>
 					<td>
-						<ValidityBox signed={true} valid={verified} />
+						<ValidityBox signed={true} valid={false} />
 					</td>
 				</tr>
 			</tbody>
@@ -88,7 +88,7 @@
 	}
 
 	article {
-		@apply space-y-4 py-10;
+		@apply space-y-4 border-zinc-300 dark:border-zinc-700 py-10;
 
 		&:first-child {
 			@apply pt-0;
