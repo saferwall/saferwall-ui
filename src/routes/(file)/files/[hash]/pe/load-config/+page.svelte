@@ -76,7 +76,7 @@
 				{/if}
 			{:else}
 				<div class="flex flex-grow items-center p-4">
-					<p class="text-center text-neutral-500">No data found</p>
+					<p class="text-center text-zinc-400 dark:text-zinc-600">No data found</p>
 				</div>
 			{/if}
 		{/if}

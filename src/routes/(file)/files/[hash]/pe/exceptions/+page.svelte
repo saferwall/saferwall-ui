@@ -8,10 +8,11 @@
 	let records = recordsPerPage;
 
 	export let data: PageData;
+
 	$: exceptions = data.exceptions?.map((exception) => {
 		return {
 			base: exception.runtime_function,
-			unwind: Object.entries(exception.unwin_info)
+			unwind: Object.entries(exception.unwind_info)
 				.filter(([key]) => !['function_entry', 'unwind_codes'].includes(key))
 				.map(([key, value]) => {
 					return {
@@ -19,7 +20,7 @@
 						value: translateGroupValue(value, 'exceptions', key)
 					};
 				}),
-			codes: (exception.unwin_info.unwind_codes || []).map(
+			codes: (exception.unwind_info.unwind_codes || []).map(
 				(code: { unwind_op: string; operand: string }) => {
 					return {
 						...code,
@@ -53,7 +54,8 @@
 	<h1 class="title">Exceptions</h1>
 	<table class="exceptions">
 		<thead>
-			<th colspan="2">Begin Address</th>
+			<th>#</th>
+			<th>Begin Address</th>
 			<th>End Address</th>
 			<th>Unwind Info Address</th>
 		</thead>
@@ -64,7 +66,7 @@
 					on:click={() => (entries[index] = !isEntryOpen(index))}
 					class:expanded={isEntryOpen(index)}
 				>
-					<td class="px-0 !pr-0">
+					<td class="px-0 !pr-0 pl-4">
 						<Icon
 							size="w-4 h-4"
 							name="arrow-down"
