@@ -23,7 +23,7 @@ export const peMenu: Menu.PE[] = [
 	{ field: Saferwall.PeMeta.EXPORT, path: 'export', title: 'Export' },
 	{ field: Saferwall.PeMeta.IMPORT, path: 'imports', title: 'Imports' },
 	{ field: Saferwall.PeMeta.RESOURCE, path: 'resource', title: 'Resource' },
-	{ field: Saferwall.PeMeta.EXCEPTIONS, path: 'exceptions', title: 'Exceptions' },
+	{ field: Saferwall.PeMeta.EXCEPTIONS, path: 'exception', title: 'Exceptions' },
 	{ field: Saferwall.PeMeta.SECURITY, path: 'certificate', title: 'Certificate' },
 	{ field: Saferwall.PeMeta.RELOC, path: 'relocations', title: 'Relocations' },
 	{ field: Saferwall.PeMeta.DEBUG, path: 'debugs', title: 'Debugs' },
