@@ -49,7 +49,7 @@
 	.tab__header__item {
 		&:hover,
 		&.active {
-			@apply text-primary;
+			@apply text-zinc-900 dark:text-zinc-100 bg-primary-100 dark:bg-zinc-700/70;
 		}
 
 		&:hover:after,
@@ -61,6 +61,7 @@
 		@apply cursor-pointer p-4 px-6 md:px-10 hover:text-primary;
 
 		&.vertical {
+			@apply rounded-t;
 			&:hover:after,
 			&.active:after {
 				@apply content-[''] absolute w-full bottom-0 left-0;
@@ -69,8 +70,9 @@
 		}
 
 		&.horizontal {
+			@apply rounded-l;
 			@apply py-1;
-
+			
 			&:hover:after,
 			&.active:after {
 				@apply content-[''] absolute h-full top-0 right-0;
