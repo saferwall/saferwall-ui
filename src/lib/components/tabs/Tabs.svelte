@@ -42,7 +42,7 @@
 		@apply flex flex-col;
 
 		.tabs__menu {
-			@apply border-b overflow-x-auto items-center;
+			@apply border-b border-zinc-300 dark:border-zinc-600 overflow-x-auto items-center;
 		}
 	}
 
@@ -50,7 +50,7 @@
 		@apply flex flex-row py-6;
 
 		.tabs__menu {
-			@apply flex flex-col border-r space-y-4;
+			@apply flex flex-col border-r border-zinc-300 dark:border-zinc-600 space-y-4;
 		}
 	}
 </style>
