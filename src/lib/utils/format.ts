@@ -135,18 +135,24 @@ export function cleanUndefinedKeyValue(data: object = {}) {
 		.reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
 }
 
+export function capitalize(str: string) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 /**
  * Function to split a camel case string into separate words and join them with space
  *
  * @param {string} text - The input string to be split
  * @returns {string}
  */
-export function translateKeyToTitle(text: string): string {
+export function translateKeyToTitle(text: string, all = false): string {
 	if (!text || text.length === 0) {
 		return '';
 	}
 	const title = String(text).split('_').join(' ');
-	return title.charAt(0).toUpperCase() + title.slice(1, title.length);
+	if (all)
+		return title.split(" ").map(w => capitalize(w)).join(" ");
+	return capitalize(title);
 }
 
 export function asciiReversed(value: string) {
