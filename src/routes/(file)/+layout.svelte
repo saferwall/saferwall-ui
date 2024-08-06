@@ -9,5 +9,5 @@
 </script>
 
 <Header {user} />
-<slot />
+	<slot />
 <Footer />

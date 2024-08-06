@@ -56,6 +56,9 @@
 		},
 		[] as string[][]
 	);
+
+	let searchValue = "";
+	let searchEncodings = "";
 </script>
 
 <section class="file__strings container mx-auto">
@@ -65,24 +68,28 @@
 				<th class="w-1/4">
 					<div class="flex items-center space-x-3 justify-between">
 						<span class="font-semibold">Encoding</span>
-						<label class="flex-center">
-							<Icon name="search" size="w-4 h-4" class="text-gray-300" />
-							<input type="text" placeholder="Search encodings..." />
+						<label class="flex-center flex gap-2">
+							<Icon name="search" size="w-4 h-4" class="text-zinc-400 dark:text-zinc-500" />
+							<input type="text" placeholder="Search encodings..." bind:value={searchEncodings}/>
 						</label>
 					</div>
 				</th>
 				<th>
 					<div class="flex items-center space-x-3 justify-between">
 						<span class="font-semibold">Value</span>
-						<label class="flex-center">
-							<Icon name="search" size="w-4 h-4" class="text-gray-300" />
-							<input type="text" placeholder="Search value..." />
+						<label class="flex-center flex gap-2">
+							<Icon name="search" size="w-4 h-4" class="text-zinc-400 dark:text-zinc-500" />
+							<input type="text" placeholder="Search value..." bind:value={searchValue}/>
 						</label>
 					</div>
 				</th>
 			</thead>
 			<tbody>
-				{#each items as item}
+				{#each items.filter(i =>
+					i[0].toLowerCase().includes(searchEncodings.toLowerCase())
+					&&
+					i[1].toLowerCase().includes(searchValue.toLowerCase()))
+				as item}
 					<tr>
 						<td>{item[0]}</td>
 						<td>{item[1]}</td>
@@ -117,7 +124,7 @@
 <style lang="postcss">
 	table {
 		th {
-			@apply border rounded;
+			@apply border border-zinc-300 dark:border-zinc-700 rounded;
 			@apply text-left px-6 py-5;
 
 			input {
@@ -127,12 +134,12 @@
 		}
 
 		tr {
-			@apply border even:bg-gray-50;
+			@apply border border-zinc-300 dark:border-zinc-700 even:bg-zinc-100 even:dark:bg-zinc-800;
 			td {
-				@apply text-xs text-neutral-900 p-4;
+				@apply text-xs text-zinc-900 dark:text-zinc-100 p-4;
 
 				&:first-child {
-					@apply border-r;
+					@apply border-r border-zinc-300 dark:border-zinc-700;
 				}
 			}
 		}

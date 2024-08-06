@@ -13,6 +13,9 @@ html.bp-lock {
 	overflow-y: unset;
 }
 
+html.dark {
+	color-scheme: dark;
+}
 
 html,
 body {
