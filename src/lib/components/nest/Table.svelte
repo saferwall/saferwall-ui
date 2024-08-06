@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { translateKeyToTitle } from "$lib/utils";
+	import Primitive from "./Primitive.svelte";
 
 	export let value: Record<string, any>[] = [];
 	export let path: (string | number)[] = [];
@@ -15,7 +16,7 @@
 			<th class="text-center px-1">#</th>
 		{/if}
 		{#each keys as head}
-			<th>{translateKeyToTitle(head, true)}</th>
+			<th class="text-center">{translateKeyToTitle(head, true)}</th>
 		{/each}
 	</thead>
 	<tbody>
@@ -23,25 +24,27 @@
 			<tr>
 				{#if showNumbers}
 					<td class="px-1">
-						<button class="p-2" on:click={() => { path = [...path, ...[tableKey ?? []].flat(), index] }}>
-							{index}
-						</button>
+						<div class="flex justify-center w-full">
+							<button class="p-2" on:click={() => { path = [...path, ...[tableKey ?? []].flat(), index] }}>
+								{index}
+							</button>
+						</div>
 					</td>
 				{/if}
 				{#each keys as key}
 					<td>
 						{#if key in v}
 							{#if typeof v[key] !== "object"}
-								{v[key].toString()}
+								<Primitive value={v[key]}></Primitive>
 							{:else}
 								<div class="flex justify-center w-full">
 									<button class="py-1 px-4" on:click={() => {
-										path = [...path, ...[tableKey ?? []].flat(), index, key];
+										path = [...path, ...[tableKey ?? []].flat(), ...(showNumbers ? [index] : []), key];
 									}}>Reveal {Array.isArray(v[key]) ? "Table" : "Object"}</button>
 								</div>
 							{/if}
-						{:else}
-							{""}
+						<!-- {:else}
+							{""} -->
 						{/if}
 					</td>
 				{/each}

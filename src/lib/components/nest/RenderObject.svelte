@@ -2,6 +2,7 @@
 	import { translateKeyToTitle } from "$lib/utils";
 	import Icon from "../Icon.svelte";
 	import Table from "./Table.svelte";
+	import TablePrimitive from "./TablePrimitive.svelte";
 
 	export let obj: Record<string | number, any> = {};
 
@@ -16,10 +17,17 @@
 		// debugger;
 		return p[c]
 	}, obj);
-	$: entries = [...Object.entries(realObject)].filter(([, value]) => typeof value === "object").toSorted(([, a], [, b]) => {
-		return score(a) - score(b);
-	});
-	$: primitiveEntries = [...Object.entries(realObject)].filter(([, value]) => typeof value !== "object");
+	$: entries = (() => {
+		// debugger;
+		return !Array.isArray(realObject) ? [...Object.entries(realObject)].filter(([, value]) => typeof value === "object").toSorted(([, a], [, b]) => {
+			return score(a) - score(b);
+		}) : [];
+	})();
+	$: primitiveEntries = (() => {
+		// debugger;
+		return !Array.isArray(realObject) ? [...Object.entries(realObject)].filter(([, value]) => typeof value !== "object") : [];
+	})();
+	$: console.log({obj, path, realObject, entries, primitiveEntries});
 </script>
 
 <div class="flex items-center p-0.5 border rounded-full border-zinc-300 dark:border-zinc-700 w-fit">
@@ -44,22 +52,38 @@
 	{/each}
 </div>
 {#if Array.isArray(realObject)}
-	<h3 class="text-md">
-		{translateKeyToTitle(path[path.length - 1].toString(), true)}
-	</h3>
-	<Table bind:path value={realObject}></Table>
+	{#if realObject.length}
+		<h3 class="text-md">
+			{translateKeyToTitle(path[path.length - 1].toString(), true)}
+		</h3>
+		{#if typeof realObject[0] !== "object"}
+			<TablePrimitive value={realObject}></TablePrimitive>
+		{:else}
+			<Table bind:path value={realObject}></Table>
+		{/if}
+	{:else}
+		<h3 class="text-md">
+			{translateKeyToTitle(path[path.length - 1].toString(), true)}: [ empty ]
+		</h3>
+	{/if}
 {:else}
 	{#if primitiveEntries.length}
 		<Table showNumbers={false} value={[Object.fromEntries(primitiveEntries)]}></Table>
 	{/if}
 	{#each entries as [key, value]}
 		<h3 class="text-md">
-			{translateKeyToTitle(key, true)}
+			{translateKeyToTitle(key, true)}{#if Array.isArray(value) && value.length === 0}: [ empty ]{/if}
 		</h3>
 		{#if Array.isArray(value)}
-			<Table tableKey={key} bind:path {value}></Table>
+			{#if value.length}
+				{#if typeof value[0] !== "object"}
+					<TablePrimitive {value}></TablePrimitive>
+				{:else}
+					<Table tableKey={key} bind:path {value}></Table>
+				{/if}
+			{/if}
 		{:else if typeof value === "object"}
-			<Table showNumbers={false} bind:path value={[value]}></Table>
+			<Table showNumbers={false} tableKey={key} bind:path value={[value]}></Table>
 		<!-- {:else} -->
 		{/if}
 	{/each}
