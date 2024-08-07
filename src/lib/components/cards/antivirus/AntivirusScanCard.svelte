@@ -13,7 +13,7 @@
 <Card class="w-full {$$props.class}">
 	<div>
 		<h2 class="font-semibold text-lg">{title}</h2>
-		<p class="text-neutral-500">
+		<p class="text-zinc-400 dark:text-zinc-500">
 			<DateTime {date} />
 		</p>
 	</div>
