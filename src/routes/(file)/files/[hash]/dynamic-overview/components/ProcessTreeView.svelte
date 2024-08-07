@@ -19,11 +19,12 @@
 			? processTableOpen.filter((i) => i !== index)
 			: [...processTableOpen, index];
 	};
+	$: console.log({trees});
 </script>
 
 <ul class={`flex flex-col divide-y ${isChild ? 'border-t border-neutral-500 mt-6' : ''}`}>
 	{#each trees as tree, index (tree.path)}
-		<li class:pl-12={tree.parent_pid === '0x0'} class:ml-12={tree.parent_pid !== '0x0'}>
+		<li class="pr-4" class:pl-12={tree.parent_pid === '0x0'} class:ml-12={tree.parent_pid !== '0x0'}>
 			<Expandable expandable={tree.children.length != 0}>
 				<svelte:fragment slot="header">
 					<div class="flex flex-col gap-2 w-full">
@@ -37,19 +38,21 @@
 									{tree.proc_name}
 								</span>
 							</h2>
-							<Label class="uppercase">
+							<Label class="uppercase rounded-full px-3">
 								{tree.file_type}
 							</Label>
 
-							<Label
-								theme={tree.detection === 'clean'
-									? 'brand'
-									: tree.detection === 'malicious'
-										? 'danger'
-										: 'base'}
-							>
-								{tree.detection}
-							</Label>
+							{#if tree.detection !== ""}
+								<Label
+									theme={tree.detection === 'clean'
+										? 'brand'
+										: tree.detection === 'malicious'
+											? 'danger'
+											: 'base'}
+								>
+									{tree.detection}
+								</Label>
+							{/if}
 						</div>
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -60,9 +63,9 @@
 						>
 							<Icon
 								name={processTableOpen.includes(index) ? 'minus-circle' : 'plus-circle'}
-								size="w-5 h-5"
+								size="w-5 h-5 text-primary"
 							/>
-							<p class="text-neutral-600 text-xs">{tree.path} »</p>
+							<p class="text-zinc-600 dark:text-zinc-400 text-xs">{tree.path} »</p>
 						</div>
 						{#if processTableOpen.includes(index)}
 							<ProcessTable {behaviorId} {client} pid={tree.pid} />
@@ -84,7 +87,7 @@
 		}
 
 		.dot {
-			@apply block w-1 h-1 rounded-full bg-black mx-1;
+			@apply block w-1 h-1 rounded-full bg-current mx-1;
 		}
 	}
 </style>

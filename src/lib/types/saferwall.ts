@@ -530,7 +530,7 @@ export namespace Saferwall {
 			MALICIOUS = 'malicious'
 		}
 		export interface ProcessItem {
-			detection: Detection;
+			detection: Detection | "";
 			file_type: string;
 			parent_link: string;
 			parent_pid: string;
