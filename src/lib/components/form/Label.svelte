@@ -14,7 +14,8 @@
 		@apply px-2 py-1;
 
 		&--base {
-			@apply bg-neutral-100 text-neutral-950;
+			@apply dark:bg-zinc-100 dark:text-zinc-950;
+			@apply bg-zinc-950 text-zinc-100;
 		}
 
 		&--brand,
