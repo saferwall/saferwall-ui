@@ -34,7 +34,7 @@
 	};
 </script>
 
-<div class="flex flex-1 flex-col w-full h-full items-center justify-center">
+<div class="flex flex-1 flex-col w-full h-full items-center">
 	<section class="container">
 		<Card class="w-full" padding={false}>
 			<svelte:fragment slot="header">
