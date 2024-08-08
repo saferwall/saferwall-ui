@@ -51,7 +51,7 @@ a.link:not([href='']) {
 }
 
 :global(.markdown-body) {
-	@apply prose;
+	/* @apply prose; */
 }
 
 .bytemd-fullscreen {
