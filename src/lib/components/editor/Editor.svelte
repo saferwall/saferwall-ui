@@ -23,7 +23,7 @@
 	let doc: () => Text;
 </script>
 
-<div class="w-full flex flex-col border border-primary-600 rounded overflow-clip">
+<div class="w-full flex flex-col border border-zinc-300 text-zinc-500 dark:border-zinc-700 rounded overflow-clip">
 	<div class="controls p-1">
 		<button
 			class="control"
@@ -305,7 +305,7 @@
 			<ListTaskIcon />
 		</button>
 	</div>
-	<div class="w-full flex *:grow-0 *:w-[50%] border-t border-primary-600 min-h-48 items-stretch">
+	<div class="w-full flex *:grow-0 *:w-[50%] border-t border-zinc-300 dark:border-zinc-700 min-h-48 items-stretch">
 		<CodeMirror
 			{extensions}
 			nodebounce={true}
@@ -314,7 +314,7 @@
 				state = () => view.state;
 				doc = () => state().doc;
 			}}
-			class="max-w-full [&_.cm-gutter]:h-full [&_.cm-content]:h-full [&_.cm-editor]:h-full border-r border-primary-600"
+			class="max-w-full [&_.cm-gutter]:h-full [&_.cm-content]:h-full [&_.cm-editor]:h-full border-r border-zinc-300 dark:border-zinc-700"
 			bind:value
 			lang={markdown({ base: markdownLanguage })}
 		/>
@@ -325,7 +325,10 @@
 </div>
 
 <style lang="postcss">
+	.controls {
+		@apply bg-zinc-100/80 dark:bg-zinc-800;
+	}
 	.control {
-		@apply p-0 w-7 h-7 inline-flex items-center justify-center text-primary-600 border hover:border-gray-300 rounded;
+		@apply p-0 w-7 h-7 inline-flex items-center justify-center  dark:text-zinc-400 text-zinc-600 hover:bg-zinc-200 hover:dark:bg-zinc-700 rounded-md;
 	}
 </style>

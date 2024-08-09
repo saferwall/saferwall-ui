@@ -60,7 +60,9 @@ if (browser) {
 
 		if (newTheme === Theme.DARK) {
 			document.documentElement.classList.add(Theme.DARK);
+			document.documentElement.classList.remove(Theme.LIGHT);
 		} else {
+			document.documentElement.classList.add(Theme.LIGHT);
 			document.documentElement.classList.remove(Theme.DARK);
 		}
 	});

@@ -22,7 +22,7 @@
 			<ul class="hidden xl:flex space-x-8 items-center">
 				<li>
 					<a
-						class="text-gray-300"
+						class="text-zinc-400 dark:text-zinc-500 hover:text-gray-200 dark:hover:text-gray-200"
 						href="https://docs.saferwall.com/"
 						target="_blank"
 						rel="noreferrer"
@@ -31,7 +31,7 @@
 					</a>
 				</li>
 				<li>
-					<a class="text-gray-300" href="/hot-activities">Hot activities</a>
+					<a class="text-zinc-400 dark:text-zinc-500 hover:text-gray-200 dark:hover:text-gray-200" href="/hot-activities">Hot activities</a>
 				</li>
 			</ul>
 			<ThemeToggle />
