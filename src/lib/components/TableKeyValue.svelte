@@ -22,7 +22,7 @@
 </script>
 
 <Table.Root class={cn(deep && !parent && 'pt-0', className)}>
-	<Table.Body class={cn(lines ? `dividey divide-y divide-neutral-100` : '')}>
+	<Table.Body class={cn(lines ? `divide-y divide-zinc-300 dark:divide-zinc-700` : '')}>
 		{#if header}
 			<Table.Row>
 				{#if Array.isArray(header)}

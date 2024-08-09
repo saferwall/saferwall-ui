@@ -51,7 +51,7 @@
 <div class="container mx-auto flex flex-col gap-4 relative overflow-hidden rounded-xl">
 	<div
 		data-sveltekit-preload-data
-		class="flex flex-col bg-white text-gray-700 rounded overflow-auto w-full h-full p-6"
+		class="flex flex-col bg-white dark:bg-zinc-900 text-zinc-800 dark:text-white rounded overflow-auto w-full h-full p-6"
 	>
 		<form
 			data-sveltekit-keepfocus
@@ -59,8 +59,8 @@
 			bind:this={form}
 			on:change={handleFormChanges}
 		>
-			<Input name="search" icon="search" bind:value={search} placeholder="Search anything..." />
-			<div class="grid grid-cols-2 gap-2 xl:gap-4 text-xs flex-shrink-0 flex-grow text-gray-600">
+			<Input name="search" icon="search" bind:value={search} placeholder="Search anything..." class="border-zinc-300 dark:border-zinc-700" />
+			<div class="grid grid-cols-2 gap-2 xl:gap-4 text-xs flex-shrink-0 flex-grow dark:text-zinc-200 text-zinc-800">
 				{#each categories as item}
 					<Checkbox
 						size="sm"
@@ -75,16 +75,16 @@
 		</form>
 	</div>
 
-	<Card padding={false}>
+	<Card padding={false} class="dark:bg-zinc-900">
 		<div class="pb-2">
 			<table class="table-auto w-full">
-				<thead class="text-left uppercase text-neutral-500 text-xs">
+				<thead class="text-left uppercase text-zinc-600 dark:text-zinc-400 text-xs">
 					<th colspan="2">File Name</th>
 					<th class="lg:w-44">Category</th>
 					<th class="lg:w-44">Verdict</th>
 					<th class="text-center w-18">Actions</th>
 				</thead>
-				<tbody class="divide-y divide-neutral-100">
+				<tbody class="divide-y divide-zinc-300 dark:divide-zinc-700">
 					{#each items as item}
 						<tr class="cursor-pointer" on:click={() => (item._open = !item._open)}>
 							<td>
@@ -111,7 +111,7 @@
 										download={item.name}
 										href={generateDownloadLink(item)}
 										on:click={(event) => event.stopImmediatePropagation()}
-										class="flex items-center justify-center w-8 h-8 rounded-full bg-white border text-primary stroke-2 hover:bg-opacity-90"
+										class="flex items-center justify-center w-8 h-8 rounded-full  border text-primary border-primary stroke-2 hover:bg-primary/20"
 									>
 										<Icon size="w-4 h-4" name="download" />
 									</a>
@@ -127,10 +127,10 @@
 							<td class="!py-0" colspan="7">
 								{#if item._open}
 									<div
-										class="p-4 text-gray-900"
+										class="p-4 text-zinc-900 dark:text-zinc-100"
 										transition:slide={{ duration: 300, easing: quintOut, axis: 'y' }}
 									>
-										<div class="border rounded-lg">
+										<div class="border rounded-lg border-zinc-300 dark:border-zinc-700">
 											<TableKeyValue
 												header={false}
 												lines={true}
@@ -162,7 +162,7 @@
 <style lang="postcss">
 	table {
 		thead {
-			@apply border-b;
+			@apply border-b border-zinc-300 dark:border-zinc-700;
 
 			th {
 				@apply font-medium py-4;

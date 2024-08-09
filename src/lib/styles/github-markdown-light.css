@@ -1,4 +1,5 @@
 /*light*/
+.light .markdown-body,
 .markdown-body[data-theme="light"],
 .markdown-body-light {
 	-ms-text-size-adjust: 100%;
@@ -13,6 +14,7 @@
 	scroll-behavior: auto;
 }
 
+.light .markdown-body .octicon,
 .markdown-body[data-theme="light"] .octicon,
 .markdown-body-light .octicon {
 	display: inline-block;
@@ -20,16 +22,22 @@
 	vertical-align: text-bottom;
 }
 
+.light .markdown-body h1:hover .anchor .octicon-link:before,
 .markdown-body[data-theme="light"] h1:hover .anchor .octicon-link:before,
 .markdown-body-light h1:hover .anchor .octicon-link:before,
+.light .markdown-body h2:hover .anchor .octicon-link:before,
 .markdown-body[data-theme="light"] h2:hover .anchor .octicon-link:before,
 .markdown-body-light h2:hover .anchor .octicon-link:before,
+.light .markdown-body h3:hover .anchor .octicon-link:before,
 .markdown-body[data-theme="light"] h3:hover .anchor .octicon-link:before,
 .markdown-body-light h3:hover .anchor .octicon-link:before,
+.light .markdown-body h4:hover .anchor .octicon-link:before,
 .markdown-body[data-theme="light"] h4:hover .anchor .octicon-link:before,
 .markdown-body-light h4:hover .anchor .octicon-link:before,
+.light .markdown-body h5:hover .anchor .octicon-link:before,
 .markdown-body[data-theme="light"] h5:hover .anchor .octicon-link:before,
 .markdown-body-light h5:hover .anchor .octicon-link:before,
+.light .markdown-body h6:hover .anchor .octicon-link:before,
 .markdown-body[data-theme="light"] h6:hover .anchor .octicon-link:before,
 .markdown-body-light h6:hover .anchor .octicon-link:before {
 	width: 16px;
@@ -41,25 +49,31 @@
 	mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
 }
 
+.light .markdown-body details,
 .markdown-body[data-theme="light"] details,
 .markdown-body-light details,
+.light .markdown-body figcaption,
 .markdown-body[data-theme="light"] figcaption,
 .markdown-body-light figcaption,
+.light .markdown-body figure,
 .markdown-body[data-theme="light"] figure,
 .markdown-body-light figure {
 	display: block;
 }
 
+.light .markdown-body summary,
 .markdown-body[data-theme="light"] summary,
 .markdown-body-light summary {
 	display: list-item;
 }
 
+.light .markdown-body [hidden],
 .markdown-body[data-theme="light"] [hidden],
 .markdown-body-light [hidden] {
 	display: none !important;
 }
 
+.light .markdown-body a,
 .markdown-body[data-theme="light"] a,
 .markdown-body-light a {
 	background-color: transparent;
@@ -67,6 +81,7 @@
 	text-decoration: none;
 }
 
+.light .markdown-body abbr[title],
 .markdown-body[data-theme="light"] abbr[title],
 .markdown-body-light abbr[title] {
 	border-bottom: none;
@@ -74,18 +89,22 @@
 	text-decoration: underline dotted;
 }
 
+.light .markdown-body b,
 .markdown-body[data-theme="light"] b,
 .markdown-body-light b,
+.light .markdown-body strong,
 .markdown-body[data-theme="light"] strong,
 .markdown-body-light strong {
 	font-weight: 600;
 }
 
+.light .markdown-body dfn,
 .markdown-body[data-theme="light"] dfn,
 .markdown-body-light dfn {
 	font-style: italic;
 }
 
+.light .markdown-body h1,
 .markdown-body[data-theme="light"] h1,
 .markdown-body-light h1 {
 	margin: 0.67em 0;
@@ -95,19 +114,23 @@
 	border-bottom: 1px solid #d0d7deb3;
 }
 
+.light .markdown-body mark,
 .markdown-body[data-theme="light"] mark,
 .markdown-body-light mark {
 	background-color: #fff8c5;
 	color: #1f2328;
 }
 
+.light .markdown-body small,
 .markdown-body[data-theme="light"] small,
 .markdown-body-light small {
 	font-size: 90%;
 }
 
+.light .markdown-body sub,
 .markdown-body[data-theme="light"] sub,
 .markdown-body-light sub,
+.light .markdown-body sup,
 .markdown-body[data-theme="light"] sup,
 .markdown-body-light sup {
 	font-size: 75%;
@@ -116,41 +139,50 @@
 	vertical-align: baseline;
 }
 
+.light .markdown-body sub,
 .markdown-body[data-theme="light"] sub,
 .markdown-body-light sub {
 	bottom: -0.25em;
 }
 
+.light .markdown-body sup,
 .markdown-body[data-theme="light"] sup,
 .markdown-body-light sup {
 	top: -0.5em;
 }
 
+.light .markdown-body img,
 .markdown-body[data-theme="light"] img,
 .markdown-body-light img {
 	border-style: none;
 	max-width: 100%;
 	box-sizing: content-box;
-	background-color: #ffffff;
+	background-color: #fff;
 }
 
+.light .markdown-body code,
 .markdown-body[data-theme="light"] code,
 .markdown-body-light code,
+.light .markdown-body kbd,
 .markdown-body[data-theme="light"] kbd,
 .markdown-body-light kbd,
+.light .markdown-body pre,
 .markdown-body[data-theme="light"] pre,
 .markdown-body-light pre,
+.light .markdown-body samp,
 .markdown-body[data-theme="light"] samp,
 .markdown-body-light samp {
 	font-family: monospace;
 	font-size: 1em;
 }
 
+.light .markdown-body figure,
 .markdown-body[data-theme="light"] figure,
 .markdown-body-light figure {
 	margin: 1em 40px;
 }
 
+.light .markdown-body hr,
 .markdown-body[data-theme="light"] hr,
 .markdown-body-light hr {
 	box-sizing: content-box;
@@ -164,6 +196,7 @@
 	border: 0;
 }
 
+.light .markdown-body input,
 .markdown-body[data-theme="light"] input,
 .markdown-body-light input {
 	font: inherit;
@@ -174,45 +207,56 @@
 	line-height: inherit;
 }
 
+.light .markdown-body [type=button],
 .markdown-body[data-theme="light"] [type=button],
 .markdown-body-light [type=button],
+.light .markdown-body [type=reset],
 .markdown-body[data-theme="light"] [type=reset],
 .markdown-body-light [type=reset],
+.light .markdown-body [type=submit],
 .markdown-body[data-theme="light"] [type=submit],
 .markdown-body-light [type=submit] {
 	-webkit-appearance: button;
 	appearance: button;
 }
 
+.light .markdown-body [type=checkbox],
 .markdown-body[data-theme="light"] [type=checkbox],
 .markdown-body-light [type=checkbox],
+.light .markdown-body [type=radio],
 .markdown-body[data-theme="light"] [type=radio],
 .markdown-body-light [type=radio] {
 	box-sizing: border-box;
 	padding: 0;
 }
 
+.light .markdown-body [type=number]::-webkit-inner-spin-button,
 .markdown-body[data-theme="light"] [type=number]::-webkit-inner-spin-button,
 .markdown-body-light [type=number]::-webkit-inner-spin-button,
+.light .markdown-body [type=number]::-webkit-outer-spin-button,
 .markdown-body[data-theme="light"] [type=number]::-webkit-outer-spin-button,
 .markdown-body-light [type=number]::-webkit-outer-spin-button {
 	height: auto;
 }
 
+.light .markdown-body [type=search]::-webkit-search-cancel-button,
 .markdown-body[data-theme="light"] [type=search]::-webkit-search-cancel-button,
 .markdown-body-light [type=search]::-webkit-search-cancel-button,
+.light .markdown-body [type=search]::-webkit-search-decoration,
 .markdown-body[data-theme="light"] [type=search]::-webkit-search-decoration,
 .markdown-body-light [type=search]::-webkit-search-decoration {
 	-webkit-appearance: none;
 	appearance: none;
 }
 
+.light .markdown-body ::-webkit-input-placeholder,
 .markdown-body[data-theme="light"] ::-webkit-input-placeholder,
 .markdown-body-light ::-webkit-input-placeholder {
 	color: inherit;
 	opacity: 0.54;
 }
 
+.light .markdown-body ::-webkit-file-upload-button,
 .markdown-body[data-theme="light"] ::-webkit-file-upload-button,
 .markdown-body-light ::-webkit-file-upload-button {
 	-webkit-appearance: button;
@@ -220,23 +264,27 @@
 	font: inherit;
 }
 
+.light .markdown-body a:hover,
 .markdown-body[data-theme="light"] a:hover,
 .markdown-body-light a:hover {
 	text-decoration: underline;
 }
 
+.light .markdown-body ::placeholder,
 .markdown-body[data-theme="light"] ::placeholder,
 .markdown-body-light ::placeholder {
 	color: #636c76;
 	opacity: 1;
 }
 
+.light .markdown-body hr::before,
 .markdown-body[data-theme="light"] hr::before,
 .markdown-body-light hr::before {
 	display: table;
 	content: "";
 }
 
+.light .markdown-body hr::after,
 .markdown-body[data-theme="light"] hr::after,
 .markdown-body-light hr::after {
 	display: table;
@@ -244,6 +292,7 @@
 	content: "";
 }
 
+.light .markdown-body table,
 .markdown-body[data-theme="light"] table,
 .markdown-body-light table {
 	border-spacing: 0;
@@ -254,25 +303,31 @@
 	overflow: auto;
 }
 
+.light .markdown-body td,
 .markdown-body[data-theme="light"] td,
 .markdown-body-light td,
+.light .markdown-body th,
 .markdown-body[data-theme="light"] th,
 .markdown-body-light th {
 	padding: 0;
 }
 
+.light .markdown-body details summary,
 .markdown-body[data-theme="light"] details summary,
 .markdown-body-light details summary {
 	cursor: pointer;
 }
 
+.light .markdown-body details:not([open])>*:not(summary),
 .markdown-body[data-theme="light"] details:not([open])>*:not(summary),
 .markdown-body-light details:not([open])>*:not(summary) {
 	display: none;
 }
 
+.light .markdown-body a:focus,
 .markdown-body[data-theme="light"] a:focus,
 .markdown-body-light a:focus,
+.light .markdown-body [role=button]:focus,
 .markdown-body[data-theme="light"] [role=button]:focus,
 .markdown-body-light [role=button]:focus {
 	outline: 2px solid #0969da;
@@ -280,8 +335,10 @@
 	box-shadow: none;
 }
 
+.light .markdown-body input[type=radio]:focus,
 .markdown-body[data-theme="light"] input[type=radio]:focus,
 .markdown-body-light input[type=radio]:focus,
+.light .markdown-body input[type=checkbox]:focus,
 .markdown-body[data-theme="light"] input[type=checkbox]:focus,
 .markdown-body-light input[type=checkbox]:focus {
 	outline: 2px solid #0969da;
@@ -289,22 +346,28 @@
 	box-shadow: none;
 }
 
+.light .markdown-body a:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] a:focus:not(:focus-visible),
 .markdown-body-light a:focus:not(:focus-visible),
+.light .markdown-body [role=button]:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] [role=button]:focus:not(:focus-visible),
 .markdown-body-light [role=button]:focus:not(:focus-visible) {
 	outline: solid 1px transparent;
 }
 
+.light .markdown-body input[type=radio]:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] input[type=radio]:focus:not(:focus-visible),
 .markdown-body-light input[type=radio]:focus:not(:focus-visible),
+.light .markdown-body input[type=checkbox]:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] input[type=checkbox]:focus:not(:focus-visible),
 .markdown-body-light input[type=checkbox]:focus:not(:focus-visible) {
 	outline: solid 1px transparent;
 }
 
+.light .markdown-body a:focus-visible,
 .markdown-body[data-theme="light"] a:focus-visible,
 .markdown-body-light a:focus-visible,
+.light .markdown-body [role=button]:focus-visible,
 .markdown-body[data-theme="light"] [role=button]:focus-visible,
 .markdown-body-light [role=button]:focus-visible {
 	outline: 2px solid #0969da;
@@ -312,8 +375,10 @@
 	box-shadow: none;
 }
 
+.light .markdown-body input[type=radio]:focus-visible,
 .markdown-body[data-theme="light"] input[type=radio]:focus-visible,
 .markdown-body-light input[type=radio]:focus-visible,
+.light .markdown-body input[type=checkbox]:focus-visible,
 .markdown-body[data-theme="light"] input[type=checkbox]:focus-visible,
 .markdown-body-light input[type=checkbox]:focus-visible {
 	outline: 2px solid #0969da;
@@ -321,27 +386,34 @@
 	box-shadow: none;
 }
 
+.light .markdown-body a:not([class]):focus,
 .markdown-body[data-theme="light"] a:not([class]):focus,
 .markdown-body-light a:not([class]):focus,
+.light .markdown-body a:not([class]):focus-visible,
 .markdown-body[data-theme="light"] a:not([class]):focus-visible,
 .markdown-body-light a:not([class]):focus-visible {
 	outline-offset: 0;
 }
 
+.light .markdown-body input[type=radio]:focus,
 .markdown-body[data-theme="light"] input[type=radio]:focus,
 .markdown-body-light input[type=radio]:focus,
+.light .markdown-body input[type=radio]:focus-visible,
 .markdown-body[data-theme="light"] input[type=radio]:focus-visible,
 .markdown-body-light input[type=radio]:focus-visible {
 	outline-offset: 0;
 }
 
+.light .markdown-body input[type=checkbox]:focus,
 .markdown-body[data-theme="light"] input[type=checkbox]:focus,
 .markdown-body-light input[type=checkbox]:focus,
+.light .markdown-body input[type=checkbox]:focus-visible,
 .markdown-body[data-theme="light"] input[type=checkbox]:focus-visible,
 .markdown-body-light input[type=checkbox]:focus-visible {
 	outline-offset: 0;
 }
 
+.light .markdown-body kbd,
 .markdown-body[data-theme="light"] kbd,
 .markdown-body-light kbd {
 	display: inline-block;
@@ -357,16 +429,22 @@
 	box-shadow: inset 0 -1px 0 #afb8c133;
 }
 
+.light .markdown-body h1,
 .markdown-body[data-theme="light"] h1,
 .markdown-body-light h1,
+.light .markdown-body h2,
 .markdown-body[data-theme="light"] h2,
 .markdown-body-light h2,
+.light .markdown-body h3,
 .markdown-body[data-theme="light"] h3,
 .markdown-body-light h3,
+.light .markdown-body h4,
 .markdown-body[data-theme="light"] h4,
 .markdown-body-light h4,
+.light .markdown-body h5,
 .markdown-body[data-theme="light"] h5,
 .markdown-body-light h5,
+.light .markdown-body h6,
 .markdown-body[data-theme="light"] h6,
 .markdown-body-light h6 {
 	margin-top: 24px;
@@ -375,6 +453,7 @@
 	line-height: 1.25;
 }
 
+.light .markdown-body h2,
 .markdown-body[data-theme="light"] h2,
 .markdown-body-light h2 {
 	font-weight: 600;
@@ -383,24 +462,28 @@
 	border-bottom: 1px solid #d0d7deb3;
 }
 
+.light .markdown-body h3,
 .markdown-body[data-theme="light"] h3,
 .markdown-body-light h3 {
 	font-weight: 600;
 	font-size: 1.25em;
 }
 
+.light .markdown-body h4,
 .markdown-body[data-theme="light"] h4,
 .markdown-body-light h4 {
 	font-weight: 600;
 	font-size: 1em;
 }
 
+.light .markdown-body h5,
 .markdown-body[data-theme="light"] h5,
 .markdown-body-light h5 {
 	font-weight: 600;
 	font-size: 0.875em;
 }
 
+.light .markdown-body h6,
 .markdown-body[data-theme="light"] h6,
 .markdown-body-light h6 {
 	font-weight: 600;
@@ -408,12 +491,14 @@
 	color: #636c76;
 }
 
+.light .markdown-body p,
 .markdown-body[data-theme="light"] p,
 .markdown-body-light p {
 	margin-top: 0;
 	margin-bottom: 10px;
 }
 
+.light .markdown-body blockquote,
 .markdown-body[data-theme="light"] blockquote,
 .markdown-body-light blockquote {
 	margin: 0;
@@ -422,6 +507,7 @@
 	border-left: 0.25em solid #d0d7de;
 }
 
+.light .markdown-body ul,
 .markdown-body[data-theme="light"] ul,
 .markdown-body-light ul {
 	margin-top: 0;
@@ -429,6 +515,7 @@
 	padding-left: 2em;
 }
 
+.light .markdown-body ol,
 .markdown-body[data-theme="light"] ol,
 .markdown-body-light ol {
 	margin-top: 0;
@@ -436,45 +523,56 @@
 	padding-left: 2em;
 }
 
+.light .markdown-body ol ol,
 .markdown-body[data-theme="light"] ol ol,
 .markdown-body-light ol ol {
 	list-style-type: lower-roman;
 }
 
+.light .markdown-body ul ol,
 .markdown-body[data-theme="light"] ul ol,
 .markdown-body-light ul ol {
 	list-style-type: lower-roman;
 }
 
+.light .markdown-body ul ul ol,
 .markdown-body[data-theme="light"] ul ul ol,
 .markdown-body-light ul ul ol,
+.light .markdown-body ul ol ol,
 .markdown-body[data-theme="light"] ul ol ol,
 .markdown-body-light ul ol ol {
 	list-style-type: lower-alpha;
 }
 
+.light .markdown-body ol ul ol,
 .markdown-body[data-theme="light"] ol ul ol,
 .markdown-body-light ol ul ol,
+.light .markdown-body ol ol ol,
 .markdown-body[data-theme="light"] ol ol ol,
 .markdown-body-light ol ol ol {
 	list-style-type: lower-alpha;
 }
 
+.light .markdown-body dd,
 .markdown-body[data-theme="light"] dd,
 .markdown-body-light dd {
 	margin-left: 0;
 }
 
+.light .markdown-body tt,
 .markdown-body[data-theme="light"] tt,
 .markdown-body-light tt,
+.light .markdown-body code,
 .markdown-body[data-theme="light"] code,
 .markdown-body-light code,
+.light .markdown-body samp,
 .markdown-body[data-theme="light"] samp,
 .markdown-body-light samp {
 	font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
 	font-size: 12px;
 }
 
+.light .markdown-body pre,
 .markdown-body[data-theme="light"] pre,
 .markdown-body-light pre {
 	margin-top: 0;
@@ -484,6 +582,7 @@
 	word-wrap: normal;
 }
 
+.light .markdown-body .octicon,
 .markdown-body[data-theme="light"] .octicon,
 .markdown-body-light .octicon {
 	display: inline-block;
@@ -492,8 +591,10 @@
 	fill: currentColor;
 }
 
+.light .markdown-body input::-webkit-outer-spin-button,
 .markdown-body[data-theme="light"] input::-webkit-outer-spin-button,
 .markdown-body-light input::-webkit-outer-spin-button,
+.light .markdown-body input::-webkit-inner-spin-button,
 .markdown-body[data-theme="light"] input::-webkit-inner-spin-button,
 .markdown-body-light input::-webkit-inner-spin-button {
 	margin: 0;
@@ -501,17 +602,20 @@
 	appearance: none;
 }
 
+.light .markdown-body .mr-2,
 .markdown-body[data-theme="light"] .mr-2,
 .markdown-body-light .mr-2 {
 	margin-right: 0.5rem !important;
 }
 
+.light .markdown-body::before,
 .markdown-body[data-theme="light"]::before,
 .markdown-body-light::before {
 	display: table;
 	content: "";
 }
 
+.light .markdown-body::after,
 .markdown-body[data-theme="light"]::after,
 .markdown-body-light::after {
 	display: table;
@@ -519,27 +623,32 @@
 	content: "";
 }
 
+.light .markdown-body>*:first-child,
 .markdown-body[data-theme="light"]>*:first-child,
 .markdown-body-light>*:first-child {
 	margin-top: 0 !important;
 }
 
+.light .markdown-body>*:last-child,
 .markdown-body[data-theme="light"]>*:last-child,
 .markdown-body-light>*:last-child {
 	margin-bottom: 0 !important;
 }
 
+.light .markdown-body a:not([href]),
 .markdown-body[data-theme="light"] a:not([href]),
 .markdown-body-light a:not([href]) {
 	color: inherit;
 	text-decoration: none;
 }
 
+.light .markdown-body .absent,
 .markdown-body[data-theme="light"] .absent,
 .markdown-body-light .absent {
 	color: #d1242f;
 }
 
+.light .markdown-body .anchor,
 .markdown-body[data-theme="light"] .anchor,
 .markdown-body-light .anchor {
 	float: left;
@@ -548,51 +657,68 @@
 	line-height: 1;
 }
 
+.light .markdown-body .anchor:focus,
 .markdown-body[data-theme="light"] .anchor:focus,
 .markdown-body-light .anchor:focus {
 	outline: none;
 }
 
+.light .markdown-body p,
 .markdown-body[data-theme="light"] p,
 .markdown-body-light p,
+.light .markdown-body blockquote,
 .markdown-body[data-theme="light"] blockquote,
 .markdown-body-light blockquote,
+.light .markdown-body ul,
 .markdown-body[data-theme="light"] ul,
 .markdown-body-light ul,
+.light .markdown-body ol,
 .markdown-body[data-theme="light"] ol,
 .markdown-body-light ol,
+.light .markdown-body dl,
 .markdown-body[data-theme="light"] dl,
 .markdown-body-light dl,
+.light .markdown-body table,
 .markdown-body[data-theme="light"] table,
 .markdown-body-light table,
+.light .markdown-body pre,
 .markdown-body[data-theme="light"] pre,
 .markdown-body-light pre,
+.light .markdown-body details,
 .markdown-body[data-theme="light"] details,
 .markdown-body-light details {
 	margin-top: 0;
 	margin-bottom: 16px;
 }
 
+.light .markdown-body blockquote> :first-child,
 .markdown-body[data-theme="light"] blockquote> :first-child,
 .markdown-body-light blockquote> :first-child {
 	margin-top: 0;
 }
 
+.light .markdown-body blockquote> :last-child,
 .markdown-body[data-theme="light"] blockquote> :last-child,
 .markdown-body-light blockquote> :last-child {
 	margin-bottom: 0;
 }
 
+.light .markdown-body h1 .octicon-link,
 .markdown-body[data-theme="light"] h1 .octicon-link,
 .markdown-body-light h1 .octicon-link,
+.light .markdown-body h2 .octicon-link,
 .markdown-body[data-theme="light"] h2 .octicon-link,
 .markdown-body-light h2 .octicon-link,
+.light .markdown-body h3 .octicon-link,
 .markdown-body[data-theme="light"] h3 .octicon-link,
 .markdown-body-light h3 .octicon-link,
+.light .markdown-body h4 .octicon-link,
 .markdown-body[data-theme="light"] h4 .octicon-link,
 .markdown-body-light h4 .octicon-link,
+.light .markdown-body h5 .octicon-link,
 .markdown-body[data-theme="light"] h5 .octicon-link,
 .markdown-body-light h5 .octicon-link,
+.light .markdown-body h6 .octicon-link,
 .markdown-body[data-theme="light"] h6 .octicon-link,
 .markdown-body-light h6 .octicon-link {
 	color: #1f2328;
@@ -600,195 +726,249 @@
 	visibility: hidden;
 }
 
+.light .markdown-body h1:hover .anchor,
 .markdown-body[data-theme="light"] h1:hover .anchor,
 .markdown-body-light h1:hover .anchor,
+.light .markdown-body h2:hover .anchor,
 .markdown-body[data-theme="light"] h2:hover .anchor,
 .markdown-body-light h2:hover .anchor,
+.light .markdown-body h3:hover .anchor,
 .markdown-body[data-theme="light"] h3:hover .anchor,
 .markdown-body-light h3:hover .anchor,
+.light .markdown-body h4:hover .anchor,
 .markdown-body[data-theme="light"] h4:hover .anchor,
 .markdown-body-light h4:hover .anchor,
+.light .markdown-body h5:hover .anchor,
 .markdown-body[data-theme="light"] h5:hover .anchor,
 .markdown-body-light h5:hover .anchor,
+.light .markdown-body h6:hover .anchor,
 .markdown-body[data-theme="light"] h6:hover .anchor,
 .markdown-body-light h6:hover .anchor {
 	text-decoration: none;
 }
 
+.light .markdown-body h1:hover .anchor .octicon-link,
 .markdown-body[data-theme="light"] h1:hover .anchor .octicon-link,
 .markdown-body-light h1:hover .anchor .octicon-link,
+.light .markdown-body h2:hover .anchor .octicon-link,
 .markdown-body[data-theme="light"] h2:hover .anchor .octicon-link,
 .markdown-body-light h2:hover .anchor .octicon-link,
+.light .markdown-body h3:hover .anchor .octicon-link,
 .markdown-body[data-theme="light"] h3:hover .anchor .octicon-link,
 .markdown-body-light h3:hover .anchor .octicon-link,
+.light .markdown-body h4:hover .anchor .octicon-link,
 .markdown-body[data-theme="light"] h4:hover .anchor .octicon-link,
 .markdown-body-light h4:hover .anchor .octicon-link,
+.light .markdown-body h5:hover .anchor .octicon-link,
 .markdown-body[data-theme="light"] h5:hover .anchor .octicon-link,
 .markdown-body-light h5:hover .anchor .octicon-link,
+.light .markdown-body h6:hover .anchor .octicon-link,
 .markdown-body[data-theme="light"] h6:hover .anchor .octicon-link,
 .markdown-body-light h6:hover .anchor .octicon-link {
 	visibility: visible;
 }
 
+.light .markdown-body h1 tt,
 .markdown-body[data-theme="light"] h1 tt,
 .markdown-body-light h1 tt,
+.light .markdown-body h1 code,
 .markdown-body[data-theme="light"] h1 code,
 .markdown-body-light h1 code {
 	padding: 0 0.2em;
 	font-size: inherit;
 }
 
+.light .markdown-body h2 tt,
 .markdown-body[data-theme="light"] h2 tt,
 .markdown-body-light h2 tt,
+.light .markdown-body h2 code,
 .markdown-body[data-theme="light"] h2 code,
 .markdown-body-light h2 code {
 	padding: 0 0.2em;
 	font-size: inherit;
 }
 
+.light .markdown-body h3 tt,
 .markdown-body[data-theme="light"] h3 tt,
 .markdown-body-light h3 tt,
+.light .markdown-body h3 code,
 .markdown-body[data-theme="light"] h3 code,
 .markdown-body-light h3 code {
 	padding: 0 0.2em;
 	font-size: inherit;
 }
 
+.light .markdown-body h4 tt,
 .markdown-body[data-theme="light"] h4 tt,
 .markdown-body-light h4 tt,
+.light .markdown-body h4 code,
 .markdown-body[data-theme="light"] h4 code,
 .markdown-body-light h4 code {
 	padding: 0 0.2em;
 	font-size: inherit;
 }
 
+.light .markdown-body h5 tt,
 .markdown-body[data-theme="light"] h5 tt,
 .markdown-body-light h5 tt,
+.light .markdown-body h5 code,
 .markdown-body[data-theme="light"] h5 code,
 .markdown-body-light h5 code {
 	padding: 0 0.2em;
 	font-size: inherit;
 }
 
+.light .markdown-body h6 tt,
 .markdown-body[data-theme="light"] h6 tt,
 .markdown-body-light h6 tt,
+.light .markdown-body h6 code,
 .markdown-body[data-theme="light"] h6 code,
 .markdown-body-light h6 code {
 	padding: 0 0.2em;
 	font-size: inherit;
 }
 
+.light .markdown-body summary h1,
 .markdown-body[data-theme="light"] summary h1,
 .markdown-body-light summary h1,
+.light .markdown-body summary h2,
 .markdown-body[data-theme="light"] summary h2,
 .markdown-body-light summary h2,
+.light .markdown-body summary h3,
 .markdown-body[data-theme="light"] summary h3,
 .markdown-body-light summary h3,
+.light .markdown-body summary h4,
 .markdown-body[data-theme="light"] summary h4,
 .markdown-body-light summary h4,
+.light .markdown-body summary h5,
 .markdown-body[data-theme="light"] summary h5,
 .markdown-body-light summary h5,
+.light .markdown-body summary h6,
 .markdown-body[data-theme="light"] summary h6,
 .markdown-body-light summary h6 {
 	display: inline-block;
 }
 
+.light .markdown-body summary h1 .anchor,
 .markdown-body[data-theme="light"] summary h1 .anchor,
 .markdown-body-light summary h1 .anchor,
+.light .markdown-body summary h2 .anchor,
 .markdown-body[data-theme="light"] summary h2 .anchor,
 .markdown-body-light summary h2 .anchor,
+.light .markdown-body summary h3 .anchor,
 .markdown-body[data-theme="light"] summary h3 .anchor,
 .markdown-body-light summary h3 .anchor,
+.light .markdown-body summary h4 .anchor,
 .markdown-body[data-theme="light"] summary h4 .anchor,
 .markdown-body-light summary h4 .anchor,
+.light .markdown-body summary h5 .anchor,
 .markdown-body[data-theme="light"] summary h5 .anchor,
 .markdown-body-light summary h5 .anchor,
+.light .markdown-body summary h6 .anchor,
 .markdown-body[data-theme="light"] summary h6 .anchor,
 .markdown-body-light summary h6 .anchor {
 	margin-left: -40px;
 }
 
+.light .markdown-body summary h1,
 .markdown-body[data-theme="light"] summary h1,
 .markdown-body-light summary h1,
+.light .markdown-body summary h2,
 .markdown-body[data-theme="light"] summary h2,
 .markdown-body-light summary h2 {
 	padding-bottom: 0;
 	border-bottom: 0;
 }
 
+.light .markdown-body ul.no-list,
 .markdown-body[data-theme="light"] ul.no-list,
 .markdown-body-light ul.no-list {
 	padding: 0;
 	list-style-type: none;
 }
 
+.light .markdown-body ol.no-list,
 .markdown-body[data-theme="light"] ol.no-list,
 .markdown-body-light ol.no-list {
 	padding: 0;
 	list-style-type: none;
 }
 
+.light .markdown-body ol[type="a s"],
 .markdown-body[data-theme="light"] ol[type="a s"],
 .markdown-body-light ol[type="a s"] {
 	list-style-type: lower-alpha;
 }
 
+.light .markdown-body ol[type="A s"],
 .markdown-body[data-theme="light"] ol[type="A s"],
 .markdown-body-light ol[type="A s"] {
 	list-style-type: upper-alpha;
 }
 
+.light .markdown-body ol[type="i s"],
 .markdown-body[data-theme="light"] ol[type="i s"],
 .markdown-body-light ol[type="i s"] {
 	list-style-type: lower-roman;
 }
 
+.light .markdown-body ol[type="I s"],
 .markdown-body[data-theme="light"] ol[type="I s"],
 .markdown-body-light ol[type="I s"] {
 	list-style-type: upper-roman;
 }
 
+.light .markdown-body ol[type="1"],
 .markdown-body[data-theme="light"] ol[type="1"],
 .markdown-body-light ol[type="1"] {
 	list-style-type: decimal;
 }
 
+.light .markdown-body div>ol:not([type]),
 .markdown-body[data-theme="light"] div>ol:not([type]),
 .markdown-body-light div>ol:not([type]) {
 	list-style-type: decimal;
 }
 
+.light .markdown-body ul ul,
 .markdown-body[data-theme="light"] ul ul,
 .markdown-body-light ul ul,
+.light .markdown-body ul ol,
 .markdown-body[data-theme="light"] ul ol,
 .markdown-body-light ul ol {
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
+.light .markdown-body ol ol,
 .markdown-body[data-theme="light"] ol ol,
 .markdown-body-light ol ol,
+.light .markdown-body ol ul,
 .markdown-body[data-theme="light"] ol ul,
 .markdown-body-light ol ul {
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
+.light .markdown-body li>p,
 .markdown-body[data-theme="light"] li>p,
 .markdown-body-light li>p {
 	margin-top: 16px;
 }
 
+.light .markdown-body li+li,
 .markdown-body[data-theme="light"] li+li,
 .markdown-body-light li+li {
 	margin-top: 0.25em;
 }
 
+.light .markdown-body dl,
 .markdown-body[data-theme="light"] dl,
 .markdown-body-light dl {
 	padding: 0;
 }
 
+.light .markdown-body dl dt,
 .markdown-body[data-theme="light"] dl dt,
 .markdown-body-light dl dt {
 	padding: 0;
@@ -798,12 +978,14 @@
 	font-weight: 600;
 }
 
+.light .markdown-body dl dd,
 .markdown-body[data-theme="light"] dl dd,
 .markdown-body-light dl dd {
 	padding: 0 16px;
 	margin-bottom: 16px;
 }
 
+.light .markdown-body table th,
 .markdown-body[data-theme="light"] table th,
 .markdown-body-light table th {
 	font-weight: 600;
@@ -811,43 +993,51 @@
 	border: 1px solid #d0d7de;
 }
 
+.light .markdown-body table td,
 .markdown-body[data-theme="light"] table td,
 .markdown-body-light table td {
 	padding: 6px 13px;
 	border: 1px solid #d0d7de;
 }
 
+.light .markdown-body table td> :last-child,
 .markdown-body[data-theme="light"] table td> :last-child,
 .markdown-body-light table td> :last-child {
 	margin-bottom: 0;
 }
 
+.light .markdown-body table tr,
 .markdown-body[data-theme="light"] table tr,
 .markdown-body-light table tr {
-	background-color: #ffffff;
+	background-color: #fff;
 	border-top: 1px solid #d0d7deb3;
 }
 
+.light .markdown-body table tr:nth-child(2n),
 .markdown-body[data-theme="light"] table tr:nth-child(2n),
 .markdown-body-light table tr:nth-child(2n) {
 	background-color: #f6f8fa;
 }
 
+.light .markdown-body table img,
 .markdown-body[data-theme="light"] table img,
 .markdown-body-light table img {
 	background-color: transparent;
 }
 
+.light .markdown-body img[align=right],
 .markdown-body[data-theme="light"] img[align=right],
 .markdown-body-light img[align=right] {
 	padding-left: 20px;
 }
 
+.light .markdown-body img[align=left],
 .markdown-body[data-theme="light"] img[align=left],
 .markdown-body-light img[align=left] {
 	padding-right: 20px;
 }
 
+.light .markdown-body .emoji,
 .markdown-body[data-theme="light"] .emoji,
 .markdown-body-light .emoji {
 	max-width: none;
@@ -855,12 +1045,14 @@
 	background-color: transparent;
 }
 
+.light .markdown-body span.frame,
 .markdown-body[data-theme="light"] span.frame,
 .markdown-body-light span.frame {
 	display: block;
 	overflow: hidden;
 }
 
+.light .markdown-body span.frame>span,
 .markdown-body[data-theme="light"] span.frame>span,
 .markdown-body-light span.frame>span {
 	display: block;
@@ -872,12 +1064,14 @@
 	border: 1px solid #d0d7de;
 }
 
+.light .markdown-body span.frame span img,
 .markdown-body[data-theme="light"] span.frame span img,
 .markdown-body-light span.frame span img {
 	display: block;
 	float: left;
 }
 
+.light .markdown-body span.frame span span,
 .markdown-body[data-theme="light"] span.frame span span,
 .markdown-body-light span.frame span span {
 	display: block;
@@ -886,6 +1080,7 @@
 	color: #1f2328;
 }
 
+.light .markdown-body span.align-center,
 .markdown-body[data-theme="light"] span.align-center,
 .markdown-body-light span.align-center {
 	display: block;
@@ -893,6 +1088,7 @@
 	clear: both;
 }
 
+.light .markdown-body span.align-center>span,
 .markdown-body[data-theme="light"] span.align-center>span,
 .markdown-body-light span.align-center>span {
 	display: block;
@@ -901,12 +1097,14 @@
 	text-align: center;
 }
 
+.light .markdown-body span.align-center span img,
 .markdown-body[data-theme="light"] span.align-center span img,
 .markdown-body-light span.align-center span img {
 	margin: 0 auto;
 	text-align: center;
 }
 
+.light .markdown-body span.align-right,
 .markdown-body[data-theme="light"] span.align-right,
 .markdown-body-light span.align-right {
 	display: block;
@@ -914,6 +1112,7 @@
 	clear: both;
 }
 
+.light .markdown-body span.align-right>span,
 .markdown-body[data-theme="light"] span.align-right>span,
 .markdown-body-light span.align-right>span {
 	display: block;
@@ -922,12 +1121,14 @@
 	text-align: right;
 }
 
+.light .markdown-body span.align-right span img,
 .markdown-body[data-theme="light"] span.align-right span img,
 .markdown-body-light span.align-right span img {
 	margin: 0;
 	text-align: right;
 }
 
+.light .markdown-body span.float-left,
 .markdown-body[data-theme="light"] span.float-left,
 .markdown-body-light span.float-left {
 	display: block;
@@ -936,11 +1137,13 @@
 	overflow: hidden;
 }
 
+.light .markdown-body span.float-left span,
 .markdown-body[data-theme="light"] span.float-left span,
 .markdown-body-light span.float-left span {
 	margin: 13px 0 0;
 }
 
+.light .markdown-body span.float-right,
 .markdown-body[data-theme="light"] span.float-right,
 .markdown-body-light span.float-right {
 	display: block;
@@ -949,6 +1152,7 @@
 	overflow: hidden;
 }
 
+.light .markdown-body span.float-right>span,
 .markdown-body[data-theme="light"] span.float-right>span,
 .markdown-body-light span.float-right>span {
 	display: block;
@@ -957,8 +1161,10 @@
 	text-align: right;
 }
 
+.light .markdown-body code,
 .markdown-body[data-theme="light"] code,
 .markdown-body-light code,
+.light .markdown-body tt,
 .markdown-body[data-theme="light"] tt,
 .markdown-body-light tt {
 	padding: 0.2em 0.4em;
@@ -969,28 +1175,34 @@
 	border-radius: 6px;
 }
 
+.light .markdown-body code br,
 .markdown-body[data-theme="light"] code br,
 .markdown-body-light code br,
+.light .markdown-body tt br,
 .markdown-body[data-theme="light"] tt br,
 .markdown-body-light tt br {
 	display: none;
 }
 
+.light .markdown-body del code,
 .markdown-body[data-theme="light"] del code,
 .markdown-body-light del code {
 	text-decoration: inherit;
 }
 
+.light .markdown-body samp,
 .markdown-body[data-theme="light"] samp,
 .markdown-body-light samp {
 	font-size: 85%;
 }
 
+.light .markdown-body pre code,
 .markdown-body[data-theme="light"] pre code,
 .markdown-body-light pre code {
 	font-size: 100%;
 }
 
+.light .markdown-body pre>code,
 .markdown-body[data-theme="light"] pre>code,
 .markdown-body-light pre>code {
 	padding: 0;
@@ -1001,11 +1213,13 @@
 	border: 0;
 }
 
+.light .markdown-body .highlight,
 .markdown-body[data-theme="light"] .highlight,
 .markdown-body-light .highlight {
 	margin-bottom: 16px;
 }
 
+.light .markdown-body .highlight pre,
 .markdown-body[data-theme="light"] .highlight pre,
 .markdown-body-light .highlight pre {
 	margin-bottom: 0;
@@ -1019,6 +1233,7 @@
 	border-radius: 6px;
 }
 
+.light .markdown-body pre,
 .markdown-body[data-theme="light"] pre,
 .markdown-body-light pre {
 	padding: 16px;
@@ -1030,8 +1245,10 @@
 	border-radius: 6px;
 }
 
+.light .markdown-body pre code,
 .markdown-body[data-theme="light"] pre code,
 .markdown-body-light pre code,
+.light .markdown-body pre tt,
 .markdown-body[data-theme="light"] pre tt,
 .markdown-body-light pre tt {
 	display: inline;
@@ -1045,8 +1262,10 @@
 	border: 0;
 }
 
+.light .markdown-body .csv-data td,
 .markdown-body[data-theme="light"] .csv-data td,
 .markdown-body-light .csv-data td,
+.light .markdown-body .csv-data th,
 .markdown-body[data-theme="light"] .csv-data th,
 .markdown-body-light .csv-data th {
 	padding: 5px;
@@ -1057,19 +1276,22 @@
 	white-space: nowrap;
 }
 
+.light .markdown-body .csv-data .blob-num,
 .markdown-body[data-theme="light"] .csv-data .blob-num,
 .markdown-body-light .csv-data .blob-num {
 	padding: 10px 8px 9px;
 	text-align: right;
-	background: #ffffff;
+	background: #fff;
 	border: 0;
 }
 
+.light .markdown-body .csv-data tr,
 .markdown-body[data-theme="light"] .csv-data tr,
 .markdown-body-light .csv-data tr {
 	border-top: 0;
 }
 
+.light .markdown-body .csv-data th,
 .markdown-body[data-theme="light"] .csv-data th,
 .markdown-body-light .csv-data th {
 	font-weight: 600;
@@ -1077,16 +1299,19 @@
 	border-top: 0;
 }
 
+.light .markdown-body [data-footnote-ref]::before,
 .markdown-body[data-theme="light"] [data-footnote-ref]::before,
 .markdown-body-light [data-footnote-ref]::before {
 	content: "[";
 }
 
+.light .markdown-body [data-footnote-ref]::after,
 .markdown-body[data-theme="light"] [data-footnote-ref]::after,
 .markdown-body-light [data-footnote-ref]::after {
 	content: "]";
 }
 
+.light .markdown-body .footnotes,
 .markdown-body[data-theme="light"] .footnotes,
 .markdown-body-light .footnotes {
 	font-size: 12px;
@@ -1094,11 +1319,13 @@
 	border-top: 1px solid #d0d7de;
 }
 
+.light .markdown-body .footnotes ol,
 .markdown-body[data-theme="light"] .footnotes ol,
 .markdown-body-light .footnotes ol {
 	padding-left: 16px;
 }
 
+.light .markdown-body .footnotes ol ul,
 .markdown-body[data-theme="light"] .footnotes ol ul,
 .markdown-body-light .footnotes ol ul {
 	display: inline-block;
@@ -1106,16 +1333,19 @@
 	margin-top: 16px;
 }
 
+.light .markdown-body .footnotes li,
 .markdown-body[data-theme="light"] .footnotes li,
 .markdown-body-light .footnotes li {
 	position: relative;
 }
 
+.light .markdown-body .footnotes li:target,
 .markdown-body[data-theme="light"] .footnotes li:target,
 .markdown-body-light .footnotes li:target {
 	color: #1f2328;
 }
 
+.light .markdown-body .footnotes li:target::before,
 .markdown-body[data-theme="light"] .footnotes li:target::before,
 .markdown-body-light .footnotes li:target::before {
 	position: absolute;
@@ -1129,202 +1359,247 @@
 	border-radius: 6px;
 }
 
+.light .markdown-body .footnotes .data-footnote-backref g-emoji,
 .markdown-body[data-theme="light"] .footnotes .data-footnote-backref g-emoji,
 .markdown-body-light .footnotes .data-footnote-backref g-emoji {
 	font-family: monospace;
 }
 
+.light .markdown-body .pl-c,
 .markdown-body[data-theme="light"] .pl-c,
 .markdown-body-light .pl-c {
 	color: #57606a;
 }
 
+.light .markdown-body .pl-c1,
 .markdown-body[data-theme="light"] .pl-c1,
 .markdown-body-light .pl-c1,
+.light .markdown-body .pl-s .pl-v,
 .markdown-body[data-theme="light"] .pl-s .pl-v,
 .markdown-body-light .pl-s .pl-v {
 	color: #0550ae;
 }
 
+.light .markdown-body .pl-e,
 .markdown-body[data-theme="light"] .pl-e,
 .markdown-body-light .pl-e,
+.light .markdown-body .pl-en,
 .markdown-body[data-theme="light"] .pl-en,
 .markdown-body-light .pl-en {
 	color: #6639ba;
 }
 
+.light .markdown-body .pl-smi,
 .markdown-body[data-theme="light"] .pl-smi,
 .markdown-body-light .pl-smi,
+.light .markdown-body .pl-s .pl-s1,
 .markdown-body[data-theme="light"] .pl-s .pl-s1,
 .markdown-body-light .pl-s .pl-s1 {
 	color: #24292f;
 }
 
+.light .markdown-body .pl-ent,
 .markdown-body[data-theme="light"] .pl-ent,
 .markdown-body-light .pl-ent {
 	color: #0550ae;
 }
 
+.light .markdown-body .pl-k,
 .markdown-body[data-theme="light"] .pl-k,
 .markdown-body-light .pl-k {
 	color: #cf222e;
 }
 
+.light .markdown-body .pl-s,
 .markdown-body[data-theme="light"] .pl-s,
 .markdown-body-light .pl-s,
+.light .markdown-body .pl-pds,
 .markdown-body[data-theme="light"] .pl-pds,
 .markdown-body-light .pl-pds,
+.light .markdown-body .pl-s .pl-pse .pl-s1,
 .markdown-body[data-theme="light"] .pl-s .pl-pse .pl-s1,
 .markdown-body-light .pl-s .pl-pse .pl-s1 {
 	color: #0a3069;
 }
 
+.light .markdown-body .pl-sr,
 .markdown-body[data-theme="light"] .pl-sr,
 .markdown-body-light .pl-sr {
 	color: #0a3069;
 }
 
+.light .markdown-body .pl-sr .pl-cce,
 .markdown-body[data-theme="light"] .pl-sr .pl-cce,
 .markdown-body-light .pl-sr .pl-cce,
+.light .markdown-body .pl-sr .pl-sre,
 .markdown-body[data-theme="light"] .pl-sr .pl-sre,
 .markdown-body-light .pl-sr .pl-sre,
+.light .markdown-body .pl-sr .pl-sra,
 .markdown-body[data-theme="light"] .pl-sr .pl-sra,
 .markdown-body-light .pl-sr .pl-sra {
 	color: #0a3069;
 }
 
+.light .markdown-body .pl-v,
 .markdown-body[data-theme="light"] .pl-v,
 .markdown-body-light .pl-v,
+.light .markdown-body .pl-smw,
 .markdown-body[data-theme="light"] .pl-smw,
 .markdown-body-light .pl-smw {
 	color: #953800;
 }
 
+.light .markdown-body .pl-bu,
 .markdown-body[data-theme="light"] .pl-bu,
 .markdown-body-light .pl-bu {
 	color: #82071e;
 }
 
+.light .markdown-body .pl-ii,
 .markdown-body[data-theme="light"] .pl-ii,
 .markdown-body-light .pl-ii {
 	color: #f6f8fa;
 	background-color: #82071e;
 }
 
+.light .markdown-body .pl-c2,
 .markdown-body[data-theme="light"] .pl-c2,
 .markdown-body-light .pl-c2 {
 	color: #f6f8fa;
 	background-color: #cf222e;
 }
 
+.light .markdown-body .pl-sr .pl-cce,
 .markdown-body[data-theme="light"] .pl-sr .pl-cce,
 .markdown-body-light .pl-sr .pl-cce {
 	font-weight: bold;
 	color: #116329;
 }
 
+.light .markdown-body .pl-ml,
 .markdown-body[data-theme="light"] .pl-ml,
 .markdown-body-light .pl-ml {
 	color: #3b2300;
 }
 
+.light .markdown-body .pl-mh,
 .markdown-body[data-theme="light"] .pl-mh,
 .markdown-body-light .pl-mh {
 	font-weight: bold;
 	color: #0550ae;
 }
 
+.light .markdown-body .pl-mh .pl-en,
 .markdown-body[data-theme="light"] .pl-mh .pl-en,
 .markdown-body-light .pl-mh .pl-en {
 	font-weight: bold;
 	color: #0550ae;
 }
 
+.light .markdown-body .pl-ms,
 .markdown-body[data-theme="light"] .pl-ms,
 .markdown-body-light .pl-ms {
 	font-weight: bold;
 	color: #0550ae;
 }
 
+.light .markdown-body .pl-mi,
 .markdown-body[data-theme="light"] .pl-mi,
 .markdown-body-light .pl-mi {
 	font-style: italic;
 	color: #24292f;
 }
 
+.light .markdown-body .pl-mb,
 .markdown-body[data-theme="light"] .pl-mb,
 .markdown-body-light .pl-mb {
 	font-weight: bold;
 	color: #24292f;
 }
 
+.light .markdown-body .pl-md,
 .markdown-body[data-theme="light"] .pl-md,
 .markdown-body-light .pl-md {
 	color: #82071e;
 	background-color: #ffebe9;
 }
 
+.light .markdown-body .pl-mi1,
 .markdown-body[data-theme="light"] .pl-mi1,
 .markdown-body-light .pl-mi1 {
 	color: #116329;
 	background-color: #dafbe1;
 }
 
+.light .markdown-body .pl-mc,
 .markdown-body[data-theme="light"] .pl-mc,
 .markdown-body-light .pl-mc {
 	color: #953800;
 	background-color: #ffd8b5;
 }
 
+.light .markdown-body .pl-mi2,
 .markdown-body[data-theme="light"] .pl-mi2,
 .markdown-body-light .pl-mi2 {
 	color: #eaeef2;
 	background-color: #0550ae;
 }
 
+.light .markdown-body .pl-mdr,
 .markdown-body[data-theme="light"] .pl-mdr,
 .markdown-body-light .pl-mdr {
 	font-weight: bold;
 	color: #8250df;
 }
 
+.light .markdown-body .pl-ba,
 .markdown-body[data-theme="light"] .pl-ba,
 .markdown-body-light .pl-ba {
 	color: #57606a;
 }
 
+.light .markdown-body .pl-sg,
 .markdown-body[data-theme="light"] .pl-sg,
 .markdown-body-light .pl-sg {
 	color: #8c959f;
 }
 
+.light .markdown-body .pl-corl,
 .markdown-body[data-theme="light"] .pl-corl,
 .markdown-body-light .pl-corl {
 	text-decoration: underline;
 	color: #0a3069;
 }
 
+.light .markdown-body [role=button]:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] [role=button]:focus:not(:focus-visible),
 .markdown-body-light [role=button]:focus:not(:focus-visible),
+.light .markdown-body [role=tabpanel][tabindex="0"]:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] [role=tabpanel][tabindex="0"]:focus:not(:focus-visible),
 .markdown-body-light [role=tabpanel][tabindex="0"]:focus:not(:focus-visible),
+.light .markdown-body button:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] button:focus:not(:focus-visible),
 .markdown-body-light button:focus:not(:focus-visible),
+.light .markdown-body summary:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] summary:focus:not(:focus-visible),
 .markdown-body-light summary:focus:not(:focus-visible),
+.light .markdown-body a:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] a:focus:not(:focus-visible),
 .markdown-body-light a:focus:not(:focus-visible) {
 	outline: none;
 	box-shadow: none;
 }
 
+.light .markdown-body [tabindex="0"]:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] [tabindex="0"]:focus:not(:focus-visible),
 .markdown-body-light [tabindex="0"]:focus:not(:focus-visible),
+.light .markdown-body details-dialog:focus:not(:focus-visible),
 .markdown-body[data-theme="light"] details-dialog:focus:not(:focus-visible),
 .markdown-body-light details-dialog:focus:not(:focus-visible) {
 	outline: none;
 }
 
+.light .markdown-body g-emoji,
 .markdown-body[data-theme="light"] g-emoji,
 .markdown-body-light g-emoji {
 	display: inline-block;
@@ -1337,55 +1612,66 @@
 	vertical-align: -0.075em;
 }
 
+.light .markdown-body g-emoji img,
 .markdown-body[data-theme="light"] g-emoji img,
 .markdown-body-light g-emoji img {
 	width: 1em;
 	height: 1em;
 }
 
+.light .markdown-body .task-list-item,
 .markdown-body[data-theme="light"] .task-list-item,
 .markdown-body-light .task-list-item {
 	list-style-type: none;
 }
 
+.light .markdown-body .task-list-item label,
 .markdown-body[data-theme="light"] .task-list-item label,
 .markdown-body-light .task-list-item label {
 	font-weight: 400;
 }
 
+.light .markdown-body .task-list-item.enabled label,
 .markdown-body[data-theme="light"] .task-list-item.enabled label,
 .markdown-body-light .task-list-item.enabled label {
 	cursor: pointer;
 }
 
+.light .markdown-body .task-list-item+.task-list-item,
 .markdown-body[data-theme="light"] .task-list-item+.task-list-item,
 .markdown-body-light .task-list-item+.task-list-item {
 	margin-top: 0.25rem;
 }
 
+.light .markdown-body .task-list-item .handle,
 .markdown-body[data-theme="light"] .task-list-item .handle,
 .markdown-body-light .task-list-item .handle {
 	display: none;
 }
 
+.light .markdown-body .task-list-item-checkbox,
 .markdown-body[data-theme="light"] .task-list-item-checkbox,
 .markdown-body-light .task-list-item-checkbox {
 	margin: 0 0.2em 0.25em -1.4em;
 	vertical-align: middle;
 }
 
+.light .markdown-body .contains-task-list,
 .markdown-body[data-theme="light"] .contains-task-list,
 .markdown-body-light .contains-task-list {
 	position: relative;
 }
 
+.light .markdown-body .contains-task-list:dir(rtl) .task-list-item-checkbox,
 .markdown-body[data-theme="light"] .contains-task-list:dir(rtl) .task-list-item-checkbox,
 .markdown-body-light .contains-task-list:dir(rtl) .task-list-item-checkbox {
 	margin: 0 -1.6em 0.25em 0.2em;
 }
 
+.light .markdown-body .contains-task-list:hover .task-list-item-convert-container,
 .markdown-body[data-theme="light"] .contains-task-list:hover .task-list-item-convert-container,
 .markdown-body-light .contains-task-list:hover .task-list-item-convert-container,
+.light .markdown-body .contains-task-list:focus-within .task-list-item-convert-container,
 .markdown-body[data-theme="light"] .contains-task-list:focus-within .task-list-item-convert-container,
 .markdown-body-light .contains-task-list:focus-within .task-list-item-convert-container {
 	display: block;
@@ -1395,11 +1681,13 @@
 	clip: auto;
 }
 
+.light .markdown-body ::-webkit-calendar-picker-indicator,
 .markdown-body[data-theme="light"] ::-webkit-calendar-picker-indicator,
 .markdown-body-light ::-webkit-calendar-picker-indicator {
 	filter: invert(50%);
 }
 
+.light .markdown-body .markdown-alert,
 .markdown-body[data-theme="light"] .markdown-alert,
 .markdown-body-light .markdown-alert {
 	padding: 0.5rem 1rem;
@@ -1408,16 +1696,19 @@
 	border-left: 0.25em solid #d0d7de;
 }
 
+.light .markdown-body .markdown-alert> :first-child,
 .markdown-body[data-theme="light"] .markdown-alert> :first-child,
 .markdown-body-light .markdown-alert> :first-child {
 	margin-top: 0;
 }
 
+.light .markdown-body .markdown-alert> :last-child,
 .markdown-body[data-theme="light"] .markdown-alert> :last-child,
 .markdown-body-light .markdown-alert> :last-child {
 	margin-bottom: 0;
 }
 
+.light .markdown-body .markdown-alert .markdown-alert-title,
 .markdown-body[data-theme="light"] .markdown-alert .markdown-alert-title,
 .markdown-body-light .markdown-alert .markdown-alert-title {
 	display: flex;
@@ -1426,56 +1717,67 @@
 	line-height: 1;
 }
 
+.light .markdown-body .markdown-alert.markdown-alert-note,
 .markdown-body[data-theme="light"] .markdown-alert.markdown-alert-note,
 .markdown-body-light .markdown-alert.markdown-alert-note {
 	border-left-color: #0969da;
 }
 
+.light .markdown-body .markdown-alert.markdown-alert-note .markdown-alert-title,
 .markdown-body[data-theme="light"] .markdown-alert.markdown-alert-note .markdown-alert-title,
 .markdown-body-light .markdown-alert.markdown-alert-note .markdown-alert-title {
 	color: #0969da;
 }
 
+.light .markdown-body .markdown-alert.markdown-alert-important,
 .markdown-body[data-theme="light"] .markdown-alert.markdown-alert-important,
 .markdown-body-light .markdown-alert.markdown-alert-important {
 	border-left-color: #8250df;
 }
 
+.light .markdown-body .markdown-alert.markdown-alert-important .markdown-alert-title,
 .markdown-body[data-theme="light"] .markdown-alert.markdown-alert-important .markdown-alert-title,
 .markdown-body-light .markdown-alert.markdown-alert-important .markdown-alert-title {
 	color: #8250df;
 }
 
+.light .markdown-body .markdown-alert.markdown-alert-warning,
 .markdown-body[data-theme="light"] .markdown-alert.markdown-alert-warning,
 .markdown-body-light .markdown-alert.markdown-alert-warning {
 	border-left-color: #bf8700;
 }
 
+.light .markdown-body .markdown-alert.markdown-alert-warning .markdown-alert-title,
 .markdown-body[data-theme="light"] .markdown-alert.markdown-alert-warning .markdown-alert-title,
 .markdown-body-light .markdown-alert.markdown-alert-warning .markdown-alert-title {
 	color: #9a6700;
 }
 
+.light .markdown-body .markdown-alert.markdown-alert-tip,
 .markdown-body[data-theme="light"] .markdown-alert.markdown-alert-tip,
 .markdown-body-light .markdown-alert.markdown-alert-tip {
 	border-left-color: #1a7f37;
 }
 
+.light .markdown-body .markdown-alert.markdown-alert-tip .markdown-alert-title,
 .markdown-body[data-theme="light"] .markdown-alert.markdown-alert-tip .markdown-alert-title,
 .markdown-body-light .markdown-alert.markdown-alert-tip .markdown-alert-title {
 	color: #1a7f37;
 }
 
+.light .markdown-body .markdown-alert.markdown-alert-caution,
 .markdown-body[data-theme="light"] .markdown-alert.markdown-alert-caution,
 .markdown-body-light .markdown-alert.markdown-alert-caution {
 	border-left-color: #cf222e;
 }
 
+.light .markdown-body .markdown-alert.markdown-alert-caution .markdown-alert-title,
 .markdown-body[data-theme="light"] .markdown-alert.markdown-alert-caution .markdown-alert-title,
 .markdown-body-light .markdown-alert.markdown-alert-caution .markdown-alert-title {
 	color: #d1242f;
 }
 
+.light .markdown-body>*:first-child>.heading-element:first-child,
 .markdown-body[data-theme="light"]>*:first-child>.heading-element:first-child,
 .markdown-body-light>*:first-child>.heading-element:first-child {
 	margin-top: 0 !important;

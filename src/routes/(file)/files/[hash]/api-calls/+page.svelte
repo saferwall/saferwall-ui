@@ -168,7 +168,7 @@
 <div class="container mx-auto flex flex-col flex-1">
 	<div
 		data-sveltekit-preload-data
-		class="flex-1 bg-white text-gray-700 rounded overflow-auto p-6 gap-4"
+		class="flex-1 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 rounded overflow-auto p-6 gap-4"
 	>
 		<form
 			data-sveltekit-keepfocus
@@ -177,7 +177,7 @@
 			class="flex items-center justify-center space-x-4"
 		>
 			<Input name="search" icon="search" bind:search placeholder="Search anything..." />
-			<div class="flex-shrink-0 flex-grow text-gray-600">
+			<div class="flex-shrink-0 flex-grow text-zinc-600 dark:text-zinc-400">
 				<Button
 					on:click={onOpenDrawMouseUp}
 					icon="filter"

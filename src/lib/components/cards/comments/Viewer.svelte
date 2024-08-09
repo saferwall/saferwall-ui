@@ -4,7 +4,6 @@
 	import remarkGfm from 'remark-gfm';
 	import { unified } from 'unified';
 	import "$lib/styles/github-markdown.css";
-	import { themeString } from "$lib/stores/theme";
 
 	let processor = unified()
 		.use(remarkParse)
@@ -16,7 +15,7 @@
 	export let value: string;
 </script>
 
-<div class="markdown-body !font-primary bg-transparent md-to-html p-2" data-theme={$themeString}>
+<div class="markdown-body !font-primary bg-transparent md-to-html p-2">
 	{@html mdToHtml}
 </div>
 

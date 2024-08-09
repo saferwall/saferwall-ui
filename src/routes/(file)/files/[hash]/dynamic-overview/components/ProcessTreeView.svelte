@@ -22,7 +22,7 @@
 	$: console.log({trees});
 </script>
 
-<ul class={`flex flex-col divide-y ${isChild ? 'border-t border-neutral-500 mt-6' : ''}`}>
+<ul class={`flex flex-col divide-y  ${isChild ? 'border-t mt-6' : ''}`}>
 	{#each trees as tree, index (tree.path)}
 		<li class="pr-4" class:pl-12={tree.parent_pid === '0x0'} class:ml-12={tree.parent_pid !== '0x0'}>
 			<Expandable expandable={tree.children.length != 0}>
@@ -58,7 +58,7 @@
 						<!-- svelte-ignore a11y-no-static-element-interactions -->
 						<div
 							on:click|stopPropagation={() => onFilePathClick(index)}
-							class="flex space-x-2 items-center text-neutral-300 transition-all"
+							class="flex space-x-2 border-zinc-700 dark:border-zinc-300 items-center text-neutral-300 transition-all"
 							class:text-primary={processTableOpen.includes(index)}
 						>
 							<Icon
@@ -82,8 +82,9 @@
 
 <style lang="postcss">
 	ul {
+		@apply dark:border-zinc-600 border-zinc-300;
 		li {
-			@apply cursor-pointer py-6;
+			@apply cursor-pointer py-6 dark:border-zinc-600 border-zinc-300;
 		}
 
 		.dot {
