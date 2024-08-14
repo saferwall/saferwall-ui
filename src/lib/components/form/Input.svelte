@@ -9,7 +9,7 @@
 	const isPassword = type === 'password';
 	$: passwordVisible = type !== 'password';
 
-	const onPasswordEyeTogglePress = () => {
+	const onClick = () => {
 		type = type === 'password' ? 'text' : 'password';
 	};
 </script>
@@ -25,17 +25,20 @@
 		{...$$props}
 		on:change
 		bind:value
+		{...{type}}
 		{placeholder}
 		class="input__element bg-transparent {$$props.class} {icon ? 'input--icon' : ''}"
+		data-class="input__element {$$props.class} {icon ? 'input--icon' : ''}"
 	/>
 	{#if isPassword}
-		<button class="password-icon" type="button" on:mousedown={onPasswordEyeTogglePress}>
-			<svg class:visible={passwordVisible}><use href="/images/icons.svg#icon-eye" /></svg>
+		<button class="password-icon outline-none border-none" class:visible={passwordVisible} type="button" on:click={onClick}>
+			<svg><use href="/images/icons.svg#icon-eye" /></svg>
 		</button>
 	{/if}
 </label>
 
-<style lang="scss">
+<style lang="postcss">
+	
 	.input {
 		@apply flex w-full relative;
 
@@ -87,13 +90,13 @@
 
 		.icon {
 			@apply w-5 h-5;
-			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-900;
+			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-100;
 			@apply absolute left-3 -translate-y-1/2 top-1/2;
 		}
 
 		.password-icon {
 			@apply w-6 h-6;
-			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-900;
+			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-100;
 			@apply absolute right-3 -translate-y-1/2 top-1/2;
 
 			&.visible {

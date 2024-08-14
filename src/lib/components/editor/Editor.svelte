@@ -2,7 +2,7 @@
 	import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 	import type { EditorView } from 'codemirror';
 	import CodeMirror from 'svelte-codemirror-editor';
-	import { EditorState, EditorSelection, Text } from "@codemirror/state";
+	import { EditorState, EditorSelection, Text, type Extension } from "@codemirror/state";
 	import BoldIcon from "$lib/components/editor/icons/BoldIcon.svelte";
 	import CodeIcon from '$lib/components/editor/icons/CodeIcon.svelte';
 	import HeadingIcon from '$lib/components/editor/icons/HeadingIcon.svelte';
@@ -14,14 +14,16 @@
 	import ListNumberedIcon from '$lib/components/editor/icons/ListNumberedIcon.svelte';
 	import ListTaskIcon from '$lib/components/editor/icons/ListTaskIcon.svelte';
 	import Viewer from "../cards/comments/Viewer.svelte";
+
 	export let value: string;
+	export let extensions: Extension[] = [];
 	
 	let view: EditorView;
 	let state: () => EditorState;
 	let doc: () => Text;
 </script>
 
-<div class="w-full flex flex-col border rounded">
+<div class="w-full flex flex-col border border-primary-600 rounded overflow-clip">
 	<div class="controls p-1">
 		<button
 			class="control"
@@ -303,15 +305,16 @@
 			<ListTaskIcon />
 		</button>
 	</div>
-	<div class="w-full flex *:grow-0 *:w-[50%] border-t min-h-48 items-stretch">
+	<div class="w-full flex *:grow-0 *:w-[50%] border-t border-primary-600 min-h-48 items-stretch">
 		<CodeMirror
+			{extensions}
 			nodebounce={true}
 			on:ready={(e) => {
 				view = e.detail;
 				state = () => view.state;
 				doc = () => state().doc;
 			}}
-			class="max-w-full [&_.cm-gutter]:h-full [&_.cm-content]:h-full [&_.cm-editor]:h-full border-r"
+			class="max-w-full [&_.cm-gutter]:h-full [&_.cm-content]:h-full [&_.cm-editor]:h-full border-r border-primary-600"
 			bind:value
 			lang={markdown({ base: markdownLanguage })}
 		/>

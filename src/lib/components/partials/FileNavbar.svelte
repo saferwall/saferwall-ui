@@ -39,7 +39,7 @@
 	</div>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
 	.file__navbar {
 		@apply py-4;
 

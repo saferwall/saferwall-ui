@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { THEME_KEY } from '$lib/config';
-import { writable } from 'svelte/store';
+import { writable, type Readable } from 'svelte/store';
 
 export enum Theme {
 	DARK = 'dark',
@@ -9,6 +9,17 @@ export enum Theme {
 }
 
 export const theme = writable<Theme>(Theme.SYSTEM);
+
+export const systemPrefersDarkMode: Readable<{ matches: boolean }> = {
+	subscribe(callback) {
+		const windowMatchMedia = window.matchMedia("(prefers-color-scheme: dark)");
+		callback(windowMatchMedia); // get initial
+		windowMatchMedia.addEventListener("change", callback) // listen for change
+		return () => {
+			windowMatchMedia.removeEventListener("change", callback);
+		}
+	}
+}
 
 export const parseTheme = (input: unknown) => {
 	switch (input) {
