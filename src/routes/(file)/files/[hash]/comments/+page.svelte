@@ -9,12 +9,21 @@
 	import Editor from '$lib/components/editor/Editor.svelte';
 	import { vscodeDarkInit, vscodeLightInit } from '@uiw/codemirror-theme-vscode';
 	import { tags } from '@lezer/highlight';
+	import NProgress from 'nprogress';
+	import { CommentApi, Configuration } from '$lib/api';
+	import { goto, invalidateAll } from '$app/navigation';
+
+
+	NProgress.configure({
+		minimum: 0.16
+	});
 
 	export let data: PageData;
 
 	$: comments = data.pagination.items;
 
 	let comment = '';
+	let postingComment = false;
 </script>
 
 <section class="file__comments container mx-auto space-y-4">
@@ -51,7 +60,38 @@
 	
 			})]}></Editor>
 		<div class="w-full flex pt-4">
-			<Button class="grow md:grow-0" size="sm">Comment</Button>
+			<Button class="grow md:grow-0" size="sm" loading={postingComment} on:click={() => {
+				if (!data?.session?.token || !data?.session?.username) {
+					goto("/auth/login");
+					return;
+				}
+				postingComment = true;
+	
+				let token = data?.session?.token || "";
+				let username = data?.session?.username || "";
+				let api = new CommentApi(new Configuration({accessToken: token}));
+				NProgress.start();
+				api.commentsPost({
+					body: comment,
+					sha256: data.hash,
+					username
+				})
+				.finally(() => {
+					postingComment = false;
+				})
+				.then(async () => {
+					await invalidateAll();
+					NProgress.done();
+					document.body.scrollIntoView();
+				})
+				.catch(err => {
+					NProgress.done();
+					console.error(err);
+					goto("/auth/login");
+					return;
+				})
+
+			}}>Comment</Button>
 		</div>
 	</Card>
 </section>

@@ -28,13 +28,13 @@
 
 <style lang="postcss">
 	ul li {
-		@apply ml-2;
+		/* @apply ml-2; */
 		@apply relative;
 		&:after, &:before {
 			@apply content-[''] absolute;
 		}
 		&:after {
-			@apply h-[1px] w-4 top-3 left-0 bg-zinc-300 dark:bg-zinc-700;
+			@apply h-[1px] w-4 top-4 left-0 bg-zinc-300 dark:bg-zinc-700;
 		}
 		&:before {
 		}
@@ -47,7 +47,7 @@
 		&:before {
 			@apply content-[''] absolute;
 			@apply border-l border-l-zinc-300 dark:border-l-zinc-700 !rounded-none h-full;
-			@apply -top-[calc(0.7rem)] left-0 bg-zinc-300 dark:bg-zinc-700;
+			@apply -top-[calc(1rem)] left-0 bg-zinc-300 dark:bg-zinc-700;
 		}
 	}
 	ul li.resource :global(> article > div:first-child) {

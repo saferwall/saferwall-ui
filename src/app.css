@@ -126,7 +126,6 @@ a.link:not([href='']) {
 		tbody tr {
 			@apply even:bg-zinc-100 even:dark:bg-zinc-800;
 			@apply odd:bg-zinc-200 odd:dark:bg-zinc-700;
-
 			td {
 				/* @apply py-3; */
 				@apply first:rounded-l last:rounded-r;

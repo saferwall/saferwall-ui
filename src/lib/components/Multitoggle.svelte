@@ -65,7 +65,7 @@
 		@apply inline-flex items-center rounded-full space-x-1;
 
 		&.with-border {
-			@apply border border-gray-100 p-1.5;
+			@apply border border-zinc-300 dark:border-zinc-600 p-1.5;
 
 			.item {
 				@apply py-1.5 px-4;
@@ -74,7 +74,7 @@
 
 		.item {
 			@apply py-2 px-4 rounded-full;
-			@apply text-neutral-500 cursor-pointer;
+			@apply text-zinc-400 dark:text-zinc-500 cursor-pointer;
 
 			&:hover,
 			&.active {

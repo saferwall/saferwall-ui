@@ -12,7 +12,7 @@
 	export let directory: Saferwall.Resource.Directory;
 	export let struct: Saferwall.Resource.Struct;
 
-	$: structOpen = false;
+	$: structOpen = true;
 	$: tableOpen = false;
 
 	const onClickToggleTable = () => {
@@ -21,7 +21,7 @@
 </script>
 
 <article class="pl-8 rounded group w-full not-table" class:open={structOpen} class:isRoot>
-	<div class="text-base pl-8 -ml-8 font-medium flex items-center space-x-2">
+	<div class="text-base pl-6 py-1 -ml-8 font-medium flex items-center space-x-2">
 		<button on:click={() => (structOpen = !structOpen)} class="flex gap-2 items-center !border-none">
 			<Icon name="arrow-down" class="{structOpen ? '' : '-rotate-90'} transition-transform" size="w-4 h-4" />
 			<h3 class="cursor-pointer">
@@ -33,7 +33,7 @@
 		{#if directory}
 			<DirectoryComponent {...directory} >
 				<article class="pl-8 rounded group w-full" class:open={tableOpen}>
-					<div class="text-base pl-8 -ml-8 font-medium flex items-center space-x-2">
+					<div class="text-base pl-6 py-1 -ml-8 font-medium flex items-center space-x-2">
 						<button on:click={() => (tableOpen = !tableOpen)} class="flex gap-2 items-center !border-none">
 							<Icon name="arrow-down" class="{tableOpen ? '' : '-rotate-90'} transition-transform" size="w-4 h-4" />
 							<h3 class="cursor-pointer">
@@ -56,5 +56,11 @@
 <style lang="postcss">
 	.isRoot {
 		@apply -ml-4;
+		> div:first-child {
+			@apply !pl-8;
+		}
+		> :global(ul) {
+			@apply ml-2;
+		}
 	}
 </style>

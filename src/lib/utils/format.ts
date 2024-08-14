@@ -402,16 +402,16 @@ export const toHexString = (bytes: number[]) => {
 };
 
 export const signatureToGuid = (signature: {
-	data1: number;
-	data2: number;
-	data3: number;
-	data4: Array<number>;
+	Data1: number;
+	Data2: number;
+	Data3: number;
+	Data4: Array<number>;
 }) => {
-	const { data1, data2, data3, data4 } = signature;
-	const guidStr = `${byteToHex(data1).padStart(8, '0')}-${byteToHex(data2).padStart(
+	const { Data1, Data2, Data3, Data4 } = signature;
+	const guidStr = `${byteToHex(Data1).padStart(8, '0')}-${byteToHex(Data2).padStart(
 		4,
 		'0'
-	)}-${byteToHex(data3).padStart(4, '0')}-${data4
+	)}-${byteToHex(Data3).padStart(4, '0')}-${Data4
 		.map((b) => byteToHex(b).padStart(2, '0'))
 		.join('')}`;
 	return guidStr.toUpperCase();

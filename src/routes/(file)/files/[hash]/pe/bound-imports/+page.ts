@@ -1,6 +1,7 @@
 import type { Saferwall } from '$lib/types';
 import type { PageLoad } from './$types';
 
+export const ssr = false;
 export const load = (async ({ params, parent }) => {
 	const { client } = await parent();
 

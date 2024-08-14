@@ -146,7 +146,7 @@
 					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-500;
 				}
 
-				&.expanded:nth-child(2n + 1):after {
+				&.expanded:after {
 					@apply rounded-b-none border-b-0;
 				}
 

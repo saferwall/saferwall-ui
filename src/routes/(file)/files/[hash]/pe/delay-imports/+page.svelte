@@ -29,7 +29,8 @@
 	<h1 class="title">Delay imports</h1>
 	<Table.Root class="groups">
 		<Table.Header>
-			<Table.Col colspan="2">Name</Table.Col>
+			<Table.Col >#</Table.Col>
+			<Table.Col >Name</Table.Col>
 			<Table.Col>Module Handle</Table.Col>
 			<Table.Col>IAT</Table.Col>
 			<Table.Col>INT</Table.Col>
