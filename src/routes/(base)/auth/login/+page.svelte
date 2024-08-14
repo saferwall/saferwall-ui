@@ -22,13 +22,14 @@
 				loading = false;
 				return;
 			}
+
 			update();
 		};
 	};
 </script>
 
 <svelte:head>
-	<title>Sign in - Saferwall</title>
+	<title>Sign in - Saferwall Beta 1.0</title>
 </svelte:head>
 
 <form
@@ -52,14 +53,14 @@
 	</div>
 	<a href="/auth/forget-password" class="self-end border-l-pink-50">Forget password?</a>
 
-	<Button theme="primary" type="submit" {loading} size="lg">Login</Button>
+	<Button theme="brand" type="submit" {loading} size="lg">Login</Button>
 
-	<p class="text-center text-sm">
+	<p class="text-center text-xs">
 		Didn't confirm registration? <a href="/auth/confirm" class="link">Send confirmation</a>
 	</p>
 </form>
-<div class="border-t border-neutral-100 p-6">
-	<p class="text-center text-sm">
+<div class="border-t border-neutral-500 p-6">
+	<p class="text-center text-xs">
 		Not a member ? <a href="/auth/register" class="link">Create your account</a>
 	</p>
 </div>

@@ -32,7 +32,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign up - Saferwall</title>
+	<title>Sign up - Saferwall Beta 1.0</title>
 </svelte:head>
 
 {#if finished}
@@ -70,7 +70,7 @@
 				disabled={loading}
 			/>
 		</div>
-		<label class="flex items-center space-x-2 text-sm">
+		<label class="flex items-center space-x-2 text-xs">
 			<input type="checkbox" required disabled={loading} name="agree" />
 			<p>
 				I agree to the <a href="/pages/terms-of-service" target="_blank" class="link"
@@ -78,10 +78,10 @@
 				>
 			</p>
 		</label>
-		<Button type="submit" {loading} theme="primary" size="lg">Create account</Button>
+		<Button type="submit" {loading} theme="brand" size="lg">Create account</Button>
 	</form>
-	<div class="border-t border-neutral-100 p-6">
-		<p class="text-center text-sm">
+	<div class="border-t border-neutral-500 p-6">
+		<p class="text-center text-xs">
 			already have an account ? <a href="/auth/login" class="link">Sign In</a>
 		</p>
 	</div>

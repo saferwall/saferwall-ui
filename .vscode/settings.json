@@ -1,6 +1,3 @@
 {
-	"files.associations": {
-		"*.css": "postcss"
-	},
-	"css.customData": [".vscode/tailwind.json"]
+    "C_Cpp.errorSquiggles": "disabled"
 }

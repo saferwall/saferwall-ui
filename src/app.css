@@ -1,34 +1,33 @@
-@import 'bigger-picture/css';
-@import './lib/styles/card.css';
-@import './lib/styles/tags.css';
-@import './lib/styles/scrollbar.css';
-@import './lib/styles/progress.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
+@import 'bigger-picture/css';
 html.bp-lock {
 	overflow-y: unset;
 }
 
+@import './lib/styles/vars.scss';
+@import './lib/styles/card.scss';
+@import './lib/styles/tags.scss';
+@import './lib/styles/scrollbar.scss';
+@import './lib/styles/progress.scss';
 
 html,
 body {
 	@apply font-primary;
-	@apply min-h-screen h-full;
+	@apply min-h-screen h-full bg-background;
 }
 
 select,
 input,
 textarea,
 button {
-	@apply focus:outline focus:outline-primary;
+	@apply focus:outline-none border border-transparent focus:border-neutral-500;
 }
 
 #app {
-	@apply flex flex-col min-h-full;
+	@apply flex flex-col min-h-full text-xs;
 }
 
 .overlay-no-scroll {
@@ -49,6 +48,10 @@ a.link:not([href='']) {
 
 :global(.markdown-body) {
 	@apply prose;
+}
+
+.bytemd-fullscreen {
+	@apply z-50;
 }
 
 .table-border {
@@ -96,11 +99,11 @@ a.link:not([href='']) {
 				@apply relative z-0;
 
 				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-200 border-t-0;
+					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-500 border-t-0;
 				}
 
 				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-200;
+					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-500;
 				}
 
 				&.expanded:after {
@@ -115,10 +118,10 @@ a.link:not([href='']) {
 	}
 
 	table.items {
-		@apply w-full;
+		@apply w-full dark:text-white;
 
 		tbody tr {
-			@apply even:bg-gray-50;
+			@apply even:bg-gray-50 dark:bg-surface-menu;
 
 			td {
 				@apply py-3 w-1/4;

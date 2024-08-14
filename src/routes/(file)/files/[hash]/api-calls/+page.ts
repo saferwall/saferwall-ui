@@ -1,9 +1,9 @@
-import { SaferwallClient } from '$lib/clients/saferwall';
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load = (async ({ url, parent, params }) => {
 	const {
+		client,
 		file: { default_behavior_report: behaviorReport }
 	} = await parent();
 
@@ -28,7 +28,7 @@ export const load = (async ({ url, parent, params }) => {
 		args.pid = pids;
 	}
 
-	const pagination = await new SaferwallClient().getFileApiTrace(behaviorId!, args);
+	const pagination = await client.getFileApiTrace(behaviorId!, args);
 
 	pagination.items = pagination.items ?? [];
 

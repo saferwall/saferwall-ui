@@ -29,15 +29,15 @@
 					{#each header as item, index}
 						<Table.Val
 							class={cn(
-								'font-semibold text-base align-top',
+								'font-medium text-base align-top',
 								index === 0 ? '' : 'w-full',
 								!header && 'font-medium whitespace-nowrap max-w-full pr-4'
 							)}>{item}</Table.Val
 						>
 					{/each}
 				{:else}
-					<Table.Val class="font-semibold text-base align-top">Member</Table.Val>
-					<Table.Val class="font-semibold text-base align-top">Value</Table.Val>
+					<Table.Val class="font-medium text-base align-top">Member</Table.Val>
+					<Table.Val class="font-medium text-base align-top">Value</Table.Val>
 				{/if}
 			</Table.Row>
 		{/if}

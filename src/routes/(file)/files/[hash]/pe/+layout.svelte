@@ -28,7 +28,7 @@
 
 <style lang="postcss">
 	.pe {
-		@apply text-sm;
+		@apply text-xs;
 
 		:global(table thead) {
 			@apply text-left;

@@ -10,47 +10,49 @@
 	export let loggedIn = false;
 	export let activity: Saferwall.Activities.All;
 
-	$: tags = parseTags(activity.file?.tags);
+	$: file = activity.file;
+	$: author = activity.author;
+	$: tags = parseTags(file?.tags);
 </script>
 
 <article>
 	<div
-		class="activity flex flex-col lg:flex-row space-y-4 lg:space-y-0 justify-between items-center bg-white shadow-base rounded-xl md:px-8 py-8 w-full"
+		class="activity flex flex-col lg:flex-row space-y-4 lg:space-y-0 justify-between items-center bg-neutral-600 rounded-card md:px-8 py-8 w-full"
 	>
 		<div class="flex flex-col flex-1 items-center md:flex-row space-y-4 md:space-y-0">
 			<div class="activity__author flex flex-col items-center space-y-2">
-				<Avatar username={activity.author.username} />
+				<Avatar username={author.username} />
 				<div class="text-center">
-					<a href="/users/{activity.author.username}" class="font-bold"
-						>{activity.author.username}</a
-					>
-					<p class="text-neutral-500">
-						Member since {timeSince(activity.author.member_since)}
+					<a class="font-medium text-sm text-gray-100" href="/users/{author.username}">
+						{author.username}
+					</a>
+					<p class="font-regular text-xs text-gray-500">
+						Member since {timeSince(author.member_since)}
 					</p>
 				</div>
 				<div>
-					<ButtonFollow username={activity.author.username} {loggedIn} followed={activity.follow} />
+					<ButtonFollow username={author.username} {loggedIn} followed={activity.follow} />
 				</div>
 			</div>
 			<div
-				class="activity__info flex-1 md:border-l lg:border-r h-full flex flex-col items-start px-6 md:px-8 space-y-6"
+				class="activity__info flex-1 md:border-l lg:border-r border-neutral-700 h-full flex flex-col items-start px-6 md:px-8 space-y-6"
 			>
 				<p class="activity__title space-x-1 flex flex-col md:flex-row">
 					<span class="flex space-x-1">
-						<a class="activity__info__author" href="/users/{activity.author.username}">
-							{activity.author.username}
+						<a class="activity__info__author" href="/users/{author.username}">
+							{author.username}
 						</a>
-						<a class="activity__info__type" href="/files/{activity.file?.hash}"
-							>{getActivityTitle(activity.type)}</a
-						>
+						<a class="activity__info__type" href="/files/{file?.hash}">
+							{getActivityTitle(activity.type)}
+						</a>
 					</span>
 					<time class="activity__time" datetime={timeToDateISO(activity.date)}>
 						{timeSince(activity.date)}
 					</time>
 				</p>
-				<InputHash hash={activity.file?.hash} />
-				{#if activity.file}
-					<ActivityMeta file={activity.file} />
+				<InputHash hash={file?.hash} />
+				{#if file}
+					<ActivityMeta {file} />
 				{/if}
 			</div>
 		</div>
@@ -77,7 +79,7 @@
 <style lang="postcss">
 	.activity {
 		&__time {
-			@apply text-neutral-400;
+			@apply text-gray-500;
 		}
 
 		&__author,
@@ -85,7 +87,7 @@
 			@apply md:px-8 2xl:px-10 lg:w-48 2xl:w-60;
 
 			&__title {
-				@apply font-semibold text-neutral-400;
+				@apply font-medium text-gray-100;
 			}
 		}
 
@@ -94,7 +96,7 @@
 
 			&__author,
 			&__type {
-				@apply font-semibold;
+				@apply font-medium;
 			}
 		}
 	}

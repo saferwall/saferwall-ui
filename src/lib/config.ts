@@ -1,20 +1,16 @@
+export const THEME_KEY = 'theme';
 export const DEFAULT_PAGINATION_ITEMS = 20;
 
 export const SESSION_KEY = 'session';
 
 export enum UploadStatus {
-	FAILED = -1,
 	UPLOADING = 0,
-	QUEUEING,
-	PROCESSING,
-	FINISHED,
+	QUEUEING = 1,
+	PROCESSING = 2,
+	FINISHED = 3
 }
 
 export const FILE_UPLOAD_STATUS = [
-	{
-		title: 'Failed',
-		value: UploadStatus.FAILED
-	},
 	{
 		title: 'Uploading',
 		value: UploadStatus.UPLOADING
@@ -30,5 +26,5 @@ export const FILE_UPLOAD_STATUS = [
 	{
 		title: 'Finished',
 		value: UploadStatus.FINISHED
-	},
+	}
 ];
