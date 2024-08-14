@@ -54,7 +54,7 @@
 
 <section class="divide-y">
 	{#each ntHeaders as group}
-		<article class="py-10 space-y-4">
+		<article class="py-10 space-y-4 border-t-zinc-300 dark:border-t-zinc-700">
 			<h1 class="title">{group.name}</h1>
 			<table class="w-full">
 				{#if group.columns}

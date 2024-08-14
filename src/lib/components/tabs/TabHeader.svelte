@@ -26,7 +26,7 @@
 			<span>{item.label}</span>
 
 			{#if item.count != undefined}
-				<span class="text-sm text-gray-400">({item.count})</span>
+				<span class="text-xs text-gray-400">({item.count})</span>
 			{/if}
 		</a>
 	{:else}
@@ -35,11 +35,11 @@
 			class:vertical
 			class:horizontal
 			class:active={item.selected}
-			on:mouseup={() => onTabMouseUp(item)}
+			on:click={() => onTabMouseUp(item)}
 		>
 			<span>{item.label}</span>
 			{#if item.count != undefined}
-				<span class="text-sm text-gray-400">({item.count})</span>
+				<span class="text-xs text-gray-400">({item.count})</span>
 			{/if}
 		</span>
 	{/if}
@@ -49,7 +49,7 @@
 	.tab__header__item {
 		&:hover,
 		&.active {
-			@apply text-primary;
+			@apply text-zinc-900 dark:text-zinc-100 bg-primary-100 dark:bg-zinc-700/70;
 		}
 
 		&:hover:after,
@@ -61,6 +61,7 @@
 		@apply cursor-pointer p-4 px-6 md:px-10 hover:text-primary;
 
 		&.vertical {
+			@apply rounded-t;
 			&:hover:after,
 			&.active:after {
 				@apply content-[''] absolute w-full bottom-0 left-0;
@@ -69,8 +70,9 @@
 		}
 
 		&.horizontal {
+			@apply rounded-l;
 			@apply py-1;
-
+			
 			&:hover:after,
 			&.active:after {
 				@apply content-[''] absolute h-full top-0 right-0;

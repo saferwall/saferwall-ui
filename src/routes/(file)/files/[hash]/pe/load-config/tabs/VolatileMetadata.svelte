@@ -28,18 +28,19 @@
 			key: 'info_range_table'
 		}
 	];
+	$: console.log({tabs});
 </script>
 
 <Tabs.Root bind:tabs center>
 	<div class="py-4">
 		{#each tabs as tab}
 			{#if tab.selected}
-				{#if tab.key === 'AccessRVATable'}
-					<div class="p-6 border border-e-neutral-100 rounded-xl flex flex-col gap-4">
+				{#if tab.key === 'accessrvatable'}
+					<div class="p-6 border border-zinc-300 dark:border-zinc-700 rounded-xl flex flex-col gap-4">
 						<ul class="space-y-2 text-md">
 							{#each tab.data as item, index}
 								{#if index < maxRecords || tab.expanded}
-									<li>
+									<li class="font-mono">
 										{valueToHex(item)}
 									</li>
 								{/if}
@@ -51,10 +52,10 @@
 						/>
 					</div>
 				{/if}
-				{#if tab.key === 'InfoRangeTable'}
-					<TableKeyValue {maxRecords} camelCase={false} items={tab.data} header={['Rva', 'Size']} />
+				{#if tab.key === 'info_range_table'}
+					<TableKeyValue {maxRecords} camelCase={false} items={tab.data} header={['RVA', 'Size']} />
 				{/if}
-				{#if tab.key === 'Struct'}
+				{#if tab.key === 'struct'}
 					<TableKeyValue items={Object.entries(tab.data)} header={false} />
 				{/if}
 			{/if}

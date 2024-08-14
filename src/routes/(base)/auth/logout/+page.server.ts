@@ -9,8 +9,10 @@ export const load = (async ({ cookies, locals }) => {
 			secure: true,
 			path: '/'
 		});
-		locals.session = null;
-		locals.user = null;
+		locals.session = undefined;
+		locals.user = undefined;
+
+		locals.client.removeSession();
 	} catch (error) {}
 
 	throw redirect(302, '/auth/login');

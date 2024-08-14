@@ -31,18 +31,18 @@
 						<span>{item.title}</span>
 
 						{#if item.count != undefined}
-							<span class="text-sm text-gray-400">({item.count})</span>
+							<span class="text-xs text-gray-400">({item.count})</span>
 						{/if}
 					</a>
 				{:else}
 					<span
-						on:mouseup={() => onTabMouseUp(item)}
+						on:click={() => onTabMouseUp(item)}
 						class="card__tabs__item"
 						class:active={item.active}
 					>
 						<span>{item.title}</span>
 						{#if item.count != undefined}
-							<span class="text-sm text-gray-400">({item.count})</span>
+							<span class="text-xs text-gray-400">({item.count})</span>
 						{/if}
 					</span>
 				{/if}
@@ -82,13 +82,13 @@
 		@apply flex flex-col;
 
 		.tabs__menu {
-			@apply border-b overflow-x-auto items-center;
+			@apply border-b border-zinc-200 dark:border-zinc-700 overflow-x-auto items-center;
 		}
 
 		.card__tabs__item:hover:after,
 		.active:after {
 			@apply content-[''] absolute w-full bottom-0 left-0;
-			@apply border-b-2 border-primary text-primary;
+			@apply border-b-2 border-zinc-200 dark:border-zinc-700 text-primary;
 		}
 	}
 
@@ -96,13 +96,13 @@
 		@apply flex flex-row py-6;
 
 		.tabs__menu {
-			@apply flex flex-col border-r space-y-4;
+			@apply flex flex-col border-r border-zinc-200 dark:border-zinc-700 space-y-4;
 		}
 
 		.card__tabs__item:hover:after,
 		.active:after {
 			@apply content-[''] absolute h-full top-0 right-0;
-			@apply border-r-2 border-primary text-primary;
+			@apply border-r-2 border-zinc-200 dark:border-zinc-700 text-primary;
 		}
 
 		.card__tabs__item {

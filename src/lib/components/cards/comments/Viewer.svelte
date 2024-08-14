@@ -3,7 +3,7 @@
 	import remarkParse from 'remark-parse';
 	import remarkGfm from 'remark-gfm';
 	import { unified } from 'unified';
-	import "github-markdown-css/github-markdown-light.css";
+	import "$lib/styles/github-markdown.css";
 
 	let processor = unified()
 		.use(remarkParse)
@@ -15,7 +15,7 @@
 	export let value: string;
 </script>
 
-<div class="markdown-body md-to-html p-2">
+<div class="markdown-body !font-primary bg-transparent md-to-html p-2">
 	{@html mdToHtml}
 </div>
 

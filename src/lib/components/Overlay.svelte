@@ -1,24 +1,20 @@
 <script>
-	import { browser } from '$app/environment';
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
 	onMount(() => {
-		if (browser) {
-			document.querySelector('body')?.classList.add('overlay-no-scroll');
-		}
-	});
+		document.body?.classList.add('overlay-no-scroll');
 
-	onDestroy(() => {
-		if (browser) {
-			document.querySelector('body')?.classList.remove('overlay-no-scroll');
-		}
+		return () => {
+			document.body?.classList.remove('overlay-no-scroll');
+		};
 	});
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	on:mouseup
+	on:click
 	transition:fade={{ duration: 200 }}
-	class="fixed z-40 top-0 left-0 w-full h-full bg-gray-600/30"
+	class="fixed z-40 top-0 left-0 w-full h-full bg-gray-600 bg-opacity-30"
 />
 <slot />

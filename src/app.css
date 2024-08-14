@@ -1,34 +1,37 @@
-@import 'bigger-picture/css';
-@import './lib/styles/card.css';
-@import './lib/styles/tags.css';
-@import './lib/styles/scrollbar.css';
-@import './lib/styles/progress.css';
-
+@import "./lib/styles/vars.css";
+@import "./lib/styles/card.css";
+@import "./lib/styles/tags.css";
+@import "./lib/styles/scrollbar.css";
+@import "./lib/styles/progress.css";
+@import "./lib/styles/github-markdown.css";
+@import "bigger-picture/css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 html.bp-lock {
 	overflow-y: unset;
 }
 
+html.dark {
+	color-scheme: dark;
+}
 
 html,
 body {
 	@apply font-primary;
-	@apply min-h-screen h-full;
+	@apply min-h-screen h-full bg-background;
 }
 
 select,
 input,
 textarea,
 button {
-	@apply focus:outline focus:outline-primary;
+	@apply focus:outline-none border border-transparent focus:border-neutral-500;
 }
 
 #app {
-	@apply flex flex-col min-h-full;
+	@apply flex flex-col min-h-full text-xs;
 }
 
 .overlay-no-scroll {
@@ -48,7 +51,11 @@ a.link:not([href='']) {
 }
 
 :global(.markdown-body) {
-	@apply prose;
+	/* @apply prose; */
+}
+
+.bytemd-fullscreen {
+	@apply z-50;
 }
 
 .table-border {
@@ -63,7 +70,9 @@ a.link:not([href='']) {
 
 		td,
 		th {
-			@apply px-4 border;
+			@apply
+			/* py-4 */
+			border;
 		}
 
 		th {
@@ -83,6 +92,37 @@ a.link:not([href='']) {
 	}
 }
 
+.table-border-base {
+	@apply border;
+	@apply w-full;
+
+	th {
+		@apply font-bold;
+	}
+
+	td,
+	th {
+		@apply
+		/* py-4 */
+		border;
+	}
+
+	th {
+		@apply border-t-0;
+	}
+
+	th:first-child,
+	td:first-child {
+		@apply border-l-0 border-t-0;
+	}
+
+	th:last-child,
+	td:last-child,
+	tr:last-child td {
+		@apply border-b-0 border-r-0;
+	}
+}
+
 .boxes {
 	table.groups {
 		@apply pr-4 border-separate border-spacing-y-2 w-full;
@@ -96,11 +136,11 @@ a.link:not([href='']) {
 				@apply relative z-0;
 
 				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-200 border-t-0;
+					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-500 border-t-0;
 				}
 
 				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-200;
+					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-500;
 				}
 
 				&.expanded:after {
@@ -108,20 +148,21 @@ a.link:not([href='']) {
 				}
 
 				td {
-					@apply p-4 py-4 rounded;
+					@apply first:rounded-l last:rounded-r;
 				}
 			}
 		}
 	}
 
 	table.items {
-		@apply w-full;
+		@apply w-full dark:text-white;
 
 		tbody tr {
-			@apply even:bg-gray-50;
-
+			@apply even:bg-zinc-100 even:dark:bg-zinc-800;
+			@apply odd:bg-zinc-200 odd:dark:bg-zinc-700;
 			td {
-				@apply py-3 w-1/4;
+				/* @apply py-3; */
+				@apply first:rounded-l last:rounded-r;
 			}
 		}
 	}

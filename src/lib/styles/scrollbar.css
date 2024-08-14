@@ -3,17 +3,17 @@
  **/
 /* width */
 ::-webkit-scrollbar {
-	@apply w-1 h-1;
+	@apply w-1.5 h-1;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	@apply bg-white;
+	@apply bg-transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	@apply bg-primary/70;
+	@apply bg-primary-500 dark:bg-primary-700;
 }
 
 /* Handle on hover */

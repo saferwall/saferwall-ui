@@ -2,15 +2,16 @@
 	import { env } from '$env/dynamic/public';
 	import { SaferwallClient } from '$lib/clients/saferwall';
 	import Button from '$lib/components/form/Button.svelte';
-	import type { Menu, Saferwall } from '$lib/types';
+	import type { Menu } from '$lib/types';
 	import ButtonLike from '../form/ButtonLike.svelte';
 	import { goto } from '$app/navigation';
 
 	export let hash: string;
+	export let client: SaferwallClient;
+	
 	export let liked = false;
 	export let loggedIn = false;
 	export let activeMenu: Menu.File;
-	export let session: Saferwall.Session | undefined;
 
 	$: downloadLink = `${env.PUBLIC_API_URL}files/${hash}/download/`;
 	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/files/${hash}/${activeMenu.path}`;
@@ -20,12 +21,12 @@
 	const onRescanClick = async () => {
 		rescaning = true;
 		try {
-			await new SaferwallClient(session).rescanFile(hash);
+			await client.rescanFile(hash);
 		} catch (error) {
 			console.error('Rescab failed', error);
 			// @ts-ignore
 			if (error.status === 401) {
-				location.href = "/auth/login";
+				goto("/auth/login");
 				return;
 			}
 		}
@@ -33,7 +34,7 @@
 	};
 </script>
 
-<section class="file-header no-scroll-style">
+<section class="file__header no-scroll-style">
 	<div class="flex items-end justify-between space-x-12">
 		<h1 class="text-3xl font-semibold flex-shrink-0">
 			<span class="sr-only">File {hash}</span>
@@ -44,13 +45,13 @@
 			<Button size="lg" loading={downloadLoading} icon="download" href={downloadLink} on:click={(e) => {
 				e.preventDefault();
 				downloadLoading = true;
-				if (!session || !session.token) {
+				if (!client.authorization) {
 					goto("/auth/login");
 					return;
 				}
 				window.fetch(downloadLink, {
 					headers: {
-						"Authorization": `Bearer ${session.token}`,
+						"Authorization": client.authorization,
 						"Content-Type": "application/json"
 					}
 				}).then(res => {
@@ -67,8 +68,8 @@
 					location.assign(file);
 				});
 			}}>
-				<span class="hidden md:block pl-2">Download file</span></Button
-			>
+				<span class="hidden md:block pl-2">Download file</span>
+			</Button>
 			<Button
 				size="lg"
 				icon="rescan"
@@ -87,11 +88,12 @@
 </section>
 
 <style lang="postcss">
-	:global(.file-header .button) {
-		@apply shadow-base border-none space-x-0;
+	:global(.file__header .button) {
+		@apply border-none space-x-0;
 	}
 
-	.file-header {
+	.file__header {
 		@apply container mx-auto pt-6 pb-2 overflow-x-auto mb-2;
+		@apply text-neutral-100;
 	}
 </style>

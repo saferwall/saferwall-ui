@@ -9,23 +9,23 @@
 
 	export let data: PageData;
 
+	$: client = data.client;
 	$: section = data.section;
 	$: username = data.username;
-	$: session = data.session;
 	$: loggedIn = data.user !== undefined;
 	$: pagination = data.pagination;
 </script>
 
 <LoadMoreContainer
 	initItems={data.pagination?.items}
+	{client}
 	{username}
-	{session}
 	{pagination}
 	{section}
 	let:items
 >
 	{#each items as item}
-		<li class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6 py-6 lg:py-8">
+		<li class="flex flex-col md:flex-row space-y-6 border-t-zinc-300 dark:border-t-zinc-700 md:space-y-0 md:space-x-6 py-6 lg:py-8">
 			<div class="w-full space-y-4">
 				<InputHash hash={item.file.hash} />
 				<ActivityMeta file={item.file} />

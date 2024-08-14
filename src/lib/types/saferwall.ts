@@ -170,39 +170,39 @@ export namespace Saferwall {
 
 			export namespace DVRT {
 				export interface Root {
-					entries: Entry[];
-					imgdyn_reloc_table: ImgDynRelocTable;
+					entries: Entry[]; //
+					image_dynamic_relocation_table: ImgDynRelocTable; //
 				}
 
 				export interface Entry {
-					img_dyn_reloc: ImgDynReloc;
-					reloc_blocks: RelocBlock[];
+					image_dynamic_relocation: ImgDynReloc; // 
+					reloc_blocks: RelocBlock[]; //
 				}
 
 				export interface ImgDynReloc {
-					base_reloc_size: number;
-					symbol: number;
+					base_reloc_size: number; //
+					symbol: number; //
 				}
 
 				export interface RelocBlock {
-					img_base_reloc: ImgBaseReloc;
-					type_offsets: TypeOffset[];
+					img_base_reloc: ImgBaseReloc; //
+					type_offsets: TypeOffset[]; //
 				}
 
 				export interface ImgBaseReloc {
-					size_of_block: number;
-					virtual_address: number;
+					size_of_block: number; //
+					virtual_address: number; //
 				}
 
 				export interface TypeOffset {
-					dynamic_symbol_offset: number;
-					type: number;
-					value: number;
+					iat_index: number; //
+					indirect_call: number; //
+					page_relative_offset: number; //
 				}
 
 				export interface ImgDynRelocTable {
-					size: number;
-					version: number;
+					size: number; //
+					version: number; //
 				}
 			}
 
@@ -412,7 +412,7 @@ export namespace Saferwall {
 	}
 
 	export interface ScanResult {
-		infected: boolean;
+		infected?: boolean;
 		output: string;
 		update: number;
 	}
@@ -530,7 +530,7 @@ export namespace Saferwall {
 			MALICIOUS = 'malicious'
 		}
 		export interface ProcessItem {
-			detection: Detection;
+			detection: Detection | "";
 			file_type: string;
 			parent_link: string;
 			parent_pid: string;
@@ -647,7 +647,7 @@ export namespace Saferwall {
 		IAT = 'iat',
 		DELAY_IMPORT = 'delay_import',
 		SECURITY = 'security',
-		EXCEPTIONS = 'exceptions',
+		EXCEPTIONS = 'exception',
 		BOUND_IMPORT = 'bound_import',
 		CLR = 'clr'
 	}
@@ -777,7 +777,7 @@ export namespace Saferwall {
 				frame_type: number;
 				has_seh: number;
 				num_locals: number;
-				off_start: number;
+				offset_start: number;
 				params_size: number;
 				proc_size: number;
 				prolog_length: number;

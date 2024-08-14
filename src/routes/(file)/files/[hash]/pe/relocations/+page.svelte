@@ -30,8 +30,8 @@
 	<h1 class="title">Relocations</h1>
 	<Table.Root class="groups">
 		<Table.Header class="font-bold">
-			<Table.Col class="w-2">#</Table.Col>
 			<Table.Col class="w-2" />
+			<Table.Col class="w-2">#</Table.Col>
 			<Table.Col>Entry RVA</Table.Col>
 			<Table.Col>Size of Block</Table.Col>
 			<Table.Col>Items Count</Table.Col>
@@ -62,7 +62,7 @@
 					{#if isEntryOpen(index)}
 						<Table.Row class={cn('box__body', isEntryOpen(index) ? '' : 'hidden')}>
 							<Table.Val colspan="5">
-								<div class="px-4 relative pt-0">
+								<div class="p-4 relative pt-0">
 									<h2
 										class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
 									>

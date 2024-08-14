@@ -9,7 +9,7 @@
 	const isPassword = type === 'password';
 	$: passwordVisible = type !== 'password';
 
-	const onPasswirdIconMouseUp = () => {
+	const onClick = () => {
 		type = type === 'password' ? 'text' : 'password';
 	};
 </script>
@@ -27,25 +27,29 @@
 		bind:value
 		{...{type}}
 		{placeholder}
-		class="input__element {$$props.class} {icon ? 'input--icon' : ''}"
+		class="input__element bg-transparent {$$props.class} {icon ? 'input--icon' : ''}"
+		data-class="input__element {$$props.class} {icon ? 'input--icon' : ''}"
 	/>
 	{#if isPassword}
-		<button class="password-dim password-icon outline-none" class:visible={passwordVisible} type="button" on:click={onPasswirdIconMouseUp}>
-			<svg class="password-dim"
-				><use href="/images/icons.svg#icon-eye" /></svg
-			>
+		<button class="password-icon outline-none border-none" class:visible={passwordVisible} type="button" on:click={onClick}>
+			<svg><use href="/images/icons.svg#icon-eye" /></svg>
 		</button>
 	{/if}
 </label>
 
 <style lang="postcss">
+	
 	.input {
 		@apply flex w-full relative;
+
+		input {
+			@apply focus:outline-none;
+			@apply border border-neutral-700 focus:border-gray-500 rounded;
+		}
 
 		&__element {
 			@apply w-full;
 			@apply px-4 pt-3 pb-3;
-			@apply border rounded;
 
 			&.input--icon {
 				@apply pl-10;
@@ -72,33 +76,35 @@
 		}
 
 		&__label {
-			@apply font-light;
+			@apply font-regular placeholder:font-regular;
 			@apply absolute transition-all;
-			@apply text-neutral-500 left-4 top-1/2 -translate-y-1/2 text-sm;
+			@apply text-zinc-500 left-4 top-1/2 -translate-y-1/2 text-xs;
 		}
 
 		&:has(input:not(:placeholder-shown)),
 		&:has(:focus) {
 			.input__label {
-				@apply top-4 text-sm;
+				@apply top-4 text-xs;
 			}
 		}
 
 		.icon {
 			@apply w-5 h-5;
-			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-900;
+			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-100;
 			@apply absolute left-3 -translate-y-1/2 top-1/2;
 		}
 
-		.password-dim {
-			@apply w-6 h-6;
-		}
 		.password-icon {
-			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-900;
+			@apply w-6 h-6;
+			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-100;
 			@apply absolute right-3 -translate-y-1/2 top-1/2;
 
 			&.visible {
 				@apply text-primary animate-pulse;
+			}
+
+			svg {
+				@apply w-full h-full;
 			}
 		}
 	}

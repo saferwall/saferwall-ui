@@ -8,10 +8,11 @@
 	let records = recordsPerPage;
 
 	export let data: PageData;
+
 	$: exceptions = data.exceptions?.map((exception) => {
 		return {
 			base: exception.runtime_function,
-			unwind: Object.entries(exception.unwin_info)
+			unwind: Object.entries(exception.unwind_info)
 				.filter(([key]) => !['function_entry', 'unwind_codes'].includes(key))
 				.map(([key, value]) => {
 					return {
@@ -19,7 +20,7 @@
 						value: translateGroupValue(value, 'exceptions', key)
 					};
 				}),
-			codes: (exception.unwin_info.unwind_codes || []).map(
+			codes: (exception.unwind_info.unwind_codes || []).map(
 				(code: { unwind_op: string; operand: string }) => {
 					return {
 						...code,
@@ -53,7 +54,8 @@
 	<h1 class="title">Exceptions</h1>
 	<table class="exceptions">
 		<thead>
-			<th colspan="2">Begin Address</th>
+			<th>#</th>
+			<th>Begin Address</th>
 			<th>End Address</th>
 			<th>Unwind Info Address</th>
 		</thead>
@@ -61,10 +63,10 @@
 			{#each exceptions.slice(0, records) as item, index}
 				<tr
 					class="box"
-					on:mouseup={() => (entries[index] = !isEntryOpen(index))}
+					on:click={() => (entries[index] = !isEntryOpen(index))}
 					class:expanded={isEntryOpen(index)}
 				>
-					<td class="px-0 !pr-0">
+					<td class="px-0 !pr-0 pl-4">
 						<Icon
 							size="w-4 h-4"
 							name="arrow-down"
@@ -100,7 +102,7 @@
 														<div class="pl-5 pt-4">
 															<ul class="border-l border-gray-100 pl-5 py-2">
 																{#each item.codes as code}
-																	<li class="text-sm">
+																	<li class="text-xs">
 																		<span class="font-semibold"
 																			>{valueToHex(code.code_offset)} :</span
 																		>
@@ -123,7 +125,7 @@
 		</tbody>
 	</table>
 
-	<ButtonShowMore mode="more" bind:expanded on:mouseup={() => paginationTrigger()} />
+	<ButtonShowMore mode="more" bind:expanded on:click={() => paginationTrigger()} />
 </article>
 
 <style lang="postcss">
@@ -139,14 +141,14 @@
 				@apply relative z-0;
 
 				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-200 border-t-0;
+					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-500 border-t-0;
 				}
 
 				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-200;
+					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-500;
 				}
 
-				&.expanded:nth-child(2n + 1):after {
+				&.expanded:after {
 					@apply rounded-b-none border-b-0;
 				}
 

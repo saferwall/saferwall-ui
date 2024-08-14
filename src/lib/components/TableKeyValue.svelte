@@ -22,22 +22,22 @@
 </script>
 
 <Table.Root class={cn(deep && !parent && 'pt-0', className)}>
-	<Table.Body class={cn(lines ? `dividey divide-y divide-neutral-100` : '')}>
+	<Table.Body class={cn(lines ? `divide-y divide-zinc-300 dark:divide-zinc-700` : '')}>
 		{#if header}
 			<Table.Row>
 				{#if Array.isArray(header)}
 					{#each header as item, index}
 						<Table.Val
 							class={cn(
-								'font-semibold text-base align-top',
+								'font-medium text-base align-top',
 								index === 0 ? '' : 'w-full',
 								!header && 'font-medium whitespace-nowrap max-w-full pr-4'
 							)}>{item}</Table.Val
 						>
 					{/each}
 				{:else}
-					<Table.Val class="font-semibold text-base align-top">Member</Table.Val>
-					<Table.Val class="font-semibold text-base align-top">Value</Table.Val>
+					<Table.Val class="font-medium text-base align-top">Member</Table.Val>
+					<Table.Val class="font-medium text-base align-top">Value</Table.Val>
 				{/if}
 			</Table.Row>
 		{/if}

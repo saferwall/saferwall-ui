@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import type { ComponentProps } from 'svelte';
 	import Button from './Button.svelte';
 
 	export let liked = false;
 	export let loggedIn = false;
 	export let hash: string;
-	export let size: string = 'sm';
+	export let size: ComponentProps<Button>['size'] = 'sm';
 
 	let loading = false;
 </script>
@@ -34,7 +35,7 @@
 		type="submit"
 		class="w-full md:w-max z-30"
 		href={loggedIn ? undefined : '/auth/login'}
-		theme={liked ? 'primary light' : 'base'}
+		theme={liked ? 'brand' : 'base'}
 		{loading}
 		{...$$restProps}
 	>

@@ -42,19 +42,18 @@
 		{#if success}
 			<Alert type="success" on:close={() => (success = false)}>Profile successfully updated.</Alert>
 		{/if}
-		<Avatar size="lg" username={user.username} />
-		<div
-			class="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow hover:cursor-pointer hover:shadow-xl"
-		>
+		<Avatar size="lg" username={user.username} >
+		</Avatar>
+		<!-- <button class="absolute bottom-0 right-0 bg-white p-2 rounded-full hover:cursor-pointer">
 			<Icon name="cloud" />
-		</div>
+		</button> -->
 		<Input label="Username" name="username" value={user.username} readonly />
 		<Input label="Name" name="name" value={user.name} />
 		<Input label="URL" name="url" value={user.url} />
 		<Input label="Biography" name="bio" value={user.bio} />
 		<Input label="Location" name="location" value={user.location} />
 	</div>
-	<Button {loading} theme="primary" size="lg" type="submit">
+	<Button {loading} theme="brand" size="lg" type="submit">
 		Save
 		<span slot="loading" class="ml-1">Saving ...</span>
 	</Button>

@@ -2,7 +2,7 @@
 	import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 	import type { EditorView } from 'codemirror';
 	import CodeMirror from 'svelte-codemirror-editor';
-	import { EditorState, EditorSelection, Text } from "@codemirror/state";
+	import { EditorState, EditorSelection, Text, type Extension } from "@codemirror/state";
 	import BoldIcon from "$lib/components/editor/icons/BoldIcon.svelte";
 	import CodeIcon from '$lib/components/editor/icons/CodeIcon.svelte';
 	import HeadingIcon from '$lib/components/editor/icons/HeadingIcon.svelte';
@@ -14,14 +14,16 @@
 	import ListNumberedIcon from '$lib/components/editor/icons/ListNumberedIcon.svelte';
 	import ListTaskIcon from '$lib/components/editor/icons/ListTaskIcon.svelte';
 	import Viewer from "../cards/comments/Viewer.svelte";
+
 	export let value: string;
+	export let extensions: Extension[] = [];
 	
 	let view: EditorView;
 	let state: () => EditorState;
 	let doc: () => Text;
 </script>
 
-<div class="w-full flex flex-col border rounded">
+<div class="w-full flex flex-col border border-zinc-300 text-zinc-500 dark:border-zinc-700 rounded overflow-clip">
 	<div class="controls p-1">
 		<button
 			class="control"
@@ -303,15 +305,16 @@
 			<ListTaskIcon />
 		</button>
 	</div>
-	<div class="w-full flex *:grow-0 *:w-[50%] border-t min-h-48 items-stretch">
+	<div class="w-full flex *:grow-0 *:w-[50%] border-t border-zinc-300 dark:border-zinc-700 min-h-48 items-stretch">
 		<CodeMirror
+			{extensions}
 			nodebounce={true}
 			on:ready={(e) => {
 				view = e.detail;
 				state = () => view.state;
 				doc = () => state().doc;
 			}}
-			class="max-w-full [&_.cm-gutter]:h-full [&_.cm-content]:h-full [&_.cm-editor]:h-full border-r"
+			class="max-w-full [&_.cm-gutter]:h-full [&_.cm-content]:h-full [&_.cm-editor]:h-full border-r border-zinc-300 dark:border-zinc-700"
 			bind:value
 			lang={markdown({ base: markdownLanguage })}
 		/>
@@ -322,7 +325,10 @@
 </div>
 
 <style lang="postcss">
+	.controls {
+		@apply bg-zinc-100/80 dark:bg-zinc-800;
+	}
 	.control {
-		@apply p-0 w-7 h-7 inline-flex items-center justify-center text-primary-600 border hover:border-gray-300 rounded;
+		@apply p-0 w-7 h-7 inline-flex items-center justify-center  dark:text-zinc-400 text-zinc-600 hover:bg-zinc-200 hover:dark:bg-zinc-700 rounded-md;
 	}
 </style>

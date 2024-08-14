@@ -20,10 +20,10 @@
 	<div class="flex flex-col">
 		<table class="card__table">
 			<thead>
-				<th>Published</th>
-				<th>Name</th>
-				<th>Source</th>
-				<th>Country</th>
+				<th class="font-semibold">Published</th>
+				<th class="font-semibold">Name</th>
+				<th class="font-semibold">Source</th>
+				<th class="font-semibold">Country</th>
 			</thead>
 			<tbody>
 				{#each submissions as submission, i}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Multitoggle from '$lib/components/Multitoggle.svelte';
+	import RenderObject from '$lib/components/nest/RenderObject.svelte';
 	import type { Saferwall } from '$lib/types';
 	import type { PageData } from './$types';
 	import CFGIAT from './tabs/CFGIAT.svelte';
@@ -72,11 +73,12 @@
 				{#if tab.component}
 					<svelte:component this={tab.component} data={tab.data} />
 				{:else}
-					<Struct data={tab.data} />
+					<!-- <Struct data={tab.data} /> -->
+					<RenderObject obj={tab.data}></RenderObject>
 				{/if}
 			{:else}
 				<div class="flex flex-grow items-center p-4">
-					<p class="text-center text-neutral-500">No data found</p>
+					<p class="text-center text-zinc-400 dark:text-zinc-600">No data found</p>
 				</div>
 			{/if}
 		{/if}

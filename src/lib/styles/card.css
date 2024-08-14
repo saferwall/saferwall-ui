@@ -4,7 +4,7 @@
 	}
 
 	&__title {
-		@apply text-2xl font-normal;
+		@apply text-2xl font-medium;
 	}
 
 	&__list {
@@ -14,30 +14,30 @@
 	&__table {
 		@apply table table-auto;
 		thead {
-			@apply text-left text-neutral-500 uppercase;
+			@apply text-left text-zinc-400 dark:text-zinc-600 uppercase;
 		}
 		tbody {
 			@apply divide-y;
 		}
 		th,
 		td {
-			@apply py-4;
+			@apply pt-2;
 		}
 	}
 
 	&__item {
-		@apply flex flex-col md:flex-row md:table-row;
-		@apply py-1 md:px-3 lg:px-6 bg-neutral-50;
+		@apply flex flex-col md:flex-row md:table-row border-none;
+		@apply py-1 md:px-3 lg:px-6 bg-zinc-100 dark:bg-zinc-700;
 
 		&:nth-child(2n) {
-			@apply bg-white;
+			@apply bg-zinc-50 dark:bg-zinc-800;
 		}
 
 		&__title {
-			@apply min-w-[80px] text-left rounded-l;
+			@apply font-semibold min-w-[80px] text-left rounded-l;
 		}
 		&__content {
-			@apply break-all rounded-r text-neutral-800;
+			@apply break-all font-regular rounded-r text-zinc-800 dark:text-zinc-100;
 		}
 
 		&__title,
@@ -55,14 +55,10 @@
 	}
 
 	&--spacing {
-		@apply space-y-6;
-	}
-
-	&--shadow {
-		@apply shadow-base;
+		@apply space-y-2;
 	}
 
 	&--border {
-		@apply border border-neutral-100;
+		/* @apply border border-neutral-500; */
 	}
 }

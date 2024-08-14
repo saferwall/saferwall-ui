@@ -1,9 +1,9 @@
 <svelte:head>
-	<title>Terms of Service - Saferwall</title>
+	<title>Terms of Service - Saferwall Beta 1.0</title>
 </svelte:head>
 
-<div class="container mx-auto py-16">
-	<article class="prose container mx-auto max-w-none">
+<div class="container mx-auto py-16 !text-zinc-900 dark:!text-zinc-100">
+	<article class="prose dark:prose-invert container mx-auto max-w-none">
 		<h1>Terms of Service</h1>
 		<p class="italic">Last Updated: <strong>18 January 2020</strong></p>
 

@@ -24,12 +24,15 @@
 		@apply flex items-center space-x-2;
 		@apply font-semibold px-4 py-2.5 rounded w-fit;
 		@apply bg-red-100 text-red-500;
+		@apply dark:bg-red-950 dark:text-red-400;
 
 		&.signed {
 			@apply bg-orange-100 text-orange-500;
+			@apply dark:bg-orange-950 dark:text-orange-400;
 		}
 		&.signed.valid {
-			@apply bg-green-100 text-green-500;
+			@apply bg-green-100 text-green-600;
+			@apply dark:bg-green-950 dark:text-green-300;
 		}
 	}
 </style>

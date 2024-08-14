@@ -135,18 +135,24 @@ export function cleanUndefinedKeyValue(data: object = {}) {
 		.reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
 }
 
+export function capitalize(str: string) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 /**
  * Function to split a camel case string into separate words and join them with space
  *
  * @param {string} text - The input string to be split
  * @returns {string}
  */
-export function translateKeyToTitle(text: string): string {
+export function translateKeyToTitle(text: string, all = false): string {
 	if (!text || text.length === 0) {
 		return '';
 	}
 	const title = String(text).split('_').join(' ');
-	return title.charAt(0).toUpperCase() + title.slice(1, title.length);
+	if (all)
+		return title.split(" ").map(w => capitalize(w)).join(" ");
+	return capitalize(title);
 }
 
 export function asciiReversed(value: string) {
@@ -402,16 +408,16 @@ export const toHexString = (bytes: number[]) => {
 };
 
 export const signatureToGuid = (signature: {
-	data1: number;
-	data2: number;
-	data3: number;
-	data4: Array<number>;
+	Data1: number;
+	Data2: number;
+	Data3: number;
+	Data4: Array<number>;
 }) => {
-	const { data1, data2, data3, data4 } = signature;
-	const guidStr = `${byteToHex(data1).padStart(8, '0')}-${byteToHex(data2).padStart(
+	const { Data1, Data2, Data3, Data4 } = signature;
+	const guidStr = `${byteToHex(Data1).padStart(8, '0')}-${byteToHex(Data2).padStart(
 		4,
 		'0'
-	)}-${byteToHex(data3).padStart(4, '0')}-${data4
+	)}-${byteToHex(Data3).padStart(4, '0')}-${Data4
 		.map((b) => byteToHex(b).padStart(2, '0'))
 		.join('')}`;
 	return guidStr.toUpperCase();

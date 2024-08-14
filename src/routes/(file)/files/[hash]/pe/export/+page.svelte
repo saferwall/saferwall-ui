@@ -38,7 +38,7 @@
 			{/each}
 		</Table.Body>
 	</Table.Root>
-	<div class="mr-4 p-4 border rounded-xl overflow-x-scroll">
+	<div class="mr-4 p-4 border border-zinc-300 dark:border-zinc-700 rounded-xl overflow-x-auto">
 		<h2
 			class="text-lg before:border-2 before:mr-2 before:border-primary text-primary font-semibold"
 		>

@@ -28,18 +28,18 @@
 
 <style lang="postcss">
 	.pe {
-		@apply text-sm;
+		@apply text-xs;
 
 		:global(table thead) {
 			@apply text-left;
 		}
 
 		:global(table thead th) {
-			@apply py-4 font-semibold;
+			@apply py-2 px-4 font-semibold;
 		}
 
 		:global(table tr td) {
-			@apply py-2 text-gray-800;
+			@apply py-2 px-4 text-zinc-800 dark:text-zinc-100;
 		}
 
 		:global(.title) {
@@ -54,11 +54,11 @@
 
 				a {
 					@apply font-medium text-gray-400;
-					@apply block py-4 pl-4 pr-10 border-b md:border-b-0 border-r md:rounded-l;
+					@apply block py-4 pl-4 pr-10 border-b md:border-b-0 border-r border-r-zinc-300 dark:border-r-zinc-700 md:rounded-l;
 
 					&.active,
 					&:hover {
-						@apply bg-primary-100 bg-opacity-20 text-primary relative;
+						@apply bg-primary-100/20 dark:bg-zinc-700 text-primary dark:text-zinc-200 relative;
 
 						&:after {
 							@apply md:content-[''] md:border-r-4 border-primary h-full md:absolute md:-right-1 md:top-0;

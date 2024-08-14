@@ -44,7 +44,7 @@
 </script>
 
 <section class="divide-y">
-	<article>
+	<article class="border-t-zinc-300 dark:border-t-zinc-700">
 		<h1 class="title">Certificate</h1>
 		<table class="w-full">
 			<tbody>
@@ -57,7 +57,7 @@
 				<tr>
 					<td>Validity</td>
 					<td>
-						<ValidityBox signed={true} valid={verified} />
+						<ValidityBox signed={true} valid={false} />
 					</td>
 				</tr>
 			</tbody>
@@ -78,7 +78,7 @@
 
 		tbody tr {
 			td {
-				@apply py-3;
+				@apply py-2;
 
 				&:first-child {
 					@apply lg:w-1/4 font-bold;
@@ -88,7 +88,7 @@
 	}
 
 	article {
-		@apply space-y-4 py-10;
+		@apply space-y-4 border-zinc-300 dark:border-zinc-700 py-10;
 
 		&:first-child {
 			@apply pt-0;

@@ -23,7 +23,7 @@
 
 		tbody tr {
 			td {
-				@apply py-3;
+				@apply py-2;
 
 				&:first-child {
 					@apply lg:w-1/4 font-medium;

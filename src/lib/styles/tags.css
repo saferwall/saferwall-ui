@@ -7,13 +7,10 @@
 }
 
 .tags__tag {
-	@apply bg-neutral-100;
-
-	&--eset {
-		@apply bg-red-200 text-red-900;
-	}
+	@apply bg-red-200 text-red-900 dark:bg-red-950/50 dark:text-red-400;
+	
 	&--pe,
 	&--packer {
-		@apply bg-blue-200 text-blue-900;
+		@apply bg-blue-200 text-blue-900 dark:bg-blue-950/50 dark:text-blue-400;
 	}
 }
