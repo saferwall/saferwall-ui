@@ -22,15 +22,7 @@
 
 	$: comments = data.pagination.items;
 
-	let comment = `
-# asdasdasd
-
-asdfasdfasdf
-
-asdfasdfasdf
-
-asdfasdfasdf
-	`;
+	let comment = "";
 	let postingComment = false;
 </script>
 

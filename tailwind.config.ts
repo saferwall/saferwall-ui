@@ -1,5 +1,5 @@
 import { Config } from "tailwindcss";
-
+import plugin from "tailwindcss/plugin";
 
 export default {
 	darkMode: 'class',
@@ -45,9 +45,12 @@ export default {
 					300: 'var(--gray-300)',
 					400: 'var(--gray-400)',
 					500: 'var(--gray-500)',
-					600: 'var(--gray-600)',
-					700: 'var(--gray-700)',
+					600: 'var(--gray-600)', /* deprecated, only left to not break usages of the color */
+					700: 'var(--gray-700)', /* deprecated, only left to not break usages of the color */
 					800: 'var(--gray-800)',
+					900: 'var(--gray-900)',
+					950: 'var(--gray-950)',
+					960: 'var(--gray-960)',
 				},
 				brand: {
 					DEFAULT: 'var(--brand-500)',
@@ -106,5 +109,34 @@ export default {
 			},
 		}
 	},
-	plugins: [require('@tailwindcss/typography')]
+	plugins: [
+		require('@tailwindcss/typography'),
+		plugin(function ({ addUtilities }) {
+			addUtilities({
+				".sw-border-primary": { borderColor: "var(--border-primary)" },
+				".sw-border-secondary": { borderColor: "var(--border-secondary)" },
+				".sw-surface-brand-CF": { borderColor: "var(--surface-brand-CF)" },
+				".sw-surface-brand": { backgroundColor: "var(--surface-brand)" },
+				".sw-surface-line": { backgroundColor: "var(--surface-line)" },
+				".sw-surface-menu-lvl2": { backgroundColor: "var(--surface-menu-lvl2)" },
+				".sw-surface-menu": { backgroundColor: "var(--surface-menu)" },
+				".sw-surface-primary": { backgroundColor: "var(--surface-primary)" },
+				".sw-surface-secondary": { backgroundColor: "var(--surface-secondary)" },
+				".sw-surface-sub-menu": { backgroundColor: "var(--surface-sub-menu)" },
+				".sw-surface-tertiary": { backgroundColor: "var(--surface-tertiary)" },
+				".sw-surface-alert-green": { backgroundColor: "var(--alert-green)" },
+				".sw-surface-alert-orange": { backgroundColor: "var(--alert-orange)" },
+				".sw-surface-alert-red": { backgroundColor: "var(--alert-red)" },
+				".sw-text-brand": { color: "var(--brand-400)" },
+				".sw-text-primary": { color: "var(--gray-100)" },
+				".sw-text-searchbar": { color: "var(--gray-400)" },
+				".sw-text-secondary": { color: "var(--gray-300)" },
+				".sw-text-tertiary": { color: "var(--gray-500)" },
+				".sw-text-table-res": { color: "var(--gray-960)" },
+				".sw-text-alert-green": { color: "var(--alert-green)" },
+				".sw-text-alert-orange": { color: "var(--alert-orange)" },
+				".sw-text-alert-red": { color: "var(--alert-red)" },
+			})
+		})
+	]
 } satisfies Config;

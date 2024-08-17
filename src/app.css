@@ -1,4 +1,5 @@
 @import "./lib/styles/vars.css";
+@import "./lib/styles/vars.v2.css";
 @import "./lib/styles/card.css";
 @import "./lib/styles/tags.css";
 @import "./lib/styles/scrollbar.css";
