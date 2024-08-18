@@ -19,7 +19,6 @@
 			? processTableOpen.filter((i) => i !== index)
 			: [...processTableOpen, index];
 	};
-	$: console.log({trees});
 </script>
 
 <ul class={`flex flex-col divide-y  ${isChild ? 'border-t mt-6' : ''}`}>
@@ -73,7 +72,7 @@
 					</div>
 				</svelte:fragment>
 				<svelte:fragment slot="expanded">
-					<svelte:self trees={tree.children} {behaviorId} pid={tree.pid} />
+					<svelte:self trees={tree.children} {behaviorId} {client} />
 				</svelte:fragment>
 			</Expandable>
 		</li>

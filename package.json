@@ -29,6 +29,7 @@
 		"@types/simplemde": "^1.11.11",
 		"@typescript-eslint/eslint-plugin": "^7.16.1",
 		"@typescript-eslint/parser": "^7.16.1",
+		"@vitejs/plugin-basic-ssl": "^1.1.0",
 		"autoprefixer": "^10.4.19",
 		"cross-env": "^7.0.3",
 		"dotenv": "^16.4.5",

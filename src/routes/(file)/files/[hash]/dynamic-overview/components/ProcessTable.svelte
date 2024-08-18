@@ -22,8 +22,8 @@
 	$: filterByQuery = (item: any) =>
 		!query || JSON.stringify(item).toLowerCase().includes(query.toLowerCase());
 
-	let systemEventsItems: Saferwall.Behaviors.SystemEvent[] = [];
-	$: filteredSystemEventsItems = systemEventsItems
+	let systemEventsItems: Saferwall.Behaviors.SystemEvent[] | null = null;
+	$: filteredSystemEventsItems = (systemEventsItems ?? [])
 		.filter((item) => {
 			return (
 				filtersValue.size === 0 ||
@@ -34,8 +34,9 @@
 		})
 		.filter(filterByQuery);
 
-	let capabilitiesItems: Saferwall.Behaviors.Capability[] = [];
-	$: filteredcapabilitiesItems = capabilitiesItems
+	let capabilitiesItems: Saferwall.Behaviors.Capability[] | null = null;
+
+	$: filteredcapabilitiesItems = (capabilitiesItems ?? [])
 		.filter((item) => {
 			return (
 				filtersValue.size === 0 ||
@@ -122,7 +123,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div transition:slide={{ axis: 'y' }} class="w-full lg:pr-12" on:click|stopPropagation>
-	<Card padding={false} class="flex flex-col gap-2 bg-zinc-100 dark:bg-zinc-800 px-8 py-6 border border-neutral-500">
+	<Card padding={false} class="flex flex-col gap-2 bg-zinc-50 dark:bg-zinc-800 px-8 py-6 border border-neutral-500">
 		<div class="inline-flex uppercase font-medium">
 			<Multitoggle items={sections} on:change={onToggleChange} />
 		</div>
@@ -153,7 +154,7 @@
 					<th>Severity</th>
 					<th>Module</th>
 				</thead>
-				<tbody class="divide-y">
+				<tbody class="divide-y divide-neutral-500">
 					{#each filteredcapabilitiesItems as item}
 						<tr>
 							<td class="capitalize">{item.category}</td>
@@ -167,15 +168,21 @@
 					{#if filteredcapabilitiesItems.length === 0}
 						<tr>
 							<td colspan="4">
-								<p class="empty-result">
-									No results with current filters. Try adjusting or expanding your search criteria
-								</p>
+								{#if capabilitiesItems !== null}
+									<p class="empty-result">
+										No results with current filters. Try adjusting or expanding your search criteria
+									</p>
+								{:else}
+									<p class="empty-result">
+										Loading...
+									</p>
+								{/if}
 							</td>
 						</tr>
 					{/if}
 				</tbody>
 			{:else}
-				<tbody class="divide-y">
+				<tbody class="divide-y divide-neutral-500">
 					{#each filteredSystemEventsItems as item}
 						<tr>
 							<td>
@@ -184,7 +191,7 @@
 									<Label size="base" theme={getOperationTheme(item.op)} class="capitalize">
 										{item.op}
 									</Label>
-									<Label size="base" class="bg-neutral-50 text-neutral-800 capitalize">
+									<Label size="base" class="capitalize">
 										{item.type}
 									</Label>
 								</div>
@@ -194,9 +201,15 @@
 					{#if filteredSystemEventsItems.length === 0}
 						<tr>
 							<td colspan="4">
-								<p class="empty-result">
-									No results with current filters. Try adjusting or expanding your search criteria
-								</p>
+								{#if systemEventsItems !== null}
+									<p class="empty-result">
+										No results with current filters. Try adjusting or expanding your search criteria
+									</p>
+								{:else}
+									<p class="empty-result">
+										Loading...
+									</p>
+								{/if}
 							</td>
 						</tr>
 					{/if}

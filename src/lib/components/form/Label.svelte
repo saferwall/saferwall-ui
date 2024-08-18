@@ -25,8 +25,8 @@
 		}
 
 		&--gray {
-			@apply dark:bg-neutral-950/80 dark:text-neutral-400;
-			@apply bg-neutral-100 text-neutral-900;
+			@apply dark:bg-zinc-900/80 dark:text-zinc-400;
+			@apply bg-zinc-200 text-zinc-900;
 		}
 
 		&--danger {
