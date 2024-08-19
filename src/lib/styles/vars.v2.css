@@ -42,8 +42,6 @@
 	--alert-green: var(--full-100);
 	--alert-orange: var(--full-300);
 	--alert-red: var(--full-200);
-	--border-primary: var(--neutral-700);
-	--border-secondary: var(--neutral-500);
 	--surface-brand-CF: var(--brand-300);
 	--surface-brand: var(--brand-400);
 	--surface-line: var(--neutral-700);
@@ -53,10 +51,19 @@
 	--surface-secondary: var(--neutral-600);
 	--surface-sub-menu: var(--gray-900);
 	--surface-tertiary: var(--gray-800);
+	--border-primary: var(--neutral-700);
+	--border-secondary: var(--neutral-500);
 	--text-brand: var(--brand-400);
 	--text-primary: var(--gray-100);
 	--text-searchbar: var(--gray-400);
 	--text-secondary: var(--gray-300);
 	--text-tertiary: var(--gray-500);
 	--text-table-res: var(--gray-960);
+
+	/* ==================== unnamed ==================== */
+
+	--surface-brand-CF-lighter: light-dark(#E8E8F6, #2D2A3B);
+	--text-brand-light: light-dark(var(--text-brand), #7E6DEA);
+	--surface-brand-CF-light: light-dark(#DFDFF3, #2D2A3B);
+
 }

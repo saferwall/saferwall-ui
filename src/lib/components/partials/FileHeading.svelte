@@ -42,7 +42,7 @@
 		</h1>
 
 		<div class="space-x-2 flex flex-shrink-0">
-			<Button size="lg" loading={downloadLoading} icon="download" href={downloadLink} on:click={(e) => {
+			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" size="lg" loading={downloadLoading} icon="download" href={downloadLink} on:click={(e) => {
 				e.preventDefault();
 				downloadLoading = true;
 				if (!client.authorization) {
@@ -71,6 +71,7 @@
 				<span class="hidden md:block pl-2">Download file</span>
 			</Button>
 			<Button
+				class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text"
 				size="lg"
 				icon="rescan"
 				loading={rescaning}
@@ -79,8 +80,8 @@
 			>
 				<span class="hidden md:block pl-2">Rescan</span>
 			</Button>
-			<ButtonLike size="lg" {hash} {loggedIn} {liked} />
-			<Button target="_blank" size="lg" icon="twitter" href={shareTwitterLink}>
+			<ButtonLike class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" size="lg" {hash} {loggedIn} {liked} />
+			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" target="_blank" size="lg" icon="twitter" href={shareTwitterLink}>
 				<span class="hidden md:block pl-2">Share</span>
 			</Button>
 		</div>

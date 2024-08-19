@@ -3,14 +3,26 @@
 		"*.css": "postcss"
 	},
 	"css.customData": [".vscode/tailwind.json"],
-	"tailwindCSS.experimental.classRegex": [
-		// ["\\w+Class=(\\S*)", "['\"]([^\"']*).*?['\"]"],
-	],
 	"tailwindCSS.classAttributes": [
 		"class",
 		"className",
 		"ngClass",
 		"class:list",
 		".*Class"
+	],
+	"colorize.languages": [
+		"css",
+		"sass",
+		"scss",
+		"less",
+		"postcss",
+		"sss",
+		"stylus",
+		"xml",
+		"svg",
+		"javascript",
+		"typescript",
+		"svelte",
+		"html"
 	]
 }

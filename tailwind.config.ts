@@ -27,6 +27,9 @@ export default {
 			borderRadius: {
 				DEFAULT: '10px',
 				sm: '0.225rem',
+				"md-old": "0.375rem",
+				md: "0.5rem",
+				lg: "20px",
 				card: '25px'
 			},
 			colors: {
@@ -57,31 +60,59 @@ export default {
 					300: 'var(--brand-300)',
 					400: 'var(--brand-400)',
 					500: 'var(--brand-500)',
+					"CF-surface": "var(--surface-brand-CF)",
+					"CF-light-surface": "var(--surface-brand-CF-light)",
+					"CF-lighter-surface": "var(--surface-brand-CF-lighter)",
+					"surface": "var(--surface-brand)",
+					"text": "var(--text-brand)",
+					"light-text": "var(--text-brand-light)",
+				},
+				line: {
+					"surface": "var(--surface-line)",
+				},
+				menu: {
+					"lvl2-surface": "var(--surface-menu-lvl2)",
+					"surface": "var(--surface-menu)",
+				},
+				"sub-menu": {
+					"surface": "var(--surface-sub-menu)"
+				},
+				"table-res": {
+					"text": "var(--text-table-res)"
+				},
+				primary: {
+					DEFAULT: '#5F4CD9',
+					"border": "var(--border-primary)",
+					"surface": "var(--surface-primary)",
+					"text": "var(--text-primary)",
+					50: '#eff2fe',
+					100: '#e2e6fd',
+					200: '#cbd0fa',
+					300: '#abb2f6',
+					400: '#898bf0',
+					500: '#756de7',
+					600: '#5f4cd9',
+					700: '#5642c0',
+					800: '#46389b',
+					900: '#3c347b',
+					950: '#241e48',
+				},
+				secondary: {
+					"border": "var(--border-secondary)",
+					"surface": "var(--surface-secondary)",
+					"text": "var(--text-secondary)",
+				},
+				tertiary: {
+					"surface": "var(--surface-tertiary)",
+					"text": "var(--text-tertiary)",
+				},
+				searchbar: {
+					"text": "var(--text-searchbar)",
 				},
 				alert: {
 					green: "var(--alert-green)",
 					red: "var(--alert-red)",
 					orange: "var(--alert-orange)",
-				},
-				surface: {
-					DEFAULT: '#19191A',
-					"primary": "var(--surface-primary)",
-					"secondary": "var(--surface-secondary)",
-					"tertiary": "var(--surface-tertiary)",
-					"brand": "var(--surface-brand)",
-					"brand-CF": "var(--surface-brand-CF)",
-					"line": "var(--surface-line)",
-					"menu": "var(--surface-menu)",
-					"sub-menu": "var(--surface-sub-menu)",
-					"menu-lvl2": "var(--surface-menu-lvl2)",
-				},
-				text: {
-					"brand": "var(--text-brand)",
-					"primary": "var(--text-primary)",
-					"secondary": "var(--text-secondary)",
-					"tertiary": "var(--text-tertiary)",
-					"searchbar": "var(--text-searchbar)",
-					"table-res": "var(--text-table-res)",
 				},
 				red: {
 					DEFAULT: '#E63755'
@@ -95,20 +126,6 @@ export default {
 				// FIXME: to remove 
 				bluex: {
 					DEFAULT: '#2573F0'
-				},
-				primary: {
-					DEFAULT: '#5F4CD9',
-					50: '#eff2fe',
-					100: '#e2e6fd',
-					200: '#cbd0fa',
-					300: '#abb2f6',
-					400: '#898bf0',
-					500: '#756de7',
-					600: '#5f4cd9',
-					700: '#5642c0',
-					800: '#46389b',
-					900: '#3c347b',
-					950: '#241e48',
 				},
 			},
 			// FIXME: to remove 

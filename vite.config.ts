@@ -29,6 +29,7 @@ export default defineConfig(({ mode }) => {
 			plugins: [...ret.plugins ?? [], basicSsl()],
 			server: {
 				origin: "https://saferwall.com",
+				host: "saferwall.com",
 				port: 443,
 				proxy: {}
 			}

@@ -11,13 +11,16 @@
 
 <section
 	data-sveltekit-preload-data="tap"
-	class="file__navbar bg-white dark:bg-background border-t border-primary-100 dark:border-none border-opacity-20 z-10 w-full sticky top-0 overflow-x-auto no-scroll-style"
+	class="file__navbar bg-secondary-surface --border-t border-primary-100 dark:border-none border-opacity-20 z-10 w-full sticky top-0 overflow-x-auto no-scroll-style"
 >
 	<div class="w-full container mx-auto flex">
 		<ul class="file__navbar__menu flex w-full space-x-3">
 			<li class="file__navbar__item flex-grow inline-flex">
 				<a
-					class="file__navbar__link text-primary bg-primary/5 hover:bg-primary hover:text-white"
+					class="file__navbar__link
+						text-brand			hover:text-brand-light-text
+						bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
+						"
 					href="/"
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
@@ -42,20 +45,29 @@
 <style lang="postcss">
 	.file__navbar {
 		@apply py-4;
-
+		
 		&__item {
 			@apply flex-shrink-0;
+			&:first-child {
+				.file__navbar__link {
+					@apply rounded;
+				}
+			}
 		}
 
 		&__link {
-			@apply transition-all duration-200 ease-in-out;
-			@apply flex items-center space-x-2 w-auto text-neutral-400;
+			@apply flex items-center space-x-2 w-auto text-secondary-text;
 			@apply p-2.5 px-5 rounded-full font-medium;
+			/* @apply transition-colors duration-200 ease-in-out; */
 		}
-
-		&__link:hover,
+		&__link:hover {
+			@apply text-brand-400 dark:text-gray-100;
+		}
 		&__link.active {
-			@apply bg-primary/90 active:bg-primary text-white;
+			@apply text-gray-100;
+		}
+		&__link.active {
+			@apply bg-primary text-white;
 		}
 	}
 </style>

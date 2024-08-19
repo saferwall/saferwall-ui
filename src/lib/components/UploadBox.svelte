@@ -73,7 +73,7 @@
 </script>
 
 <section
-	class="bg-white dark:bg-surface-menu rounded-card p-8 md:p-12 flex flex-col justify-between space-y-6"
+	class="bg-white dark:bg-menu-surface rounded-card p-8 md:p-12 flex flex-col justify-between space-y-6"
 >
 	<input class="hidden" type="file" multiple bind:this={inputFiles} on:change={onFilesChanges} />
 

@@ -37,7 +37,7 @@ import FileTypeIcon from '$lib/components/FileTypeIcon.svelte';
 <Card
 	flex={false}
 	padding={false}
-	class="summary flex lg:justify-between flex-wrap lg:flex-nowrap lg:items-center rounded w-full lg:p-4 divide-x divide-surface-line"
+	class="summary flex lg:justify-between flex-wrap lg:flex-nowrap lg:items-center rounded w-full lg:p-4 divide-x divide-line-surface"
 >
 	<article class="summary__card flex-grow">
 		<h2 class="sr-only">Analyse score</h2>
@@ -47,8 +47,8 @@ import FileTypeIcon from '$lib/components/FileTypeIcon.svelte';
 				circleClass="stroke-none"
 				scoreClass="text-md leading-[1] {signatureFill}"
 				progressCircleClass="{signatureStroke}"
-				totalClass="fill-text-secondary"
-				trackCircleClass="stroke-surface-line"
+				totalClass="fill-secondary-text"
+				trackCircleClass="stroke-line-surface"
 			></CircularProgessBar>
 			<p class="font-semibold {signatureColor}">
 				{#if score.value === 0}
