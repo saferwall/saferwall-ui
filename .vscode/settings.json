@@ -2,5 +2,15 @@
 	"files.associations": {
 		"*.css": "postcss"
 	},
-	"css.customData": [".vscode/tailwind.json"]
+	"css.customData": [".vscode/tailwind.json"],
+	"tailwindCSS.experimental.classRegex": [
+		// ["\\w+Class=(\\S*)", "['\"]([^\"']*).*?['\"]"],
+	],
+	"tailwindCSS.classAttributes": [
+		"class",
+		"className",
+		"ngClass",
+		"class:list",
+		".*Class"
+	]
 }

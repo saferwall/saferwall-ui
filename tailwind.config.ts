@@ -54,17 +54,34 @@ export default {
 				},
 				brand: {
 					DEFAULT: 'var(--brand-500)',
-					500: 'var(--brand-500)',
-					400: 'var(--brand-400)',
 					300: 'var(--brand-300)',
+					400: 'var(--brand-400)',
+					500: 'var(--brand-500)',
+				},
+				alert: {
+					green: "var(--alert-green)",
+					red: "var(--alert-red)",
+					orange: "var(--alert-orange)",
 				},
 				surface: {
 					DEFAULT: '#19191A',
-					primary: '#19191A',
-					menu: '#19191A',
-					brand: {
-						light: '#242434'
-					}
+					"primary": "var(--surface-primary)",
+					"secondary": "var(--surface-secondary)",
+					"tertiary": "var(--surface-tertiary)",
+					"brand": "var(--surface-brand)",
+					"brand-CF": "var(--surface-brand-CF)",
+					"line": "var(--surface-line)",
+					"menu": "var(--surface-menu)",
+					"sub-menu": "var(--surface-sub-menu)",
+					"menu-lvl2": "var(--surface-menu-lvl2)",
+				},
+				text: {
+					"brand": "var(--text-brand)",
+					"primary": "var(--text-primary)",
+					"secondary": "var(--text-secondary)",
+					"tertiary": "var(--text-tertiary)",
+					"searchbar": "var(--text-searchbar)",
+					"table-res": "var(--text-table-res)",
 				},
 				red: {
 					DEFAULT: '#E63755'
@@ -93,9 +110,6 @@ export default {
 					900: '#3c347b',
 					950: '#241e48',
 				},
-				purplex: {
-					DEFAULT: '#6C5ED1'
-				}
 			},
 			// FIXME: to remove 
 			boxShadow: {
@@ -127,12 +141,12 @@ export default {
 				".sw-surface-alert-green": { backgroundColor: "var(--alert-green)" },
 				".sw-surface-alert-orange": { backgroundColor: "var(--alert-orange)" },
 				".sw-surface-alert-red": { backgroundColor: "var(--alert-red)" },
-				".sw-text-brand": { color: "var(--brand-400)" },
-				".sw-text-primary": { color: "var(--gray-100)" },
-				".sw-text-searchbar": { color: "var(--gray-400)" },
-				".sw-text-secondary": { color: "var(--gray-300)" },
-				".sw-text-tertiary": { color: "var(--gray-500)" },
-				".sw-text-table-res": { color: "var(--gray-960)" },
+				".sw-text-brand": { color: "var(--text-brand)" },
+				".sw-text-primary": { color: "var(--text-primary)" },
+				".sw-text-searchbar": { color: "var(--text-searchbar)" },
+				".sw-text-secondary": { color: "var(--text-secondary)" },
+				".sw-text-tertiary": { color: "var(--text-tertiary)" },
+				".sw-text-table-res": { color: "var(--text-table-res)" },
 				".sw-text-alert-green": { color: "var(--alert-green)" },
 				".sw-text-alert-orange": { color: "var(--alert-orange)" },
 				".sw-text-alert-red": { color: "var(--alert-red)" },
