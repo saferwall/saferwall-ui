@@ -15,7 +15,7 @@
 	$: tags = parseTags(properties?.Tags);
 </script>
 
-<Card>
+<Card class="rounded-lg">
 	<h1 class="card__title">Basic properties</h1>
 	<table class="card__list">
 		{#each Object.entries(properties) as [key, value]}

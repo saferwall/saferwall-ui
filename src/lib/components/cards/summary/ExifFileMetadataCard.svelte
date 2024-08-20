@@ -21,7 +21,7 @@
 	};
 </script>
 
-<Card>
+<Card class="rounded-lg">
 	<h1 class="card__title">ExifTool File Metadata</h1>
 	<div class="flex flex-col">
 		<table class="card__list" class:expanded>

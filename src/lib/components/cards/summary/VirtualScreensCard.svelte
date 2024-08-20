@@ -43,7 +43,7 @@
 	const onClickMoreToggle = () => (showAll = !showAll);
 </script>
 
-<Card>
+<Card class="rounded-lg">
 	<h1 class="card__title">Virtual Screens</h1>
 	<div class="virtual__screens">
 		{#each activeScreenshots as image, index}

@@ -24,7 +24,7 @@
 	};
 </script>
 
-<Card>
+<Card class="rounded-lg">
 	<h1 class="card__title">Indicators</h1>
 	<div class="flex flex-col relative overflow-hidden">
 		<table class="card__table">

@@ -15,7 +15,7 @@
 	};
 </script>
 
-<Card>
+<Card class="rounded-lg">
 	<h1 class="card__title">Submissions</h1>
 	<div class="flex flex-col">
 		<table class="card__table">

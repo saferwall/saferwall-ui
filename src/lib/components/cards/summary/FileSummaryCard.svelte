@@ -37,7 +37,7 @@ import FileTypeIcon from '$lib/components/FileTypeIcon.svelte';
 <Card
 	flex={false}
 	padding={false}
-	class="summary flex lg:justify-between flex-wrap lg:flex-nowrap lg:items-center rounded w-full lg:p-4 divide-x divide-line-surface"
+	class="summary flex lg:justify-between flex-wrap lg:flex-nowrap lg:items-center w-full lg:py-[35px] lg:px-[45px] divide-x divide-line-surface rounded-lg"
 >
 	<article class="summary__card flex-grow">
 		<h2 class="sr-only">Analyse score</h2>
@@ -90,12 +90,12 @@ import FileTypeIcon from '$lib/components/FileTypeIcon.svelte';
 <style lang="postcss">
 	.summary {
 		&__card {
-			@apply p-6 lg:px-4 lg:py-0 w-1/2 md:w-auto text-xs;
+			@apply p-6 lg:py-0 w-1/2 md:w-auto text-xs;
 
 			@apply flex flex-col justify-center;
 
 			&:first-child {
-				@apply lg:border-none w-full md:w-auto p-6;
+				@apply lg:border-none w-full md:w-auto p-0;
 			}
 
 			&:last-child {
