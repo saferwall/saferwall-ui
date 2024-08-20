@@ -9,7 +9,10 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: (process.env?.NODE_ADAPTER ? adapterNode : adapterAuto)()
+		adapter: (process.env?.NODE_ADAPTER ? adapterNode : adapterAuto)(),
+		csrf: {
+			checkOrigin: false
+		}
 	}
 };
 
