@@ -66,6 +66,7 @@
 		"bigger-picture": "^1.1.17",
 		"carta-md": "^4.3.6",
 		"codemirror": "^6.0.1",
+		"flag-icons": "^7.2.3",
 		"github-markdown-css": "^5.6.1",
 		"nprogress": "^0.2.0",
 		"remark-gfm": "^4.0.0",
