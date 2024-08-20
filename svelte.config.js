@@ -11,7 +11,7 @@ const config = {
 	kit: {
 		adapter: (process.env?.NODE_ADAPTER ? adapterNode : adapterAuto)(),
 		csrf: {
-			checkOrigin: false
+			checkOrigin: !(process.env.NODE_ENV === "development")
 		}
 	}
 };
