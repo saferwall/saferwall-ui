@@ -20,7 +20,13 @@
 <Card class="rounded-lg">
 	<h1 class="card__title">Submissions</h1>
 	<div class="flex flex-col">
-		<table class="card__table">
+		<table class="card__table [table-layout:fixed] w-full">
+			<colgroup>
+				<col span="1" class="w-[180px]">
+				<col span="1" class="min-w-[25%]">
+				<col span="1" class="w-[max(100px,35%)]">
+				<col span="1" class="w-[150px]">
+			 </colgroup>
 			<thead>
 				<th class="font-semibold">Published</th>
 				<th class="font-semibold">Name</th>
@@ -30,13 +36,19 @@
 			<tbody class="[&_td]:whitespace-nowrap">
 				{#each submissions as submission, i}
 					<tr class:hide={!expanded && i > maxRecords}>
-						<td><time>{timestampToFormattedDate(submission.timestamp)}</time></td>
-						<td>{submission.filename}</td>
-						<td class="capitalize w-full">{submission.src}</td>
-						<td>
+						<td class="max-w-fit"><time>{timestampToFormattedDate(submission.timestamp)}</time></td>
+						<td class="text-ellipsis whitespace-nowrap overflow-hidden break-all">
+								{submission.filename}
+						</td>
+						<td class="capitalize">{submission.src}</td>
+						<td class="max-w-fit">
 							<div class="flex gap-2">
-								<span class="fi fi-{submission.country.toLowerCase()}"></span>
-								<span>{countryNames[submission.country.toLowerCase()]}</span>
+								{#if submission.country && typeof submission.country === "string"}
+									<span class="fi fi-{submission.country.toLowerCase()} flex-shrink-0"></span>
+									<span class="text-ellipsis overflow-hidden">{countryNames[submission.country.toLowerCase()]}</span>
+								{:else}
+									<span>N/A</span>
+								{/if}
 							</div>
 						</td>
 					</tr>

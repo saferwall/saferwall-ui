@@ -36,12 +36,11 @@
 
 <section class="file__header no-scroll-style">
 	<div class="flex items-end justify-between space-x-12">
-		<div class="flex flex-col">
-			<h1 class="text-3xl font-semibold flex-shrink-0">
-				<!-- <span class="sr-only">File {hash}</span> -->
+		<div class="flex flex-col min-w-0">
+			<h1 class="text-3xl font-semibold">
 				{activeMenu.fullName || activeMenu.name}
 			</h1>
-			<p class="text-secondary-text">{hash}</p>
+			<p class="text-secondary-text min-w-0 text-ellipsis whitespace-nowrap overflow-hidden">{hash}</p>
 		</div>
 
 		<div class="space-x-2 flex flex-shrink-0">

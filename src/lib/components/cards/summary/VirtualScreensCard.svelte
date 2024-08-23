@@ -72,7 +72,7 @@
 		}
 
 		&__preview {
-			@apply w-full bg-gray-100 border border-gray-100 rounded bg-cover mx-auto overflow-hidden;
+			@apply w-full bg-tertiary-surface border border-tertiary-surface rounded bg-cover mx-auto overflow-hidden;
 
 			img {
 				@apply object-fill w-full h-full;
