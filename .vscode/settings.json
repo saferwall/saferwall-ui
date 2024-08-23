@@ -2,5 +2,27 @@
 	"files.associations": {
 		"*.css": "postcss"
 	},
-	"css.customData": [".vscode/tailwind.json"]
+	"css.customData": [".vscode/tailwind.json"],
+	"tailwindCSS.classAttributes": [
+		"class",
+		"className",
+		"ngClass",
+		"class:list",
+		".*Class"
+	],
+	"colorize.languages": [
+		"css",
+		"sass",
+		"scss",
+		"less",
+		"postcss",
+		"sss",
+		"stylus",
+		"xml",
+		"svg",
+		"javascript",
+		"typescript",
+		"svelte",
+		"html"
+	]
 }

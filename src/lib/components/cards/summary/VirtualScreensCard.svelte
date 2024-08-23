@@ -43,7 +43,7 @@
 	const onClickMoreToggle = () => (showAll = !showAll);
 </script>
 
-<Card>
+<Card class="rounded-lg">
 	<h1 class="card__title">Virtual Screens</h1>
 	<div class="virtual__screens">
 		{#each activeScreenshots as image, index}
@@ -72,7 +72,7 @@
 		}
 
 		&__preview {
-			@apply w-full bg-gray-100 border border-gray-100 rounded bg-cover mx-auto overflow-hidden;
+			@apply w-full bg-tertiary-surface border border-tertiary-surface rounded bg-cover mx-auto overflow-hidden;
 
 			img {
 				@apply object-fill w-full h-full;

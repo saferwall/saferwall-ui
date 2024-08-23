@@ -36,13 +36,15 @@
 
 <section class="file__header no-scroll-style">
 	<div class="flex items-end justify-between space-x-12">
-		<h1 class="text-3xl font-semibold flex-shrink-0">
-			<span class="sr-only">File {hash}</span>
-			{activeMenu.fullName || activeMenu.name}
-		</h1>
+		<div class="flex flex-col min-w-0">
+			<h1 class="text-3xl font-semibold">
+				{activeMenu.fullName || activeMenu.name}
+			</h1>
+			<p class="text-secondary-text min-w-0 text-ellipsis whitespace-nowrap overflow-hidden">{hash}</p>
+		</div>
 
 		<div class="space-x-2 flex flex-shrink-0">
-			<Button size="lg" loading={downloadLoading} icon="download" href={downloadLink} on:click={(e) => {
+			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" size="lg" loading={downloadLoading} icon="download" href={downloadLink} on:click={(e) => {
 				e.preventDefault();
 				downloadLoading = true;
 				if (!client.authorization) {
@@ -71,6 +73,7 @@
 				<span class="hidden md:block pl-2">Download file</span>
 			</Button>
 			<Button
+				class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text"
 				size="lg"
 				icon="rescan"
 				loading={rescaning}
@@ -79,8 +82,8 @@
 			>
 				<span class="hidden md:block pl-2">Rescan</span>
 			</Button>
-			<ButtonLike size="lg" {hash} {loggedIn} {liked} />
-			<Button target="_blank" size="lg" icon="twitter" href={shareTwitterLink}>
+			<ButtonLike class="{liked ? "bg-brand-surface hover:bg-brand-500" : "bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text "}" size="lg" {hash} {loggedIn} bind:liked />
+			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" target="_blank" size="lg" icon="twitter" href={shareTwitterLink}>
 				<span class="hidden md:block pl-2">Share</span>
 			</Button>
 		</div>

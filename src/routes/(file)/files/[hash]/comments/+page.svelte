@@ -22,15 +22,7 @@
 
 	$: comments = data.pagination.items;
 
-	let comment = `
-# asdasdasd
-
-asdfasdfasdf
-
-asdfasdfasdf
-
-asdfasdfasdf
-	`;
+	let comment = "";
 	let postingComment = false;
 </script>
 
@@ -65,8 +57,8 @@ asdfasdfasdf
 						color: '#ce9178'
 					},
 				],
-	
-			})]}></Editor>
+				})
+			]}></Editor>
 		<div class="w-full flex pt-4">
 			<Button class="grow md:grow-0" size="sm" loading={postingComment} on:click={() => {
 				if (!data?.session?.token || !data?.session?.username) {

@@ -5,6 +5,7 @@
 	import { UploadStatus } from '$lib/config';
 	import UploadFileStatus from './UploadFileStatus.svelte';
 	import ButtonBrowse from './form/ButtonBrowse.svelte';
+	import { goto } from '$app/navigation';
 
 	export let client: SaferwallClient;
 	export let loggedIn = false;
@@ -70,30 +71,56 @@
 		queueFiles = [...queueFiles, queue];
 		triggerQueueUpdate();
 	};
+
+	function doDrop(event: DragEvent) {
+		if (!loggedIn) { goto("/auth/login"); }
+		let dt = event.dataTransfer;
+		if (!dt) return;
+		onFilesChanges({ target: { files: dt.files }});
+	}
+
+	let draggingFilesOver = false;
+
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <section
-	class="bg-white dark:bg-surface-menu rounded-card p-8 md:p-12 flex flex-col justify-between space-y-6"
+	class="bg-white dark:bg-neutral-600 rounded-card p-8 md:p-12 flex flex-col justify-between space-y-6"
+	on:dragenter={(e) => { e.stopPropagation(); e.preventDefault(); console.log("on:dragenter"); draggingFilesOver = true; }}
+	on:dragleave={(e) => { e.stopPropagation(); e.preventDefault(); console.log("on:dragenter"); draggingFilesOver = false; }}
+	on:dragover={(e) => { e.stopPropagation(); e.preventDefault(); console.log("on:dragover"); }}
+	on:drop={(e) => { e.stopPropagation(); e.preventDefault(); doDrop(e); draggingFilesOver = false; }}
 >
+	{#if draggingFilesOver}
+		<div class="flex min-h-[300px] items-center gap-2 justify-center border-[3px] border-dashed border-black dark:border-white text-black dark:text-white">
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6">
+				<use href="/images/icons.svg#icon-cloud" />
+			</svg>
+			<p>
+				Drop your files here to upload {#if !loggedIn}(login required){/if}
+			</p>
+		</div>
+	{:else}
+		<div class="flex min-h-[300px] flex-col items-center justify-center space-y-6">
+			<div class="m-auto w-max h-max">
+				<ButtonBrowse href={loggedIn ? undefined : '/auth/login'} on:click={selectFiles} />
+			</div>
+
+			<div class="flex flex-col w-full space-y-2">
+				{#each queueFiles as queue}
+					<UploadFileStatus
+						hash={queue.hash}
+						file={queue.file}
+						error={queue.error}
+						status={queue.status}
+						on:reupload={() => queue.uploadFile()}
+					/>
+				{/each}
+			</div>
+		</div>
+	{/if}
 	<input class="hidden" type="file" multiple bind:this={inputFiles} on:change={onFilesChanges} />
 
-	<div class="flex min-h-[300px] flex-col items-center justify-center space-y-6">
-		<div class="m-auto w-max h-max">
-			<ButtonBrowse href={loggedIn ? undefined : '/auth/login'} on:click={selectFiles} />
-		</div>
-
-		<div class="flex flex-col w-full space-y-2">
-			{#each queueFiles as queue}
-				<UploadFileStatus
-					hash={queue.hash}
-					file={queue.file}
-					error={queue.error}
-					status={queue.status}
-					on:reupload={() => queue.uploadFile()}
-				/>
-			{/each}
-		</div>
-	</div>
 
 	<div class="m-auto text-center max-w-screen-md">
 		<p class="text-xs md:text-base md:px-8">

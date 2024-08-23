@@ -10,21 +10,9 @@
 
 	$: expanded = false;
 	$: activeExpanding = indicators.length > maxRecords;
-
-	const getSeverityTheme = (value: string): Label['$$prop_def']['theme'] => {
-		switch (value) {
-			case 'high':
-				return 'danger';
-			case 'informative':
-				return 'warning';
-
-			default:
-				return 'base';
-		}
-	};
 </script>
 
-<Card>
+<Card class="rounded-lg">
 	<h1 class="card__title">Indicators</h1>
 	<div class="flex flex-col relative overflow-hidden">
 		<table class="card__table">
@@ -38,10 +26,26 @@
 				{#each indicators as indicator, i}
 					<tr class:hide={!expanded && i > maxRecords}>
 						<td>{indicator.description}</td>
-						<td class="capitalize">
-							<Label theme={getSeverityTheme(indicator.severity)}>
-								{indicator.severity}
-							</Label>
+						<td>
+							<div class="flex gap-2 items-center {
+								{
+									high: "text-alert-red",
+									suspicious: "text-alert-orange",
+									informative: "text-brand-text"
+								}[indicator.severity] || "text-brand-text"}">
+								<svg class="size-4">
+									<use href="/images/icons.svg#{
+										{
+											high: "icon-unsafe",
+											suspicious: "icon-target",
+											informative: "icon-info"
+										}[indicator.severity] || "icon-info"
+									}" />
+								</svg>
+								<span class="capitalize">
+									{indicator.severity}
+								</span>
+							</div>
 						</td>
 						<td class="capitalize">{indicator.category}</td>
 						<td>{indicator.module}</td>

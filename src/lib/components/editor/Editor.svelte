@@ -329,6 +329,6 @@
 		@apply bg-zinc-100/80 dark:bg-zinc-800;
 	}
 	.control {
-		@apply p-0 w-7 h-7 inline-flex items-center justify-center  dark:text-zinc-400 text-zinc-600 hover:bg-zinc-200 hover:dark:bg-zinc-700 rounded-md;
+		@apply p-0 w-7 h-7 inline-flex items-center justify-center  dark:text-zinc-400 text-zinc-600 hover:bg-zinc-200 hover:dark:bg-zinc-700 rounded-md-old;
 	}
 </style>

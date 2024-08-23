@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { SaferwallClient } from '$lib/clients/saferwall';
 	import Card from '$lib/components/Card.svelte';
 	import type { Saferwall } from '$lib/types';
 	import ProcessTreeView from './components/ProcessTreeView.svelte';
@@ -40,7 +41,7 @@
 			<svelte:fragment slot="header">
 				<h1 class="text-2xl">Process Tree</h1>
 			</svelte:fragment>
-			<ProcessTreeView {behaviorId} {session} trees={processTree} isChild={false} />
+			<ProcessTreeView {behaviorId} client={new SaferwallClient(session)} trees={processTree} isChild={false} />
 		</Card>
 	</section>
 </div>

@@ -8,36 +8,55 @@
 	}
 
 	&__list {
-		@apply md:space-y-4;
+		/* @apply md:space-y-4; */
+		@apply border-separate border-spacing-y-[5px];
 	}
 
 	&__table {
-		@apply table table-auto;
+		@apply table table-auto border-separate border-spacing-y-[9px];
 		thead {
 			@apply text-left text-zinc-400 dark:text-zinc-600 uppercase;
 		}
 		tbody {
-			@apply divide-y;
+			/* @apply divide-y; */
+			tr {
+				@apply bg-tertiary-surface;
+			}
 		}
-		th,
+		th {
+			@apply text-secondary-text;
+			@apply py-1 px-3;
+			&:first-child {
+				@apply pl-0;
+			}
+			&:last-child {
+				@apply pr-0;
+			}
+		}
 		td {
-			@apply pt-2;
+			@apply px-4 py-3;
+			&:first-child {
+				@apply rounded-l-[6px];
+			}
+			&:last-child {
+				@apply rounded-r-[6px];
+			}
 		}
 	}
 
 	&__item {
 		@apply flex flex-col md:flex-row md:table-row border-none;
-		@apply py-1 md:px-3 lg:px-6 bg-zinc-100 dark:bg-zinc-700;
+		@apply py-1 md:px-3 lg:px-6;
 
-		&:nth-child(2n) {
-			@apply bg-zinc-50 dark:bg-zinc-800;
+		&:nth-child(2n + 1) {
+			@apply bg-tertiary-surface;
 		}
 
 		&__title {
-			@apply font-semibold min-w-[80px] text-left rounded-l;
+			@apply font-semibold min-w-[80px] text-left rounded-l-[6px] text-primary-text;
 		}
 		&__content {
-			@apply break-all font-regular rounded-r text-zinc-800 dark:text-zinc-100;
+			@apply break-all font-regular rounded-r-[6px] text-table-res-text;
 		}
 
 		&__title,

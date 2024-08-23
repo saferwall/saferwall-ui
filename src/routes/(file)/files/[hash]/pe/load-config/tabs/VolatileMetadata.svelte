@@ -28,7 +28,6 @@
 			key: 'info_range_table'
 		}
 	];
-	$: console.log({tabs});
 </script>
 
 <Tabs.Root bind:tabs center>

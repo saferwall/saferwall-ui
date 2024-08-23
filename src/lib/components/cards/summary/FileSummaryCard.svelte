@@ -1,5 +1,6 @@
 <script lang="ts">
-	import FileTypeIcon from '$lib/components/FileTypeIcon.svelte';
+	import CircularProgessBar from '$lib/components/CircularProgessBar.svelte';
+import FileTypeIcon from '$lib/components/FileTypeIcon.svelte';
 	import type { Saferwall } from '$lib/types';
 	import { timeSince } from '$lib/utils';
 	import Card from '../../Card.svelte';
@@ -14,18 +15,21 @@
 	export let signature: string | undefined = undefined;
 	export let fileExtension: string | undefined = undefined;
 
-	$: scoreColor =
-		score.value == 0
-			? 'text-green'
-			: score.value! / (score.count || 1) > 0.5
-				? 'text-red'
-				: 'text-orange';
 	$: signatureColor = signature?.includes('not')
-		? 'text-red'
+		? 'text-alert-red'
 		: signature?.includes('invalid')
-			? 'text-orange'
-			: 'text-green';
-
+			? 'text-alert-orange'
+			: 'text-alert-green';
+	$: signatureFill = signature?.includes('not')
+		? 'fill-alert-red'
+		: signature?.includes('invalid')
+			? 'fill-alert-orange'
+			: 'fill-alert-green';
+	$: signatureStroke = signature?.includes('not')
+		? 'stroke-alert-red'
+		: signature?.includes('invalid')
+			? 'stroke-alert-orange'
+			: 'stroke-alert-green';
 	$: lastScannedSince = timeSince(lastScanned);
 	$: firstSubmissionSince = timeSince(firstSubmission);
 </script>
@@ -33,18 +37,20 @@
 <Card
 	flex={false}
 	padding={false}
-	class="summary flex lg:justify-between flex-wrap lg:flex-nowrap lg:items-center rounded w-full lg:p-4"
+	class="summary flex lg:justify-between flex-wrap lg:flex-nowrap lg:items-center w-full lg:py-[35px] lg:px-[45px] divide-x divide-line-surface rounded-lg"
 >
 	<article class="summary__card flex-grow">
 		<h2 class="sr-only">Analyse score</h2>
 		<div class="flex items-center space-x-6">
-			<div class="rounded-full font-bold text-lg bg-gray-200 p-1.5">
-				<div class="flex flex-center flex-col w-24 h-24 rounded-full bg-white dark:bg-zinc-900">
-					<span class="text-3xl {scoreColor}">{score?.value ?? 'N/A'}</span>
-					<span class="text-gray-300 dark:text-zinc-300">/ {score?.count ?? '-'}</span>
-				</div>
-			</div>
-			<p class="font-semibold {scoreColor}">
+			<CircularProgessBar score={score?.value} total={score?.count}
+				textClass="font-medium"
+				circleClass="stroke-none"
+				scoreClass="text-md leading-[1] {signatureFill}"
+				progressCircleClass="{signatureStroke}"
+				totalClass="fill-secondary-text"
+				trackCircleClass="stroke-line-surface"
+			></CircularProgessBar>
+			<p class="font-semibold {signatureColor}">
 				{#if score.value === 0}
 					No antivirus venders flagged <br />this file as malicious
 				{:else}
@@ -84,12 +90,12 @@
 <style lang="postcss">
 	.summary {
 		&__card {
-			@apply p-6 lg:px-4 lg:py-0 w-1/2 md:w-auto text-xs;
+			@apply p-6 lg:py-0 w-1/2 md:w-auto text-xs;
 
 			@apply flex flex-col justify-center;
 
 			&:first-child {
-				@apply lg:border-none w-full md:w-auto p-6;
+				@apply lg:border-none w-full md:w-auto p-0;
 			}
 
 			&:last-child {
