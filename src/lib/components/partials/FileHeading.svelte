@@ -94,7 +94,7 @@
 					</div>
 					<div bind:this={hashCopied} class="hash-copied bg-[#56AC30] text-white min-w-0 hidden items-center rounded-[6px] gap-1 p-[10px]">
 						<Icon name="check-circle"></Icon>
-						Hash Copied !
+						Hash copied !
 					</div>
 				</div>
 			</h2>
