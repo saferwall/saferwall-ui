@@ -22,6 +22,7 @@
 	--gray-900: light-dark(#FFFFFF, #212121);
 	--gray-950: light-dark(#FFFFFF, #161616);
 	--gray-960: light-dark(#5B5C64, #878889);
+	--gray-970: light-dark(#FFFFFF, #1C1C1F);
 
 	/* ==================== neutral ==================== */
 
@@ -37,11 +38,14 @@
 	--neutral-800: light-dark(#F2F1F3, #0D0D0D);
 	--neutral-900: light-dark(#FFFFFF, #0D0D0D);
 
-	/* ==================== aliases ==================== */
+	/* ==================== alias/alert ==================== */
 
 	--alert-green: var(--full-100);
 	--alert-orange: var(--full-300);
 	--alert-red: var(--full-200);
+
+	/* ==================== alias/surface ==================== */
+
 	--surface-brand-CF: var(--brand-300);
 	--surface-brand: var(--brand-400);
 	--surface-line: var(--neutral-700);
@@ -51,8 +55,15 @@
 	--surface-secondary: var(--neutral-600);
 	--surface-sub-menu: var(--gray-900);
 	--surface-tertiary: var(--gray-800);
+	--surface-hash: var(--gray-970);
+
+	/* ==================== alias/border ==================== */
+	
 	--border-primary: var(--neutral-700);
 	--border-secondary: var(--neutral-500);
+	
+	/* ==================== alias/text ==================== */
+
 	--text-brand: var(--brand-400);
 	--text-primary: var(--gray-100);
 	--text-searchbar: var(--gray-400);

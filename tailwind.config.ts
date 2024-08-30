@@ -25,12 +25,13 @@ export default {
 				'3xl': '23px'
 			},
 			borderRadius: {
-				DEFAULT: '10px',
-				sm: '0.225rem',
+				DEFAULT: "10px",
+				base: "10px",
+				sm: "0.225rem",
 				"md-old": "0.375rem",
 				md: "0.5rem",
 				lg: "20px",
-				card: '25px'
+				card: "25px"
 			},
 			colors: {
 				background: 'var(--background)',
@@ -113,6 +114,9 @@ export default {
 					green: "var(--alert-green)",
 					red: "var(--alert-red)",
 					orange: "var(--alert-orange)",
+				},
+				hash: {
+					surface: "var(--surface-hash)",
 				},
 				red: {
 					DEFAULT: '#E63755'
