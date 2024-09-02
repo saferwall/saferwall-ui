@@ -15,19 +15,19 @@
 
 <div class="container mx-auto pb-20">
 	<div
-		class="flex md:space-y-0 md:flex-row md:space-x-10 max-md:bg-white max-md:rounded-xl max-md:p-6"
+		class="flex md:space-y-0 md:flex-row md:space-x-10 max-md:bg-secondary-surface max-md:rounded-xl max-md:p-6"
 	>
 		<AntivirusScanCard
 			title="First Scan"
 			result={firstScan}
 			date={first_scan}
-			class="max-md:rounded-none max-md:p-0"
+			class="max-md:rounded-none max-md:p-0 bg-secondary-surface"
 		/>
 		<AntivirusScanCard
 			title="Last scan"
 			result={lastScan}
 			date={last_scan}
-			class="max-md:rounded-none max-md:p-0"
+			class="max-md:rounded-none max-md:p-0 bg-secondary-surface"
 		/>
 	</div>
 </div>

@@ -12,20 +12,24 @@
 
 <Card class="w-full {$$props.class}">
 	<div>
-		<h2 class="font-semibold text-lg">{title}</h2>
-		<p class="text-zinc-400 dark:text-zinc-500">
+		<h2 class="font-semibold text-lg text-primary-text">{title}</h2>
+		<p class="text-secondary-text">
 			<DateTime {date} />
 		</p>
 	</div>
 	<div class="border-t border-neutral-500" />
-	<table class="card__list">
+	<table class="card__list table-fixed">
 		{#each Object.entries(result) as [key, item]}
-			<tr class="card__item">
-				<th class="card__item__title capitalize font-normal">{key}</th>
-				<td class="card__item__content">
-					<AntivirusResult {...item} />
-				</td>
-			</tr>
+		<tr class="card__item">
+			<th class="card__item__title capitalize font-normal">{key}</th>
+			<td class="card__item__content md:px-0 text-nowrap">
+				<AntivirusResult {...item} />
+			</td>
+		</tr>
 		{/each}
+		<colgroup>
+			<col span="1" class="w-[50%]">
+			<col span="1" class="w-[50%]">
+		 </colgroup>
 	</table>
 </Card>
