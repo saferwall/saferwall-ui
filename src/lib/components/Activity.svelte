@@ -17,10 +17,10 @@
 
 <article>
 	<div
-		class="activity flex flex-col lg:flex-row space-y-4 lg:space-y-0 justify-between items-center bg-neutral-600 rounded-card md:px-8 py-8 w-full"
+		class="activity max-w-full flex flex-col lg:flex-row space-y-4 lg:space-y-0 justify-between items-center bg-neutral-600 rounded-card md:px-8 py-8 w-full"
 	>
-		<div class="flex flex-col flex-1 items-center md:flex-row space-y-4 md:space-y-0">
-			<div class="activity__author flex flex-col items-center space-y-2">
+		<div class="max-w-full flex flex-col flex-1 items-center md:flex-row space-y-4 md:space-y-0 overflow-hidden">
+			<div class="activity__author max-w-full flex flex-col items-center space-y-2">
 				<Avatar username={author.username} />
 				<div class="text-center">
 					<a class="font-medium text-sm text-gray-100" href="/users/{author.username}">
@@ -35,7 +35,7 @@
 				</div>
 			</div>
 			<div
-				class="activity__info flex-1 md:border-l lg:border-r border-neutral-700 h-full flex flex-col items-start px-6 md:px-8 space-y-6"
+				class="activity__info max-w-full flex-1 md:border-l lg:border-r border-neutral-700 h-full flex flex-col items-start px-6 md:px-8 space-y-6 min-w-0"
 			>
 				<p class="activity__title space-x-1 flex flex-col md:flex-row">
 					<span class="flex space-x-1">

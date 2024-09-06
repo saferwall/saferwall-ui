@@ -62,7 +62,7 @@
 		</ul>
 	</div>
 </section>
-<div class="transition-[max-height] bg-neutral-600" style="max-height: {uploadOpen ? "1000px" : "0px"} !important">
+<div class="transition-[max-height] bg-neutral-600 overflow-y-hidden" style="max-height: {uploadOpen ? "1000px" : "0px"} !important">
 	<UploadBox {loggedIn} {client} />
 </div>
 

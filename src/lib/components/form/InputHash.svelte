@@ -19,7 +19,7 @@
 
 <a
 	href="/files/{hash}"
-	class="w-full flex items-center text-gray-100 bg-gray-800 hover:bg-neutral-700 rounded px-4 space-x-2"
+	class="max-w-full flex items-center text-gray-100 bg-gray-800 hover:bg-neutral-700 rounded px-4 space-x-2 min-w-0 basis-0"
 >
 	<button
 		type="button"
@@ -28,10 +28,7 @@
 	>
 		<Icon class="size-[1.1rem]" name={copied ? 'check-line' : 'copy'} />
 	</button>
-	<input
-		class="w-full py-2.5 bg-transparent focus:outline-none focus:border-transparent cursor-pointer"
-		type="text"
-		value={hash}
-		readonly
-	/>
+	<div class="flex-grow flex-shrink py-2.5 bg-transparent focus:outline-none focus:border-transparent cursor-pointer overflow-hidden text-ellipsis">
+		{hash}
+	</div>
 </a>
