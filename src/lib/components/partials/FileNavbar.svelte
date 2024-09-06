@@ -1,12 +1,18 @@
 <script lang="ts">
 	import type { Menu } from '$lib/types';
+	import { page } from '$app/stores';
+	import type { SaferwallClient } from '$lib/clients/saferwall';
+	import UploadBox from '../UploadBox.svelte';
 
+	export let client: SaferwallClient;
+	export let loggedIn = false;
 	export let hash = '';
 	export let activeFileMenu: Menu.File[] = [];
 	export let activeMenu: { name: string; path: string };
 
 	$: isPathActive = (path: string): boolean => path === activeMenu.path;
 	$: generateFilePath = (path: string): string => `/files/${hash}/${path}`;
+	let uploadOpen = false;
 </script>
 
 <section
@@ -16,18 +22,33 @@
 	<div class="w-full container mx-auto flex">
 		<ul class="file__navbar__menu flex w-full space-x-3">
 			<li class="file__navbar__item flex-grow inline-flex">
-				<a
-					class="file__navbar__link
-						text-brand			hover:text-brand-light-text
-						bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
-						"
-					href="/"
-				>
-					<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
-						<use href="/images/icons.svg#icon-cloud" />
-					</svg>
-					<span>Upload file</span>
-				</a>
+				{#if loggedIn}
+					<button
+						class="file__navbar__link
+							text-brand			hover:text-brand-light-text
+							bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
+							"
+						on:click={(e) => uploadOpen = !uploadOpen}
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
+							<use href="/images/icons.svg#icon-cloud" />
+						</svg>
+						<span>Upload file</span>
+					</button>
+				{:else}
+					<a
+						class="file__navbar__link
+							text-brand			hover:text-brand-light-text
+							bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
+							"
+						href="/auth/login?redir={encodeURIComponent($page.url.pathname)}"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
+							<use href="/images/icons.svg#icon-cloud" />
+						</svg>
+						<span>Upload file</span>
+					</a>
+				{/if}
 			</li>
 			{#each activeFileMenu as item}
 				<li class="file__navbar__item">
@@ -41,6 +62,9 @@
 		</ul>
 	</div>
 </section>
+<div class="transition-[max-height] bg-neutral-600" style="max-height: {uploadOpen ? "1000px" : "0px"} !important">
+	<UploadBox {loggedIn} {client} />
+</div>
 
 <style lang="postcss">
 	.file__navbar {

@@ -49,7 +49,9 @@ export const actions = {
 
 			client.setSession(session);
 
-			throw redirect(303, '/');
+			let redirUrl = new URL(request.url).searchParams.get("redir") ?? "/";
+			
+			throw redirect(303, redirUrl);
 		} catch (error) {
 			if (isRedirect(error)) {
 				throw error;

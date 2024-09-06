@@ -9,7 +9,7 @@
 	let error: string = '';
 	let errors: Record<string, boolean> = {};
 
-	const handleFormSubmit: SubmitFunction = () => {
+	const handleFormSubmit: SubmitFunction = ({action}) => {
 		error = '';
 		errors = {};
 		loading = true;

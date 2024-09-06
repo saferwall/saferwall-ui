@@ -20,7 +20,7 @@
 	<meta name="description" content="Scan results for file {fileName} hash {hash}." />
 </svelte:head>
 
-<FileNavbar {hash} {activeMenu} {activeFileMenu} />
+<FileNavbar {hash} {activeMenu} {activeFileMenu} {loggedIn} {client} />
 <main class="flex-1 flex flex-col h-full bg-background">
 	<FileHeading {client} {activeMenu} {hash} {loggedIn} {liked} />
 	<div class="flex flex-col flex-1 pt-4 pb-10">

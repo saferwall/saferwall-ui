@@ -17,7 +17,6 @@
 			<DateTime {date} />
 		</p>
 	</div>
-	<div class="border-t border-neutral-500" />
 	<table class="card__list table-fixed">
 		{#each Object.entries(result) as [key, item]}
 		<tr class="card__item">

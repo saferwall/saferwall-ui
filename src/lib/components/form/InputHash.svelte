@@ -12,7 +12,7 @@
 
 		clearTimeout(copied);
 		if (await copyToClipboard(url)) {
-			copied = setTimeout(() => (copied = undefined), 1000);
+			copied = window.setTimeout(() => (copied = undefined), 1000);
 		}
 	};
 </script>
@@ -26,7 +26,7 @@
 		on:click={onCopyClick}
 		class="hover:text-primary outline-none bg-transparent"
 	>
-		<Icon class="w-3 h-3" name={copied ? 'check-line' : 'copy'} />
+		<Icon class="size-[1.1rem]" name={copied ? 'check-line' : 'copy'} />
 	</button>
 	<input
 		class="w-full py-2.5 bg-transparent focus:outline-none focus:border-transparent cursor-pointer"
