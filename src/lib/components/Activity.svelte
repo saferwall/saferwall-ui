@@ -26,7 +26,7 @@
 					<a class="font-medium text-sm text-gray-100" href="/users/{author.username}">
 						{author.username}
 					</a>
-					<p class="font-regular text-xs text-gray-500">
+					<p class="font-regular text-[13px] text-gray-500">
 						Member since {timeSince(author.member_since)}
 					</p>
 				</div>

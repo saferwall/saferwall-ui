@@ -86,9 +86,9 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <section
 	class="bg-white dark:bg-neutral-600 rounded-card p-8 md:p-12 flex flex-col justify-between space-y-6"
-	on:dragenter={(e) => { e.stopPropagation(); e.preventDefault(); console.log("on:dragenter"); draggingFilesOver = true; }}
-	on:dragleave={(e) => { e.stopPropagation(); e.preventDefault(); console.log("on:dragenter"); draggingFilesOver = false; }}
-	on:dragover={(e) => { e.stopPropagation(); e.preventDefault(); console.log("on:dragover"); }}
+	on:dragenter={(e) => { e.stopPropagation(); e.preventDefault(); draggingFilesOver = true; }}
+	on:dragleave={(e) => { e.stopPropagation(); e.preventDefault(); draggingFilesOver = false; }}
+	on:dragover={(e) => { e.stopPropagation(); e.preventDefault(); }}
 	on:drop={(e) => { e.stopPropagation(); e.preventDefault(); doDrop(e); draggingFilesOver = false; }}
 >
 	{#if draggingFilesOver}
@@ -123,7 +123,7 @@
 
 
 	<div class="m-auto text-center max-w-screen-md">
-		<p class="text-xs md:text-base md:px-8">
+		<p class="text-xs md:text-[0.9rem] md:px-8">
 			By using Saferwall you consent to our
 			<a class="link" target="_blank" rel="noreferrer" href="/pages/terms-of-service">
 				Terms of Service
