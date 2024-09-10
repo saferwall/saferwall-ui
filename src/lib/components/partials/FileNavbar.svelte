@@ -13,6 +13,7 @@
 	$: isPathActive = (path: string): boolean => path === activeMenu.path;
 	$: generateFilePath = (path: string): string => `/files/${hash}/${path}`;
 	let uploadOpen = false;
+	let uploadBox: HTMLElement;
 </script>
 
 <section
@@ -28,7 +29,11 @@
 							text-brand			hover:text-brand-light-text
 							bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
 							"
-						on:click={(e) => uploadOpen = !uploadOpen}
+						on:click={(e) => {
+							if (!uploadOpen)
+								window.scrollTo({top: 0});
+							uploadOpen = !uploadOpen;
+						}}
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
 							<use href="/images/icons.svg#icon-cloud" />
@@ -62,7 +67,7 @@
 		</ul>
 	</div>
 </section>
-<div class="transition-[max-height] bg-neutral-600 overflow-y-hidden" style="max-height: {uploadOpen ? "1000px" : "0px"} !important">
+<div class="transition-[max-height] bg-neutral-600 overflow-y-hidden" style="max-height: {uploadOpen ? "1000px" : "0px"} !important" bind:this={uploadBox}>
 	<UploadBox {loggedIn} {client} />
 </div>
 

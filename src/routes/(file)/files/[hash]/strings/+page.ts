@@ -13,7 +13,7 @@ export const load = (async ({ params, url, parent }) => {
 		per_page: perPage.toString()
 	});
 
-	const pagination = await client.request<Saferwall.Pagination<Saferwall.Strings>>(
+	const pagination = await client.request<Saferwall.Pagination<string[]>>(
 		`files/${params.hash}/strings?${urlParams.toString()}`
 	);
 	pagination.items = pagination.items ?? [];

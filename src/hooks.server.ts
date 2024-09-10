@@ -10,8 +10,7 @@ const resolveEvent: Handle = ({ resolve, event }) => {
 
 	return resolve(event, {
 		transformPageChunk: ({ html }) => {
-			// return html.replace('data-theme', `class="${theme}"`);
-			return html;
+			return html.replace('data-theme', `class="${theme}"`);
 		}
 	});
 };

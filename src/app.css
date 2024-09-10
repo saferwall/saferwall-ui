@@ -28,7 +28,7 @@ select,
 input,
 textarea,
 button {
-	@apply focus:outline-none border border-transparent focus:border-neutral-500;
+	@apply focus:outline-none border border-transparent;
 }
 
 #app {
