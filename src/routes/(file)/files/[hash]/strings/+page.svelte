@@ -49,15 +49,7 @@
 	};
 
 	$: _items = data.pagination?.items ?? {};
-	$: items = Object.entries(_items).reduce(
-		(list, [encoding, values]: [string, any]) => {
-			const valuesMapped = values.map((val: string) => {
-				return [encoding, val];
-			});
-			return [...list, ...valuesMapped];
-		},
-		[] as string[][]
-	);
+	$: items = _items.map(i => [i.encoding, i.value]).slice(0, 2);
 
 	$: searchFilteredItems = items.filter(i =>
 					i[0].toLowerCase().includes(searchEncodings.toLowerCase())
@@ -69,7 +61,7 @@
 </script>
 
 <section class="file__strings container mx-auto">
-	<Card class="overflow-x-auto">
+	<Card class="overflow-x-auto bg-secondary-surface">
 		<table class="text-primary-text table border-spacing-x-[15px] border-separate table-fixed w-full">
 			<thead>
 				<tr>
@@ -81,11 +73,11 @@
 						<div class="items-center flex gap-[8px] border border-primary-border pl-[13px] pr-[2px] rounded-sm">
 							<Icon name="search" size="size-5" class="text-searchbar-text" />
 							<input type="text" class="bg-transparent placeholder:text-searchbar-text !border-none py-[15px] flex-grow [-moz-appearance:textfield] [&::-webkit-calendar-picker-indicator]:hidden" placeholder="Search encodings..." bind:value={searchEncodings} list="encoding_suggestions"/>
-							<datalist id="encoding_suggestions">
+							<!-- <datalist id="encoding_suggestions">
 								{#each Object.entries(_items).filter(e => e[1].length !== 0).map(e => e[0]) as key}
 									<option value={key}></option>
 								{/each}
-							</datalist>
+							</datalist> -->
 						</div>
 					</th>
 					<th class="border-b-[5px] border-transparent">
@@ -117,33 +109,44 @@
 						</td>
 					</tr>
 				{/if}
+				<tr>
+					<td colspan="2">
+						<form class="flex justify-between space-x-4 pt-[30px]">
+							<div>
+								<Select name="per_page" class="py-[7px] px-[10px] pr-[5px] pl-[3px] bg-secondary-surface border border-secondary-border text-secondary-text rounded-sm" on:change={(event) => handlePageLimit(currentPage, event)}>
+									{#each perPages as count}
+										<option selected={perPage == count}>{count}</option>
+									{/each}
+								</Select>
+							</div>
+							<ul class="flex space-x-2">
+								{#each pagesButtons as page}
+									<li>
+										<Button
+											class="{currentPage === page
+												?
+													"text-white bg-brand-surface"
+												:
+													`border border-secondary-border text-secondary-text
+													hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
+													active:text-white active:bg-brand-surface`
+											} py-[10px] px-[calc(10px+1lh-1.7ch)] rounded-sm"
+											href={typeof page === 'number' ? generatePagination(page, perPage) : undefined}
+										>
+											{page}
+										</Button>
+									</li>
+								{/each}
+							</ul>
+						</form>
+					</td>
+				</tr>
 			</tbody>
 			<colgroup>
 				<col span="1" class="w-[34%]">
 				<col span="1" class="w-[66%]">
 			 </colgroup>
 		</table>
-		<form class="flex justify-end space-x-4">
-			<ul class="flex space-x-2">
-				{#each pagesButtons as page}
-					<li>
-						<Button
-							class={currentPage === page ? 'active' : ''}
-							href={typeof page === 'number' ? generatePagination(page, perPage) : undefined}
-						>
-							{page}
-						</Button>
-					</li>
-				{/each}
-			</ul>
-			<div>
-				<Select name="per_page" on:change={(event) => handlePageLimit(currentPage, event)}>
-					{#each perPages as count}
-						<option selected={perPage == count}>{count}</option>
-					{/each}
-				</Select>
-			</div>
-		</form>
 	</Card>
 </section>
 

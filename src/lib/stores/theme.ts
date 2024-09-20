@@ -44,7 +44,6 @@ export const toggleTheme = () => {
 };
 
 if (browser) {
-	console.log("ran");
 	const localTheme = localStorage.getItem(THEME_KEY);
 	if (localTheme) {
 		theme.set(parseTheme(localTheme));

@@ -38,7 +38,7 @@
 			{#if user}
 				<UserMenu {user} />
 			{:else}
-				<div class="space-x-2">
+				<div class="flex items-center gap-2">
 					<div class="!hidden md:!inline-flex">
 						<Button class="min-w-[100px]" href="/auth/login">Login</Button>
 					</div>
