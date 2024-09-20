@@ -49,7 +49,7 @@
 	};
 
 	$: _items = data.pagination?.items ?? {};
-	$: items = _items.map(i => [i.encoding, i.value]).slice(0, 2);
+	$: items = _items.map(i => [i.encoding, i.value]).slice(0, perPage);
 
 	$: searchFilteredItems = items.filter(i =>
 					i[0].toLowerCase().includes(searchEncodings.toLowerCase())
