@@ -20,6 +20,7 @@ html.dark {
 
 html,
 body {
+	scrollbar-gutter: stable;
 	@apply font-primary;
 	@apply min-h-screen h-full bg-background;
 }
