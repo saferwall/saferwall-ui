@@ -24,6 +24,9 @@ export const load = (async ({ params, url, parent }) => {
 	pagination.items ??= [];
 
 	return {
-		pagination
+		pagination,
+		client,
+		params,
+		url,
 	};
 }) satisfies PageLoad;
