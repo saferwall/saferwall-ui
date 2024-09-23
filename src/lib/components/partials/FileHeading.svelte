@@ -7,6 +7,7 @@
 	import { goto } from '$app/navigation';
 	import Icon from '../Icon.svelte';
 	import { onMount } from 'svelte';
+	import CopyPopup from './CopyPopup.svelte';
 
 	export let hash: string;
 	export let client: SaferwallClient;
@@ -34,35 +35,6 @@
 		}
 		window.location.reload();
 	};
-
-	function hideElement(el: HTMLElement) {
-		el.classList.add("hidden");
-		el.classList.remove("flex");
-	}
-
-	function showElement(el: HTMLElement) {
-		el.classList.remove("hidden");
-		el.classList.add("flex");
-	}
-
-	let popup: HTMLElement;
-	let hashCopied: HTMLElement;
-	let hashCopiedTimeout: number;
-
-	onMount(() => {
-		let listener = (event: MouseEvent) => {
-			console.log({popup, event, target: event.target})
-			if (!popup.contains((event.target as HTMLElement))) {
-				hideElement(popup);
-			}
-		};
-		window.addEventListener("click", listener, {
-			capture: true,
-		});
-		return () => {
-			window.removeEventListener("click", listener);
-		}
-	})
 </script>
 
 <section class="file__header no-scroll-style">
@@ -72,31 +44,7 @@
 				{activeMenu.fullName || activeMenu.name}
 			</h1>
 			<h2 class="block relative min-w-0 overflow-visible h-[1lh]">
-				<button class="border-none text-secondary-text text-ellipsis whitespace-nowrap overflow-hidden hover:text-brand-text w-full" on:click={() => {
-					hideElement(hashCopied);
-					showElement(popup);
-				}}>
-					{hash}
-				</button>
-				<div bind:this={popup} class="absolute z-[1] right-0 top-[calc(100%+0.5rem)] w-[80%] hidden flex-col items-end gap-2">
-					<div class="main flex gap-2 p-4 text-primary-text bg-hash-surface rounded-base border border-secondary-border shadow-[0px_2px_13px_0px_rgba(0,0,0,0.1)] w-full">
-						<div class="break-words min-w-0">{hash}</div>
-						<button class="flex-shrink-0 p-1 flex h-fit border-none" on:click={() => {
-							clearTimeout(hashCopiedTimeout);
-							showElement(hashCopied);
-							navigator.clipboard.writeText(hash);
-							hashCopiedTimeout = window.setTimeout(() => hideElement(hashCopied), 1000)
-						}}>
-							<svg name="content-copy" class="text-brand-text" width="20" height="20">
-								<use href="/images/icons.svg#icon-content-copy" />
-							</svg>
-						</button>
-					</div>
-					<div bind:this={hashCopied} class="hash-copied bg-[#56AC30] text-white min-w-0 hidden items-center rounded-[6px] gap-1 p-[10px]">
-						<Icon name="check-circle"></Icon>
-						Hash copied !
-					</div>
-				</div>
+				<CopyPopup value={hash} copiedText="Hash Copied !" class="w-full text-secondary-text" popupClass="w-[80%]" popupPosition="right"/>
 			</h2>
 		</div>
 

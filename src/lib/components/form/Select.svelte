@@ -3,13 +3,14 @@
 	export let label = '';
 	export let required = false;
 	export let disabled = false;
+	export let value = "";
 </script>
 
 <label class="select peer-focus" class:labeled={label}>
 	{#if label}
 		<span class="select__label">{label}</span>
 	{/if}
-	<select {required} {disabled} {name} class="select__field {$$props.class}" on:change>
+	<select {required} {disabled} {name} class="select__field {$$props.class}" bind:value on:change>
 		<slot />
 	</select>
 </label>

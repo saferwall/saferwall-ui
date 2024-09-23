@@ -16,21 +16,23 @@ export default {
 				semibold: "600"
 			},
 			fontSize: {
-				'xs': '14px',
-				'sm': '15px',
-				'md': '20px',
-				'lg': '20px',
-				'xl': '20px',
-				'2xl': '23px',
-				'3xl': '23px'
+				"xs": "13px",
+				"sm": "14px",
+				"base": "15px",
+				"md": "16px",
+				"lg": "18px",
+				"xl": "23px",
+				"2xl": "25px",
+				"3xl": "28px"
 			},
 			borderRadius: {
 				DEFAULT: "10px",
+
+				sm: "6px",
 				base: "10px",
-				sm: "0.225rem",
-				"md-old": "0.375rem",
-				md: "0.5rem",
 				lg: "20px",
+
+				md: "0.5rem",
 				card: "25px"
 			},
 			colors: {

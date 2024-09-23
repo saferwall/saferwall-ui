@@ -42,7 +42,7 @@
 	<title>Saferwall Beta 1.0</title>
 </svelte:head>
 
-<div class="container mx-auto py-10 space-y-20">
+<div class="container mx-auto py-10 space-y-20 px-4">
 	<UploadBox {loggedIn} {client} />
 	<LatestActivities on:load={onLoadMore} {loading} {reachEnd} {loggedIn} {activities} />
 </div>
