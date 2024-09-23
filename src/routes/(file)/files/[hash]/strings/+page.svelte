@@ -9,6 +9,7 @@
 	import type { Saferwall } from '$lib/types';
 	import { onMount } from 'svelte';
 	import debounce from 'debounce';
+	import { browser } from '$app/environment';
 
 	export let data: PageData;
 
@@ -88,6 +89,18 @@
 			count++
 		}
 	};
+
+	$: {
+		if (browser) {
+			const url = new URL(window.location.href);
+			url.searchParams.delete("q");
+			if (searchValue !== "")
+				url.searchParams.set("q", searchValue);
+			url.searchParams.set("per_page", perPage.toString());
+			url.searchParams.set("page", currentPage.toString());
+			window.history.pushState(null, "", url.toString());
+		}
+	}
 
 	$: {
 		if (count > 1) {
