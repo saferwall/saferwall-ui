@@ -26,7 +26,7 @@
 		})
 		.filter((page) => page !== undefined);
 
-	$: pagesButtons = [1, ...pages, totalPages].filter(
+	$: pagesButtons = [1, ...pages, ...(totalPages ? [totalPages] : [])].filter(
 		(page, index, array) => array.indexOf(page) === index
 	);
 
@@ -145,7 +145,7 @@
 					// &&
 					// i[1].toLowerCase().includes(searchValue.toLowerCase())
 				);
-	// $: console.log({count, searchFilteredItems, perPage, perPageString, currentPage})
+	// $: console.log({count, searchFilteredItems, perPage, perPageString, currentPage, pagesButtons})
 
 	let searchValue = data?.url?.searchParams?.get("q") ?? "";
 	let searchEncodings = "";
@@ -233,7 +233,6 @@
 								{#each pagesButtons as page}
 									<li>
 										<Button
-											data-sveltekit-replacestate
 											class="{currentPage === page
 												?
 													"text-white bg-brand-surface"
