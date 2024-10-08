@@ -151,7 +151,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div transition:slide={{ axis: 'y' }} class="w-full lg:pr-12 pb-3" on:click|stopPropagation>
-	<Card padding={false} class="flex flex-col gap-2 bg-p-tree-surface px-[1.125rem] py-[1.125rem] pb-5 border border-primary-border rounded-lg shadow-[0px_3px_9px_0px_rgba(0,_0,_0,_0.10)]">
+	<Card padding={false} class="flex flex-col gap-2 bg-p-tree-surface px-[1.125rem] py-[1.125rem] pb-5 border border-primary-border rounded-lg">
 		<div class="inline-flex uppercase font-medium">
 			<Multitoggle items={sections} on:change={onToggleChange} />
 		</div>
