@@ -30,7 +30,7 @@
 	<div class="text-secondary-text text-center pb-4">No Process Tree available.</div>
 {:else if trees.length}
 	<ul class="flex flex-col divide-y divide-line-surface {isChild && trees.length ? "border-t border-line-surface " : "pl-12"}">
-		{#each debouncedTrees as tree, index}
+		{#each debouncedTrees as tree, index (tree.path)}
 			<li class="pr-4" class:pl-8={tree.parent_pid !== '0x0'}>
 				<Expandable expandable={true} open={false}>
 					<!-- /* tree.children.length != 0 */ -->
