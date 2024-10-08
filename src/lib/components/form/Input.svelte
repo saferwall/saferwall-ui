@@ -14,9 +14,9 @@
 	};
 </script>
 
-<label class="input peer-focus" class:labeled={label} class:error>
+<label class="input peer-focus text-inherit" class:labeled={label} class:error>
 	{#if icon}
-		<svg class="icon"><use href="/images/icons.svg#icon-{icon}" /></svg>
+		<svg class="icon text-inherit"><use href="/images/icons.svg#icon-{icon}" class="text-inherit" /></svg>
 	{/if}
 	{#if label}
 		<span class="input__label">{label}</span>

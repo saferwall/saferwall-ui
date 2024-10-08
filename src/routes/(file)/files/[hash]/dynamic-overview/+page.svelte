@@ -37,9 +37,9 @@
 
 <div class="flex flex-1 flex-col w-full h-full items-center">
 	<section class="container">
-		<Card class="w-full" padding={false}>
+		<Card class="w-full bg-secondary-surface pb-8" padding={false}>
 			<svelte:fragment slot="header">
-				<h1 class="text-2xl">Process Tree</h1>
+				<h1 class="text-2xl text-primary-text">Process Tree</h1>
 			</svelte:fragment>
 			<ProcessTreeView {behaviorId} client={new SaferwallClient(session)} trees={processTree} isChild={false} />
 		</Card>

@@ -73,7 +73,7 @@
 		}
 
 		.item {
-			@apply py-2 px-4 rounded-full;
+			@apply py-2 px-5 rounded-full;
 			@apply text-zinc-400 dark:text-zinc-500 cursor-pointer;
 
 			&:hover,

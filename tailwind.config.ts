@@ -57,6 +57,13 @@ export default {
 					900: 'var(--gray-900)',
 					950: 'var(--gray-950)',
 					960: 'var(--gray-960)',
+					970: 'var(--gray-970)',
+					980: 'var(--gray-980)',
+					981: 'var(--gray-981)',
+					982: 'var(--gray-982)',
+					983: 'var(--gray-983)',
+					984: 'var(--gray-984)',
+					985: 'var(--gray-985)',
 				},
 				brand: {
 					DEFAULT: 'var(--brand-500)',
@@ -68,10 +75,23 @@ export default {
 					"CF-lighter-surface": "var(--surface-brand-CF-lighter)",
 					"surface": "var(--surface-brand)",
 					"text": "var(--text-brand)",
+					"border": "var(--border-brand)",
 					"light-text": "var(--text-brand-light)",
 				},
 				line: {
 					"surface": "var(--surface-line)",
+				},
+				"line-sec": {
+					"surface": "var(--surface-line-sec)",
+				},
+				crcl: {
+					"surface": "var(--surface-crcl)",
+				},
+				"p-tree": {
+					"surface": "var(--surface-p-tree)",
+				},
+				apc: {
+					"surface": "var(--surface-apc)",
 				},
 				menu: {
 					"lvl2-surface": "var(--surface-menu-lvl2)",
@@ -108,6 +128,10 @@ export default {
 				tertiary: {
 					"surface": "var(--surface-tertiary)",
 					"text": "var(--text-tertiary)",
+					"border": "var(--border-tertiary)",
+				},
+				elm: {
+					"border": "var(--border-elm)",
 				},
 				searchbar: {
 					"text": "var(--text-searchbar)",

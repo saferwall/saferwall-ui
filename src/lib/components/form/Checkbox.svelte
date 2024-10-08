@@ -22,7 +22,7 @@
 			@apply w-6 h-6;
 			@apply shrink-0;
 			@apply outline-none appearance-none;
-			@apply relative border-2 border-zinc-500 rounded;
+			@apply relative border border-elm-border rounded-sm;
 			transition:
 				background-color 0.3s ease,
 				border-color 0.3s ease;
@@ -35,7 +35,7 @@
 				@apply hidden border-white;
 				@apply absolute content-[''] w-2/6 h-3/5;
 				@apply rotate-45 bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2;
-				border-width: 0 1.5px 1.5px 0;
+				border-width: 0 2px 2px 0;
 			}
 
 			&:checked::after {

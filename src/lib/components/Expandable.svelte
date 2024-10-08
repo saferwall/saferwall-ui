@@ -12,11 +12,12 @@
 
 <div class="flex flex-col">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	 <!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div on:click={onPress} class="cursor-pointer">
-		<div class="flex items-start space-x-4">
+		<div class="flex items-center gap-[12px]">
 			{#if expandable}
-				<div class="pt-2 text-neutral-400">
-					<Icon name="arrow-down" size="w-4 h-3" class={open ? '' : '-rotate-90'} />
+				<div class="text-neutral-400 border border-brand rounded-full transition-transform {open ? 'bg-brand-surface' : '-rotate-90 text-brand'} w-5 h-5 flex justify-center items-center">
+					<Icon name="arrow-down" size="w-2.5 h-2.5" class="translate-y-[1px] translate-x-[-0.5px] transition-colors {open ? 'text-white' : 'text-brand'}" />
 				</div>
 			{/if}
 			<slot name="header" />

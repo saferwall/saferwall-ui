@@ -271,6 +271,14 @@
 		</g>
 	</symbol>
 
+	<symbol id="icon-backlight" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<mask id="mask0_1393_1635" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+			<rect y="0.236328" width="20" height="20" fill="#CF2F2F"/>
+		</mask>
+		<g mask="url(#mask0_1393_1635)">
+			<path d="M0.71875 12.7344V10.8385H4.28125V12.7344H0.71875ZM5.29167 8.40917L2.76312 5.88062L4.09417 4.53375L6.62271 7.07812L5.29167 8.40917ZM5.71875 15.4635V12.7344H14.2812V15.4635H5.71875ZM9.05208 6.06771V1.67188H10.9479V6.06771H9.05208ZM14.7083 8.41417L13.3823 7.07812L15.9058 4.54958L17.2477 5.88562L14.7083 8.41417ZM15.7187 12.7344V10.8385H19.2812V12.7344H15.7187Z" fill="#B73D32"/>
+		</g>
+	</symbol>
 
     <symbol id="icon-check-line" fill="none" stroke="currentColor" stroke-width="1.5"
         viewBox="0 0 24 24">
