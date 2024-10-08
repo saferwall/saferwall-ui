@@ -32,7 +32,7 @@
 				<!-- /* tree.children.length != 0 */ -->
 				<svelte:fragment slot="header">
 					<div class="flex flex-col gap-2 w-full py-3">
-						<div class="flex items-center gap-2 capitalize">
+						<div class="flex items-center gap-2">
 							<h2 class="flex gap-1 items-center font-medium">
 								<span>
 									0x<span class="uppercase">
@@ -50,11 +50,13 @@
 
 							{#if tree.detection !== ""}
 								<Label class="capitalize {tree.detection === "malicious" ? "text-alert-red bg-[#ED4060]/10" : (tree.detection === "clean" ? "text-[#498B5A] bg-[#498B5A]/10" : "")}">
-									<div class="flex gap-1 items-center">
+									<div class="flex gap-1 items-center capitalize">
 										{#if tree.detection !== "unknown"}
 											<Icon class="size-4 flex flex-col items-center justify-center {tree.detection === "malicious" ? "-translate-y-[1px]" : ""}" name={tree.detection === "malicious" ? "unsafe" : (tree.detection === "clean" ? "info" : "")}></Icon>
 										{/if}
-										{tree.detection}
+										<span class="capitalize">
+											{tree.detection}
+										</span>
 									</div>
 								</Label>
 							{/if}
@@ -85,7 +87,7 @@
 						<!-- svelte-ignore a11y-no-static-element-interactions -->
 						<div
 							on:click|stopPropagation={() => onFilePathClick(index)}
-							class="flex gap-[12px] pt-0.5 pb-3 border-zinc-700 dark:border-zinc-300 items-center transition-all"
+							class="cursor-pointer flex gap-[12px] pt-0.5 pb-3 border-zinc-700 dark:border-zinc-300 items-center transition-all"
 							class:text-primary={processTableOpen.includes(index)}
 						>
 							<div class="text-neutral-400 border border-brand rounded-full transition-transform {processTableOpen.includes(index) ? 'bg-brand-surface' : '-rotate-90 text-brand'} w-5 h-5 flex justify-center items-center">
@@ -109,7 +111,7 @@
 	ul {
 		@apply dark:border-zinc-600 border-zinc-300;
 		li {
-			@apply cursor-pointer py-0 dark:border-zinc-600 border-zinc-300;
+			@apply  py-0 dark:border-zinc-600 border-zinc-300;
 		}
 
 		.dot {
