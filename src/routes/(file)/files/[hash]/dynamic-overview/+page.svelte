@@ -37,7 +37,7 @@
 
 <div class="flex flex-1 flex-col w-full h-full items-center">
 	<section class="container">
-		<Card class="w-full bg-secondary-surface pb-8" padding={false}>
+		<Card class="w-full bg-secondary-surface pb-8 pr-4" padding={false}>
 			<svelte:fragment slot="header">
 				<h1 class="text-2xl text-primary-text">Process Tree</h1>
 			</svelte:fragment>

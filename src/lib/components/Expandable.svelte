@@ -3,8 +3,8 @@
 	import Icon from './Icon.svelte';
 
 	export let expandable = false;
+	export let open = true;
 
-	let open = true;
 	const onPress = () => {
 		open = !open;
 	};
