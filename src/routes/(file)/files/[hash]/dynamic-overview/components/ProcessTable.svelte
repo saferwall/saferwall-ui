@@ -199,11 +199,11 @@
 						<tr>
 							<td colspan="4">
 								{#if capabilitiesItems !== null}
-									<p class="empty-result">
+									<p class="empty-result text-secondary-text">
 										No results with current filters. Try adjusting or expanding your search criteria
 									</p>
 								{:else}
-									<p class="empty-result">
+									<p class="empty-result text-secondary-text">
 										Loading...
 									</p>
 								{/if}
@@ -232,11 +232,11 @@
 						<tr>
 							<td colspan="4">
 								{#if systemEventsItems !== null}
-									<p class="empty-result">
+									<p class="empty-result text-secondary-text">
 										No results with current filters. Try adjusting or expanding your search criteria
 									</p>
 								{:else}
-									<p class="empty-result">
+									<p class="empty-result text-secondary-text">
 										Loading...
 									</p>
 								{/if}
