@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
-export const load = (async ({ url, parent, params }) => {
+export const load = (async ({ url, parent, params, fetch }) => {
 	const {
 		client,
 		file: { default_behavior_report: behaviorReport }

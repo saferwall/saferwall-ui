@@ -2,7 +2,7 @@ import { fileMenu } from '$lib/data/menu';
 import type { Menu, Saferwall } from '$lib/types';
 import type { LayoutLoad } from './$types';
 
-export const load = (async ({ parent, params: { hash }, url }) => {
+export const load = (async ({ parent, params: { hash }, url, fetch, route }) => {
 	const { client } = await parent();
 
 	const paths = url.pathname.split(`/files/`)[1].split('/');
@@ -14,7 +14,10 @@ export const load = (async ({ parent, params: { hash }, url }) => {
 		activeFileMenu: Menu.File[];
 
 	try {
-		file = await client.getFileSummary(hash);
+		if (route.id.endsWith("/pe")) {
+			throw new Error();
+		}
+		file = await client.with(fetch).getFileSummary(hash);
 		activeFileMenu = [...fileMenu]
 			.filter(
 				(menu) =>

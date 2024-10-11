@@ -7,9 +7,10 @@
 	import Card from '$lib/components/Card.svelte';
 	import CopyPopup from '$lib/components/partials/CopyPopup.svelte';
 	import type { Saferwall } from '$lib/types';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import debounce from 'debounce';
 	import { browser } from '$app/environment';
+	import { pushState } from '$app/navigation';
 
 	export let data: PageData;
 
@@ -32,7 +33,7 @@
 
 	$: perPages = [5, 10, 20, 40, 50, 100, 300].filter((page) => page <= totalCount);
 
-	$: currentPage = data.pagination.page;
+	let currentPage = data.pagination.page;
 	let perPage = data.pagination.per_page;
 	let perPageString = data.pagination.per_page.toString();
 	const f = (v: string) => { perPageString = v };
@@ -83,22 +84,24 @@
 	let count = 0;
 
 	/* the worst code i've written so far, this is spaghetti, you should not code while drowsy, FIXME */
+	function getCount() { return count; }
+
 	$: {
-		(searchValue || perPage || 1);
+		(searchValue, perPage, currentPage);
 		if (mounted) {
 			count++
 		}
 	};
 
 	$: {
-		if (browser) {
+		if (browser && mounted) {
 			const url = new URL(window.location.href);
 			url.searchParams.delete("q");
 			if (searchValue !== "")
 				url.searchParams.set("q", searchValue);
 			url.searchParams.set("per_page", perPage.toString());
 			url.searchParams.set("page", currentPage.toString());
-			window.history.pushState(null, "", url.toString());
+			pushState(url.toString(), "");
 		}
 	}
 
@@ -108,23 +111,27 @@
 		}
 	};
 
-	const ff = () => currentPage = 1;
+	const resetCurrentPage = () => currentPage = 1;
 	$: {
-		searchValue || 1;
-		if (count > 0) {
-			ff();
+		searchValue;
+		if (getCount() > 1) {
+			console.log("resetting")
+			resetCurrentPage();
 			debounced();
 		}
 	}
+
+
 	$: {
-		currentPage || 1;
-		if (count > 0) {
+		currentPage;
+		if (getCount() > 1) {
 			debounced();
 		}
 	}
 	
 	let mounted = false;
-	onMount(() => {
+	onMount(async () => {
+		await tick();
 		searchValue = url.searchParams.get("q") ?? "";
 		mounted = true;
 	})
@@ -240,7 +247,7 @@
 													`border border-secondary-border text-secondary-text
 													hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
 													active:text-white active:bg-brand-surface`
-											} py-[10px] px-[calc(10px+1lh-1.7ch)] rounded-sm"
+											} rounded-sm h-full {page < 10 ? "aspect-square" : "px-[10px]"}"
 											on:click={() => { currentPage = page }}
 											loading={currentPage === page && awaiting}
 										>

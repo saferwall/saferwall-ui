@@ -7,6 +7,7 @@
 	export let data: LayoutData;
 
 	$: activeMenu = peMenu.filter((menu) =>
+		// @ts-ignore
 		data.file.pe_meta?.includes(menu.field as Saferwall.PeMeta)
 	);
 </script>

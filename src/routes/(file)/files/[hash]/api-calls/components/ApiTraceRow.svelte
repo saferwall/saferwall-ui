@@ -36,14 +36,14 @@
 	};
 </script>
 
-<div class="ml-12 px-4 relative py-2 -mt-7 border-l">
+<div class="relative">
 	<table class="w-full">
 		<thead>
-			<th>Type</th>
-			<th>Name</th>
-			<th>Value</th>
+			<th class="text-tertiary-text font-semibold">Type</th>
+			<th class="text-tertiary-text font-semibold">Name</th>
+			<th class="text-tertiary-text font-semibold">Value</th>
 		</thead>
-		<tbody>
+		<tbody class="divide-y divide-line-sec-surface">
 			{#each values as entry}
 				<tr>
 					<td>{entry.type}</td>
@@ -65,7 +65,7 @@
 			@apply text-left;
 
 			th {
-				@apply pb-2;
+				@apply pb-2 ;
 
 				&:nth-child(3) {
 					@apply w-full;
@@ -75,7 +75,7 @@
 
 		tbody {
 			td {
-				@apply pr-12 py-1 align-top;
+				@apply pr-12 py-[15px] align-top font-regular;
 			}
 		}
 	}

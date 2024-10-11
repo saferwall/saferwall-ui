@@ -14,13 +14,17 @@ import type {
 
 export class SaferwallClient {
 	session?: Saferwall.Session;
-
+	fetch?: (...args: any[]) => Promise<any>;
 	get authorization() {
 		if (this.session && this.session.token) {
 			return `Bearer ${this.session.token}`;
 		}
 
 		return undefined;
+	}
+
+	public with(fetch: (...args: any[]) => Promise<any>) {
+		return new SaferwallClient(this.session, fetch);
 	}
 
 	private config: Saferwall.Config = {
@@ -32,7 +36,8 @@ export class SaferwallClient {
 		return this.authorization !== undefined;
 	}
 
-	constructor(session?: Saferwall.Session) {
+	constructor(session?: Saferwall.Session, fetch?: (...args: any[]) => Promise<any>) {
+		this.fetch = fetch;
 		this.setSession(session);
 	}
 
@@ -53,8 +58,11 @@ export class SaferwallClient {
 			},
 			...args
 		};
-
-		const response: any = await fetch(url, this.setAuthHeaders(init));
+		const _fetch = this.fetch ?? fetch;
+		const response: any = await _fetch(url, 
+			// @ts-ignore
+			this.setAuthHeaders(init)
+		);
 
 		if (!response.ok) {
 			throw response;
