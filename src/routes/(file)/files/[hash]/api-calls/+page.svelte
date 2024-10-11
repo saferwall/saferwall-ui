@@ -12,6 +12,7 @@
 	import type { PageData } from './$types';
 	import ApiTraceRow from './components/ApiTraceRow.svelte';
 	import FiltersDrawer from './components/FilterDrawer.svelte';
+	import { cubicInOut, cubicOut } from 'svelte/easing';
 
 	export let data: PageData;
 
@@ -67,6 +68,8 @@
 	$: client = data.client;
 	$: currentPage = data.pagination.page;
 	$: perPage = data.pagination.per_page;
+	$: perPageString = perPage.toString();
+	let awaiting = false;
 	$: totalPages = data.pagination.page_count;
 	$: totalCount = data.pagination.total_count;
 	$: behaviorId = data.behaviorId!;
@@ -159,7 +162,7 @@
 	};
 
 	onMount(() => {
-		fetch('/data/w32apis-ui.json', { cache: 'force-cache' })
+		fetch("/api/w32api", { cache: "force-cache" })
 			.then((res) => res.json())
 			.then((res) => (w32apis = res));
 	});
@@ -168,22 +171,22 @@
 <div class="container mx-auto flex flex-col flex-1">
 	<div
 		data-sveltekit-preload-data
-		class="flex-1 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 rounded overflow-auto p-6 gap-4"
+		class="flex-1 bg-secondary-surface text-primary-text rounded overflow-auto p-6 gap-4"
 	>
 		<form
 			data-sveltekit-keepfocus
 			bind:this={form}
 			on:change={handleFormChanges}
-			class="flex items-center justify-center space-x-4"
+			class="flex items-center justify-center space-x-4 text-gray-500"
 		>
-			<Input name="search" icon="search" bind:search placeholder="Search anything..." />
-			<div class="flex-shrink-0 flex-grow text-zinc-600 dark:text-zinc-400">
+			<Input name="search" icon="search" class="border-primary-border text-primary-text placeholder:text-searchbar-text" bind:search placeholder="Search anything..." />
+			<div class="flex-shrink-0 flex-grow ">
 				<Button
 					on:click={onOpenDrawMouseUp}
-					icon="filter"
-					class={pids.length > 0 ? 'border-primary' : ''}
+					icon="tune"
+					class="border-primary-border {pids.length > 0 ? '' : ''}"
 				>
-					<span class="px-2 py-0.5"> Process filter </span>
+					<span class="px-2 py-0.5 text-primary-text">Process filter</span>
 
 					{#if pids.length > 0}
 						<span
@@ -194,21 +197,22 @@
 					{/if}
 				</Button>
 			</div>
-			<div class="properties relative flex-shrink-0 flex-grow text-gray-600">
-				<Button icon="properties" on:click={onPropsToggleAction} on:keyup={onPropsToggleAction}>
-					<span class="px-2 py-0.5">Properties</span>
+			<div class="properties relative flex-shrink-0 flex-grow">
+				<Button icon="checklist" class="border-primary-border" on:click={onPropsToggleAction} on:keyup={onPropsToggleAction}>
+					<span class="px-2 py-0.5 text-primary-text">Properties</span>
 				</Button>
 				{#if displayProperties}
 					<Overlay on:click={onPropsToggleAction}>
 						<ul class="absolute top-[120%] left-0 w-52 z-50 bg-white rounded-lg p-4">
 							<li class="flex flex-row items-center justify-between pb-2">
 								<span class="text-xs text-neutral-500 font-semibold">Show table</span>
+								<!-- svelte-ignore a11y-autofocus -->
 								<button
 									autofocus
 									on:keyup={(e) => (e.key === 'Escape' ? onPropsToggleAction() : null)}
 									on:click={onPropsToggleAction}
 									type="button"
-									class="text-xs bg-neutral-50 rounded-full border border-neutral-500 p-1"
+									class="text-xs bg-neutral-50 rounded-full border border-primary-border p-1"
 								>
 									<Icon name="close" size="w-4 h-4" />
 								</button>
@@ -233,33 +237,30 @@
 					</Overlay>
 				{/if}
 			</div>
-			<div class="flex-shrink-0 flex flex-row items-center space-x-2">
-				<span class="text-gray-500 flex-shrink-0">Results per page</span>
-				<Select name="per_page">
-					{#each perPages as count}
-						<option value={count} selected={perPage == count}>{count}</option>
-					{/each}
-				</Select>
-			</div>
 		</form>
 		<div class="flex flex-1 h-full">
 			<table class="w-full flex-shrink-0 rows h-full">
-				<thead class="rows__thead">
-					<th colspan="2">TIME</th>
+				<thead class="rows__thead font-semibold">
+					<th>
+						<center class="pl-4 w-full flex items-center font-bold">
+							<center class="size-5">#</center>
+						</center>
+					</th>
+					<th><div class="th">TIME</div></th>
 					{#if isActiveProperty('pid')}
-						<th>PID</th>
+						<th><div class="th">PID</div></th>
 					{/if}
 					{#if isActiveProperty('tid')}
-						<th>TID</th>
+						<th><div class="th">TID</div></th>
 					{/if}
 					{#if isActiveProperty('api')}
-						<th>API</th>
+						<th><div class="th">API</div></th>
 					{/if}
 					{#if isActiveProperty('args')}
-						<th>ARGUMENTS</th>
+						<th><div class="th">ARGUMENTS</div></th>
 					{/if}
 					{#if isActiveProperty('ret')}
-						<th>RETURN</th>
+						<th><div class="th">RETURN</div></th>
 					{/if}
 				</thead>
 				<tbody>
@@ -273,56 +274,114 @@
 							}}
 							class:expanded={trace._open}
 						>
-							<td class="pl-4">
-								<Icon
-									size="w-4 h-4"
-									name="arrow-down"
-									class={'transition-all ' + (trace._open === true ? '' : '-rotate-90')}
-								/>
+							<td class="pl-4 w-min">
+								<p class="flex h-full w-min">
+									<span class="min-h-[1lh] flex items-center justify-center rounded-full !size-5 {trace._open === true ? "bg-brand-surface" : "bg-transparent"}">
+										<Icon
+											size="size-2.5"
+											name="arrow-down"
+											class="transition-all {trace._open === true ? "text-white translate-y-[1px]" : "-rotate-90  text-brand-surface"}"
+										/>
+									</span>
+								</p>
 							</td>
-							<td>{timestampToFormattedDate(trace.ts)}</td>
+							<td>
+								<p class="flex flex-col gap-4 h-full relative">
+									<span class="h-[1lh] flex items-center">
+										{timestampToFormattedDate(trace.ts)}
+									</span>
+									{#if trace._open}
+										<div transition:slide={{ axis: 'y', duration: 150, easing: cubicOut }} class="w-0">
+											<ApiTraceRow
+												{trace}
+												{client}
+												{hash}
+												{behaviorId}
+												procName={getProcName(rows[index].pid)}
+												pid={rows[index].pid}
+												tid={rows[index].tid}
+											/>
+										</div>
+									{/if}
+								</p>
+							</td>
 							{#if isActiveProperty('pid')}
-								<td>{trace.pid}</td>
-							{/if}
-							{#if isActiveProperty('tid')}
-								<td>{trace.tid}</td>
-							{/if}
-							{#if isActiveProperty('api')}
-								<td>{trace.name}</td>
-							{/if}
-							{#if isActiveProperty('args')}
-								<td class="max-w-xs">
-									<p class="truncate text-xs">
-										{trace._args || 'NaN'}
+								<td>
+									<p class="flex h-full">
+										<span class="h-[1lh] flex items-center">{trace.pid}</span>
 									</p>
 								</td>
 							{/if}
+							{#if isActiveProperty('tid')}
+								<td>
+									<p class="flex h-full">
+										<span class="h-[1lh] flex items-center">{trace.tid}</span>
+									</p>
+								</td>
+							{/if}
+							{#if isActiveProperty('api')}
+								<td>
+									<p class="flex h-full">
+										<span class="h-[1lh] flex items-center">{trace.name}</span>
+									</p>
+								</td>
+							{/if}
+							{#if isActiveProperty('args')}
+								<td class="truncate max-w-xs ">
+									{trace._args || 'NaN'}
+									<!-- <p class="h-full truncate text-xs max-w-xs">
+										<span class="h-[1lh] flex items-center">
+											{trace._args || 'NaN'}
+										</span>
+									</p> -->
+								</td>
+							{/if}
 							{#if isActiveProperty('ret')}
-								<td>{trace.ret}</td>
+								<td>
+									<p class="flex h-full">
+										<span class="h-[1lh] flex items-center">{trace.ret}</span>
+									</p>
+								</td>
 							{/if}
 						</tr>
-						{#if trace._open}
-							<tr class="box__body" class:hidden={!trace._open}>
-								<td colspan="8" class="overflow-hidden">
-									<div transition:slide={{ axis: 'y', duration: 200 }}>
-										<ApiTraceRow
-											{trace}
-											{client}
-											{hash}
-											{behaviorId}
-											procName={getProcName(rows[index].pid)}
-											pid={rows[index].pid}
-											tid={rows[index].tid}
-										/>
-									</div>
-								</td>
-							</tr>
-						{/if}
 					{/each}
+					<tr>
+						<td class="border-0" colspan="8">
+							<form class="flex justify-between --pt-[30px] max-w-full">
+								<div class="[&_>_label]:h-full">
+									<Select name="per_page" class="py-[7px] px-[10px] pr-[5px] pl-[3px] bg-secondary-surface border border-secondary-border text-secondary-text rounded-sm" bind:value={perPageString}>
+										{#each perPages as count}
+											<option selected={count == perPage}>{count.toString()}</option>
+										{/each}
+									</Select>
+								</div>
+								<ul class="flex gap-2 flex-shrink-0 min-w-max">
+									{#each pagesButtons as page}
+										<li>
+											<Button
+												class="{currentPage === page.number
+													?
+														"text-white bg-brand-surface"
+													:
+														`border border-secondary-border text-secondary-text
+														hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
+														active:text-white active:bg-brand-surface`
+												} rounded-sm h-full {page.number < 10 ? "aspect-square" : "px-[10px]"}"
+												on:click={() => { currentPage = page.number }}
+												loading={currentPage === page.number && awaiting}
+											>
+												{page.number}
+											</Button>
+										</li>
+									{/each}
+								</ul>
+							</form>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
-		<div class="flex justify-center">
+		<!-- <div class="flex justify-center">
 			<ul class="flex space-x-2">
 				{#each pagesButtons as page}
 					<li>
@@ -336,7 +395,7 @@
 					</li>
 				{/each}
 			</ul>
-		</div>
+		</div> -->
 	</div>
 </div>
 
@@ -354,17 +413,22 @@
 
 <style lang="postcss">
 	table.rows {
-		@apply pr-4 border-separate border-spacing-y-2 w-full;
+		@apply pr-4 border-separate border-spacing-y-[13px] w-full;
 
 		thead th {
 			@apply cursor-pointer;
-			@apply font-medium text-gray-400 py-3 text-left flex-row;
+			@apply font-medium text-tertiary-text pt-[30px] text-left flex-row;
+			.th {
+				@apply font-semibold;
+				&:after {
+					content: '◀   ▶';
+					@apply transform rotate-90 scale-y-[50%] scale-x-[40%] -translate-x-2 inline-block w-max h-max text-xs px-1 font-black;
+				}
+			}
 		}
-
+		
 		thead.rows__thead > th {
-			&:after {
-				content: '<>';
-				@apply transform rotate-90 inline-block w-max h-max text-xs px-2 font-black;
+			.th {
 			}
 		}
 
@@ -372,25 +436,27 @@
 			tr {
 				@apply relative z-0 whitespace-nowrap;
 
-				&.box__body:after {
-					@apply content-[''] absolute -z-10 -top-2 rounded-t-none left-0 border rounded w-full h-full border-neutral-500 border-t-0;
+				td {
+					@apply align-baseline;
+					@apply border border-primary-border border-r-0 border-l-0;
+					&:first-child {
+						@apply border-l rounded-l;
+					}
+					&:last-child {
+						@apply border-r rounded-r;
+					}
 				}
+				@apply tracking-wide;
 
+				@apply bg-transparent transition-colors;
 				&.expanded {
-					@apply font-medium;
-				}
-
-				&.box:after {
-					@apply content-[''] absolute -z-10 top-0 left-0 border rounded w-full h-full border-neutral-500;
-				}
-
-				&.expanded:after {
-					@apply rounded-b-none border-b-0;
+					@apply font-medium tracking-[0.015em];
+					@apply bg-apc-surface;
 				}
 
 				td {
 					@apply cursor-pointer;
-					@apply py-4 rounded;
+					@apply py-4 pr-1;
 				}
 			}
 		}

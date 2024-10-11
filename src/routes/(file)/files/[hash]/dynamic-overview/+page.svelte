@@ -41,7 +41,7 @@
 			<svelte:fragment slot="header">
 				<h1 class="text-2xl text-primary-text">Process Tree</h1>
 			</svelte:fragment>
-			<ProcessTreeView {behaviorId} client={new SaferwallClient(session)} trees={processTree} isChild={false} />
+			<ProcessTreeView {behaviorId} client={new SaferwallClient(session, fetch)} trees={processTree} isChild={false} />
 		</Card>
 	</section>
 </div>

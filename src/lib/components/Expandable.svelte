@@ -17,7 +17,7 @@
 		<div class="flex items-center gap-[12px]">
 			{#if expandable}
 				<div class="text-neutral-400 border border-brand rounded-full transition-transform {open ? 'bg-brand-surface' : '-rotate-90 text-brand'} w-5 h-5 flex justify-center items-center">
-					<Icon name="arrow-down" size="w-2.5 h-2.5" class="translate-y-[1px] translate-x-[-0.5px] transition-colors {open ? 'text-white' : 'text-brand'}" />
+					<Icon name="arrow-down" size="w-2.5 h-2.5" class="translate-y-[1px] transition-colors {open ? 'text-white' : 'text-brand'}" />
 				</div>
 			{/if}
 			<slot name="header" />
