@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { SaferwallClient } from '$lib/clients/saferwall';
 	import Card from '$lib/components/Card.svelte';
+	import Icon from '$lib/components/Icon.svelte';
 	import Multitoggle from '$lib/components/Multitoggle.svelte';
 	import Checkbox from '$lib/components/form/Checkbox.svelte';
 	import Input from '$lib/components/form/Input.svelte';
@@ -42,7 +43,7 @@
 				filtersValue.size === 0 ||
 				(item.severity === 'high' && filtersValue.has('high')) ||
 				(item.severity === 'suspicious' && filtersValue.has('suspicious')) ||
-				(item.severity === 'informative' && filtersValue.has('informative'))
+				(item.severity === 'low' && filtersValue.has('low'))
 			);
 		})
 		.filter(filterByQuery);
@@ -54,7 +55,7 @@
 			value: ProcessSections.CAPABILITIES,
 			checked: true,
 			filters: [
-				{ label: 'Informative', value: 'informative' },
+				{ label: 'Low', value: 'low' },
 				{ label: 'Suspicious', value: 'suspicious' },
 				{ label: 'High', value: 'high' }
 			]
@@ -99,6 +100,18 @@
 		}
 	};
 
+	const getSeverityDataTheme = (severity: string) => {
+		switch (severity) {
+			case 'high':
+				return { class: 'text-[#B73D32]', icon: "backlight" };
+			case 'suspicious':
+				return { class: 'text-[#ED8C1A]', icon: "target" };
+
+			default:
+				return { class: "text-[#634FE1]", icon: "info" };
+		}
+	};
+
 	const getOperationTheme = (operation: string) => {
 		switch (operation) {
 			case 'create':
@@ -113,6 +126,21 @@
 		}
 	};
 
+	const getOperationDataTheme = (operation: string) => {
+		switch (operation) {
+			case 'create':
+				return "text-[#498B5A] bg-[#498B5A]/15";
+			case 'write':
+				return "text-[#C58837] bg-[#C58837]/15";
+			case 'delete':
+				return "text-[#ED63C2] bg-[#ED63C2]/15";
+			case "read":
+				return "text-[#4675E2] bg-[#4675E2]/15";
+			default:
+				return "text-primary-text bg-tertiary-surface";
+		}
+	};
+
 	onMount(() => {
 		if (behaviorId) {
 			fetchData();
@@ -122,22 +150,23 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div transition:slide={{ axis: 'y' }} class="w-full lg:pr-12" on:click|stopPropagation>
-	<Card padding={false} class="flex flex-col gap-2 bg-zinc-50 dark:bg-zinc-800 px-8 py-6 border border-neutral-500">
+<div transition:slide={{ axis: 'y' }} class="w-full lg:pr-12 pb-3" on:click|stopPropagation>
+	<Card padding={false} class="flex flex-col gap-2 bg-p-tree-surface px-[1.125rem] py-[1.125rem] pb-5 border border-primary-border rounded-lg shadow-[0px_3px_9px_0px_rgba(0,_0,_0,_0.10)]">
 		<div class="inline-flex uppercase font-medium">
 			<Multitoggle items={sections} on:change={onToggleChange} />
 		</div>
-		<form class="flex flex-row gap-6 lg:gap-12">
-			<Input name="search" icon="search" bind:value={query} placeholder="Search anything..." class="dark:border-zinc-700 border-zinc-300 placeholder:text-zinc-500" />
+		<form class="flex flex-row gap-6 lg:gap-12 text-gray-500">
+			<Input name="search" icon="search" bind:value={query} placeholder="Search anything..." class="border-elm-border placeholder:text-searchbar-text" />
 			<div class="flex flex-row flex-shrink-0 items-center gap-6">
-				<strong class="text-zinc-600 dark:text-zinc-400">FILTER BY</strong>
-				<div class="flex flex-row items-center text-xs font-medium text-zinc-700 dark:text-zinc-300 gap-2">
+				<strong class="text-tertiary-text">FILTER BY</strong>
+				<div class="flex flex-row items-center text-xs font-medium text-primary-text gap-4">
 					{#each selectedSection?.filters as filter}
 						<Checkbox
 							name="filters"
 							type="checkbox"
 							value={filter.value}
 							checked={filtersValue.has(filter.value)}
+							class="cursor-pointer select-none"
 							on:click={() => onFilterChange(filter.value)}
 						>
 							{filter.label}
@@ -148,19 +177,20 @@
 		</form>
 		<table>
 			{#if selectedSection.value === ProcessSections.CAPABILITIES}
-				<thead>
+				<thead class="[&_th]:text-tertiary-text">
 					<th>Category</th>
-					<th>Description</th>
+					<th>Operation</th>
 					<th>Severity</th>
 					<th>Module</th>
 				</thead>
-				<tbody class="divide-y divide-neutral-500">
+				<tbody class="divide-y divide-line-sec-surface">
 					{#each filteredcapabilitiesItems as item}
 						<tr>
 							<td class="capitalize">{item.category}</td>
 							<td>{item.description}</td>
-							<td class="capitalize">
-								<Label theme={getSeverityTheme(item.severity)}>{item.severity}</Label>
+							<td class="capitalize flex gap-2 items-center">
+								<Icon size="size-5" name={getSeverityDataTheme(item.severity).icon} class="{getSeverityDataTheme(item.severity).class}"></Icon>
+								<span class="{getSeverityDataTheme(item.severity).class}">{item.severity}</span>
 							</td>
 							<td class="capitalize">{item.module}</td>
 						</tr>
@@ -169,11 +199,11 @@
 						<tr>
 							<td colspan="4">
 								{#if capabilitiesItems !== null}
-									<p class="empty-result">
+									<p class="empty-result text-secondary-text">
 										No results with current filters. Try adjusting or expanding your search criteria
 									</p>
 								{:else}
-									<p class="empty-result">
+									<p class="empty-result text-secondary-text">
 										Loading...
 									</p>
 								{/if}
@@ -182,15 +212,15 @@
 					{/if}
 				</tbody>
 			{:else}
-				<tbody class="divide-y divide-neutral-500">
+				<tbody class="divide-y divide-line-sec-surface">
 					{#each filteredSystemEventsItems as item}
 						<tr>
 							<td>
-								<div class="flex gap-3">
+								<div class="flex items-center gap-3">
 									<p>{item.path}</p>
-									<Label size="base" theme={getOperationTheme(item.op)} class="capitalize">
+									<span class="px-[11px] py-[4px] rounded-sm font-semibold capitalize {getOperationDataTheme(item.op)}">
 										{item.op}
-									</Label>
+									</span>
 									<Label size="base" class="capitalize">
 										{item.type}
 									</Label>
@@ -202,11 +232,11 @@
 						<tr>
 							<td colspan="4">
 								{#if systemEventsItems !== null}
-									<p class="empty-result">
+									<p class="empty-result text-secondary-text">
 										No results with current filters. Try adjusting or expanding your search criteria
 									</p>
 								{:else}
-									<p class="empty-result">
+									<p class="empty-result text-secondary-text">
 										Loading...
 									</p>
 								{/if}
