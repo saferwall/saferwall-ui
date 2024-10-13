@@ -12,7 +12,7 @@ import type {
 	UpdateProfileDto
 } from '$lib/types';
 import { fileMenu } from '$lib/data/menu';
-import { fileMenuStore, peMenuStore } from '$lib/utils/fileMenu';
+// import { fileMenuStore, peMenuStore } from '$lib/utils/fileMenu';
 
 export class SaferwallClient {
 	session?: Saferwall.Session;
@@ -79,8 +79,8 @@ export class SaferwallClient {
 					let ui_tabs: string[] = ui.tabs;
 					let pe_meta: string[] = ui.pe;
 					let newFileMenu = fileMenu.filter(el => ui_tabs.includes(el.realPath ?? el.path) || el.path === "antivirus");
-					fileMenuStore.set(newFileMenu);
-					peMenuStore.set(pe_meta);
+					// fileMenuStore.set(newFileMenu);
+					// peMenuStore.set(pe_meta);
 				}
 			}
 			return ret;
