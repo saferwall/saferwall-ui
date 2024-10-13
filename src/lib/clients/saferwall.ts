@@ -14,9 +14,11 @@ import type {
 import { fileMenu } from '$lib/data/menu';
 import { fileMenuStore, peMenuStore } from '$lib/utils/fileMenu';
 
+type DBI<T> = { main: T, default_behavior_report: { id: string } }
+
 export class SaferwallClient {
 	session?: Saferwall.Session;
-	fetch?: (...args: any[]) => Promise<any>;
+	fetch?: (...args: any[]) => Promise<Response>;
 	get authorization() {
 		if (this.session && this.session.token) {
 			return `Bearer ${this.session.token}`;
@@ -50,12 +52,12 @@ export class SaferwallClient {
 	public removeSession() {
 		this.session = undefined;
 	}
-	public async request<T>(endpoint: string, args: RequestInit = {}, toJson = true): Promise<T> {
-		const url = `${endpoint.startsWith('https://') ? '' : this.config.url}${endpoint}`;
+	public async request<T>(endpoint: string, args: RequestInit = {}, toJson = true, mimicBrowser = true): Promise<T> {
+		const url = `${endpoint.startsWith("https://") ? "" : this.config.url}${endpoint}`;
 		const init: RequestInit = {
 			headers: {
-				'Content-Type': 'application/json',
-				'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
+				"Content-Type": "application/json",
+				"X-Get-Ui": (+mimicBrowser).toString(),
 				...(args.headers ?? {})
 			},
 			...args
@@ -77,7 +79,7 @@ export class SaferwallClient {
 				if (ui) {
 					let ui_tabs: string[] = ui.tabs;
 					let pe_meta: string[] = ui.pe;
-					let newFileMenu = fileMenu.filter(el => ui_tabs.includes(el.realPath ?? el.path) || el.path === "antivirus");
+					let newFileMenu = fileMenu.filter(el => ui_tabs.includes(el.realPath ?? el.path));
 					fileMenuStore.set(newFileMenu);
 					peMenuStore.set(pe_meta);
 				}
@@ -181,10 +183,24 @@ export class SaferwallClient {
 		);
 	}
 
+	public async getFileApiTraceHash(
+		hash: string,
+		pagination?: Pagination & Partial<{ pid: string[] }>
+	) {
+		const ret = await (this.fetch ?? fetch)(`/api/default_behavior_id/${hash}/api-trace` + this.generatePaginateQuery(pagination));
+		return await ret.json() as DBI<Saferwall.Pagination<Saferwall.Behaviors.ApiTrace.Item>>;
+	}
+
 	public async getFileProcessTree(behaviorId: string) {
 		return this.request<{ proc_tree: Saferwall.Behaviors.ProcessItem[] }>(
 			`behaviors/${behaviorId}?fields=proc_tree`
 		).then((res) => res.proc_tree ?? []);
+	}
+
+	public async getFileProcessTreeHash(hash: string) {
+		return await (this.fetch ?? fetch)(`/api/default_behavior_id/${hash}?fields=proc_tree`)
+		.then((res) => res.json())
+		.then(res => res.proc_tree ?? []) as Promise<DBI<Saferwall.Behaviors.ProcessItem[]>>;
 	}
 
 	public async getFileSystemEvents(behaviorId: string, pid?: string) {
@@ -211,6 +227,20 @@ export class SaferwallClient {
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.Artifacts>>(
 			`behaviors/${behaviorId}/artifacts?` + params.toString()
 		);
+	}
+
+	public async getBehaviorArtifactsHash(
+		hash: string,
+		categories?: string[],
+		pagination?: Pagination
+	) {
+		const params = this.generatePaginationParams(pagination);
+		if (categories && categories.length > 0) {
+			categories.forEach((kind) => params.append('kind', kind));
+		}
+
+		let ret = await (this.fetch ?? fetch)(`/api/default_behavior_id/${hash}/artifacts?` + params.toString());
+		return await ret.json() as DBI<Saferwall.Pagination<Saferwall.Behaviors.Artifacts>>;
 	}
 
 	// TODO: (API) Implement pid filtering

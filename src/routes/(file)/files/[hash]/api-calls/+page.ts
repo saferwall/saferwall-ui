@@ -6,14 +6,14 @@ export const load = (async ({ url, parent, params, fetch }) => {
 		client,
 	} = await parent();
 
-	const { default_behavior_report: behaviorReport } = await client.request<{ default_behavior_report: { id: string } }>(
-		`files/${params.hash}/?fields=default_behavior_report`
-	);
+	// const { default_behavior_report: behaviorReport } = await client.request<{ default_behavior_report: { id: string } }>(
+	// 	`files/${params.hash}/?fields=default_behavior_report`
+	// );
 
-	if (!behaviorReport || !behaviorReport.id) {
-		throw redirect(307, `/files/${params.hash}/summary`);
-	}
-	const behaviorId = behaviorReport.id;
+	// if (!behaviorReport || !behaviorReport.id) {
+	// 	throw redirect(307, `/files/${params.hash}/summary`);
+	// }
+	// const behaviorId = behaviorReport.id;
 
 	const search = url.searchParams.get('search');
 	const page = Math.abs(parseInt(url.searchParams.get('page')!) || 1);
@@ -31,7 +31,8 @@ export const load = (async ({ url, parent, params, fetch }) => {
 		args.pid = pids;
 	}
 
-	const pagination = await client.getFileApiTrace(behaviorId!, args);
+	const { main: pagination, default_behavior_report: { id: behaviorId } } = await client.getFileApiTraceHash(params.hash, args);
+	// const pagination = await client.getFileApiTrace(behaviorId!, args);
 
 	pagination.items = pagination.items ?? [];
 
