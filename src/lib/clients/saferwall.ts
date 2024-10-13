@@ -11,6 +11,8 @@ import type {
 	UpdatePasswordDto,
 	UpdateProfileDto
 } from '$lib/types';
+import { fileMenu } from '$lib/data/menu';
+import { fileMenuStore, peMenuStore } from '$lib/utils/fileMenu';
 
 export class SaferwallClient {
 	session?: Saferwall.Session;
@@ -48,12 +50,12 @@ export class SaferwallClient {
 	public removeSession() {
 		this.session = undefined;
 	}
-
 	public async request<T>(endpoint: string, args: RequestInit = {}, toJson = true): Promise<T> {
 		const url = `${endpoint.startsWith('https://') ? '' : this.config.url}${endpoint}`;
 		const init: RequestInit = {
 			headers: {
 				'Content-Type': 'application/json',
+				'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
 				...(args.headers ?? {})
 			},
 			...args
@@ -68,8 +70,20 @@ export class SaferwallClient {
 			throw response;
 		}
 
+
 		if (toJson) {
-			return response.json();
+			let ret = await response.json();
+			if (endpoint.match(/^\/?files\/[0-9a-f]{64}/)) {
+				let ui = ret.ui;
+				if (ui) {
+					let ui_tabs: string[] = ui.tabs;
+					let pe_meta: string[] = ui.pe;
+					let newFileMenu = fileMenu.filter(el => ui_tabs.includes(el.realPath ?? el.path) || el.path === "antivirus");
+					fileMenuStore.set(newFileMenu);
+					peMenuStore.set(pe_meta);
+				}
+			}
+			return ret;
 		}
 
 		return response;
