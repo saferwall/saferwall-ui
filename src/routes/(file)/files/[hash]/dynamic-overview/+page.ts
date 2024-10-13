@@ -4,8 +4,11 @@ import type { PageLoad } from '../$types';
 export const load: PageLoad = async ({ parent, params }) => {
 	const {
 		client,
-		file: { default_behavior_report: behaviorReport }
 	} = await parent();
+
+	const { default_behavior_report: behaviorReport } = await client.request<{ default_behavior_report: { id: string } }>(
+		`files/${params.hash}/?fields=default_behavior_report`
+	);
 
 	if (!behaviorReport || !behaviorReport.id) {
 		throw redirect(307, `/files/${params.hash}/summary`);

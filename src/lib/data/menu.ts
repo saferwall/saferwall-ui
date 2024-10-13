@@ -9,9 +9,9 @@ export const fileMenu: Menu.File[] = [
 	},
 	{ name: 'Strings', path: 'strings' },
 	{ name: 'Antivirus', path: 'antivirus' },
-	{ name: 'Dynamic Overview', path: 'dynamic-overview' },
-	{ name: 'API Calls', path: 'api-calls' },
-	{ name: 'Files & MemDumps', path: 'files-memdumps' },
+	{ name: 'Dynamic Overview', path: 'dynamic-overview', realPath: "behavior_scans" },
+	{ name: 'API Calls', path: 'api-calls', realPath: "behavior_scans" },
+	{ name: 'Files & MemDumps', path: 'files-memdumps', realPath: "behavior_scans" },
 	{ name: 'Comments', path: 'comments' }
 ];
 

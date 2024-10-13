@@ -1,14 +1,15 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Card from '$lib/components/Card.svelte';
 	import { peMenu } from '$lib/data/menu';
 	import type { Saferwall } from '$lib/types';
+	import { peMenuStore } from '$lib/utils/fileMenu';
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
 
 	$: activeMenu = peMenu.filter((menu) =>
-		// @ts-ignore
-		data.file.pe_meta?.includes(menu.field as Saferwall.PeMeta)
+		$peMenuStore.includes(menu.field as Saferwall.PeMeta)
 	);
 </script>
 
@@ -17,7 +18,7 @@
 		<ul data-sveltekit-preload-data="tap">
 			{#each activeMenu as item}
 				<li>
-					<a class:active={item.path === data.menu} href={item.path}>{item.title}</a>
+					<a class:active={item.path === data.menu} href={`/files/${data.hash}/pe/${item.path}`} on:click|preventDefault={() => goto(item.path)}>{item.title}</a>
 				</li>
 			{/each}
 		</ul>
