@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { twMerge } from "tailwind-merge";
+
 	export let label = '';
 	export let placeholder = ' ';
 	export let icon: string = '';
 	export let type = 'text';
 	export let error = false;
 	export let value: string | undefined = undefined;
+	export let iconClass = "";
 
 	const isPassword = type === 'password';
 	$: passwordVisible = type !== 'password';
@@ -16,7 +19,9 @@
 
 <label class="input peer-focus text-inherit" class:labeled={label} class:error>
 	{#if icon}
-		<svg class="icon text-inherit"><use href="/images/icons.svg#icon-{icon}" class="text-inherit" /></svg>
+		<svg class={twMerge("icon text-inherit")}>
+			<use href="/images/icons.svg#icon-{icon}" class={twMerge("text-inherit origin-center", iconClass)} />
+		</svg>
 	{/if}
 	{#if label}
 		<span class="input__label">{label}</span>

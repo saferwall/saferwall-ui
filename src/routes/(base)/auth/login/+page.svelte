@@ -53,7 +53,7 @@
 			disabled={loading}
 		/>
 	</div>
-	<a href="/auth/forget-password" class="self-end border-l-pink-50">Forget password?</a>
+	<a href="/auth/forgot-password" class="self-end border-l-pink-50">Forgot password?</a>
 
 	<Button theme="brand" type="submit" {loading} size="lg">Login</Button>
 

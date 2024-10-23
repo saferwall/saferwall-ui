@@ -13,12 +13,20 @@
 
 	let copiedTimeout: number;
 	let popup: HTMLElement;
+	let popupButton: HTMLElement;
 	let copiedShown = false;
 	let popupOpen = false;
 
+	$: {
+		if (popupOpen === false) {
+			clearTimeout(copiedTimeout);
+			copiedShown = false;
+		}
+	};
+
 	onMount(() => {
 		let listener = (event: MouseEvent) => {
-			if (popup && !popup.contains((event.target as HTMLElement))) {
+			if (popup && popupButton && !popup.contains((event.target as HTMLElement)) && !popupButton.contains((event.target as HTMLElement))) {
 				popupOpen = false;
 			}
 		};
@@ -32,7 +40,7 @@
 
 </script>
 
-<button class={twMerge("text-ellipsis whitespace-nowrap overflow-hidden hover:text-brand-text", Class)} on:click={() => popupOpen = true}>
+<button bind:this={popupButton} class={twMerge("text-ellipsis whitespace-nowrap overflow-hidden hover:text-brand-text", Class)} on:click={() => popupOpen = !popupOpen}>
 	{value}
 </button>
 {#if popupOpen}

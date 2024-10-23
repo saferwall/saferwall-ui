@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import debounce from 'debounce';
+	import { pushState } from '$app/navigation';
 	import Icon from '$lib/components/Icon.svelte';
 	import Overlay from '$lib/components/Overlay.svelte';
 	import Button from '$lib/components/form/Button.svelte';
@@ -7,30 +8,50 @@
 	import Select from '$lib/components/form/Select.svelte';
 	import type { Pagination, Saferwall } from '$lib/types';
 	import { cleanUndefinedKeyValue, timestampToFormattedDate } from '$lib/utils';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import { slide } from 'svelte/transition';
 	import type { PageData } from './$types';
 	import ApiTraceRow from './components/ApiTraceRow.svelte';
 	import FiltersDrawer from './components/FilterDrawer.svelte';
-	import { cubicInOut, cubicOut } from 'svelte/easing';
+	import { cubicOut } from 'svelte/easing';
+	import PopUnder from '$lib/components/partials/PopUnder.svelte';
+	import CheckBox from '$lib/components/form/CheckBox.v2.svelte';
+	import { page } from '$app/stores';
+	import { browser } from '$app/environment';
 
 	export let data: PageData;
 
 	const propertiesItems = [
-		{ id: 'pid', name: 'PID' },
-		{ id: 'tid', name: 'TID' },
-		{ id: 'args', name: 'Arguments' },
-		{ id: 'api', name: 'API' },
-		{ id: 'ret', name: 'Return' }
+		{ id: 'pid', name: 'PID' } as const,
+		{ id: 'tid', name: 'TID' } as const,
+		{ id: 'name', name: 'API' } as const,
+		{ id: '_args', name: 'Arguments', short: "Args." } as const,
+		{ id: 'ret', name: 'Return' } as const,
 	];
-
-	let form: HTMLFormElement;
 
 	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
 
-	$: search = data.search;
-	$: pids = (data.filters.pids || []).filter(Boolean);
-	$: hiddenProps = (data.hiddenProps || []).filter(Boolean);
+	let search = data.search || "";
+	let pids = (data.filters.pids || []).filter(Boolean);
+	let hiddenProps = (data.hiddenProps || []).filter(Boolean);
+	let propertyItemHidden: {
+		shown: boolean,
+		name: string,
+		short?: string | undefined,
+		id: typeof propertiesItems[number]["id"]
+	}[] = propertiesItems.map(item => ({ ...item, shown: !hiddenProps.includes(item.id) }));
+
+
+	function convertPerPageStringToNumber(perPageString: string) {
+		perPage = Number(perPageString);
+	}
+
+	function convertPerPageNumberToString(perPage: number) {
+		perPageString = String(perPage);
+	}
+
+	$: convertPerPageStringToNumber(perPageString)
+	$: convertPerPageNumberToString(perPage)
 
 	$: pages = Array(5)
 		.fill(0)
@@ -48,14 +69,6 @@
 		.map((pageNumber) => {
 			return {
 				number: pageNumber,
-				href:
-					typeof pageNumber === 'number'
-						? generateQueryParams({
-								...formParams,
-								page: pageNumber,
-								hprops: hiddenProps
-							})
-						: undefined
 			};
 		})
 		.filter((p) => totalPages > 0);
@@ -64,19 +77,29 @@
 		(page, index) => index < 1 || page <= totalCount
 	);
 
+	let pagination = data.pagination;
+
+	let previousData = {
+		currentPage: pagination.page,
+		perPageString: pagination.per_page.toString(),
+		propertyItemHidden,
+		pids,
+		search,
+	}
+
 	$: hash = data.hash;
 	$: client = data.client;
-	$: currentPage = data.pagination.page;
-	$: perPage = data.pagination.per_page;
-	$: perPageString = perPage.toString();
-	let awaiting = false;
-	$: totalPages = data.pagination.page_count;
-	$: totalCount = data.pagination.total_count;
+	let currentPage = pagination.page;
+	let perPage = pagination.per_page;
+	let perPageString = perPage.toString();
+	$: totalPages = pagination.page_count;
+	$: totalCount = pagination.total_count;
 	$: behaviorId = data.behaviorId!;
 	$: filters = [] as Saferwall.Behaviors.ProcessTree;
+	let awaiting = false;
 
 	$: w32apis = {} as Record<string, string[]>;
-	$: rows = updateRows(data.pagination.items, w32apis);
+	$: rows = updateRows(pagination.items, w32apis);
 
 	const generateQueryParams = (
 		options: Pagination & {
@@ -89,35 +112,6 @@
 			'?' +
 			new URLSearchParams(cleanUndefinedKeyValue({ ...(options as Pagination<string>) })).toString()
 		);
-	};
-
-	const getFormParams = () => {
-		const formData = new FormData(form);
-		const updateHiddenProps = formData?.getAll('hprops') as string[];
-
-		return {
-			pids,
-			page: currentPage,
-			per_page: parseInt(formData?.get('per_page') as string),
-			search: formData?.get('search') as string,
-			hprops: updateHiddenProps
-		};
-	};
-
-	$: formParams = (currentPage || hiddenProps || form) && getFormParams();
-
-	const handleFormChanges = () => {
-		goto(
-			generateQueryParams({
-				...getFormParams()
-			}),
-			{ replaceState: true, noScroll: true }
-		);
-	};
-
-	const onFiltersChanges = ({ detail }: { detail: string[] }) => {
-		pids = [...detail];
-		handleFormChanges();
 	};
 
 	const onRowToggleMouseUp = (index: number, trace: any) => {
@@ -151,21 +145,99 @@
 		});
 	};
 
-	$: isActiveProperty = (id: string): boolean => !hiddenProps || !hiddenProps?.includes(id);
+	let displayProperties = false;
 
-	$: displayProperties = false;
-	const onPropsToggleAction = () => (displayProperties = !displayProperties);
+	let filterDrawer = false;
 
-	$: filterDrawer = false;
-	const onOpenDrawMouseUp = () => {
-		filterDrawer = true;
-	};
-
-	onMount(() => {
-		fetch("/api/w32api", { cache: "force-cache" })
+	let mounted = false
+	onMount(async () => {
+		await tick();
+		mounted = true;
+		window.fetch("/api/w32api", { cache: "force-cache" })
 			.then((res) => res.json())
 			.then((res) => (w32apis = res));
 	});
+
+	type DataType = {
+		currentPage: number;
+		perPageString: string;
+		propertyItemHidden: {
+			shown: boolean;
+			name: string;
+			short?: string | undefined;
+			id: "pid" | "tid" | "name" | "_args" | "ret";
+		}[];
+		pids: string[];
+		search: string;
+	};
+
+	function detectChanges(data: DataType) {
+		if (JSON.stringify(data) !== JSON.stringify(previousData)) {
+			let newUrl = new URL($page.url);
+			newUrl.searchParams.set("page", data.currentPage.toString());
+			newUrl.searchParams.set("per_page", data.perPageString.toString());
+			let hprops = data.propertyItemHidden.filter(el => !el.shown);
+			if (hprops.length) {
+				newUrl.searchParams.set("hprops", hprops.map(el => el.id).join(","));
+			}
+			if (data.pids.length) {
+				newUrl.searchParams.set("pids", data.pids.join(","));
+			}
+			if (data.search !== "") {
+				newUrl.searchParams.set("q", data.search);
+			}
+			pushState(newUrl.toString(), "");
+			let reqParams: Record<string, number | string> = {};
+			let changedCount = 0;
+			if (data.pids.length)
+				reqParams["pid"] = data.pids.join(",");
+			if (JSON.stringify(data.pids) !== JSON.stringify(previousData.pids)) {
+				changedCount++;
+			}
+			reqParams["page"] = data.currentPage.toString();
+			if (data.currentPage !== previousData.currentPage) {
+				changedCount++;
+			}
+			if (data.search !== "")
+				reqParams["q"] = data.search;
+			if (data.search !== previousData.search) {
+				changedCount++;
+				currentPage = 1;
+				reqParams["page"] = 1;
+			}
+			reqParams["per_page"] = data.perPageString.toString();
+			if (data.perPageString !== previousData.perPageString) {
+				changedCount++;
+				currentPage = 1;
+				reqParams["page"] = 1;
+			}
+
+			if (changedCount) {
+				debounced(reqParams);
+			}
+			previousData = structuredClone(data);
+		}
+	}
+	
+	let debounced = debounce((reqParams) => {
+		awaiting = true;
+		client.getFileApiTrace(behaviorId, reqParams).then((res) => {
+			pagination = res;
+		}).finally(() => awaiting = false);
+	}, 200);
+
+
+	$: {
+		if (browser && mounted) {
+			detectChanges({
+				currentPage,
+				perPageString,
+				propertyItemHidden,
+				pids,
+				search
+			});
+		}
+	}
 </script>
 
 <div class="container mx-auto flex flex-col flex-1">
@@ -173,71 +245,49 @@
 		data-sveltekit-preload-data
 		class="flex-1 bg-secondary-surface text-primary-text rounded overflow-auto p-6 gap-4"
 	>
-		<form
-			data-sveltekit-keepfocus
-			bind:this={form}
-			on:change={handleFormChanges}
-			class="flex items-center justify-center space-x-4 text-gray-500"
-		>
-			<Input name="search" icon="search" class="border-primary-border text-primary-text placeholder:text-searchbar-text" bind:search placeholder="Search anything..." />
-			<div class="flex-shrink-0 flex-grow ">
+		<div class="flex items-center justify-center space-x-4">
+			<div class="icon-color-wrapper text-gray-500 flex-grow">
+				<Input name="search" icon={awaiting ? "loading": "search"} class="border-primary-border text-primary-text placeholder:text-searchbar-text" placeholder="Search anything..." bind:value={search} iconClass="{awaiting ? "animate-spin origin-center" : ""}"/>
+			</div>
+			<div class="flex-shrink-0">
 				<Button
-					on:click={onOpenDrawMouseUp}
+					on:click={() => filterDrawer = !filterDrawer}
 					icon="tune"
-					class="border-primary-border {pids.length > 0 ? '' : ''}"
+					class="{pids.length ? "border-brand-border text-brand-text" : "border-primary-border text-primary-text"}"
+					iconClass="size-5 {pids.length ? "text-brand-text" : "text-primary-icn"}"
 				>
-					<span class="px-2 py-0.5 text-primary-text">Process filter</span>
+					<span class="px-2 py-0.5">Process filter</span>
 
-					{#if pids.length > 0}
+					{#if pids.length}
 						<span
-							class="flex items-center justify-center rounded-full w-6 h-6 bg-primary text-white text-xs"
+							class="flex items-center justify-center rounded-full w-6 h-6 bg-brand-surface text-white text-xs"
 						>
 							{pids.length}
 						</span>
 					{/if}
 				</Button>
 			</div>
-			<div class="properties relative flex-shrink-0 flex-grow">
-				<Button icon="checklist" class="border-primary-border" on:click={onPropsToggleAction} on:keyup={onPropsToggleAction}>
-					<span class="px-2 py-0.5 text-primary-text">Properties</span>
-				</Button>
-				{#if displayProperties}
-					<Overlay on:click={onPropsToggleAction}>
-						<ul class="absolute top-[120%] left-0 w-52 z-50 bg-white rounded-lg p-4">
-							<li class="flex flex-row items-center justify-between pb-2">
-								<span class="text-xs text-neutral-500 font-semibold">Show table</span>
-								<!-- svelte-ignore a11y-autofocus -->
-								<button
-									autofocus
-									on:keyup={(e) => (e.key === 'Escape' ? onPropsToggleAction() : null)}
-									on:click={onPropsToggleAction}
-									type="button"
-									class="text-xs bg-neutral-50 rounded-full border border-primary-border p-1"
-								>
-									<Icon name="close" size="w-4 h-4" />
-								</button>
-							</li>
-							{#each propertiesItems as property}
-								<li class="px-2 py-1 flex flex-row justify-between">
-									<input
-										id={property.id}
-										type="checkbox"
-										class="hidden"
-										name="hprops"
-										checked={!isActiveProperty(property.id)}
-										value={property.id}
-									/>
-									<span>{property.name}</span>
-									<label for={property.id} class="py-0.5 text-xs px-2 text-primary font-semibold">
-										Hide
-									</label>
+			<div class="properties relative flex-shrink-0">
+				<PopUnder popupPosition="left" bind:popUnderOpen={displayProperties}>
+					<Button slot="clickable" icon="checklist"
+						class="{displayProperties ? "text-brand-text bg-fltr-surface" : "text-primary-text"} border-primary-border"
+						iconClass="{displayProperties ? "text-secondary-icn" : "text-primary-icn"} size-5"
+						>
+						<span class="px-2 py-0.5">Properties</span>
+					</Button>
+					<ul class="bg-fltr-surface border border-primary-border rounded p-4 flex flex-col gap-3 shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]" slot="dropdown">
+						<!-- {#key hiddenProps} -->
+							{#each propertyItemHidden as property}
+								<li class="flex flex-row justify-between items-center gap-8">
+									<span>{property.short || property.name}</span>
+									<CheckBox bind:checked={property.shown}></CheckBox>
 								</li>
 							{/each}
-						</ul>
-					</Overlay>
-				{/if}
+						<!-- {/key} -->
+					</ul>
+				</PopUnder>
 			</div>
-		</form>
+		</div>
 		<div class="flex flex-1 h-full">
 			<table class="w-full flex-shrink-0 rows h-full">
 				<thead class="rows__thead font-semibold">
@@ -247,21 +297,11 @@
 						</center>
 					</th>
 					<th><div class="th">TIME</div></th>
-					{#if isActiveProperty('pid')}
-						<th><div class="th">PID</div></th>
-					{/if}
-					{#if isActiveProperty('tid')}
-						<th><div class="th">TID</div></th>
-					{/if}
-					{#if isActiveProperty('api')}
-						<th><div class="th">API</div></th>
-					{/if}
-					{#if isActiveProperty('args')}
-						<th><div class="th">ARGUMENTS</div></th>
-					{/if}
-					{#if isActiveProperty('ret')}
-						<th><div class="th">RETURN</div></th>
-					{/if}
+					{#each propertyItemHidden as property}
+						{#if property.shown}
+							<th><div class="th uppercase">{property.name}</div></th>
+						{/if}
+					{/each}
 				</thead>
 				<tbody>
 					{#each rows as trace, index}
@@ -274,6 +314,7 @@
 							}}
 							class:expanded={trace._open}
 						>
+							<!-- <td>{index}</td> -->
 							<td class="pl-4 w-min">
 								<p class="flex h-full w-min">
 									<span class="min-h-[1lh] flex items-center justify-center rounded-full !size-5 {trace._open === true ? "bg-brand-surface" : "bg-transparent"}">
@@ -291,7 +332,9 @@
 										{timestampToFormattedDate(trace.ts)}
 									</span>
 									{#if trace._open}
-										<div transition:slide={{ axis: 'y', duration: 150, easing: cubicOut }} class="w-0">
+										<!-- svelte-ignore a11y-click-events-have-key-events -->
+										<!-- svelte-ignore a11y-no-static-element-interactions -->
+										<div transition:slide={{ axis: 'y', duration: 150, easing: cubicOut }} class="w-0" on:click|stopPropagation>
 											<ApiTraceRow
 												{trace}
 												{client}
@@ -305,49 +348,27 @@
 									{/if}
 								</p>
 							</td>
-							{#if isActiveProperty('pid')}
-								<td>
-									<p class="flex h-full">
-										<span class="h-[1lh] flex items-center">{trace.pid}</span>
-									</p>
-								</td>
-							{/if}
-							{#if isActiveProperty('tid')}
-								<td>
-									<p class="flex h-full">
-										<span class="h-[1lh] flex items-center">{trace.tid}</span>
-									</p>
-								</td>
-							{/if}
-							{#if isActiveProperty('api')}
-								<td>
-									<p class="flex h-full">
-										<span class="h-[1lh] flex items-center">{trace.name}</span>
-									</p>
-								</td>
-							{/if}
-							{#if isActiveProperty('args')}
-								<td class="truncate max-w-xs ">
-									{trace._args || 'NaN'}
-									<!-- <p class="h-full truncate text-xs max-w-xs">
-										<span class="h-[1lh] flex items-center">
-											{trace._args || 'NaN'}
-										</span>
-									</p> -->
-								</td>
-							{/if}
-							{#if isActiveProperty('ret')}
-								<td>
-									<p class="flex h-full">
-										<span class="h-[1lh] flex items-center">{trace.ret}</span>
-									</p>
-								</td>
-							{/if}
+							{#each propertyItemHidden as property}
+								{#if property.shown}
+									<td class="truncate max-w-xs">
+										{trace[property.id] || "NaN"}
+									</td>
+								{/if}
+							{/each}
 						</tr>
 					{/each}
+					{#if !rows.length}
+						<tr>
+							<td colspan="7" class="border-none text-secondary-text">
+								<center>
+									No results found.
+								</center>
+							</td>
+						</tr>
+					{/if}
 					<tr>
-						<td class="border-0" colspan="8">
-							<form class="flex justify-between --pt-[30px] max-w-full">
+						<td class="border-0" colspan="7">
+							<div class="flex justify-between --pt-[30px] max-w-full">
 								<div class="[&_>_label]:h-full">
 									<Select name="per_page" class="py-[7px] px-[10px] pr-[5px] pl-[3px] bg-secondary-surface border border-secondary-border text-secondary-text rounded-sm" bind:value={perPageString}>
 										{#each perPages as count}
@@ -366,8 +387,10 @@
 														`border border-secondary-border text-secondary-text
 														hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
 														active:text-white active:bg-brand-surface`
-												} rounded-sm h-full {page.number < 10 ? "aspect-square" : "px-[10px]"}"
-												on:click={() => { currentPage = page.number }}
+												} rounded-sm h-full px-[10px] py-[10px] min-w-[calc(1lh+22px)]"
+												on:click={() => {
+													currentPage = page.number
+												}}
 												loading={currentPage === page.number && awaiting}
 											>
 												{page.number}
@@ -375,49 +398,29 @@
 										</li>
 									{/each}
 								</ul>
-							</form>
+							</div>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<!-- <div class="flex justify-center">
-			<ul class="flex space-x-2">
-				{#each pagesButtons as page}
-					<li>
-						<Button
-							data-sveltekit-noscroll=""
-							class={currentPage === page.number ? 'active' : ''}
-							href={page.href}
-						>
-							{page.number}
-						</Button>
-					</li>
-				{/each}
-			</ul>
-		</div> -->
 	</div>
 </div>
 
 <FiltersDrawer
-	{pids}
+	bind:pids
+	bind:open={filterDrawer}
 	{client}
 	{behaviorId}
-	open={filterDrawer}
-	on:filters={(event) => {
-		filters = [...(event.detail ?? [])];
-	}}
-	on:change={onFiltersChanges}
-	on:close={() => (filterDrawer = false)}
 />
 
 <style lang="postcss">
 	table.rows {
-		@apply pr-4 border-separate border-spacing-y-[13px] w-full;
+		@apply pr-4 border-separate border-spacing-y-[13px] w-full pt-[30px];
 
 		thead th {
 			@apply cursor-pointer;
-			@apply font-medium text-tertiary-text pt-[30px] text-left flex-row;
+			@apply font-medium text-tertiary-text text-left flex-row;
 			.th {
 				@apply font-semibold;
 				&:after {

@@ -93,6 +93,12 @@ export default {
 				apc: {
 					"surface": "var(--surface-apc)",
 				},
+				fltr: {
+					"surface": "var(--surface-fltr)"
+				},
+				selected: {
+					"surface": "var(--surface-selected)"
+				},
 				menu: {
 					"lvl2-surface": "var(--surface-menu-lvl2)",
 					"surface": "var(--surface-menu)",
@@ -108,6 +114,7 @@ export default {
 					"border": "var(--border-primary)",
 					"surface": "var(--surface-primary)",
 					"text": "var(--text-primary)",
+					"icn": "var(--icn-primary)",
 					50: '#eff2fe',
 					100: '#e2e6fd',
 					200: '#cbd0fa',
@@ -124,6 +131,7 @@ export default {
 					"border": "var(--border-secondary)",
 					"surface": "var(--surface-secondary)",
 					"text": "var(--text-secondary)",
+					"icn": "var(--icn-secondary)",
 				},
 				tertiary: {
 					"surface": "var(--surface-tertiary)",

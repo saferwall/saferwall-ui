@@ -174,6 +174,23 @@ export function hexToASCII(hex: string): string {
 	);
 }
 
+export function hexToActualASCIIForHexDump(hex: string): string {
+	return new TextDecoder('ascii').decode(
+		new Uint8Array(
+			hex
+				.replace(/\s/g, '')
+				.match(/.{1,2}/g)!
+				.map((byte) => {
+					let ret = parseInt(byte, 16);
+					if (ret < 33 || ret > 126) {
+						ret = 46; // a dot
+					}
+					return ret;
+				})
+		)
+	);
+}
+
 /**
  * Function to get the label of data directory for a given index
  *

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import Card from '$lib/components/Card.svelte';
 	import { peMenu } from '$lib/data/menu';
 	import type { Saferwall } from '$lib/types';
@@ -15,10 +16,15 @@
 
 <section class="pe container mx-auto w-full h-full items-center justify-center">
 	<Card class="flex flex-col md:flex-row space-x-4" flex={false} padding={false}>
-		<ul data-sveltekit-preload-data="tap">
+		<ul>
 			{#each activeMenu as item}
 				<li>
-					<a class:active={item.path === data.menu} href={`/files/${data.hash}/pe/${item.path}`} on:click|preventDefault={() => goto(item.path)}>{item.title}</a>
+					<a class:active={item.path === data.menu} href="/files/{data.hash}/pe/{item.path}{$page.url.search}" on:click|preventDefault={(e) =>
+						// @ts-ignore
+						goto(e.target?.href || "")}
+					>
+						{item.title}
+					</a>
 				</li>
 			{/each}
 		</ul>
