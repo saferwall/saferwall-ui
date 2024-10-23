@@ -1,16 +1,19 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
 	import Icon from './Icon.svelte';
+	import { twMerge } from 'tailwind-merge';
 
 	export let expandable = false;
 	export let open = true;
+	let Class = "";
+	export { Class as class };
 
 	const onPress = () => {
 		open = !open;
 	};
 </script>
 
-<div class="flex flex-col">
+<div class={twMerge("flex flex-col", Class)}>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	 <!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div on:click={onPress} class="cursor-pointer">

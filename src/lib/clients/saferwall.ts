@@ -13,6 +13,7 @@ import type {
 } from '$lib/types';
 import { fileMenu } from '$lib/data/menu';
 import { fileMenuStore, peMenuStore } from '$lib/utils/fileMenu';
+import { page } from '$app/stores';
 
 type DBI<T> = { main: T, default_behavior_report: { id: string } }
 
@@ -53,7 +54,8 @@ export class SaferwallClient {
 		this.session = undefined;
 	}
 	public async request<T>(endpoint: string, args: RequestInit = {}, toJson = true, mimicBrowser = true): Promise<T> {
-		const url = `${endpoint.startsWith("https://") ? "" : this.config.url}${endpoint}`;
+		const urlString = `${endpoint.startsWith("https://") ? "" : this.config.url}${endpoint}`;
+		const url = new URL(urlString);
 		const init: RequestInit = {
 			headers: {
 				"Content-Type": "application/json",
@@ -63,8 +65,7 @@ export class SaferwallClient {
 			...args
 		};
 		const _fetch = this.fetch ?? fetch;
-		const response: any = await _fetch(url, 
-			// @ts-ignore
+		const response: any = await _fetch(urlString, 
 			this.setAuthHeaders(init)
 		);
 
@@ -72,6 +73,7 @@ export class SaferwallClient {
 			throw response;
 		}
 
+		
 		if (toJson) {
 			let ret = await response.json();
 			if (endpoint.match(/^\/?files\/[0-9a-f]{64}/)) {
@@ -79,7 +81,8 @@ export class SaferwallClient {
 				if (ui) {
 					let ui_tabs: string[] = ui.tabs;
 					let pe_meta: string[] = ui.pe;
-					let newFileMenu = fileMenu.filter(el => ui_tabs.includes(el.realPath ?? el.path));
+					let newFileMenu = fileMenu
+						.filter(el => ui_tabs.includes(el.realPath ?? el.path))
 					fileMenuStore.set(newFileMenu);
 					peMenuStore.set(pe_meta);
 				}

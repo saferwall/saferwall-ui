@@ -95,7 +95,7 @@
 								class:text-primary={processTableOpen.includes(index)}
 							>
 								<div class="text-neutral-400 border border-brand rounded-full transition-transform {processTableOpen.includes(index) ? 'bg-brand-surface' : '-rotate-90 text-brand'} w-5 h-5 flex justify-center items-center">
-									<Icon name="arrow-down" size="w-2.5 h-2.5" class="translate-y-[1px] translate-x-[-0.5px] transition-colors {processTableOpen.includes(index) ? 'text-white' : 'text-brand'}" />
+									<Icon name="arrow-down" size="w-2.5 h-2.5" class="translate-y-[1px] transition-colors {processTableOpen.includes(index) ? 'text-white' : 'text-brand'}" />
 								</div>
 								<p class="select-none transition-colors text-xs {processTableOpen.includes(index) ? "text-brand-text" : "text-table-res-text"}">{tree.path} »</p>
 							</div>

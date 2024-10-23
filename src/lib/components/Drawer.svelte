@@ -27,7 +27,7 @@
 	<Overlay on:click={closeDrawer}>
 		<div
 			transition:fly={{ duration: 300, easing: quintInOut, x: '100%' }}
-			class={`drawer fixed top-0 right-0 h-full w-full bg-white z-50 drawer--${size}`}
+			class={`drawer fixed top-0 right-0 h-full w-full bg-secondary-surface z-50 drawer--${size}`}
 		>
 			{#if closeButton}
 				<!-- Drawer content goes here -->

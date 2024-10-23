@@ -8,8 +8,10 @@
 	import Icon from '../Icon.svelte';
 	import { onMount } from 'svelte';
 	import CopyPopup from './CopyPopup.svelte';
+	import { page } from '$app/stores';
 
 	export let hash: string;
+	export let behaviorId: string | null;
 	export let client: SaferwallClient;
 	
 	export let liked = false;
@@ -49,6 +51,12 @@
 		</div>
 
 		<div class="space-x-2 flex flex-shrink-0">
+			{#if $page.route.id === "/(file)/files/[hash]/api-calls" && behaviorId}
+				<Button icon="export-api-logs" href="{env.PUBLIC_ARTIFACTS_URL}{hash}/{behaviorId}/api_trace.json"
+					class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text">
+					<span class="hidden lg:block pl-2">Export API Logs</span>
+				</Button>
+			{/if}
 			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" size="lg" loading={downloadLoading} icon="download" href={downloadLink} on:click={(e) => {
 				e.preventDefault();
 				downloadLoading = true;
@@ -75,7 +83,7 @@
 					location.assign(file);
 				});
 			}}>
-				<span class="hidden md:block pl-2">Download file</span>
+				<span class="hidden lg:block pl-2">Download file</span>
 			</Button>
 			<Button
 				class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text"
@@ -85,11 +93,11 @@
 				disabled={rescaning}
 				on:click={onRescanClick}
 			>
-				<span class="hidden md:block pl-2">Rescan</span>
+				<span class="hidden lg:block pl-2">Rescan</span>
 			</Button>
 			<ButtonLike class="{liked ? "bg-brand-surface hover:bg-brand-500" : "bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text "}" size="lg" {hash} {loggedIn} bind:liked />
 			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" target="_blank" size="lg" icon="twitter" href={shareTwitterLink}>
-				<span class="hidden md:block pl-2">Share</span>
+				<span class="hidden lg:block pl-2">Share</span>
 			</Button>
 		</div>
 	</div>

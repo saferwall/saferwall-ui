@@ -1,19 +1,16 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+import { tryCatch } from '$lib/utils/try_catch';
 
-export const load = (async ({ url, parent, params, fetch }) => {
+export const load = (async ({ url, parent, params }) => {
 	const {
 		client,
 	} = await parent();
 
-	// const { default_behavior_report: behaviorReport } = await client.request<{ default_behavior_report: { id: string } }>(
-	// 	`files/${params.hash}/?fields=default_behavior_report`
-	// );
-
-	// if (!behaviorReport || !behaviorReport.id) {
-	// 	throw redirect(307, `/files/${params.hash}/summary`);
-	// }
-	// const behaviorId = behaviorReport.id;
+	const behaviorReportId = url.searchParams.get("behavior_id");
+	if (!behaviorReportId) {
+		throw redirect(307, `/files/${params.hash}/`);
+	}
 
 	const search = url.searchParams.get('search');
 	const page = Math.abs(parseInt(url.searchParams.get('page')!) || 1);
@@ -31,16 +28,18 @@ export const load = (async ({ url, parent, params, fetch }) => {
 		args.pid = pids;
 	}
 
-	const { main: pagination, default_behavior_report: { id: behaviorId } } = await client.getFileApiTraceHash(params.hash, args);
-	// const pagination = await client.getFileApiTrace(behaviorId!, args);
+	const [pagination] = await tryCatch(client.getFileApiTrace(behaviorReportId!, args));
 
+	if (!pagination) {
+		throw redirect(307, `/files/${params.hash}/`);
+	}
 	pagination.items = pagination.items ?? [];
 
 	return {
 		search: typeof search === 'string' ? search : undefined,
 		pagination,
 		hiddenProps,
-		behaviorId,
+		behaviorId: behaviorReportId,
 		filters: {
 			pids
 		}

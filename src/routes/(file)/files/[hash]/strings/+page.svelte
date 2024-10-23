@@ -247,7 +247,7 @@
 													`border border-secondary-border text-secondary-text
 													hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
 													active:text-white active:bg-brand-surface`
-											} rounded-sm h-full {page < 10 ? "aspect-square" : "px-[10px]"}"
+											} rounded-sm h-full px-[10px] py-[10px] min-w-[calc(1lh+22px)]"
 											on:click={() => { currentPage = page }}
 											loading={currentPage === page && awaiting}
 										>

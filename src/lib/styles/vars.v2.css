@@ -63,11 +63,12 @@
 	--surface-sub-menu: var(--gray-900);
 	--surface-tertiary: var(--gray-800);
 	--surface-hash: var(--gray-970);
-
 	--surface-crcl: var(--gray-981);
 	--surface-p-tree: var(--gray-982);
 	--surface-apc: var(--gray-983);
 	--surface-line-sec: var(--gray-984);
+	--surface-fltr: var(--gray-900);
+	--surface-selected: light-dark(#FFFFFF, var(--brand-300));
 
 	/* ==================== alias/border ==================== */
 	
@@ -85,6 +86,11 @@
 	--text-secondary: var(--gray-300);
 	--text-tertiary: var(--gray-500);
 	--text-table-res: var(--gray-960);
+
+	/* ==================== alias/icn ==================== */
+
+	--icn-primary: var(--gray-500);
+	--icn-secondary: var(--brand-400);
 
 	/* ==================== unnamed ==================== */
 

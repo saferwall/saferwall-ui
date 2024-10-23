@@ -7,6 +7,6 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<svg on:click class={twMerge("icon", size, $$props.class)}>
+<svg on:click class={twMerge("icon", size, $$props.class, $$restProps.class)}>
 	<use href="/images/icons.svg#icon-{name}" />
 </svg>
