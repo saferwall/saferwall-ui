@@ -29,7 +29,10 @@
 		{ id: 'ret', name: 'Return' } as const,
 	];
 
-	$: getProcName = (pid: string) => filters.find((f) => f.pid == pid)?.proc_name!;
+	$: getProcName = (pid: string) => {
+		console.log({pid, filters, filtersmaybe: data.filters});
+		return filters.find((f) => f.pid == pid)?.proc_name!
+	};
 
 	let search = data.search || "";
 	let pids = (data.filters.pids || []).filter(Boolean);
@@ -200,7 +203,9 @@
 			}
 			if (data.search !== "")
 				reqParams["q"] = data.search;
+			let searchChanged = false;
 			if (data.search !== previousData.search) {
+				searchChanged = true;
 				changedCount++;
 				currentPage = 1;
 				reqParams["page"] = 1;
@@ -213,18 +218,24 @@
 			}
 
 			if (changedCount) {
-				debounced(reqParams);
+				if (searchChanged)
+					debounced(reqParams);
+				else {
+					requestNewData(reqParams);
+				}
 			}
 			previousData = structuredClone(data);
 		}
 	}
 	
-	let debounced = debounce((reqParams) => {
+	function requestNewData(reqParams: Record<string, string | number>) {
 		awaiting = true;
 		client.getFileApiTrace(behaviorId, reqParams).then((res) => {
 			pagination = res;
 		}).finally(() => awaiting = false);
-	}, 200);
+	}
+
+	let debounced = debounce(requestNewData, 500);
 
 
 	$: {
@@ -247,7 +258,7 @@
 	>
 		<div class="flex items-center justify-center space-x-4">
 			<div class="icon-color-wrapper text-gray-500 flex-grow">
-				<Input name="search" icon={awaiting ? "loading": "search"} class="border-primary-border text-primary-text placeholder:text-searchbar-text" placeholder="Search anything..." bind:value={search} iconClass="{awaiting ? "animate-spin origin-center" : ""}"/>
+				<Input name="search" icon={awaiting ? "loading": "search"} class="border-primary-border text-primary-text placeholder:text-searchbar-text" placeholder="Search API calls by name..." bind:value={search} iconClass="{awaiting ? "animate-spin origin-center" : ""}"/>
 			</div>
 			<div class="flex-shrink-0">
 				<Button

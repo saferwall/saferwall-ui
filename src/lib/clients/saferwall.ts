@@ -13,7 +13,6 @@ import type {
 } from '$lib/types';
 import { fileMenu } from '$lib/data/menu';
 import { fileMenuStore, peMenuStore } from '$lib/utils/fileMenu';
-import { page } from '$app/stores';
 
 type DBI<T> = { main: T, default_behavior_report: { id: string } }
 
@@ -55,7 +54,6 @@ export class SaferwallClient {
 	}
 	public async request<T>(endpoint: string, args: RequestInit = {}, toJson = true, mimicBrowser = true): Promise<T> {
 		const urlString = `${endpoint.startsWith("https://") ? "" : this.config.url}${endpoint}`;
-		const url = new URL(urlString);
 		const init: RequestInit = {
 			headers: {
 				"Content-Type": "application/json",

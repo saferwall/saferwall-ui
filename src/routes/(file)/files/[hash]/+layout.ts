@@ -1,22 +1,21 @@
 import { fileMenu } from '$lib/data/menu';
 import { redirect } from '@sveltejs/kit';
 import type { LayoutLoad } from './$types';
+import { tryCatch } from '$lib/utils/try_catch';
 
 export const load = (async ({ parent, params: { hash }, url }) => {
 	const { client } = await parent();
 
-	if (!url.searchParams.get("behavior_id") && !url.searchParams.get("0_behavior")) {
-		const { default_behavior_report: behaviorReport } = await client.request<{ default_behavior_report: { id: string } }>(
+	if (url.searchParams.get("behavior_id") === null) {
+		const [dbi] = await tryCatch(client.request<{ default_behavior_report: { id: string } }>(
 			`files/${hash}/?fields=default_behavior_report`
-		);
-	
-		if (!behaviorReport || !behaviorReport.id) {
-			url.searchParams.set("0_behavior", "");
-
+		));
+		if (!dbi || !dbi.default_behavior_report.id) {
+			url.searchParams.set("behavior_id", "");
 			throw redirect(307, url);
 		}
+		const { default_behavior_report: behaviorReport } = dbi!;
 		url.searchParams.set("behavior_id", behaviorReport.id);
-
 		throw redirect(307, url)
 	}
 
