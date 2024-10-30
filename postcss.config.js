@@ -2,6 +2,7 @@ export default {
 	plugins: {
 		"tailwindcss/nesting": {},
 		tailwindcss: {},
-		autoprefixer: {}
+		autoprefixer: {},
+		"@csstools/postcss-light-dark-function": {},
 	}
 };

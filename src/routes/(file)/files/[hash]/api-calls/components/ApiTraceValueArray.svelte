@@ -26,6 +26,8 @@
 				[[], []]
 			)[0]
 		: [];
+
+	$: console.log({hex});
 	const dispatch = createEventDispatcher();
 	const onClickLoadMore = () => {
 		dispatch('load');
@@ -37,12 +39,16 @@
 		<div class="flex gap-x-4 w-full text-xs">
 			<Expandable expandable={true} bind:open class="gap-2">
 				<div class="flex flex-row gap-4 font-['Roboto_Mono'] font-semibold text-[12px]" slot="header">
-					<div>{hex[0][0].join(" ")}</div>
-					<div>{hex[0][1]}</div>
+					{#if hex[0] && hex[0][0]}
+						<div>{hex[0][0].join(" ")}</div>
+						<div>{hex[0][1]}</div>
+					{:else}
+						<div class="text-secondary-text">empty</div>
+					{/if}
 				</div>
-				<div class="max-h-96 overflow-y-auto overflow-x-clip" slot="expanded">
+				<div class="max-h-96 overflow-y-auto overflow-x-clip pr-3" slot="expanded">
 					{#each hex as [v, string], index}
-						<div class="flex flex-row gap-4 font-['Roboto_Mono'] font-semibold text-[12px] text-table-res-text pr-2">
+						<div class="flex flex-row gap-4 font-['Roboto_Mono'] font-semibold text-[12px] text-table-res-text w-fit">
 							<div>{(index * 16).toString(16).padStart(16, "0")}</div>
 							<div>{v.join(" ")}</div>
 							<div>{string}</div>

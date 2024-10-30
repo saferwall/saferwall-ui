@@ -1,4 +1,4 @@
-:root {
+.not-root {
 	--gray-100: light-dark(#27252c, #d3cfcf);
 	--gray-200: light-dark(#5f4cd9, #d3cfcf);
 	--gray-300: light-dark(#6f7077, #6a6b71);
