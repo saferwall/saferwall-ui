@@ -1,45 +1,43 @@
 <script lang="ts">
 	import Expandable from '$lib/components/Expandable.svelte';
-import Icon from '$lib/components/Icon.svelte';
 	import Button from '$lib/components/form/Button.svelte';
-	import type { Saferwall } from '$lib/types';
-	import { hexToActualASCIIForHexDump, hexToASCII, toHexString } from '$lib/utils';
 	import { createEventDispatcher, getContext } from 'svelte';
+	import { hexToActualASCIIForHexDump, hexToASCII, toHexString } from '$lib/utils';
+	import Icon from '$lib/components/Icon.svelte';
+	import type { Saferwall } from '$lib/types';
+	import ApiTraceValueArray from './ApiTraceValueArray.svelte';
 
 	export let loading = false;
 	export let value: Saferwall.Behaviors.ApiTrace.EntryValue;
+	// $: buffId = value.buf_id;
+	// $: val = value.val;
+	// $: hex = Array.isArray(val)
+	// 	? val.reduce(
+	// 			([lines, current], int, index) => {
+	// 				current.push(int);
 
-	$: buffId = value.buf_id;
-	$: val = value.val;
-	$: hex = Array.isArray(val)
-		? val.reduce(
-				([lines, current], int, index) => {
-					current.push(int);
+	// 				if (current.length === 16 || val.length === index) {
+	// 					const hexStr = toHexString(current);
+	// 					lines.push([hexStr, hexToActualASCIIForHexDump(hexStr.join(' '))]);
+	// 					current = [];
+	// 				}
 
-					if (current.length === 16 || val.length === index) {
-						const hexStr = toHexString(current);
-						lines.push([hexStr, hexToActualASCIIForHexDump(hexStr.join(' '))]);
-						current = [];
-					}
+	// 				return [lines, current];
+	// 			},
+	// 			[[], []]
+	// 		)[0]
+	// 	: [];
 
-					return [lines, current];
-				},
-				[[], []]
-			)[0]
-		: [];
 
-	let open = false;
-	const onToggleMouseUp = () => (open = !open);
-
-	const dispatch = createEventDispatcher();
-	const onClickLoadMore = (e: MouseEvent) => {
-		dispatch('load');
-	};
+	// const dispatch = createEventDispatcher();
+	// const onClickLoadMore = (e: MouseEvent) => {
+	// 	dispatch('load');
+	// };
 </script>
 
 <div class="flex flex-col flex-1">
-	{#if val}
-		<div class="flex flex-col">
+	{#if value.val}
+		<!-- <div class="flex flex-col">
 			{#if Array.isArray(val)}
 				<div class="flex gap-x-4 w-full text-xs">
 					<Expandable expandable={true} bind:open class="gap-2">
@@ -68,27 +66,30 @@ import Icon from '$lib/components/Icon.svelte';
 			{:else}
 				{value.val}
 			{/if}
-		</div>
+		</div> -->
+		<ApiTraceValueArray bind:loading on:load bind:value={value.val} bind:buf_id={value.buf_id}/>
 	{/if}
 	{#if value.in}
 		<div class="flex items-center gap-2">
-			<div class="flex items-center">
-				<Icon size="size-3.5" class="" name="value-in" />
+			<div class="flex items-center self-start h-5">
+				<Icon size="" class="size-3.5" name="value-in" />
 			</div>
-			<span class="value-hex">
+			<!-- <span class="value-hex">
 				{value.in}
-			</span>
+			</span> -->
+			<ApiTraceValueArray bind:loading on:load bind:value={value.in} bind:buf_id={value.in_id}/>
 		</div>
 	{/if}
 
 	{#if value.out}
 		<div class="flex items-center gap-2">
-			<div class="flex items-center">
-				<Icon size="size-3.5" class="" name="value-out" />
+			<div class="flex items-center self-start h-5">
+				<Icon size="" class="size-3.5" name="value-out" />
 			</div>
-			<span class="value-hex">
+			<!-- <span class="value-hex">
 				{value.out}
-			</span>
+			</span> -->
+			<ApiTraceValueArray bind:loading on:load bind:value={value.out} bind:buf_id={value.out_id}/>
 		</div>
 	{/if}
 </div>

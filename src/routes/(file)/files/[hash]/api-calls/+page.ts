@@ -12,7 +12,7 @@ export const load = (async ({ url, parent, params }) => {
 		throw redirect(307, `/files/${params.hash}/`);
 	}
 
-	const search = url.searchParams.get('search');
+	const search = url.searchParams.get('q');
 	const page = Math.abs(parseInt(url.searchParams.get('page')!) || 1);
 	const perPage = Math.abs(parseInt(url.searchParams.get('per_page')!) || 10);
 
@@ -26,6 +26,9 @@ export const load = (async ({ url, parent, params }) => {
 
 	if (pids && pids.filter(Boolean).length > 0) {
 		args.pid = pids;
+	}
+	if (search) {
+		args.q = search;
 	}
 
 	const [pagination] = await tryCatch(client.getFileApiTrace(behaviorReportId!, args));
