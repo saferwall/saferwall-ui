@@ -1,19 +1,24 @@
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from '../$types';
+import { tryCatch } from '$lib/utils/try_catch';
 
-export const load: PageLoad = async ({ parent, params }) => {
+export const load: PageLoad = async ({ parent, params, url }) => {
 	const {
 		client,
-		file: { default_behavior_report: behaviorReport }
 	} = await parent();
 
-	if (!behaviorReport || !behaviorReport.id) {
-		throw redirect(307, `/files/${params.hash}/summary`);
+	const behaviorReportId = url.searchParams.get("behavior_id");
+	if (!behaviorReportId) {
+		throw redirect(307, `/files/${params.hash}/`);
 	}
 
-	const processArray = await client.getFileProcessTree(behaviorReport.id);
+	const [processArray] = await tryCatch(client.getFileProcessTree(behaviorReportId));
+	if (!processArray) {
+		url.searchParams.delete("behavior_id");
+		throw redirect(307, url);
+	}
 	return {
-		behaviorId: behaviorReport.id,
+		behaviorId: behaviorReportId,
 		processArray
 	};
 };

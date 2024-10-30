@@ -12,6 +12,7 @@ export interface Error {
 
 export namespace Menu {
 	export interface File {
+		realPath?: string;
 		name: string;
 		path: string;
 		fullName?: string;

@@ -21,7 +21,7 @@ export const handle: Handle = (async ({ event, resolve }) => {
 		event.platform = await fallBackPlatformToMiniFlareInDev(event.platform!);
 	}
 
-	const client = new SaferwallClient();
+	const client = new SaferwallClient(undefined, event.fetch);
 	event.locals.client = client;
 	try {
 		const sessionData = event.cookies.get(SESSION_KEY);

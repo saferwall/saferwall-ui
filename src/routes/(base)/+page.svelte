@@ -19,18 +19,21 @@
 		try {
 			pagination.page += 1;
 
-			const newActivities = await client.getActivities(pagination);
+			let p: Record<string, any> = { ...pagination };
+			delete p.items;
+			const newActivities = await client.getActivities(p);
 
-			if (newActivities.items === null) {
+			if (newActivities.items === null || newActivities.items.length !== newActivities.per_page) {
 				reachEnd = true;
 				throw new Error('User has reached end of activities');
 			}
 
 			activities = [...activities, ...newActivities.items];
 
-			if (pagination.page >= pagination.page_count) {
-				reachEnd = true;
-			}
+			/* note: maybe ayoub broke the page_count? it's always zero */
+			// if (pagination.page >= pagination.page_count) {
+			// 	reachEnd = true;
+			// }
 		} catch (error) {
 			console.error(error);
 		}

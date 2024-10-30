@@ -1,11 +1,11 @@
-@import "./lib/styles/vars.css";
-@import "./lib/styles/vars.v2.css";
 @import "./lib/styles/card.css";
 @import "./lib/styles/tags.css";
 @import "./lib/styles/scrollbar.css";
 @import "./lib/styles/progress.css";
 @import "./lib/styles/github-markdown.css";
 @import "bigger-picture/css";
+/* @import url('https://fonts.cdnfonts.com/css/menlo'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

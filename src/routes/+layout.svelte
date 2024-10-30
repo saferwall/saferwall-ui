@@ -23,3 +23,138 @@
 </svelte:head>
 
 <slot />
+
+<style>
+	:root {
+		--gray-100: light-dark(#27252c, #d3cfcf);
+		--gray-200: light-dark(#5f4cd9, #d3cfcf);
+		--gray-300: light-dark(#6f7077, #6a6b71);
+		--gray-400: light-dark(#bbbbbb, #6f7077);
+		--gray-500: light-dark(#9f9f9f, #66686f);
+		--gray-600: light-dark(#bababd, #53565e);
+		--gray-700: light-dark(#ededf6, #2c2c30);
+		--gray-800: light-dark(#f3f3f6, #2c2c30);
+
+		--neutral-100: light-dark(#1f1b1b, #ffffff);
+		/* - */
+		--neutral-500: light-dark(#d9d9d9, #373638);
+		--neutral-600: light-dark(#ffffff, #1a1a1a);
+		--neutral-700: light-dark(#e6e6e6, #292929);
+		--neutral-800: light-dark(#f2f1f3, #0d0d0d);
+		--neutral-900: light-dark(#ffffff, #0d0d0d);
+
+		--brand-500: light-dark(#5340ce, #5340ce);
+		--brand-400: light-dark(#5f4cd9, #5f4cd9);
+		--brand-200: light-dark(#f3f3f9, #242434);
+		--brand-300: light-dark(#f3f3f9, #f3f3f9);
+
+		--green-500: #49af30;
+
+		--orange-500: #ed8c1a;
+
+		--red-500: #ed4060;
+
+		--background: var(--neutral-800);
+	}
+	:root {
+		/* ==================== brand ==================== */
+
+		--brand-300: light-dark(#F3F3F9, #242231);
+		--brand-400: light-dark(#5F4CD9, #5F4CD9);
+		--brand-500: light-dark(#5340CE, #5340CE);
+
+		/* ==================== full ==================== */
+
+		--full-100: light-dark(#49AF30, #49AF30);
+		--full-200: light-dark(#ED4060, #ED4060);
+		--full-300: light-dark(#ED8C1A, #ED8C1A);
+
+		/* ==================== gray ==================== */
+
+		--gray-100: light-dark(#27252C, #D3CFCF);
+		--gray-200: light-dark(var(--brand-400), #C0BFC1);
+		--gray-300: light-dark(#888992, #5F5F5F);
+		--gray-400: light-dark(#9F9F9F, #5F5F5F);
+		--gray-500: light-dark(#888992, #5F5F5F);
+		--gray-800: light-dark(#F3F3F6, #282828);
+		--gray-900: light-dark(#FFFFFF, #212121);
+		--gray-950: light-dark(#FFFFFF, #161616);
+		--gray-960: light-dark(#5B5C64, #878889);
+		--gray-970: light-dark(#FFFFFF, #1C1C1F);
+
+		--gray-980: light-dark(#CCCBCE, #464548);
+		--gray-981: light-dark(#B8B8B8, #626265);
+		--gray-982: light-dark(#FFFFFF, #1E1E1F);
+		--gray-983: light-dark(#FFFFFF, #1E1E1E);
+		--gray-984: light-dark(#E6E6E6, #323133);
+		--gray-985: light-dark(#E6E6E6, #323133);
+
+		/* ==================== neutral ==================== */
+
+		--neutral-100: light-dark(#1F1B1B, #FFFFFF);
+		/*
+		--neutral-200: light-dark(#FFFFFF, #000000);
+		--neutral-300: light-dark(#FFFFFF, #000000);
+		--neutral-400: light-dark(#FFFFFF, #000000);
+		*/
+		--neutral-500: light-dark(#D9D9D9, #373638);
+		--neutral-600: light-dark(#FFFFFF, #1A1A1A);
+		--neutral-700: light-dark(#E6E6E6, #292929);
+		--neutral-800: light-dark(#F2F1F3, #0D0D0D);
+		--neutral-900: light-dark(#FFFFFF, #0D0D0D);
+
+		/* ==================== alias/alert ==================== */
+
+		--alert-green: var(--full-100);
+		--alert-orange: var(--full-300);
+		--alert-red: var(--full-200);
+
+		/* ==================== alias/surface ==================== */
+
+		--surface-brand-CF: var(--brand-300);
+		--surface-brand: var(--brand-400);
+		--surface-line: var(--neutral-700);
+		--surface-menu-lvl2: var(--gray-950);
+		--surface-menu: var(--neutral-900);
+		--surface-primary: var(--neutral-800);
+		--surface-secondary: var(--neutral-600);
+		--surface-sub-menu: var(--gray-900);
+		--surface-tertiary: var(--gray-800);
+		--surface-hash: var(--gray-970);
+		--surface-crcl: var(--gray-981);
+		--surface-p-tree: var(--gray-982);
+		--surface-apc: var(--gray-983);
+		--surface-line-sec: var(--gray-984);
+		--surface-fltr: var(--gray-900);
+		--surface-selected: light-dark(#FFFFFF, var(--brand-300));
+
+		/* ==================== alias/border ==================== */
+		
+		--border-primary: var(--neutral-700);
+		--border-secondary: var(--neutral-500);
+		--border-tertiary: var(--gray-980);
+		--border-brand: var(--brand-500);
+		--border-elm: var(--gray-985);
+		
+		/* ==================== alias/text ==================== */
+
+		--text-brand: var(--brand-400);
+		--text-primary: var(--gray-100);
+		--text-searchbar: var(--gray-400);
+		--text-secondary: var(--gray-300);
+		--text-tertiary: var(--gray-500);
+		--text-table-res: var(--gray-960);
+
+		/* ==================== alias/icn ==================== */
+
+		--icn-primary: var(--gray-500);
+		--icn-secondary: var(--brand-400);
+
+		/* ==================== unnamed ==================== */
+
+		--surface-brand-CF-lighter: light-dark(#E8E8F6, #2D2A3B);
+		--text-brand-light: light-dark(var(--text-brand), #7E6DEA);
+		--surface-brand-CF-light: light-dark(#DFDFF3, #2D2A3B);
+
+	}
+</style>

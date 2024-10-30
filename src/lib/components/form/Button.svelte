@@ -6,6 +6,7 @@
 	export { Class as class };
 	export let loading = false;
 	export let disabled = false;
+	export let iconClass = "";
 	export let icon: string | undefined = undefined;
 	export let href: string | undefined = undefined;
 	export let target: string | undefined = undefined;
@@ -25,7 +26,7 @@
 		<Loading {loading}>
 			<div class="content">
 				{#if icon}
-					<svg class="icon" class:opacity-0={loading}
+					<svg class="{twMerge("size-4", iconClass)}" class:opacity-0={loading}
 						><use href="/images/icons.svg#icon-{icon}" /></svg
 					>{/if}
 				<slot />
@@ -43,7 +44,7 @@
 		<Loading {loading}>
 			<div class="content">
 				{#if icon}
-					<svg class="icon" class:opacity-0={loading}
+					<svg class="{twMerge("size-4", iconClass)}" class:opacity-0={loading}
 						><use href="/images/icons.svg#icon-{icon}" /></svg
 					>
 				{/if}
@@ -121,8 +122,5 @@
 			@apply bg-opacity-60 border-opacity-5 cursor-not-allowed;
 		}
 
-		.icon {
-			@apply w-4 h-4;
-		}
 	}
 </style>

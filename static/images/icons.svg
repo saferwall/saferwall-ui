@@ -229,14 +229,33 @@
         <path stroke="currentColor" stroke-width="1.3"
             d="M16.501 1H4.723m11.778 5.499H4.723m11.778 5.5H4.723M2.95 1H.5m2.45 5.5H.5M2.95 12H.5" />
     </symbol>
-    <symbol id="icon-value-in" fill="none" viewBox="0 0 25 24">
-        <path stroke="#6EBA14" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M2.422 12h17m-7-7 7 7-7 7" />
+
+	<symbol id="icon-checklist" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<mask id="mask0_1406_8092" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="19">
+			<rect width="19" height="19" fill="#D9D9D9"/>
+		</mask>
+		<g mask="url(#mask0_1406_8092)">
+			<path d="M4.41752 15.1931L1.45074 12.2313L2.71543 10.9715L4.39772 12.6538L7.76231 9.28451L9.02205 10.5688L4.41752 15.1931ZM4.41752 8.85978L1.45074 5.89795L2.71543 4.63821L4.39772 6.32051L7.76231 2.95117L9.02205 4.23545L4.41752 8.85978ZM10.3154 13.5672V11.7662H17.5493V13.5672H10.3154ZM10.3154 7.23389V5.43285H17.5493V7.23389H10.3154Z" fill="currentColor"/>
+		</g>
+	</symbol>
+
+    <symbol id="icon-value-in" fill="none" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+		<path d="M10.4791 7.83594H0.333252V6.16927H10.4791L5.81242 1.5026L6.99992 0.335938L13.6666 7.0026L6.99992 13.6693L5.81242 12.5026L10.4791 7.83594Z" fill="#6EBA14"/>
     </symbol>
-    <symbol id="icon-value-out" fill="none" viewBox="0 0 25 24">
-        <path stroke="#7035EC" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M18.422 8h-17m7 7-7-7 7-7" />
+	<symbol id="icon-export-api-logs" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<mask id="mask0_1412_9055" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="21" height="20">
+			<rect x="0.919434" width="20" height="20" fill="#D9D9D9"/>
+		</mask>
+		<g mask="url(#mask0_1412_9055)">
+			<path d="M8.16943 13.9167L7.00277 12.75L10.5861 9.16667H7.5861V7.5H13.4194V13.3333H11.7528V10.3333L8.16943 13.9167ZM16.7528 10V4.16667H10.9194V2.5H18.4194V10H16.7528ZM5.0861 17.5C4.62777 17.5 4.23541 17.3368 3.90902 17.0104C3.58263 16.684 3.41943 16.2917 3.41943 15.8333V2.5H5.0861V15.8333H18.4194V17.5H5.0861Z" fill="#5F4CD9"/>
+		</g>
+	</symbol>
+
+
+    <symbol id="icon-value-out" fill="none" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+		<path d="M3.52092 6.16601L13.6667 6.16602L13.6667 7.83268L3.52092 7.83268L8.18758 12.4993L7.00008 13.666L0.333416 6.99935L7.00008 0.332682L8.18758 1.49935L3.52092 6.16601Z" fill="#5F4CD9"/>
     </symbol>
+	
     <symbol id="icon-plus-circle" fill="none" stroke="currentColor" stroke-width="1.5"
         viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round"
@@ -279,6 +298,16 @@
 			<path d="M0.71875 12.7344V10.8385H4.28125V12.7344H0.71875ZM5.29167 8.40917L2.76312 5.88062L4.09417 4.53375L6.62271 7.07812L5.29167 8.40917ZM5.71875 15.4635V12.7344H14.2812V15.4635H5.71875ZM9.05208 6.06771V1.67188H10.9479V6.06771H9.05208ZM14.7083 8.41417L13.3823 7.07812L15.9058 4.54958L17.2477 5.88562L14.7083 8.41417ZM15.7187 12.7344V10.8385H19.2812V12.7344H15.7187Z" fill="#B73D32"/>
 		</g>
 	</symbol>
+
+	<symbol id="icon-tune" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<mask id="mask0_1406_8071" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="19">
+			<rect width="19" height="19" fill="#D9D9D9"/>
+		</mask>
+		<g mask="url(#mask0_1406_8071)">
+			<path d="M8.67038 16.7718V11.8752H10.4004V13.4585H16.7337V15.1885H10.4004V16.7718H8.67038ZM2.26599 15.1885V13.4585H7.16265V15.1885H2.26599ZM5.43266 11.9462V10.3629H2.26599V8.63745H5.43266V7.05412H7.16265V11.9462H5.43266ZM8.67038 10.3629V8.63745H16.7337V10.3629H8.67038ZM11.837 7.12517V2.22852H13.567V3.81185H16.7337V5.54184H13.567V7.12517H11.837ZM2.26599 5.54184V3.81185H10.3293V5.54184H2.26599Z" fill="currentColor"/>
+		</g>
+	</symbol>
+
 
     <symbol id="icon-check-line" fill="none" stroke="currentColor" stroke-width="1.5"
         viewBox="0 0 24 24">
