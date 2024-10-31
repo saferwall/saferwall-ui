@@ -43,7 +43,7 @@
 	</div>
 
 	{#if hash}
-		<InputHash {hash} />
+		<InputHash {hash} behavior_id="" />
 	{/if}
 
 	<div class="progress w-full h-2 relative bg-neutral-200 rounded-xl overflow-hidden">

@@ -3,8 +3,9 @@
 	import { copyToClipboard } from '$lib/utils';
 	import Icon from '../Icon.svelte';
 
-	export let hash = '';
-	$: url = `${$page.url}files/${hash}`;
+	export let hash = "";
+	export let behavior_id: string | undefined;
+	$: url = `${$page.url}files/${hash}?behavior_id=${behavior_id ?? ""}`;
 
 	let copied: number | undefined;
 	const onCopyClick = async (event: MouseEvent) => {
@@ -18,7 +19,7 @@
 </script>
 
 <a
-	href="/files/{hash}"
+	href="/files/{hash}?behavior_id={behavior_id ?? ""}"
 	class="max-w-full flex items-center text-gray-100 bg-gray-800 hover:bg-neutral-700 rounded px-4 space-x-2 min-w-0 basis-0"
 >
 	<button

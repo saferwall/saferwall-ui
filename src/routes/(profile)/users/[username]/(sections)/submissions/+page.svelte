@@ -27,7 +27,7 @@
 	{#each items as item}
 		<li class="flex flex-col md:flex-row space-y-6 border-t-zinc-300 dark:border-t-zinc-700 md:space-y-0 md:space-x-6 py-6 lg:py-8">
 			<div class="w-full space-y-4">
-				<InputHash hash={item.file.hash} />
+				<InputHash hash={item.file.hash} behavior_id={item.file?.default_behavior_id}/>
 				<ActivityMeta file={item.file} />
 			</div>
 			<div class="w-full md:w-max">

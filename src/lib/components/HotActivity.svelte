@@ -27,7 +27,7 @@
 		<ul class="space-y-2">
 			{#each srotedFiles as file}
 				<li class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-2">
-					<InputHash hash={file.sha256} />
+					<InputHash hash={file.sha256} behavior_id={file.default_behavior_id} />
 					<Tags tags={file.tags} />
 				</li>
 			{/each}
