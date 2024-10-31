@@ -36,7 +36,7 @@
 						<Viewer value={item.comment}></Viewer>
 					</div>
 				</div>
-				<InputHash hash={item.file.hash} />
+				<InputHash hash={item.file.hash} behavior_id={item.file?.default_behavior_id} />
 				<ActivityMeta file={item.file} />
 			</div>
 		</li>

@@ -42,7 +42,7 @@
 						<a class="activity__info__author" href="/users/{author.username}">
 							{author.username}
 						</a>
-						<a class="activity__info__type" href="/files/{file?.hash}">
+						<a class="activity__info__type" href="/files/{file?.hash}?behavior_id={file?.default_behavior_id ?? ""}">
 							{getActivityTitle(activity.type)}
 						</a>
 					</span>
@@ -50,7 +50,7 @@
 						{timeSince(activity.date)}
 					</time>
 				</p>
-				<InputHash hash={file?.hash} />
+				<InputHash hash={file?.hash} behavior_id={file?.default_behavior_id} />
 				{#if file}
 					<ActivityMeta {file} />
 				{/if}
