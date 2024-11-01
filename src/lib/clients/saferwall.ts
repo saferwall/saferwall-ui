@@ -56,8 +56,7 @@ export class SaferwallClient {
 		const urlString = `${endpoint.startsWith("https://") ? "" : this.config.url}${endpoint}`;
 		const init: RequestInit = {
 			headers: {
-				"Content-Type": "application/json",
-				"X-Get-Ui": (+mimicBrowser).toString(),
+				...(mimicBrowser ? { "User-Agent": "Chromium" }: {}),
 				...(args.headers ?? {})
 			},
 			...args
