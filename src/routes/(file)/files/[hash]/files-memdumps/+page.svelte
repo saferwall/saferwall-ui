@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto, pushState } from '$app/navigation';
 	import { categoriesList, convertBytes, getArtifcatKind } from '$lib/utils';
-	import { quintOut } from 'svelte/easing';
+	import { cubicOut, quintOut } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
 	import type { PageData } from './$types';
 
@@ -35,8 +35,6 @@
 	}, {} as Record<string, boolean>);
 	$: categories =  Object.entries(checkboxes).filter(e => e[1]).map(e => e[0]);
 
-	$: console.log({checkboxes, categories});
-
 	function convertPerPageStringToNumber(perPageString: string) {
 		perPage = Number(perPageString);
 	}
@@ -48,7 +46,11 @@
 	let changes: string[] = [];
 
 	function subscribe(obj: Record<string, any>) {
-		changes = [...changes, Object.keys(obj)[0]];
+		let str = Object.keys(obj)[0];
+		if (!changes.includes(str)) {
+			changes = [...changes, str];
+		}
+		changes = [...changes];
 	}
 
 	let dontFireNext = true;
@@ -63,15 +65,13 @@
 
 	$: processChanges(changes);
 
-	const debouncedGetNewData = debounce(() => {
-		getNewData(1);
-	}, 500);
+	const debouncedGetNewData = debounce(getNewData, 500);
 
-	async function getNewData(curPage = currentPage) {
+	async function getNewData() {
 		awaiting = true;
 		const [res] = await tryCatch(data.client.getBehaviorArtifacts(data.behaviorId, categories, {
 			per_page: perPage,
-			page: curPage,
+			page: currentPage,
 		}, search));
 		awaiting = false;
 		changes = [];
@@ -83,30 +83,35 @@
 	}
 
 	async function processChanges(_changes: string[]) {
-		console.log({_changes, dontFireNext});
 		if (dontFireNext) {
 			dontFireNext = false;
 			changes = [];
 			return;
 		}
 		if (!_changes.length) return;
+
 		let newUrl = new URL($page.url);
-			newUrl.searchParams.set("page", currentPage.toString());
-			newUrl.searchParams.set("per_page", perPageString.toString());
-			if (search) {
-				newUrl.searchParams.set("q", search);
-			}
-			if (categories.length) {
-				newUrl.searchParams.set("categories", categories.join(","));
-			}
-			pushState(newUrl.toString(), "");
+		newUrl.searchParams.set("page", currentPage.toString());
+		newUrl.searchParams.set("per_page", perPageString.toString());
+		if (search) {
+			newUrl.searchParams.set("q", search);
+		} else {
+			newUrl.searchParams.delete("q");
+		}
+		if (categories.length) {
+			newUrl.searchParams.set("categories", categories.join(","));
+		} else {
+			newUrl.searchParams.delete("categories");
+		}
+		pushState(newUrl.toString(), "");
+	
+		if (changes.includes("perPage") || changes.includes("categories") || changes.includes("search")) {
+			currentPage = 1;
+		}
 		if (_changes.includes("search")) {
 			currentPage = 1;
 			debouncedGetNewData();
 		} else {
-			if (changes.includes("perPage")) {
-				currentPage = 1;
-			}
 			getNewData();
 		}
 	}
@@ -140,8 +145,6 @@
 	$: hash = data.hash;
 	$: behaviorId = data.behaviorId;
 
-	$: console.log({pagination, perPage, perPageString});
-
 	let awaiting = false;
 
 	const generateDownloadLink = (item: Saferwall.Behaviors.Artifacts): string => {
@@ -152,7 +155,7 @@
 <div class="container mx-auto flex flex-col gap-4 relative overflow-hidden rounded-xl">
 	<div
 		data-sveltekit-preload-data
-		class="flex flex-col bg-white dark:bg-zinc-900 text-zinc-800 dark:text-white rounded overflow-auto w-full h-full p-6"
+		class="flex flex-col rounded overflow-auto w-full h-full p-6 bg-secondary-surface"
 	>
 	<!-- bind:this={form} -->
 		<div
@@ -160,7 +163,7 @@
 			class="flex items-center justify-center gap-12"
 		>
 			<Input name="search" icon={awaiting ? "loading" : "search"} bind:value={search} placeholder="Search anything..." class="border-primary-border placeholder:text-searchbar-text" iconClass="text-gray-500 {awaiting ? "animate-spin" : ""}" />
-			<div class="grid grid-cols-2 gap-2 xl:gap-4 text-xs flex-shrink-0 flex-grow dark:text-zinc-200 text-zinc-800">
+			<div class="grid grid-cols-2 gap-2 xl:gap-4 text-xs flex-shrink-0 flex-grow ">
 				{#each categoriesList as item}
 						<!-- size="sm"
 						name="categories"
@@ -177,41 +180,53 @@
 		</div>
 	</div>
 
-	<Card padding={false} class="dark:bg-zinc-900">
+	<Card padding={false} class="bg-secondary-surface">
 		<div class="pb-2">
 			<table class="table-auto w-full">
-				<thead class="text-left uppercase text-zinc-600 dark:text-zinc-400 text-xs">
+				<thead class="text-left uppercase  text-xs">
 					<th colspan="2">File Name</th>
 					<th class="lg:w-44">Category</th>
 					<th class="lg:w-44">Verdict</th>
 					<th class="text-center w-fit"></th>
 				</thead>
-				<tbody class="divide-y divide-zinc-300 dark:divide-zinc-700">
+				<tbody class="divide-y divide-line-surface">
 					{#each items as item}
 						<tr class="cursor-pointer" on:click={() => (item._open = !item._open)}>
 							<td>
-								<div class={`transition-all duration-200 ${item._open ? '' : '-rotate-90'}`}>
-									<Icon name="arrow-down" size="w-3 h-5" />
-								</div>
+								<span class="flex flex-col min-h-8 justify-center">
+									<div class="min-h-[1lh] flex items-center justify-center rounded-full !size-5 {item._open ? "bg-brand-surface" : "bg-transparent"}">
+										<Icon
+											size="size-2.5"
+											name="arrow-down"
+											class="transition-all {item._open ? "text-white translate-y-[1px]" : "-rotate-90  text-brand-surface"}"
+										/>
+									</div>
+								</span>
 							</td>
 							<td>
-								<p>
-									{item.name}
+								<p class="flex flex-col">
+									<span class="flex flex-col min-h-8 justify-center {item._open ? "text-brand-text font-medium" : "text-primary-text"} transition-colors">
+										{item.name}
+									</span>
 								</p>
 							</td>
 							<td class="lg:w-44 capitalize">
-								{getArtifcatKind(item.kind)}
+								<span class="min-h-8 flex flex-col justify-center">
+									{getArtifcatKind(item.kind)}
+								</span>
 							</td>
 							<td class="lg:w-44">
-								<div class="font-medium text-sm {item.detection ? "text-alert-red bg-[#ED4060]/15 flex gap-2 items-center w-fit px-2.5 py-1 rounded-sm" : "text-secondary-text"}">
-									{#if item.detection}
-										<Icon name="unsafe" class="size-3.5"></Icon>
-									{/if}
-									{item.detection || 'N/A'}
-								</div>
+								<span class="min-h-8 flex flex-col justify-center">
+									<div class=" font-medium text-sm {item.detection ? "text-alert-red bg-[#ED4060]/15 flex gap-2 items-center w-fit px-2.5 py-1 rounded-sm" : "text-secondary-text"}">
+										{#if item.detection}
+											<Icon name="unsafe" class="size-3.5"></Icon>
+										{/if}
+										{item.detection || 'N/A'}
+									</div>
+								</span>
 							</td>
 							<td class="w-8">
-								<div class="flex flex-row items-center justify-center gap-2 w-fit">
+								<div class="flex flex-col items-center justify-center gap-2 w-fit">
 									<a
 										download={item.name}
 										href={generateDownloadLink(item)}
@@ -220,38 +235,37 @@
 									>
 										<Icon size="w-4 h-4" name="download-2" />
 									</a>
-									<!-- <div
-										class="flex items-center justify-center w-8 h-8 rounded-full bg-white border text-primary stroke-2"
-									>
-										<Icon size="w-4 h-4" name="eye" />
-									</div> -->
 								</div>
 							</td>
 						</tr>
-						<tr class="py-0 border-none">
-							<td class="!py-0" colspan="7">
-								{#if item._open}
-									<div
-										class="p-4 text-zinc-900 dark:text-zinc-100"
-										transition:slide={{ duration: 300, easing: quintOut, axis: 'y' }}
-									>
-										<div class="border rounded-lg border-zinc-300 dark:border-zinc-700">
-											<TableKeyValue
-												header={false}
-												lines={true}
-												items={Object.entries({
-													'File Size': convertBytes(item.size),
-													// @ts-ignore
-													Magic: item.magic,
-													SHA256: item.sha256,
-													'Matched Rules': item.matched_rules.join(', ')
-												}).filter(([_, val]) => val)}
-											/>
+						{#if item._open}
+							<tr class="py-0 border-none">
+								<td class="pb-4 px-10" colspan="7">
+									<!-- svelte-ignore a11y-click-events-have-key-events -->
+									<!-- svelte-ignore a11y-no-static-element-interactions -->
+									<div transition:slide={{ axis: 'y', duration: 150, easing: cubicOut }} on:click|stopPropagation>
+										<div class="px-5 py-2 rounded border border-line-surface cursor-auto shadow-[0px_1px_12px_0px_rgba(0,_0,_0,_0.07)] bg-p-tree-surface">
+											<table class="w-full">
+												<tbody class="divide-y divide-line-surface">
+													{#each Object.entries({
+														'File Size': convertBytes(item.size),
+														// @ts-ignore
+														Magic: item.magic,
+														SHA256: item.sha256,
+														'Matched Rules': item.matched_rules.join(', ')
+													}).filter(([_, val]) => val) as [key, value]}
+														<tr>
+															<th class="text-start whitespace-nowrap font-semibold">{key}</th>
+															<td class="whitespace-nowrap">{value}</td>
+														</tr>
+													{/each}
+												</tbody>
+											</table>
 										</div>
 									</div>
-								{/if}
-							</td>
-						</tr>
+								</td>
+							</tr>
+						{/if}
 					{:else}
 						<tr>
 							<td class="py-12 text-center" colspan="6">
@@ -303,10 +317,10 @@
 <style lang="postcss">
 	table {
 		thead {
-			@apply border-b border-zinc-300 dark:border-zinc-700;
+			@apply border-b border-line-surface;
 
 			th {
-				@apply font-medium py-4;
+				@apply font-semibold py-4 text-tertiary-text;
 
 				&:first-child,
 				&:last-child {
@@ -317,8 +331,9 @@
 
 		tbody {
 			tr td {
+				@apply align-top;
 				&:first-child {
-					@apply w-6 text-neutral-400;
+					@apply w-6;
 				}
 				&:first-child,
 				&:last-child {

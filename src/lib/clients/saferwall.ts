@@ -222,7 +222,7 @@ export class SaferwallClient {
 	) {
 		const params = this.generatePaginationParams(pagination);
 		if (categories && categories.length > 0) {
-			categories.forEach((kind) => params.append('kind', kind));
+			params.append('kind', categories.join(","));
 		}
 		if (query) {
 			params.append("q", query);
@@ -241,6 +241,7 @@ export class SaferwallClient {
 		const params = this.generatePaginationParams(pagination);
 		if (categories && categories.length > 0) {
 			categories.forEach((kind) => params.append('kind', kind));
+			// params.append('kind', categories.join(","));
 		}
 
 		let ret = await (this.fetch ?? fetch)(`/api/default_behavior_id/${hash}/artifacts?` + params.toString());

@@ -15,7 +15,7 @@ export const load = (async ({ url, parent, params }) => {
 
 	const search = url.searchParams.get('search');
 	const page = Math.abs(parseInt(url.searchParams.get('page')!) || 1);
-	const perPage = Math.abs(parseInt(url.searchParams.get('per_page')!) || 5);
+	const perPage = Math.abs(parseInt(url.searchParams.get('per_page')!) || 20);
 	const categories =
 		url.searchParams
 			.get('categories')
