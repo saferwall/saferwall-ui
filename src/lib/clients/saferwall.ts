@@ -217,11 +217,15 @@ export class SaferwallClient {
 	public async getBehaviorArtifacts(
 		behaviorId: string,
 		categories?: string[],
-		pagination?: Pagination
+		pagination?: Pagination,
+		query?: string,
 	) {
 		const params = this.generatePaginationParams(pagination);
 		if (categories && categories.length > 0) {
 			categories.forEach((kind) => params.append('kind', kind));
+		}
+		if (query) {
+			params.append("q", query);
 		}
 
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.Artifacts>>(

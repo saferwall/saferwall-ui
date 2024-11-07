@@ -34,6 +34,13 @@ export const artifactsKinds = {
 	memfree: 'Freed Buffers'
 };
 
+export const categoriesList = Object.entries(artifactsKinds).map(([name, label]) => {
+	return {
+		name,
+		label
+	};
+});
+
 /**
  * Parse mixed tags to basic tag name & category
  * @param fileTags mix of tags with value type string|array
