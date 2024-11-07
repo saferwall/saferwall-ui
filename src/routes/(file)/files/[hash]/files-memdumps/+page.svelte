@@ -96,6 +96,9 @@
 			if (search) {
 				newUrl.searchParams.set("q", search);
 			}
+			if (categories.length) {
+				newUrl.searchParams.set("categories", categories.join(","));
+			}
 			pushState(newUrl.toString(), "");
 		if (_changes.includes("search")) {
 			currentPage = 1;
