@@ -4,10 +4,12 @@ import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import rehypeSanitize from "rehype-sanitize";
-import rehypeStarryNight from "rehype-starry-night";
+import rehypeStarryNight, { type Options } from "rehype-starry-night";
 import remarkCustomHeaderId from "remark-custom-header-id";
 import { visit } from "unist-util-visit";
 import type { Element } from "hast";
+import { browser } from "$app/environment";
+import { onigBase64 } from "./onig";
 
 export const processor = unified()
 	.use(remarkParse)
@@ -70,5 +72,9 @@ export const processor = unified()
 			})
 		}
 	})
-	.use(rehypeStarryNight)
+	.use(rehypeStarryNight, browser ? { getOnigurumaUrlFetch: () => {
+		let ret = new URL(onigBase64);
+		console.log({ret});
+		return ret;
+	}, } : {})
 	.use(rehypeStringify);

@@ -2,6 +2,10 @@
 	import "../app.css";
 	import NProgress from "nprogress";
 	import { navigating } from "$app/stores";
+	import { onMount } from "svelte";
+	import { browser } from "$app/environment";
+	import { isLight, parseTheme, Theme, theme } from "$lib/stores/theme";
+	import { THEME_KEY } from "$lib/config";
 	
 	NProgress.configure({
 		minimum: 0.16
@@ -13,6 +17,30 @@
 		}
 		if (!$navigating) {
 			NProgress.done();
+		}
+	}
+
+	let mounted = false;
+	onMount(() => {
+		mounted = true;
+		const localTheme = localStorage.getItem(THEME_KEY);
+		if (localTheme) {
+			console.log({localTheme, $theme});
+			$theme = parseTheme(localTheme);
+		}
+	})
+
+	$: {
+		if (mounted && browser) {
+			document.cookie = `theme=${$theme}; max-age=${31_536_000}; path=/`;
+
+			if ($theme === Theme.SYSTEM) {
+				localStorage.removeItem(THEME_KEY);
+			} else {
+				localStorage.setItem(THEME_KEY, $theme);
+			}
+			document.documentElement.classList.toggle(Theme.LIGHT, $isLight);
+			document.documentElement.classList.toggle(Theme.DARK, !$isLight);
 		}
 	}
 </script>

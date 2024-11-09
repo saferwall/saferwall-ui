@@ -12,7 +12,8 @@
 	import { CommentApi, Configuration } from "$lib/api";
 	import { goto, invalidateAll } from "$app/navigation";
 	import { titleExtraStore } from "$lib/utils/fileMenu";
-	import { onDestroy } from "svelte";
+	import { onDestroy, onMount } from "svelte";
+	import { browser } from "$app/environment";
 
 
 	NProgress.configure({
@@ -23,6 +24,11 @@
 
 	$: comments = data.pagination.items;
 	$: $titleExtraStore = ` (${comments.length})`;
+
+	let mounted = false;
+	onMount(() => {
+		mounted = true;
+	})
 
 	onDestroy(() => {
 		$titleExtraStore = "";
@@ -42,7 +48,9 @@
 		</div>
 	{/if}
 	<Card spacing={false}>
-		<Editor bind:value={comment} theme={$themeString} placeholder="Add your comment here..."></Editor>
+		{#if browser && mounted}
+			<Editor bind:value={comment} theme={$themeString} placeholder="Add your comment here..."></Editor>
+		{/if}
 		<div class="w-full flex pt-4">
 			<Button class="grow md:grow-0" size="sm" loading={postingComment} disabled={!comment} title="{comment ? "" : "Cannot post an empty comment"}" on:click={() => {
 				if (!data?.session?.token || !data?.session?.username) {

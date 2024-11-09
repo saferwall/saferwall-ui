@@ -38,18 +38,15 @@
 			? theme
 			: (['light', 'dark'] as const)[Number($systemPrefersDarkMode.matches)];
 
-	$: exts = [
-		...extensions,
-		realTheme === 'light'
-			? vscodeLightInit({
+	const vscLight = vscodeLightInit({
 					settings: {
 						lineHighlight: '#f0f0f07f',
 						selectionMatch: '#f0f0f0',
 						fontFamily: 'JetBrains Mono',
 						fontSize: '14px'
 					}
-				})
-			: vscodeDarkInit({
+				});
+	const vscDark = vscodeDarkInit({
 					settings: {
 						background: 'transparent',
 						gutterBackground: 'transparent',
@@ -72,7 +69,12 @@
 							color: '#ce9178'
 						}
 					]
-				})
+				});
+	$: exts = [
+		...extensions,
+		(realTheme === 'light'
+			? vscLight
+			: vscDark)
 	];
 
 	let viewEl: HTMLElement;
