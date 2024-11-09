@@ -8,7 +8,6 @@ import rehypeStarryNight, { type Options } from "rehype-starry-night";
 import remarkCustomHeaderId from "remark-custom-header-id";
 import { visit } from "unist-util-visit";
 import type { Element } from "hast";
-import { browser } from "$app/environment";
 import { onigBase64 } from "./onig";
 
 export const processor = unified()
@@ -72,9 +71,5 @@ export const processor = unified()
 			})
 		}
 	})
-	.use(rehypeStarryNight, browser ? { getOnigurumaUrlFetch: () => {
-		let ret = new URL(onigBase64);
-		console.log({ret});
-		return ret;
-	}, } : {})
+	.use(rehypeStarryNight, { getOnigurumaUrlFetch: () => new URL(onigBase64) })
 	.use(rehypeStringify);
