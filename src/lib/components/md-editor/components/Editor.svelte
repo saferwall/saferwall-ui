@@ -129,7 +129,6 @@
 	}
 	$: {
 		if (mounted && browser) {
-			console.log({borderBox});
 			resizable.resizable(show === 'split');
 		}
 	}

@@ -25,7 +25,6 @@
 		mounted = true;
 		const localTheme = localStorage.getItem(THEME_KEY);
 		if (localTheme) {
-			console.log({localTheme, $theme});
 			$theme = parseTheme(localTheme);
 		}
 	})

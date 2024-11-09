@@ -27,7 +27,6 @@
 			)[0]
 		: [];
 
-	$: console.log({hex});
 	const dispatch = createEventDispatcher();
 	const onClickLoadMore = () => {
 		dispatch('load');
