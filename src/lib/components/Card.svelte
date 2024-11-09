@@ -11,7 +11,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <article
-	class="{twMerge("card relative overflow-hidden bg-neutral-600 text-gray-100 rounded", $$props.class)}"
+	class="{twMerge("card relative overflow-hidden bg-neutral-600 rounded", $$props.class)}"
 	class:card--flex={flex}
 	class:card--padding={padding}
 	class:card--spacing={spacing}

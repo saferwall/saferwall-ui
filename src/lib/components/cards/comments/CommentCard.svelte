@@ -7,7 +7,8 @@
 	import Icon from '$lib/components/Icon.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Card from '../../Card.svelte';
-	import Viewer from './Viewer.svelte';
+	import Viewer from '$lib/components/md-editor/components/Viewer.svelte';
+	import { themeString } from '$lib/stores/theme';
 
 	export let author: Saferwall.Author;
 	export let comment: string;
@@ -15,20 +16,20 @@
 </script>
 
 <Card spacing={false}>
-	<div class="flex space-x-6 items-center">
-		<Avatar size="md" username={author.username} />
-		<div class="text-xs">
-			<a href="/users/{author.username}" class="font-bold">{author.username}</a>
-			<p class="text-neutral-500">Member since {getMemberSince(author.member_since)}</p>
-		</div>
-		<div>
+	<div class="flex gap-2.5 items-center">
+		<Avatar size="md" class="size-10" username={author.username} />
+		<div class="flex gap-[1.375rem] items-center">
+			<div class="text-xs">
+				<a href="/users/{author.username}" class="font-bold">{author.username}</a>
+				<p class="text-tertiary-text">Member since {getMemberSince(author.member_since)}</p>
+			</div>
 			<Button size="xss">Follow</Button>
 		</div>
 	</div>
 	<section class="my-2">
-		<Viewer value={comment} />
+		<Viewer value={comment} theme={$themeString}/>
 	</section>
-	<div class="flex items-center text-neutral-500 space-x-2">
+	<div class="flex items-center text-tertiary-text space-x-2">
 		<Icon name="calendar" size="w-4 h-4" />
 		<DateTime {date} />
 	</div>

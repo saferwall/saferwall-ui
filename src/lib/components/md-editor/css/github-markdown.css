@@ -1,0 +1,12 @@
+@import "./github-markdown-dark.css";
+@import "./github-markdown-light.css";
+
+.markdown-body .header-link {
+	@apply flex items-center gap-1;
+	a {
+		@apply opacity-0;
+	}		
+	&:hover a, a:focus {
+		@apply opacity-100;
+	}
+}

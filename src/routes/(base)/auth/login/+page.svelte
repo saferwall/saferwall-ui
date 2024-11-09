@@ -3,13 +3,13 @@
 	import Alert from '$lib/components/Alert.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Input from '$lib/components/form/Input.svelte';
-	import type { SubmitFunction } from './$types';
+	import type { SubmitFunction } from '@sveltejs/kit';
 
 	let loading = false;
 	let error: string = '';
 	let errors: Record<string, boolean> = {};
 
-	const handleFormSubmit: SubmitFunction = ({action}) => {
+	const handleFormSubmit: SubmitFunction = () => {
 		error = '';
 		errors = {};
 		loading = true;

@@ -24,7 +24,7 @@ export const systemPrefersDarkMode: Readable<{ matches: boolean }> = {
 	}
 }
 export const isLight = derived([theme, systemPrefersDarkMode], ([theme, { matches: prefersDark }]) => theme === Theme.LIGHT || (theme === Theme.SYSTEM && !prefersDark))
-export const themeString = derived(isLight, (isLight) => ["dark", "light"][Number(isLight)]);
+export const themeString: Readable<"dark" | "light"> = derived(isLight, (isLight) => (["dark", "light"] as const)[Number(isLight)]);
 export const oppositeThemeString = derived(isLight, (isLight) => ["dark", "light"][Number(!isLight)]);
 
 

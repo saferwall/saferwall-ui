@@ -56,11 +56,17 @@ export class SaferwallClient {
 		const urlString = `${endpoint.startsWith("https://") ? "" : this.config.url}${endpoint}`;
 		const init: RequestInit = {
 			headers: {
-				...(mimicBrowser ? { "User-Agent": "Chromium" }: {}),
+				...(mimicBrowser ? { "User-Agent": "Chromium" } : {}),
 				...(args.headers ?? {})
 			},
 			...args
 		};
+		if (init.method === "POST") {
+			init.headers = {
+				...init.headers,
+				"Content-Type": "application/json"
+			};
+		}
 		const _fetch = this.fetch ?? fetch;
 		const response: any = await _fetch(urlString, 
 			this.setAuthHeaders(init)
@@ -303,7 +309,7 @@ export class SaferwallClient {
 		});
 	}
 
-	public async singIn(data: LoginDto) {
+	public async login(data: LoginDto) {
 		return this.request<Saferwall.Session>('auth/login', {
 			method: 'POST',
 			body: JSON.stringify(data)

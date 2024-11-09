@@ -38,7 +38,7 @@
 		&__label {
 			@apply font-light;
 			@apply absolute transition-all;
-			@apply text-neutral-500 left-4 top-1/2 -translate-y-1/2 text-base;
+			@apply left-4 top-1/2 -translate-y-1/2 text-base;
 		}
 
 		.icon {

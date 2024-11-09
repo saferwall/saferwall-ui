@@ -60,7 +60,7 @@
 					<a
 						class="file__navbar__link"
 						class:active={isPathActive(item.path)}
-						href={new URL(generateFilePath(item.path) + $page.url.search, $page.url.href).toString()}>{item.name}</a
+						href={new URL(generateFilePath(item.path) + `?behavior_id=${$page.url.searchParams.get("behavior_id")}`, $page.url.href).toString()}>{item.name}</a
 					>
 				</li>
 			{/each}

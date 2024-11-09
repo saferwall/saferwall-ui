@@ -1,9 +1,8 @@
-<script>
-	import '../app.css';
-
-	import NProgress from 'nprogress';
-	import { navigating } from '$app/stores';
-
+<script lang="ts">
+	import "../app.css";
+	import NProgress from "nprogress";
+	import { navigating } from "$app/stores";
+	
 	NProgress.configure({
 		minimum: 0.16
 	});

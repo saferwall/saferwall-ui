@@ -205,7 +205,7 @@
 							</td>
 							<td>
 								<p class="flex flex-col">
-									<span class="flex flex-col min-h-8 justify-center {item._open ? "text-brand-text font-medium" : "text-primary-text"} transition-colors">
+									<span class="flex flex-col min-h-8 justify-center {item._open ? "text-brand-text font-medium tracking-[0.015em]" : "text-primary-text tracking-wide"} transition-colors">
 										{item.name}
 									</span>
 								</p>
@@ -269,7 +269,7 @@
 					{:else}
 						<tr>
 							<td class="py-12 text-center" colspan="6">
-								It looks like we didn't find any data.
+								No results found.
 							</td>
 						</tr>
 					{/each}
