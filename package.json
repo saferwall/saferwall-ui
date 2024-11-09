@@ -1,6 +1,6 @@
 {
 	"name": "saferwall",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"private": true,
 	"scripts": {
 		"d": "sudo PATH=\"$PATH\" bash -c 'npm run dev'",
