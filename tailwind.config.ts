@@ -8,6 +8,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
+				"jetbrains-mono": `"JetBrains Mono"`,
 				primary: 'Inter'
 			},
 			fontWeight: {
@@ -179,6 +180,7 @@ export default {
 		}
 	},
 	plugins: [
+		// @ts-ignore
 		require('@tailwindcss/typography'),
 		plugin(function ({ addUtilities }) {
 			addUtilities({

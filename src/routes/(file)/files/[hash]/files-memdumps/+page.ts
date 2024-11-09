@@ -1,14 +1,7 @@
-import { artifactsKinds } from '$lib/utils';
+import { categoriesList } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { tryCatch } from '$lib/utils/try_catch';
-
-const categoriesList = Object.entries(artifactsKinds).map(([name, label]) => {
-	return {
-		name,
-		label
-	};
-});
 
 export const load = (async ({ url, parent, params }) => {
 	const {
@@ -22,7 +15,7 @@ export const load = (async ({ url, parent, params }) => {
 
 	const search = url.searchParams.get('search');
 	const page = Math.abs(parseInt(url.searchParams.get('page')!) || 1);
-	const perPage = Math.abs(parseInt(url.searchParams.get('per_page')!) || 200);
+	const perPage = Math.abs(parseInt(url.searchParams.get('per_page')!) || 20);
 	const categories =
 		url.searchParams
 			.get('categories')
@@ -41,7 +34,6 @@ export const load = (async ({ url, parent, params }) => {
 
 	return {
 		behaviorId: behaviorReportId,
-		categories: categoriesList,
 		filters: {
 			categories
 		},

@@ -56,11 +56,17 @@ export class SaferwallClient {
 		const urlString = `${endpoint.startsWith("https://") ? "" : this.config.url}${endpoint}`;
 		const init: RequestInit = {
 			headers: {
-				...(mimicBrowser ? { "User-Agent": "Chromium" }: {}),
+				...(mimicBrowser ? { "User-Agent": "Chromium" } : {}),
 				...(args.headers ?? {})
 			},
 			...args
 		};
+		if (init.method === "POST") {
+			init.headers = {
+				...init.headers,
+				"Content-Type": "application/json"
+			};
+		}
 		const _fetch = this.fetch ?? fetch;
 		const response: any = await _fetch(urlString, 
 			this.setAuthHeaders(init)
@@ -217,11 +223,15 @@ export class SaferwallClient {
 	public async getBehaviorArtifacts(
 		behaviorId: string,
 		categories?: string[],
-		pagination?: Pagination
+		pagination?: Pagination,
+		query?: string,
 	) {
 		const params = this.generatePaginationParams(pagination);
 		if (categories && categories.length > 0) {
-			categories.forEach((kind) => params.append('kind', kind));
+			params.append('kind', categories.join(","));
+		}
+		if (query) {
+			params.append("q", query);
 		}
 
 		return this.request<Saferwall.Pagination<Saferwall.Behaviors.Artifacts>>(
@@ -237,6 +247,7 @@ export class SaferwallClient {
 		const params = this.generatePaginationParams(pagination);
 		if (categories && categories.length > 0) {
 			categories.forEach((kind) => params.append('kind', kind));
+			// params.append('kind', categories.join(","));
 		}
 
 		let ret = await (this.fetch ?? fetch)(`/api/default_behavior_id/${hash}/artifacts?` + params.toString());
@@ -298,7 +309,7 @@ export class SaferwallClient {
 		});
 	}
 
-	public async singIn(data: LoginDto) {
+	public async login(data: LoginDto) {
 		return this.request<Saferwall.Session>('auth/login', {
 			method: 'POST',
 			body: JSON.stringify(data)

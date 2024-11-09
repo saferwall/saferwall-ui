@@ -9,6 +9,7 @@
 	import { onMount } from 'svelte';
 	import CopyPopup from './CopyPopup.svelte';
 	import { page } from '$app/stores';
+	import { titleExtraStore } from '$lib/utils/fileMenu';
 
 	export let hash: string;
 	export let behaviorId: string | null;
@@ -42,8 +43,9 @@
 <section class="file__header no-scroll-style">
 	<div class="flex items-end justify-between space-x-12">
 		<div class="flex flex-col min-w-0">
-			<h1 class="text-3xl font-semibold">
+			<h1 class="text-xl font-semibold">
 				{activeMenu.fullName || activeMenu.name}
+				<span class="text-lg text-secondary-text">{$titleExtraStore}</span>
 			</h1>
 			<h2 class="block relative min-w-0 overflow-visible h-[1lh]">
 				<CopyPopup value={hash} copiedText="Hash Copied !" class="w-full text-secondary-text" popupClass="w-[80%]" popupPosition="right"/>

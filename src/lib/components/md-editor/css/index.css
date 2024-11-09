@@ -1,0 +1,19 @@
+@import "./github-markdown.css";
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	* {
+		/* @apply border-gray-200; */
+	}
+	/* @apply text-slate-900; */
+	.dark {
+		* {
+			/* @apply border-gray-800; */
+		}
+		/* @apply text-slate-200; */
+	}
+}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_AVATAR_API_URL } from '$env/static/public';
+	import { twMerge } from 'tailwind-merge';
 
 	const DEFAULT_AVATAR = '/images/default-avatar.svg';
 
@@ -15,9 +16,11 @@
 	const onImageError = (event: Event & { currentTarget: EventTarget & Element }) => {
 		(event.currentTarget as HTMLImageElement).src = DEFAULT_AVATAR;
 	};
+	let Class = "";
+	export { Class as class }
 </script>
 
-<a class="avatar avatar--{size}" on:click href="/users/{username}">
+<a class={twMerge(`avatar avatar--${size}`, Class)} on:click href="/users/{username}">
 	{#if avatarImage}
 		<img
 			class="avatar__image"

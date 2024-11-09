@@ -5,7 +5,9 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import Avatar from '$lib/components/Avatar.svelte';
 	import DateTime from '$lib/components/DateTime.svelte';
-	import Viewer from '$lib/components/cards/comments/Viewer.svelte';
+	// import Viewer from '$lib/components/cards/comments/Viewer.svelte';
+	import Viewer from '$lib/components/md-editor/components/Viewer.svelte';
+	import { themeString } from '$lib/stores/theme';
 
 	export let data: PageData;
 
@@ -33,7 +35,7 @@
 						</div>
 					</div>
 					<div class="bg-zinc-50 dark:bg-zinc-800 dark:border-zinc-800 border border-opacity-20 border-zinc-300 w-full p-2 rounded">
-						<Viewer value={item.comment}></Viewer>
+						<Viewer value={item.comment} theme={$themeString}></Viewer>
 					</div>
 				</div>
 				<InputHash hash={item.file.hash} behavior_id={item.file?.default_behavior_id} />

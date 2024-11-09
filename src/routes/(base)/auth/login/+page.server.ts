@@ -36,11 +36,10 @@ export const actions = {
 		}
 
 		try {
-			const session = await client.singIn({
+			const session = await client.login({
 				username,
 				password
 			});
-
 			cookies.set(SESSION_KEY, JSON.stringify(session), {
 				httpOnly: true,
 				secure: true,
