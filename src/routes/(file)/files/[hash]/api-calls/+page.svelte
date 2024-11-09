@@ -30,7 +30,6 @@
 	];
 
 	$: getProcName = (pid: string) => {
-		console.log({pid, filters, filtersmaybe: data.filters});
 		return filters.find((f) => f.pid == pid)?.proc_name!
 	};
 

@@ -18,7 +18,6 @@ export class WorkerWrapper<Request, Response = Request> {
 		this.worker.onmessage = (e: MessageEvent<Response>) => {
 			v(e);
 			if (this.cacheForNext !== undefined) {
-				console.log("posting");
 				this.worker.postMessage(this.cacheForNext);
 				this.cacheForNext = undefined;
 			} else {
