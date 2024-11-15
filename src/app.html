@@ -21,4 +21,10 @@
 	<body data-sveltekit-preload-data="tap" class="text-primary-text">
 		<div id="app">%sveltekit.body%</div>
 	</body>
+	<script>
+		let theme = localStorage.getItem("theme");
+		if (!theme) {
+			document.documentElement.classList.add(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+		}
+	</script>
 </html>
