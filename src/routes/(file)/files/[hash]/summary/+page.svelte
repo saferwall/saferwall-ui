@@ -27,7 +27,7 @@
 	$: indicators = behavior?.capabilities;
 </script>
 
-<section class="container mx-auto space-y-6">
+<section class="mx-auto space-y-6">
 	<FileSummaryCard {...summaryCard} />
 	<BasePropsCard {properties} />
 	{#if exif && Object.keys(exif).length}
