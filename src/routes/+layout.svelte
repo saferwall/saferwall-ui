@@ -6,7 +6,7 @@
 	import { browser } from "$app/environment";
 	import { isLight, parseTheme, Theme, theme } from "$lib/stores/theme";
 	import { THEME_KEY } from "$lib/config";
-	
+
 	NProgress.configure({
 		minimum: 0.16
 	});

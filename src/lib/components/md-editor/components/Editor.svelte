@@ -5,7 +5,7 @@
 	import { type Extension } from '@codemirror/state';
 	import Viewer from './WorkerViewer.svelte';
 	import CodeMirror, { type ThemeSpec } from './CodeMirror.svelte';
-	import { systemPrefersDarkMode, type ColorTheme } from '../util.ts';
+	import { type ColorTheme } from '../util.ts';
 	import EditorButtons from './EditorButtons.svelte';
 	import { vscodeDarkInit, vscodeLightInit } from '@uiw/codemirror-theme-vscode';
 	import { tags } from '@lezer/highlight';
@@ -14,6 +14,7 @@
 	import interact from 'interactjs';
 	import { browser } from '$app/environment';
 	import type { Interactable } from '@interactjs/types';
+	import { systemPrefersDarkMode } from '$lib/stores/theme.ts';
 
 	export let value: string;
 	export let theme: ColorTheme = 'system';

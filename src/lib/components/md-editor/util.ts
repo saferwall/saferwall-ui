@@ -27,15 +27,4 @@ export function debounce<T extends (...args: any[]) => any>(func: T, threshold: 
     } as T;
 }
 
-export const systemPrefersDarkMode: Readable<{ matches: boolean }> = {
-	subscribe(callback) {
-		const windowMatchMedia = window.matchMedia("(prefers-color-scheme: dark)");
-		callback(windowMatchMedia); // get initial
-		windowMatchMedia.addEventListener("change", callback) // listen for change
-		return () => {
-			windowMatchMedia.removeEventListener("change", callback);
-		}
-	}
-}
-
 export type ColorTheme = "light" | "dark" | "system"

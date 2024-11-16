@@ -1,10 +1,11 @@
 <script lang="ts">
 	import "../css/github-markdown.css"
-    import { systemPrefersDarkMode, type ColorTheme } from "../util.ts";
+    import { type ColorTheme } from "../util.ts";
     import { onMount } from "svelte";
 	import Worker from "../viewer_worker?worker"
     import { WorkerWrapper } from "../worker_wrapper.ts";
     import { twMerge } from "tailwind-merge";
+	import { systemPrefersDarkMode } from "$lib/stores/theme.ts";
 
 	export let value: string;
 	export let theme: ColorTheme = "system";
