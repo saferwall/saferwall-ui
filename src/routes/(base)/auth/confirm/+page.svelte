@@ -16,10 +16,11 @@
 		errors = {};
 		loading = true;
 
-		return async ({ result: { data, type }, update }) => {
+		return async ({ result, update }) => {
 			loading = false;
-
-			if (type === 'failure') {
+			
+			if (result.type === 'failure') {
+				let data: Record<string, any> = result.data!;
 				errors = data;
 				error = data?.message;
 
@@ -37,25 +38,25 @@
 </svelte:head>
 
 {#if finished}
-	<AuthActionDone
-		title="Email sent !"
-		description="If your email is in our system, you will receive <br />instructions to reset your password shortly."
-	/>
+	<AuthActionDone title="Email sent !" imageClass="size-14">
+		<p class="text-center">If your email is in our system, you will receive instructions to reset your password shortly.</p>
+	</AuthActionDone>
 {:else}
 	<form
 		use:enhance={handleFormSubmit}
 		method="POST"
-		class="flex flex-col space-y-6 px-10 lg:px-16 py-14"
+		class="flex flex-col gap-4 px-[40px] py-[35px]"
 	>
-		<h1 class="text-3xl font-bold">Didn’t confirm registration ?</h1>
+		<h1 class="text-2xl font-bold">Didn’t confirm registration ?</h1>
 		{#if error}
 			<Alert type="error" on:close={() => (error = '')}>{error}</Alert>
 		{/if}
-		<p class="text-neutral-700">
+		<p>
 			Enter your account email address and we’ll send you a link to confirm your email.
 		</p>
 		<div class="space-y-4">
 			<Input
+				class="border-primary-border"
 				required
 				error={errors.email}
 				label="Email"
