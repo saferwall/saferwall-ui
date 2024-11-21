@@ -5,6 +5,7 @@
 	import Button from '$lib/components/form/Button.svelte';
 	import AuthActionDone from '$lib/components/AuthActionDone.svelte';
 	import type { SubmitFunction } from './$types';
+	import { page } from '$app/stores';
 
 	let loading = false;
 	let finished = false;
@@ -31,6 +32,8 @@
 			update();
 		};
 	};
+
+	let email = $page.url.searchParams.get("id") || "";
 </script>
 
 <svelte:head>
@@ -38,7 +41,7 @@
 </svelte:head>
 
 {#if finished}
-	<AuthActionDone title="Email sent !" imageClass="size-14">
+	<AuthActionDone title="Confirmation email sent" imageClass="size-14">
 		<p class="text-center">If your email is in our system, you will receive instructions to reset your password shortly.</p>
 	</AuthActionDone>
 {:else}
@@ -56,6 +59,7 @@
 		</p>
 		<div class="space-y-4">
 			<Input
+				value={email}
 				class="border-primary-border"
 				required
 				error={errors.email}
