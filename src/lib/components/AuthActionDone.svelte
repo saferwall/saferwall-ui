@@ -1,15 +1,20 @@
 <script lang="ts">
+	import { twMerge } from "tailwind-merge";
+
 	export let title = '';
-	export let description = '';
-	export let image = 'illustration-email-sent';
-	export let imageSize = 'w-36 h-36';
+	export let image = 'image-email-sent';
+	export let imageClass = 'w-36 h-36';
+	export let textClass = "";
+	let Class = "";
+	export { Class as class };
 </script>
 
-<div class="px-14 py-16 flex flex-col items-center space-y-6">
-	<svg class={imageSize}><use href="/images/icons.svg#{image}" /></svg>
-	<div class="flex flex-col items-center space-y-3">
-		<h1 class="text-2xl font-bold">{title}</h1>
-		<p class="text-neutral-700">{@html description}</p>
+<div class={twMerge("px-[40px] py-[35px] flex flex-col items-center gap-4 w-full max-w-[450px]", Class)}>
+	<svg class={imageClass}>
+		<use href="/images/icons.svg#{image}" />
+	</svg>
+	<div class={twMerge("flex flex-col items-center gap-2", textClass)}>
+		<h1 class="text-lg font-bold">{title}</h1>
+		<slot />
 	</div>
-	<slot />
 </div>

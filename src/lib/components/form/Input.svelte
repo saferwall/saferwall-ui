@@ -8,6 +8,8 @@
 	export let error = false;
 	export let value: string | undefined = undefined;
 	export let iconClass = "";
+	export let starsForBullets = false;
+	export let labelClass = "";
 
 	const isPassword = type === 'password';
 	$: passwordVisible = type !== 'password';
@@ -24,7 +26,7 @@
 		</svg>
 	{/if}
 	{#if label}
-		<span class="input__label">{label}</span>
+		<span class="input__label {labelClass}">{label}</span>
 	{/if}
 	<input
 		{...$$props}
@@ -32,17 +34,26 @@
 		bind:value
 		{...{type}}
 		{placeholder}
-		class="input__element bg-transparent {$$props.class} {icon ? 'input--icon' : ''}"
+		class="input__element bg-transparent {starsForBullets && type === "password" ? "font-bold font-['pwd']" : ""} {$$props.class} {icon ? 'input--icon' : ''}"
 		data-class="input__element {$$props.class} {icon ? 'input--icon' : ''}"
 	/>
 	{#if isPassword}
-		<button class="password-icon outline-none border-none" class:visible={passwordVisible} type="button" on:click={onClick}>
-			<svg><use href="/images/icons.svg#icon-eye" /></svg>
+		<button class="password-icon outline-none border-none text-primary-icn flex items-center justify-center" type="button" on:click={onClick}>
+			<svg class="size-7">
+				<use href="/images/icons.svg#icon-password-visible" class:hidden={passwordVisible}/>
+				<use href="/images/icons.svg#icon-password-invisible" class:hidden={!passwordVisible}/>
+			</svg>
 		</button>
 	{/if}
 </label>
 
 <style lang="postcss">
+	@font-face {
+		font-family: 'pwd';
+		src: url('/pwd.woff2') format('woff2');
+		font-weight: normal;
+		font-style: normal;
+	}
 	
 	.input {
 		@apply flex w-full relative;
@@ -100,7 +111,7 @@
 		}
 
 		.password-icon {
-			@apply w-6 h-6;
+			@apply size-6;
 			@apply text-neutral-400 hover:cursor-pointer hover:text-neutral-100;
 			@apply absolute right-3 -translate-y-1/2 top-1/2;
 

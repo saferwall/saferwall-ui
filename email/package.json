@@ -1,0 +1,40 @@
+{
+	"name": "saferwall",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"ln": "bash ln.sh",
+		"dev": "vite dev",
+		"predev": "npm run ln",
+		"build": "vite build",
+		"prebuild": "npm run ln",
+		"preview": "vite preview"
+	},
+	"type": "module",
+	"devDependencies": {
+		"@csstools/postcss-light-dark-function": "^2.0.6",
+		"@sveltejs/adapter-auto": "^3.2.2",
+		"@sveltejs/adapter-static": "^3.0.6",
+		"@sveltejs/kit": "^2.8.0",
+		"@sveltejs/vite-plugin-svelte": "^3.1.1",
+		"@tailwindcss/typography": "^0.5.13",
+		"@vitejs/plugin-basic-ssl": "^1.1.0",
+		"autoprefixer": "^10.4.19",
+		"dotenv": "^16.4.5",
+		"postcss": "^8.4.39",
+		"svelte": "^4.2.18",
+		"svelte-check": "^3.8.4",
+		"tailwind-merge": "^2.4.0",
+		"tailwindcss": "^3.4.6",
+		"tslib": "^2.6.3",
+		"typescript": "^5.5.3",
+		"vite": "^5.4.8",
+		"vite-plugin-html": "^3.2.2",
+		"vite-plugin-inline-source": "^2.5.2",
+		"vitest": "^2.0.3",
+		"wrangler": "^3.65.1"
+	},
+	"dependencies": {
+		"vite-plugin-ejs": "^1.7.0"
+	}
+}

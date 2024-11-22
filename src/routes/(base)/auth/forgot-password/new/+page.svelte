@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
 	import Alert from '$lib/components/Alert.svelte';
 	import AuthActionDone from '$lib/components/AuthActionDone.svelte';
 	import Button from '$lib/components/form/Button.svelte';
@@ -16,10 +17,11 @@
 		errors = {};
 		loading = true;
 
-		return async ({ result: { data, type }, update }) => {
+		return async ({ result, update }) => {
 			loading = false;
-
-			if (type === 'failure') {
+			
+			if (result.type === 'failure') {
+				let data: Record<string, any> = result.data!;
 				errors = data;
 				error = data?.message;
 
@@ -38,34 +40,39 @@
 
 {#if finished}
 	<AuthActionDone
-		imageSize="w-24 h-24"
-		image="illustration-done"
-		title="Congratulation !"
-		description="Your password has been successfully reset."
+		imageClass="size-20"
+		image="image-circle-check"
+		title="Congratulations !"
+		class="gap-0"
 	>
-		<Button href="/auth/login" theme="brand" size="lg">Login</Button>
+		<div class="flex flex-col items-center gap-4">
+			<p>Your password has been successfully reset.</p>
+			<Button href="/auth/login?id={$page.url.searchParams.get("id") || ""}" theme="brand" size="lg" class="py-[10px] px-[25px] bg-brand-surface">Login</Button>
+		</div>
 	</AuthActionDone>
 {:else}
 	<form
 		method="POST"
 		use:enhance={handleFormSubmit}
-		class="flex flex-col space-y-6 px-10 lg:px-16 py-14"
+		class="flex flex-col gap-4 px-[40px] py-[35px]"
 	>
-		<h1 class="text-3xl font-bold">New password</h1>
+		<h1 class="text-2xl font-bold">New password</h1>
 		{#if error}
 			<Alert type="error" on:close={() => (error = '')}>{error}</Alert>
 		{/if}
-		<p class="text-neutral-700">Enter your new password</p>
+		<p>Enter your new password.</p>
 		<div class="space-y-4">
 			<Input
+				class="border-primary-border"
 				required
 				error={errors.password}
 				label="New Password"
+				starsForBullets
 				type="password"
 				name="password"
 				disabled={loading}
 			/>
 		</div>
-		<Button {loading} type="submit" theme="brand" size="lg">Change password</Button>
+		<Button {loading} type="submit" theme="brand" size="lg">Reset password</Button>
 	</form>
 {/if}

@@ -20,11 +20,13 @@
 </svelte:head>
 
 <FileNavbar {hash} {activeMenu} activeFileMenu={$fileMenuStore} {loggedIn} {client} />
-<main class="flex-1 flex flex-col h-full bg-background mx-4">
-	<FileHeading {client} {activeMenu} {hash} {behaviorId} {loggedIn}
-	/>
-	<!-- {liked}  -->
-	<div class="flex flex-col flex-1 pt-4 pb-10">
-		<slot />
+<main class="h-full flex flex-col items-center bg-background lg:px-12 px-4">
+	<div class="container flex-1 flex flex-col">
+		<FileHeading {client} {activeMenu} {hash} {behaviorId} {loggedIn}
+		/>
+		<!-- {liked}  -->
+		<div class="flex flex-col flex-1 pt-4 pb-10">
+			<slot />
+		</div>
 	</div>
 </main>

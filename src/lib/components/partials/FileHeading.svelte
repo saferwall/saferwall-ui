@@ -111,7 +111,7 @@
 	}
 
 	.file__header {
-		@apply container mx-auto pt-6 pb-2 mb-2;
+		@apply pt-6 pb-2 mb-2;
 		@apply text-neutral-100;
 	}
 </style>
