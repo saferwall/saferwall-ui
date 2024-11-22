@@ -14,10 +14,10 @@
 			<svg class="w-32" inline-source src="src/logo.svg"></svg>
 		</a>
 		<main class="flex flex-col gap-2 items-start">
-			<p class="text-lg font-semibold">Hi <%= username %> !</p>
+			<p class="text-lg font-semibold">Hi <%- username %> !</p>
 			<p>Thank you for signing up with <span class="font-semibold">Saferwall</span> ! Please confirm your registration by clicking the button below.</p>
 			<button class="mt-2">
-				<a href="<%= verify_account_link %>" class="text-white font-semibold rounded-sm text-sm bg-brand-surface px-6 py-3">Confirm your registration</a>
+				<a href="<%- verify_account_link %>" class="text-white font-semibold rounded-sm text-sm bg-brand-surface px-6 py-3">Confirm your registration</a>
 			</button>
 			<p class="mt-8">
 				Thanks,<br>
@@ -28,7 +28,7 @@
 					<svg class="size-9" inline-source src="/static/logo.svg"></svg>
 					<div class="flex flex-col">
 						<p class="text-[12px] leading-[12px] text-[#888992]">Need help? Contact us !</p>
-						<a href="mailto:<%= support_email %>" class="font-semibold leading-[25px]"><%= support_email %></a>
+						<a href="mailto:<%- support_email %>" class="font-semibold leading-[25px]"><%- support_email %></a>
 					</div>
 				</div>
 			</footer>

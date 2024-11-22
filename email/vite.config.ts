@@ -66,16 +66,16 @@ const inputs = [
 ]
 
 const ejsVars = {
-	support_email: process.env?.SW_SUPPORT_EMAIL || "contact@saferwall.com",
-	email: process.env?.SW_EMAIL || "example@example.com",
-	username: process.env?.SW_USERNAME || "exampleUser",
-	token: process.env?.SW_TOKEN || "<token>",
-	guid: process.env?.SW_GUID || "<guid>",
+	support_email: `{{ .SupportEmail }}`,
+	email: `{{ .Email }}`,
+	username: `{{ .Username }}`,
+	token: `{{ .Token }}`,
+	guid: `{{ .Guid }}`,
 	get reset_password_link() {
-		return `https://saferwall.com/auth/forgot-password/new?token=${encodeURIComponent(this.token)}&guid=${encodeURIComponent(this.guid)}&id=${encodeURIComponent(this.email)}`;
+		return `https://saferwall.com/auth/forgot-password/new?tokeg={{ .Token }}&guid={{ .Guid }}&id={{ .Email }}`;
 	},
 	get verify_account_link() {
-		return `https://saferwall.com/auth/confirm/verify?token=${encodeURIComponent(this.token)}&guid=${encodeURIComponent(this.guid)}&id=${encodeURIComponent(this.email)}`;
+		return `https://saferwall.com/auth/confirm/verify?token={{ .Token }}&guid={{ .Guid }}&id={{ .Email }}`;
 	}
 }
 

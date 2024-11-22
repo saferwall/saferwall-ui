@@ -12,15 +12,15 @@
 			<svg class="w-32" inline-source src="src/logo.svg"></svg>
 		</a>
 		<main class="flex flex-col gap-2 items-start">
-			<p class="text-lg font-semibold">Hi <%= username %> !</p>
+			<p class="text-lg font-semibold">Hi <%- username %> !</p>
 			<p>
 				Use the button below to reset your password.<span class="font-semibold"> This link is only valid for the next 10 minutes.</span></p>
 			<button class="mt-6 mb-4">
-				<a href="<%= reset_password_link %>" class="text-white bg-brand-surface inline text-sm px-6 py-3 rounded-sm font-semibold leading-[150%]">Reset your password</a>
+				<a href="<%- reset_password_link %>" class="text-white bg-brand-surface inline text-sm px-6 py-3 rounded-sm font-semibold leading-[150%]">Reset your password</a>
 			</button>
 			<p class="mt-4 text-xs flex flex-col gap-1">
 				If you’re having trouble with the button above, copy and paste the URL below into your web browser.
-				<a href="<%= reset_password_link %>" class="underline text-brand-text font-medium text-xs"><%= reset_password_link %></a>
+				<a href="<%- reset_password_link %>" class="underline text-brand-text font-medium text-xs"><%- reset_password_link %></a>
 			</p>
 			<p class="mt-8">
 				Thanks,<br>
@@ -31,7 +31,7 @@
 					<svg class="size-9" inline-source src="/static/logo.svg"></svg>
 					<div class="flex flex-col">
 						<p class="text-[12px] leading-[12px] text-[#888992]">Need help? Contact us !</p>
-						<a href="mailto:<%= support_email %>" class="font-semibold leading-[25px]"><%= support_email %></a>
+						<a href="mailto:<%- support_email %>" class="font-semibold leading-[25px]"><%- support_email %></a>
 					</div>
 				</div>
 			</footer>
