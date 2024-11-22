@@ -5,11 +5,35 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Saferwall - Confirm your account</title>
-  <link rel="stylesheet" crossorigin href="/assets/app-CCbJv-zL.css">
+	<link rel="stylesheet" href="../app.css">
 </head>
 
 <body>
-
+	<div class="mx-auto container flex flex-col py-4 gap-16 px-4">
+		<a href="https://www.saferwall.com">
+			<svg class="w-32" inline-source src="src/logo.svg"></svg>
+		</a>
+		<main class="flex flex-col gap-2 items-start">
+			<p class="text-lg font-semibold">Hi <%= username %> !</p>
+			<p>Thank you for signing up with <span class="font-semibold">Saferwall</span> ! Please confirm your registration by clicking the button below.</p>
+			<button class="mt-2">
+				<a href="<%= api_link %>" class="text-white font-semibold rounded-sm text-sm bg-brand-surface px-6 py-3">Confirm your registration</a>
+			</button>
+			<p class="mt-8">
+				Thanks,<br>
+				<span class="font-semibold">The Saferwall Team</span>
+			</p>
+			<footer class="mt-4 border-t border-[#E6E6E6] w-full">
+				<div class="mt-7 flex gap-3 items-center">
+					<svg class="size-9" inline-source src="/static/logo.svg"></svg>
+					<div class="flex flex-col">
+						<p class="text-[12px] leading-[12px] text-[#888992]">Need help? Contact us !</p>
+						<a href="mailto:support@contact.ma" class="font-semibold leading-[25px]">support@contact.ma</a>
+					</div>
+				</div>
+			</footer>
+		</main>
+	</div>
 </body>
 
 </html>
