@@ -13,6 +13,7 @@
 	"type": "module",
 	"devDependencies": {
 		"@csstools/postcss-light-dark-function": "^2.0.6",
+		"@fullhuman/postcss-purgecss": "^6.0.0",
 		"@sveltejs/adapter-auto": "^3.2.2",
 		"@sveltejs/adapter-static": "^3.0.6",
 		"@sveltejs/kit": "^2.8.0",

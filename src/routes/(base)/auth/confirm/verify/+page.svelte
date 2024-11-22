@@ -15,6 +15,7 @@
 				else
 					goto(`/auth/confirm/expired?id=${encodeURIComponent($page.url.searchParams.get("id") || "")}`)
 			}).catch(err => {
+				goto(`/auth/confirm/expired?id=${encodeURIComponent($page.url.searchParams.get("id") || "")}`)
 			})
 		}
 	})
