@@ -65,13 +65,23 @@ const inputs = [
 	"password-reset",
 ]
 
+const ejsVars = {
+	support_email: process.env?.SW_SUPPORT_EMAIL || "contact@saferwall.com",
+	email: process.env?.SW_EMAIL || "example@example.com",
+	username: process.env?.SW_USERNAME || "exampleUser",
+	token: process.env?.SW_TOKEN || "<token>",
+	guid: process.env?.SW_GUID || "<guid>",
+	get reset_password_link() {
+		return `https://saferwall.com/auth/forgot-password/new?token=${encodeURIComponent(this.token)}&guid=${encodeURIComponent(this.guid)}&id=${encodeURIComponent(this.email)}`;
+	},
+	get verify_account_link() {
+		return `https://saferwall.com/auth/confirm/verify?token=${encodeURIComponent(this.token)}&guid=${encodeURIComponent(this.guid)}&id=${encodeURIComponent(this.email)}`;
+	}
+}
+
 export default defineConfig({
 	plugins: [
-		ViteEjsPlugin({
-			email: process.env?.SW_EMAIL || "test@gmail.com",
-			username: process.env?.SW_USERNAME || "user",
-			api_link: process.env?.SW_API_LINK || "about:blank"
-		}),
+		ViteEjsPlugin(ejsVars),
 		inlineSource({}),
 		inlineCssPlugin(),
 	],
