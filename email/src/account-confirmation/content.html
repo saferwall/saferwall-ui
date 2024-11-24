@@ -4,31 +4,38 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Saferwall - Confirm your account</title>
+	<title>Saferwall - Account confirmation</title>
 	<link rel="stylesheet" href="../app.css">
 </head>
 
-<body>
-	<div class="mx-auto container flex flex-col py-4 gap-16 px-4">
-		<a href="https://www.saferwall.com">
-			<svg class="w-32" inline-source src="src/logo.svg"></svg>
-		</a>
-		<main class="flex flex-col gap-2 items-start">
-			<p class="text-lg font-semibold">Hi <%- username %> !</p>
-			<p>Thank you for signing up with <span class="font-semibold">Saferwall</span> ! Please confirm your registration by clicking the button below.</p>
-			<button class="mt-2">
-				<a href="<%- verify_account_link %>" class="text-white font-semibold rounded-sm text-sm bg-brand-surface px-6 py-3">Confirm your registration</a>
+<body class="">
+	<div class="mx-auto container py-4 px-10 text-primary-text">
+		<p class="mb-16">
+			<a href="https://www.saferwall.com" class="">
+				<img src="/src/logo.svg" class="w-32" alt="saferwall logo">
+			</a>
+		</p>
+		<main class="items-start">
+			<p class="text-lg font-semibold mb-1">Hi <%- username %> !</p>
+			<p>
+				Thank you for signing up with <span class="font-semibold">Saferwall</span> ! Please confirm your registration by clicking the button below.</p>
+			<button class="mt-6 mb-4">
+				<a href="<%- verify_account_link %>" class="text-white bg-brand-surface inline text-sm px-6 py-3 rounded-sm font-semibold leading-[150%]">
+					Confirm your registration
+				</a>
 			</button>
 			<p class="mt-8">
 				Thanks,<br>
 				<span class="font-semibold">The Saferwall Team</span>
 			</p>
 			<footer class="mt-4 border-t border-[#E6E6E6] w-full">
-				<div class="mt-7 flex gap-3 items-center">
-					<svg class="size-9" inline-source src="/static/logo.svg"></svg>
-					<div class="flex flex-col">
-						<p class="text-[12px] leading-[12px] text-[#888992]">Need help? Contact us !</p>
-						<a href="mailto:<%- support_email %>" class="font-semibold leading-[25px]"><%- support_email %></a>
+				<div class="mt-7">
+					<img src="/static/logo.svg" class="w-9 float-left mr-3" alt="saferwall logo">
+					<div class="inline">
+						<p class="pt-0.5 text-[12px] leading-[12px] text-[#888992]">Need help? Contact us !</p>
+						<a href="mailto:<%- support_email %>" class="font-semibold leading-[25px]">
+							<%- support_email %>
+						</a>
 					</div>
 				</div>
 			</footer>
