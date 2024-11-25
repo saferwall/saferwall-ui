@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-
 	import Input from '$lib/components/form/Input.svelte';
 	import Button from '$lib/components/form/Button.svelte';
 	import Alert from '$lib/components/Alert.svelte';
@@ -19,15 +18,16 @@
 		success = false;
 		loading = true;
 
-		return async ({ result, form }) => {
+		return async ({ result, formData }) => {
 			loading = false;
 			if (result.type === 'failure') {
+				// @ts-ignore
 				error = result.data?.message;
 			}
 
 			if (result.type == 'success') {
 				success = true;
-				form.reset();
+				// formData.reset();
 			}
 		};
 	}}

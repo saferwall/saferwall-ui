@@ -61,7 +61,7 @@ export class SaferwallClient {
 			},
 			...args
 		};
-		if (init.method === "POST") {
+		if (init.method !== "GET") {
 			init.headers = {
 				...init.headers,
 				"Content-Type": "application/json"
@@ -358,7 +358,10 @@ export class SaferwallClient {
 	public async updateEmail(data: UpdateEmailDto) {
 		return this.request<Saferwall.Session>(`users/${data.username}/email`, {
 			method: 'PATCH',
-			body: JSON.stringify(data)
+			body: JSON.stringify({
+				password: data.password,
+				email: data.email
+			})
 		});
 	}
 
@@ -390,6 +393,7 @@ export class SaferwallClient {
 				Authorization: this.authorization!
 			};
 		}
+		// console.log({init});
 
 		return init;
 	}

@@ -1,5 +1,6 @@
-/* old vars kept to not break old stuff */
 :root {
+	/* old vars kept to not break old stuff */
+
 	--gray-100: light-dark(#27252c, #d3cfcf);
 	--gray-200: light-dark(#5f4cd9, #d3cfcf);
 	--gray-300: light-dark(#6f7077, #6a6b71);
@@ -8,7 +9,7 @@
 	--gray-600: light-dark(#bababd, #53565e);
 	--gray-700: light-dark(#ededf6, #2c2c30);
 	--gray-800: light-dark(#f3f3f6, #2c2c30);
-
+	
 	--neutral-100: light-dark(#1f1b1b, #ffffff);
 	/* - */
 	--neutral-500: light-dark(#d9d9d9, #373638);
@@ -16,23 +17,22 @@
 	--neutral-700: light-dark(#e6e6e6, #292929);
 	--neutral-800: light-dark(#f2f1f3, #0d0d0d);
 	--neutral-900: light-dark(#ffffff, #0d0d0d);
-
+	
 	--brand-500: light-dark(#5340ce, #5340ce);
 	--brand-400: light-dark(#5f4cd9, #5f4cd9);
 	--brand-200: light-dark(#f3f3f9, #242434);
 	--brand-300: light-dark(#f3f3f9, #f3f3f9);
-
+	
 	--green-500: #49af30;
-
+	
 	--orange-500: #ed8c1a;
-
+	
 	--red-500: #ed4060;
-
+	
 	--background: var(--neutral-800);
-}
 
-/* new vars */
-:root {
+	/* new vars */
+
 	/* ==================== brand ==================== */
 
 	--brand-300: light-dark(#F3F3F9, #242231);

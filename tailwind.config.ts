@@ -5,6 +5,9 @@ export default {
 	darkMode: 'class',
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	important: true,
+	corePlugins:{
+		preflight: true,
+	},
 	theme: {
 		extend: {
 			fontFamily: {
