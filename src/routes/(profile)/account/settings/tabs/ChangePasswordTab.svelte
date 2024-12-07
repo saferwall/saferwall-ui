@@ -15,13 +15,13 @@
 	method="post"
 	action="?/password"
 	class="space-y-4"
-	use:enhance={({ data, cancel }) => {
+	use:enhance={({ formData, cancel }) => {
 		errors = {};
 		error = '';
 		success = false;
 		loading = true;
 
-		if (data.get('confirm_password') !== data.get('new_password')) {
+		if (formData.get('confirm_password') !== formData.get('new_password')) {
 			errors.confirm_password = true;
 			error = "New password and confirm password don't match";
 
@@ -29,15 +29,16 @@
 			return cancel();
 		}
 
-		return async ({ result, form }) => {
+		return async ({ result, formElement }) => {
 			loading = false;
 			if (result.type == 'failure') {
+				// @ts-ignore
 				error = result.data?.message;
 			}
 
 			if (result.type == 'success') {
 				success = true;
-				form.reset();
+				formElement.reset();
 			}
 		};
 	}}

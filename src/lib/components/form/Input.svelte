@@ -40,8 +40,8 @@
 	{#if isPassword}
 		<button class="password-icon outline-none border-none text-primary-icn flex items-center justify-center" type="button" on:click={onClick}>
 			<svg class="size-7">
-				<use href="/images/icons.svg#icon-password-visible" class:hidden={passwordVisible}/>
-				<use href="/images/icons.svg#icon-password-invisible" class:hidden={!passwordVisible}/>
+				<use href="/images/icons.svg#icon-password-visible" class:hidden={!passwordVisible}/>
+				<use href="/images/icons.svg#icon-password-invisible" class:hidden={passwordVisible}/>
 			</svg>
 		</button>
 	{/if}

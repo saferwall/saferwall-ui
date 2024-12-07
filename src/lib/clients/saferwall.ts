@@ -67,9 +67,12 @@ export class SaferwallClient {
 				"Content-Type": "application/json"
 			};
 		}
+		const _init = this.setAuthHeaders(init);
 		const _fetch = this.fetch ?? fetch;
+		// console.log(": " + urlString);
+		// console.log(JSON.stringify(_init, undefined, 4));
 		const response: any = await _fetch(urlString, 
-			this.setAuthHeaders(init)
+			_init
 		);
 
 		if (!response.ok) {

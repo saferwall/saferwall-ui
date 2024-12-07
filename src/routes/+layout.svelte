@@ -3,10 +3,19 @@
 	import "$lib/styles/vars.css";
 	import NProgress from "nprogress";
 	import { navigating } from "$app/stores";
-	import { onMount } from "svelte";
+	import { onMount, setContext } from "svelte";
 	import { browser } from "$app/environment";
 	import { isLight, parseTheme, Theme, theme } from "$lib/stores/theme";
 	import { THEME_KEY } from "$lib/config";
+	import type { LayoutServerData } from "./$types";
+	import { writable } from "svelte/store";
+	import type { Saferwall } from "$lib/types";
+
+	export let data: LayoutServerData;
+
+	const userStore = writable<Saferwall.User | undefined>(data?.user);
+	setContext("user", userStore)
+	$: $userStore = data.user;
 
 	NProgress.configure({
 		minimum: 0.16

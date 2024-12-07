@@ -11,7 +11,7 @@
 	$: profile = data.profile;
 	$: loggedIn = data.user !== undefined;
 	$: selfProfile = data.user?.username === data.username;
-	$: followed = data.profile.followers?.includes(data.user?.username!);
+	$: followed = data.profile.followers?.filter((el) => el.username == data.user?.username).length !== 0;
 </script>
 
 <svelte:head>

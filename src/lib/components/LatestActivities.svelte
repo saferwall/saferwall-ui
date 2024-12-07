@@ -20,7 +20,7 @@
 <section class="latest__ space-y-4">
 	<h4 class="font-medium text-xl">Latest activities</h4>
 	{#if !activities || activities.length === 0}
-		<p>No activities available currently</p>
+		<p class="text-tertiary-text">No activities available currently</p>
 	{:else}
 		<div class="activities__ space-y-8 pt-6">
 			{#each activities as activity}
