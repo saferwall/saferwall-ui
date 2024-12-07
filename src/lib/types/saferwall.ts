@@ -60,7 +60,7 @@ export namespace Saferwall {
 		submissions_count: number;
 		likes: string[];
 		following: string[];
-		followers: string[];
+		followers: { username: string, ts: number }[];
 		last_seen: number;
 		member_since: number;
 	}

@@ -3,9 +3,12 @@
 	import DateTime from '$lib/components/DateTime.svelte';
 	import ButtonFollow from '$lib/components/form/ButtonFollow.svelte';
 	import type { Saferwall } from '$lib/types';
+	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
 
 	export let loggedIn = false;
 	export let item: Saferwall.Activities.Follow;
+	let userStore: Writable<Saferwall.User | undefined> = getContext("user");
 </script>
 
 <article
@@ -20,7 +23,9 @@
 			</div>
 		</div>
 		<div class="z-30">
-			<ButtonFollow username={item.username} {loggedIn} followed={item.follow} />
+			{#if item.username !== $userStore?.username}
+				<ButtonFollow username={item.username} {loggedIn} followed={item.follow} />
+			{/if}
 		</div>
 	</div>
 	<a class="absolute opacity-0 z-10 inset-0" href="/users/{item.username}">

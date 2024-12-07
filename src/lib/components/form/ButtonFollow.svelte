@@ -12,16 +12,17 @@
 <form
 	action="/actions?/follow"
 	method="post"
-	use:enhance={({ data }) => {
+	use:enhance={({ formData }) => {
 		loading = true;
 
-		data.append('username', username);
-		data.append('follow', followed ? 'unfollow' : 'follow');
+		formData.append('username', username);
+		formData.append('follow', followed ? 'unfollow' : 'follow');
 
 		return async ({ result }) => {
 			loading = false;
 
 			if (result.type === 'success') {
+				// @ts-ignore
 				followed = result.data?.follow;
 			}
 		};
