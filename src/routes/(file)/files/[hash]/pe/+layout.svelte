@@ -61,16 +61,18 @@
 				@apply shrink-0;
 
 				a {
-					@apply font-medium text-gray-400;
-					@apply block py-4 pl-4 pr-10 border-b md:border-b-0 border-r border-r-zinc-300 dark:border-r-zinc-700 md:rounded-l;
+					@apply font-medium text-secondary-text;
+					@apply block py-4 pl-4 pr-10 border-b md:border-b-0 border-r border-r-line-surface md:rounded-l;
 
-					&.active,
-					&:hover {
-						@apply bg-primary-100/20 dark:bg-zinc-700 text-primary dark:text-zinc-200 relative;
+					&.active {
+						@apply bg-brand-CF-surface text-primary-text relative font-semibold;
 
 						&:after {
-							@apply md:content-[''] md:border-r-4 border-primary h-full md:absolute md:-right-1 md:top-0;
+							@apply md:content-[''] md:border-r-4 border-brand-surface h-full md:absolute md:-right-1 md:top-0;
 						}
+					}
+					&:hover {
+						@apply text-primary-text;
 					}
 				}
 			}
