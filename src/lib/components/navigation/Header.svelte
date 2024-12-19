@@ -10,7 +10,7 @@
 	export let user: Saferwall.User | undefined;
 </script>
 
-<nav class="px-8 bg-neutral-900 w-full">
+<nav class="px-8 bg-neutral-900 w-full shadow-[0px_1px_4px_0px_rgba(13,_13,_13,_0.07)] z-40">
 	<div class="container mx-auto flex items-center w-full py-5 justify-between">
 		<div class="flex items-center gap-x-12 px-4 flex-grow">
 			<Logo />
