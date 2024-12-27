@@ -10,7 +10,7 @@ export const load = (async ({ url, parent, params }) => {
 
 	const behaviorReportId = url.searchParams.get("behavior_id");
 	if (!behaviorReportId) {
-		throw redirect(307, `/files/${params.hash}/`);
+		throw redirect(307, `/app/files/${params.hash}/`);
 	}
 
 	const search = url.searchParams.get('search');
@@ -29,7 +29,7 @@ export const load = (async ({ url, parent, params }) => {
 	}));
 
 	if (!pagination) {
-		throw redirect(307, `/files/${params.hash}/`);
+		throw redirect(307, `/app/files/${params.hash}/`);
 	}
 
 	return {

@@ -9,7 +9,7 @@ export const load: PageLoad = async ({ parent, params, url }) => {
 
 	const behaviorReportId = url.searchParams.get("behavior_id");
 	if (!behaviorReportId) {
-		throw redirect(307, `/files/${params.hash}/`);
+		throw redirect(307, `/app/files/${params.hash}/`);
 	}
 
 	const [processArray] = await tryCatch(client.getFileProcessTree(behaviorReportId));

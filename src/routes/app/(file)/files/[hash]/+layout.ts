@@ -19,7 +19,7 @@ export const load = (async ({ parent, params: { hash }, url }) => {
 		throw redirect(307, url)
 	}
 
-	const paths = url.pathname.split(`/files/`)[1].split('/');
+	const paths = url.pathname.split(`/app/files/`)[1].split('/');
 
 	const activePath = paths[1];
 	const activeMenu = fileMenu.find((menu) => menu.path === activePath)! || {};

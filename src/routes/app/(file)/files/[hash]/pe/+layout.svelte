@@ -19,7 +19,7 @@
 		<ul>
 			{#each activeMenu as item}
 				<li>
-					<a class:active={item.path === data.menu} href="/files/{data.hash}/pe/{item.path}{$page.url.search}" on:click|preventDefault={(e) =>
+					<a class:active={item.path === data.menu} href="/app/files/{data.hash}/pe/{item.path}{$page.url.search}" on:click|preventDefault={(e) =>
 						// @ts-ignore
 						goto(e.target?.href || "")}
 					>

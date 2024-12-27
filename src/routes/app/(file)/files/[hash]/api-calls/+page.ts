@@ -9,7 +9,7 @@ export const load = (async ({ url, parent, params }) => {
 
 	const behaviorReportId = url.searchParams.get("behavior_id");
 	if (!behaviorReportId) {
-		throw redirect(307, `/files/${params.hash}/`);
+		throw redirect(307, `/app/files/${params.hash}/`);
 	}
 
 	const search = url.searchParams.get('q');
@@ -34,7 +34,7 @@ export const load = (async ({ url, parent, params }) => {
 	const [pagination] = await tryCatch(client.getFileApiTrace(behaviorReportId!, args));
 
 	if (!pagination) {
-		throw redirect(307, `/files/${params.hash}/`);
+		throw redirect(307, `/app/files/${params.hash}/`);
 	}
 	pagination.items = pagination.items ?? [];
 

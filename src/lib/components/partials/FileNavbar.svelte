@@ -11,7 +11,7 @@
 	export let activeMenu: { name: string; path: string };
 
 	$: isPathActive = (path: string): boolean => path === activeMenu.path;
-	$: generateFilePath = (path: string): string => `/files/${hash}/${path}`;
+	$: generateFilePath = (path: string): string => `/app/files/${hash}/${path}`;
 	let uploadOpen = false;
 	let uploadBox: HTMLElement;
 </script>

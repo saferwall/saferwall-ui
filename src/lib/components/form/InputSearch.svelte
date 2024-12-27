@@ -11,7 +11,7 @@
 		const hash = (event.target as HTMLInputElement).value;
 		validHash = isStringSHA256(hash);
 		if (validHash) {
-			goto(`/files/${hash}/summary`);
+			goto(`/app/files/${hash}/summary`);
 		}
 	};
 </script>

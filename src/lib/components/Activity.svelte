@@ -42,7 +42,7 @@
 						<a class="activity__info__author" href="/users/{author.username}">
 							{author.username}
 						</a>
-						<a class="activity__info__type" href="/files/{file?.hash}?behavior_id={file?.default_behavior_id ?? ""}">
+						<a class="activity__info__type" href="/app/files/{file?.hash}?behavior_id={file?.default_behavior_id ?? ""}">
 							{getActivityTitle(activity.type)}
 						</a>
 					</span>

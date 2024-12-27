@@ -19,8 +19,8 @@
 	export let loggedIn = false;
 	export let activeMenu: Menu.File;
 
-	$: downloadLink = `${env.PUBLIC_API_URL}files/${hash}/download/`;
-	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/files/${hash}/${activeMenu.path}`;
+	$: downloadLink = `${env.PUBLIC_API_URL}app/files/${hash}/download/`;
+	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/app/files/${hash}/${activeMenu.path}`;
 
 	let rescaning = false;
 	let downloadLoading = false;
@@ -53,7 +53,7 @@
 		</div>
 
 		<div class="space-x-2 flex flex-shrink-0">
-			{#if $page.route.id === "/(file)/files/[hash]/api-calls" && behaviorId}
+			{#if $page.route.id === "/app/(file)/files/[hash]/api-calls" && behaviorId}
 				<Button icon="export-api-logs" href="{env.PUBLIC_ARTIFACTS_URL}{hash}/{behaviorId}/api_trace.json"
 					class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text">
 					<span class="hidden lg:block pl-2">Export API Logs</span>
