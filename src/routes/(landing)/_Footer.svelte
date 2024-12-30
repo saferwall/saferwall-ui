@@ -16,7 +16,7 @@
 		<div class="flex flex-row items-center lg:flex-col lg:items-start justify-between grow-[1] gap-[28px]">
 			<div class="flex flex-col gap-[14px]">
 				<Logo />
-				<p class="text-[#969696] lg:block hidden">A hackable malware sandbox.</p>
+				<p class="text-[#969696] lg:block hidden">A hackable malware sandbox for the 21st Century.</p>
 			</div>
 			<div class="flex text-[#969696]" style="gap: {clamp(20, 23)}">
 				<Icon name="github-logo" class="size-[17px]"></Icon>

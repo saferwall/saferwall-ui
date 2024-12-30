@@ -20,7 +20,7 @@
 	export { Class as class }
 </script>
 
-<a class={twMerge(`avatar avatar--${size}`, Class)} on:click href="/users/{username}">
+<a class={twMerge(`avatar avatar--${size}`, Class)} on:click href="/app/users/{username}">
 	{#if avatarImage}
 		<img
 			class="avatar__image"

@@ -54,7 +54,7 @@
 		<div class="w-full flex pt-4">
 			<Button class="grow md:grow-0" size="sm" loading={postingComment} disabled={!comment} title="{comment ? "" : "Cannot post an empty comment"}" on:click={() => {
 				if (!data?.session?.token || !data?.session?.username) {
-					goto("/auth/login");
+					goto("/app/auth/login");
 					return;
 				}
 				if (!comment) return;
@@ -81,7 +81,7 @@
 				.catch(err => {
 					NProgress.done();
 					console.error(err);
-					goto("/auth/login");
+					goto("/app/auth/login");
 					return;
 				})
 

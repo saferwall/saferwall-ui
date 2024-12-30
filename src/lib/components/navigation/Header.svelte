@@ -31,7 +31,7 @@
 					</a>
 				</li>
 				<li>
-					<a class="text-zinc-400 dark:text-zinc-500 hover:text-gray-200 dark:hover:text-gray-200" href="/hot-activities">Hot activities</a>
+					<a class="text-zinc-400 dark:text-zinc-500 hover:text-gray-200 dark:hover:text-gray-200" href="/app/hot-activities">Hot activities</a>
 				</li>
 			</ul>
 			<ThemeToggle />
@@ -40,9 +40,9 @@
 			{:else}
 				<div class="flex items-center gap-2">
 					<div class="!hidden md:!inline-flex">
-						<Button class="min-w-[100px]" href="/auth/login">Login</Button>
+						<Button class="min-w-[100px]" href="/app/auth/login">Login</Button>
 					</div>
-					<Button class="min-w-[100px]" href="/auth/register" theme="brand">Sign up</Button>
+					<Button class="min-w-[100px]" href="/app/auth/register" theme="brand">Sign up</Button>
 				</div>
 			{/if}
 		</div>

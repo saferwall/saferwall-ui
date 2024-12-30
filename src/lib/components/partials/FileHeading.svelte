@@ -32,7 +32,7 @@
 			console.error('Rescab failed', error);
 			// @ts-ignore
 			if (error.status === 401) {
-				goto("/auth/login");
+				goto("/app/auth/login");
 				return;
 			}
 		}
@@ -63,7 +63,7 @@
 				e.preventDefault();
 				downloadLoading = true;
 				if (!client.authorization) {
-					goto("/auth/login");
+					goto("/app/auth/login");
 					return;
 				}
 				window.fetch(downloadLink, {
@@ -74,7 +74,7 @@
 				}).then(res => {
 					if (res.status === 401) {
 						downloadLoading = false;
-						goto("/auth/login");
+						goto("/app/auth/login");
 						return;
 					}
 					return res.blob()

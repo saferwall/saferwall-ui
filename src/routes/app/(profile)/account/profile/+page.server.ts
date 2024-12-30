@@ -5,8 +5,8 @@ export const load = (async ({ parent }) => {
 	const { user } = await parent();
 
 	if (user) {
-		throw redirect(301, `/users/${user.username}/likes`);
+		throw redirect(301, `/app/users/${user.username}/likes`);
 	}
 
-	throw redirect(301, '/auth/login');
+	throw redirect(301, '/app/auth/login');
 }) satisfies PageServerLoad;

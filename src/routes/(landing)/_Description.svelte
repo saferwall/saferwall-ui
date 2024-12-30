@@ -62,7 +62,7 @@
 			{#each data as el}
 				<div
 					class="flex flex-col gap-[20px]  border border-[#1F1F20] min-w-[240px]"
-					style="padding: {cssClamp('20px', '26px')}; border-radius: {cssClamp("20px", "30px")}"
+					style="padding: 20px; padding-block: {cssClamp('20px', '26px')}; border-radius: {cssClamp("20px", "30px")}"
 				>
 					<Icon name={el.icon} class="size-[40px]"></Icon>
 					<div class="flex flex-col" style="gap: {cssClamp('5px', '10px')}">

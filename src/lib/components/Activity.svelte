@@ -23,7 +23,7 @@
 			<div class="activity__author max-w-full flex flex-col items-center space-y-2">
 				<Avatar username={author.username} />
 				<div class="text-center">
-					<a class="font-medium text-sm text-gray-100" href="/users/{author.username}">
+					<a class="font-medium text-sm text-gray-100" href="/app/users/{author.username}">
 						{author.username}
 					</a>
 					<p class="font-regular text-[13px] text-gray-500">
@@ -39,7 +39,7 @@
 			>
 				<p class="activity__title space-x-1 flex flex-col md:flex-row">
 					<span class="flex space-x-1">
-						<a class="activity__info__author" href="/users/{author.username}">
+						<a class="activity__info__author" href="/app/users/{author.username}">
 							{author.username}
 						</a>
 						<a class="activity__info__type" href="/app/files/{file?.hash}?behavior_id={file?.default_behavior_id ?? ""}">
@@ -65,7 +65,7 @@
 				{#if tags.length > 0}
 					{#each tags as tag}
 						<li class="tags__tag tags__tag--{tag.category}">
-							<a href="/tags/{tag.category}-{tag.name}">{tag.name}</a>
+							<a href="/app/tags/{tag.category}-{tag.name}">{tag.name}</a>
 						</li>
 					{/each}
 				{:else}

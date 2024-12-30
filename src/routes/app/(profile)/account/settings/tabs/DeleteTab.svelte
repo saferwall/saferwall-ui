@@ -35,11 +35,12 @@
 				loading = false;
 
 				if (result.type == 'failure') {
+					// @ts-ignore
 					error = result.data?.message;
 					return;
 				}
 
-				redirect(301, '/auth/logout');
+				redirect(301, '/app/auth/logout');
 			};
 		}}
 	>

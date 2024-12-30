@@ -21,6 +21,7 @@ import { clamp } from "$lib/utils";
 			padding-block: {clamp(8, 10)};
 			padding-inline: {clamp(16, 20)};
 		"
+		href="/app"
 	>
 		Try for free
 	</Button>

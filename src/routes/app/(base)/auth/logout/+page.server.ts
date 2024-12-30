@@ -15,5 +15,5 @@ export const load = (async ({ cookies, locals }) => {
 		locals.client.removeSession();
 	} catch (error) {}
 
-	throw redirect(302, '/auth/login');
+	throw redirect(302, '/app/auth/login');
 }) satisfies PageServerLoad;

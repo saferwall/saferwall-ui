@@ -3,12 +3,12 @@ import type { LayoutServerLoad } from './$types';
 
 export const load = (({ locals, url }) => {
 	// if logout
-	if (url.pathname === '/auth/logout') {
+	if (url.pathname === '/app/auth/logout') {
 		return {};
 	}
 
 	// if authentified redirect home page
 	if (locals.user) {
-		throw redirect(302, '/');
+		throw redirect(302, '/app/');
 	}
 }) satisfies LayoutServerLoad;

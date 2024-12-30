@@ -58,16 +58,16 @@
 			disabled={loading}
 		/>
 	</div>
-	<a href="/auth/forgot-password" class="self-end border-l-pink-50">Forgot password?</a>
+	<a href="/app/auth/forgot-password" class="self-end border-l-pink-50">Forgot password?</a>
 
 	<Button theme="brand" type="submit" {loading} size="lg">Login</Button>
 
 	<p class="text-center text-xs">
-		Didn't confirm registration? <a href="/auth/confirm" class="link">Send confirmation</a>
+		Didn't confirm registration? <a href="/app/auth/confirm" class="link">Send confirmation</a>
 	</p>
 </form>
 <div class="border-t border-line-surface py-6">
 	<p class="text-center text-xs">
-		Not a member? <a href="/auth/register" class="link">Sign up</a>
+		Not a member? <a href="/app/auth/register" class="link">Sign up</a>
 	</p>
 </div>

@@ -90,7 +90,7 @@
 		<label class="flex items-center space-x-2 text-xs">
 			<CheckBox class="border-[1px]" required disabled={loading} name="agree"/>
 			<p>
-				I agree to the <a href="/pages/terms-of-service" target="_blank" class="link"
+				I agree to the <a href="/app/pages/terms-of-service" target="_blank" class="link"
 					>Terms of Service</a
 				>
 			</p>
@@ -99,7 +99,7 @@
 	</form>
 	<div class="pb-6">
 		<p class="text-center text-xs">
-			Already have an account? <a href="/auth/login" class="link">Login</a>
+			Already have an account? <a href="/app/auth/login" class="link">Login</a>
 		</p>
 	</div>
 {/if}

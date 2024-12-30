@@ -11,7 +11,7 @@
 <AuthActionDone imageClass="size-20" image="image-dead-robot" title="This link has expired" class="gap-4" textClass="gap-3">
 	<div class="flex flex-col items-center gap-4">
 		<p class="text-center">Please click the button below to receive a new confirmation email for your registration.</p>
-		<Button href="/auth/confirm?{$page.url.searchParams.toString()}" theme="brand" size="lg" class="py-[10px] px-[25px] bg-brand-surface">
+		<Button href="/app/auth/confirm?{$page.url.searchParams.toString()}" theme="brand" size="lg" class="py-[10px] px-[25px] bg-brand-surface">
 			Resend a new confirmation link
 		</Button>
 	</div>

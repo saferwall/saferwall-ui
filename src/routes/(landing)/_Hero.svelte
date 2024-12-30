@@ -27,6 +27,7 @@
 			padding-inline: {clamp(16, 22)};
 			padding-block: {clamp(8, 12)};
 		"
+		href="/app"
 		>
 		Try for free
 	</Button>

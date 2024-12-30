@@ -11,11 +11,11 @@
 			fetch(`${env.PUBLIC_API_URL}auth/verify-account${$page.url.search}`)
 			.then(res => {
 				if (res.status == 200)
-					goto(`/auth/confirm/done?id=${encodeURIComponent($page.url.searchParams.get("id") || "")}`)
+					goto(`/app/auth/confirm/done?id=${encodeURIComponent($page.url.searchParams.get("id") || "")}`)
 				else
-					goto(`/auth/confirm/expired?id=${encodeURIComponent($page.url.searchParams.get("id") || "")}`)
+					goto(`/app/auth/confirm/expired?id=${encodeURIComponent($page.url.searchParams.get("id") || "")}`)
 			}).catch(err => {
-				goto(`/auth/confirm/expired?id=${encodeURIComponent($page.url.searchParams.get("id") || "")}`)
+				goto(`/app/auth/confirm/expired?id=${encodeURIComponent($page.url.searchParams.get("id") || "")}`)
 			})
 		}
 	})

@@ -8,12 +8,12 @@
 		text: string;
 	}[] = [
 		{
-			icon: '',
+			icon: 'target-bug',
 			title: 'Evasive Detection',
 			text: 'Saferwall Sandbox runs malware in a real environment, providing better detection of evasive threats than virtual machines.'
 		},
 		{
-			icon: '',
+			icon: 'semi-valve-logo',
 			title: 'IOC Extraction',
 			text: 'IOCs are extracted to track past attacks, prevent future threats, and simplify malware investigation and triage'
 		},
@@ -23,17 +23,17 @@
 			text: 'Script complex actions via the API, allowing seamless implementation of all well-known functionalities.'
 		},
 		{
-			icon: 'scale-paper-stack',
+			icon: 'scale-up',
 			title: 'Scaled Analysis',
 			text: 'Saferwall is designed for scalability, efficiently scanning large volumes of samples to tackle emerging threats daily.'
 		},
 		{
-			icon: '',
+			icon: 'package-toolbox',
 			title: 'Automated Unpacking',
 			text: 'Dynamic analysis enables unpacking and advanced insights, identifying new malware families with ongoing updates.'
 		},
 		{
-			icon: '',
+			icon: 'string-search',
 			title: 'Advanced Search',
 			text: 'Look up file hashes, domains, behaviors, and IOCs in seconds for fast, actionable results.'
 		},
@@ -74,9 +74,9 @@
 			{#each data as el}
 				<div
 					class="flex flex-col gap-[20px] border border-[#1F1F20] min-w-[242px] lg:min-w-[368px]"
-					style="padding: {cssClamp('20px', '26px')}; border-radius: {cssClamp('20px', '30px')}"
+					style="padding-inline: {cssClamp('20px', '35px')}; padding-block: {cssClamp('20px', '28px')}; border-radius: {cssClamp('20px', '30px')}"
 				>
-					<Icon name={el.icon} class="size-[90px]"></Icon>
+					<Icon name={el.icon} class="size-[60px]"></Icon>
 					<div class="flex flex-col" style="gap: {cssClamp('5px', '10px')}">
 						<h4 class="capitalize text-[16px] font-semibold text-[#DBDBDB]">{el.title}</h4>
 						<p class="text-[#969696] text-[14px]">{el.text}</p>

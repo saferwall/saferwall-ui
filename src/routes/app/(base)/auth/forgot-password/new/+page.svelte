@@ -47,7 +47,7 @@
 	>
 		<div class="flex flex-col items-center gap-4">
 			<p>Your password has been successfully reset.</p>
-			<Button href="/auth/login?id={$page.url.searchParams.get("id") || ""}" theme="brand" size="lg" class="py-[10px] px-[25px] bg-brand-surface">Login</Button>
+			<Button href="/app/auth/login?id={$page.url.searchParams.get("id") || ""}" theme="brand" size="lg" class="py-[10px] px-[25px] bg-brand-surface">Login</Button>
 		</div>
 	</AuthActionDone>
 {:else}
