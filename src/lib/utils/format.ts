@@ -22,9 +22,10 @@ const labels: { [key: string]: string } = {
 };
 
 const activityTypes: { [key: string]: string } = {
-	comment: 'commented on file',
-	like: 'liked a file',
-	submit: 'submitted a file'
+	comment: 'commented on',
+	like: 'liked',
+	submit: 'submitted',
+	follow: 'followed'
 };
 
 export const artifactsKinds = {
@@ -81,8 +82,8 @@ export function parseTags(fileTags: any): Saferwall.Tag[] {
  * @param type activity type
  * @returns title
  */
-export function getActivityTitle(type: Saferwall.Activities.All): string {
-	return activityTypes[type];
+export function getActivityTitle(act: Saferwall.Activity): string {
+	return activityTypes[act.type] + " " + (act.type === "follow" ? act.target : "a file");
 }
 
 /**
