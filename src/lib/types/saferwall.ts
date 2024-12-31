@@ -1,7 +1,7 @@
 import type { artifactsKinds } from '$lib/utils';
 
 export namespace Saferwall {
-	export type ActivityType = 'comment' | 'like' | 'submit';
+	export type ActivityType = 'comment' | 'like' | 'submit' | 'follow';
 	export type ProfileSection = 'likes' | 'comments' | 'submissions' | 'followers' | 'following';
 
 	export type Config = {

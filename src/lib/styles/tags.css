@@ -7,10 +7,11 @@
 }
 
 .tags__tag {
-	@apply bg-red-200 text-red-900 dark:bg-red-950/50 dark:text-red-400;
+	@apply font-medium;
+	@apply bg-[#ED4060]/10 text-[#ED4060];
 	
 	&--pe,
 	&--packer {
-		@apply bg-blue-200 text-blue-900 dark:bg-blue-950/50 dark:text-blue-400;
+		@apply bg-[#5F4CD9]/10 text-[#5F4CD9];
 	}
 }

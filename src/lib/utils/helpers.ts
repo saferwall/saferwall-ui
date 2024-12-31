@@ -39,3 +39,27 @@ export const orderObjectKeys = (obj: any) => {
 			{} as typeof obj
 		);
 };
+
+export function cssClamp(min: string, max: string, rest: [minWidth?: number, maxWidth?: number] = [360, 1024]): string {
+	rest[0] ??= 360;
+	rest[1] ??= 1024;
+	let [minWidth, maxWidth] = rest;
+	// const slope = (parseInt(max) - parseInt(min)) / (maxWidth - minWidth);
+
+	// // Construct the calc formula to reverse the incline if needed
+	// const calcValue = `calc(${min} + ${slope} * (100vw - ${minWidth}px))`;
+
+	// // Generate the CSS clamp string
+	// return `clamp(${Math.min(parseInt(min), parseInt(max))}px, ${calcValue}, ${Math.max(parseInt(min), parseInt(max))}px)`;
+	const slope = (parseInt(max) - parseInt(min)) / (maxWidth - minWidth);
+
+	// Generate the calc formula
+	const calcValue = `calc(${min} + ${slope} * (100vw - ${minWidth}px))`;
+  
+	// Use min and max functions to constrain the calc value
+	return `calc(min(max(${calcValue}, ${Math.min(parseInt(min), parseInt(max))}px), ${Math.max(parseInt(min), parseInt(max))}px))`;
+}
+
+export function clamp(min: number, max: number) {
+	return cssClamp(min + "px", max + "px");
+}

@@ -23,7 +23,7 @@
 			<div class="grow space-y-4 w-full">
 				<div class="flex flex-col">
 					<h1 class="text-2xl font-semibold text-gray-100">{username}</h1>
-					<a class="text-gray-400" href="/users/{username}">@{username}</a>
+					<a class="text-gray-400" href="/app/users/{username}">@{username}</a>
 					{#if url}
 						<a
 							href={url}
@@ -48,7 +48,7 @@
 		</div>
 		<div class="actions__ flex flex-col pt-4 w-full md:w-max h-full flex-shrink-0 my-auto">
 			{#if selfProfile}
-				<Button href="/account/settings" theme="brand" size="lg">Edit my profile</Button>
+				<Button href="/app/account/settings" theme="brand" size="lg">Edit my profile</Button>
 			{:else}
 				<!-- TODO: user follow status -->
 				<ButtonFollow {username} {loggedIn} {followed} size="xl" />

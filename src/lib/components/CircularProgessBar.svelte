@@ -22,7 +22,7 @@
 	$: progress = (score ?? 0) / (total ?? 1);
 </script>
 
-<svg width="{size}" height="{size}" viewBox="0 0 {size + 0} {size + 0}" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg class={Class} width="{size}" height="{size}" viewBox="0 0 {size + 0} {size + 0}" version="1.1" xmlns="http://www.w3.org/2000/svg">
 	<circle class={twMerge("stroke-zinc-400", Class, circleClass, trackCircleClass)} r={radius} cx={size / 2} cy={size / 2} stroke-width={strokeWidth} stroke-dasharray={circumfrence} fill="transparent" stroke-dashoffset="0"></circle>
 	<circle class={twMerge("stroke-green-500", Class, circleClass, progressCircleClass)} r={radius} cx={size / 2} cy={size / 2} stroke-width={strokeWidth} stroke-linecap="round" stroke-dasharray={circumfrence} fill="transparent" stroke-dashoffset="{circumfrence * (1 - progress)}px" style="transform:rotate(180deg); transform-origin: center; transform-box: fill-box;"></circle>
 	<text class={twMerge("fill-green-500", Class, textClass, scoreClass)} x="50%" y="50%" dy="-0.6lh" dominant-baseline="middle" text-anchor="middle">{!noScore ? score : "N/A"}</text>

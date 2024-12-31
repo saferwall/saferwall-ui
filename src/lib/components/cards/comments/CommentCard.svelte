@@ -20,7 +20,7 @@
 		<Avatar size="md" class="size-10" username={author.username} />
 		<div class="flex gap-[1.375rem] items-center">
 			<div class="text-xs">
-				<a href="/users/{author.username}" class="font-bold">{author.username}</a>
+				<a href="/app/users/{author.username}" class="font-bold">{author.username}</a>
 				<p class="text-tertiary-text">Member since {getMemberSince(author.member_since)}</p>
 			</div>
 			<Button size="xss">Follow</Button>
