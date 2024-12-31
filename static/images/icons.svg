@@ -822,4 +822,14 @@
 			</linearGradient>
 		</defs>
 	</symbol>
+	<symbol id="icon-arrow-left" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<mask id="mask0_3315_5568" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="21" height="22">
+			<rect y="0.5" width="21" height="21" fill="currentColor" />
+		</mask>
+		<g mask="url(#mask0_3315_5568)">
+			<path
+				d="M6.84691 11.8711L11.7469 16.7711L10.5 17.9961L3.50003 10.9961L10.5 3.99609L11.7469 5.22109L6.84691 10.1211H17.5V11.8711H6.84691Z"
+				fill="currentColor" />
+		</g>
+	</symbol>
 </svg>

@@ -12,6 +12,7 @@
 	export let labelClass = "";
 	export let labelStyle = "";
 	export let multiline = false;
+	export let parentClass = "";
 
 	const isPassword = type === 'password';
 	$: passwordVisible = type !== 'password';
@@ -21,7 +22,7 @@
 	};
 </script>
 
-<label class="input peer-focus text-inherit" class:labeled={label} class:error>
+<label class={twMerge("input peer-focus text-inherit", parentClass)} class:labeled={label} class:error>
 	{#if icon}
 		<svg class={twMerge("icon text-inherit")}>
 			<use href="/images/icons.svg#icon-{icon}" class={twMerge("text-inherit origin-center", iconClass)} />
@@ -34,6 +35,8 @@
 		<textarea
 			bind:value
 			on:change
+			on:focus
+			on:blur
 			{...$$props}
 			{placeholder}
 			class="input__element bg-transparent {$$props.class}"
@@ -42,6 +45,8 @@
 		<input
 			{...$$props}
 			on:change
+			on:focus
+			on:blur
 			bind:value
 			{...{type}}
 			{placeholder}
@@ -57,6 +62,7 @@
 			</svg>
 		</button>
 	{/if}
+	<slot></slot>
 </label>
 
 <style lang="postcss">

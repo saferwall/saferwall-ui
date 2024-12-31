@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { LayoutData } from './$types';
 	import FileNavbar from '$lib/components/partials/FileNavbar.svelte';
 	import FileHeading from '$lib/components/partials/FileHeading.svelte';
 	import { fileMenuStore } from '$lib/utils/fileMenu';
 	import { page } from '$app/stores';
+	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
 

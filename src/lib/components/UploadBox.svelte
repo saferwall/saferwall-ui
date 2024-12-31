@@ -123,7 +123,7 @@
 
 
 	<div class="m-auto text-center max-w-screen-md">
-		<p class="text-xs md:text-[0.9rem] md:px-8">
+		<p class="text-xs md:text-[0.9rem] md:px-8 text-primary-text">
 			By using Saferwall you consent to our
 			<a class="link" target="_blank" rel="noreferrer" href="/app/pages/terms-of-service">
 				Terms of Service

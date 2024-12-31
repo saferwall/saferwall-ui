@@ -63,11 +63,11 @@
 				class:max-lg:hidden={tags.length === 0}
 			>
 				<p class="tags__title hidden lg:block">TAGS</p>
-				<ul class="tags__list">
+				<ul class="flex flex-wrap gap-[7px]">
 					{#if tags.length > 0}
 						{#each tags as tag}
-							<li class="tags__tag tags__tag--{tag.category}">
-								<a href="/app/tags/{tag.category}-{tag.name}">{tag.name}</a>
+							<li class="flex">
+								<a class="rounded-sm px-2.5 py-1.5 tags__tag tags__tag--{tag.category}" href="/app/tags/{tag.category}-{tag.name}">{tag.name}</a>
 							</li>
 						{/each}
 					{:else}

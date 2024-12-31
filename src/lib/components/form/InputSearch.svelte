@@ -1,33 +1,39 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { isStringSHA256 } from '$lib/utils/helpers';
-
-	import Icon from '../Icon.svelte';
+	import Button from './Button.svelte';
 	import Input from './Input.svelte';
 
 	let validHash = true;
-
-	const onSearchChange = (event: Event) => {
-		const hash = (event.target as HTMLInputElement).value;
-		validHash = isStringSHA256(hash);
-		if (validHash) {
+	let hash = "";
+	function submit(e: Event) {
+		e.preventDefault();
+		validHash = isStringSHA256(hash) || !hash;
+		if (validHash && hash) {
 			goto(`/app/files/${hash}/summary`);
+		} else {
+			alert(`"${hash}" is an invalid hash`)
 		}
-	};
+	}
 </script>
 
-<div
-	class="flex relative w-[400px] focus-within:w-full focus-within:text-gray-500 text-gray-200 transition-all duration-500"
+<form
+	class="flex relative w-full --max-w-[400px] --focus-within:w-full --focus-within:text-gray-500 --text-gray-200 --transition-all --duration-500"
+	on:submit={submit}
 >
-	<Icon
-		name="search"
-		size="w-5 h-5"
-		class={`absolute right-4 top-1/2 -translate-y-1/2 ${validHash ? 'currentColor' : 'text-red-500'}`}
-	/>
 	<Input
-		class="w-full"
+		icon="search"
+		iconClass="text-[#5F5F5F]"
+		class="text-primary-text w-full border-none py-3.5"
+		parentClass="border {!validHash ? "border-alert-red" : "border-secondary-border"} rounded-[10px] px-[3px]"
 		placeholder="Quick file hash lookup"
 		error={!validHash}
-		on:change={onSearchChange}
-	/>
-</div>
+		bind:value={hash}
+		on:focus
+		on:blur={() => validHash ||= !hash}
+	>
+		<Button class="h-fit self-center show-on-blur text-white bg-brand-500 px-5 py-2.5"
+			on:click={submit}
+		>Search</Button>
+	</Input>
+</form>
