@@ -98,7 +98,7 @@
 				<span class="hidden lg:block pl-2">Rescan</span>
 			</Button>
 			<ButtonLike class="{liked ? "bg-brand-surface hover:bg-brand-500" : "bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text "}" size="lg" {hash} {loggedIn} bind:liked />
-			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" target="_blank" size="lg" icon="twitter" href={shareTwitterLink}>
+			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" target="_blank" size="lg" icon="x-logo" href={shareTwitterLink}>
 				<span class="hidden lg:block pl-2">Share</span>
 			</Button>
 		</div>

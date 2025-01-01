@@ -129,7 +129,7 @@
 				Terms of Service
 			</a>
 			and
-			<a class="link" target="_blank" rel="noreferrer" href="/pages/privacy-and-policy">
+			<a class="link" target="_blank" rel="noreferrer" href="/pages/privacy-policy">
 				Privacy Policy
 			</a> and allow us to share your submission with the security community. Learn more
 		</p>
