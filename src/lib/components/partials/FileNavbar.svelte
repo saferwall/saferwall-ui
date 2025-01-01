@@ -11,7 +11,7 @@
 	export let activeMenu: { name: string; path: string };
 
 	$: isPathActive = (path: string): boolean => path === activeMenu.path;
-	$: generateFilePath = (path: string): string => `/app/files/${hash}/${path}`;
+	$: generateFilePath = (path: string): string => `/files/${hash}/${path}`;
 	let uploadOpen = false;
 	let uploadBox: HTMLElement;
 </script>
@@ -46,7 +46,7 @@
 							text-brand			hover:text-brand-light-text
 							bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
 							"
-						href="/app/auth/login?redir={encodeURIComponent($page.url.pathname)}"
+						href="/auth/login?redir={encodeURIComponent($page.url.pathname)}"
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
 							<use href="/images/icons.svg#icon-cloud" />

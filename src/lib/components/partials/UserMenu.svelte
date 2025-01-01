@@ -56,19 +56,19 @@
 			data-sveltekit-preload-data="tap"
 		>
 			<li class="user__menu__item">
-				<a class="menu__link" href="/app/account/profile">
+				<a class="menu__link" href="/account/profile">
 					<Icon size="w-5 h-5" name="user" />
 					<span class="menu__label">Profile</span>
 				</a>
 			</li>
 			<li class="user__menu__item">
-				<a class="menu__link" href="/app/account/settings">
+				<a class="menu__link" href="/account/settings">
 					<Icon size="w-5 h-5" name="cog" />
 					<span class="menu__label">Settings</span>
 				</a>
 			</li>
 			<li class="user__menu__item">
-				<a data-sveltekit-reload class="menu__link" href="/app/auth/logout">
+				<a data-sveltekit-reload class="menu__link" href="/auth/logout">
 					<Icon size="w-5 h-5" name="logout" />
 					<span class="menu__label">Logout</span>
 				</a>

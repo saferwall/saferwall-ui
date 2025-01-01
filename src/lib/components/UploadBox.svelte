@@ -73,7 +73,7 @@
 	};
 
 	function doDrop(event: DragEvent) {
-		if (!loggedIn) { goto("/app/auth/login"); }
+		if (!loggedIn) { goto("/auth/login"); }
 		let dt = event.dataTransfer;
 		if (!dt) return;
 		onFilesChanges({ target: { files: dt.files }});
@@ -103,7 +103,7 @@
 	{:else}
 		<div class="flex min-h-[300px] flex-col items-center justify-center space-y-6">
 			<div class="m-auto w-max h-max">
-				<ButtonBrowse href={loggedIn ? undefined : '/app/auth/login'} on:click={selectFiles} />
+				<ButtonBrowse href={loggedIn ? undefined : '/auth/login'} on:click={selectFiles} />
 			</div>
 
 			<div class="flex flex-col w-full space-y-2">
@@ -125,11 +125,11 @@
 	<div class="m-auto text-center max-w-screen-md">
 		<p class="text-xs md:text-[0.9rem] md:px-8 text-primary-text">
 			By using Saferwall you consent to our
-			<a class="link" target="_blank" rel="noreferrer" href="/app/pages/terms-of-service">
+			<a class="link" target="_blank" rel="noreferrer" href="/pages/terms-of-service">
 				Terms of Service
 			</a>
 			and
-			<a class="link" target="_blank" rel="noreferrer" href="/app/pages/privacy-and-policy">
+			<a class="link" target="_blank" rel="noreferrer" href="/pages/privacy-and-policy">
 				Privacy Policy
 			</a> and allow us to share your submission with the security community. Learn more
 		</p>

@@ -2,6 +2,7 @@ export const THEME_KEY = 'theme';
 export const DEFAULT_PAGINATION_ITEMS = 20;
 
 export const SESSION_KEY = 'session';
+export const APP_VISITED_KEY = "hasVisitedAppBefore";
 
 export enum UploadStatus {
 	UPLOADING = 0,

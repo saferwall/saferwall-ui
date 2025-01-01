@@ -10,7 +10,7 @@
 		e.preventDefault();
 		validHash = isStringSHA256(hash) || !hash;
 		if (validHash && hash) {
-			goto(`/app/files/${hash}/summary`);
+			goto(`/files/${hash}/summary`);
 		} else {
 			alert(`"${hash}" is an invalid hash`)
 		}
