@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invalidateAll } from '$app/navigation';
 	import type { Saferwall } from '$lib/types';
 
 	import Button from '../form/Button.svelte';
@@ -37,18 +38,18 @@
 				<li>
 					<a
 						class="text-zinc-400 dark:text-zinc-500 hover:text-gray-200 dark:hover:text-gray-200"
+						href="/home" on:click={() => invalidateAll()}>Home</a
+					>
+				</li>
+				<li>
+					<a
+						class="text-zinc-400 dark:text-zinc-500 hover:text-gray-200 dark:hover:text-gray-200"
 						href="https://docs.saferwall.com/"
 						target="_blank"
 						rel="noreferrer"
 					>
 						Documentation
 					</a>
-				</li>
-				<li>
-					<a
-						class="text-zinc-400 dark:text-zinc-500 hover:text-gray-200 dark:hover:text-gray-200"
-						href="/app/hot-activities">Hot activities</a
-					>
 				</li>
 			</ul>
 			<Button icon="search" class="size-10 text-secondary-text rounded-full hide-on-focus lg:hidden flex justify-center" on:click={() => focused = true}></Button>
@@ -58,9 +59,9 @@
 			{:else}
 				<div class="flex items-center gap-2">
 					<div class="!hidden md:!inline-flex">
-						<Button class="min-w-[100px]" href="/app/auth/login">Login</Button>
+						<Button class="min-w-[100px]" href="/auth/login">Login</Button>
 					</div>
-					<Button class="min-w-[100px]" href="/app/auth/register" theme="brand">
+					<Button class="min-w-[100px]" href="/auth/register" theme="brand">
 						Sign up
 					</Button>
 				</div>

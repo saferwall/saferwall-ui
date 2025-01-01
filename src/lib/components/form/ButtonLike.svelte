@@ -34,7 +34,7 @@
 		icon="like"
 		type="submit"
 		class="w-full md:w-max z-30"
-		href={loggedIn ? undefined : '/app/auth/login'}
+		href={loggedIn ? undefined : '/auth/login'}
 		theme={liked ? 'brand' : 'base'}
 		{loading}
 		{...$$restProps}

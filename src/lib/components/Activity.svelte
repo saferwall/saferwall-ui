@@ -25,7 +25,7 @@
 				<div class="activity__author max-w-full flex flex-col items-center space-y-2">
 					<Avatar username={author.username} />
 					<div class="text-center">
-						<a class="font-medium text-sm text-gray-100" href="/app/users/{author.username}">
+						<a class="font-medium text-sm text-gray-100" href="/users/{author.username}">
 							{author.username}
 						</a>
 						<p class="font-regular text-[13px] text-gray-500">
@@ -41,10 +41,10 @@
 				>
 					<p class="activity__title space-x-1 flex flex-col md:flex-row">
 						<span class="flex space-x-1">
-							<a class="activity__info__author" href="/app/users/{author.username}">
+							<a class="activity__info__author" href="/users/{author.username}">
 								{author.username}
 							</a>
-							<a class="activity__info__type" href="/app/files/{file?.hash}?behavior_id={file?.default_behavior_id ?? ""}">
+							<a class="activity__info__type" href="/files/{file?.hash}?behavior_id={file?.default_behavior_id ?? ""}">
 								{getActivityTitle(activity)}
 							</a>
 						</span>
@@ -67,7 +67,7 @@
 					{#if tags.length > 0}
 						{#each tags as tag}
 							<li class="flex">
-								<a class="rounded-sm px-2.5 py-1.5 tags__tag tags__tag--{tag.category}" href="/app/tags/{tag.category}-{tag.name}">{tag.name}</a>
+								<a class="rounded-sm px-2.5 py-1.5 tags__tag tags__tag--{tag.category}" href="/tags/{tag.category}-{tag.name}">{tag.name}</a>
 							</li>
 						{/each}
 					{:else}
@@ -91,13 +91,13 @@
 					</div>
 				</div>
 				<div class="font-medium text-sm py-3">
-					<a class="font-medium text-sm text-gray-100" href="/app/users/{author.username}">
+					<a class="font-medium text-sm text-gray-100" href="/users/{author.username}">
 						{author.username}
 					</a>
 					<span class="text-gray-100">
 						followed
 					</span>
-					<a class="font-medium text-sm text-gray-100" href="/app/users/{activity.target}">
+					<a class="font-medium text-sm text-gray-100" href="/users/{activity.target}">
 						{activity.target}
 					</a>
 					<div class="text-center">

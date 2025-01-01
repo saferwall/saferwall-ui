@@ -29,7 +29,6 @@
 			NProgress.done();
 		}
 	}
-
 	let mounted = false;
 	onMount(() => {
 		mounted = true;

@@ -107,13 +107,13 @@ const ejsVars = {
 	token: `{{ .Token }}`,
 	guid: `{{ .Guid }}`,
 	get reset_password_link() {
-		return `https://saferwall.com/app/auth/forgot-password/new?token={{ .Token }}&guid={{ .Guid }}&id={{ .Email }}`;
+		return `https://saferwall.com/auth/forgot-password/new?token={{ .Token }}&guid={{ .Guid }}&id={{ .Email }}`;
 	},
 	get verify_account_link() {
-		return `https://saferwall.com/app/auth/confirm/verify?token={{ .Token }}&guid={{ .Guid }}&id={{ .Email }}`;
+		return `https://saferwall.com/auth/confirm/verify?token={{ .Token }}&guid={{ .Guid }}&id={{ .Email }}`;
 	},
 	get update_email_link() {
-		return `https://saferwall.com/app/auth/confirm/verify?token={{ .Token }}&guid={{ .Guid }}&id={{ .Email }}`;
+		return `https://saferwall.com/auth/confirm/verify?token={{ .Token }}&guid={{ .Guid }}&id={{ .Email }}`;
 	},
 }
 

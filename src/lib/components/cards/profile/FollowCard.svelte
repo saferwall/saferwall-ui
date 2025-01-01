@@ -28,7 +28,7 @@
 			{/if}
 		</div>
 	</div>
-	<a class="absolute opacity-0 z-10 inset-0" href="/app/users/{item.username}">
+	<a class="absolute opacity-0 z-10 inset-0" href="/users/{item.username}">
 		{item.username}
 	</a>
 </article>

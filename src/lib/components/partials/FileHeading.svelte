@@ -19,8 +19,8 @@
 	export let loggedIn = false;
 	export let activeMenu: Menu.File;
 
-	$: downloadLink = `${env.PUBLIC_API_URL}app/files/${hash}/download/`;
-	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/app/files/${hash}/${activeMenu.path}`;
+	$: downloadLink = `${env.PUBLIC_API_URL}files/${hash}/download/`;
+	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/files/${hash}/${activeMenu.path}`;
 
 	let rescaning = false;
 	let downloadLoading = false;
@@ -32,7 +32,7 @@
 			console.error('Rescab failed', error);
 			// @ts-ignore
 			if (error.status === 401) {
-				goto("/app/auth/login");
+				goto("/auth/login");
 				return;
 			}
 		}
@@ -53,7 +53,7 @@
 		</div>
 
 		<div class="space-x-2 flex flex-shrink-0">
-			{#if $page.route.id === "/app/(file)/files/[hash]/api-calls" && behaviorId}
+			{#if $page.route.id === "/(file)/files/[hash]/api-calls" && behaviorId}
 				<Button icon="export-api-logs" href="{env.PUBLIC_ARTIFACTS_URL}{hash}/{behaviorId}/api_trace.json"
 					class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text">
 					<span class="hidden lg:block pl-2">Export API Logs</span>
@@ -63,7 +63,7 @@
 				e.preventDefault();
 				downloadLoading = true;
 				if (!client.authorization) {
-					goto("/app/auth/login");
+					goto("/auth/login");
 					return;
 				}
 				window.fetch(downloadLink, {
@@ -74,7 +74,7 @@
 				}).then(res => {
 					if (res.status === 401) {
 						downloadLoading = false;
-						goto("/app/auth/login");
+						goto("/auth/login");
 						return;
 					}
 					return res.blob()
@@ -98,7 +98,7 @@
 				<span class="hidden lg:block pl-2">Rescan</span>
 			</Button>
 			<ButtonLike class="{liked ? "bg-brand-surface hover:bg-brand-500" : "bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text "}" size="lg" {hash} {loggedIn} bind:liked />
-			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" target="_blank" size="lg" icon="twitter" href={shareTwitterLink}>
+			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" target="_blank" size="lg" icon="x-logo" href={shareTwitterLink}>
 				<span class="hidden lg:block pl-2">Share</span>
 			</Button>
 		</div>
