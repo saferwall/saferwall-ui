@@ -29,7 +29,7 @@
 		</svg>
 	{/if}
 	{#if label}
-		<span class="input__label {labelClass}" style={labelStyle}>{label}</span>
+		<span class="input__label cursor-text {labelClass}" style={labelStyle}>{label}</span>
 	{/if}
 	{#if multiline}
 		<textarea

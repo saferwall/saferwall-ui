@@ -317,14 +317,13 @@
 			<ellipse cx="165.327" cy="50.5" rx="5.43683" ry="5.5" fill="#1B1B1D" />
 			<defs>
 				<pattern
+					x="9"
+					y="9"
 					id="pattern0_3073_5438"
-					x="0"
-					y="0"
 					patternUnits="userSpaceOnUse"
-					height="60"
-					width="60"
+					width="56" height="56"
 				>
-					<image x="4" y="0" height="56" width="56" xlink:href="/images/default-avatar.svg"></image>
+					<image x="0" y="0" height="56" width="56" href="/generic-pfp.png"></image>
 				</pattern>
 				<linearGradient
 					id="paint0_linear_3073_5438"
