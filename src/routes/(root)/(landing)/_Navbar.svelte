@@ -62,7 +62,7 @@
 						<li>
 							<Button
 								class="bg-[#5F4CD9] text-white rounded-[8px] font-semibold px-4.5 py-[6px] leading-[25px] border-none"
-								href="/app?redir=/auth/login"
+								href="/app"
 								on:click={() => invalidateAll()}
 							>
 								Start&nbsp;
@@ -132,7 +132,7 @@
 						<li>
 							<Button
 								class="bg-[#5F4CD9] text-white rounded-[8px] font-semibold px-4.5 py-[6px] leading-[25px] border-none"
-								href="/app?redir=/auth/login"
+								href="/app"
 								on:click={() => invalidateAll()}
 							>
 								Start&nbsp;
