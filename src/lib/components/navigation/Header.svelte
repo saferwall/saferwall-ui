@@ -38,7 +38,7 @@
 				<li>
 					<a
 						class="text-zinc-400 dark:text-zinc-500 hover:text-gray-200 dark:hover:text-gray-200"
-						href="/home" on:click={() => invalidateAll()}>Home</a
+						href="/home" on:click={() => invalidateAll()}>About Saferwall</a
 					>
 				</li>
 				<li>

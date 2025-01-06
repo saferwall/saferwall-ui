@@ -13,7 +13,7 @@
 	});
 </script>
 
-<Card class="bg-neutral-50 border border-zinc-300 dark:border-zinc-700" padding={false}>
+<Card class="border border-zinc-300 dark:border-zinc-700" padding={false}>
 	<table>
 		<thead>
 			<th>Member</th>
