@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/form/Button.svelte';
 	import Logo from '$lib/components/partials/Logo.svelte';
@@ -61,6 +62,8 @@
 						<li>
 							<Button
 								class="bg-[#5F4CD9] text-white rounded-[8px] font-semibold px-4.5 py-[6px] leading-[25px] border-none"
+								href="/app?redir=/auth/login"
+								on:click={() => invalidateAll()}
 							>
 								Start&nbsp;
 								<span class="hidden min-[350px]:block"> an analysis </span>
@@ -129,6 +132,8 @@
 						<li>
 							<Button
 								class="bg-[#5F4CD9] text-white rounded-[8px] font-semibold px-4.5 py-[6px] leading-[25px] border-none"
+								href="/app?redir=/auth/login"
+								on:click={() => invalidateAll()}
 							>
 								Start&nbsp;
 								<span class="hidden min-[350px]:block"> an analysis </span>
