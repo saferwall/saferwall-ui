@@ -89,7 +89,7 @@
 						class="flex flex-col gap-[20px] border border-[#1F1F20] min-w-[242px] lg:min-w-[368px]"
 						style="padding-inline: {cssClamp('20px', '35px', [ 1024, 1152 ])}; padding-block: {cssClamp('20px', '28px', [ 1024, 1152 ])}; border-radius: {cssClamp('20px', '25px', [ 1024, 1152 ])}"
 					>
-						<Icon name={el.icon} class="size-[60px]"></Icon>
+						<Icon name={el.icon} class="size-[48px]"></Icon>
 						<div class="flex flex-col" style="gap: {cssClamp('5px', '10px')}">
 							<h4 class="capitalize --text-[16px] font-semibold text-[#DBDBDB]"
 								style="font-size: {clamp(15, 16)}; line-height: {clamp(22, 25)};">
