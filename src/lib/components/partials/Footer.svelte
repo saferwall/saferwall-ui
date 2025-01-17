@@ -8,16 +8,15 @@
 	<div class="container mx-auto py-6 flex justify-between">
 		<p>© {year} Saferwall. All rights reserved.</p>
 		<ul class="flex space-x-3">
-			<li>
+			<li class="hover:text-primary-text text-secondary-text">
 				<a href="https://github.com/saferwall" target="_blank" rel="noreferrer">
-					<Icon name="github-logo" class="size-6"></Icon>
+					<Icon name="github-logo" class="size-4"></Icon>
 					<span class="sr-only">Saferwall Github</span>
 				</a>
 			</li>
-			<li>
+			<li class="hover:text-primary-text text-secondary-text">
 				<a href="https://x.com/saferwall" target="_blank" rel="noreferrer">
-					<Icon name="x-logo" class="size-6"></Icon>
-
+					<Icon name="x-logo" class="size-4"></Icon>
 					<span class="sr-only">Saferwall X</span>
 				</a>
 			</li>

@@ -10,6 +10,12 @@ export default {
 	},
 	theme: {
 		extend: {
+			padding: {
+				landing: "var(--px-landing)",
+			},
+			margin: {
+				landing: "var(--mx-landing)",
+			},
 			fontFamily: {
 				"jetbrains-mono": `"JetBrains Mono"`,
 				primary: 'Inter'

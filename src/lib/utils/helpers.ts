@@ -40,9 +40,11 @@ export const orderObjectKeys = (obj: any) => {
 		);
 };
 
-export function cssClamp(min: string, max: string, rest: [minWidth?: number, maxWidth?: number] = [360, 1024]): string {
-	rest[0] ??= 360;
-	rest[1] ??= 1024;
+const mobileWidth = 375;
+const largerWidth = 1024;
+export function cssClamp(min: string, max: string, rest: [minWidth?: number, maxWidth?: number] = [mobileWidth, largerWidth]): string {
+	rest[0] ??= mobileWidth;
+	rest[1] ??= largerWidth;
 	let [minWidth, maxWidth] = rest;
 	// const slope = (parseInt(max) - parseInt(min)) / (maxWidth - minWidth);
 

@@ -7,7 +7,7 @@
 </script>
 
 <section class="flex flex-col items-center" style="padding-block: {cssClamp("14px", "63px")}">
-	<div class="container px-4 overflow-x-hidden max-w-[calc(100vw-16px)]">
+	<div class="w-min container landing-container mx-landing overflow-x-hidden max-w-[calc(100vw-16px)]">
 		<svg
 			class={twMerge('lg:block hidden one', Class)}
 			width="1152"
