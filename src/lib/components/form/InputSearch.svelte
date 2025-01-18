@@ -25,7 +25,7 @@
 		icon="search"
 		iconClass="text-[#5F5F5F]"
 		class="text-primary-text w-full border-none py-3.5"
-		parentClass="border {!validHash ? "border-alert-red" : "border-secondary-border"} rounded-[10px] px-[3px]"
+		parentClass="border {!validHash ? "border-alert-red" : "border-primary-border"} rounded-[10px] px-[3px]"
 		placeholder="Quick file hash lookup"
 		error={!validHash}
 		bind:value={hash}

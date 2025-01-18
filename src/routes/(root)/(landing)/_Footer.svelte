@@ -63,21 +63,21 @@
 	]
 </script>
 
-<footer class="px-4 flex justify-center w-full" style="padding-block: {clamp(40, 70)}">
-	<div class="flex container bg-[#0D0D0D] flex-col lg:flex-row justify-between gap-[44px]">
+<footer class="flex justify-center w-full" style="padding-block: {clamp(40, 70)}">
+	<div class="flex container landing-container mx-landing bg-[#0D0D0D] flex-col lg:flex-row justify-between gap-[44px]">
 		<div class="flex flex-row items-center lg:flex-col lg:items-start justify-between grow-[1] gap-[28px]">
 			<div class="flex flex-col gap-[14px]">
 				<Logo />
 				<p class="text-[#969696] lg:block hidden">A hackable malware sandbox for the 21st Century.</p>
 			</div>
-			<div class="flex text-[#969696]" style="gap: {clamp(20, 23)}">
-				<a href="https://github.com/saferwall/">
+			<div class="flex" style="gap: {clamp(20, 23)}">
+				<a class="hover:text-[#DBDBDB] text-[#969696]" href="https://github.com/saferwall/">
 					<Icon name="github-logo" class="size-[17px]"></Icon>
 				</a>
-				<a href="https://www.linkedin.com/company/saferwall/">
+				<a class="hover:text-[#DBDBDB] text-[#969696]" href="https://www.linkedin.com/company/saferwall/">
 					<Icon name="linkedin-logo" class="size-[17px]"></Icon>
 				</a>
-				<a href="https://x.com/Saferwall">
+				<a class="hover:text-[#DBDBDB] text-[#969696]" href="https://x.com/Saferwall">
 					<Icon name="x-logo" class="size-[17px]"></Icon>
 				</a>
 			</div>
@@ -85,10 +85,10 @@
 		<div class="flex grow-[2] flex-wrap max-[454px]:*:min-w-[120px] gap-[16px] *:mb-[14px]">
 			{#each data as el}
 				<div class="flex flex-col grow basis-0 gap-[15px]">
-					<h5 class="font-medium">{el.title}</h5>
+					<h5 class="font-medium" style="font-size: {clamp(13, 14)}; line-height: {clamp(20, 26)}">{el.title}</h5>
 					<ul class="flex flex-col gap-[10px]">
 						{#each el.items as {text, href}}
-							<li class="text-[#969696]">
+							<li class="text-[#969696] hover:text-[#DBDBDB]" style="font-size: {clamp(14, 14)}; line-height: {clamp(21, 25)};">
 								<a {href}>
 									{text}
 								</a>
