@@ -16,7 +16,7 @@
 			href: '/',
 			preventDefault: true,
 			get selected() {
-				return $page.url.pathname == '/' && (location.hash === "#" || location.hash === "");
+				return mounted && $page.url.pathname == '/' && (location.hash === "#" || location.hash === "");
 			}
 		},
 		{
