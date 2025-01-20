@@ -7,8 +7,8 @@ import { cssClamp } from "$lib/utils";
 	const clamp = (min: number, max: number) => cssClamp(min +  "px", max + "px", [360, maxWidth])
 </script>
 
-<section class="flex justify-center" style="padding-top: {clamp(80, 90)}; padding-bottom: {clamp(50, 90)}">
-	<div class="container landing-container mx-landing">
+<section class="flex justify-center" style="padding-top: {clamp(80, 90)}; padding-bottom: {clamp(50, 90)};">
+	<div class="container landing-container mx-landing [&.container.container.container]:min-[564px]:max-w-[564px]">
 		<div class="flex flex-col gap-[40px] ">
 	
 			<div class="flex flex-col items-center *:text-center" style="gap: {clamp(13, 15)}">
