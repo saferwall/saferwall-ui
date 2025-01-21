@@ -49,7 +49,6 @@
 		e.preventDefault();
 		let m = href.match(/#(.*)/);
 		let prom = new Promise((res) => res(undefined))
-		console.log({1: new URL(href, location.href).pathname, 2: $page.url.pathname})
 		if (new URL(href, location.href).pathname !== $page.url.pathname) {
 			prom = goto(new URL(href, location.href).pathname);
 		}

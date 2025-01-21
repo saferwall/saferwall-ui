@@ -89,7 +89,7 @@
 					<ul class="flex flex-col gap-[10px]">
 						{#each el.items as {text, href}}
 							<li class="text-[#969696] hover:text-[#DBDBDB]" style="font-size: {clamp(14, 14)}; line-height: {clamp(21, 25)};">
-								<a {href}>
+								<a {href} class="text-nowrap whitespace-nowrap">
 									{text}
 								</a>
 							</li>

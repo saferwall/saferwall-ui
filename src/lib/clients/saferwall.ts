@@ -61,7 +61,7 @@ export class SaferwallClient {
 			},
 			...args
 		};
-		if (init.method !== "GET") {
+		if (init.method !== "GET" && (typeof init.body === "string")) {
 			init.headers = {
 				...init.headers,
 				"Content-Type": "application/json"
@@ -69,16 +69,12 @@ export class SaferwallClient {
 		}
 		const _init = this.setAuthHeaders(init);
 		const _fetch = this.fetch ?? fetch;
-		// console.log(": " + urlString);
-		// console.log(JSON.stringify(_init, undefined, 4));
-		const response: any = await _fetch(urlString, 
-			_init
-		);
+		// console.log({urlString, _init});
+		const response: any = await _fetch(urlString, _init);
 
 		if (!response.ok) {
 			throw response;
 		}
-
 		
 		if (toJson) {
 			let ret = await response.json();
@@ -122,7 +118,7 @@ export class SaferwallClient {
 	}
 
 	public async uploadFile(file: File): Promise<Saferwall.File> {
-		const data: any = new FormData();
+		const data = new FormData();
 		data.append('file', file);
 
 		return this.request<Saferwall.File>(`files/`, {

@@ -23,8 +23,10 @@
 	</body>
 	<script>
 		let theme = localStorage.getItem("theme");
+		console.log({'window.matchMedia("(prefers-color-scheme: dark)").matches': window.matchMedia("(prefers-color-scheme: dark)").matches, theme});
 		if (!theme) {
 			document.documentElement.classList.add(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 		}
 	</script>
+	<script src="https://www.google.com/recaptcha/api.js?render=6LfcurUqAAAAAOc5jCpNPLryEnzhpz91AAu3UOHC"></script>
 </html>
