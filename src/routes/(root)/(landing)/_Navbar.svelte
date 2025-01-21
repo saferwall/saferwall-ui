@@ -1,39 +1,66 @@
 <script lang="ts">
-	import { invalidateAll } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/form/Button.svelte';
 	import Logo from '$lib/components/partials/Logo.svelte';
+	import { onMount } from 'svelte';
+
+	let mounted = false;
+	onMount(() => {
+		mounted = true;
+	})
 
 	let navText = [
 		{
 			text: 'home',
 			href: '/',
+			preventDefault: true,
 			get selected() {
-				return $page.url.pathname == '/' && $page.url.hash === "";
+				return mounted && $page.url.pathname == '/' && (location.hash === "#" || location.hash === "");
 			}
 		},
 		{
 			text: 'highlights',
 			href: '/#highlights',
+			preventDefault: true,
 			get selected() {
-				return $page.url.hash === this.href.substring(1);
+				return mounted && location.hash === this.href.substring(1);
 			}
 		},
 		{
 			text: 'features',
 			href: '/#features',
+			preventDefault: true,
 			get selected() {
-				return $page.url.hash === this.href.substring(1);
+				return mounted && location.hash === this.href.substring(1);
 			}
 		},
 		{
 			text: 'contact',
 			href: '/contact',
+			preventDefault: false,
 			get selected() {
 				return $page.url.pathname.startsWith('/contact');
 			}
 		}
 	];
+	
+	function onPreventDefault(e: any, href: string) {
+		e.preventDefault();
+		let m = href.match(/#(.*)/);
+		let prom = new Promise((res) => res(undefined))
+		if (new URL(href, location.href).pathname !== $page.url.pathname) {
+			prom = goto(new URL(href, location.href).pathname);
+		}
+		prom.then(() => {
+			if (m) {
+				document.getElementById(m[1])!.scrollIntoView();
+			} else {
+				window.scrollTo({ top: 0 });
+			}
+		})
+	}
+
 	export let menuOpen = false;
 </script>
 
@@ -49,13 +76,13 @@
 						<li>
 							<ul class="flex md:gap-8 gap-5 items-center">
 								{#key $page.url}
-									{#each navText as { text, href, selected }}
+									{#each navText as { text, href, selected, preventDefault }}
 										<li
 											class:menuOpen
 											class="hidden md:block [&.menuOpen]:hidden capitalize text-[#969696] hover:text-[#DBDBDB] [&.selected]:text-[#DBDBDB]"
 											class:selected
 										>
-											<a {href}>
+											<a {href} on:click={(e) => { if (preventDefault) { onPreventDefault(e, href) } }}>
 												{text}
 											</a>
 										</li>
@@ -94,12 +121,12 @@
 									pb-6 pt-4"
 					>
 						{#key $page.url}
-							{#each navText as { text, href, selected }}
+							{#each navText as { text, href, selected, preventDefault }}
 								<li
 									class="capitalize text-[14px] text-transparent leading-6"
 									class:selected
 								>
-									<a {href} on:click={() => (menuOpen = false)}>
+									<a {href} on:click={(e) => { if (preventDefault) { onPreventDefault(e, href) } menuOpen = false;}}>
 										{text}
 									</a>
 								</li>
@@ -122,13 +149,13 @@
 						<li>
 							<ul class="flex md:gap-8 gap-5 items-center">
 								{#key $page.url}
-									{#each navText as { text, href, selected }}
+									{#each navText as { text, href, selected, preventDefault }}
 										<li
 											class:menuOpen
 											class="hidden md:block [&.menuOpen]:hidden capitalize text-[#969696] hover:text-[#DBDBDB] [&.selected]:text-[#DBDBDB]"
 											class:selected
 										>
-											<a {href}>
+											<a {href} on:click={(e) => { if (preventDefault) { onPreventDefault(e, href) } }}>
 												{text}
 											</a>
 										</li>
@@ -165,12 +192,12 @@
 								pb-6"
 					>
 						{#key $page.url}
-							{#each navText as { text, href, selected }}
+							{#each navText as { text, href, selected, preventDefault }}
 								<li
 									class="capitalize text-[14px] text-[#969696] hover:text-[#DBDBDB] [&.selected]:text-[#DBDBDB] leading-6"
 									class:selected
 								>
-									<a {href} on:click={() => (menuOpen = false)}>
+									<a {href} on:click={(e) => { if (preventDefault) { onPreventDefault(e, href) } menuOpen = false;}}>
 										{text}
 									</a>
 								</li>

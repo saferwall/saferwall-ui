@@ -88,7 +88,7 @@
 		.card__tabs__item:hover:after,
 		.active:after {
 			@apply content-[''] absolute w-full bottom-0 left-0;
-			@apply border-b-2 border-zinc-200 dark:border-zinc-700 text-primary;
+			@apply border-b-2 border-brand-surface text-primary;
 		}
 	}
 
@@ -102,7 +102,7 @@
 		.card__tabs__item:hover:after,
 		.active:after {
 			@apply content-[''] absolute h-full top-0 right-0;
-			@apply border-r-2 border-zinc-200 dark:border-zinc-700 text-primary;
+			@apply border-r-2 border-brand-surface text-primary;
 		}
 
 		.card__tabs__item {

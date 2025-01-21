@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '$lib/components/Icon.svelte';
 	import { clamp, cssClamp } from '$lib/utils';
+	import { navLinkSectionAction } from '$lib/utils/navLinkSectionAction';
 
 	let data: {
 		icon: string;
@@ -41,6 +42,7 @@
 </script>
 
 <section
+	use:navLinkSectionAction
 	id="features"
 	class="flex justify-center scroll-mt-[73px]"
 	style="

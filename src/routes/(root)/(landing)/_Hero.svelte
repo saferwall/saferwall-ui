@@ -2,11 +2,15 @@
 	import { invalidateAll } from "$app/navigation";
 	import Button from "$lib/components/form/Button.svelte";
 	import { clamp } from "$lib/utils";
+	import { navLinkSectionAction } from "$lib/utils/navLinkSectionAction";
 
 
 </script>
 
-<section class="flex justify-center"
+<section
+	id=""
+	use:navLinkSectionAction
+	class="flex justify-center"
 	style="
 		padding-top: {clamp(75, 125)};
 		padding-bottom: {clamp(50, 60)};

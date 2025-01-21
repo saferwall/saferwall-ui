@@ -134,6 +134,43 @@ export interface CommentUpdateCommentRequest {
 /**
  * 
  * @export
+ * @interface CommentsGet200Response
+ */
+export interface CommentsGet200Response {
+    /**
+     * 
+     * @type {Array<EntityComment>}
+     * @memberof CommentsGet200Response
+     */
+    'items'?: Array<EntityComment>;
+    /**
+     * 
+     * @type {number}
+     * @memberof CommentsGet200Response
+     */
+    'page'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CommentsGet200Response
+     */
+    'page_count'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CommentsGet200Response
+     */
+    'per_page'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CommentsGet200Response
+     */
+    'total_count'?: number;
+}
+/**
+ * 
+ * @export
  * @interface EntityBehavior
  */
 export interface EntityBehavior {
@@ -161,6 +198,12 @@ export interface EntityBehavior {
      * @memberof EntityBehavior
      */
     'capabilities'?: object;
+    /**
+     * 
+     * @type {EntityDocMetadata}
+     * @memberof EntityBehavior
+     */
+    'doc'?: EntityDocMetadata;
     /**
      * 
      * @type {object}
@@ -199,10 +242,10 @@ export interface EntityBehavior {
     'sha256'?: string;
     /**
      * 
-     * @type {number}
+     * @type {EntityFileScanProgressType}
      * @memberof EntityBehavior
      */
-    'status'?: number;
+    'status'?: EntityFileScanProgressType;
     /**
      * 
      * @type {object}
@@ -222,6 +265,8 @@ export interface EntityBehavior {
      */
     'type'?: string;
 }
+
+
 /**
  * 
  * @export
@@ -234,6 +279,12 @@ export interface EntityComment {
      * @memberof EntityComment
      */
     'body'?: string;
+    /**
+     * Meta represents document metadata.
+     * @type {EntityDocMetadata}
+     * @memberof EntityComment
+     */
+    'doc'?: EntityDocMetadata;
     /**
      * ID represents the activity identifier.
      * @type {string}
@@ -268,6 +319,31 @@ export interface EntityComment {
 /**
  * 
  * @export
+ * @interface EntityDocMetadata
+ */
+export interface EntityDocMetadata {
+    /**
+     * 
+     * @type {number}
+     * @memberof EntityDocMetadata
+     */
+    'created_at'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EntityDocMetadata
+     */
+    'last_updated'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof EntityDocMetadata
+     */
+    'version'?: number;
+}
+/**
+ * 
+ * @export
  * @interface EntityFile
  */
 export interface EntityFile {
@@ -285,12 +361,6 @@ export interface EntityFile {
     'byte_entropy'?: Array<number>;
     /**
      * 
-     * @type {number}
-     * @memberof EntityFile
-     */
-    'comments_count'?: number;
-    /**
-     * 
      * @type {string}
      * @memberof EntityFile
      */
@@ -301,6 +371,12 @@ export interface EntityFile {
      * @memberof EntityFile
      */
     'default_behavior_report'?: object;
+    /**
+     * 
+     * @type {EntityDocMetadata}
+     * @memberof EntityFile
+     */
+    'doc'?: EntityDocMetadata;
     /**
      * 
      * @type {{ [key: string]: string; }}
@@ -405,10 +481,10 @@ export interface EntityFile {
     'ssdeep'?: string;
     /**
      * 
-     * @type {number}
+     * @type {EntityFileScanProgressType}
      * @memberof EntityFile
      */
-    'status'?: number;
+    'status'?: EntityFileScanProgressType;
     /**
      * 
      * @type {object}
@@ -429,6 +505,12 @@ export interface EntityFile {
     'tags'?: { [key: string]: any; };
     /**
      * 
+     * @type {string}
+     * @memberof EntityFile
+     */
+    'tlsh'?: string;
+    /**
+     * 
      * @type {Array<string>}
      * @memberof EntityFile
      */
@@ -440,6 +522,23 @@ export interface EntityFile {
      */
     'type'?: string;
 }
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EntityFileScanProgressType = {
+    FileScanProgressQueued: 1,
+    FileScanProgressProcessing: 2,
+    FileScanProgressFinished: 3
+} as const;
+
+export type EntityFileScanProgressType = typeof EntityFileScanProgressType[keyof typeof EntityFileScanProgressType];
+
+
 /**
  * 
  * @export
@@ -503,40 +602,28 @@ export interface EntityUser {
     'confirmed'?: boolean;
     /**
      * 
+     * @type {EntityDocMetadata}
+     * @memberof EntityUser
+     */
+    'doc'?: EntityDocMetadata;
+    /**
+     * 
      * @type {string}
      * @memberof EntityUser
      */
     'email'?: string;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<EntityUserFollows>}
      * @memberof EntityUser
      */
-    'followers'?: Array<string>;
+    'followers'?: Array<EntityUserFollows>;
     /**
      * 
-     * @type {number}
+     * @type {Array<EntityUserFollows>}
      * @memberof EntityUser
      */
-    'followers_count'?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof EntityUser
-     */
-    'following'?: Array<string>;
-    /**
-     * 
-     * @type {number}
-     * @memberof EntityUser
-     */
-    'following_count'?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof EntityUser
-     */
-    'has_avatar'?: boolean;
+    'following'?: Array<EntityUserFollows>;
     /**
      * 
      * @type {number}
@@ -545,16 +632,10 @@ export interface EntityUser {
     'last_seen'?: number;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<EntityUserLike>}
      * @memberof EntityUser
      */
-    'likes'?: Array<string>;
-    /**
-     * 
-     * @type {number}
-     * @memberof EntityUser
-     */
-    'likes_count'?: number;
+    'likes'?: Array<EntityUserLike>;
     /**
      * 
      * @type {string}
@@ -581,10 +662,10 @@ export interface EntityUser {
     'password'?: string;
     /**
      * 
-     * @type {number}
+     * @type {Array<EntityUserSubmission>}
      * @memberof EntityUser
      */
-    'submissions_count'?: number;
+    'submissions'?: Array<EntityUserSubmission>;
     /**
      * 
      * @type {string}
@@ -603,6 +684,63 @@ export interface EntityUser {
      * @memberof EntityUser
      */
     'username'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EntityUserFollows
+ */
+export interface EntityUserFollows {
+    /**
+     * 
+     * @type {number}
+     * @memberof EntityUserFollows
+     */
+    'ts'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EntityUserFollows
+     */
+    'username'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EntityUserLike
+ */
+export interface EntityUserLike {
+    /**
+     * 
+     * @type {string}
+     * @memberof EntityUserLike
+     */
+    'sha256'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EntityUserLike
+     */
+    'ts'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface EntityUserSubmission
+ */
+export interface EntityUserSubmission {
+    /**
+     * 
+     * @type {string}
+     * @memberof EntityUserSubmission
+     */
+    'sha256'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof EntityUserSubmission
+     */
+    'ts'?: number;
 }
 /**
  * 
@@ -1726,6 +1864,46 @@ export class BehaviorApi extends BaseAPI {
 export const CommentApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * List comments
+         * @summary Retrieves a paginated list of comments
+         * @param {number} [perPage] Number of comments  per page
+         * @param {number} [page] Specify the page number
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        commentsGet: async (perPage?: number, page?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/comments/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (perPage !== undefined) {
+                localVarQueryParameter['per_page'] = perPage;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Deletes a comment by ID.
          * @summary Deletes a comment
          * @param {string} id Comment ID
@@ -1892,6 +2070,20 @@ export const CommentApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CommentApiAxiosParamCreator(configuration)
     return {
         /**
+         * List comments
+         * @summary Retrieves a paginated list of comments
+         * @param {number} [perPage] Number of comments  per page
+         * @param {number} [page] Specify the page number
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async commentsGet(perPage?: number, page?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CommentsGet200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.commentsGet(perPage, page, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CommentApi.commentsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Deletes a comment by ID.
          * @summary Deletes a comment
          * @param {string} id Comment ID
@@ -1955,6 +2147,17 @@ export const CommentApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = CommentApiFp(configuration)
     return {
         /**
+         * List comments
+         * @summary Retrieves a paginated list of comments
+         * @param {number} [perPage] Number of comments  per page
+         * @param {number} [page] Specify the page number
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        commentsGet(perPage?: number, page?: number, options?: any): AxiosPromise<CommentsGet200Response> {
+            return localVarFp.commentsGet(perPage, page, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Deletes a comment by ID.
          * @summary Deletes a comment
          * @param {string} id Comment ID
@@ -2005,6 +2208,19 @@ export const CommentApiFactory = function (configuration?: Configuration, basePa
  * @extends {BaseAPI}
  */
 export class CommentApi extends BaseAPI {
+    /**
+     * List comments
+     * @summary Retrieves a paginated list of comments
+     * @param {number} [perPage] Number of comments  per page
+     * @param {number} [page] Specify the page number
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommentApi
+     */
+    public commentsGet(perPage?: number, page?: number, options?: RawAxiosRequestConfig) {
+        return CommentApiFp(this.configuration).commentsGet(perPage, page, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Deletes a comment by ID.
      * @summary Deletes a comment
@@ -2146,6 +2362,50 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Search files
+         * @summary Searches files based on files\' metadata
+         * @param {number} [perPage] Number of files per page
+         * @param {number} [page] Specify the page number
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        filesSearchPost: async (perPage?: number, page?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/files/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
+
+            if (perPage !== undefined) {
+                localVarQueryParameter['per_page'] = perPage;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2411,6 +2671,44 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
+         * Frontend metadata fields such as navbar menus.
+         * @summary Frontend Metadata
+         * @param {string} sha256 File SHA256
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        filesSha256MetaUiGet: async (sha256: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'sha256' is not null or undefined
+            assertParamExists('filesSha256MetaUiGet', 'sha256', sha256)
+            const localVarPath = `/files/{sha256}/meta-ui/`
+                .replace(`{${"sha256"}}`, encodeURIComponent(String(sha256)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "Bearer", [], configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Patch a portion of a file report.
          * @summary Update a file report (partial update)
          * @param {string} sha256 File SHA256
@@ -2530,10 +2828,11 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {string} sha256 File SHA256
          * @param {number} [perPage] Number of strings per page
          * @param {number} [page] Specify the page number
+         * @param {string} [q] Specify the string to search for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        filesSha256StringsGet: async (sha256: string, perPage?: number, page?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        filesSha256StringsGet: async (sha256: string, perPage?: number, page?: number, q?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'sha256' is not null or undefined
             assertParamExists('filesSha256StringsGet', 'sha256', sha256)
             const localVarPath = `/files/{sha256}/strings/`
@@ -2555,6 +2854,10 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (page !== undefined) {
                 localVarQueryParameter['page'] = page;
+            }
+
+            if (q !== undefined) {
+                localVarQueryParameter['q'] = q;
             }
 
 
@@ -2682,6 +2985,20 @@ export const FileApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Search files
+         * @summary Searches files based on files\' metadata
+         * @param {number} [perPage] Number of files per page
+         * @param {number} [page] Specify the page number
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async filesSearchPost(perPage?: number, page?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginationPages>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.filesSearchPost(perPage, page, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FileApi.filesSearchPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * List of comments for a given file.
          * @summary Returns a paginated list of file comments
          * @param {string} sha256 File SHA256
@@ -2727,7 +3044,7 @@ export const FileApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async filesSha256GeneratePresignedUrlPost(sha256: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async filesSha256GeneratePresignedUrlPost(sha256: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.filesSha256GeneratePresignedUrlPost(sha256, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FileApi.filesSha256GeneratePresignedUrlPost']?.[localVarOperationServerIndex]?.url;
@@ -2773,6 +3090,19 @@ export const FileApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Frontend metadata fields such as navbar menus.
+         * @summary Frontend Metadata
+         * @param {string} sha256 File SHA256
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async filesSha256MetaUiGet(sha256: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.filesSha256MetaUiGet(sha256, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FileApi.filesSha256MetaUiGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Patch a portion of a file report.
          * @summary Update a file report (partial update)
          * @param {string} sha256 File SHA256
@@ -2805,7 +3135,7 @@ export const FileApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async filesSha256RescanPost(sha256: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async filesSha256RescanPost(sha256: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.filesSha256RescanPost(sha256, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FileApi.filesSha256RescanPost']?.[localVarOperationServerIndex]?.url;
@@ -2817,11 +3147,12 @@ export const FileApiFp = function(configuration?: Configuration) {
          * @param {string} sha256 File SHA256
          * @param {number} [perPage] Number of strings per page
          * @param {number} [page] Specify the page number
+         * @param {string} [q] Specify the string to search for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async filesSha256StringsGet(sha256: string, perPage?: number, page?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginationPages>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.filesSha256StringsGet(sha256, perPage, page, options);
+        async filesSha256StringsGet(sha256: string, perPage?: number, page?: number, q?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginationPages>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.filesSha256StringsGet(sha256, perPage, page, q, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FileApi.filesSha256StringsGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2846,7 +3177,7 @@ export const FileApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async filesSha256UnlikePost(sha256: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async filesSha256UnlikePost(sha256: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.filesSha256UnlikePost(sha256, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FileApi.filesSha256UnlikePost']?.[localVarOperationServerIndex]?.url;
@@ -2882,6 +3213,17 @@ export const FileApiFactory = function (configuration?: Configuration, basePath?
          */
         filesPost(file: File, options?: any): AxiosPromise<EntityFile> {
             return localVarFp.filesPost(file, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Search files
+         * @summary Searches files based on files\' metadata
+         * @param {number} [perPage] Number of files per page
+         * @param {number} [page] Specify the page number
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        filesSearchPost(perPage?: number, page?: number, options?: any): AxiosPromise<PaginationPages> {
+            return localVarFp.filesSearchPost(perPage, page, options).then((request) => request(axios, basePath));
         },
         /**
          * List of comments for a given file.
@@ -2920,7 +3262,7 @@ export const FileApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        filesSha256GeneratePresignedUrlPost(sha256: string, options?: any): AxiosPromise<void> {
+        filesSha256GeneratePresignedUrlPost(sha256: string, options?: any): AxiosPromise<object> {
             return localVarFp.filesSha256GeneratePresignedUrlPost(sha256, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2954,6 +3296,16 @@ export const FileApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.filesSha256LikePost(sha256, options).then((request) => request(axios, basePath));
         },
         /**
+         * Frontend metadata fields such as navbar menus.
+         * @summary Frontend Metadata
+         * @param {string} sha256 File SHA256
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        filesSha256MetaUiGet(sha256: string, options?: any): AxiosPromise<object> {
+            return localVarFp.filesSha256MetaUiGet(sha256, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Patch a portion of a file report.
          * @summary Update a file report (partial update)
          * @param {string} sha256 File SHA256
@@ -2980,7 +3332,7 @@ export const FileApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        filesSha256RescanPost(sha256: string, options?: any): AxiosPromise<void> {
+        filesSha256RescanPost(sha256: string, options?: any): AxiosPromise<object> {
             return localVarFp.filesSha256RescanPost(sha256, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2989,11 +3341,12 @@ export const FileApiFactory = function (configuration?: Configuration, basePath?
          * @param {string} sha256 File SHA256
          * @param {number} [perPage] Number of strings per page
          * @param {number} [page] Specify the page number
+         * @param {string} [q] Specify the string to search for
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        filesSha256StringsGet(sha256: string, perPage?: number, page?: number, options?: any): AxiosPromise<PaginationPages> {
-            return localVarFp.filesSha256StringsGet(sha256, perPage, page, options).then((request) => request(axios, basePath));
+        filesSha256StringsGet(sha256: string, perPage?: number, page?: number, q?: string, options?: any): AxiosPromise<PaginationPages> {
+            return localVarFp.filesSha256StringsGet(sha256, perPage, page, q, options).then((request) => request(axios, basePath));
         },
         /**
          * File metadata returned in the summary view of a file.
@@ -3012,7 +3365,7 @@ export const FileApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        filesSha256UnlikePost(sha256: string, options?: any): AxiosPromise<void> {
+        filesSha256UnlikePost(sha256: string, options?: any): AxiosPromise<object> {
             return localVarFp.filesSha256UnlikePost(sha256, options).then((request) => request(axios, basePath));
         },
     };
@@ -3048,6 +3401,19 @@ export class FileApi extends BaseAPI {
      */
     public filesPost(file: File, options?: RawAxiosRequestConfig) {
         return FileApiFp(this.configuration).filesPost(file, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Search files
+     * @summary Searches files based on files\' metadata
+     * @param {number} [perPage] Number of files per page
+     * @param {number} [page] Specify the page number
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FileApi
+     */
+    public filesSearchPost(perPage?: number, page?: number, options?: RawAxiosRequestConfig) {
+        return FileApiFp(this.configuration).filesSearchPost(perPage, page, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -3135,6 +3501,18 @@ export class FileApi extends BaseAPI {
     }
 
     /**
+     * Frontend metadata fields such as navbar menus.
+     * @summary Frontend Metadata
+     * @param {string} sha256 File SHA256
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FileApi
+     */
+    public filesSha256MetaUiGet(sha256: string, options?: RawAxiosRequestConfig) {
+        return FileApiFp(this.configuration).filesSha256MetaUiGet(sha256, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Patch a portion of a file report.
      * @summary Update a file report (partial update)
      * @param {string} sha256 File SHA256
@@ -3176,12 +3554,13 @@ export class FileApi extends BaseAPI {
      * @param {string} sha256 File SHA256
      * @param {number} [perPage] Number of strings per page
      * @param {number} [page] Specify the page number
+     * @param {string} [q] Specify the string to search for
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FileApi
      */
-    public filesSha256StringsGet(sha256: string, perPage?: number, page?: number, options?: RawAxiosRequestConfig) {
-        return FileApiFp(this.configuration).filesSha256StringsGet(sha256, perPage, page, options).then((request) => request(this.axios, this.basePath));
+    public filesSha256StringsGet(sha256: string, perPage?: number, page?: number, q?: string, options?: RawAxiosRequestConfig) {
+        return FileApiFp(this.configuration).filesSha256StringsGet(sha256, perPage, page, q, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

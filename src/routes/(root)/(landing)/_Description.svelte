@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Icon from '$lib/components/Icon.svelte';
 	import { clamp, cssClamp } from '$lib/utils';
+	import { navLinkSectionAction } from '$lib/utils/navLinkSectionAction';
+	import { onMount } from 'svelte';
 
 	let data: {
 		icon: string;
@@ -28,9 +30,36 @@
 			text: 'Get all necessary information to help you make the right decision.'
 		}
 	];
+
+	let This: HTMLElement;
+	let box: ResizeObserverSize[] = [];
+
+	// function onScroll() {
+	// 	if (This) {
+	// 		let abox = box[0];
+	// 		let { scrollTop } = document.documentElement;
+	// 		if (scrollTop <= This.offsetTop + abox.blockSize  && scrollTop >= This.offsetTop) {
+	// 			if (location.hash !== "#" + This.id) {
+	// 				console.log({h: location.hash, id: This.id});
+	// 				let temp = This.id;
+	// 				This.id = "";
+	// 				location.hash = "#" + temp;
+	// 				This.id = temp;
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+	// $: onScroll(), box;
 </script>
 
+<!-- <svelte:window on:scroll={onScroll}></svelte:window> -->
+
+<!-- bind:this={This}
+bind:contentBoxSize={box}
+bind:borderBoxSize={box} -->
 <section
+	use:navLinkSectionAction
 	id="highlights"
 	class="flex flex-col --items-center max-w-full w-full scroll-mt-[73px]"
 	style="padding-block: {cssClamp('40px', '80px')}; gap: {cssClamp('40px', '60px')}"

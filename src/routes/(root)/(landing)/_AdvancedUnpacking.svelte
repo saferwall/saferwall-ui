@@ -11,7 +11,7 @@
 >
 	<div class="container landing-container mx-landing">
 		<div class="flex flex-col gap-[50px] md:flex-row-reverse justify-between items-center *:grow *:basis-0">
-			<div class="flex flex-col justify-center lg:max-w-[460px]" style="gap: {clamp(0, 15)}">
+			<div class="flex flex-col justify-center lg:max-w-[460px]" style="gap: {clamp(8, 15)}">
 				<span class="text-[#56575D] font-medium leading-[25px]" style="font-size: {clamp(16, 20)}">04.</span>
 				<h3 class="font-semibold" style="font-size: {clamp(23, 35)}; line-height: {clamp(30, 48)};">
 					Uncover hidden threats with advanced unpacking
