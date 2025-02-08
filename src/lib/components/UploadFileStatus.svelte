@@ -24,7 +24,7 @@
 </script>
 
 <article
-	class="flex flex-col w-fill space-y-2 p-4 border border-neutral-200 rounded-xl"
+	class="flex flex-col w-fill space-y-2 p-4 border border-primary-border rounded-xl"
 	class:error
 >
 	<div class="flex justify-between">
@@ -46,7 +46,7 @@
 		<InputHash {hash} behavior_id="" />
 	{/if}
 
-	<div class="progress w-full h-2 relative bg-neutral-200 rounded-xl overflow-hidden">
+	<div class="progress w-full h-2 relative bg-tertiary-surface rounded-xl overflow-hidden">
 		<div class={`h-full status--${currentStatus}`} style={`width: ${progress}%`} />
 	</div>
 

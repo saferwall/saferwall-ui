@@ -8,8 +8,10 @@
 	$: user = data.user;
 </script>
 
-<Header {user} />
-<main class="flex-1 flex flex-col h-full text-primary-text">
-	<slot />
-</main>
-<Footer />
+<div class="relative">
+	<Header {user} />
+	<main class="flex-1 flex flex-col h-full text-primary-text">
+		<slot />
+	</main>
+	<Footer />
+</div>

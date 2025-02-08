@@ -11,13 +11,15 @@
 	export let href: string | undefined = undefined;
 	export let target: string | undefined = undefined;
 	export let size: 'base' | 'xss' | 'xs' | 'sm' | 'md' | 'lg' = 'base';
-	export let theme: 'base' | 'gray' | 'brand' | 'danger' = 'base';
+	export let theme: 'base' | 'gray' | 'brand' | 'danger' | "none" = 'base';
 	export let type: 'button' | 'submit' | 'reset' | undefined = 'button';
+	export let This: HTMLElement | undefined = undefined;
 </script>
 
 {#if href}
 	<a
 		on:click
+		bind:this={This}
 		{...$$props}
 		{href}
 		{target}
@@ -36,6 +38,7 @@
 {:else}
 	<button
 		on:click
+		bind:this={This}
 		{...$$props}
 		{type}
 		disabled={loading || disabled}
@@ -87,12 +90,12 @@
 		 * Brand Theme
 		 */
 		&--brand {
-			@apply bg-brand-400 border-brand-400 text-white;
+			@apply bg-brand-200 border-brand-200 text-white;
 		}
 
 		&--brand.active,
 		&--brand:hover {
-			@apply bg-brand-500 border-brand-500;
+			@apply bg-brand-100 border-brand-100;
 		}
 
 		&--danger {
@@ -100,6 +103,9 @@
 			@apply focus:outline-red-500 hover:outline-red-500 hover:bg-opacity-95;
 		}
 
+		&--none {
+			@apply bg-transparent hover:bg-transparent;
+		}
 		&--size {
 			&--xss {
 				@apply text-xs py-2;

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import Card from '../Card.svelte';
+	import { twMerge } from 'tailwind-merge';
 
 	interface TabItem {
 		title: string;
@@ -11,6 +12,10 @@
 
 	const dispatch = createEventDispatcher();
 
+	let Class = ""
+	export let headingClass = ""
+	export let menuClass = ""
+	export { Class as class }
 	export let direction: 'vertical' | 'horizontal' = 'vertical';
 	export let heading: TabItem[] = [];
 
@@ -22,12 +27,14 @@
 	};
 </script>
 
-<Card class={`card__tabs ${direction}`} padding={false}>
-	<div class="tabs__menu no-scroll-style" data-sveltekit-preload-data="hover">
+<Card class={`card__tabs ${direction} ${twMerge("", Class)}`} padding={false}>
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
+	<div class="tabs__menu no-scroll-style {menuClass}" data-sveltekit-preload-data="hover">
 		<slot name="heading">
 			{#each items as item}
 				{#if item.url}
-					<a href={item.url} class="card__tabs__item" class:active={item.active}>
+					<a href={item.url} class="card__tabs__item {headingClass}" class:active={item.active}>
 						<span>{item.title}</span>
 
 						{#if item.count != undefined}
@@ -37,7 +44,7 @@
 				{:else}
 					<span
 						on:click={() => onTabMouseUp(item)}
-						class="card__tabs__item"
+						class="card__tabs__item {headingClass}"
 						class:active={item.active}
 					>
 						<span>{item.title}</span>

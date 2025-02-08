@@ -770,6 +770,44 @@ export interface ErrorsErrorResponse {
 /**
  * 
  * @export
+ * @interface FileAutoCompleteEntry
+ */
+export interface FileAutoCompleteEntry {
+    /**
+     * 
+     * @type {string}
+     * @memberof FileAutoCompleteEntry
+     */
+    'comment'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FileAutoCompleteEntry
+     */
+    'query'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface FileFileSearchAutocomplete
+ */
+export interface FileFileSearchAutocomplete {
+    /**
+     * 
+     * @type {Array<FileAutoCompleteEntry>}
+     * @memberof FileFileSearchAutocomplete
+     */
+    'examples'?: Array<FileAutoCompleteEntry>;
+    /**
+     * 
+     * @type {Array<FileAutoCompleteEntry>}
+     * @memberof FileFileSearchAutocomplete
+     */
+    'search_modifiers'?: Array<FileAutoCompleteEntry>;
+}
+/**
+ * 
+ * @export
  * @interface FilesGet200Response
  */
 export interface FilesGet200Response {
@@ -2369,6 +2407,36 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
             };
         },
         /**
+         * File search autocomplete.
+         * @summary Returns a list of file search autocomplete data.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        filesSearchAutocompleteGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/files/search/autocomplete/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Search files
          * @summary Searches files based on files\' metadata
          * @param {number} [perPage] Number of files per page
@@ -2377,7 +2445,7 @@ export const FileApiAxiosParamCreator = function (configuration?: Configuration)
          * @throws {RequiredError}
          */
         filesSearchPost: async (perPage?: number, page?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/files/search`;
+            const localVarPath = `/files/search/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2985,6 +3053,18 @@ export const FileApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * File search autocomplete.
+         * @summary Returns a list of file search autocomplete data.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async filesSearchAutocompleteGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileFileSearchAutocomplete>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.filesSearchAutocompleteGet(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FileApi.filesSearchAutocompleteGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Search files
          * @summary Searches files based on files\' metadata
          * @param {number} [perPage] Number of files per page
@@ -3215,6 +3295,15 @@ export const FileApiFactory = function (configuration?: Configuration, basePath?
             return localVarFp.filesPost(file, options).then((request) => request(axios, basePath));
         },
         /**
+         * File search autocomplete.
+         * @summary Returns a list of file search autocomplete data.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        filesSearchAutocompleteGet(options?: any): AxiosPromise<FileFileSearchAutocomplete> {
+            return localVarFp.filesSearchAutocompleteGet(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Search files
          * @summary Searches files based on files\' metadata
          * @param {number} [perPage] Number of files per page
@@ -3404,6 +3493,17 @@ export class FileApi extends BaseAPI {
     }
 
     /**
+     * File search autocomplete.
+     * @summary Returns a list of file search autocomplete data.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FileApi
+     */
+    public filesSearchAutocompleteGet(options?: RawAxiosRequestConfig) {
+        return FileApiFp(this.configuration).filesSearchAutocompleteGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Search files
      * @summary Searches files based on files\' metadata
      * @param {number} [perPage] Number of files per page
@@ -3585,6 +3685,116 @@ export class FileApi extends BaseAPI {
      */
     public filesSha256UnlikePost(sha256: string, options?: RawAxiosRequestConfig) {
         return FileApiFp(this.configuration).filesSha256UnlikePost(sha256, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * SupportApi - axios parameter creator
+ * @export
+ */
+export const SupportApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Handles contact us form-data sent via landing page.
+         * @summary Contact Us
+         * @param {string} gRecaptchaResponse Google Recaptcha v3 response
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        contactPost: async (gRecaptchaResponse: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'gRecaptchaResponse' is not null or undefined
+            assertParamExists('contactPost', 'gRecaptchaResponse', gRecaptchaResponse)
+            const localVarPath = `/contact/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(gRecaptchaResponse, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SupportApi - functional programming interface
+ * @export
+ */
+export const SupportApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SupportApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Handles contact us form-data sent via landing page.
+         * @summary Contact Us
+         * @param {string} gRecaptchaResponse Google Recaptcha v3 response
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async contactPost(gRecaptchaResponse: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.contactPost(gRecaptchaResponse, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SupportApi.contactPost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * SupportApi - factory interface
+ * @export
+ */
+export const SupportApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = SupportApiFp(configuration)
+    return {
+        /**
+         * Handles contact us form-data sent via landing page.
+         * @summary Contact Us
+         * @param {string} gRecaptchaResponse Google Recaptcha v3 response
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        contactPost(gRecaptchaResponse: string, options?: any): AxiosPromise<object> {
+            return localVarFp.contactPost(gRecaptchaResponse, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SupportApi - object-oriented interface
+ * @export
+ * @class SupportApi
+ * @extends {BaseAPI}
+ */
+export class SupportApi extends BaseAPI {
+    /**
+     * Handles contact us form-data sent via landing page.
+     * @summary Contact Us
+     * @param {string} gRecaptchaResponse Google Recaptcha v3 response
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SupportApi
+     */
+    public contactPost(gRecaptchaResponse: string, options?: RawAxiosRequestConfig) {
+        return SupportApiFp(this.configuration).contactPost(gRecaptchaResponse, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -11,11 +11,39 @@
 	export let starsForBullets = false;
 	export let labelClass = "";
 	export let labelStyle = "";
-	export let multiline = false;
 	export let parentClass = "";
+	export let multiline = false;
+	export let useDiv = false;
+	export let contentBox = [] as ResizeObserverSize[];
+	export let This: HTMLElement | undefined = undefined;
 
 	const isPassword = type === 'password';
 	$: passwordVisible = type !== 'password';
+
+	function onInput(e: Event) {
+		// console.log({it: (e.target as HTMLDivElement).innerText})
+		// if (This) {
+		// 	This.childNodes.forEach(node => {
+		// 		if (node.nodeType === Node.ELEMENT_NODE && (node as HTMLElement).tagName === "BR") {
+		// 			node.remove();
+		// 		}
+		// 	})
+		// }
+		// if (This && This.innerText !== This.innerHTML) {
+		// 	console.log({it: This.innerText, ih: This.innerHTML});
+		// }
+		value = (e.target as HTMLDivElement).innerText;
+		// console.log({it: (e.target as HTMLDivElement).innerText})
+	}
+
+	// $: {
+		// if (useDiv && This && value !== undefined && This.innerText !== value) {
+		// 	This.innerText = value;
+		// }
+		// if (This && This.innerText !== This.innerHTML && This.innerText === "\n") {
+		// 	This.innerHTML = ""
+		// }
+	// };
 
 	const onClick = () => {
 		type = type === 'password' ? 'text' : 'password';
@@ -31,28 +59,51 @@
 	{#if label}
 		<span class="input__label cursor-text {labelClass}" style={labelStyle}>{label}</span>
 	{/if}
-	{#if multiline}
-		<textarea
-			bind:value
+	{#if useDiv}
+		<div
+			tabindex="0"
+			role="textbox"
+			contenteditable="plaintext-only"
+			bind:this={This}
+			on:input
+			on:input={onInput}
 			on:change
+			on:keydown
 			on:focus
 			on:blur
 			{...$$props}
 			{placeholder}
-			class="input__element bg-transparent {$$props.class}"
-		></textarea>
+			class="input__element bg-transparent min-h-[1lh] outline-none border rounded {$$props.class} {icon ? 'input--icon' : ''}">{value}</div>
 	{:else}
-		<input
-			{...$$props}
-			on:change
-			on:focus
-			on:blur
-			bind:value
-			{...{type}}
-			{placeholder}
-			class="input__element bg-transparent {starsForBullets && type === "password" ? "font-bold font-['pwd']" : ""} {$$props.class} {icon ? 'input--icon' : ''}"
-			data-class="input__element {$$props.class} {icon ? 'input--icon' : ''}"
-		/>
+		{#if multiline}
+			<textarea
+				bind:contentBoxSize={contentBox}
+				bind:this={This}
+				bind:value
+				on:input
+				on:change
+				on:keydown
+				on:focus
+				on:blur
+				{...$$props}
+				{placeholder}
+				class="input__element bg-transparent {$$props.class} {icon ? 'input--icon' : ''}"
+			></textarea>
+		{:else}
+			<input
+				{...$$props}
+				bind:this={This}
+				on:change
+				on:keydown
+				on:focus
+				on:blur
+				bind:value
+				{...{type}}
+				{placeholder}
+				class="input__element bg-transparent {starsForBullets && type === "password" ? "font-bold font-['pwd']" : ""} {$$props.class} {icon ? 'input--icon' : ''}"
+				data-class="input__element {$$props.class} {icon ? 'input--icon' : ''}"
+			/>
+		{/if}
 	{/if}
 	{#if isPassword}
 		<button class="password-icon outline-none border-none text-primary-icn flex items-center justify-center" type="button" on:click={onClick}>
