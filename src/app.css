@@ -28,7 +28,7 @@ body {
 select,
 input,
 textarea,
-button {
+button:not([class*="border-b"], [class*="border-t"], [class*="border-r"], [class*="border-l"]) {
 	@apply focus:outline-none border border-transparent;
 }
 

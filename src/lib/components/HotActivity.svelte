@@ -39,7 +39,7 @@
 			{#each refs as ref}
 				<li>
 					<a
-						class="text-bluex hover:underline font-medium"
+						class="text-[#2573F0] hover:underline font-medium"
 						href={ref.url}
 						target="_blank"
 						rel="noreferrer">{ref.title}</a

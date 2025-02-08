@@ -9,6 +9,7 @@
 	function submit(e: Event) {
 		e.preventDefault();
 		validHash = isStringSHA256(hash) || !hash;
+		hash = hash.trim();
 		if (validHash && hash) {
 			goto(`/files/${hash}/summary`);
 		} else {
@@ -24,7 +25,7 @@
 	<Input
 		icon="search"
 		iconClass="text-[#5F5F5F]"
-		class="text-primary-text w-full border-none py-3.5"
+		class="text-primary-text w-full border-none py-[15px]"
 		parentClass="border {!validHash ? "border-alert-red" : "border-primary-border"} rounded-[10px] px-[3px]"
 		placeholder="Quick file hash lookup"
 		error={!validHash}
