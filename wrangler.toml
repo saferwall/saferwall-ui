@@ -4,3 +4,6 @@ compatibility_date = "2023-07-15"
 kv_namespaces = [
     { binding = "HOT_ACTIVITIES", id = "c67c115fd45340b9942903cd634b757e", preview_id = "96d30c3c21434b059e0747b0672eab78" }
 ]
+
+[vars]
+NODE_OPTIONS = "--network-family-autoselection-attempt-timeout=2000"
