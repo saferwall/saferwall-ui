@@ -1,5 +1,6 @@
 name = "saferwall"
 compatibility_date = "2023-07-15"
+pages_build_output_dir = ".svelte-kit/cloudflare"
 
 kv_namespaces = [
     { binding = "HOT_ACTIVITIES", id = "c67c115fd45340b9942903cd634b757e", preview_id = "96d30c3c21434b059e0747b0672eab78" }
