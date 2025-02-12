@@ -9,3 +9,6 @@ kv_namespaces = [
 [vars]
 NODE_OPTIONS = "--network-family-autoselection-attempt-timeout=2000"
 NODE_VERSION = "22"
+PUBLIC_API_URL = "https://api.saferwall.com/v1/"
+PUBLIC_AVATAR_API_URL = "https://avatar.saferwall.com/{username}"
+PUBLIC_ARTIFACTS_URL = "https://artifacts.saferwall.com/"
