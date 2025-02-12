@@ -16,6 +16,8 @@
 <div class={`alert alert--${type}`}>
 	<slot />
 	{#if close}
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="cursor-pointer" on:click={onClose}>
 			<Icon name={icon} />
 		</div>
