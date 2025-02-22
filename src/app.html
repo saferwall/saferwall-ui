@@ -25,7 +25,7 @@
 	</body>
 	<script>
 		let theme = localStorage.getItem("theme");
-		console.log({'window.matchMedia("(prefers-color-scheme: dark)").matches': window.matchMedia("(prefers-color-scheme: dark)").matches, theme});
+		// console.log({'window.matchMedia("(prefers-color-scheme: dark)").matches': window.matchMedia("(prefers-color-scheme: dark)").matches, theme});
 		if (!theme) {
 			document.documentElement.classList.add(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 		}

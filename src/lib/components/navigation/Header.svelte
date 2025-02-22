@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invalidateAll } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import type { Saferwall } from '$lib/types';
 	import { onMount } from 'svelte';
 
@@ -9,6 +9,7 @@
 	import UserMenu from '../partials/UserMenu.svelte';
 	import ThemeToggle from '../ThemeToggle.svelte';
 	import AdvancedSearch from '../AdvancedSearch.svelte';
+	import { page } from '$app/stores';
 	
 	let mounted = false;
 	onMount(() => {
@@ -16,6 +17,7 @@
 	})
 
 	export let user: Saferwall.User | undefined;
+	export let session: Saferwall.Session | undefined;
 	let advanced = false;
 	let focused = false;
 
@@ -26,7 +28,9 @@
 	}
 </script>
 
-<AdvancedSearch bind:advanced></AdvancedSearch>
+{#if session}
+	<AdvancedSearch bind:advanced {session}></AdvancedSearch>
+{/if}
 <nav class="text-sm --px-8 bg-neutral-900 w-full shadow-[0px_1px_4px_0px_rgba(13,_13,_13,_0.07)] z-40">
 	<div
 		class:focused
@@ -47,9 +51,17 @@
 				>
 				<InputSearch on:focus={() => (focused = true)} />
 			</div>
-			<Button icon="advanced-search" class="[&_.content]:gap-2 hidden lg:flex leading-5 p-[15px] hide-on-focus"
-				on:click={() => advanced = true}
-				>Advanced Search</Button>
+			{#if user}
+				<Button icon="advanced-search" class="[&_.content]:gap-2 hidden lg:flex leading-5 p-[15px] hide-on-focus"
+					on:click={() => {
+							advanced = true;
+					}}
+					>Advanced Search</Button>
+			{:else}
+				<Button icon="advanced-search" class="[&_.content]:gap-2 hidden lg:flex leading-5 p-[15px] hide-on-focus"
+					href="/auth/login?redir={encodeURIComponent($page.url.href)}"
+					>Advanced Search</Button>
+			{/if}
 		</div>
 		<div class="hide-on-focus inline-flex items-center gap-6">
 			<ul class="hidden xl:flex gap-6 items-center">
@@ -70,8 +82,12 @@
 					</a>
 				</li>
 			</ul>
-			<Button icon="search" class="size-10 text-secondary-text rounded-full hide-on-focus lg:hidden flex justify-center" on:click={() => focused = true}></Button>
-			<Button icon="advanced-search" class="size-10 text-secondary-text rounded-full hide-on-focus lg:hidden flex justify-center" on:click={() => advanced = true}></Button>
+			<Button icon="search" class="hide-on-focus size-10 text-secondary-text rounded-full lg:hidden flex justify-center" on:click={() => focused = true}></Button>
+			{#if user}
+				<Button icon="advanced-search" class="hide-on-focus size-10 text-secondary-text rounded-full lg:hidden flex justify-center" on:click={() => advanced = true}></Button>
+			{:else}
+				<Button icon="advanced-search" class="hide-on-focus size-10 text-secondary-text rounded-full lg:hidden flex justify-center" href="/auth/login?redir={encodeURIComponent($page.url.href)}"></Button>
+			{/if}
 			<ThemeToggle />
 			{#if user}
 				<UserMenu {user} />

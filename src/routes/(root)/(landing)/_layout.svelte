@@ -19,7 +19,7 @@
 	"
 	>
 	<Navbar />
-	<div class="grow w-full relative z-10 *:[&_not(.container)]:max-w-full --*:mx-auto">
+	<div class="grow w-full relative z-10 --*:[&_not(.container)]:max-w-full --*:mx-auto">
 		<slot></slot>
 	</div>
 	<CallToAction />

@@ -8,6 +8,7 @@
 	export let data: LayoutData;
 
 	$: user = data.user;
+	$: session = data.session;
 	$: profile = data.profile;
 	$: loggedIn = data.user !== undefined;
 	$: selfProfile = data.user?.username === data.username;
@@ -17,7 +18,7 @@
 <svelte:head>
 	<title>{profile.username} Profile - Saferwall Beta 1.0</title>
 </svelte:head>
-<Header {user} />
+<Header {user} {session}/>
 <main class="flex-1 flex flex-col py-4 h-full bg-background space-y-6">
 	<ProfileHeading />
 	<ProfileCard {loggedIn} {...profile} {selfProfile} {followed} />

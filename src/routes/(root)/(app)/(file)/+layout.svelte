@@ -6,9 +6,10 @@
 	export let data: LayoutData;
 
 	$: user = data.user;
+	$: session = data.session;
 </script>
 
-<Header {user} />
+<Header {user} {session}/>
 <main class="flex-1 flex flex-col h-full text-primary-text">
 	<slot />
 </main>

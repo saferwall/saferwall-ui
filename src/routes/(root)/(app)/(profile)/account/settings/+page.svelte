@@ -8,7 +8,7 @@
 
 	const menu = [
 		{
-			title: 'Account informations',
+			title: 'Account information',
 			active: true
 		},
 		{

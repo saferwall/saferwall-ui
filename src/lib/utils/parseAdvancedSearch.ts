@@ -64,7 +64,7 @@ let i = 0;
 let str = "";
 let parsingResult = [] as ParsingResult
 
-type ParsingResult = {type: ConsumerStrings, value: string}[]
+export type ParsingResult = {type: ConsumerStrings, value: string}[]
 function consumerMain(re: RegExp | string, flags = "") {
 	re = new RegExp(re, "y" + flags);
 	re.lastIndex = i;

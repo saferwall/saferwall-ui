@@ -6,11 +6,12 @@
 	export let data: LayoutData;
 
 	$: user = data.user;
+	$: session = data.session;
 </script>
 
-<div class="relative">
-	<Header {user} />
-	<main class="flex-1 flex flex-col h-full text-primary-text">
+<div class="relative flex flex-col items-stretch grow">
+	<Header {user} {session} />
+	<main class="flex-1 flex flex-col text-primary-text grow">
 		<slot />
 	</main>
 	<Footer />
