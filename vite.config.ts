@@ -19,9 +19,6 @@ export default defineConfig(({ mode }) => {
 				"svelte-codemirror-editor",
 			]
 		},
-		test: {
-			include: ['src/**/*.{test,spec}.{js,ts}']
-		},
 	};
 	if (mode === "development") {
 		ret = {

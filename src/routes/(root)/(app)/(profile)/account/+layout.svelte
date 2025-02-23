@@ -8,13 +8,14 @@
 	export let data: LayoutData;
 
 	$: user = data.user!;
+	$: session = data.session!;
 </script>
 
 <svelte:head>
 	<title>Account Settings - Saferwall Beta 1.0</title>
 </svelte:head>
 
-<Header {user} />
+<Header {user} {session}/>
 <main class="flex-1 flex flex-col py-4 h-full bg-background space-y-6">
 	<ProfileHeading title="Settings" />
 	<slot />

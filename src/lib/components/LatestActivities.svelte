@@ -24,8 +24,8 @@
 	{:else}
 		<div class="activities__ space-y-8 pt-6">
 			{#each activities as activity}
-				{#if activity.type == "submit"}
-				{/if}
+				<!-- {#if activity.type == "submit"}
+				{/if} -->
 				<ActivityItem {loggedIn} {activity} />
 			{/each}
 		</div>

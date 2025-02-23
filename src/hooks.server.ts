@@ -26,7 +26,7 @@ export const handle: Handle = (async ({ event, resolve }) => {
 	try {
 		const sessionData = event.cookies.get(SESSION_KEY);
 		if (!sessionData) {
-			return await resolveEvent({ event, resolve });
+			return resolveEvent({ event, resolve });
 		}
 
 		const session = JSON.parse(sessionData);

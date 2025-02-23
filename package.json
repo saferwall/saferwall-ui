@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"d": "sudo PATH=\"$PATH\" bash -c 'npm run dev'",
+		"d": "sudo PATH=\"$PATH\" NODE_OPTIONS=\"--network-family-autoselection-attempt-timeout=2000\" bash -c 'npm run dev'",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
@@ -23,10 +23,10 @@
 		"@interactjs/types": "^1.10.27",
 		"@openapitools/openapi-generator-cli": "^2.13.4",
 		"@playwright/test": "^1.45.2",
-		"@sveltejs/adapter-auto": "^3.2.2",
-		"@sveltejs/adapter-cloudflare": "^4.6.1",
-		"@sveltejs/adapter-node": "^5.2.0",
-		"@sveltejs/kit": "^2.8.0",
+		"@sveltejs/adapter-auto": "^4.0.0",
+		"@sveltejs/adapter-cloudflare": "^5.0.2",
+		"@sveltejs/adapter-node": "^5.2.12",
+		"@sveltejs/kit": "^2.17.1",
 		"@sveltejs/vite-plugin-svelte": "^3.1.1",
 		"@tailwindcss/typography": "^0.5.13",
 		"@types/nprogress": "^0.2.3",
@@ -56,7 +56,6 @@
 		"tslib": "^2.6.3",
 		"typescript": "^5.5.3",
 		"vite": "^5.4.8",
-		"vitest": "^2.0.3",
 		"wrangler": "^3.65.1"
 	},
 	"dependencies": {
@@ -90,5 +89,8 @@
 		"tailwind-merge": "^2.5.4",
 		"unified": "^11.0.5",
 		"unist-util-visit": "^5.0.0"
+	},
+	"engines": {
+		"node": ">=22"
 	}
 }
