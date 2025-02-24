@@ -93,9 +93,9 @@ export function getActivityTitle(act: Saferwall.Activity): string {
  */
 export function getLabelClass(classification?: string): string {
 	if (!classification) {
-		return `unknown`;
+		return `benign`;
 	}
-	return classification.split('.')[1].toLowerCase();
+	return classification;
 }
 
 /**
