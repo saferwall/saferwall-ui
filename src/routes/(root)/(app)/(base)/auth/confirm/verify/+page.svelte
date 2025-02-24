@@ -22,7 +22,7 @@
 </script>
 
 <svelte:head>
-	<title>Verify account - Saferwall Beta 1.0</title>
+	<title>Verify account - Saferwall 1.0</title>
 </svelte:head>
 
 <AuthActionDone

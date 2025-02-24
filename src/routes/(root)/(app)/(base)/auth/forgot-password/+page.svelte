@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>Forgot password - Saferwall Beta 1.0</title>
+	<title>Forgot password - Saferwall 1.0</title>
 </svelte:head>
 
 {#if finished}

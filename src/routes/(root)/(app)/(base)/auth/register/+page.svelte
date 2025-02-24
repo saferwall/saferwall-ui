@@ -41,7 +41,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign up - Saferwall Beta 1.0</title>
+	<title>Sign up - Saferwall 1.0</title>
 </svelte:head>
 
 {#if finished}

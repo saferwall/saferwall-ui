@@ -12,7 +12,7 @@
 </script>
 
 <svelte:head>
-	<title>Account Settings - Saferwall Beta 1.0</title>
+	<title>Account Settings - Saferwall 1.0</title>
 </svelte:head>
 
 <Header {user} {session}/>

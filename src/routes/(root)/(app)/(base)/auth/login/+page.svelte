@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>Login - Saferwall Beta 1.0</title>
+	<title>Login - Saferwall 1.0</title>
 </svelte:head>
 
 <form

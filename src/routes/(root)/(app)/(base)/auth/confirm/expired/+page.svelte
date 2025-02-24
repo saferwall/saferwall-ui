@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>Account confirmed - Saferwall Beta 1.0</title>
+	<title>Account confirmed - Saferwall 1.0</title>
 </svelte:head>
 
 <AuthActionDone imageClass="size-20" image="image-dead-robot" title="This link has expired" class="gap-4" textClass="gap-3">
