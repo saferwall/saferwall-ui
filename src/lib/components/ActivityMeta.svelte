@@ -66,7 +66,7 @@
 		&.label--benign, &.label--benign span {
 			@apply !text-green;
 		}
-		&.label--unknown, &.label--unknown span {
+		&.label--suspicious, &.label--suspicious span {
 			@apply !text-orange;
 		}
 		&.label--malicious, &.label--malicious span {
