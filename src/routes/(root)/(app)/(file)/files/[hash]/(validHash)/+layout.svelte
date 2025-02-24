@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>{activeMenu.name} - {hash} - Saferwall Beta 1.0</title>
+	<title>{activeMenu.name} - {hash} - Saferwall 1.0</title>
 	<meta name="description" content="Scan results for file hash {hash}." />
 </svelte:head>
 

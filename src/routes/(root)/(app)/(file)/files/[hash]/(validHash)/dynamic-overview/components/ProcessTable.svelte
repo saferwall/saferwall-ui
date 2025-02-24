@@ -19,7 +19,7 @@
 		SYSTEM_EVENTS = 'sysevents'
 	}
 
-	//TODO: refactore and improve code & filtering
+	//TODO: refactor and improve code & filtering
 	$: filterByQuery = (item: any) =>
 		!query || JSON.stringify(item).toLowerCase().includes(query.toLowerCase());
 
@@ -30,7 +30,7 @@
 				filtersValue.size === 0 ||
 				(item.type === 'file' && filtersValue.has('file')) ||
 				(item.type === 'network' && filtersValue.has('network')) ||
-				(item.type === 'registery' && filtersValue.has('registery'))
+				(item.type === 'registry' && filtersValue.has('registry'))
 			);
 		})
 		.filter(filterByQuery);
@@ -66,7 +66,7 @@
 			filters: [
 				{ label: 'File', value: 'file' },
 				{ label: 'Network', value: 'network' },
-				{ label: 'Registery', value: 'registery' }
+				{ label: 'Registry', value: 'registry' }
 			]
 		}
 	];

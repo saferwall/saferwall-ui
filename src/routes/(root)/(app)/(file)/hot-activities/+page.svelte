@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Hot activities - Saferwall Beta 1.0</title>
+	<title>Hot activities - Saferwall 1.0</title>
 </svelte:head>
 
 <main class="flex-1 flex flex-col h-full bg-background">

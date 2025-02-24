@@ -18,7 +18,7 @@ import type { Saferwall } from '$lib/types';
 const labels: { [key: string]: string } = {
 	benign: 'safe',
 	malicious: 'unsafe',
-	unknown: 'unsafe'
+	suspicious: 'unsafe'
 };
 
 const activityTypes: { [key: string]: string } = {

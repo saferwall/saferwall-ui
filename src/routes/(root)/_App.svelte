@@ -45,7 +45,7 @@
 
 
 <svelte:head>
-	<title>Saferwall Beta 1.0</title>
+	<title>Saferwall 1.0</title>
 </svelte:head>
 
 <Layout {data}>

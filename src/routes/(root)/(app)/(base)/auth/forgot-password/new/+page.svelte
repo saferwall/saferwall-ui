@@ -35,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>New password - Saferwall Beta 1.0</title>
+	<title>New password - Saferwall 1.0</title>
 </svelte:head>
 
 {#if finished}
