@@ -8,7 +8,8 @@
 	import { autoCompleteData, parseSearch, type ConsumerThrow, type ParsingResult } from "$lib/utils/parseAdvancedSearch";
 	import type { Saferwall } from "$lib/types";
 	import CheckBox from "./form/CheckBox.v2.svelte";
-	import { convertBytes, timestampToFormattedDate } from "$lib/utils";
+	import { convertBytes, parseTags, timestampToFormattedDate } from "$lib/utils";
+	import type { AxiosError } from "axios";
 
 	export let advanced: boolean;
 	export let session: Saferwall.Session;
@@ -45,24 +46,30 @@
 	let page = 1;
 
 	let pages: PaginationPages | undefined;
-	$: items = pages ? pages.items as {class: string, file_extension: string, file_format: string, first_seen: number, id: string, last_scanned: number, multiav: {hits: number, total: number}, name: string, size: number, tags: Record<string, string>}[] : [];
+	let pagesError = "";
+	$: items = (pages ? pages.items as {class: string | null, file_extension: string, file_format: string, first_seen?: number, id: string, last_scanned?: number, multiav: {hits: number, total: number}, name: string, size: number, tags?: Saferwall.Tags}[] : [])
+		.map(el => ({...el}));
 	function submit() {
 		console.log("submitted");
 		console.log({search});
 		inputEl.blur();
 		inputEl.disabled = true;
+		awaitingSearchResults = true;
 		api.filesSearchPost(perPage, page, {
 			data: { query: search }
 		})
 		.finally(() => {
 			inputEl.disabled = false;
+			awaitingSearchResults = false;
 		})
 		.then((res) => {
 			console.log(res.data);
 			pages = res.data;
-			console.log(JSON.stringify(res.data));
-		}).catch((err) => {
+			// console.log(JSON.stringify(res.data));
+		}).catch((err: AxiosError) => {
 			console.log(err);
+			pages = undefined;
+			pagesError = (err.response?.data as any)?.message ?? ""
 		})
 	}
 	function keydown(e: KeyboardEvent) {
@@ -133,6 +140,7 @@
 	let res = [] as ResizeObserverEntry[];
 
 	let focusoutTimeout = -1;
+	let focusinTimeout = -1;
 	let selectedSuggestionIndex = 0;
 	let inputEl: HTMLInputElement;
 	let sugEl: HTMLInputElement;
@@ -365,9 +373,15 @@
 				suggestionListElements[selectedSuggestionIndex] &&
 				lastSuggestionIndexFocused != selectedSuggestionIndex
 			) {
-			suggestionListElements[selectedSuggestionIndex].focus();
+
+			let el = suggestionListElements[selectedSuggestionIndex];
+			let parent = el.parentElement!;
+			if (el.offsetTop + el.clientHeight > parent.scrollTop + parent.clientHeight) {
+				parent.scrollTo({top: el.offsetTop + el.clientHeight - parent.clientHeight});
+			} else if (el.offsetTop < parent.scrollTop) {
+				parent.scrollTo({top: el.offsetTop});
+			}
 			lastSuggestionIndexFocused = selectedSuggestionIndex;
-			inputEl.focus();
 		}
 	}
 </script>
@@ -418,9 +432,13 @@
 							on:focusin={() => {
 								clearTimeout(focusoutTimeout);
 								focusoutTimeout = -1;
-								searchFocused = true;
+								focusinTimeout = window.setTimeout(() => {
+									searchFocused = true;
+								})
 							}}
 							on:focusout={() => {
+								clearTimeout(focusinTimeout);
+								focusinTimeout = -1;
 								focusoutTimeout = window.setTimeout(() => {
 									searchFocused = false;
 								});
@@ -451,14 +469,14 @@
 								class="[font-variant-ligatures:none] overflow-hidden resize-none min-h-[1lh] placeholder:text-searchbar-text border-primary-border active:border-primary-border focus:border-primary-border"
 							></Input>
 							{#if suggestionList.length}
-								<div class="parent relative rounded z-[20]">
-									<div class="overflow-clip rounded absolute top-0 left-0 w-full">
-										<ul
-											class="relative max-h-[calc(72px*5+3px)] overflow-y-auto flex flex-col items-stretch bg-quaternary-surface border border-secondary-border rounded mt-2 overflow-clip [&.focused]:visible invisible"
-											class:focused={showSuggestions}
-										>
-											{#each suggestionList as s, index}
-												<!-- <li class=""  tabindex="1"> -->
+								<div class="relative rounded z-[20]">
+									<div class="parent absolute w-full">
+										<div class="overflow-clip rounded relative top-0 left-0 w-full">
+											<ul
+												class="relative max-h-[calc(72px*5+0px)] overflow-y-auto flex-col items-stretch bg-quaternary-surface border border-secondary-border rounded mt-2 overflow-clip [&.focused]:flex hidden"
+												class:focused={showSuggestions}
+											>
+												{#each suggestionList as s, index}
 													<button bind:this={suggestionListElements[index]}
 														class:selected={index === selectedSuggestionIndex}
 														class="
@@ -484,63 +502,83 @@
 															{s.description}
 														</p>
 													</button>
-												<!-- </li> -->
-											{/each}
-										</ul>
+												{/each}
+											</ul>
+										</div>
 									</div>
 								</div>
 							{/if}
-							<div class="results flex flex-col gap-1">
+						</div>
+						<div class="results flex flex-col gap-1">
+							{#if awaitingSearchResults}
+								<div class="py-8 text-center text-secondary-text">Searching...</div>
+							{:else}
 								{#if pages}
-									<table>
-										<thead class="[&_th]:p-2">
-											<th class="w-fit">
-												<div class="flex">
-													<CheckBox></CheckBox>
-												</div>
-											</th>
-											{#each ["sha256", "classification", "multiav", "first seen", "last scanned", "size", "type"] as thText}
-												<th class="uppercase" align="left">{thText}</th>
-											{/each}
-										</thead>
-										<tbody>
-											{#each items as el}
-												<!-- <div>{JSON.stringify(el)}</div> -->
-												<tr class="[&_td]:p-2">
-													<td class="w-fit">
-														<div class="flex">
-															<CheckBox></CheckBox>
-														</div>
-													</td>
-													<td>
-														<div class="flex flex-col gap-1">
-															<div>
-																{el.id}
+									{#if items.length}
+										<table>
+											<thead class="[&_th]:p-2">
+												<th class="w-fit">
+													<div class="flex">
+														<CheckBox></CheckBox>
+													</div>
+												</th>
+												{#each ["sha256", "classification", "multiav", "first seen", "last scanned", "size", "type"] as thText}
+													<th class="uppercase" align="left">{thText}</th>
+												{/each}
+											</thead>
+											<tbody>
+												{#each items as el}
+													<!-- <div>{JSON.stringify(el)}</div> -->
+													<tr class="[&_td]:p-2">
+														<td class="w-fit">
+															<div class="flex">
+																<CheckBox></CheckBox>
 															</div>
-															<div class="flex gap-1">
-																{#each Object.entries(el.tags) as [av, tag]}
-																	<li class="flex">
-																		<a class="rounded-sm px-2.5 py-1.5 tags__tag tags__tag--{av}" href="/tags/{av}-{tag}">{tag}</a>
-																	</li>
-																{/each}
+														</td>
+														<td>
+															<div class="flex flex-col gap-1">
+																<div>
+																	{el.id}
+																</div>
+																<div class="flex gap-1">
+																	{#each parseTags(el.tags) as {category, name}}
+																		<li class="flex">
+																			<a class="rounded-sm px-2.5 py-1.5 tags__tag tags__tag--{category}" href="/tags/{category}-{name}">{name}</a>
+																		</li>
+																	{/each}
+																</div>
 															</div>
-														</div>
-													</td>
-													<td class="capitalize {{malicious: "text-alert-red", unknown: "text-alert-orange", benign: "text-alert-green"}[el.class]} flex gap-1.5 items-center">
-														<Icon name={el.class === "benign" ? "safe" : "unsafe"} size="size-[14px]"></Icon>
-														{el.class}
-													</td>
-													<td>{el.multiav.hits}/{el.multiav.total}</td>
-													<td>{timestampToFormattedDate(el.first_seen).split(" ")[0]}<br>{timestampToFormattedDate(el.first_seen).split(" ")[1]}</td>
-													<td>{timestampToFormattedDate(el.last_scanned).split(" ")[0]}<br>{timestampToFormattedDate(el.last_scanned).split(" ")[1]}</td>
-													<td>{convertBytes(el.size)}</td>
-													<td class="uppercase">{el.file_format}/{el.file_extension}</td>
-												</tr>
-											{/each}
-										</tbody>
-									</table>
+														</td>
+														<td class="">
+															<div class="capitalize {el.class ? {malicious: "text-alert-red", unknown: "text-alert-orange", benign: "text-alert-green"}[el.class] : "text-alert-orange"} flex gap-1.5 items-center">
+																<Icon name={el.class === "benign" ? "safe" : "unsafe"} size="size-[14px]"></Icon>
+																{el.class ?? "Unknown"}
+															</div>
+														</td>
+														<td>{el.multiav.hits}/{el.multiav.total}</td>
+														{#if true}
+															{@const tm = 
+																// @ts-ignore
+																(s) => 
+																s ? timestampToFormattedDate(s).split(" ") : ["Unknown", ""]}
+															{@const fs = tm(el.first_seen)}
+															{@const ls = tm(el.last_scanned)}
+															<td>{fs[0]}<br>{fs[1]}</td>
+															<td>{ls[0]}<br>{ls[1]}</td>
+															<td>{convertBytes(el.size)}</td>
+															<td class="uppercase">{el.file_format }/{el.file_extension}</td>
+														{/if}
+													</tr>
+												{/each}
+											</tbody>
+										</table>
+									{:else}
+										<div class="py-8 text-center text-secondary-text">No results found.</div>
+									{/if}
+								{:else if pagesError}
+									<div class="py-8 text-center text-alert-red">Error: {pagesError}</div>
 								{/if}
-							</div>
+							{/if}
 						</div>
 					{:else}
 						<center class="text-secondary-text">Under construction...</center>
@@ -551,3 +589,9 @@
 		</TabsImproved>
 	</div>
 </div>
+
+<style>
+	td {
+		vertical-align: top;
+	}
+</style>

@@ -599,7 +599,7 @@ export namespace Saferwall {
 		pe: string[];
 		windefender: string;
 	}> & {
-		[key: string]: any;
+		[key: string]: string | string[];
 	};
 
 	export type Properties = Partial<{
