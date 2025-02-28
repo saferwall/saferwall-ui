@@ -10,7 +10,7 @@
 			@apply w-5 h-5;
 			@apply shrink-0;
 			@apply outline-none appearance-none;
-			@apply relative rounded-sm border-[2px] border-elm-border;
+			@apply relative rounded-[5px] border-[1px] border-elm-border;
 			transition:
 				background-color 0.3s ease,
 				border-color 0.3s ease;

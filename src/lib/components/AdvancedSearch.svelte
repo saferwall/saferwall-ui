@@ -4,27 +4,42 @@
 	import Button from "./form/Button.svelte";
 	import Input from "./form/Input.svelte";
 	import Icon from "./Icon.svelte";
-	import { Configuration, FileApi, type FileFileSearchAutocomplete, type PaginationPages } from "$lib/api";
-	import { autoCompleteData, parseSearch, type ConsumerThrow, type ParsingResult } from "$lib/utils/parseAdvancedSearch";
+	import {
+		Configuration,
+		FileApi,
+		type FileFileSearchAutocomplete,
+		type PaginationPages
+	} from "$lib/api";
+	import {
+		autoCompleteData,
+		parseSearch,
+		type ConsumerThrow,
+		type ParsingResult
+	} from "$lib/utils/parseAdvancedSearch";
 	import type { Saferwall } from "$lib/types";
 	import CheckBox from "./form/CheckBox.v2.svelte";
 	import { convertBytes, parseTags, timestampToFormattedDate } from "$lib/utils";
 	import type { AxiosError } from "axios";
+	import PopUnder from "./partials/PopUnder.svelte";
+	import { writable } from "svelte/store";
+	import { env } from "$env/dynamic/public";
 
 	export let advanced: boolean;
 	export let session: Saferwall.Session;
 
-	const api = new FileApi(new Configuration({accessToken: session.token}));
+	const api = new FileApi(new Configuration({ accessToken: session.token }));
 
 	let search = "";
 	let searchEditHistory = [search];
 	let searchEditHistoryIndex = 0;
 	function searchEditHistoryPush(...newValues: string[]) {
 		let spliced = searchEditHistory.toSpliced(searchEditHistoryIndex + 1);
-		newValues = newValues.filter((nv, index) => newValues.indexOf(nv) === index).filter((nv, index, arr) => {
-			let idx = -1 - index;
-			return spliced.at(idx) !== nv
-		});
+		newValues = newValues
+			.filter((nv, index) => newValues.indexOf(nv) === index)
+			.filter((nv, index, arr) => {
+				let idx = -1 - index;
+				return spliced.at(idx) !== nv;
+			});
 		if (newValues.length) {
 			searchEditHistory = spliced;
 			searchEditHistory = [...searchEditHistory, ...newValues];
@@ -45,37 +60,55 @@
 	let perPage = 10;
 	let page = 1;
 
-	let pages: PaginationPages | undefined;
+	let pages: PaginationPages | undefined = JSON.parse(`{"page":1,"per_page":100,"page_count":3020,"total_count":301953,"items":[{"class":"malicious","file_extension":"exe","file_format":"pe","first_seen":1740647497,"id":"9756e94992c1878645ec54867218564e5434bc8a0915207df90b7d712ccbdcae","last_scanned":1740647524,"multiav":{"hits":2,"total":14},"name":"9756e94992c1878645ec54867218564e5434bc8a0915207df90b7d712ccbdcae","size":176548,"tags":{"packer":["upx","vc"],"pe":"exe"}},{"class":"malicious","file_extension":"wsf","file_format":"txt","first_seen":1740647513,"id":"9756eae2461047fc53de653891b7d881384c3f7558abeb4c8b0b49830a435bbd","last_scanned":1740647539,"multiav":{"hits":11,"total":14},"name":"9756eae2461047fc53de653891b7d881384c3f7558abeb4c8b0b49830a435bbd","size":2286,"tags":{"avira":"CVE-2005-1790","windefender":"Winload"}},{"class":"malicious","file_extension":"exe","file_format":"pe","first_seen":1740647507,"id":"9756e9ae2a93e61168daa95ebc03feb529688d91e82985f5d7c21f65aa2d4d53","last_scanned":1740647540,"multiav":{"hits":4,"total":14},"name":"9756e9ae2a93e61168daa95ebc03feb529688d91e82985f5d7c21f65aa2d4d53","size":2715416,"tags":{"eset":"Soft32Downloader","packer":"delphi","pe":"exe"}},{"class":"malicious","file_extension":"exe","file_format":"pe","first_seen":1740647523,"id":"9756ecd19c632329378082752e0206581c376b1b09444595ec3535763fe5c83c","last_scanned":1740647552,"multiav":{"hits":11,"total":14},"name":"9756ecd19c632329378082752e0206581c376b1b09444595ec3535763fe5c83c","size":259768,"tags":{"avira":"Adware","packer":"vc","pe":"exe","windefender":"Malgent"}},{"class":"malicious","file_extension":"html","file_format":"txt","first_seen":1740647543,"id":"9756f0fd0267a991d6f63a40f1e3726895a6626f8e1d876bae0ff622b5cccf7f","last_scanned":1740647565,"multiav":{"hits":7,"total":14},"name":"9756f0fd0267a991d6f63a40f1e3726895a6626f8e1d876bae0ff622b5cccf7f","size":955,"tags":{"avira":"ExpKit","windefender":"Gnaeus"}},{"class":"malicious","file_extension":"html","file_format":"txt","first_seen":1740647564,"id":"9756f2621b0d842df95ddd11c084bc8d8b56c1e3e1b53489c759c8764aa95345","last_scanned":1740647590,"multiav":{"hits":9,"total":14},"name":"9756f2621b0d842df95ddd11c084bc8d8b56c1e3e1b53489c759c8764aa95345","size":43785,"tags":{"avira":"IFrame","windefender":"Obfuscator"}},{"class":"benign","file_extension":"html","file_format":"txt","first_seen":1740647579,"id":"9756f5a81aa787e40203e477394fafe58b7d9095fe56e17a62bb4f4e7d1bf6d4","last_scanned":1740647601,"multiav":{"hits":0,"total":14},"name":"9756f5a81aa787e40203e477394fafe58b7d9095fe56e17a62bb4f4e7d1bf6d4","size":9224},{"class":"malicious","file_extension":"html","file_format":"txt","first_seen":1740647589,"id":"9756f6b5d6471d8c8f31f35c7c0f351031882d73a9e1a098b01ce0acb59fdf53","last_scanned":1740647615,"multiav":{"hits":9,"total":14},"name":"9756f6b5d6471d8c8f31f35c7c0f351031882d73a9e1a098b01ce0acb59fdf53","size":78285,"tags":{"avira":"FakejQuery","windefender":"FakejQuery"}},{"class":"malicious","file_extension":"pdf","file_format":"pdf","first_seen":1740647436,"id":"9756e40c0f14edfa60fb7f73c673c5a1b77a4d21fdd142c22483995d8ac52eb2","last_scanned":1740647462,"multiav":{"hits":7,"total":14},"name":"9756e40c0f14edfa60fb7f73c673c5a1b77a4d21fdd142c22483995d8ac52eb2","size":49686,"tags":{"eset":"A"}},{"class":"malicious","file_extension":"exe","file_format":"pe","first_seen":1740647461,"id":"9756e598ec917f20f2ab133f43b82bc9a2c2c6a11d4387ae118491cc218a0e61","last_scanned":1740647491,"multiav":{"hits":11,"total":14},"name":"9756e598ec917f20f2ab133f43b82bc9a2c2c6a11d4387ae118491cc218a0e61","size":334337,"tags":{"avira":"Dropper","eset":"Bifrose","packer":["upx","vc"],"pe":"exe","windefender":"Injector"}}]}`);
 	let pagesError = "";
-	$: items = (pages ? pages.items as {class: string | null, file_extension: string, file_format: string, first_seen?: number, id: string, last_scanned?: number, multiav: {hits: number, total: number}, name: string, size: number, tags?: Saferwall.Tags}[] : [])
-		.map(el => ({...el}));
+
+	type PageItem = {
+		class: string;
+		file_extension: string;
+		file_format: string;
+		first_seen: number;
+		id: string;
+		name: string;
+		last_scanned: number;
+		multiav: {
+			hits: number;
+			total: number;
+		};
+		size: number;
+		tags: Record<string, string | string[]>;
+	};
+
 	function submit() {
 		console.log("submitted");
-		console.log({search});
+		console.log({ search });
 		inputEl.blur();
 		inputEl.disabled = true;
 		awaitingSearchResults = true;
-		api.filesSearchPost(perPage, page, {
-			data: { query: search }
-		})
-		.finally(() => {
-			inputEl.disabled = false;
-			awaitingSearchResults = false;
-		})
-		.then((res) => {
-			console.log(res.data);
-			pages = res.data;
-			// console.log(JSON.stringify(res.data));
-		}).catch((err: AxiosError) => {
-			console.log(err);
-			pages = undefined;
-			pagesError = (err.response?.data as any)?.message ?? ""
-		})
+		api
+			.filesSearchPost(perPage, page, {
+				data: { query: search }
+			})
+			.finally(() => {
+				inputEl.disabled = false;
+				awaitingSearchResults = false;
+			})
+			.then((res) => {
+				console.log(res.data);
+				pages = res.data;
+				console.log(JSON.stringify(res.data));
+			})
+			.catch((err: AxiosError) => {
+				console.log(err);
+				pages = undefined;
+				pagesError = (err.response?.data as any)?.message ?? "";
+			});
 	}
 	function keydown(e: KeyboardEvent) {
 		// console.log(`key: ${e.key}`);
 		if (e.key.toLowerCase() === "z" && e.ctrlKey) {
-			if (!e.shiftKey) { // undo
+			if (!e.shiftKey) {
+				// undo
 				e.preventDefault();
 				// debugger;
 				if (search !== searchEditHistory[searchEditHistoryIndex]) {
@@ -83,7 +116,8 @@
 				}
 				searchEditHistoryIndex = Math.max(searchEditHistoryIndex - 1, 0);
 				setSearch(searchEditHistory[searchEditHistoryIndex] || "", false);
-			} else { // redo
+			} else {
+				// redo
 				e.preventDefault();
 				searchEditHistoryIndex = Math.min(searchEditHistoryIndex + 1, searchEditHistory.length - 1);
 				setSearch(searchEditHistory[searchEditHistoryIndex] || "", false);
@@ -119,7 +153,7 @@
 		if (!e.altKey && !e.ctrlKey && !e.shiftKey && e.key === "Tab") {
 			if (suggestionList[selectedSuggestionIndex]) {
 				setSearch(suggestionList[selectedSuggestionIndex].value);
-			} 
+			}
 		}
 	}
 	type DeepRequired<T> = T extends object
@@ -127,6 +161,17 @@
 				[K in keyof T]-?: T[K] extends Array<infer U> ? Array<DeepRequired<U>> : DeepRequired<T[K]>;
 			}
 		: T;
+	type DeepNullish<T> = T extends object
+		? {
+				[K in keyof T]?:
+					| (T[K] extends Array<infer U> ? Array<DeepNullish<U>> : DeepNullish<T[K]>)
+					| null;
+			}
+		: T;
+
+	function dflt<R extends any, T extends R | undefined | null>(value: T, def: any): R | string {
+		return value ? value : def;
+	}
 
 	let sug: DeepRequired<FileFileSearchAutocomplete> = { examples: [], search_modifiers: [] };
 	$: autoCompleteData.keys = sug.search_modifiers.map((sm) => ({
@@ -175,27 +220,33 @@
 		}
 	}
 	let showSuggestions = false;
-	let parsingData: { parseRes: ParsingResult, failedRe: ConsumerThrow, restIsSpacesOrEmpty: boolean};
+	let parsingData: {
+		parseRes: ParsingResult;
+		failedRe: ConsumerThrow;
+		restIsSpacesOrEmpty: boolean;
+	};
 	$: suggestionList, (selectedSuggestionIndex = 0);
 	$: res, suggestion, search, contentChanged();
 	$: search, (showSuggestions = searchFocused && !!suggestionList.length && !awaitingSuggestions);
 	$: {
 		if (search.trim()) {
-			let [parseRes, failedRe] = parseSearch(search)
+			let [parseRes, failedRe] = parseSearch(search);
 			// console.log("parseRes", parseRes)
 			// console.log("failedRe", failedRe)
 			if (!failedRe) {
 				failedRe = [search.length, ["logicalOperator"], [""]];
 			}
-			let [ endIndex, tokenNames,  ] = failedRe;
-			suggestionList = []
+			let [endIndex, tokenNames] = failedRe;
+			suggestionList = [];
 			let space = search.trimEnd() === search ? " " : "";
-			let keyOrGroupSpace = space.repeat(+(parseRes.length && parseRes.at(-1)!.type === "logicalOperator"));
+			let keyOrGroupSpace = space.repeat(
+				+(parseRes.length && parseRes.at(-1)!.type === "logicalOperator")
+			);
 			let endsWithSpaces = !space;
 			// console.log({endsWithSpace})
 			let searchRest = search.substring(endIndex);
 			let restIsSpacesOrEmpty = !searchRest.trimEnd();
-			
+
 			parsingData = { parseRes, failedRe, restIsSpacesOrEmpty };
 
 			function addSuggestions({
@@ -203,39 +254,47 @@
 				search,
 				valueStartsWith,
 				prefix = "",
-				suffix = "",
+				suffix = ""
 			}: {
-				sourceList: Array<{ value: string; displayValue?: string, description: string }>;
+				sourceList: Array<{ value: string; displayValue?: string; description: string }>;
 				search: string;
 				valueStartsWith?: string;
 				prefix?: string;
 				suffix?: string;
 			}): void {
 				if (valueStartsWith) {
-					suggestionList.push(...sourceList
-						.filter(sug => sug.value.startsWith(valueStartsWith) && sug.value.length !== valueStartsWith.length)
-						.map(sug => ({
-							...sug,
-							displayValue: sug.displayValue || sug.value,
-							value: search + "\u200B" + prefix + sug.value.substring(valueStartsWith.length) + suffix,
-						}))
+					suggestionList.push(
+						...sourceList
+							.filter(
+								(sug) =>
+									sug.value.startsWith(valueStartsWith) &&
+									sug.value.length !== valueStartsWith.length
+							)
+							.map((sug) => ({
+								...sug,
+								displayValue: sug.displayValue || sug.value,
+								value:
+									search + "\u200B" + prefix + sug.value.substring(valueStartsWith.length) + suffix
+							}))
 					);
 				} else {
-					suggestionList.push(...sourceList.map(sug => ({
-						...sug,
-						displayValue: sug.displayValue || sug.value,
-						value: search + "\u200B" + prefix + sug.value + suffix,
-					})));
+					suggestionList.push(
+						...sourceList.map((sug) => ({
+							...sug,
+							displayValue: sug.displayValue || sug.value,
+							value: search + "\u200B" + prefix + sug.value + suffix
+						}))
+					);
 				}
 			}
-			tokenNames.forEach(token => {
+			tokenNames.forEach((token) => {
 				switch (token) {
 					case "key": {
 						if (restIsSpacesOrEmpty) {
 							addSuggestions({
 								sourceList: autoCompleteData.keys,
 								search,
-								prefix: keyOrGroupSpace,
+								prefix: keyOrGroupSpace
 							});
 						} else {
 							// error, expected key at endIndex
@@ -248,20 +307,20 @@
 								addSuggestions({
 									sourceList: autoCompleteData.keys,
 									valueStartsWith: parseRes.at(-1)!.value,
-									search,
+									search
 								});
 							} else {
 								// error, can't autocomplete
 							}
 							addSuggestions({
 								sourceList: autoCompleteData.comparisonOperators,
-								search,
+								search
 							});
 						} else if (!endsWithSpaces) {
 							addSuggestions({
 								sourceList: autoCompleteData.comparisonOperators,
 								valueStartsWith: searchRest.trimStart(),
-								search,
+								search
 							});
 						}
 						break;
@@ -271,10 +330,10 @@
 							addSuggestions({
 								sourceList: autoCompleteData.comparisonOperators,
 								valueStartsWith: parseRes.at(-1)!.value,
-								search,
+								search
 							});
 						}
-						suggestion = search + "\u200B" +"<value>";
+						suggestion = search + "\u200B" + "<value>";
 						break;
 					}
 					case "closingGroupingOperator": {
@@ -282,7 +341,7 @@
 							addSuggestions({
 								sourceList: [autoCompleteData.groupingOperators[1]],
 								search,
-								prefix: keyOrGroupSpace,
+								prefix: keyOrGroupSpace
 							});
 						}
 						break;
@@ -310,7 +369,7 @@
 							addSuggestions({
 								sourceList: [autoCompleteData.groupingOperators[0]],
 								search,
-								prefix: keyOrGroupSpace,
+								prefix: keyOrGroupSpace
 							});
 						}
 						break;
@@ -322,11 +381,19 @@
 			});
 			suggestionList = [...suggestionList];
 		}
-	};
+	}
 	$: {
 		if (searchFocused && suggestionList[selectedSuggestionIndex]) {
 			suggestion = suggestionList[selectedSuggestionIndex].value;
-		} else if (!searchFocused || (searchFocused && !(parsingData && parsingData.failedRe[1].includes("value") && parsingData.restIsSpacesOrEmpty))) {
+		} else if (
+			!searchFocused ||
+			(searchFocused &&
+				!(
+					parsingData &&
+					parsingData.failedRe[1].includes("value") &&
+					parsingData.restIsSpacesOrEmpty
+				))
+		) {
 			suggestion = "";
 		}
 	}
@@ -346,44 +413,68 @@
 		search = "";
 		searchEditHistory = [search];
 		searchEditHistoryIndex = 0;
+		// pages = undefined;
 	}
 	let awaitingSuggestions = false;
 	let awaitingSearchResults = false;
 	$: {
 		if (advanced && mounted) {
 			awaitingSuggestions = true;
-			api.filesSearchAutocompleteGet().then((res) => {
-				let { data } = res;
-				data.examples = [...(data.examples ?? []).map((e) => ({ query: "", comment: "", ...e }))];
-				data.search_modifiers = [
-					...(data.search_modifiers ?? []).map((s) => ({ query: "", comment: "", ...s }))
-				]
-				// temporary fix for duped queries from backend
-				.filter((el, index, arr) => arr.find(f => f.query === el.query) === el);
-				sug = data as DeepRequired<FileFileSearchAutocomplete>;
-			}).finally(() => awaitingSuggestions = false);
+			api
+				.filesSearchAutocompleteGet()
+				.then((res) => {
+					let { data } = res;
+					data.examples = [...(data.examples ?? []).map((e) => ({ query: "", comment: "", ...e }))];
+					data.search_modifiers = [
+						...(data.search_modifiers ?? []).map((s) => ({ query: "", comment: "", ...s }))
+					]
+						// temporary fix for duped queries from backend
+						.filter((el, index, arr) => arr.find((f) => f.query === el.query) === el);
+					sug = data as DeepRequired<FileFileSearchAutocomplete>;
+				})
+				.finally(() => (awaitingSuggestions = false));
 			resetSearch();
 		}
 	}
 	let lastSuggestionIndexFocused = 0;
 	$: {
 		if (
-				searchFocused &&
-				suggestionListElements.length &&
-				suggestionListElements[selectedSuggestionIndex] &&
-				lastSuggestionIndexFocused != selectedSuggestionIndex
-			) {
-
+			searchFocused &&
+			suggestionListElements.length &&
+			suggestionListElements[selectedSuggestionIndex] &&
+			lastSuggestionIndexFocused != selectedSuggestionIndex
+		) {
 			let el = suggestionListElements[selectedSuggestionIndex];
 			let parent = el.parentElement!;
 			if (el.offsetTop + el.clientHeight > parent.scrollTop + parent.clientHeight) {
-				parent.scrollTo({top: el.offsetTop + el.clientHeight - parent.clientHeight});
+				parent.scrollTo({ top: el.offsetTop + el.clientHeight - parent.clientHeight });
 			} else if (el.offsetTop < parent.scrollTop) {
-				parent.scrollTo({top: el.offsetTop});
+				parent.scrollTo({ top: el.offsetTop });
 			}
 			lastSuggestionIndexFocused = selectedSuggestionIndex;
 		}
 	}
+	let exportDropdownOpen = false;
+	let downloadDropdownOpen = false;
+	let checkAll = false;
+	function onCheckAll(e: Event) {
+		let checked = (e.target as HTMLInputElement).checked;
+		items = items.map(i => ({...i, checked }));
+	}
+	function onCheck(e: Event) {
+		let checked = (e.target as HTMLInputElement).checked;
+		checkAll = checkAll && checked;
+	}
+	let items = [] as (DeepNullish<PageItem> & {checked: boolean})[];
+	$: {
+		if (pages) {
+			setItems();
+		}
+	};
+	function setItems() {
+		items = (pages?.items as DeepNullish<PageItem>[]).map((el) => ({ ...el, checked: false }))
+	}
+	// $: console.log({pages, items, awaitingSearchResults});
 </script>
 
 {#if advanced}
@@ -424,50 +515,57 @@
 			tabsClass="justify-center"
 			tabClass="text-[15px] leading-[23px] p-2.5 px-5"
 		>
-			<div class="wrapper p-4">
-				<div>
+			<div class="wrapper pt-5">
+				<div class="*:px-5">
 					{#if currentTab === "Search all"}
 						<div
-							class="relative"
 							on:focusin={() => {
+								// console.log("before focusin");
 								clearTimeout(focusoutTimeout);
 								focusoutTimeout = -1;
 								focusinTimeout = window.setTimeout(() => {
+									// console.log("focusin");
 									searchFocused = true;
-								})
+								});
 							}}
 							on:focusout={() => {
+								// console.log("before focusout");
 								clearTimeout(focusinTimeout);
 								focusinTimeout = -1;
 								focusoutTimeout = window.setTimeout(() => {
+									// console.log("focusout");
 									searchFocused = false;
 								});
 							}}
 						>
-							<Input
-								multiline
-								rows="1"
-								bind:This={sugEl}
-								tabindex="-1"
-								value={awaitingSuggestions && search === "" ? "" : suggestion}
-								icon={awaitingSuggestions ? "loading" : "search"}
-								iconClass="{awaitingSuggestions ? "animate-spin origin-center" : ""} text-gray-500"
-								parentClass="absolute top-0 left-0"
-								class="[font-variant-ligatures:none] overflow-hidden resize-none min-h-[1lh] text-searchbar-text border-primary-border active:border-primary-border focus:border-primary-border"
-							></Input>
-							<Input
-								multiline
-								rows="1"
-								bind:This={inputEl}
-								on:keydown={keydown}
-								bind:value={search}
-								placeholder={suggestion
-									? ""
-									: (awaitingSuggestions ? "Loading..." : "Search filename, file path, hashes, application name, publisher name, certificates, and more ...")}
-								icon={awaitingSuggestions ? "loading" : "search"}
-								iconClass="{awaitingSuggestions ? "animate-spin origin-center" : ""} text-gray-500"
-								class="[font-variant-ligatures:none] overflow-hidden resize-none min-h-[1lh] placeholder:text-searchbar-text border-primary-border active:border-primary-border focus:border-primary-border"
-							></Input>
+							<div class="relative">
+								<Input
+									multiline
+									rows="1"
+									bind:This={sugEl}
+									tabindex="-1"
+									value={awaitingSuggestions && search === "" ? "" : suggestion}
+									icon={awaitingSuggestions ? "loading" : "search"}
+									iconClass="{awaitingSuggestions ? 'animate-spin origin-center' : ''} text-gray-500"
+									parentClass="absolute top-0 left-0"
+									class="[font-variant-ligatures:none] overflow-hidden resize-none min-h-[1lh] text-searchbar-text border-primary-border active:border-primary-border focus:border-primary-border"
+								></Input>
+								<Input
+									multiline
+									rows="1"
+									bind:This={inputEl}
+									on:keydown={keydown}
+									bind:value={search}
+									placeholder={suggestion
+										? ""
+										: awaitingSuggestions
+											? "Loading..."
+											: "Search hashes, IOCs, AV detections, IPs, domains, and more ..."}
+									icon={awaitingSuggestions ? "loading" : "search"}
+									iconClass="{awaitingSuggestions ? 'animate-spin origin-center' : ''} text-gray-500"
+									class="[font-variant-ligatures:none] overflow-hidden resize-none min-h-[1lh] placeholder:text-searchbar-text border-primary-border active:border-primary-border focus:border-primary-border"
+								></Input>
+							</div>
 							{#if suggestionList.length}
 								<div class="relative rounded z-[20]">
 									<div class="parent absolute w-full">
@@ -477,7 +575,8 @@
 												class:focused={showSuggestions}
 											>
 												{#each suggestionList as s, index}
-													<button bind:this={suggestionListElements[index]}
+													<button
+														bind:this={suggestionListElements[index]}
 														class:selected={index === selectedSuggestionIndex}
 														class="
 															flex flex-col items-start gap-1
@@ -509,81 +608,183 @@
 								</div>
 							{/if}
 						</div>
-						<div class="results flex flex-col gap-1">
+						<div class="[&.results.results.results]:px-0 results flex flex-col gap-1">
 							{#if awaitingSearchResults}
 								<div class="py-8 text-center text-secondary-text">Searching...</div>
-							{:else}
-								{#if pages}
-									{#if items.length}
-										<table>
-											<thead class="[&_th]:p-2">
-												<th class="w-fit">
-													<div class="flex">
-														<CheckBox></CheckBox>
+							{:else if pages}
+								{#if items.length}
+									<div class="max-w-full pt-5 flex flex-col items-stretch gap-5">
+										<div class="flex px-5 gap-2">
+											<PopUnder class="w-min" popupPosition="left" bind:popUnderOpen={exportDropdownOpen} popupClass="m-0 w-auto items-start" animate={false}>
+												<button slot="clickable" class="border border-primary-border text-primary-text px-3 py-2 rounded-sm">
+													<div class="flex items-center gap-2">
+														<span class="font-medium">Export</span>
+														<Icon name="arrow-down" class="size-[9px]"></Icon>
 													</div>
-												</th>
-												{#each ["sha256", "classification", "multiav", "first seen", "last scanned", "size", "type"] as thText}
-													<th class="uppercase" align="left">{thText}</th>
-												{/each}
-											</thead>
-											<tbody>
-												{#each items as el}
-													<!-- <div>{JSON.stringify(el)}</div> -->
-													<tr class="[&_td]:p-2">
-														<td class="w-fit">
-															<div class="flex">
-																<CheckBox></CheckBox>
-															</div>
-														</td>
-														<td>
-															<div class="flex flex-col gap-1">
-																<div>
-																	{el.id}
+												</button>
+												<ul class="bg-quaternary-surface py-2 border border-primary-border rounded-base shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]" slot="dropdown">
+													{#each [["selected", "selected"], ["10", "top 10"], ["100", "top 100"], ["all", "all files"]] as [value, text]}
+														<li class="">
+															<button class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start" on:click={() => {
+																exportDropdownOpen = false;
+															}}>
+																{text}
+															</button>
+														</li>
+													{/each}
+												</ul>
+											</PopUnder>
+											<PopUnder class="w-min" popupPosition="left" bind:popUnderOpen={downloadDropdownOpen} popupClass="m-0 w-auto items-start" animate={false}>
+												<button slot="clickable" class="border border-primary-border text-primary-text px-3 py-2 rounded-sm">
+													<div class="flex items-center gap-2">
+														<span class="font-medium">Download</span>
+														<Icon name="arrow-down" class="size-[9px]"></Icon>
+													</div>
+												</button>
+												<ul class="bg-quaternary-surface py-2 border border-primary-border rounded-base shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]" slot="dropdown">
+													{#each [["selected", "selected"], ["10", "top 10"], ["100", "top 100"], ["all", "all files"]] as [value, text]}
+														<li class="">
+															<button class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start" on:click={() => {
+																downloadDropdownOpen = false;
+															}}>
+																{text}
+															</button>
+														</li>
+													{/each}
+												</ul>
+											</PopUnder>
+										</div>
+										<div class="overflow-x-auto max-w-full">
+											<table class=" min-w-max w-full border-collapse">
+												<thead class="[&_th]:py-3 [&_th]:px-1 [&_th:first-child]:pl-5 [&_th:last-child]:pr-5 --[&_th_*]:min-h-[44px] bg-tbl-advanced-search-surface">
+													<th class="w-[20px]">
+														<div class="flex flex-col">
+															<CheckBox on:change={onCheckAll} bind:checked={checkAll}></CheckBox>
+														</div>
+													</th>
+													{#each ["sha256", "classification", "multiav", "first seen", "last scanned", "size", "type"] as thText}
+														<th
+															class="uppercase text-tertiary-text font-semibold text-xs"
+															align="left">{thText}</th
+														>
+													{/each}
+												</thead>
+												<tbody>
+													{#each items as el}
+														<!-- <div>{JSON.stringify(el)}</div> -->
+														<tr class="border-y border-line-surface first:border-t-0 last:border-b-0
+															[&_td]:align-top
+															[&_td]:pb-9 [&_td]:pt-5 [&_td]:px-2
+															[&_td:first-child]:pl-5 [&_td:last-child]:pr-5
+															[&:hover_td]:bg-quaternary-hov2-surface
+															[&:hover_.controls]:visible
+															">
+															<td class="w-[20px]">
+																<div class="flex flex-col">
+																	<CheckBox on:change={onCheck} bind:checked={el.checked}></CheckBox>
 																</div>
-																<div class="flex gap-1">
-																	{#each parseTags(el.tags) as {category, name}}
-																		<li class="flex">
-																			<a class="rounded-sm px-2.5 py-1.5 tags__tag tags__tag--{category}" href="/tags/{category}-{name}">{name}</a>
-																		</li>
-																	{/each}
+															</td>
+															<td>
+																<div class="flex flex-col gap-2">
+																	<div class="flex gap-2">
+																		<div class="max-w-[366px] text-ellipsis overflow-hidden break-keep font-semibold">
+																			{el.id}
+																		</div>
+																		<div class="controls --invisible flex gap-1">
+																			<PopUnder popupPosition="left" timeout={1000}>
+																				<button on:click={() => window.navigator.clipboard.writeText(el.id ?? "")} slot="clickable" class="text-brand-text border-none size-5 flex justify-center items-center">
+																					<Icon class="size-[18px]" name="content-copy"></Icon>
+																				</button>
+																				<div slot="dropdown" class="flex value-copied select-none bg-[#56AC30] text-white min-w-0 items-center rounded-[6px] gap-1 p-[10px] whitespace-nowrap text-nowrap">
+																					<Icon name="check-circle"></Icon>
+																					Hash copied&nbsp!
+																				</div>
+																			</PopUnder>
+																			<a href="{env.PUBLIC_API_URL}files/{el.id}/download/" class="text-brand-text border-none p-0.5" on:click={(e) => {
+																				e.preventDefault();
+																				window.fetch(`${env.PUBLIC_API_URL}files/${el.id}/download/`, {
+																					headers: {
+																						"Authorization": `Bearer ${session.token}`,
+																						"Content-Type": "application/json"
+																					}
+																				}).then(res => {
+																					if (res.status === 401) {
+																						return;
+																					}
+																					return res.blob()
+																				}).then(blob => {
+																					if (!blob) return;
+																					let file = URL.createObjectURL(blob);
+																					location.assign(file);
+																				});
+																			}}>
+																				<Icon class="size-4" name="download-2"></Icon>
+																			</a>
+																		</div>
+																	</div>
+																	<div class="flex pb-0.5 gap-1 {el.id === el.name ? "text-secondary-text" : ""}">
+																		<Icon name="file" class="size-[17px]"></Icon>
+																		{el.id === el.name ? "Not relevant" : el.name}
+																	</div>
+																	<div class="flex gap-1">
+																		{#each parseTags(el.tags) as { category, name }}
+																			<li class="flex">
+																				<a
+																					class="rounded-sm px-2 py-1.5 tags__tag tags__tag--{category}"
+																					href="/tags/{category}-{name}">{name}</a
+																				>
+																			</li>
+																		{/each}
+																	</div>
 																</div>
-															</div>
-														</td>
-														<td class="">
-															<div class="capitalize {el.class ? {malicious: "text-alert-red", unknown: "text-alert-orange", benign: "text-alert-green"}[el.class] : "text-alert-orange"} flex gap-1.5 items-center">
-																<Icon name={el.class === "benign" ? "safe" : "unsafe"} size="size-[14px]"></Icon>
-																{el.class ?? "Unknown"}
-															</div>
-														</td>
-														<td>{el.multiav.hits}/{el.multiav.total}</td>
-														{#if true}
-															{@const tm = 
-																// @ts-ignore
-																(s) => 
-																s ? timestampToFormattedDate(s).split(" ") : ["Unknown", ""]}
-															{@const fs = tm(el.first_seen)}
-															{@const ls = tm(el.last_scanned)}
-															<td>{fs[0]}<br>{fs[1]}</td>
-															<td>{ls[0]}<br>{ls[1]}</td>
-															<td>{convertBytes(el.size)}</td>
-															<td class="uppercase">{el.file_format }/{el.file_extension}</td>
-														{/if}
-													</tr>
-												{/each}
-											</tbody>
-										</table>
-									{:else}
-										<div class="py-8 text-center text-secondary-text">No results found.</div>
-									{/if}
-								{:else if pagesError}
-									<div class="py-8 text-center text-alert-red">Error: {pagesError}</div>
+															</td>
+															<td class="">
+																<div
+																	class="uppercase font-medium {el.class
+																		? {
+																				malicious: 'text-alert-red',
+																				unknown: 'text-alert-orange',
+																				suspicious: 'text-alert-orange',
+																				benign: 'text-alert-green'
+																			}[el.class]
+																		: 'text-alert-orange'} flex gap-1.5 items-center"
+																>
+																	<Icon
+																		name={el.class === "benign" ? "safe" : "unsafe"}
+																		size="size-[14px]"
+																	></Icon>
+																	{el.class ?? "Unknown"}
+																</div>
+															</td>
+															<td>{dflt(el.multiav?.hits, "?")}/{dflt(el.multiav?.total, "?")}</td>
+															{#if true}
+																{@const tm =
+																	// @ts-ignore
+																	(s) =>
+																		s ? timestampToFormattedDate(s).split(" ") : ["Unknown", ""]}
+																{@const fs = tm(el.first_seen)}
+																{@const ls = tm(el.last_scanned)}
+																<td>{fs[0]}<br />{fs[1]}</td>
+																<td>{ls[0]}<br />{ls[1]}</td>
+																<td>{typeof el.size === "number" ? convertBytes(el.size) : "?B"}</td>
+																<td class="uppercase">{el.file_format}/{el.file_extension}</td>
+															{/if}
+														</tr>
+													{/each}
+												</tbody>
+											</table>
+										</div>
+									</div>
+								{:else}
+									<div class="py-8 text-center text-secondary-text">No results found.</div>
 								{/if}
+							{:else if pagesError}
+								<div class="py-8 text-center text-alert-red">Error: {pagesError}</div>
 							{/if}
 						</div>
 					{:else}
 						<center class="text-secondary-text">Under construction...</center>
 					{/if}
-					<input type="submit" hidden />
 				</div>
 			</div>
 		</TabsImproved>
@@ -591,7 +792,4 @@
 </div>
 
 <style>
-	td {
-		vertical-align: top;
-	}
 </style>
