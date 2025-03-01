@@ -687,7 +687,7 @@
 															<td>
 																<div class="flex flex-col gap-2">
 																	<div class="flex gap-2">
-																		<div class="max-w-[366px] text-ellipsis overflow-hidden break-keep font-semibold">
+																		<div class="max-w-[max(40vw,300px)] text-ellipsis overflow-hidden break-keep font-semibold">
 																			{el.id}
 																		</div>
 																		<div class="controls invisible flex gap-1">
@@ -733,7 +733,7 @@
 																			<li class="flex">
 																				<a
 																					class="rounded-sm px-2 py-1.5 tags__tag tags__tag--{category}"
-																					href="/tags/{category}-{name}">{name}</a
+																					href="/tags/{category}/{name}">{name}</a
 																				>
 																			</li>
 																		{/each}

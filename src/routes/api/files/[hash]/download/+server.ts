@@ -10,7 +10,7 @@ export async function GET({ fetch, params, cookies }) {
 		let res = await fetch(`${env.PUBLIC_API_URL}files/${params.hash}/download/`, {
 			headers: {
 				"Authorization": client.authorization!,
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
 			}
 		})
 		if (res.status === 401) {
