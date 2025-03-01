@@ -73,6 +73,7 @@
 		"codemirror": "^6.0.1",
 		"debounce": "^2.1.1",
 		"flag-icons": "^7.2.3",
+		"got": "^14.4.6",
 		"interactjs": "^1.10.27",
 		"nprogress": "^0.2.0",
 		"rehype-highlight": "^7.0.0",

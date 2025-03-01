@@ -700,24 +700,26 @@
 																					Hash copied&nbsp!
 																				</div>
 																			</PopUnder>
-																			<a href="{env.PUBLIC_API_URL}files/{el.id}/download/" class="text-brand-text border-none p-0.5" on:click={(e) => {
-																				e.preventDefault();
-																				window.fetch(`${env.PUBLIC_API_URL}files/${el.id}/download/`, {
-																					headers: {
-																						"Authorization": `Bearer ${session.token}`,
-																						"Content-Type": "application/json"
-																					}
-																				}).then(res => {
-																					if (res.status === 401) {
-																						return;
-																					}
-																					return res.blob()
-																				}).then(blob => {
-																					if (!blob) return;
-																					let file = URL.createObjectURL(blob);
-																					location.assign(file);
-																				});
-																			}}>
+																			<a href="/api/files/{el.id}/download/" class="text-brand-text border-none p-0.5" 
+																			>
+																			<!-- on:click={(e) => {
+																				// e.preventDefault();
+																				// window.fetch(`${env.PUBLIC_API_URL}files/${el.id}/download/`, {
+																				// 	headers: {
+																				// 		"Authorization": `Bearer ${session.token}`,
+																				// 		"Content-Type": "application/json"
+																				// 	}
+																				// }).then(res => {
+																				// 	if (res.status === 401) {
+																				// 		return;
+																				// 	}
+																				// 	return res.blob()
+																				// }).then(blob => {
+																				// 	if (!blob) return;
+																				// 	let file = URL.createObjectURL(blob);
+																				// 	location.assign(file);
+																				// });
+																			}} -->
 																				<Icon class="size-4" name="download-2"></Icon>
 																			</a>
 																		</div>
