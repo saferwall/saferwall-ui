@@ -627,6 +627,13 @@
 														<li class="">
 															<button class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start" on:click={() => {
 																exportDropdownOpen = false;
+																let f = {
+																	selected: () => items.filter(i => i.checked).map(i => i.id).join("\n") + "\n",
+																	"10": () => items.filter((_, i) => i < 10).map(i => i.id).join("\n") + "\n",
+																	"100": () => items.filter((_, i) => i < 100).map(i => i.id).join("\n") + "\n",
+																	all: () => items.map(i => i.id).join("\n") + "\n"
+																}[value];
+																window.navigator.clipboard.writeText((f || (() => ""))());
 															}}>
 																{text}
 															</button>
@@ -687,9 +694,13 @@
 															<td>
 																<div class="flex flex-col gap-2">
 																	<div class="flex gap-2">
-																		<div class="max-w-[max(40vw,300px)] text-ellipsis overflow-hidden break-keep font-semibold">
+																		<a href="/files/{el.id}/" class="max-w-[max(40vw,300px)] text-ellipsis overflow-hidden break-keep font-semibold"
+																			on:click={(e) => {
+																				e.preventDefault();
+
+																			}}>
 																			{el.id}
-																		</div>
+																		</a>
 																		<div class="controls invisible flex gap-1">
 																			<PopUnder popupPosition="left" timeout={1000}>
 																				<button on:click={() => window.navigator.clipboard.writeText(el.id ?? "")} slot="clickable" class="text-brand-text border-none size-5 flex justify-center items-center">
