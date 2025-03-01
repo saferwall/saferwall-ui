@@ -690,7 +690,7 @@
 																		<div class="max-w-[366px] text-ellipsis overflow-hidden break-keep font-semibold">
 																			{el.id}
 																		</div>
-																		<div class="controls --invisible flex gap-1">
+																		<div class="controls invisible flex gap-1">
 																			<PopUnder popupPosition="left" timeout={1000}>
 																				<button on:click={() => window.navigator.clipboard.writeText(el.id ?? "")} slot="clickable" class="text-brand-text border-none size-5 flex justify-center items-center">
 																					<Icon class="size-[18px]" name="content-copy"></Icon>
