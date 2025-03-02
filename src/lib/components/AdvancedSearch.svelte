@@ -23,6 +23,9 @@
 	import PopUnder from "./partials/PopUnder.svelte";
 	import { writable } from "svelte/store";
 	import { env } from "$env/dynamic/public";
+	import PaginationButtons from "./PaginationButtons.svelte";
+	import PaginationPerPageSelect from "./PaginationPerPageSelect.svelte";
+	import debounce from "debounce";
 
 	export let advanced: boolean;
 	export let session: Saferwall.Session;
@@ -96,7 +99,7 @@
 			.then((res) => {
 				console.log(res.data);
 				pages = res.data;
-				console.log(JSON.stringify(res.data));
+				// console.log(JSON.stringify(res.data));
 			})
 			.catch((err: AxiosError) => {
 				console.log(err);
@@ -226,7 +229,6 @@
 		restIsSpacesOrEmpty: boolean;
 	};
 	$: suggestionList, (selectedSuggestionIndex = 0);
-	$: res, suggestion, search, contentChanged();
 	$: search, (showSuggestions = searchFocused && !!suggestionList.length && !awaitingSuggestions);
 	$: {
 		if (search.trim()) {
@@ -417,6 +419,11 @@
 	}
 	let awaitingSuggestions = false;
 	let awaitingSearchResults = false;
+	$: inputPlaceholder = suggestion
+		? ""
+		: awaitingSuggestions
+			? "Loading..."
+			: "Search hashes, IOCs, AV detections, IPs, domains, and more ..."
 	$: {
 		if (advanced && mounted) {
 			awaitingSuggestions = true;
@@ -455,6 +462,8 @@
 		}
 	}
 	let exportDropdownOpen = false;
+	let exportLastValueEl: HTMLButtonElement;
+	let exportLastValue = "";
 	let downloadDropdownOpen = false;
 	let checkAll = false;
 	function onCheckAll(e: Event) {
@@ -475,6 +484,110 @@
 		items = (pages?.items as DeepNullish<PageItem>[]).map((el) => ({ ...el, checked: false }))
 	}
 	// $: console.log({pages, items, awaitingSearchResults});
+	let iframeSrc = "";
+	let iframeTitle = ""
+	let mainScrollable: HTMLDivElement;
+	let tableScrollable: HTMLDivElement;
+	// function transferScrollFocus(parentElement: HTMLElement, childElement: HTMLElement) {
+	// 	// Store the current scroll position of the parent
+	// 	const parentScrollTop = parentElement.scrollTop;
+	// 	const parentScrollHeight = parentElement.scrollHeight;
+	// 	const parentClientHeight = parentElement.clientHeight;
+
+	// 	// Check if we've reached the bottom of the parent scrollable area
+	// 	if (Math.abs(parentScrollTop + parentClientHeight - parentScrollHeight) < 2) {
+	// 		// We're at the bottom of the parent, transfer focus to child
+
+	// 		// 1. Prevent scroll events from propagating to parent temporarily
+	// 		const preventParentScroll = (e: Event) => {
+	// 			e.stopPropagation();
+	// 			// Once we've handled one scroll event, remove this handler
+	// 			parentElement.removeEventListener('wheel', preventParentScroll, { capture: true });
+	// 		};
+
+	// 		// 2. Capture wheel events at the parent level before they bubble
+	// 		parentElement.addEventListener('wheel', preventParentScroll, { capture: true });
+
+	// 		// 3. Set focus to the child element to ensure it receives keyboard events
+	// 		childElement.focus();
+
+	// 		// 4. For touch devices, you might need similar handling for touch events
+	// 		const preventParentTouch = (e: Event) => {
+	// 			e.stopPropagation();
+	// 			parentElement.removeEventListener('touchmove', preventParentTouch, { capture: true });
+	// 		};
+	// 		parentElement.addEventListener('touchmove', preventParentTouch, { capture: true });
+	// 	}
+	// }
+	// let preventDefault = (e: Event) => e.preventDefault()
+	function onScrollWheel(e: WheelEvent) {
+		// console.log({e});
+		// let { shiftKey, deltaX, deltaY, isTrusted } = e;
+		// transferScrollFocus(mainScrollable, tableScrollable);
+
+		// if (isTrusted) {
+			// e.preventDefault();
+			// // if (!shiftKey) {
+				
+			// // }
+			// const wheelEvt = document.createEvent('MouseEvents');
+			// wheelEvt.initEvent('wheel', true, true);
+
+			// // Set deltaY depending on wheel up or wheel down
+			// wheelEvt.deltaY = +120; 
+			// // wheelEvt.deltaY = -120;
+
+			// // Pass event to element
+			// tableScrollable.dispatchEvent(wheelEvt);
+		// console.log({sh: mainScrollable.clientHeight, st: mainScrollable.scrollTop});
+		// if (mainScrollable.scrollTop + mainScrollable.clientHeight >= mainScrollable.scrollHeight) {
+		// 	console.log("doing it!")
+		// 	// mainScrollable.();
+		// 	// tableScrollable.click();
+		// 	mainScrollable.addEventListener("scroll", preventDefault, { capture: true });
+		// 	// mainScrollable.classList.add("overflow-y-hidden");
+		// }
+		// }
+		// if (shiftKey) {
+		// 	// tableScrollable.dispatchEvent(
+		// 	// 	new WheelEvent("wheel", {
+		// 	// 		...e,
+		// 	// 		shiftKey: true,
+		// 	// 	}
+		// 	// ));
+		// 	tableScrollable.scrollBy({left: deltaY, behavior: "auto"});
+		// } else {
+		// 	// debugger;
+		// 	if (deltaY) {
+		// 		if (isTrusted) {
+		// 			e.preventDefault();
+		// 			if (deltaY > 0) {
+		// 				let difference = mainScrollable.scrollHeight - mainScrollable.scrollTop
+		// 				if (difference > 0) {
+		// 					// setTimeout(() => mainScrollable.dispatchEvent(e))
+		// 					if (difference < deltaY) {
+		// 					}
+		// 				}
+		// 				else {
+		// 					// setTimeout(() => tableScrollable.dispatchEvent(e));
+		// 				}
+		// 			} else {
+						
+		// 			}
+		// 		}
+		// 	}
+		// }
+	}
+	function onScrollTouch(e: TouchEvent) {
+		// if (e.deltaX) {
+
+		// }
+	}
+	
+	$: res, suggestion, inputPlaceholder, search, searchFocused, contentChanged();
+	let debounced = () => {};
+	onMount(() => debounced = debounce(() => { if (search) { submit() }}, 1000));
+	$: perPage, page, debounced();
 </script>
 
 {#if advanced}
@@ -484,8 +597,33 @@
 <div
 	id="advanced_search"
 	class:advanced
-	class="sticky bg-advanced-search-surface bottom-0 w-full h-0 invisible [&.advanced]:visible [&.advanced]:h-[100vh] z-[40] flex flex-col items-stretch gap-2 overflow-y-auto"
->
+	bind:this={mainScrollable}
+	class="fixed bg-advanced-search-surface top-0 w-full h-0 invisible [&.advanced]:visible [&.advanced]:h-[100vh] z-[40] flex flex-col items-stretch gap-2 {iframeSrc ? "overflow-y-hidden" : "overflow-y-auto"} no-scroll-style"
+		on:wheel|nonpassive={onScrollWheel}
+		on:touchmove|nonpassive={onScrollTouch}
+	>
+	<div class="iframe fixed top-0 left-0 min-h-[100vh] w-full z-10 overflow-x-clip {iframeSrc ? "overflow-y-auto" : "overflow-y-clip pointer-events-none"} flex items-stretch">
+		<button on:click={() => iframeSrc = ""} class:visible={!!iframeSrc} class="split grow transition-[backdrop-filter] [backdrop-filter:blur(0px)] [&.visible]:[backdrop-filter:blur(18px)]"></button>
+		<div class:visible={!!!!iframeSrc} class="h-full absolute right-0 w-[calc(100%-200px)] bg-advanced-search-surface flex flex-col transition-transform translate-x-full [&.visible]:translate-x-0">
+			<div>
+				<Button
+					class="p-5 text-primary-text border-none leading-[25px] text-sm [&_.content]:gap-1"
+					theme="none"
+					icon="close"
+					on:click={() => (iframeSrc = "")}
+					iconClass="text-primary-icn size-[21px]">Close</Button
+				>
+			</div>
+			<div class="grow relative ">
+				<div class="size-full flex flex-col justify-center items-center">
+					<Icon name="loading" class="size-20 animate-spin origin-center text-primary-icn"></Icon>
+				</div>
+				{#if iframeSrc}
+					<iframe class="absolute top-0 left-0 size-full" src={iframeSrc} frameborder="0" title={iframeTitle}></iframe>
+				{/if}
+			</div>
+		</div>
+	</div>
 	<nav class="flex flex-col items-center py-4">
 		<div class="container">
 			<Button
@@ -513,12 +651,13 @@
 			tabs={["Search all", "Goodware"]}
 			bind:value={currentTab}
 			tabsClass="justify-center"
+			contentClass=""
 			tabClass="text-[15px] leading-[23px] p-2.5 px-5"
 		>
-			<div class="wrapper pt-5">
+			<div class="wrapper relative max-h-[100vh]">
 				<div class="*:px-5">
 					{#if currentTab === "Search all"}
-						<div
+						<div class="input pt-5"
 							on:focusin={() => {
 								// console.log("before focusin");
 								clearTimeout(focusoutTimeout);
@@ -556,11 +695,7 @@
 									bind:This={inputEl}
 									on:keydown={keydown}
 									bind:value={search}
-									placeholder={suggestion
-										? ""
-										: awaitingSuggestions
-											? "Loading..."
-											: "Search hashes, IOCs, AV detections, IPs, domains, and more ..."}
+									placeholder={inputPlaceholder}
 									icon={awaitingSuggestions ? "loading" : "search"}
 									iconClass="{awaitingSuggestions ? 'animate-spin origin-center' : ''} text-gray-500"
 									class="[font-variant-ligatures:none] overflow-hidden resize-none min-h-[1lh] placeholder:text-searchbar-text border-primary-border active:border-primary-border focus:border-primary-border"
@@ -615,7 +750,7 @@
 								{#if items.length}
 									<div class="max-w-full pt-5 flex flex-col items-stretch gap-5">
 										<div class="flex px-5 gap-2">
-											<PopUnder class="w-min" popupPosition="left" bind:popUnderOpen={exportDropdownOpen} popupClass="m-0 w-auto items-start" animate={false}>
+											<PopUnder class="w-min" popupPosition="left" bind:popUnderOpen={exportDropdownOpen} popupClass="m-0 w-auto items-start z-[8]" animate={false}>
 												<button slot="clickable" class="border border-primary-border text-primary-text px-3 py-2 rounded-sm">
 													<div class="flex items-center gap-2">
 														<span class="font-medium">Export</span>
@@ -627,6 +762,8 @@
 														<li class="">
 															<button class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start" on:click={() => {
 																exportDropdownOpen = false;
+																exportLastValue = text;
+																exportLastValueEl.click();
 																let f = {
 																	selected: () => items.filter(i => i.checked).map(i => i.id).join("\n") + "\n",
 																	"10": () => items.filter((_, i) => i < 10).map(i => i.id).join("\n") + "\n",
@@ -634,14 +771,12 @@
 																	all: () => items.map(i => i.id).join("\n") + "\n"
 																}[value];
 																window.navigator.clipboard.writeText((f || (() => ""))());
-															}}>
-																{text}
-															</button>
+															}}>{text}</button>
 														</li>
 													{/each}
 												</ul>
 											</PopUnder>
-											<PopUnder class="w-min" popupPosition="left" bind:popUnderOpen={downloadDropdownOpen} popupClass="m-0 w-auto items-start" animate={false}>
+											<PopUnder class="w-min" popupPosition="left" bind:popUnderOpen={downloadDropdownOpen} popupClass="m-0 w-auto items-start z-[8]" animate={false}>
 												<button slot="clickable" class="border border-primary-border text-primary-text px-3 py-2 rounded-sm">
 													<div class="flex items-center gap-2">
 														<span class="font-medium">Download</span>
@@ -660,21 +795,33 @@
 													{/each}
 												</ul>
 											</PopUnder>
+											<PopUnder timeout={1500} animate={true} parentClass="h-0 *:shrink *:min-h-0 *:h-0" popupClass="top-0">
+												<button bind:this={exportLastValueEl} slot="clickable" class="h-0"></button>
+												<div slot="dropdown" class="flex value-copied select-none bg-[#56AC30] text-white min-w-0 items-center rounded-[6px] gap-1 p-[8px] whitespace-nowrap text-nowrap">
+													<Icon name="check-circle" class="size-[18px]"></Icon>
+													Exported {exportLastValue}&nbsp!
+												</div>
+											</PopUnder>
 										</div>
-										<div class="overflow-x-auto max-w-full">
-											<table class=" min-w-max w-full border-collapse">
-												<thead class="[&_th]:py-3 [&_th]:px-1 [&_th:first-child]:pl-5 [&_th:last-child]:pr-5 --[&_th_*]:min-h-[44px] bg-tbl-advanced-search-surface">
-													<th class="w-[20px]">
-														<div class="flex flex-col">
-															<CheckBox on:change={onCheckAll} bind:checked={checkAll}></CheckBox>
-														</div>
-													</th>
-													{#each ["sha256", "classification", "multiav", "first seen", "last scanned", "size", "type"] as thText}
-														<th
-															class="uppercase text-tertiary-text font-semibold text-xs"
-															align="left">{thText}</th
-														>
-													{/each}
+										<div bind:this={tableScrollable} class="overflow-x-auto max-h-[100vh] overflow-y-auto --no-scroll-style max-w-full relative">
+											<table class="min-w-max w-full border-collapse">
+												<thead class="
+													[&_th]:py-3 [&_th]:px-1 [&_th:first-child]:pl-5 [&_th:last-child]:pr-5 --[&_th_*]:min-h-[44px]
+													[&_th]:sticky [&_th]:top-0 [&_th]:bg-tbl-advanced-search-surface
+												">
+													<tr>
+														<th class="w-[20px] left-0 z-[5]">
+															<div class="flex flex-col">
+																<CheckBox on:change={onCheckAll} bind:checked={checkAll}></CheckBox>
+															</div>
+														</th>
+														{#each ["sha256", "classification", "multiav", "first seen", "last scanned", "size", "type"] as thText}
+															<th
+																class="z-[2] uppercase text-tertiary-text font-semibold text-xs"
+																align="left">{thText}</th
+															>
+														{/each}
+													</tr>
 												</thead>
 												<tbody>
 													{#each items as el}
@@ -683,10 +830,11 @@
 															[&_td]:align-top
 															[&_td]:pb-9 [&_td]:pt-5 [&_td]:px-2
 															[&_td:first-child]:pl-5 [&_td:last-child]:pr-5
+															[&_td]:bg-advanced-search-surface
 															[&:hover_td]:bg-quaternary-hov2-surface
-															[&:hover_.controls]:visible
+															[&:hover_.control]:visible
 															">
-															<td class="w-[20px]">
+															<td class="w-[20px] sticky left-0 z-[4]">
 																<div class="flex flex-col">
 																	<CheckBox on:change={onCheck} bind:checked={el.checked}></CheckBox>
 																</div>
@@ -694,16 +842,16 @@
 															<td>
 																<div class="flex flex-col gap-2">
 																	<div class="flex gap-2">
-																		<a href="/files/{el.id}/" class="max-w-[max(40vw,300px)] text-ellipsis overflow-hidden break-keep font-semibold"
+																		<a href="/files/{el.id}/summary?behavior_id=" class="max-w-[max(40vw,300px)] text-ellipsis overflow-hidden break-keep font-semibold"
 																			on:click={(e) => {
 																				e.preventDefault();
-
+																				iframeSrc = new URL(`/files/${el.id}/summary?behavior_id=&strip`, location.href).href;
 																			}}>
 																			{el.id}
 																		</a>
-																		<div class="controls invisible flex gap-1">
-																			<PopUnder popupPosition="left" timeout={1000}>
-																				<button on:click={() => window.navigator.clipboard.writeText(el.id ?? "")} slot="clickable" class="text-brand-text border-none size-5 flex justify-center items-center">
+																		<div class="flex gap-1">
+																			<PopUnder popupPosition="left" timeout={1000} class="">
+																				<button on:click={() => window.navigator.clipboard.writeText(el.id ?? "")} slot="clickable" class="control invisible text-brand-text border-none size-5 flex justify-center items-center">
 																					<Icon class="size-[18px]" name="content-copy"></Icon>
 																				</button>
 																				<div slot="dropdown" class="flex value-copied select-none bg-[#56AC30] text-white min-w-0 items-center rounded-[6px] gap-1 p-[10px] whitespace-nowrap text-nowrap">
@@ -711,7 +859,7 @@
 																					Hash copied&nbsp!
 																				</div>
 																			</PopUnder>
-																			<a href="/api/files/{el.id}/download/" class="text-brand-text border-none p-0.5" 
+																			<a href="/api/files/{el.id}/download/" class="control invisible text-brand-text border-none p-0.5" 
 																			>
 																			<!-- on:click={(e) => {
 																				// e.preventDefault();
@@ -774,18 +922,22 @@
 																{@const tm =
 																	// @ts-ignore
 																	(s) =>
-																		s ? timestampToFormattedDate(s).split(" ") : ["Unknown", ""]}
+																		s ? timestampToFormattedDate(s).split(" ") : ["?", ""]}
 																{@const fs = tm(el.first_seen)}
 																{@const ls = tm(el.last_scanned)}
 																<td>{fs[0]}<br />{fs[1]}</td>
 																<td>{ls[0]}<br />{ls[1]}</td>
 																<td>{typeof el.size === "number" ? convertBytes(el.size) : "?B"}</td>
-																<td class="uppercase">{el.file_format}/{el.file_extension}</td>
+																<td class="uppercase">{el.file_format ?? "?"}/{el.file_extension ?? "?"}</td>
 															{/if}
 														</tr>
 													{/each}
 												</tbody>
 											</table>
+											<div class="sticky z-[8] bottom-[-1px] left-0 w-full flex justify-between p-5 bg-advanced-search-surface border-t border-t-line-surface">
+												<PaginationPerPageSelect bind:current={perPage} max={Math.min(pages.total_count || 100, 100)}></PaginationPerPageSelect>
+												<PaginationButtons bind:currentPage={page} totalPages={pages.page_count || 1}></PaginationButtons>
+											</div>
 										</div>
 									</div>
 								{:else}
@@ -796,7 +948,7 @@
 							{/if}
 						</div>
 					{:else}
-						<center class="text-secondary-text">Under construction...</center>
+						<center class="py-8 text-secondary-text">Under construction...</center>
 					{/if}
 				</div>
 			</div>
