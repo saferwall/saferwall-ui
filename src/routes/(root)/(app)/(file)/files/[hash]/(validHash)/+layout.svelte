@@ -4,6 +4,7 @@
 	import { fileMenuStore } from '$lib/utils/fileMenu';
 	import { page } from '$app/stores';
 	import type { LayoutData } from './$types';
+	import { getContext } from 'svelte';
 
 	export let data: LayoutData;
 

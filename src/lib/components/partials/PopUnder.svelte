@@ -7,6 +7,7 @@
 	export let popupPosition: "right" | "left" | "center" = "center";
 	export { Class as class };
 	export let popupClass = "";
+	export let parentClass = "";
 	export let timeout: number | null = null
 
 	let popup: HTMLElement;
@@ -30,7 +31,7 @@
 	let to = -1;
 </script>
 
-<div class="relative flex flex-col" bind:this={popup}>
+<div class={twMerge("relative flex flex-col", parentClass)} bind:this={popup}>
 	<button on:click={() => {
 		if (timeout === null) {
 			popUnderOpen = !popUnderOpen

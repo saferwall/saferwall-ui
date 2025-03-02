@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
-import type { PageLoad } from '../../$types';
 import { tryCatch } from '$lib/utils/try_catch';
+import type { PageLoad } from '../$types';
 
 export const load: PageLoad = async ({ parent, params, url }) => {
 	const {

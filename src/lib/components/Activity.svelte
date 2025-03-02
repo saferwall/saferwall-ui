@@ -67,7 +67,7 @@
 					{#if tags.length > 0}
 						{#each tags as tag}
 							<li class="flex">
-								<a class="rounded-sm px-2.5 py-1.5 tags__tag tags__tag--{tag.category}" href="/tags/{tag.category}-{tag.name}">{tag.name}</a>
+								<a class="rounded-sm px-2.5 py-1.5 tags__tag tags__tag--{tag.category}" href="/tags/{tag.category}/{tag.name}">{tag.name}</a>
 							</li>
 						{/each}
 					{:else}

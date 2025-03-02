@@ -70,7 +70,7 @@
 					<ul class="tags__list">
 						{#each tags as tag}
 							<li class="tags__tag tags__tag--{tag.category}">
-								<a href="/tags/{tag.category}-{tag.name}">{tag.name}</a>
+								<a href="/tags/{tag.category}/{tag.name}">{tag.name}</a>
 							</li>
 						{/each}
 					</ul>

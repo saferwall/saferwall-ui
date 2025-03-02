@@ -3,12 +3,15 @@
 	import { page } from '$app/stores';
 	import type { SaferwallClient } from '$lib/clients/saferwall';
 	import UploadBox from '../UploadBox.svelte';
+	import { getContext } from 'svelte';
 
 	export let client: SaferwallClient;
 	export let loggedIn = false;
 	export let hash = '';
 	export let activeFileMenu: Menu.File[] = [];
 	export let activeMenu: { name: string; path: string };
+
+	let strip: boolean = getContext("strip");
 
 	$: isPathActive = (path: string): boolean => path === activeMenu.path;
 	$: generateFilePath = (path: string): string => `/files/${hash}/${path}`;
@@ -22,39 +25,41 @@
 >
 	<div class="w-full container mx-auto flex">
 		<ul class="file__navbar__menu flex w-full space-x-3">
-			<li class="file__navbar__item flex-grow inline-flex">
-				{#if loggedIn}
-					<button
-						class="file__navbar__link
-							text-brand			hover:text-brand-light-text
-							bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
-							"
-						on:click={(e) => {
-							if (!uploadOpen)
-								window.scrollTo({top: 0});
-							uploadOpen = !uploadOpen;
-						}}
-					>
-						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
-							<use href="/images/icons.svg#icon-cloud" />
-						</svg>
-						<span>Upload file</span>
-					</button>
-				{:else}
-					<a
-						class="file__navbar__link
-							text-brand			hover:text-brand-light-text
-							bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
-							"
-						href="/auth/login?redir={encodeURIComponent($page.url.pathname)}"
-					>
-						<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
-							<use href="/images/icons.svg#icon-cloud" />
-						</svg>
-						<span>Upload file</span>
-					</a>
-				{/if}
-			</li>
+			{#if !strip}
+				<li class="file__navbar__item flex-grow inline-flex ">
+					{#if loggedIn}
+						<button
+							class="file__navbar__link upload-file
+								text-brand			hover:text-brand-light-text
+								bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
+								"
+							on:click={(e) => {
+								if (!uploadOpen)
+									window.scrollTo({top: 0});
+								uploadOpen = !uploadOpen;
+							}}
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
+								<use href="/images/icons.svg#icon-cloud" />
+							</svg>
+							<span>Upload file</span>
+						</button>
+					{:else}
+						<a
+							class="file__navbar__link
+								text-brand			hover:text-brand-light-text
+								bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
+								"
+							href="/auth/login?redir={encodeURIComponent($page.url.pathname)}"
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
+								<use href="/images/icons.svg#icon-cloud" />
+							</svg>
+							<span>Upload file</span>
+						</a>
+					{/if}
+				</li>
+			{/if}
 			{#each activeFileMenu as item}
 				<li class="file__navbar__item">
 					<a
@@ -78,7 +83,7 @@
 		&__item {
 			@apply flex-shrink-0;
 			&:first-child {
-				.file__navbar__link {
+				.file__navbar__link.upload-file {
 					@apply rounded;
 				}
 			}
