@@ -21,8 +21,6 @@
 	import { convertBytes, parseTags, timestampToFormattedDate } from "$lib/utils";
 	import type { AxiosError } from "axios";
 	import PopUnder from "./partials/PopUnder.svelte";
-	import { writable } from "svelte/store";
-	import { env } from "$env/dynamic/public";
 	import PaginationButtons from "./PaginationButtons.svelte";
 	import PaginationPerPageSelect from "./PaginationPerPageSelect.svelte";
 	import debounce from "debounce";
@@ -33,6 +31,8 @@
 	const api = new FileApi(new Configuration({ accessToken: session.token }));
 
 	let search = "";
+	let currentSearch = "";
+	let lastSearch = "";
 	let searchEditHistory = [search];
 	let searchEditHistoryIndex = 0;
 	function searchEditHistoryPush(...newValues: string[]) {
@@ -83,29 +83,32 @@
 	};
 
 	function submit() {
-		console.log("submitted");
-		console.log({ search });
-		inputEl.blur();
-		inputEl.disabled = true;
-		awaitingSearchResults = true;
-		api
-			.filesSearchPost(perPage, page, {
-				data: { query: search }
-			})
-			.finally(() => {
-				inputEl.disabled = false;
-				awaitingSearchResults = false;
-			})
-			.then((res) => {
-				console.log(res.data);
-				pages = res.data;
-				// console.log(JSON.stringify(res.data));
-			})
-			.catch((err: AxiosError) => {
-				console.log(err);
-				pages = undefined;
-				pagesError = (err.response?.data as any)?.message ?? "";
-			});
+		if (currentSearch) {
+			console.log("submitted");
+			console.log({ currentSearch });
+			inputEl.blur();
+			inputEl.disabled = true;
+			awaitingSearchResults = true;
+			api
+				.filesSearchPost(perPage, page, {
+					data: { query: currentSearch }
+				})
+				.finally(() => {
+					inputEl.disabled = false;
+					awaitingSearchResults = false;
+					lastSearch = currentSearch;
+				})
+				.then((res) => {
+					console.log(res.data);
+					pages = res.data;
+					// console.log(JSON.stringify(res.data));
+				})
+				.catch((err: AxiosError) => {
+					console.log(err);
+					pages = undefined;
+					pagesError = (err.response?.data as any)?.message ?? "";
+				});
+		}
 	}
 	function keydown(e: KeyboardEvent) {
 		// console.log(`key: ${e.key}`);
@@ -131,7 +134,7 @@
 		}
 		if (e.key === "Enter" && !e.shiftKey) {
 			e.preventDefault();
-			submit();
+			currentSearch = search;
 		}
 		if (e.key === "Tab") {
 			e.preventDefault();
@@ -423,7 +426,7 @@
 		? ""
 		: awaitingSuggestions
 			? "Loading..."
-			: "Search hashes, IOCs, AV detections, IPs, domains, and more ..."
+			: "Search hashes, IOCs, AV detections, IPs, domains, and more ...";
 	$: {
 		if (advanced && mounted) {
 			awaitingSuggestions = true;
@@ -468,24 +471,24 @@
 	let checkAll = false;
 	function onCheckAll(e: Event) {
 		let checked = (e.target as HTMLInputElement).checked;
-		items = items.map(i => ({...i, checked }));
+		items = items.map((i) => ({ ...i, checked }));
 	}
 	function onCheck(e: Event) {
 		let checked = (e.target as HTMLInputElement).checked;
 		checkAll = checkAll && checked;
 	}
-	let items = [] as (DeepNullish<PageItem> & {checked: boolean})[];
+	let items = [] as (DeepNullish<PageItem> & { checked: boolean })[];
 	$: {
 		if (pages) {
 			setItems();
 		}
-	};
+	}
 	function setItems() {
-		items = (pages?.items as DeepNullish<PageItem>[]).map((el) => ({ ...el, checked: false }))
+		items = (pages?.items as DeepNullish<PageItem>[]).map((el) => ({ ...el, checked: false }));
 	}
 	// $: console.log({pages, items, awaitingSearchResults});
 	let iframeSrc = "";
-	let iframeTitle = ""
+	let iframeTitle = "";
 	let mainScrollable: HTMLDivElement;
 	let tableScrollable: HTMLDivElement;
 	// function transferScrollFocus(parentElement: HTMLElement, childElement: HTMLElement) {
@@ -524,21 +527,17 @@
 		// console.log({e});
 		// let { shiftKey, deltaX, deltaY, isTrusted } = e;
 		// transferScrollFocus(mainScrollable, tableScrollable);
-
 		// if (isTrusted) {
-			// e.preventDefault();
-			// // if (!shiftKey) {
-				
-			// // }
-			// const wheelEvt = document.createEvent('MouseEvents');
-			// wheelEvt.initEvent('wheel', true, true);
-
-			// // Set deltaY depending on wheel up or wheel down
-			// wheelEvt.deltaY = +120; 
-			// // wheelEvt.deltaY = -120;
-
-			// // Pass event to element
-			// tableScrollable.dispatchEvent(wheelEvt);
+		// e.preventDefault();
+		// // if (!shiftKey) {
+		// // }
+		// const wheelEvt = document.createEvent('MouseEvents');
+		// wheelEvt.initEvent('wheel', true, true);
+		// // Set deltaY depending on wheel up or wheel down
+		// wheelEvt.deltaY = +120;
+		// // wheelEvt.deltaY = -120;
+		// // Pass event to element
+		// tableScrollable.dispatchEvent(wheelEvt);
 		// console.log({sh: mainScrollable.clientHeight, st: mainScrollable.scrollTop});
 		// if (mainScrollable.scrollTop + mainScrollable.clientHeight >= mainScrollable.scrollHeight) {
 		// 	console.log("doing it!")
@@ -572,7 +571,6 @@
 		// 					// setTimeout(() => tableScrollable.dispatchEvent(e));
 		// 				}
 		// 			} else {
-						
 		// 			}
 		// 		}
 		// 	}
@@ -580,14 +578,42 @@
 	}
 	function onScrollTouch(e: TouchEvent) {
 		// if (e.deltaX) {
-
 		// }
 	}
-	
+
 	$: res, suggestion, inputPlaceholder, search, searchFocused, contentChanged();
 	let debounced = () => {};
-	onMount(() => debounced = debounce(() => { if (search) { submit() }}, 1000));
+	onMount(() => {
+		debounced = debounce(submit, 1000);
+		// @ts-ignore
+		// function addEventListenerAll(target, listener, ...otherArguments) {
+		// 	// install listeners for all natively triggered events
+		// 	for (const key in target) {
+		// 		if (/^on/.test(key)) {
+		// 			const eventType = key.substr(2);
+		// 			target.addEventListener(eventType, listener, ...otherArguments);
+		// 		}
+		// 	}
+		// 	// dynamically install listeners for all manually triggered events, just-in-time before they're dispatched ;D
+		// 	const dispatchEvent_original = EventTarget.prototype.dispatchEvent;
+		// 	function dispatchEvent(event: Event) {
+		// 		target.addEventListener(event.type, listener, ...otherArguments);  // multiple identical listeners are automatically discarded
+		// 		// @ts-ignore
+		// 		dispatchEvent_original.apply(this, arguments);
+		// 	}
+		// 	// @ts-ignore
+		// 	EventTarget.prototype.dispatchEvent = dispatchEvent;
+		// 	if (EventTarget.prototype.dispatchEvent !== dispatchEvent) throw new Error(`Browser is smarter than you think!`);
+
+		// }
+
+		// // usage example
+		// addEventListenerAll(window, (evt: Event) => {
+		// 	console.log(evt.type);
+		// });
+	});
 	$: perPage, page, debounced();
+	$: currentSearch, submit();
 </script>
 
 {#if advanced}
@@ -598,13 +624,26 @@
 	id="advanced_search"
 	class:advanced
 	bind:this={mainScrollable}
-	class="fixed bg-advanced-search-surface top-0 w-full h-0 invisible [&.advanced]:visible [&.advanced]:h-[100vh] z-[40] flex flex-col items-stretch gap-2 {iframeSrc ? "overflow-y-hidden" : "overflow-y-auto"} no-scroll-style"
-		on:wheel|nonpassive={onScrollWheel}
-		on:touchmove|nonpassive={onScrollTouch}
+	class="fixed bg-advanced-search-surface top-0 w-full h-0 invisible [&.advanced]:visible [&.advanced]:h-[100vh] z-[40] flex flex-col items-stretch gap-2 {iframeSrc
+		? 'overflow-y-hidden'
+		: 'overflow-y-auto'} no-scroll-style"
+	on:wheel|nonpassive={onScrollWheel}
+	on:touchmove|nonpassive={onScrollTouch}
+>
+	<div
+		class="iframe fixed top-0 left-0 min-h-[100vh] w-full z-10 overflow-x-clip {iframeSrc
+			? 'overflow-y-auto'
+			: 'overflow-y-clip pointer-events-none'} flex items-stretch"
 	>
-	<div class="iframe fixed top-0 left-0 min-h-[100vh] w-full z-10 overflow-x-clip {iframeSrc ? "overflow-y-auto" : "overflow-y-clip pointer-events-none"} flex items-stretch">
-		<button on:click={() => iframeSrc = ""} class:visible={!!iframeSrc} class="split grow transition-[backdrop-filter] [backdrop-filter:blur(0px)] [&.visible]:[backdrop-filter:blur(18px)]"></button>
-		<div class:visible={!!!!iframeSrc} class="h-full absolute right-0 w-[calc(100%-200px)] bg-advanced-search-surface flex flex-col transition-transform translate-x-full [&.visible]:translate-x-0">
+		<button
+			on:click={() => (iframeSrc = "")}
+			class:visible={!!iframeSrc}
+			class="split grow transition-[backdrop-filter] [backdrop-filter:blur(0px)] [&.visible]:[backdrop-filter:blur(18px)]"
+		></button>
+		<div
+			class:visible={!!!!iframeSrc}
+			class="h-full absolute right-0 w-[calc(100%-200px)] bg-advanced-search-surface flex flex-col transition-transform translate-x-full [&.visible]:translate-x-0"
+		>
 			<div>
 				<Button
 					class="p-5 text-primary-text border-none leading-[25px] text-sm [&_.content]:gap-1"
@@ -614,12 +653,17 @@
 					iconClass="text-primary-icn size-[21px]">Close</Button
 				>
 			</div>
-			<div class="grow relative ">
+			<div class="grow relative">
 				<div class="size-full flex flex-col justify-center items-center">
 					<Icon name="loading" class="size-20 animate-spin origin-center text-primary-icn"></Icon>
 				</div>
 				{#if iframeSrc}
-					<iframe class="absolute top-0 left-0 size-full" src={iframeSrc} frameborder="0" title={iframeTitle}></iframe>
+					<iframe
+						class="absolute top-0 left-0 size-full"
+						src={iframeSrc}
+						frameborder="0"
+						title={iframeTitle}
+					></iframe>
 				{/if}
 			</div>
 		</div>
@@ -657,7 +701,8 @@
 			<div class="wrapper relative max-h-[100vh]">
 				<div class="*:px-5">
 					{#if currentTab === "Search all"}
-						<div class="input pt-5"
+						<div
+							class="input pt-5"
 							on:focusin={() => {
 								// console.log("before focusin");
 								clearTimeout(focusoutTimeout);
@@ -685,7 +730,9 @@
 									tabindex="-1"
 									value={awaitingSuggestions && search === "" ? "" : suggestion}
 									icon={awaitingSuggestions ? "loading" : "search"}
-									iconClass="{awaitingSuggestions ? 'animate-spin origin-center' : ''} text-gray-500"
+									iconClass="{awaitingSuggestions
+										? 'animate-spin origin-center'
+										: ''} text-gray-500"
 									parentClass="absolute top-0 left-0"
 									class="[font-variant-ligatures:none] overflow-hidden resize-none min-h-[1lh] text-searchbar-text border-primary-border active:border-primary-border focus:border-primary-border"
 								></Input>
@@ -697,7 +744,9 @@
 									bind:value={search}
 									placeholder={inputPlaceholder}
 									icon={awaitingSuggestions ? "loading" : "search"}
-									iconClass="{awaitingSuggestions ? 'animate-spin origin-center' : ''} text-gray-500"
+									iconClass="{awaitingSuggestions
+										? 'animate-spin origin-center'
+										: ''} text-gray-500"
 									class="[font-variant-ligatures:none] overflow-hidden resize-none min-h-[1lh] placeholder:text-searchbar-text border-primary-border active:border-primary-border focus:border-primary-border"
 								></Input>
 							</div>
@@ -744,71 +793,124 @@
 							{/if}
 						</div>
 						<div class="[&.results.results.results]:px-0 results flex flex-col gap-1">
-							{#if awaitingSearchResults}
-								<div class="py-8 text-center text-secondary-text">Searching...</div>
-							{:else if pages}
-								{#if items.length}
+							{#if pages}
+								{#if items.length && (!awaitingSearchResults || currentSearch === lastSearch)}
 									<div class="max-w-full pt-5 flex flex-col items-stretch gap-5">
 										<div class="flex px-5 gap-2">
-											<PopUnder class="w-min" popupPosition="left" bind:popUnderOpen={exportDropdownOpen} popupClass="m-0 w-auto items-start z-[8]" animate={false}>
-												<button slot="clickable" class="border border-primary-border text-primary-text px-3 py-2 rounded-sm">
+											<PopUnder
+												class="w-min"
+												popupPosition="left"
+												bind:popUnderOpen={exportDropdownOpen}
+												popupClass="m-0 w-auto items-start z-[8]"
+												animate={false}
+											>
+												<button
+													slot="clickable"
+													class="border border-primary-border text-primary-text px-3 py-2 rounded-sm"
+												>
 													<div class="flex items-center gap-2">
 														<span class="font-medium">Export</span>
 														<Icon name="arrow-down" class="size-[9px]"></Icon>
 													</div>
 												</button>
-												<ul class="bg-quaternary-surface py-2 border border-primary-border rounded-base shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]" slot="dropdown">
+												<ul
+													class="bg-quaternary-surface py-2 border border-primary-border rounded-base shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]"
+													slot="dropdown"
+												>
 													{#each [["selected", "selected"], ["10", "top 10"], ["100", "top 100"], ["all", "all files"]] as [value, text]}
 														<li class="">
-															<button class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start" on:click={() => {
-																exportDropdownOpen = false;
-																exportLastValue = text;
-																exportLastValueEl.click();
-																let f = {
-																	selected: () => items.filter(i => i.checked).map(i => i.id).join("\n") + "\n",
-																	"10": () => items.filter((_, i) => i < 10).map(i => i.id).join("\n") + "\n",
-																	"100": () => items.filter((_, i) => i < 100).map(i => i.id).join("\n") + "\n",
-																	all: () => items.map(i => i.id).join("\n") + "\n"
-																}[value];
-																window.navigator.clipboard.writeText((f || (() => ""))());
-															}}>{text}</button>
+															<button
+																class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start"
+																on:click={() => {
+																	exportDropdownOpen = false;
+																	exportLastValue = text;
+																	exportLastValueEl.click();
+																	let f = {
+																		selected: () =>
+																			items
+																				.filter((i) => i.checked)
+																				.map((i) => i.id)
+																				.join("\n") + "\n",
+																		"10": () =>
+																			items
+																				.filter((_, i) => i < 10)
+																				.map((i) => i.id)
+																				.join("\n") + "\n",
+																		"100": () =>
+																			items
+																				.filter((_, i) => i < 100)
+																				.map((i) => i.id)
+																				.join("\n") + "\n",
+																		all: () => items.map((i) => i.id).join("\n") + "\n"
+																	}[value];
+																	window.navigator.clipboard.writeText((f || (() => ""))());
+																}}>{text}</button
+															>
 														</li>
 													{/each}
 												</ul>
 											</PopUnder>
-											<PopUnder class="w-min" popupPosition="left" bind:popUnderOpen={downloadDropdownOpen} popupClass="m-0 w-auto items-start z-[8]" animate={false}>
-												<button slot="clickable" class="border border-primary-border text-primary-text px-3 py-2 rounded-sm">
+											<PopUnder
+												class="w-min"
+												popupPosition="left"
+												bind:popUnderOpen={downloadDropdownOpen}
+												popupClass="m-0 w-auto items-start z-[8]"
+												animate={false}
+											>
+												<button
+													slot="clickable"
+													class="border border-primary-border text-primary-text px-3 py-2 rounded-sm"
+												>
 													<div class="flex items-center gap-2">
 														<span class="font-medium">Download</span>
 														<Icon name="arrow-down" class="size-[9px]"></Icon>
 													</div>
 												</button>
-												<ul class="bg-quaternary-surface py-2 border border-primary-border rounded-base shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]" slot="dropdown">
+												<ul
+													class="bg-quaternary-surface py-2 border border-primary-border rounded-base shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]"
+													slot="dropdown"
+												>
 													{#each [["selected", "selected"], ["10", "top 10"], ["100", "top 100"], ["all", "all files"]] as [value, text]}
 														<li class="">
-															<button class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start" on:click={() => {
-																downloadDropdownOpen = false;
-															}}>
+															<button
+																class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start"
+																on:click={() => {
+																	downloadDropdownOpen = false;
+																}}
+															>
 																{text}
 															</button>
 														</li>
 													{/each}
 												</ul>
 											</PopUnder>
-											<PopUnder timeout={1500} animate={true} parentClass="h-0 *:shrink *:min-h-0 *:h-0" popupClass="top-0">
+											<PopUnder
+												timeout={1500}
+												animate={true}
+												parentClass="h-0 *:shrink *:min-h-0 *:h-0"
+												popupClass="top-0"
+											>
 												<button bind:this={exportLastValueEl} slot="clickable" class="h-0"></button>
-												<div slot="dropdown" class="flex value-copied select-none bg-[#56AC30] text-white min-w-0 items-center rounded-[6px] gap-1 p-[8px] whitespace-nowrap text-nowrap">
+												<div
+													slot="dropdown"
+													class="flex value-copied select-none bg-[#56AC30] text-white min-w-0 items-center rounded-[6px] gap-1 p-[8px] whitespace-nowrap text-nowrap"
+												>
 													<Icon name="check-circle" class="size-[18px]"></Icon>
 													Exported {exportLastValue}&nbsp!
 												</div>
 											</PopUnder>
 										</div>
-										<div bind:this={tableScrollable} class="overflow-x-auto max-h-[100vh] overflow-y-auto --no-scroll-style max-w-full relative">
+										<div
+											bind:this={tableScrollable}
+											class="overflow-x-auto max-h-[100vh] overflow-y-auto --no-scroll-style max-w-full relative"
+										>
 											<table class="min-w-max w-full border-collapse">
-												<thead class="
+												<thead
+													class="
 													[&_th]:py-3 [&_th]:px-1 [&_th:first-child]:pl-5 [&_th:last-child]:pr-5 --[&_th_*]:min-h-[44px]
 													[&_th]:sticky [&_th]:top-0 [&_th]:bg-tbl-advanced-search-surface
-												">
+												"
+												>
 													<tr>
 														<th class="w-[20px] left-0 z-[5]">
 															<div class="flex flex-col">
@@ -824,44 +926,87 @@
 													</tr>
 												</thead>
 												<tbody>
+													{#if awaitingSearchResults}
+														<tr
+															class="[&_td]:align-top
+															[&_td]:pb-9 [&_td]:pt-5 [&_td]:px-2
+															[&_td:first-child]:pl-5 [&_td:last-child]:pr-5
+															[&_td]:bg-advanced-search-surface"
+														>
+															<td colspan="8" class="sticky top-[50%] left-0">
+																<div class="h-0 flex flex-col items-center justify-center">
+																	<div
+																		class="flex gap-1 items-center justify-center font-bold text-md text-tertiary-text"
+																	>
+																		<Icon
+																			name="loading"
+																			class="size-5 animate-spin origin-center text-primary-icn"
+																		></Icon>
+																		LOADING
+																	</div>
+																</div>
+															</td>
+														</tr>
+													{/if}
+
 													{#each items as el}
 														<!-- <div>{JSON.stringify(el)}</div> -->
-														<tr class="border-y border-line-surface first:border-t-0 last:border-b-0
+														<tr
+															class="border-y first:border-t-0 last:border-b-0
 															[&_td]:align-top
 															[&_td]:pb-9 [&_td]:pt-5 [&_td]:px-2
 															[&_td:first-child]:pl-5 [&_td:last-child]:pr-5
 															[&_td]:bg-advanced-search-surface
 															[&:hover_td]:bg-quaternary-hov2-surface
 															[&:hover_.control]:visible
-															">
+															{awaitingSearchResults ? '[&_td]:invisible border-transparent' : 'border-line-surface'}
+															"
+														>
 															<td class="w-[20px] sticky left-0 z-[4]">
 																<div class="flex flex-col">
-																	<CheckBox on:change={onCheck} bind:checked={el.checked}></CheckBox>
+																	<CheckBox on:change={onCheck} bind:checked={el.checked}
+																	></CheckBox>
 																</div>
 															</td>
 															<td>
 																<div class="flex flex-col gap-2">
 																	<div class="flex gap-2">
-																		<a href="/files/{el.id}/summary?behavior_id=" class="max-w-[max(40vw,300px)] text-ellipsis overflow-hidden break-keep font-semibold"
+																		<a
+																			href="/files/{el.id}/summary?behavior_id="
+																			class="max-w-[max(40vw,300px)] text-ellipsis overflow-hidden break-keep font-semibold"
 																			on:click={(e) => {
 																				e.preventDefault();
-																				iframeSrc = new URL(`/files/${el.id}/summary?behavior_id=&strip`, location.href).href;
-																			}}>
+																				iframeSrc = new URL(
+																					`/files/${el.id}/summary?behavior_id=&strip`,
+																					location.href
+																				).href;
+																			}}
+																		>
 																			{el.id}
 																		</a>
 																		<div class="flex gap-1">
 																			<PopUnder popupPosition="left" timeout={1000} class="">
-																				<button on:click={() => window.navigator.clipboard.writeText(el.id ?? "")} slot="clickable" class="control invisible text-brand-text border-none size-5 flex justify-center items-center">
+																				<button
+																					on:click={() =>
+																						window.navigator.clipboard.writeText(el.id ?? "")}
+																					slot="clickable"
+																					class="control invisible text-brand-text border-none size-5 flex justify-center items-center"
+																				>
 																					<Icon class="size-[18px]" name="content-copy"></Icon>
 																				</button>
-																				<div slot="dropdown" class="flex value-copied select-none bg-[#56AC30] text-white min-w-0 items-center rounded-[6px] gap-1 p-[10px] whitespace-nowrap text-nowrap">
+																				<div
+																					slot="dropdown"
+																					class="flex value-copied select-none bg-[#56AC30] text-white min-w-0 items-center rounded-[6px] gap-1 p-[10px] whitespace-nowrap text-nowrap"
+																				>
 																					<Icon name="check-circle"></Icon>
 																					Hash copied&nbsp!
 																				</div>
 																			</PopUnder>
-																			<a href="/api/files/{el.id}/download/" class="control invisible text-brand-text border-none p-0.5" 
+																			<a
+																				href="/api/files/{el.id}/download/"
+																				class="control invisible text-brand-text border-none p-0.5"
 																			>
-																			<!-- on:click={(e) => {
+																				<!-- on:click={(e) => {
 																				// e.preventDefault();
 																				// window.fetch(`${env.PUBLIC_API_URL}files/${el.id}/download/`, {
 																				// 	headers: {
@@ -883,7 +1028,11 @@
 																			</a>
 																		</div>
 																	</div>
-																	<div class="flex pb-0.5 gap-1 {el.id === el.name ? "text-secondary-text" : ""}">
+																	<div
+																		class="flex pb-0.5 gap-1 {el.id === el.name
+																			? 'text-secondary-text'
+																			: ''}"
+																	>
 																		<Icon name="file" class="size-[17px]"></Icon>
 																		{el.id === el.name ? "Not relevant" : el.name}
 																	</div>
@@ -921,28 +1070,43 @@
 															{#if true}
 																{@const tm =
 																	// @ts-ignore
-																	(s) =>
-																		s ? timestampToFormattedDate(s).split(" ") : ["?", ""]}
+																	(s) => (s ? timestampToFormattedDate(s).split(" ") : ["?", ""])}
 																{@const fs = tm(el.first_seen)}
 																{@const ls = tm(el.last_scanned)}
 																<td>{fs[0]}<br />{fs[1]}</td>
 																<td>{ls[0]}<br />{ls[1]}</td>
-																<td>{typeof el.size === "number" ? convertBytes(el.size) : "?B"}</td>
-																<td class="uppercase">{el.file_format ?? "?"}/{el.file_extension ?? "?"}</td>
+																<td>{typeof el.size === "number" ? convertBytes(el.size) : "?B"}</td
+																>
+																<td class="uppercase"
+																	>{el.file_format ?? "?"}/{el.file_extension ?? "?"}</td
+																>
 															{/if}
 														</tr>
 													{/each}
+													<!-- {/if} -->
 												</tbody>
 											</table>
-											<div class="sticky z-[8] bottom-[-1px] left-0 w-full flex justify-between p-5 bg-advanced-search-surface border-t border-t-line-surface">
-												<PaginationPerPageSelect bind:current={perPage} max={Math.min(pages.total_count || 100, 100)}></PaginationPerPageSelect>
-												<PaginationButtons bind:currentPage={page} totalPages={pages.page_count || 1}></PaginationButtons>
+											<div
+												class="sticky z-[8] bottom-[-1px] left-0 w-full flex justify-between p-5 bg-advanced-search-surface border-t border-t-line-surface"
+											>
+												<PaginationPerPageSelect
+													bind:current={perPage}
+													max={Math.min(pages.total_count || 100, 100)}
+												></PaginationPerPageSelect>
+												<PaginationButtons
+													bind:currentPage={page}
+													totalPages={pages.page_count || 1}
+												></PaginationButtons>
 											</div>
 										</div>
 									</div>
+								{:else if currentSearch !== lastSearch}
+									<div class="py-8 text-center text-secondary-text">Searching...</div>
 								{:else}
 									<div class="py-8 text-center text-secondary-text">No results found.</div>
 								{/if}
+							{:else if awaitingSearchResults}
+								<div class="py-8 text-center text-secondary-text">Searching...</div>
 							{:else if pagesError}
 								<div class="py-8 text-center text-alert-red">Error: {pagesError}</div>
 							{/if}
