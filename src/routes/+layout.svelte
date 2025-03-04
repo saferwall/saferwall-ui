@@ -2,7 +2,7 @@
 	import "../app.css";
 	import "$lib/styles/vars.css";
 	import NProgress from "nprogress";
-	import { navigating } from "$app/stores";
+	import { navigating, page } from "$app/stores";
 	import { onMount, setContext } from "svelte";
 	import { browser } from "$app/environment";
 	import { isLight, parseTheme, Theme, theme } from "$lib/stores/theme";
@@ -22,7 +22,7 @@
 	});
 
 	$: {
-		if ($navigating) {
+		if ($navigating && !$navigating.to?.url.pathname.startsWith("/api/files/download")) {
 			NProgress.start();
 		}
 		if (!$navigating) {

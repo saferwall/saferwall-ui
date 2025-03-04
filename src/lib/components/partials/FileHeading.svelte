@@ -19,7 +19,7 @@
 	export let loggedIn = false;
 	export let activeMenu: Menu.File;
 
-	$: downloadLink = `${env.PUBLIC_API_URL}files/${hash}/download/`;
+	$: downloadLink = `/api/files/download/${hash}`;
 	$: shareTwitterLink = `https://twitter.com/intent/tweet?text=https://saferwall.com/files/${hash}/${activeMenu.path}`;
 
 	let rescaning = false;
@@ -59,7 +59,9 @@
 					<span class="hidden lg:block pl-2">Export API Logs</span>
 				</Button>
 			{/if}
-			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" size="lg" loading={downloadLoading} icon="download" href={downloadLink} on:click={(e) => {
+			<Button class="bg-secondary-surface hover:bg-brand-CF-light-surface hover:text-brand-light-text" size="lg" loading={downloadLoading} icon="download" href={downloadLink}
+			>
+			<!-- on:click={(e) => {
 				e.preventDefault();
 				downloadLoading = true;
 				if (!client.authorization) {
@@ -84,7 +86,7 @@
 					let file = URL.createObjectURL(blob);
 					location.assign(file);
 				});
-			}}>
+			}} -->
 				<span class="hidden lg:block pl-2">Download file</span>
 			</Button>
 			<Button

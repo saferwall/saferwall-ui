@@ -24,6 +24,93 @@
 	import PaginationButtons from "./PaginationButtons.svelte";
 	import PaginationPerPageSelect from "./PaginationPerPageSelect.svelte";
 	import debounce from "debounce";
+	import { onDestroy } from "svelte";
+	import Lenis from "lenis";
+	import 'lenis/dist/lenis.css'
+
+	// let mainScrollable: HTMLElement;
+	// let tableScrollable: HTMLElement;
+	let lenis: Lenis;
+
+	// Track which element is currently being scrolled
+	let activeScrollElement = "parent";
+
+	onMount(() => {
+		// Initialize Lenis with settings to mimic native scrolling
+		// console.log("wtf?");
+		lenis = new Lenis({
+			wrapper: mainScrollable,
+			duration: 0, // No animation duration for instant response
+			smoothWheel: false, // Disable smooth scrolling on mouse wheel
+			infinite: false, // No infinite scrolling
+			gestureOrientation: "vertical", // Vertical scrolling only
+			wheelMultiplier: 1, // Standard wheel multiplier
+			lerp: 0 // No linear interpolation (instant movement)
+		});
+
+		// Set up main render loop
+		function raf(time: number) {
+			lenis.raf(time);
+			requestAnimationFrame(raf);
+		}
+		requestAnimationFrame(raf);
+
+		// Custom scroll logic for transition
+		lenis.on("scroll", ({ scroll, limit, direction }) => {
+			// When parent is active
+			console.log({scroll});
+			if (activeScrollElement === "parent") {
+				// If we're at the bottom of the parent, start scrolling the child
+				if (Math.abs(scroll - limit) < 1) {
+					activeScrollElement = "child";
+					lenis.stop();
+
+					// Re-initialize lenis for the child element with native-like settings
+					lenis = new Lenis({
+						wrapper: tableScrollable,
+						content: tableScrollable,
+						duration: 0,
+						smoothWheel: false,
+						infinite: false,
+						gestureOrientation: "vertical",
+						wheelMultiplier: 1,
+						lerp: 0
+					});
+
+					// Set up the scroll event for child
+					lenis.on("scroll", handleChildScroll);
+					requestAnimationFrame(raf);
+				}
+			}
+		});
+
+		// Handle child scroll logic
+		function handleChildScroll({ scroll, direction }: { scroll: number, direction: number }) {
+			// If at the top of child scrolling up, switch back to parent
+			if (scroll <= 0 && direction === -1) {
+				activeScrollElement = "parent";
+				lenis.stop();
+
+				// Re-initialize lenis for parent element with native-like settings
+				lenis = new Lenis({
+					duration: 0,
+					smoothWheel: false,
+					infinite: false,
+					gestureOrientation: "vertical",
+					wheelMultiplier: 1,
+					lerp: 0
+				});
+
+				requestAnimationFrame(raf);
+			}
+		}
+	});
+
+	onDestroy(() => {
+		if (lenis) {
+			lenis.destroy();
+		}
+	});
 
 	export let advanced: boolean;
 	export let session: Saferwall.Session;
@@ -1003,27 +1090,9 @@
 																				</div>
 																			</PopUnder>
 																			<a
-																				href="/api/files/{el.id}/download/"
+																				href="/api/files/download/{el.id}"
 																				class="control invisible text-brand-text border-none p-0.5"
 																			>
-																				<!-- on:click={(e) => {
-																				// e.preventDefault();
-																				// window.fetch(`${env.PUBLIC_API_URL}files/${el.id}/download/`, {
-																				// 	headers: {
-																				// 		"Authorization": `Bearer ${session.token}`,
-																				// 		"Content-Type": "application/json"
-																				// 	}
-																				// }).then(res => {
-																				// 	if (res.status === 401) {
-																				// 		return;
-																				// 	}
-																				// 	return res.blob()
-																				// }).then(blob => {
-																				// 	if (!blob) return;
-																				// 	let file = URL.createObjectURL(blob);
-																				// 	location.assign(file);
-																				// });
-																			}} -->
 																				<Icon class="size-4" name="download-2"></Icon>
 																			</a>
 																		</div>

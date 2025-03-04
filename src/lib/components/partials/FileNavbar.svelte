@@ -4,6 +4,7 @@
 	import type { SaferwallClient } from '$lib/clients/saferwall';
 	import UploadBox from '../UploadBox.svelte';
 	import { getContext } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let client: SaferwallClient;
 	export let loggedIn = false;
@@ -27,7 +28,7 @@
 		<ul class="file__navbar__menu flex w-full space-x-3">
 			{#if !strip}
 				<li class="file__navbar__item flex-grow inline-flex ">
-					{#if loggedIn}
+					<!-- {#if loggedIn}
 						<button
 							class="file__navbar__link upload-file
 								text-brand			hover:text-brand-light-text
@@ -44,20 +45,30 @@
 							</svg>
 							<span>Upload file</span>
 						</button>
-					{:else}
-						<a
-							class="file__navbar__link
+					{:else} -->
+						<button
+							class="file__navbar__link upload-file
 								text-brand			hover:text-brand-light-text
 								bg-brand-CF-surface	hover:bg-brand-CF-lighter-surface
 								"
-							href="/auth/login?redir={encodeURIComponent($page.url.pathname)}"
+							role={loggedIn ? "button" : "link"}
+							on:click={(e) => {
+								if (loggedIn) {
+									e.preventDefault();
+									if (!uploadOpen)
+										window.scrollTo({top: 0});
+									uploadOpen = !uploadOpen;
+								} else {
+									goto(`/auth/login?redir=${encodeURIComponent($page.url.pathname)}`);
+								}
+							}}
 						>
 							<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5">
 								<use href="/images/icons.svg#icon-cloud" />
 							</svg>
 							<span>Upload file</span>
-						</a>
-					{/if}
+						</button>
+					<!-- {/if} -->
 				</li>
 			{/if}
 			{#each activeFileMenu as item}

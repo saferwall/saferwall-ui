@@ -9,7 +9,9 @@
 	let loading = false;
 	let error: string = '';
 	let errors: Record<string, boolean> = {};
+
 	let id = $page.url.searchParams.get("id") || ""
+	let password = "";
 
 	const handleFormSubmit: SubmitFunction = () => {
 		error = '';
@@ -48,7 +50,7 @@
 		<Alert type="error" on:close={() => (error = '')}>{error}</Alert>
 	{/if}
 	<div class="space-y-4 ">
-		<Input class="border-primary-border placeholder:text-secondary-text" label="Username or Email" name="username" error={errors.username} disabled={loading} value={id}/>
+		<Input class="border-primary-border placeholder:text-secondary-text" label="Username or Email" name="username" error={errors.username} disabled={loading} bind:value={id}/>
 		<Input class="border-primary-border placeholder:text-secondary-text"
 			label="Password"
 			type="password"
@@ -56,6 +58,7 @@
 			name="password"
 			error={errors.password}
 			disabled={loading}
+			bind:value={password}
 		/>
 	</div>
 	<a href="/auth/forgot-password" class="self-end border-l-pink-50">Forgot password?</a>
