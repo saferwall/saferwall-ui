@@ -1,9 +1,9 @@
 ################################
 # STEP 1 build
 ################################
-FROM node:16-alpine AS builder
+FROM node:22.14.0-alpine AS builder
 
-# Make the 'app' folder the current working directory.
+# Make the 'app' folder the current working directory
 WORKDIR /app
 
 # Copy both 'package.json' and 'package-lock.json' (if available)
@@ -22,9 +22,9 @@ RUN npm run build
 ############################
 # STEP 2 create a small image
 ############################
-FROM node:16-alpine
+FROM node:22.14.0-alpine
 LABEL maintainer="https://github.com/saferwall"
-LABEL version="0.5.0"
+LABEL version=1.0.0
 LABEL description="Saferwall UI"
 
 # Make the 'app' folder the current working directory.
@@ -39,4 +39,4 @@ EXPOSE 3000
 
 ENV NODE_ENV=production
 
-CMD [ "node", "build" ]
+CMD [ "npm", "run", "build" ]

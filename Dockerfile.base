@@ -3,7 +3,7 @@
 ################################
 FROM node:${NODE_VERSION}-alpine AS builder
 
-# Make the 'app' folder the current working directory.
+# Make the 'app' folder the current working directory
 WORKDIR /app
 
 # Copy both 'package.json' and 'package-lock.json' (if available)
