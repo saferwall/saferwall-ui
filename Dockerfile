@@ -34,8 +34,9 @@ LABEL description="Saferwall UI"
 WORKDIR /app
 
 # Copy the artifacts from the build stage.
-COPY --from=builder /app/build build/
+COPY --from=builder /app/.svelte-kit .svelte-kit/
 COPY --from=builder /app/node_modules node_modules/
+COPY vite.config.ts .
 COPY package.json .
 
 EXPOSE 3000
