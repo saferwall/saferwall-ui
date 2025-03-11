@@ -19,6 +19,9 @@ export default defineConfig(({ mode }) => {
 				"svelte-codemirror-editor",
 			]
 		},
+		preview: {
+			port: 3000,
+		}
 	};
 	if (mode === "development") {
 		ret = {
