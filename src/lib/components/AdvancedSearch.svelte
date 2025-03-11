@@ -118,8 +118,8 @@
 	const api = new FileApi(new Configuration({ accessToken: session.token }));
 
 	let search = "";
-	let currentSearch = "";
-	let lastSearch = "";
+	let currentSearch = search;
+	let lastSearch = search;
 	let searchEditHistory = [search];
 	let searchEditHistoryIndex = 0;
 	function searchEditHistoryPush(...newValues: string[]) {
@@ -170,7 +170,7 @@
 	};
 
 	function submit() {
-		if (currentSearch) {
+		if (currentSearch && inputEl) {
 			console.log("submitted");
 			console.log({ currentSearch });
 			inputEl.blur();
@@ -577,7 +577,9 @@
 	let iframeSrc = "";
 	let iframeTitle = "";
 	let mainScrollable: HTMLDivElement;
+	let mainContent: HTMLDivElement;
 	let tableScrollable: HTMLDivElement;
+	let tableContent: HTMLDivElement;
 	// function transferScrollFocus(parentElement: HTMLElement, childElement: HTMLElement) {
 	// 	// Store the current scroll position of the parent
 	// 	const parentScrollTop = parentElement.scrollTop;
@@ -711,7 +713,7 @@
 	id="advanced_search"
 	class:advanced
 	bind:this={mainScrollable}
-	class="fixed bg-advanced-search-surface top-0 w-full h-0 invisible [&.advanced]:visible [&.advanced]:h-[100vh] z-[40] flex flex-col items-stretch gap-2 {iframeSrc
+	class="fixed bg-advanced-search-surface top-0 w-full h-0 invisible [&.advanced]:visible [&.advanced]:h-[100vh] z-[40] {iframeSrc
 		? 'overflow-y-hidden'
 		: 'overflow-y-auto'} no-scroll-style"
 	on:wheel|nonpassive={onScrollWheel}
@@ -991,7 +993,7 @@
 											bind:this={tableScrollable}
 											class="overflow-x-auto max-h-[100vh] overflow-y-auto --no-scroll-style max-w-full relative"
 										>
-											<table class="min-w-max w-full border-collapse">
+											<table bind:this={tableContent} class="min-w-max w-full border-collapse">
 												<thead
 													class="
 													[&_th]:py-3 [&_th]:px-1 [&_th:first-child]:pl-5 [&_th:last-child]:pr-5 --[&_th_*]:min-h-[44px]
