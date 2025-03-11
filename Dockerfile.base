@@ -1,7 +1,7 @@
 ################################
 # STEP 1 build
 ################################
-FROM node:22.14.0-alpine AS builder
+FROM node:${NODE_VERSION}-alpine AS builder
 
 # Make the 'app' folder the current working directory
 WORKDIR /app
@@ -22,9 +22,9 @@ RUN npm run build
 ############################
 # STEP 2 create a small image
 ############################
-FROM node:22.14.0-alpine
+FROM node:${NODE_VERSION}-alpine
 LABEL maintainer="https://github.com/saferwall"
-LABEL version=1.0.0
+LABEL version=${PACKAGE_VERSION}
 LABEL description="Saferwall UI"
 
 # Make the 'app' folder the current working directory.
