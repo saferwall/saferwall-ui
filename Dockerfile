@@ -16,6 +16,9 @@ COPY . .
 
 ENV NODE_ADAPTER=true
 
+# Copy .env
+COPY .env.example .env
+
 # Build the app.
 RUN npm run build
 
