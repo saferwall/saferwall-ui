@@ -42,5 +42,6 @@ COPY package.json .
 EXPOSE 3000
 
 ENV NODE_ENV=production
+ENV NODE_OPTIONS=--network-family-autoselection-attempt-timeout=2000
 
-CMD [ "NODE_OPTIONS='--network-family-autoselection-attempt-timeout=2000'", "npm", "run", "preview" ]
+CMD [ "npm", "run", "preview" ]
