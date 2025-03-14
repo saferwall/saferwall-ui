@@ -6,9 +6,10 @@
 
 	let perPageString = current.toString();
 
-	$: console.log({perPages, max})
-	$: perPages = [5, 10, 20, 40, 50, 100, 300].filter((p) => p <= Math.max(5, max));
-	$: current = perPages.find(n => n >= Math.max(5, Math.min(max, current)))!
+	// $: console.log({perPages, max})
+	$: perPages = [5, 10, 20, 40, 50, 100, 300]
+	// .filter((p) => p <= Math.max(5, max));
+	// $: current = perPages.find(n => n >= Math.max(5, Math.min(max, current)))!
 	$: perPageString, toInt();
 	$: current, toString();
 	function toString() {
@@ -19,7 +20,7 @@
 		
 		current = parseInt(perPageString);
 	}
-	$: console.log({current, perPageString});
+	// $: console.log({current, perPageString});
 </script>
 
 <Select

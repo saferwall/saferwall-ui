@@ -24,15 +24,102 @@
 	import PaginationButtons from "./PaginationButtons.svelte";
 	import PaginationPerPageSelect from "./PaginationPerPageSelect.svelte";
 	import debounce from "debounce";
+	import { onDestroy } from "svelte";
+	import Lenis from "lenis";
+	import 'lenis/dist/lenis.css'
+
+	// let mainScrollable: HTMLElement;
+	// let tableScrollable: HTMLElement;
+	let lenis: Lenis;
+
+	// Track which element is currently being scrolled
+	let activeScrollElement = "parent";
+
+	// onMount(() => {
+	// 	// Initialize Lenis with settings to mimic native scrolling
+	// 	// console.log("wtf?");
+	// 	lenis = new Lenis({
+	// 		wrapper: mainScrollable,
+	// 		duration: 0, // No animation duration for instant response
+	// 		smoothWheel: false, // Disable smooth scrolling on mouse wheel
+	// 		infinite: false, // No infinite scrolling
+	// 		gestureOrientation: "vertical", // Vertical scrolling only
+	// 		wheelMultiplier: 1, // Standard wheel multiplier
+	// 		lerp: 0 // No linear interpolation (instant movement)
+	// 	});
+
+	// 	// Set up main render loop
+	// 	function raf(time: number) {
+	// 		lenis.raf(time);
+	// 		requestAnimationFrame(raf);
+	// 	}
+	// 	requestAnimationFrame(raf);
+
+	// 	// Custom scroll logic for transition
+	// 	lenis.on("scroll", ({ scroll, limit, direction }) => {
+	// 		// When parent is active
+	// 		console.log({scroll});
+	// 		if (activeScrollElement === "parent") {
+	// 			// If we're at the bottom of the parent, start scrolling the child
+	// 			if (Math.abs(scroll - limit) < 1) {
+	// 				activeScrollElement = "child";
+	// 				lenis.stop();
+
+	// 				// Re-initialize lenis for the child element with native-like settings
+	// 				lenis = new Lenis({
+	// 					wrapper: tableScrollable,
+	// 					content: tableScrollable,
+	// 					duration: 0,
+	// 					smoothWheel: false,
+	// 					infinite: false,
+	// 					gestureOrientation: "vertical",
+	// 					wheelMultiplier: 1,
+	// 					lerp: 0
+	// 				});
+
+	// 				// Set up the scroll event for child
+	// 				lenis.on("scroll", handleChildScroll);
+	// 				requestAnimationFrame(raf);
+	// 			}
+	// 		}
+	// 	});
+
+	// 	// Handle child scroll logic
+	// 	function handleChildScroll({ scroll, direction }: { scroll: number, direction: number }) {
+	// 		// If at the top of child scrolling up, switch back to parent
+	// 		if (scroll <= 0 && direction === -1) {
+	// 			activeScrollElement = "parent";
+	// 			lenis.stop();
+
+	// 			// Re-initialize lenis for parent element with native-like settings
+	// 			lenis = new Lenis({
+	// 				duration: 0,
+	// 				smoothWheel: false,
+	// 				infinite: false,
+	// 				gestureOrientation: "vertical",
+	// 				wheelMultiplier: 1,
+	// 				lerp: 0
+	// 			});
+
+	// 			requestAnimationFrame(raf);
+	// 		}
+	// 	}
+	// });
+
+	// onDestroy(() => {
+	// 	if (lenis) {
+	// 		lenis.destroy();
+	// 	}
+	// });
 
 	export let advanced: boolean;
 	export let session: Saferwall.Session;
 
 	const api = new FileApi(new Configuration({ accessToken: session.token }));
 
-	let search = "";
-	let currentSearch = "";
-	let lastSearch = "";
+	let search = "size>0";
+	let currentSearch = search;
+	let lastSearch = search;
 	let searchEditHistory = [search];
 	let searchEditHistoryIndex = 0;
 	function searchEditHistoryPush(...newValues: string[]) {
@@ -83,15 +170,18 @@
 	};
 
 	function submit() {
-		if (currentSearch) {
-			console.log("submitted");
-			console.log({ currentSearch });
+		if (currentSearch && inputEl) {
+			// console.log("submitted");
+			// console.log({ currentSearch });
 			inputEl.blur();
 			inputEl.disabled = true;
 			awaitingSearchResults = true;
 			api
 				.filesSearchPost(perPage, page, {
-					data: { query: currentSearch }
+					data: {
+						query: currentSearch,
+						...(sortBy ? { sort_by: sortBy, order: isSortDirectionDescending ? "desc" : "asc" } : {})
+					}
 				})
 				.finally(() => {
 					inputEl.disabled = false;
@@ -414,12 +504,12 @@
 			ro.disconnect();
 		};
 	});
-	function resetSearch() {
-		search = "";
-		searchEditHistory = [search];
-		searchEditHistoryIndex = 0;
-		pages = undefined;
-	}
+	// function resetSearch() {
+	// 	search = "";
+	// 	searchEditHistory = [search];
+	// 	searchEditHistoryIndex = 0;
+	// 	pages = undefined;
+	// }
 	let awaitingSuggestions = false;
 	let awaitingSearchResults = false;
 	$: inputPlaceholder = suggestion
@@ -443,7 +533,7 @@
 					sug = data as DeepRequired<FileFileSearchAutocomplete>;
 				})
 				.finally(() => (awaitingSuggestions = false));
-			resetSearch();
+			// resetSearch();
 		}
 	}
 	let lastSuggestionIndexFocused = 0;
@@ -490,7 +580,9 @@
 	let iframeSrc = "";
 	let iframeTitle = "";
 	let mainScrollable: HTMLDivElement;
+	let mainContent: HTMLDivElement;
 	let tableScrollable: HTMLDivElement;
+	let tableContent: HTMLDivElement;
 	// function transferScrollFocus(parentElement: HTMLElement, childElement: HTMLElement) {
 	// 	// Store the current scroll position of the parent
 	// 	const parentScrollTop = parentElement.scrollTop;
@@ -612,8 +704,12 @@
 		// 	console.log(evt.type);
 		// });
 	});
-	$: perPage, page, debounced();
+	$: currentSearch, (sortBy = undefined), (isSortDirectionDescending = true);
+	$: isSortDirectionDescending, sortBy, perPage, page, debounced();
 	$: currentSearch, submit();
+
+	let sortBy: string | undefined;
+	let isSortDirectionDescending = true;
 </script>
 
 {#if advanced}
@@ -624,7 +720,7 @@
 	id="advanced_search"
 	class:advanced
 	bind:this={mainScrollable}
-	class="fixed bg-advanced-search-surface top-0 w-full h-0 invisible [&.advanced]:visible [&.advanced]:h-[100vh] z-[40] flex flex-col items-stretch gap-2 {iframeSrc
+	class="fixed bg-advanced-search-surface top-0 w-full h-0 invisible [&.advanced]:visible [&.advanced]:h-[100vh] z-[40] {iframeSrc
 		? 'overflow-y-hidden'
 		: 'overflow-y-auto'} no-scroll-style"
 	on:wheel|nonpassive={onScrollWheel}
@@ -796,131 +892,158 @@
 							{#if pages}
 								{#if items.length && (!awaitingSearchResults || currentSearch === lastSearch)}
 									<div class="max-w-full pt-5 flex flex-col items-stretch gap-5">
-										<div class="flex px-5 gap-2">
-											<PopUnder
-												class="w-min"
-												popupPosition="left"
-												bind:popUnderOpen={exportDropdownOpen}
-												popupClass="m-0 w-auto items-start z-[8]"
-												animate={false}
-											>
-												<button
-													slot="clickable"
-													class="border border-primary-border text-primary-text px-3 py-2 rounded-sm"
+										<div class="flex items-center justify-between px-5">
+											<div class="flex gap-2">
+												<PopUnder
+													class="w-min"
+													popupPosition="left"
+													bind:popUnderOpen={exportDropdownOpen}
+													popupClass="m-0 w-auto items-start z-[8]"
+													animate={false}
 												>
-													<div class="flex items-center gap-2">
-														<span class="font-medium">Export</span>
-														<Icon name="arrow-down" class="size-[9px]"></Icon>
+													<button
+														slot="clickable"
+														class="border border-primary-border text-primary-text px-3 py-2 rounded-sm"
+													>
+														<div class="flex items-center gap-2">
+															<span class="font-medium">Export</span>
+															<Icon name="arrow-down" class="size-[9px]"></Icon>
+														</div>
+													</button>
+													<ul
+														class="bg-quaternary-surface py-2 border border-primary-border rounded-base shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]"
+														slot="dropdown"
+													>
+														{#each [["selected", "selected"], ["10", "top 10"], ["100", "top 100"], ["all", "all files"]] as [value, text]}
+															<li class="">
+																<button
+																	class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start"
+																	on:click={() => {
+																		exportDropdownOpen = false;
+																		exportLastValue = text;
+																		exportLastValueEl.click();
+																		let f = {
+																			selected: () =>
+																				items
+																					.filter((i) => i.checked)
+																					.map((i) => i.id)
+																					.join("\n") + "\n",
+																			"10": () =>
+																				items
+																					.filter((_, i) => i < 10)
+																					.map((i) => i.id)
+																					.join("\n") + "\n",
+																			"100": () =>
+																				items
+																					.filter((_, i) => i < 100)
+																					.map((i) => i.id)
+																					.join("\n") + "\n",
+																			all: () => items.map((i) => i.id).join("\n") + "\n"
+																		}[value];
+																		window.navigator.clipboard.writeText((f || (() => ""))());
+																	}}>{text}</button
+																>
+															</li>
+														{/each}
+													</ul>
+												</PopUnder>
+												<PopUnder
+													class="w-min"
+													popupPosition="left"
+													bind:popUnderOpen={downloadDropdownOpen}
+													popupClass="m-0 w-auto items-start z-[8]"
+													animate={false}
+												>
+													<button
+														slot="clickable"
+														class="border border-primary-border text-primary-text px-3 py-2 rounded-sm"
+													>
+														<div class="flex items-center gap-2">
+															<span class="font-medium">Download</span>
+															<Icon name="arrow-down" class="size-[9px]"></Icon>
+														</div>
+													</button>
+													<ul
+														class="bg-quaternary-surface py-2 border border-primary-border rounded-base shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]"
+														slot="dropdown"
+													>
+														{#each [["selected", "selected"], ["10", "top 10"], ["100", "top 100"], ["all", "all files"]] as [value, text]}
+															<li class="">
+																<button
+																	class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start"
+																	on:click={() => {
+																		downloadDropdownOpen = false;
+																	}}
+																>
+																	{text}
+																</button>
+															</li>
+														{/each}
+													</ul>
+												</PopUnder>
+												<PopUnder
+													timeout={1500}
+													animate={true}
+													parentClass="h-0 *:shrink *:min-h-0 *:h-0"
+													popupClass="top-0"
+												>
+													<button bind:this={exportLastValueEl} slot="clickable" class="h-0"></button>
+													<div
+														slot="dropdown"
+														class="flex value-copied select-none bg-[#56AC30] text-white min-w-0 items-center rounded-[6px] gap-1 p-[8px] whitespace-nowrap text-nowrap"
+													>
+														<Icon name="check-circle" class="size-[18px]"></Icon>
+														Exported {exportLastValue}&nbsp!
 													</div>
-												</button>
-												<ul
-													class="bg-quaternary-surface py-2 border border-primary-border rounded-base shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]"
-													slot="dropdown"
-												>
-													{#each [["selected", "selected"], ["10", "top 10"], ["100", "top 100"], ["all", "all files"]] as [value, text]}
-														<li class="">
-															<button
-																class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start"
-																on:click={() => {
-																	exportDropdownOpen = false;
-																	exportLastValue = text;
-																	exportLastValueEl.click();
-																	let f = {
-																		selected: () =>
-																			items
-																				.filter((i) => i.checked)
-																				.map((i) => i.id)
-																				.join("\n") + "\n",
-																		"10": () =>
-																			items
-																				.filter((_, i) => i < 10)
-																				.map((i) => i.id)
-																				.join("\n") + "\n",
-																		"100": () =>
-																			items
-																				.filter((_, i) => i < 100)
-																				.map((i) => i.id)
-																				.join("\n") + "\n",
-																		all: () => items.map((i) => i.id).join("\n") + "\n"
-																	}[value];
-																	window.navigator.clipboard.writeText((f || (() => ""))());
-																}}>{text}</button
-															>
-														</li>
-													{/each}
-												</ul>
-											</PopUnder>
-											<PopUnder
-												class="w-min"
-												popupPosition="left"
-												bind:popUnderOpen={downloadDropdownOpen}
-												popupClass="m-0 w-auto items-start z-[8]"
-												animate={false}
-											>
-												<button
-													slot="clickable"
-													class="border border-primary-border text-primary-text px-3 py-2 rounded-sm"
-												>
-													<div class="flex items-center gap-2">
-														<span class="font-medium">Download</span>
-														<Icon name="arrow-down" class="size-[9px]"></Icon>
-													</div>
-												</button>
-												<ul
-													class="bg-quaternary-surface py-2 border border-primary-border rounded-base shadow-[0px_1px_9px_0px_rgba(0,_0,_0,_0.25)]"
-													slot="dropdown"
-												>
-													{#each [["selected", "selected"], ["10", "top 10"], ["100", "top 100"], ["all", "all files"]] as [value, text]}
-														<li class="">
-															<button
-																class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start"
-																on:click={() => {
-																	downloadDropdownOpen = false;
-																}}
-															>
-																{text}
-															</button>
-														</li>
-													{/each}
-												</ul>
-											</PopUnder>
-											<PopUnder
-												timeout={1500}
-												animate={true}
-												parentClass="h-0 *:shrink *:min-h-0 *:h-0"
-												popupClass="top-0"
-											>
-												<button bind:this={exportLastValueEl} slot="clickable" class="h-0"></button>
-												<div
-													slot="dropdown"
-													class="flex value-copied select-none bg-[#56AC30] text-white min-w-0 items-center rounded-[6px] gap-1 p-[8px] whitespace-nowrap text-nowrap"
-												>
-													<Icon name="check-circle" class="size-[18px]"></Icon>
-													Exported {exportLastValue}&nbsp!
-												</div>
-											</PopUnder>
+												</PopUnder>
+											</div>
+											<div class="text-secondary-text font-bold uppercase">{(pages.total_count || 0).toLocaleString()} result{(pages.total_count || 0) > 1 ? "s" : ""}</div>
 										</div>
 										<div
 											bind:this={tableScrollable}
 											class="overflow-x-auto max-h-[100vh] overflow-y-auto --no-scroll-style max-w-full relative"
 										>
-											<table class="min-w-max w-full border-collapse">
+											<table bind:this={tableContent} class="min-w-max w-full border-collapse">
 												<thead
 													class="
-													[&_th]:py-3 [&_th]:px-1 [&_th:first-child]:pl-5 [&_th:last-child]:pr-5 --[&_th_*]:min-h-[44px]
-													[&_th]:sticky [&_th]:top-0 [&_th]:bg-tbl-advanced-search-surface
+													 --[&_th_*]:min-h-[44px]
+													[&_th]:top-0 [&_th]:bg-tbl-advanced-search-surface
 												"
 												>
 													<tr>
-														<th class="w-[20px] left-0 z-[5]">
+														<th colspan="8" class="sticky left-0 top-0 py-0 px-0">
+															<div class="h-[0px] overflow-visible flex w-full">
+																<div class="h-[44px] min-h-[44px] grow px-1 py-3 bg-tbl-advanced-search-surface"></div>
+															</div>
+														</th>
+													</tr>
+													<tr class="[&_th]:sticky [&_th]:py-3 [&_th:first-child]:pl-5 [&_th:last-child]:pr-5">
+														<th class="w-[20px] left-0 z-[5] px-1">
 															<div class="flex flex-col">
 																<CheckBox on:change={onCheckAll} bind:checked={checkAll}></CheckBox>
 															</div>
 														</th>
-														{#each ["sha256", "classification", "multiav", "first seen", "last scanned", "size", "type"] as thText}
+														{#each [["sha256"], ["classification"], ["multiav"], ["first seen"], ["last scanned"], ["size"], ["type"]] as [thText, key]}
+															{@const realKey = (key || thText).replace(" ", "_")}
 															<th
-																class="z-[2] uppercase text-tertiary-text font-semibold text-xs"
-																align="left">{thText}</th
+																class="z-[2] uppercase text-tertiary-text font-semibold text-xs px-1 pr-4"
+																align="left">
+																<div class="flex gap-2 items-center">
+																	<span class="leading-[1]">
+																		{thText}
+																	</span>
+																	<button on:click={() => {
+																		let nv = realKey;
+																		let oldv = sortBy;
+																		sortBy = !isSortDirectionDescending && oldv === nv ? undefined : nv;
+																		isSortDirectionDescending = !sortBy || nv !== oldv ? true : !isSortDirectionDescending;
+																	}}>
+																		{#each ["▲", "▼"] as sym, index}
+																			<div class="leading-[6px] text-[6px] {sortBy === realKey && +(isSortDirectionDescending) === index ? "opacity-0" : ""}">{sym}</div>
+																		{/each}
+																	</button>
+																</div>
+															</th
 															>
 														{/each}
 													</tr>
@@ -1003,27 +1126,9 @@
 																				</div>
 																			</PopUnder>
 																			<a
-																				href="/api/files/{el.id}/download/"
+																				href="/api/files/download/{el.id}"
 																				class="control invisible text-brand-text border-none p-0.5"
 																			>
-																				<!-- on:click={(e) => {
-																				// e.preventDefault();
-																				// window.fetch(`${env.PUBLIC_API_URL}files/${el.id}/download/`, {
-																				// 	headers: {
-																				// 		"Authorization": `Bearer ${session.token}`,
-																				// 		"Content-Type": "application/json"
-																				// 	}
-																				// }).then(res => {
-																				// 	if (res.status === 401) {
-																				// 		return;
-																				// 	}
-																				// 	return res.blob()
-																				// }).then(blob => {
-																				// 	if (!blob) return;
-																				// 	let file = URL.createObjectURL(blob);
-																				// 	location.assign(file);
-																				// });
-																			}} -->
 																				<Icon class="size-4" name="download-2"></Icon>
 																			</a>
 																		</div>
@@ -1032,9 +1137,12 @@
 																		class="flex pb-0.5 gap-1 {el.id === el.name
 																			? 'text-secondary-text'
 																			: ''}"
+																		title={el.name}
 																	>
 																		<Icon name="file" class="size-[17px]"></Icon>
-																		{el.id === el.name ? "Not relevant" : el.name}
+																		<span class="max-w-[calc(max(40vw,300px)-21px)] text-ellipsis overflow-hidden break-keep whitespace-nowrap">
+																			{el.id === el.name ? "Not relevant" : el.name}
+																		</span>
 																	</div>
 																	<div class="flex gap-1">
 																		{#each parseTags(el.tags) as { category, name }}

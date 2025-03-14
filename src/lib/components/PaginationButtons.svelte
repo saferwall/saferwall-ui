@@ -4,6 +4,7 @@
 	import InputRange from "./InputRange.svelte";
 
 	export let currentPage: number;
+	let _currentPage = currentPage;
 	export let totalPages: number;
 	export let awaiting = false;
 
@@ -11,21 +12,22 @@
 	let inputPressed = false;
 
 	$: {
-		if (currentPage < 1) {
-			currentPage = 1;
-		} else if (currentPage > totalPages) {
-			currentPage = totalPages;
+		if (_currentPage < 1) {
+			_currentPage = 1;
+		} else if (_currentPage > totalPages) {
+			_currentPage = totalPages;
 		}
+		currentPage = _currentPage;
 	}
 	function setThisText() {
 		if (This) {
-			This.innerText = currentPage.toString();
+			This.innerText = _currentPage.toString();
 		}
 	}
-	$: currentPage, setThisText();
+	$: _currentPage, setThisText();
 	
 	onMount(() => {
-		This.innerText = currentPage.toString();
+		This.innerText = _currentPage.toString();
 	})
 
 </script>
@@ -38,7 +40,7 @@
 				hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
 				active:text-white active:bg-brand-surface rounded-sm h-full px-[10px] py-[10px] min-w-[calc(1lh+22px)]"
 				on:click={() => {
-					currentPage = 1;
+					_currentPage = 1;
 				}}>{1}</Button
 			>
 		</li>
@@ -48,7 +50,7 @@
 				hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
 				active:text-white active:bg-brand-surface rounded-sm h-full px-[10px] py-[10px] min-w-[calc(1lh+22px)]"
 				on:click={() => {
-					currentPage -= 100;
+					_currentPage -= 100;
 				}}>{-100}</Button
 			>
 		</li>
@@ -58,7 +60,7 @@
 				hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
 				active:text-white active:bg-brand-surface rounded-sm h-full px-[10px] py-[10px] min-w-[calc(1lh+22px)]"
 				on:click={() => {
-					currentPage -= 10;
+					_currentPage -= 10;
 				}}>{-10}</Button
 			>
 		</li>
@@ -75,7 +77,7 @@
 					on:blur={function (e) {
 						console.log("here?")
 						// @ts-ignore
-						e.target.innerText = currentPage.toString();
+						e.target.innerText = _currentPage.toString();
 					}}
 					tabindex="0"
 					contenteditable="plaintext-only"
@@ -84,11 +86,11 @@
 							e.preventDefault();
 							try {
 								// @ts-ignore
-								currentPage = parseInt(this.innerText);
-								if (currentPage < 1) {
-									currentPage = 1;
-								} else if (currentPage > totalPages) {
-									currentPage = totalPages;
+								_currentPage = parseInt(this.innerText);
+								if (_currentPage < 1) {
+									_currentPage = 1;
+								} else if (_currentPage > totalPages) {
+									_currentPage = totalPages;
 								}
 							} catch {}
 						}
@@ -97,20 +99,20 @@
 						if (["ArrowUp", "ArrowDown"].includes(e.key)) {
 							e.preventDefault();
 							try {
-								currentPage += (+(e.key === "ArrowUp") * 2 - 1) * (e.shiftKey ? 10 : 1);
+								_currentPage += (+(e.key === "ArrowUp") * 2 - 1) * (e.shiftKey ? 10 : 1);
 							} catch {}
 						}
 					}}
 				></div>
 				<div class="pl-[2px] flex flex-col justify-center">
 					<button
-						on:click={() => currentPage++}
+						on:click={() => _currentPage++}
 						class="pb-0 bg-black p-0.5 opacity-25 hover:opacity-35"
 					>
 						<div class="border-white border-b-4 border-x-[3px] border-x-transparent"></div>
 					</button>
 					<button
-						on:click={() => currentPage--}
+						on:click={() => _currentPage--}
 						class="pt-0 bg-black p-0.5 opacity-25 hover:opacity-35"
 					>
 						<div class="border-white border-t-4 border-x-[3px] border-x-transparent"></div>
@@ -124,7 +126,7 @@
 				hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
 				active:text-white active:bg-brand-surface rounded-sm h-full px-[10px] py-[10px] min-w-[calc(1lh+22px)]"
 				on:click={() => {
-					currentPage += 10;
+					_currentPage += 10;
 				}}>+{10}</Button
 			>
 		</li>
@@ -134,7 +136,7 @@
 				hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
 				active:text-white active:bg-brand-surface rounded-sm h-full px-[10px] py-[10px] min-w-[calc(1lh+22px)]"
 				on:click={() => {
-					currentPage += 100;
+					_currentPage += 100;
 				}}>+{100}</Button
 			>
 		</li>
@@ -144,7 +146,7 @@
 				hover:text-brand-text hover:bg-brand-CF-surface hover:border-transparent
 				active:text-white active:bg-brand-surface rounded-sm h-full px-[10px] py-[10px] min-w-[calc(1lh+22px)]"
 				on:click={() => {
-					currentPage = totalPages;
+					_currentPage = totalPages;
 				}}>{totalPages}</Button
 			>
 		</li>
@@ -154,7 +156,7 @@
 		trackHeight={8}
 		thumbSize={15}
 		min={1}
-		value={currentPage}
+		value={_currentPage}
 		max={totalPages}
 		on:input={function () {
 			// @ts-ignore
@@ -162,7 +164,7 @@
 		}}
 		on:change={function () {
 			// @ts-ignore
-			currentPage = parseInt(this.value);
+			_currentPage = parseInt(this.value);
 		}}
 		on:mousedown={() => (inputPressed = true)}
 		on:mouseup={() => (inputPressed = false)}

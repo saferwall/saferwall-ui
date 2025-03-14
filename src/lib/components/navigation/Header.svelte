@@ -11,24 +11,24 @@
 	import AdvancedSearch from '../AdvancedSearch.svelte';
 	import { page } from '$app/stores';
 	
-	let mounted = false;
-	onMount(() => {
-		mounted = true;
-	})
-
+	
 	export let user: Saferwall.User | undefined;
 	export let session: Saferwall.Session | undefined;
 	let advanced = false;
 	let focused = false;
-
+	
+	let mounted = false;
+	onMount(() => {
+		mounted = true;
+	})
 	$: {
 		if (mounted) {
-			document.documentElement.classList[advanced ? "add" : "remove"]("overflow-y-clip", "no-scroll-style")
+			document.documentElement.classList[advanced ? "add" : "remove"]("--overflow-y-clip", "no-scroll-style")
 		}
 	}
 </script>
 
-{#if session}
+{#if session && advanced}
 	<AdvancedSearch bind:advanced {session}></AdvancedSearch>
 {/if}
 <nav class="text-sm --px-8 bg-neutral-900 w-full shadow-[0px_1px_4px_0px_rgba(13,_13,_13,_0.07)] z-40">
