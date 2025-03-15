@@ -13,13 +13,14 @@
  */
 
 
+import { env } from '$env/dynamic/public';
 import type { Configuration } from './configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 
-export const BASE_PATH = "https://api.saferwall.com/v1".replace(/\/+$/, "");
+export const BASE_PATH = env.PUBLIC_API_URL.replace(/\/+$/, "");
 
 /**
  *
