@@ -1,5 +1,5 @@
 {
-	"name": "saferwall",
+	"name": "saferwall-email-template",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -30,7 +30,7 @@
 		"tailwindcss": "^3.4.6",
 		"tslib": "^2.6.3",
 		"typescript": "^5.5.3",
-		"vite": "^5.4.8",
+		"vite": "^5.4.14",
 		"vite-plugin-ejs": "^1.7.0",
 		"vite-plugin-html": "^3.2.2"
 	}
