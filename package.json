@@ -15,7 +15,8 @@
 		"format": "prettier --plugin-search-dir . --write .",
 		"gen-api": "openapi-generator-cli generate -i ../webapis/docs/swagger.json -g typescript-axios -o src/lib/api",
 		"prepublish": "PACKAGE_VERSION=$(jq -r '.version' package.json) NODE_VERSION=$(node -v | sed 's/v//'); echo $PACKAGE_VERSION; echo $NODE_VERSION; cat Dockerfile.base | sed 's/${NODE_VERSION}/'\"$NODE_VERSION\"/ | sed 's/${PACKAGE_VERSION}/'\"$PACKAGE_VERSION\"/ > Dockerfile",
-		"publish": "gh workflow run release.yaml --ref master"
+		"publish": "gh workflow run release.yaml --ref master",
+		"postinstall": "patch-package"
 	},
 	"type": "module",
 	"devDependencies": {
