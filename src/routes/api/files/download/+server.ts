@@ -15,7 +15,7 @@ export async function POST({ fetch, cookies, request }) {
 			}
 			console.log({data, body: JSON.stringify({ hashes: JSON.parse(data) }),});
 			let res = await fetch(
-				`${env.PUBLIC_API_URL}files/bulk-download/`,
+				`${env.PUBLIC_API_URL}files/download/`,
 				{
 					headers: {
 						"Authorization": client.authorization!,
