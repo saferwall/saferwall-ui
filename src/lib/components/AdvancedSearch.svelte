@@ -117,7 +117,7 @@
 
 	const api = new FileApi(new Configuration({ accessToken: session.token }));
 
-	let search = "size>0";
+	let search = "";
 	let currentSearch = search;
 	let lastSearch = search;
 	let searchEditHistory = [search];
