@@ -558,6 +558,9 @@
 	let exportLastValueEl: HTMLButtonElement;
 	let exportLastValue = "";
 	let downloadDropdownOpen = false;
+	let filesToDownload = [] as string[]
+	let submitBulkButton: HTMLInputElement;
+	$: console.log({submitBulkButton});
 	let checkAll = false;
 	function onCheckAll(e: Event) {
 		let checked = (e.target as HTMLInputElement).checked;
@@ -715,6 +718,10 @@
 {#if advanced}
 	{@html `<${""}style>${styleString}</${""}style>`}
 {/if}
+<form method="POST" action="/api/files/download" class="size-0 overflow-hidden">
+	<input type="text" name="hashes" value={JSON.stringify(filesToDownload)}>
+	<input type="submit" value="" bind:this={submitBulkButton}>
+</form>
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
 	id="advanced_search"
@@ -973,6 +980,29 @@
 																	class="w-full justify-start capitalize pl-4 pr-8 py-2 font-medium hover:bg-quaternary-hov2-surface text-start"
 																	on:click={() => {
 																		downloadDropdownOpen = false;
+																		let f = {
+																			selected: () =>
+																				items
+																					.filter((i) => i.checked)
+																					.map((i) => i.id || "")
+																					,
+																			"10": () =>
+																				items
+																					.filter((_, i) => i < 10)
+																					.map((i) => i.id || "")
+																					,
+																			"100": () =>
+																				items
+																					.filter((_, i) => i < 100)
+																					.map((i) => i.id || "")
+																					,
+																			all: () => items.map((i) => i.id || "")
+																		}[value];
+																		filesToDownload = (f || (() => []))();
+																		console.log({filesToDownload});
+																		setTimeout(() => {
+																			submitBulkButton.click();
+																		})
 																	}}
 																>
 																	{text}
